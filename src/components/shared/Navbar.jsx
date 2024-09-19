@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo + Website Name */}
           <div className="flex items-center space-x-2">
@@ -59,7 +59,7 @@ const Navbar = () => {
                 alt="Profile"
                 height='40'
                 width='40'
-                className="h-10 w-10 rounded-full cursor-pointer border-2 border-white hover:border-yellow-300 transition duration-300 ease-in-out"
+                className=" rounded-full cursor-pointer border-2 border-white hover:border-yellow-300 transition duration-300 ease-in-out"
                 onClick={toggleDropdown} // Toggle dropdown on image click
               />
 
@@ -120,7 +120,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 
 
