@@ -1,11 +1,16 @@
+import SellEventTicket from '@/components/events/SellEventTicket';
+import TicketManagesystem from '@/components/events/TicketManagesystem';
+
+
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            sel event ticket page
+         <SellEventTicket></SellEventTicket>
+         <TicketManagesystem></TicketManagesystem>
         </div>
     );
 };
-
+             
 export default page;
