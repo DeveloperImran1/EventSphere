@@ -8,7 +8,8 @@ const Navbar = () => {
                     <h2>Logo</h2>
                 </div>
                 <div className="flex items-center justify-between gap-5">
-                    <button className="rounded-full bg-[--color-logo] px-6 py-2 text-white transition-all duration-300 hover:scale-90">Log In</button>
+                    <button className="rounded-full  bg-[--color-logo] px-6 py-2 text-[--color-light] transition-all duration-300 hover:scale-90">Log In</button>
+
                     <button className="rounded-full text-[--color-light] bg-[--color-dark] px-6 py-2 transition-all duration-300 hover:scale-90">Register</button>
                   
                 </div>
