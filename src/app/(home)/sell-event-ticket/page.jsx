@@ -1,11 +1,15 @@
+import SellEventTicket from '@/components/events/SellEventTicket';
+
+
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            sel event ticket page
+         <SellEventTicket></SellEventTicket>
+         
         </div>
     );
 };
-
+             
 export default page;
