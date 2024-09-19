@@ -54,7 +54,7 @@ const Banner = () => {
     .filter((section) => section.countries.length > 0);
 
   return (
-    <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-10">
+    <div className="w-full md:rounded-bl-full bg-gradient-to-r from-blue-50 to-blue-100 py-10">
       <div className="container mx-auto flex flex-col md:flex-row items-start gap-10">
         {/* Left Section: Search Bars */}
         <div className="w-full md:h-auto md:w-1/3 bg-white p-6 rounded-lg shadow-lg relative">
