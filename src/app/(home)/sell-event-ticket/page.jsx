@@ -3,7 +3,7 @@ import React from 'react';
 const page = () => {
     return (
         <div>
-            sel event ticket page
+        ......now i am here (atik)
         </div>
     );
 };
