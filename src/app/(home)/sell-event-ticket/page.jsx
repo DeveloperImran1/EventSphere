@@ -1,11 +1,15 @@
+import SellEventTicket from '@/components/events/SellEventTicket';
+
+
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-        ......now i am here (atik)
+         <SellEventTicket></SellEventTicket>
+         
         </div>
     );
 };
-
+             
 export default page;
