@@ -11,7 +11,10 @@ import "react-datepicker/dist/react-datepicker.css"; // Import the CSS for the d
 // Country sections with grouped countries
 const countrySections = [
   { section: "North America", countries: ["United States", "Canada"] },
-  { section: "Europe", countries: ["United Kingdom", "Germany", "France", "Italy"] },
+  {
+    section: "Europe",
+    countries: ["United Kingdom", "Germany", "France", "Italy"],
+  },
   { section: "Asia", countries: ["India", "Japan"] },
   { section: "Oceania", countries: ["Australia"] },
   { section: "South America", countries: ["Brazil"] },
@@ -32,26 +35,32 @@ const Banner = () => {
   };
 
   // Filtered list of countries based on search term
-  const filteredCountrySectionsFrom = countrySections.map((section) => ({
-    ...section,
-    countries: section.countries.filter((country) =>
-      country.toLowerCase().includes(fromSearchTerm.toLowerCase())
-    ),
-  })).filter(section => section.countries.length > 0);
+  const filteredCountrySectionsFrom = countrySections
+    .map((section) => ({
+      ...section,
+      countries: section.countries.filter((country) =>
+        country.toLowerCase().includes(fromSearchTerm.toLowerCase())
+      ),
+    }))
+    .filter((section) => section.countries.length > 0);
 
-  const filteredCountrySectionsTo = countrySections.map((section) => ({
-    ...section,
-    countries: section.countries.filter((country) =>
-      country.toLowerCase().includes(toSearchTerm.toLowerCase())
-    ),
-  })).filter(section => section.countries.length > 0);
+  const filteredCountrySectionsTo = countrySections
+    .map((section) => ({
+      ...section,
+      countries: section.countries.filter((country) =>
+        country.toLowerCase().includes(toSearchTerm.toLowerCase())
+      ),
+    }))
+    .filter((section) => section.countries.length > 0);
 
   return (
     <div className="w-full bg-gradient-to-r from-blue-50 to-blue-100 py-10">
       <div className="container mx-auto flex flex-col md:flex-row items-start gap-10">
         {/* Left Section: Search Bars */}
-        <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-lg relative">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">Search Flights</h2>
+        <div className="w-full md:h-auto md:w-1/3 bg-white p-6 rounded-lg shadow-lg relative">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+            Search Flights
+          </h2>
 
           {/* First Search Bar (From) */}
           <div className="relative mb-6">
@@ -63,7 +72,9 @@ const Banner = () => {
               value={fromSearchTerm}
               onChange={(e) => setFromSearchTerm(e.target.value)}
               onClick={() => setDropdownVisibleFrom(true)}
-              onBlur={() => setTimeout(() => setDropdownVisibleFrom(false), 100)}
+              onBlur={() =>
+                setTimeout(() => setDropdownVisibleFrom(false), 100)
+              }
             />
 
             {/* From Dropdown */}
@@ -71,7 +82,9 @@ const Banner = () => {
               <div className="absolute z-10 right-0 mt-2 border border-gray-300 rounded-lg max-h-48 overflow-y-auto bg-white shadow-lg w-full">
                 {filteredCountrySectionsFrom.map((section, index) => (
                   <div key={index} className="p-2">
-                    <div className="font-semibold text-gray-600 mb-1">{section.section}</div>
+                    <div className="font-semibold text-gray-600 mb-1">
+                      {section.section}
+                    </div>
                     <ul>
                       {section.countries.map((country, i) => (
                         <li
@@ -110,7 +123,9 @@ const Banner = () => {
               <div className="absolute z-10 right-0 mt-2 border border-gray-300 rounded-lg max-h-48 overflow-y-auto bg-white shadow-lg w-full">
                 {filteredCountrySectionsTo.map((section, index) => (
                   <div key={index} className="p-2">
-                    <div className="font-semibold text-gray-600 mb-1">{section.section}</div>
+                    <div className="font-semibold text-gray-600 mb-1">
+                      {section.section}
+                    </div>
                     <ul>
                       {section.countries.map((country, i) => (
                         <li
@@ -133,7 +148,10 @@ const Banner = () => {
 
           {/* Date and Time Picker */}
           <div className="relative mb-6">
-            <label htmlFor="date-picker" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="date-picker"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Select Date and Time
             </label>
             <DatePicker
@@ -153,7 +171,18 @@ const Banner = () => {
         </div>
 
         {/* Right Section: Swiper Slider */}
-        <div className="w-full md:w-2/3">
+        <div className="w-full  md:w-2/3">
+          <div className="ml-4 md:ml-12 flex flex-col items-start md:items-center justify-center text-left md:text-center mx-auto max-w-3xl px-4 py-8">
+            <h1 className="font-extrabold text-2xl md:text-4xl lg:text-5xl text-gray-900 leading-snug">
+              Europe's Nº 1 destination for
+              <br className="block md:hidden" />
+              <span className="whitespace-nowrap">train and bus tickets*</span>
+            </h1>
+            <p className="text-lg md:text-xl mt-4 mb-4 text-gray-700">
+              Discover Europe with great savings and easy booking
+            </p>
+          </div>
+
           <Swiper
             spaceBetween={30}
             centeredSlides={true}
@@ -171,7 +200,9 @@ const Banner = () => {
           >
             <SwiperSlide>
               <div className="flex justify-center items-center bg-blue-500 h-64 text-white rounded-lg shadow-lg">
-                <h3 className="text-3xl font-bold">Travel to Amazing Places!</h3>
+                <h3 className="text-3xl font-bold">
+                  Travel to Amazing Places!
+                </h3>
               </div>
             </SwiperSlide>
             <SwiperSlide>
@@ -185,12 +216,34 @@ const Banner = () => {
               </div>
             </SwiperSlide>
 
-            <div className="absolute top-0 right-0 m-4 autoplay-progress" slot="container-end">
+            <div
+              className="absolute top-0 right-0 m-4 autoplay-progress"
+              slot="container-end"
+            >
               <svg className="w-8 h-8" viewBox="0 0 48 48" ref={progressCircle}>
-                <circle cx="24" cy="24" r="20" className="text-gray-300" strokeWidth="4" fill="none"></circle>
-                <circle cx="24" cy="24" r="20" className="text-blue-600" strokeWidth="4" fill="none" strokeDasharray="126" strokeDashoffset="calc(126 * var(--progress))"></circle>
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="20"
+                  className="text-gray-300"
+                  strokeWidth="4"
+                  fill="none"
+                ></circle>
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="20"
+                  className="text-blue-600"
+                  strokeWidth="4"
+                  fill="none"
+                  strokeDasharray="126"
+                  strokeDashoffset="calc(126 * var(--progress))"
+                ></circle>
               </svg>
-              <span ref={progressContent} className="text-xs text-gray-700"></span>
+              <span
+                ref={progressContent}
+                className="text-xs text-gray-700"
+              ></span>
             </div>
           </Swiper>
         </div>
