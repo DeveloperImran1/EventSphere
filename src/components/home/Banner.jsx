@@ -199,20 +199,33 @@ const Banner = () => {
             className="mySwiper"
           >
             <SwiperSlide>
-              <div className="flex justify-center items-center bg-blue-500 h-64 text-white rounded-lg shadow-lg">
-                <h3 className="text-3xl font-bold">
-                  Travel to Amazing Places!
-                </h3>
+              <div className="flex justify-center items-center h-64  rounded-lg shadow-lg">
+                <div>
+                  <img
+                    src="https://i.postimg.cc/9fTsz5rx/191119074441-haneda-airport-file.jpg"
+                    alt=""
+                  />
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex justify-center items-center bg-green-500 h-64 text-white rounded-lg shadow-lg">
-                <h3 className="text-3xl font-bold">Explore New Adventures</h3>
+              <div className="flex justify-center items-center h-64  rounded-lg shadow-lg">
+                <div>
+                  <img
+                    src="https://i.postimg.cc/mDPjh7XT/lisbon-portugal-september-23-2021-train-at-lisbon-lisboa-oriente-railway-station-modern-architecture.jpg"
+                    alt=""
+                  />
+                </div>
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="flex justify-center items-center bg-red-500 h-64 text-white rounded-lg shadow-lg">
-                <h3 className="text-3xl font-bold">Find Your Next Journey</h3>
+              <div className="flex justify-center items-center h-64   rounded-lg shadow-lg">
+                <div>
+                  <img className=""
+                    src="https://i.postimg.cc/4NPckmPP/happy-couple-talking-while-holding-260nw-2294396297.jpg"
+                    alt=""
+                  />
+                </div>
               </div>
             </SwiperSlide>
 
