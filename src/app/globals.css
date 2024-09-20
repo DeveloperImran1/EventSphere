@@ -3,31 +3,7 @@
 @tailwind utilities;
 
 
-/* this is default style when is install nextJs */
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
- */
 
  
  /* ===== GLOBAL VARIABLES MY CUSTOM STYLES ===== */
@@ -36,7 +12,8 @@ body {
    /* Brand Colors */
    --color-logo: #00a88f; /* Logo color */
    --color-light: #ffffff; /* Light background color (white) */
-   --color-dark: #160078; /* Deep blue background color */
+   --color-dark: linear-gradient(to right, #109AE4, #61C0CE) ; /* Deep blue background color */
+   
 
    --color-hover: #2332c4; /* Normal blue for hover or selection */
    
@@ -49,48 +26,9 @@ body {
    /* Font Variables */
    --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
    --font-family-serif: 'Merriweather', serif;
-   --font-size-base: 16px; /* Base font size */
-   --font-size-small: 0.875rem; /* 14px */
-   --font-size-medium: 1rem; /* 16px */
-   --font-size-large: 1.25rem; /* 20px */
-   --font-weight-light: 300;
-   --font-weight-regular: 400;
-   --font-weight-bold: 700;
+  
  
-   /* Spacing Variables */
-   --space-xxs: 4px;
-   --space-xs: 8px;
-   --space-sm: 12px;
-   --space-md: 16px;
-   --space-lg: 24px;
-   --space-xl: 32px;
-   --space-xxl: 40px;
- 
-   /* Border Radius */
-   --border-radius-small: 4px;
-   --border-radius-medium: 8px;
-   --border-radius-large: 12px;
- 
-   /* Shadow */
-   --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
-   --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
-   --box-shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
- 
-   /* Breakpoints for Responsive Design */
-   --breakpoint-xs: 480px; /* Extra small devices (mobile) */
-   --breakpoint-sm: 768px; /* Small devices (tablets) */
-   --breakpoint-md: 1024px; /* Medium devices (desktops) */
-   --breakpoint-lg: 1280px; /* Large devices */
-   --breakpoint-xl: 1440px; /* Extra large devices */
- 
-   /* Container Widths */
-   --container-width-xs: 100%; /* Mobile */
-   --container-width-sm: 540px; /* Tablet */
-   --container-width-md: 720px; /* Small Desktop */
-   --container-width-lg: 960px; /* Large Desktop */
-   --container-width-xl: 1140px; /* Extra Large Screens */
  }
-
  
  
  /* ===== GLOBAL STYLES ===== */
@@ -113,47 +51,12 @@ body {
    line-height: 1.5;
  }
  
- /* Responsive Containers */
- .container {
-   width: 100%;
-   margin: 0 auto;
-   padding: 0 var(--space-md);
+ p{
+  color: #6b7280;
+  
  }
- 
- @media (min-width: var(--breakpoint-sm)) {
-   .container {
-     max-width: var(--container-width-sm);
-   }
- }
- 
- @media (min-width: var(--breakpoint-md)) {
-   .container {
-     max-width: var(--container-width-md);
-   }
- }
- 
- @media (min-width: var(--breakpoint-lg)) {
-   .container {
-     max-width: var(--container-width-lg);
-   }
- }
- 
- @media (min-width: var(--breakpoint-xl)) {
-   .container {
-     max-width: var(--container-width-xl);
-   }
- }
- 
- /* Utility Classes */
- .mt-sm { margin-top: var(--space-sm); }
- .mt-md { margin-top: var(--space-md); }
- .mt-lg { margin-top: var(--space-lg); }
- 
- .p-sm { padding: var(--space-sm); }
- .p-md { padding: var(--space-md); }
- .p-lg { padding: var(--space-lg); }
- 
- .text-center { text-align: center; }
+
+
  
 
 
@@ -193,7 +96,7 @@ body {
    font-size: 1.25rem;
  }
  
- @media (min-width: var(--breakpoint-sm)) {
+ @media (min-width: 768px) {
    h1 {
      font-size: 2.5rem;
    }
