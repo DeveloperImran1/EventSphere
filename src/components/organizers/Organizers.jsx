@@ -126,7 +126,7 @@ const Organizers = () => {
                             <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
                                 {organizer.name}
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{organizer.role}</p>
+                            <p className="text-sm  mb-2">{organizer.role}</p>
 
                             <div className="flex flex-wrap gap-2">
                                 {organizer.specialization.map((spec, index) => (

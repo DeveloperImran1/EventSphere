@@ -44,8 +44,8 @@ const HomepageSection = () => {
           </ul>
         </motion.div>
         <div className="relative">
-          <Image
-            src="" // Replace  image URL
+          <img
+            src="https://i.ibb.co.com/q0x9qVJ/6411b7a3fa853599f08d4700-image-4-min.png" // Replace  image URL
             alt="Ticketing System"
             width={400}
             height={300}
@@ -58,7 +58,7 @@ const HomepageSection = () => {
         {/* Second Section */}
         <div className="relative">
           <Image
-            src="/your-second-image-url-here" // Replace  image URL
+            src="" // Replace  image URL
             alt="Event Crowd"
             width={400}
             height={300}
