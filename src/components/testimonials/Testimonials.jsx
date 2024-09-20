@@ -44,37 +44,40 @@ const Testimonials = () => {
     ]
 
     return (
-        <div className="container mx-auto p-4 mb-20 ">
+        <div className=" mx-auto p-4  ">
             <div>
-                {/* <h2 className="text-3xl font-bold tracking-tight text-center sm:text-5xl text-blue-500 mb-5">Users Reviews</h2> */}
+                <h2 className="text-3xl font-bold tracking-tight text-center sm:text-5xl text-blue-500 mb-5">Users Reviews</h2>
                
             </div>
             <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={1}
-                breakpoints={{
-                    640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                    },
-                }}
-                coverflowEffect={{
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 1,
-                    slideShadows: true,
-                }}
-                pagination={{ clickable: true }}
-                modules={[EffectCoverflow, Pagination]}
-                className="mySwiper"
+                 effect={'coverflow'}
+                 grabCursor={true}
+                 centeredSlides={true}
+                 slidesPerView={1}
+                 breakpoints={{
+                     640: {
+                         slidesPerView: 1,
+                     },
+                     768: {
+                         slidesPerView: 2,
+                     },
+                     1024: {
+                         slidesPerView: 3,
+                     },
+                     1280: {
+                         slidesPerView: 3, // 4 slides for larger devices
+                     },
+                 }}
+                 coverflowEffect={{
+                     rotate: 50,
+                     stretch: 0,
+                     depth: 100,
+                     modifier: 1,
+                     slideShadows: true,
+                 }}
+                 pagination={{ clickable: true }}
+                 modules={[EffectCoverflow, Pagination]}
+                 className="mySwiper"
             >
                 {reviews.map((review, index) => (
                     <SwiperSlide key={index}>
