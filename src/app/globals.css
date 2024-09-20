@@ -36,7 +36,8 @@ body {
    /* Brand Colors */
    --color-logo: #00a88f; /* Logo color */
    --color-light: #ffffff; /* Light background color (white) */
-   --color-dark: #160078; /* Deep blue background color */
+   --color-dark: linear-gradient(to right, #109AE4, #61C0CE) ; /* Deep blue background color */
+   
 
    --color-hover: #2332c4; /* Normal blue for hover or selection */
    
@@ -112,7 +113,10 @@ body {
    background-color: var(--color-light);
    line-height: 1.5;
  }
+ p{
+  color: black ;
  
+ }
  /* Responsive Containers */
  .container {
    width: 100%;
