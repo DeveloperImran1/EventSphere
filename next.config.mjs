@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['media.licdn.com', 'encrypted-tbn0.gstatic.com', 'img.freepik.com', 'static.vecteezy.com', 'imgcdn.stablediffusionweb.com',"ashisheditz.com","images.pexels.com","i.postimg.cc"],
+        domains: ['media.licdn.com', 'encrypted-tbn0.gstatic.com', 'img.freepik.com', 'static.vecteezy.com', 'imgcdn.stablediffusionweb.com',"ashisheditz.com","images.pexels.com","i.postimg.cc", 'i.postimg.cc', 'i.ibb.co'],
     },
 
         remotePatterns: [

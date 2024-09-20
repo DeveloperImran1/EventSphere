@@ -23,10 +23,11 @@ const HomepageSection = () => {
             <li className="flex items-center justify-center"><FaCheckCircle className="text-green-500 mr-2" />Provide coupons, ticket expiry, discounts and more.</li>
             <li className="flex items-center justify-center"><FaCheckCircle className="text-green-500 mr-2" />Custom domain and branded white-labeled event ticketing.</li>
           </ul>
+
         </div>
         <div className="relative w-full h-[400px]">
           <img
-            src="https://i.ibb.co.com/BjdY7FC/pexels-ono-kosuki-5999936.jpg" // Replace with your imagebb link
+            src="https://i.ibb.co.com/BjdY7FC/pexels-ono-kosuki-5999936.jpg" // Replace with your imagebb lin
             alt="Ticketing System"
             className="rounded-lg shadow-lg object-cover w-full h-full"
             width="400" 
@@ -35,6 +36,7 @@ const HomepageSection = () => {
         </div>
 
         {/* Second Section */}
+
         <div className="relative w-full h-[400px]">
           <img
             src="https://i.ibb.co.com/q0x9qVJ/6411b7a3fa853599f08d4700-image-4-min.png" // Replace with your imagebb link
