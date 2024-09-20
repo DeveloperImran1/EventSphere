@@ -8,9 +8,9 @@ const TicketingManagementSection = () => {
   return (
     <section className={styles.ticketingManagement}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Boost Event Success with Our Powerful Ticketing Management Software</h2>
+        <h2  className="text-center font-bold text-5xl text-black   font-sans">Boost Event Success with  Our Powerful   <br /> Ticketing Management Software</h2>
         <p className={styles.description}>
-          Our ticketing platform simplifies event management, enhances user experience, and helps increase your ticket sales. Manage your events smoothly with ease.
+          Our ticketing platform simplifies event management, enhances user experience, and  <br />  helps increase your ticket sales.Manage your events smoothly with ease.
         </p>
         <div className={styles.features}>
           <h3 className={styles.featuresHeading}>Main Features:</h3>
