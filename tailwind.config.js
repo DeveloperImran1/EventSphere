@@ -7,11 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Space Grotesk"', 'sans-serif'], // Adding Space Grotesk to the sans family
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        'top-down': {
+          '0%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(10px)' },
+          '100%': { transform: 'translateY(-10px)' },
+        },
+      },
+      animation: {
+        'top-down': 'top-down 3s infinite ease-in-out',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
