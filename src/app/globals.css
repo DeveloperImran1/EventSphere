@@ -3,31 +3,7 @@
 @tailwind utilities;
 
 
-/* this is default style when is install nextJs */
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
- */
 
  
  /* ===== GLOBAL VARIABLES MY CUSTOM STYLES ===== */
@@ -113,51 +89,13 @@ body {
    background-color: var(--color-light);
    line-height: 1.5;
  }
+ 
  p{
-  color: black ;
- 
+  color: #6b7280;
+  
  }
- /* Responsive Containers */
- .container {
-   width: 100%;
-   margin: 0 auto;
-   padding: 0 var(--space-md);
- }
- 
- @media (min-width: var(--breakpoint-sm)) {
-   .container {
-     max-width: var(--container-width-sm);
-   }
- }
- 
- @media (min-width: var(--breakpoint-md)) {
-   .container {
-     max-width: var(--container-width-md);
-   }
- }
- 
- @media (min-width: var(--breakpoint-lg)) {
-   .container {
-     max-width: var(--container-width-lg);
-   }
- }
- 
- @media (min-width: var(--breakpoint-xl)) {
-   .container {
-     max-width: var(--container-width-xl);
-   }
- }
- 
- /* Utility Classes */
- .mt-sm { margin-top: var(--space-sm); }
- .mt-md { margin-top: var(--space-md); }
- .mt-lg { margin-top: var(--space-lg); }
- 
- .p-sm { padding: var(--space-sm); }
- .p-md { padding: var(--space-md); }
- .p-lg { padding: var(--space-lg); }
- 
- .text-center { text-align: center; }
+
+
  
 
 
