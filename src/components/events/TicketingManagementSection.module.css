@@ -11,17 +11,11 @@
     margin: 0 auto;
   }
   
-  .heading {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
-  }
-  
+
   .description {
+    margin-top: 20px;
     font-size: 1.2rem;
-    color: #555;
+    color: black;
     margin-bottom: 30px;
     text-align: center;
   }
@@ -66,8 +60,9 @@
   }
   
   .featureItem:nth-child(2) {
-    background: #6a1b9a; /* Purple */
+    background: linear-gradient(to right, #f472b6, #9b5de5); /* Pink to Purple Gradient */
   }
+  
   
   .featureItem:nth-child(3) {
     background: #1e88e5; /* Blue */
