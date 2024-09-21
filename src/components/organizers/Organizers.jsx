@@ -160,7 +160,7 @@ const Organizers = () => {
                                     <MdPeople className="text-xl" />
                                     Followers: {organizer.followers}
                                 </p>
-                                <div className="flex items-center gap-3 text-xl text-[--color-logo]">
+                                <div className="flex items-center gap-3 text-xl ">
                                     <FaLinkedin />
                                     <FaFacebook />
                                 </div>

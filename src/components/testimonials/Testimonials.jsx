@@ -87,6 +87,8 @@ const Testimonials = () => {
             >
                 {reviews.map((review, index) => (
                     <SwiperSlide key={index}>
+                        {/* <div className="container review-card p-6 pt-20 bg-gradient-to-br  from-[#109AE4] to-[#61C0CE] rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 lg:relative"> */}
+                            {/* <Image src={review.profile_pic} alt={review.user_name} className="w-20 h-20 rounded-full lg:-ml-20 lg:-mt-20 mx-auto lg:absolute" width={200} height={200}/> */}
 
                         <div className="review-card p-6 pt-20 bg-[#013730] opacity-80  rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 lg:relative">
                             

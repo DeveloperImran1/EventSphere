@@ -31,9 +31,7 @@
   --color-warning: #ff9800;
   /* Warning messages */
 
-  /* Font Variables */
-  --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  --font-family-serif: 'Merriweather', serif;
+ 
 }
 
   h1,
@@ -81,11 +79,6 @@ p {
 
 
 
-
-
-
-
-
 /* Button Styles */
 .button {
   display: inline-block;
@@ -105,6 +98,7 @@ p {
   transform: scale(0.9);
   /* Scale down on hover */
 }
+
 
 
  /* Responsive Typography */
