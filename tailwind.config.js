@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Space Grotesk"', 'sans-serif'], // Adding Space Grotesk to the sans family
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
