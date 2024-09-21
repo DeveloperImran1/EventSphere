@@ -9,7 +9,7 @@ const EventRegister = () => {
                 title="Seamless Registration And Ticketing Systems"
             >
             </SectionTitle>
-            <div className='flex gap-12 '>
+            <div className='flex flex-col lg:flex-row gap-12 '>
                 <div className='flex-1'>
                     <div>
                         <h3 className='font-bold  mb-2'>Registration</h3>

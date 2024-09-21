@@ -48,8 +48,9 @@ const Testimonials = () => {
         <div className=" container mx-auto p-4  ">
             <div>
                 <SectionTitle
+                subTitle="Users Reviews"
                     title="Testimonials"
-                    description="you"
+                    description="Read our testimonials to hear from satisfied customers. Their experiences highlight our commitment to quality and service, showcasing how we've positively impacted their journeys. Join our community of happy clients!"
                 >
 
                 </SectionTitle>

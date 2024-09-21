@@ -5,7 +5,7 @@ const SectionTitle = ({ title, description,subTitle }) => {
         <div className="mx-auto text-center md:w-1/2  mb-12">
             <div className=" flex gap-5 justify-center items-center mb-2">
                 <p className="w-12 h-[2px] bg-yellow-500"></p>
-               <p className="text-yellow-500"> {subTitle}</p>
+               <p className="text-yellow-500 font-medium"> {subTitle}</p>
                 <p className="w-12 h-[2px] bg-yellow-500 "></p>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold uppercase mb-4 ">{title}</h2>
