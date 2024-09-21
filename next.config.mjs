@@ -7,9 +7,9 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '**', // This allows any hostname
+                hostname: 'i.ibb.co.com', // This allows any hostname
                 port: '',
-                pathname: '/**' // This allows any path
+                pathname: '**' // This allows any path
             }
         ]
     }
