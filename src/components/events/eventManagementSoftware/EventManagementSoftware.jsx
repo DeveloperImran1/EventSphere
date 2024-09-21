@@ -4,6 +4,8 @@ import EventStaticSection from './EventStaticSection';
 import EventRegister from './EventRegister';
 import EventLimeLights from './EventLimeLights';
 import HandyFeatured from './HandyFeatured';
+import ExperianceTab from './ExperianceTab';
+import Testimonials from '@/components/testimonials/Testimonials';
 
 const EventManagementSoftware = () => {
   return (
@@ -13,6 +15,8 @@ const EventManagementSoftware = () => {
       <EventRegister/>
       <EventLimeLights/>
       <HandyFeatured/>
+      <ExperianceTab/>
+      <Testimonials/>
     </div>
   );
 };
