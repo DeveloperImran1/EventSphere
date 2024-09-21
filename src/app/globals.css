@@ -6,7 +6,6 @@
 
 
 
-<<<<<<< HEAD
 /* ===== GLOBAL VARIABLES MY CUSTOM STYLES ===== */
 :root {
 
@@ -194,21 +193,21 @@ p {
   text-align: center;
 }
 
-=======
-   --color-hover: #2332c4; /* Normal blue for hover or selection */
+
+   /* --color-hover: #2332c4; Normal blue for hover or selection */
    
    /* Utility Colors */
-   --color-border: #d1d1d1; /* Neutral color for borders */
-   --color-error: #ff4c4c; /* Error messages */
-   --color-success: #4caf50; /* Success messages */
-   --color-warning: #ff9800; /* Warning messages */
+   /* --color-border: #d1d1d1; Neutral color for borders */
+   /* --color-error: #ff4c4c; Error messages */
+   /* --color-success: #4caf50; Success messages */
+   /* --color-warning: #ff9800; Warning messages */
  
    /* Font Variables */
-   --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-   --font-family-serif: 'Merriweather', serif;
+   /* --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+   --font-family-serif: 'Merriweather', serif; */
   
  
- }
+
  
  
  /* ===== GLOBAL STYLES ===== */
@@ -238,7 +237,6 @@ p {
 
 
  
->>>>>>> 76f0b303e9b5b1bdc82de383e46939ba85d226ad
 
 
 /* Button Styles */
@@ -262,7 +260,6 @@ p {
 }
 
 
-<<<<<<< HEAD
 
 /* Responsive Typography */
 h1 {
@@ -298,7 +295,6 @@ h4 {
     font-size: 1.5rem;
   }
 }
-=======
  /* Responsive Typography */
  h1 {
    font-size: 2rem;
@@ -334,4 +330,3 @@ h4 {
    }
  }
  
->>>>>>> 76f0b303e9b5b1bdc82de383e46939ba85d226ad
