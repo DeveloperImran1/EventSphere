@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -26,10 +27,10 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <Image
               src="https://i.postimg.cc/tgBF08hc/stock-vector-illustration-of-transport-for-travel-car-train-bus-and-airplane-505816168.jpg"
               alt="Logo"
@@ -42,8 +43,8 @@ const Navbar = () => {
               icket
               <span className="text-pink-400">l</span>y
             </span>
-          </div>
-
+          </div> */}
+            <Logo/>
           {/* Navigation Links for larger devices */}
           <div className="hidden md:flex space-x-8 text-white">
             <Link
