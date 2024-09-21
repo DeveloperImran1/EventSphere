@@ -6,6 +6,7 @@ import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";
+import Logo from "@/components/shared/Logo";
 
 const LoginPage = () => {
     const [viewPass, setViewPass] = useState(false);
@@ -24,16 +25,16 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="h-screen">
+        <div className="">
             <div
                 style={{ backgroundImage: `url('https://i.postimg.cc/13VKgtYc/top-banner.png')` }}
-                className="bg-cover bg-center max-h-[200px] md:max-h-[450px]"
+                className="bg-cover bg-center pb-16"
             >
                 <div className="max-w-[1320px] mx-auto flex flex-col md:flex-row text-white">
                     <div className="w-full md:w-1/2 my-5 md:mt-14 p-3">
                         <div className="max-w-[550px] mb-44">
                             <h1 className="pb-[30px] mb-[30px] font-bold text-3xl md:border-b text-center md:text-start md:ml-0">
-                                Logo
+                                <Logo></Logo>
                             </h1>
                             <div className="hidden md:block">
                                 <h1 className="font-semibold text-2xl leading-9 mb-6">
@@ -75,7 +76,7 @@ const LoginPage = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="hidden md:block text-black">
+                        <div className="hidden md:block text-white">
                             <h2 className="font-bold text-2xl my-12">
                                 10,000+ communities and organisers worldwide sell with
                                 EventBookings
@@ -207,8 +208,8 @@ const LoginPage = () => {
                                         setViewPass(!viewPass);
                                     }}
                                     className={`${!viewPass
-                                            ? "absolute right-4 top-10"
-                                            : "absolute right-4 top-10 text-gray-400"
+                                        ? "absolute right-4 top-10"
+                                        : "absolute right-4 top-10 text-gray-400"
                                         }`}
                                 >
                                     <HiOutlineEye className="text-2xl" />
@@ -224,20 +225,21 @@ const LoginPage = () => {
                             </button>
                         </form>
 
-                        {/* Log in with Google, Facebook, Apple */}
+
+                        {/* Sign up with Google, Facebook, Apple */}
                         <div className="mt-4 text-center">
-                            <p>Or, Log in with</p>
-                            <div className="flex justify-center space-x-5 mt-2 text-center">
-                                {/* Google Log in Button */}
-                                <button className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center text-center">
+                            <p>Or, Sign up with</p>
+                            <div className="flex flex-col md:flex-row items-center justify-center space-x-5 mt-2 text-center">
+                                {/* Google Sign Up Button */}
+                                <button className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center justify-center ">
                                     <FcGoogle className="m-2 w-5 h-5" /> Google
                                 </button>
-                                {/* Facebook Log in Button */}
-                                <button className="border w-full border-gray-300 rounded-md px-4 flex items-center">
-                                    <FaFacebook className="mr-2 w-5 h-5 text-blue-600" /> Facebook
+                                {/* Facebook Sign Up Button */}
+                                <button className="border w-full border-gray-300 rounded-md px-4 flex items-center justify-center">
+                                    <FaFacebook className="m-2 w-5 h-5 text-blue-600" /> Facebook
                                 </button>
-                                {/* Apple Log in Button */}
-                                <button className="border w-full border-gray-300 rounded-md px-4 flex items-center">
+                                {/* Apple Sign Up Button */}
+                                <button className="border w-full border-gray-300 rounded-md  flex items-center justify-center">
                                     <FaApple className="m-2 w-5 h-5" /> Apple
                                 </button>
                             </div>
