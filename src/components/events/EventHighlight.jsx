@@ -4,12 +4,12 @@ import Image from 'next/image';
 const EventHighlight = () => {
   return (
     <div className="text-center py-12">
-      <h2 className="text-3xl md:text-4xl font-semibold  text-black ">Over 5K+ Events Growing with Eventify</h2>
+      <h2 className="text-3xl md:text-4xl font-semibold  font-serif text-black ">Over 5K+ Events Growing with Eventify</h2>
       
       {/* Stars */}
       <div className="flex justify-center my-6">
         {[...Array(5)].map((_, index) => (
-          <FaStar key={index} className="text-yellow-400 text-3xl md:text-4xl mx-1 animate-star" />
+          <FaStar key={index} className="text-yellow-400 text-3xl md:text-4xl mx-2 animate-star" />
         ))}
       </div>
 
