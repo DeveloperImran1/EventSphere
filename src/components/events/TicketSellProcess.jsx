@@ -2,7 +2,17 @@ import React from 'react';
 
 const TicketSellProcess = () => {
     return (
-      <div className='flex justify-center gap-20'   >
+    <div  className='my-24' >
+   {/* heading */}
+    <div className='text-center mt-10 my-16  container mx-auto  '  >
+            <h1 className='   font-serif text-5xl font-medium text-black'  >Streamline Your Event Ticketing Sales Process</h1>
+                  <p className='text-lg font-serif  mt-4 text-gray-600  '  >   We understand that every event is unique, and that`s why we offer customized solutions tailored to your 
+                    specific needs. <br />  From personalized ticketing options to marketing tools, we are committed to maximizing your sales and making your event a success.         </p>
+    </div>
+
+
+{/* 2 card  */}
+<div className='flex justify-center gap-16'   >
          <div className="card  w-[600px] ">
   <figure className="">
     <img
@@ -12,7 +22,7 @@ const TicketSellProcess = () => {
   </figure>
   <div className="mt-10 p-2 md:p-6">
     <h2 className="card-title  font-serif text-3xl text-black "> QR Scan and Badge Printing  </h2>
-    <p  className='mt-4 text-lg font-serif'  > Say goodbye to long lines and hassles at the door - Try our badge printing and ticket scanning feature today! Eventify makes it easy to print custom badges for your attendees, allowing for quick and easy check-in at your event.</p>
+    <p  className='mt-4 text-lg text-gray-600 font-serif'  > Say goodbye to long lines and hassles at the door - Try our badge printing and ticket scanning feature today! Eventify makes it easy to print custom badges for your attendees, allowing for quick and easy check-in at your event.</p>
    
   </div>
          </div>
@@ -25,13 +35,17 @@ const TicketSellProcess = () => {
   </figure>
   <div className="mt-10 p-2 md:p-6">
     <h2 className="card-title  font-serif text-3xl text-black "> API and Integration  </h2>
-    <p  className='mt-4 text-lg font-serif'  >Integrate your event management and ticketing app with your favorite tools and apps using our robust API and Zapier integration. Save time and boost your productivity by streamlining your workflow and automating repetitive tasks.</p>
+    <p  className='mt-4 text-lg text-gray-600 font-serif'  >Integrate your event management and ticketing app with your favorite tools and apps using our robust API and Zapier integration. Save time and boost your productivity by streamlining your workflow and automating repetitive tasks.</p>
    
   </div>
           </div>
 
 
-      </div>
+   
+   
+   
+       </div>
+       </div>
     );
 };
 
