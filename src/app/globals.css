@@ -34,17 +34,7 @@
   /* Font Variables */
   --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   --font-family-serif: 'Merriweather', serif;
-  --font-size-base: 16px;
-  /* Base font size */
-  --font-size-small: 0.875rem;
-  /* 14px */
-  --font-size-medium: 1rem;
-  /* 16px */
-  --font-size-large: 1.25rem;
-  /* 20px */
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
+}
 
   h1,
   h2,
@@ -61,50 +51,6 @@
   div {
     font-family: 'Roboto', sans-serif;
   }
-
-  /* Spacing Variables */
-  --space-xxs: 4px;
-  --space-xs: 8px;
-  --space-sm: 12px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-xxl: 40px;
-
-  /* Border Radius */
-  --border-radius-small: 4px;
-  --border-radius-medium: 8px;
-  --border-radius-large: 12px;
-
-  /* Shadow */
-  --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
-  --box-shadow-heavy: 0 8px 16px rgba(0, 0, 0, 0.2);
-
-  /* Breakpoints for Responsive Design */
-  --breakpoint-xs: 480px;
-  /* Extra small devices (mobile) */
-  --breakpoint-sm: 768px;
-  /* Small devices (tablets) */
-  --breakpoint-md: 1024px;
-  /* Medium devices (desktops) */
-  --breakpoint-lg: 1280px;
-  /* Large devices */
-  --breakpoint-xl: 1440px;
-  /* Extra large devices */
-
-  /* Container Widths */
-  --container-width-xs: 100%;
-  /* Mobile */
-  --container-width-sm: 540px;
-  /* Tablet */
-  --container-width-md: 720px;
-  /* Small Desktop */
-  --container-width-lg: 960px;
-  /* Large Desktop */
-  --container-width-xl: 1140px;
-  /* Extra Large Screens */
-}
 
 
 
@@ -133,6 +79,7 @@ p {
 
 }
 
+<<<<<<< HEAD
 /* Responsive Containers */
 .container {
   width: 100%;
@@ -237,6 +184,13 @@ p {
 
 
  
+=======
+
+
+
+
+
+>>>>>>> 4312dbe759d051f10612331b07b57beba7d5871f
 
 
 /* Button Styles */
@@ -260,6 +214,7 @@ p {
 }
 
 
+<<<<<<< HEAD
 
 /* Responsive Typography */
 h1 {
@@ -295,6 +250,8 @@ h4 {
     font-size: 1.5rem;
   }
 }
+=======
+>>>>>>> 4312dbe759d051f10612331b07b57beba7d5871f
  /* Responsive Typography */
  h1 {
    font-size: 2rem;
