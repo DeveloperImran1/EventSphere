@@ -4,6 +4,7 @@ import PopularEvents from './PopularEvents';
 import EventTime from './EventTime';
 import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
+import EventManagementSoftware from '../events/eventManagementSoftware/EventManagementSoftware';
 
 const HomeContainer = () => {
     return (
@@ -14,6 +15,7 @@ const HomeContainer = () => {
             <EventTime></EventTime>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
+           <EventManagementSoftware></EventManagementSoftware>
         </div>
     );
 };
