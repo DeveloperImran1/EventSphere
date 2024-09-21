@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { MdPeople } from "react-icons/md";
 // import Link from 'next/link';
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import SectionTitle from '../shared/SectionTitle';
 
 
 const Organizers = () => {
@@ -90,7 +91,13 @@ const Organizers = () => {
 
     return (
         <div className="container mx-auto p-4 mb-20">
-            <h1 className="text-2xl font-bold text-center mb-6">Top Organizers</h1>
+         <SectionTitle 
+         subTitle="Our Team"
+         title={"top organizers"}
+         description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque expedita cupiditate illum aspernatur? Sunt repellendus ullam assumenda ex illo?"}
+         >
+
+         </SectionTitle>
             <Swiper
                 modules={[Pagination, Navigation]}
                 spaceBetween={30}
@@ -148,8 +155,8 @@ const Organizers = () => {
                             </a>
 
                             {/* Add group-hover effect */}
-                            <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 flex gap-2 items-center">
+                            <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
+                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 pt-2 flex gap-2 items-center">
                                     <MdPeople className="text-xl" />
                                     Followers: {organizer.followers}
                                 </p>
