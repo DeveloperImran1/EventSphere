@@ -3,8 +3,8 @@ import React from 'react';
 
 const EventLimeLights = () => {
     return (
-        <div>
-            <div className='container w-11/12 mx-auto mb-20'>
+        <div className='container w-11/12 mx-auto'>
+            <div className=''>
                 <SectionTitle
                     subTitle="Stakeholders Make or Break Your Event"
                     title="Give Them The Limelight They Deserve!"
@@ -38,7 +38,7 @@ const EventLimeLights = () => {
 
     {/* next event section  */}
 
-            <div className='container w-11/12 mx-auto mb-20'>
+            <div className=''>
                 <SectionTitle
                     subTitle="See What Worked And What Didn’t"
                     title="Make Your Next Event Successful With Our Event Planning Software"
@@ -66,7 +66,37 @@ const EventLimeLights = () => {
 
                     </div>
                     <div className='flex-1'>
-                        <img src="https://img.freepik.com/premium-photo/calendar-computer-software-application-modish-schedule-planning_31965-282631.jpg?w=900" alt="register" className='object-cover rounded-2xl' />
+                        <img src="https://img.freepik.com/free-photo/appointment-agenda-reminder-personal-organizer-calendar-concept_53876-13792.jpg?t=st=1726938133~exp=1726941733~hmac=5e963d76bb7a9393bed4c7b94dd4998b0326b0ac026912e9c15cfae6d22f8f1b&w=740" alt="register" className='object-cover rounded-2xl' />
+                    </div>
+                </div>
+            </div>
+
+    {/* Little Extra section  */}
+
+            <div className='mb-20'>
+                <SectionTitle
+                    subTitle="Miscellaneous"
+                    title="Because Who Doesn’t Love A Little Extra Help!"
+                >
+                </SectionTitle>
+                <div className='flex lg:flex-row-reverse flex-col gap-6  lg:gap-12  '>
+                    <div className='flex-1 lg:pt-32'>
+                        <div>
+                            <h3 className='font-bold  mb-2'>Engaging Interaction</h3>
+                            <p className='mb-10'>Enhance user experience with engaging interactions and intuitive design. Foster connections that keep users coming back</p>
+                        </div>
+                        <div>
+                            <h3 className='font-bold  mb-2'>Speaker Showcase</h3>
+                            <p className='mb-10'>Highlight speakers to engage attendees and showcase their expertise. Discover insights from industry leaders</p>
+                        </div>
+                        <div>
+                            <h3 className='font-bold  mb-2'>Comprehensive Event Insights</h3>
+                            <p className='mb-10'>Access event insights for smarter planning and execution. Make informed decisions for success!</p>
+                        </div>
+                       
+                    </div>
+                    <div className='flex-1 bg-[#E7E8FF] pt-10 px-6 rounded-t-lg'>
+                        <img src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65c396d2b749951d9e9e513d_User%20Group%20Permissions%20(1).svg" alt="register" className='object-cover rounded-2xl' />
                     </div>
                 </div>
             </div>
