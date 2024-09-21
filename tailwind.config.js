@@ -10,6 +10,8 @@ module.exports = {
       fontFamily: {
         sans: ['"Space Grotesk"', 'sans-serif'], // Adding Space Grotesk to the sans family
       },
+      poppins: ['Poppins', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
