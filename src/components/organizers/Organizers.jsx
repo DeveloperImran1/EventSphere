@@ -123,7 +123,7 @@ const Organizers = () => {
                         {/* Add group class here */}
                         <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 flex flex-col items-center text-center group">
                             <div className="relative w-32 h-32 mb-4">
-                                <Image
+                                <img
                                     src={organizer.profilePicture}
                                     alt={`${organizer.name}'s profile`}
                                     className="rounded-full object-cover w-full h-full animate-top-down"
