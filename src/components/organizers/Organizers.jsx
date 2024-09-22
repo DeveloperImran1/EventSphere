@@ -94,7 +94,7 @@ const Organizers = () => {
          <SectionTitle 
          subTitle="Our Team"
          title={"top organizers"}
-         description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Est cumque expedita cupiditate illum aspernatur? Sunt repellendus ullam assumenda ex illo?"}
+         description={"Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life"}
          >
 
          </SectionTitle>
@@ -114,7 +114,7 @@ const Organizers = () => {
                         slidesPerView: 3,
                     },
                     1280: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                     },
                 }}
             >
