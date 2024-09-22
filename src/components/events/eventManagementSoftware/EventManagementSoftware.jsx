@@ -7,11 +7,14 @@ import HandyFeatured from './HandyFeatured';
 import ExperianceTab from './ExperianceTab';
 import Testimonials from '@/components/testimonials/Testimonials';
 import AppleLogoSection from './AppleLogoSection';
+import InputSchedule from './InputSchedule';
+import AnimatedImageSection from './AnimateImageSection';
 
 const EventManagementSoftware = () => {
   return (
     <div>
       <EventTitle/>
+      <AnimatedImageSection/>
       <EventStaticSection/>
       <EventRegister/>
       <EventLimeLights/>
@@ -19,6 +22,7 @@ const EventManagementSoftware = () => {
       <ExperianceTab/>
       <Testimonials/>
       <AppleLogoSection/>
+      <InputSchedule/>
     </div>
   );
 };
