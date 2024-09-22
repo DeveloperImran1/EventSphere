@@ -6,6 +6,7 @@ import EventLimeLights from './EventLimeLights';
 import HandyFeatured from './HandyFeatured';
 import ExperianceTab from './ExperianceTab';
 import Testimonials from '@/components/testimonials/Testimonials';
+import AppleLogoSection from './AppleLogoSection';
 
 const EventManagementSoftware = () => {
   return (
@@ -17,6 +18,7 @@ const EventManagementSoftware = () => {
       <HandyFeatured/>
       <ExperianceTab/>
       <Testimonials/>
+      <AppleLogoSection/>
     </div>
   );
 };
