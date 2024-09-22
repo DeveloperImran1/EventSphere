@@ -280,4 +280,55 @@ h4 {
      font-size: 1.5rem;
    }
  }
+
  
+ @layer base {
+  :root {
+      --radius: 0.5rem;
+  
+ 
+   }
+  
+ 
+}
+ 
+
+
+
+ /* Star Animation by Atik */
+ @keyframes starAnimation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.animate-star {
+  animation: starAnimation 1s infinite;
+}
+
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+
+ 
+
+ @layer base {
+  :root {
+      --radius: 0.5rem;
+  
+ 
+   }
+  
+ 
+} 
+ 
+

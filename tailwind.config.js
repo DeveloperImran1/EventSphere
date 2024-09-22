@@ -81,10 +81,7 @@ module.exports = {
       },
       poppins: ['Poppins', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+     
       keyframes: {
         'top-down': {
           '0%': { transform: 'translateY(-10px)' },
