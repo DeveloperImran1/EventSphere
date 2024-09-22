@@ -136,6 +136,19 @@ p {
    }
  }
 
+ 
+ @layer base {
+  :root {
+      --radius: 0.5rem;
+  
+ 
+   }
+  
+ 
+}
+ 
+
+
 
  /* event company */
  @keyframes starAnimation {
@@ -159,5 +172,6 @@ p {
 .hover\:scale-110:hover {
   transform: scale(1.1);
 }
+
 
 
