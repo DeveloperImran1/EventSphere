@@ -1,8 +1,16 @@
+import DashboardNavbar from '@/components/dashboard/user/DashboardNavbar';
+import DashboardSideBar from '@/components/dashboard/user/DashboardSideBar';
+import UserInfo from '@/components/dashboard/user/UserInfo';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
+        <DashboardNavbar/>
+        <div className='flex gap-4'>
+        <DashboardSideBar/>
+        <UserInfo/>
+        </div>
         This is admin profile page . Another page is cannot add in this time.
         <button className='button'>Submit</button>
         </div>
