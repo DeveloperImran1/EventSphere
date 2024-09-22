@@ -3,7 +3,7 @@ import React from 'react';
 
 const EventRegister = () => {
     return (
-        <div className='container mx-5 w-11/12 lg:mx-auto mb-20'>
+        <div className=' w-11/12 mx-auto mb-20'>
             <SectionTitle
                 subTitle="The Secret To Sold Out Events"
                 title="Seamless Registration And Ticketing Systems"

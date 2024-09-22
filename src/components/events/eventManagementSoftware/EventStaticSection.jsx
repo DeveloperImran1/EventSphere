@@ -3,7 +3,7 @@ import React from 'react';
 
 const EventStaticSection = () => {
     return (
-        <div className='container w-11/12 flex flex-col lg:flex-row gap-12 mx-auto mb-20'>
+        <div className=' w-11/12 flex flex-col lg:flex-row gap-12 mx-auto mb-20'>
             <img src="https://img.freepik.com/free-photo/young-handsome-business-man-with-laptop-office_1303-21060.jpg" alt='organizers picture' className='rounded-2xl' />
             <div>
                 <h2 className='font-bold'>Event That Engages, Converts, and Generates Revenue</h2>
