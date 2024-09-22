@@ -1,69 +1,159 @@
+import Link from 'next/link';
 import React from 'react';
+import Image from "next/image";
+import { LiaFacebook } from "react-icons/lia";
+import { SlSocialTwitter, SlSocialYoutube } from "react-icons/sl";
+import { BsInstagram } from "react-icons/bs";
+import { TbBrandLinkedin } from "react-icons/tb";
+import Logo from './Logo';
+
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="flex flex-col justify-around gap-5 bg-gray-300 py-8 dark:bg-gray-500 dark:text-white">
-                <nav className="text-lg">
-                    <ul className="flex h-full flex-wrap items-center justify-center gap-3">
-                        <li>
-                            <a className="cursor-pointer hover:underline">Home</a>
-                        </li>
-                        <li>
-                            <a className="cursor-pointer hover:underline">Contact</a>
-                        </li>
-                        <li>
-                            <a className="cursor-pointer hover:underline">About</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav className="text-lg">
-                    <ul className="flex h-full flex-wrap items-center justify-center gap-5">
-                        <li className="cursor-pointer">
-                            <a>
-                                <Facebook className="size-6 fill-current" />
-                            </a>
-                        </li>
-                        <li className="cursor-pointer">
-                            <a>
-                                <Twitter className="size-6 fill-current" />
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <aside className="text-center text-sm">
-                    <p>&copy; 2024 NavigateUI. All Rights Reserved.</p>
-                </aside>
-            </footer>
-        </div>
+        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-0">
+            <div className="flex flex-col pt-36 items-stretch border-[#40454f] max-w-[1280px] mx-6 md:mx-auto">
+                {/* Footer Header */}
+                <div className="text-white uppercase pb-[100px]">
+                    <h1 className='text-transparent bg-clip-text max-w-[600px] text-[48px] font-bold leading-[120%] bg-gradient-to-r from-green-500 to-blue-400'>The future of <span>events</span>
+                        <br />is here.</h1>
+                </div>
+                {/* Footer Menu */}
+                <div className="grid gap-0 border-b border-[#2b4475] justify-between pb-20 
+                grid-cols-2 md:grid-cols-[0.3fr_0.25fr_0.25fr_0.25fr]">
+                    {/* Footer Link 1*/}
+                    <div className="flex flex-col items-start">
+                        {/* Footer Menu Tittle */}
+                        <div className="pb-[30px] text-[#40454f]">
+                            <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PLATFORMS</h6>
+                        </div>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Virtual Event Platform</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Hybrid Event Platform</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">In-person Event Platform</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Mobile Event App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Expo & Exhibition</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Management Platform</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Registration Platform</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Corporate Event App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Enterprise Event App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show Management Software</Link>
+                    </div>
+                    {/* Footer Link 2*/}
+                    <div className="flex flex-col items-start">
+                        {/* Footer Menu Tittle */}
+                        <div className="pb-[30px] text-[#40454f]">
+                            <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PRODUCTS</h6>
+                        </div>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Ticketing Software</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Check-in App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Badge Printing</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Ticket Sales Report</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Lead Retrieval App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Networking App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Gamification App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Poll & QA</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Matchmaking App</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Concierge Service</Link>
+                    </div>
+                    {/* Footer Link 3*/}
+                    <div className="flex flex-col items-start">
+                        {/* Footer Menu Tittle */}
+                        <div className="pb-[30px] text-[#40454f]">
+                            <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">RESOURCES</h6>
+                        </div>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Pricing</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Contact</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">About</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">About</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Blog</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Customer Stories</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">FAQ</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Referral Program</Link>
+                    </div>
+                    {/* Footer Link 4*/}
+                    <div className="flex flex-col items-start">
+                        {/* Footer Menu Tittle */}
+                        <div className="pb-[30px] text-[#40454f]">
+                            <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">OTHERS</h6>
+                        </div>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Privacy Policy</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Terms of Use</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Restricted Businesses</Link>
+                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Security</Link>
+                        {/* <Link href={'/#'} className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</Link> */}
+                        <div className="">
+                            <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</h6>
+                            <div className="flex flex-col w-[320px]">
+                                <Link href={'#'} className='pt-[15px] max-w-[100%]'>
+                                    <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3e4e6bff71d1f1eb40b_Eventify%20AppStore.svg" width={180} height={100} alt='palyStor' />
+                                </Link>
+                                <Link href={'#'} className='pt-[15px] max-w-[100%]'>
+                                    <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3f797f08340d7065372_Eventify%20PlayStore.svg" width={180} height={100} alt='palyStor' />
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* Footer Logos */}
+                <div className="flex flex-col md:flex-row gap-[20px] border-b border-[#2b4475] justify-between items-center py-5">
+                    {/* Left Side */}
+                    <div className="flex gap-6">
+                        <Link href={'/#'} className='max-w-[100%] w-[153px]'>
+                            <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/663390f4e17bd17f094fb35f_Trustpilot.svg" width={1000} height={100}  alt='RatingLogo'/>
+                        </Link>
+                        <Link href={'/#'} className='max-w-[100%] w-[100px] h-[100px]'>
+                            <Image src="https://i.postimg.cc/cC7gjTvc/crozdesk-happiest-users-badge.webp" width={100} height={100}  alt='RatingLogo'/>
+                        </Link>
+                    </div>
+                    {/* Right Side */}
+                    <div className="flex flex-col gap-3">
+                        <h6 className='text-[#f1f3f6] pb-3 text-[16px] text-left'>Eventify is now ISO 27001:2022 certified</h6>
+                        <div className="flex gap-3">
+                            <Link href={"/#"} className='max-w-[100%] h-[80px] '>
+                                <Image className='w-auto h-20' src="https://i.postimg.cc/MTC3tZBQ/65c0de53a884445bf83987f4-ISO-27001.png" alt='footerLogo' height={80} width={100}/>
+                            </Link>
+                            <Link href={"/#"} className='max-w-[100%] h-[80px] '>
+                                <Image className='w-auto h-20' src="https://i.postimg.cc/j5wkznDT/65c0ddba09609703dbc33655-AICPA-SOC.png" alt='footerLogo' height={80} width={100}/>
+                            </Link>
+                            <Link href={"/#"} className='max-w-[100%] h-[80px] '>
+                                <Image className='w-auto h-20' src="https://i.postimg.cc/bvFBD9NL/65c0e0a7b891b647e8b8dcdf-GDPR-compliant-badge-1.webp" alt='footerLogo' height={80} width={100}/>
+                            </Link>
+                            <Link href={"/#"} className='max-w-[100%] h-[80px] '>
+                                <Image className='w-auto h-20' src="https://i.postimg.cc/DzzNwMF8/65c0e040724c4b40079cb478-SOC-2-Type-2.png" alt='footerLogo' height={80} width={100}/>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                {/* Footer Down */}
+                <div className="text-[#fffc] flex flex-col md:flex-row justify-between items-center py-[30px] text-[16px]">
+                    {/* Left Side */}
+                    <div className="flex flex-col md:flex-row items-center ">
+                        <Logo/>
+                        <h1 className='px-5 text-[16px] mx-auto my-10'><span>&copy;</span> Eventify 2024. All rights reserved.</h1>
+                    </div>
+                    {/* Right Side */}
+                    <div className="flex items-center justify-start h-[20px]">
+                        <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
+                            <LiaFacebook className='text-[32px]' />
+                        </Link>
+                        <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
+                            <SlSocialTwitter className='text-[26px]'/>
+                        </Link>
+                        <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
+                            <BsInstagram className='text-2xl' />
+                        </Link>
+                        <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
+                            <TbBrandLinkedin className='text-3xl' />
+                        </Link>
+                        <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
+                            <SlSocialYoutube className='text-3xl' />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </footer>
     );
 };
 
 export default Footer;
-
-
-
-
-function Facebook({ className }) {
-    return (
-        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-        </svg>
-    );
-}
-
-function YouTube({ className }) {
-    return (
-        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-        </svg>
-    );
-}
-
-function Twitter({ className }) {
-    return (
-        <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-        </svg>
-    );
-}
