@@ -5,7 +5,7 @@ const WelcomePopup = () => {
   return (
     <div className="relative h-screen bg-[url('https://i.postimg.cc/KYXmLkry/bcc3716da3dabc9f944d1c30cea66036-background-Desktop.jpg')] bg-no-repeat bg-cover flex flex-col items-center justify-center text-center">
       <h1 className="text-3xl md:text-5xl font-bold text-[#1e0a3c] mb-4 px-5 md:px-0">
-        Welcome to Eventbrite! <span className="wave">👋</span>
+        Welcome to Sphere! <span className="wave">👋</span>
       </h1>
       <p className="text-xl md:text-xl leading-[2rem] text-gray-700 mb-12 px-5 md:px-0">
         We're glad you're here! What can we help you with first?
