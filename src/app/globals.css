@@ -5,78 +5,100 @@
 
 
 
- 
- /* ===== GLOBAL VARIABLES MY CUSTOM STYLES ===== */
- :root {
- 
-   /* Brand Colors */
-   --color-logo: #00a88f; /* Logo color */
-   --color-light: #ffffff; /* Light background color (white) */
-   --color-dark: linear-gradient(to right, #109AE4, #61C0CE) ; /* Deep blue background color */
-   
 
-   --color-hover: #2332c4; /* Normal blue for hover or selection */
-   
-   /* Utility Colors */
-   --color-border: #d1d1d1; /* Neutral color for borders */
-   --color-error: #ff4c4c; /* Error messages */
-   --color-success: #4caf50; /* Success messages */
-   --color-warning: #ff9800; /* Warning messages */
- 
-   /* Font Variables */
-   --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-   --font-family-serif: 'Merriweather', serif;
-  
- 
- }
- 
- 
- /* ===== GLOBAL STYLES ===== */
- *,
- *::before,
- *::after {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
- 
- html {
-   font-size: var(--font-size-base);
-   scroll-behavior: smooth;
- }
- 
- body {
-   font-family: var(--font-family-sans);
-   background-color: var(--color-light);
-   line-height: 1.5;
- }
- 
- p{
-  color: #6b7280;
-  
- }
+/* ===== GLOBAL VARIABLES MY CUSTOM STYLES ===== */
+:root {
+
+  /* Brand Colors */
+  --color-logo: #00a88f;
+  /* Logo color */
+  --color-light: #ffffff;
+  /* Light background color (white) */
+  --color-dark: linear-gradient(to right, #109AE4, #61C0CE);
+  /* Deep blue background color */
 
 
+  --color-hover: #2332c4;
+  /* Normal blue for hover or selection */
+
+  /* Utility Colors */
+  --color-border: #d1d1d1;
+  /* Neutral color for borders */
+  --color-error: #ff4c4c;
+  /* Error messages */
+  --color-success: #4caf50;
+  /* Success messages */
+  --color-warning: #ff9800;
+  /* Warning messages */
+
  
+}
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Descriptioner jonno Roboto */
+  p,
+  span,
+  div {
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+
+/* ===== GLOBAL STYLES ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-light);
+  line-height: 1.5;
+}
+
+p {
+  color: black;
+
+}
+
 
 
 /* Button Styles */
 .button {
   display: inline-block;
-  padding: 0.5rem 1.5rem; /* px-6 py-2 equivalent */
+  padding: 0.5rem 1.5rem;
+  /* px-6 py-2 equivalent */
   background-color: var(--color-logo);
   color: var(--color-light);
-  border-radius: var(--border-radius-large); 
+  border-radius: var(--border-radius-large);
   text-align: center;
   cursor: pointer;
   transition: background-color 300ms, transform 300ms;
 }
 
 .button:hover {
-  background-color: var(--color-hover); /* Color change on hover */
-  transform: scale(0.9); /* Scale down on hover */
+  background-color: var(--color-hover);
+  /* Color change on hover */
+  transform: scale(0.9);
+  /* Scale down on hover */
 }
- 
+
 
 
  /* Responsive Typography */
@@ -113,6 +135,7 @@
      font-size: 1.5rem;
    }
  }
+
  
  @layer base {
   :root {
@@ -124,3 +147,31 @@
  
 }
  
+
+
+
+ /* event company */
+ @keyframes starAnimation {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.animate-star {
+  animation: starAnimation 1s infinite;
+}
+
+
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+
+
