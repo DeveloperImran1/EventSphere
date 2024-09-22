@@ -1,3 +1,4 @@
+import CustomerSpeak from '@/components/events/CustomerSpeak';
 import EventHighlight from '@/components/events/EventHighlight';
 import EventifyEdge from '@/components/events/EventifyEdge';
 import Pricing from '@/components/events/Pricing';
@@ -17,6 +18,7 @@ const page = () => {
          <TicketSellProcess></TicketSellProcess>
          <Pricing></Pricing>
           <EventifyEdge></EventifyEdge>
+          <CustomerSpeak></CustomerSpeak>
         </div>
     );
 };
