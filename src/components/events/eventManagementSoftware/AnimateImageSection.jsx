@@ -9,7 +9,7 @@ const AnimatedImageSection = () => {
             <div className="lg:w-1/2 p-5">
                 <h2 className="text-3xl font-bold mb-4">Ordinary Tools, Ordinary Events—Summon The Kraken Of Online Event Management Software</h2>
                 <p className="text-lg">
-                Here are some signs that show your event management system is too basic or outdated.
+                    Here are some signs that show your event management system is too basic or outdated.
                 </p>
                 <ul className="mt-10">
                     <li>Hefty ticket cut</li>
@@ -22,7 +22,7 @@ const AnimatedImageSection = () => {
             {/* Right side with 1/2 split into 2 halves for images */}
             <div className="lg:w-1/2 flex flex-col lg:flex-row gap-5">
                 {/* Left-side images (animate from down to top) */}
-                <div className="lg:w-1/2 flex flex-col justify-between h-80 relative overflow-hidden">
+                <div className="lg:w-1/2 flex flex-col justify-between h-auto lg:h-80 relative overflow-hidden">
                     <div className="absolute inset-0 move-up">
                         <img src="https://img.freepik.com/premium-vector/online-payment-concept-people-pay-online-shopping-using-debit-credit-card-online-payment-through-mobile-app_115790-235.jpg?ga=GA1.1.245323466.1722741120&semt=ais_hybrid" alt="Image 1" className="w-full mb-4" />
                         <img src="https://img.freepik.com/free-photo/decorated-banquet-hall-with-served-round-table-with-hydrangea-centerpiece-chiavari-chairs_8353-10059.jpg?size=626&ext=jpg&ga=GA1.1.245323466.1722741120&semt=ais_hybrid" alt="Image 2" className="w-full mb-4" />
@@ -32,7 +32,7 @@ const AnimatedImageSection = () => {
                 </div>
 
                 {/* Right-side images (animate from top to down) */}
-                <div className="lg:w-1/2 flex flex-col justify-between h-80 relative overflow-hidden">
+                <div className="lg:w-1/2 flex flex-col justify-between h-auto lg:h-80 relative overflow-hidden">
                     <div className="absolute inset-0 move-down">
                         <img src="https://img.freepik.com/free-photo/tender-hydrangea-centerpiece-round-table-with-candles_8353-10056.jpg?size=626&ext=jpg&ga=GA1.1.245323466.1722741120&semt=ais_hybrid" alt="Image 5" className="w-full mb-4" />
                         <img src="https://img.freepik.com/free-vector/payment-receipt-template-with-flat-design_23-2147895616.jpg?ga=GA1.1.245323466.1722741120&semt=ais_hybrid" alt="Image 6" className="w-full mb-4" />
