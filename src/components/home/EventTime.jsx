@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import image from '@/app/assets/react.jpeg'
+
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 import { ImShare } from "react-icons/im";
@@ -33,8 +33,11 @@ const EventTime = () => {
             <div className=" ">
               <div className="max-w-[300px] ">
               <Image
-                src={image}
+                src="https://i.ibb.co.com/mXPHSQf/58d479834a200acdff41c0086f0f80ba.jpg"
                 alt="Picture of the author"
+                width={200}
+                height={200}
+
                 className="rounded-md hover:scale-105 transition-all duration-300"
               />
               </div>
