@@ -8,11 +8,10 @@ import EventOrderList from '../events/EventOrderList';
 
 const HomeContainer = () => {
     return (
-        <div>
+        <div className='space-y-20'>
             <Banner></Banner>
             
             <PopularEvents></PopularEvents>
-            <EventTime></EventTime>
             <EventOrderList/>
             <Organizers></Organizers>
             <Testimonials></Testimonials>

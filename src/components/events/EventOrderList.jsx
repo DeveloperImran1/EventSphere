@@ -52,10 +52,8 @@ const EventOrderList = () => {
 
 
     ]
-    return <div className=" flex mx-auto p-4 text-black">
-        <div className=" w-[350px]">
-            hg
-        </div>
+    return <div className="mx-auto p-4 text-black">
+      
         <div className="">
             <div className=" flex justify-between my-5">
                 <div className="">
