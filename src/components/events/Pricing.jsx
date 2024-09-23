@@ -5,7 +5,7 @@ const Pricing = () => {
     return (
         <div>
         {/* Background section */}
-        <div className="bg-slate-300 pb-36">
+        <div className="bg-slate-300   pb-36">
           <div className="container mx-auto p-2 md:p-20">
             <div className="text-center">
               <h1 className="text-xl font-semibold font-serif tracking-[.25em] text-blue-500">PRICING</h1>
@@ -18,9 +18,9 @@ const Pricing = () => {
         </div>
       
         {/* Cards section */}
-        <div className="container mx-auto -mt-[192px] flex flex-col md:flex-row justify-center gap-6 p-4">
+        <div className="container mx-auto  flex flex-col md:flex-row justify-center gap-6 p-4">
           {/* First card */}
-          <div className="w-full md:w-1/2 p-8 bg-white border border-gray-200 rounded-lg shadow-md">
+          <div className="w-full    md:w-1/2 p-8 bg-white border border-gray-200 rounded-lg shadow-md">
             <h5 className="mb-4 text-2xl font-serif font-bold tracking-tight text-gray-900">Free</h5>
             <p className="mb-4 font-normal text-gray-700">
               Enjoy flat rates for a lifetime with Eventify event ticketing software! Get everyone onboard, optimize registration & boost ticket sales.

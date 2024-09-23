@@ -3,6 +3,7 @@ import EventHighlight from '@/components/events/EventHighlight';
 import EventifyEdge from '@/components/events/EventifyEdge';
 import Pricing from '@/components/events/Pricing';
 import SellEventTicket from '@/components/events/SellEventTicket';
+import Services from '@/components/events/Services';
 import TicketManagesystem from '@/components/events/TicketManagesystem';
 import TicketSellProcess from '@/components/events/TicketSellProcess';
 
@@ -19,6 +20,7 @@ const page = () => {
          <Pricing></Pricing>
           <EventifyEdge></EventifyEdge>
           <CustomerSpeak></CustomerSpeak>
+          <Services></Services>
         </div>
     );
 };
