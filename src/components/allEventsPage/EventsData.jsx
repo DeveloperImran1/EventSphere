@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import EventCard from './EventCard';
 
 const EventsData = () => {
@@ -11,9 +12,10 @@ const EventsData = () => {
             "companyName": "XYZ Innovations",
             "price": "$50",
             "location": "Downtown Convention Center, New York",
+            "category": "Technology",
             "organizer": {
                 "name": "John Doe",
-                "followers": 200000
+                "followers": "20.3 k"
             },
             "description": "A premier event showcasing the latest in technology and innovation.",
             "tags": ["#Technology", "#Innovation", "#Expo"],
@@ -26,9 +28,10 @@ const EventsData = () => {
             "companyName": "Live Events Inc.",
             "price": "$75",
             "location": "Central Park, New York",
+            "category": "Music",
             "organizer": {
                 "name": "Jane Smith",
-                "followers": 150000
+                "followers": "15 K"
             },
             "description": "An open-air concert featuring world-renowned artists.",
             "tags": ["#Music", "#Concert", "#Outdoor"],
@@ -41,9 +44,10 @@ const EventsData = () => {
             "companyName": "Entrepreneur Hub",
             "price": "Free",
             "location": "Silicon Valley Conference Center, California",
+            "category": "Business",
             "organizer": {
                 "name": "Michael Lee",
-                "followers": 100000
+                "followers": "10.4 k"
             },
             "description": "A gathering of startup founders and investors to explore new opportunities.",
             "tags": ["#Startup", "#Entrepreneurship", "#Networking"],
@@ -56,24 +60,47 @@ const EventsData = () => {
             "companyName": "Creative Minds Co.",
             "price": "$30",
             "location": "Art Gallery, San Francisco",
+            "category": "Art & Culture",
             "organizer": {
                 "name": "Emily Clark",
-                "followers": 50000
+                "followers": '5.1 k'
             },
             "description": "An exhibition of contemporary art and cultural performances.",
             "tags": ["#Art", "#Culture", "#Exhibition"],
             "button": "Buy Tickets"
         }
     ]
+    const [cartItems, setCartItems] = useState([]);
+
+    // Function to handle adding to cart
+    const addToCart = (event) => {
+        setCartItems([...cartItems, event]);
+        alert(`${event.title} added to cart!`);
+    };
+
+    // Function to handle sharing the event
+    const shareEvent = (event) => {
+        const shareOptions = `
+            Share on: 
+            1. Facebook: https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}
+            2. WhatsApp: https://api.whatsapp.com/send?text=${encodeURIComponent(window.location.href)}
+        `;
+        alert(shareOptions);
+    };
 
     return (
         <div className='flex gap-10 w-11/12 mx-auto'>
             <div className='w-1/5 '>
-filtering
+                filtering
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 justify-center ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {eventsData.map((event, index) => (
-                    <EventCard key={index} event={event} />
+                    <EventCard
+                        key={index}
+                        event={event}
+                        addToCart={addToCart}
+                        shareEvent={shareEvent}
+                    />
                 ))}
             </div>
         </div>
