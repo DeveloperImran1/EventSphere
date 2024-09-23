@@ -1,6 +1,8 @@
 import CustomerSpeak from '@/components/events/CustomerSpeak';
 import EventHighlight from '@/components/events/EventHighlight';
 import EventifyEdge from '@/components/events/EventifyEdge';
+import FAQ from '@/components/events/FAQ';
+import FAQS from '@/components/events/FAQ';
 import Pricing from '@/components/events/Pricing';
 import SellEventTicket from '@/components/events/SellEventTicket';
 import Services from '@/components/events/Services';
@@ -21,6 +23,7 @@ const page = () => {
           <EventifyEdge></EventifyEdge>
           <CustomerSpeak></CustomerSpeak>
           <Services></Services>
+             <FAQ></FAQ>
         </div>
     );
 };
