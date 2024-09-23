@@ -1,4 +1,5 @@
 import MainHeader from '@/components/About/MainHeader';
+import OurPhilosophy from '@/components/About/OurPhilosophy';
 import TopAbout from '@/components/About/TopAbout';
 import React from 'react';
 
@@ -7,6 +8,7 @@ const page = () => {
         <div>
             <MainHeader/>
             <TopAbout/>
+            <OurPhilosophy/>
         </div>
     );
 };
