@@ -7,9 +7,7 @@ import { CiFilter } from "react-icons/ci";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
