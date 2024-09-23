@@ -2,8 +2,12 @@
 import React, { useState } from 'react';
 import EventCard from './EventCard';
 import { toast } from 'react-toastify';
+import { Range } from 'react-range';
 
 const EventsData = () => {
+    const [cartItems, setCartItems] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [priceRange, setPriceRange] = useState([0, 100]);
 
     const eventsData = [
         {
@@ -71,8 +75,19 @@ const EventsData = () => {
             "button": "Buy Tickets"
         }
     ]
-    const [cartItems, setCartItems] = useState([]);
 
+
+    const categories = [...new Set(eventsData.map(event => event.category))];
+
+    // Filter events based on selected category and price range
+    const filteredEvents = eventsData.filter(event => {
+        const withinPriceRange = event.price >= priceRange[0] && event.price <= priceRange[1];
+        const matchesCategory = selectedCategory ? event.category === selectedCategory : true;
+        return withinPriceRange && matchesCategory;
+    });
+
+    // Sort events by price (ascending)
+    const sortedEvents = filteredEvents.sort((a, b) => a.price - b.price);
 
     // Function to handle adding to cart
     const addToCart = (event) => {
@@ -88,9 +103,35 @@ const EventsData = () => {
 
 
     return (
-        <div className='flex gap-10 w-11/12 mx-auto'>
-            <div className='w-1/5 '>
-                filtering
+        <div className='flex gap-10 w-11/12 mx-auto mt-20'>
+            <div className='w-1/5'>
+                <h5 className=" font-bold mb-4">Filter by Category</h5>
+                {categories.map((category, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setSelectedCategory(category)}
+                        className={`block w-full rounded-lg text-center mb-2 py-2  ${selectedCategory === category ? 'bg-[--color-logo] text-white' : 'bg-gray-200'}`}
+                    >
+                        {category}
+                    </button>
+                ))}
+                <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
+                <Range
+                    values={priceRange}
+                    step={1}
+                    min={0}
+                    max={100}
+                    onChange={values => setPriceRange(values)}
+                    renderTrack={({ props, children }) => (
+                        <div {...props} style={{ ...props.style,  height: '6px', background: '#ccc' }}>
+                            {children}
+                        </div>
+                    )}
+                    renderThumb={({ props }) => (
+                        <div {...props} style={{ ...props.style, height: '24px', width: '24px', backgroundColor: 'var(--color-logo)',  borderRadius:"50%"}}/>
+                    )}
+                />
+                <p className="text-center mt-2">Price: {priceRange[0]} - {priceRange[1]}</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
                 {eventsData.map((event, index) => (

@@ -7,8 +7,8 @@ const EventCard = ({ event, addToCart, shareEvent }) => {
         <div>
             {/* Toast container to show toasts */}
             <ToastContainer />
-            <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 hover:scale-105 transition-transform duration-300">
-                <img className="w-full h-48 object-cover" src={event.photo} alt={event.title} />
+            <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
+                <img className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" src={event.photo} alt={event.title} />
 
                 {/* Love and Share Icons - visible on hover */}
                 <div className="absolute top-36 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
@@ -63,11 +63,11 @@ const EventCard = ({ event, addToCart, shareEvent }) => {
                     </div>
                     <p className="text-gray-500 my-2">{event.description}</p>
                     <div className='flex justify-between items-center'>
-                        <p className="text-lg font-semibold">{event.price}</p>
-                        <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-600 transition">
-                            Details
+                       
+                        <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
+                        {event.price}
                         </button>
-                        <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-600 transition">
+                        <button className="bg-[--color-logo] text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
                             {event.button}
                         </button>
                     </div>
