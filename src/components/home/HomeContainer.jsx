@@ -14,6 +14,7 @@ const HomeContainer = () => {
             <EventTime></EventTime>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
+         
         </div>
     );
 };
