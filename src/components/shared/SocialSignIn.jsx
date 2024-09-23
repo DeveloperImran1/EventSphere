@@ -1,21 +1,50 @@
-import React from 'react';
+"use client"; // Ensure this component is client-side only
+
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import Swal from 'sweetalert2';
+
 const SocialSignIn = () => {
     const router = useRouter();
-    const session = useSession();
-    console.log("Session is age", session)
+    const { status } = useSession(); // Session status only
+
+    const successfullSignIn = () => {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Welcome to EventSphere!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
+
+    const errorSignIn = () => {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Something Went Wrong",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
+
     const handleSocialLogin = async (provider) => {
-        const resp = await signIn(provider, { redirect: false })
-        console.log("responce is", resp)
-        console.log("Session is", session)
-        if (session.status === 'authenticated') {
-            router.push('/')
+        const resp = await signIn(provider, { redirect: false }); // Avoid auto redirect
+        console.log("Response from signIn:", resp);
+
+        if (resp?.ok) {
+            successfullSignIn();
+            // Check session status after successful sign-in
+            router.push('/');
+        } else {
+            // errorSignIn();
+            console.log("something went wrong for signIn")
         }
-    }
+    };
 
     return (
         <div>
@@ -32,7 +61,7 @@ const SocialSignIn = () => {
                         <FaFacebook className="m-2 w-5 h-5 text-blue-600" /> Facebook
                     </button>
                     {/* Apple Sign Up Button */}
-                    <button className="border w-full border-gray-300 rounded-md  flex items-center justify-center">
+                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 rounded-md  flex items-center justify-center">
                         <FaApple className="m-2 w-5 h-5" /> Apple
                     </button>
                 </div>

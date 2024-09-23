@@ -8,8 +8,21 @@ import Image from "next/image";
 import { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import SocialSignIn from "@/components/shared/SocialSignIn";
+import { signIn } from "next-auth/react";
+import Swal from 'sweetalert2'
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const successfullySignIn = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Successfully SignIn",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+  const router = useRouter();
   const [viewPass, setViewPass] = useState(false);
   const [viewConfirmPass, setViewConfirmPass] = useState(false)
   const [formData, setFormData] = useState({
@@ -23,12 +36,19 @@ const page = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const name = `${e.target.firstName.value} ${e.target.lastName.value}`
+    const email = e.target.email.value
+    const password = e.target.password.value
+    const image = 'https://i.ibb.co.com/7GvpDBs/Blue-Modern-Facebook-Profile-Picture-1.jpg'
     const newUser = {
       name: `${e.target.firstName.value} ${e.target.lastName.value}`,
       email: e.target.email.value,
       password: e.target.password.value,
+      image
     }
     console.log(newUser)
     const resp = await fetch('http://localhost:3000/register/api', {
@@ -38,8 +58,23 @@ const page = () => {
         "content-type": "application/json"
       }
     });
-    console.log(resp)
+    console.log("SignUp korar por responce is ", resp)
+
+    // nextJs dia login korar way: 
+    const responce = await signIn('credentials', {
+      email, password,
+      redirect: false
+    });
+    console.log("responce is", responce)
+    // thik vabe login hole home page a pathia dibo.
+    if (responce.status === 200) {
+      successfullySignIn()
+      router.push('/')
+    }
   };
+
+
+
 
 
 
