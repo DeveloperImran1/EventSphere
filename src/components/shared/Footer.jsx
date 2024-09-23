@@ -10,7 +10,7 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-0">
+        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-10 ">
             <div className="flex flex-col pt-36 items-stretch border-[#40454f] max-w-[1280px] mx-6 md:mx-auto">
                 {/* Footer Header */}
                 <div className="text-white uppercase pb-[100px]">
@@ -32,12 +32,7 @@ const Footer = () => {
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Mobile Event App</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Expo & Exhibition</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Management Platform</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Registration Platform</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Corporate Event App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Enterprise Event App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Trade Show Management Software</Link>
+                
                     </div>
                     {/* Footer Link 2*/}
                     <div className="flex flex-col items-start">
@@ -51,10 +46,7 @@ const Footer = () => {
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Ticket Sales Report</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Lead Retrieval App</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Networking App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Gamification App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Poll & QA</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Matchmaking App</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Event Concierge Service</Link>
+                 
                     </div>
                     {/* Footer Link 3*/}
                     <div className="flex flex-col items-start">
@@ -68,8 +60,7 @@ const Footer = () => {
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">About</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Blog</Link>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Customer Stories</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">FAQ</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Referral Program</Link>
+                    
                     </div>
                     {/* Footer Link 4*/}
                     <div className="flex flex-col items-start">
@@ -78,10 +69,8 @@ const Footer = () => {
                             <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">OTHERS</h6>
                         </div>
                         <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Privacy Policy</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Terms of Use</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Restricted Businesses</Link>
-                        <Link href={'/#'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Security</Link>
-                        {/* <Link href={'/#'} className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</Link> */}
+              
+                      
                         <div className="">
                             <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</h6>
                             <div className="flex flex-col w-[320px]">
@@ -107,9 +96,9 @@ const Footer = () => {
                         </Link>
                     </div>
                     {/* Right Side */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 ">
                         <h6 className='text-[#f1f3f6] pb-3 text-[16px] text-left'>Eventify is now ISO 27001:2022 certified</h6>
-                        <div className="flex gap-3">
+                        <div className="flex gap-3 pr-[60px] md:mr-5">
                             <Link href={"/#"} className='max-w-[100%] h-[80px] '>
                                 <Image className='w-auto h-20' src="https://i.postimg.cc/MTC3tZBQ/65c0de53a884445bf83987f4-ISO-27001.png" alt='footerLogo' height={80} width={100}/>
                             </Link>
@@ -133,7 +122,7 @@ const Footer = () => {
                         <h1 className='px-5 text-[16px] mx-auto my-10'><span>&copy;</span> Eventify 2024. All rights reserved.</h1>
                     </div>
                     {/* Right Side */}
-                    <div className="flex items-center justify-start h-[20px]">
+                    <div className="flex items-center justify-start h-[20px] pr-[60px] md:mr-5">
                         <Link href={'/#'} className='mr-6 items-center transition ease-in-out delay-150 hover:-translate-y-1 duration-300'>
                             <LiaFacebook className='text-[32px]' />
                         </Link>
