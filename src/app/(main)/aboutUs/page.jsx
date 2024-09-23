@@ -1,3 +1,4 @@
+import FactsSection from '@/components/About/FactsSection';
 import MainHeader from '@/components/About/MainHeader';
 import OurPhilosophy from '@/components/About/OurPhilosophy';
 import TopAbout from '@/components/About/TopAbout';
@@ -9,6 +10,7 @@ const page = () => {
             <MainHeader/>
             <TopAbout/>
             <OurPhilosophy/>
+            <FactsSection/>
         </div>
     );
 };
