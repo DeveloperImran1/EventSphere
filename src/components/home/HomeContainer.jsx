@@ -4,6 +4,7 @@ import PopularEvents from './PopularEvents';
 import EventTime from './EventTime';
 import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
+import EventOrderList from '../events/EventOrderList';
 
 const HomeContainer = () => {
     return (
@@ -12,6 +13,7 @@ const HomeContainer = () => {
             
             <PopularEvents></PopularEvents>
             <EventTime></EventTime>
+            <EventOrderList/>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
         </div>
