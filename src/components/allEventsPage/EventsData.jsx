@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import { Range } from 'react-range';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Link from 'next/link';
+import eventsDataJson from '@/components/allEventsPage/EventDataJson'
 
 const EventsData = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -13,77 +15,12 @@ const EventsData = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
-    const eventsData = [
-        {
-            "photo": "https://theinternetofthings.report/Images/EventImages/6d99b196-f9f7-4ba1-9999-a2d80a3bebc7_iot-tech-expo-europe.jpg",
-            "title": "IOT Tech Expo 2024",
-            "dateTime": "2024-03-15T10:00:00",
-            "companyName": "XYZ Innovations",
-            "price": 50,
-            "location": "Downtown Convention Center, New York",
-            "category": "Technology",
-            "organizer": {
-                "name": "John Doe",
-                "followers": "20.3 k"
-            },
-            "description": "A premier event showcasing the latest in technology and innovation.",
-            "tags": ["#Technology", "#Innovation", "#Expo"],
-            "button": "Buy Tickets"
-        },
-        {
-            "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt7YxGKZzeOvM21OHoPWHFC9XR7q-NUv5wBQ&s",
-            "title": "Music Fest 2024",
-            "dateTime": "2024-04-20T16:00:00",
-            "companyName": "Live Events Inc.",
-            "price": 75,
-            "location": "Central Park, New York",
-            "category": "Music",
-            "organizer": {
-                "name": "Jane Smith",
-                "followers": "15 K"
-            },
-            "description": "An open-air concert featuring best world-renowned artists.",
-            "tags": ["#Music", "#Concert", "#Outdoor"],
-            "button": "Buy Tickets"
-        },
-        {
-            "photo": "https://i.ytimg.com/vi/DNmhD8Scbj4/maxresdefault.jpg",
-            "title": "Startup Summit 2024",
-            "dateTime": "2024-05-05T09:00:00",
-            "companyName": "Entrepreneur Hub",
-            "price": 0,
-            "location": "Silicon Valley Conference Center, California",
-            "category": "Business",
-            "organizer": {
-                "name": "Michael Lee",
-                "followers": "10.4 k"
-            },
-            "description": "A gathering of startup founders and investors to explore new opportunities.",
-            "tags": ["#Startup", "#Entrepreneurship", "#Networking"],
-            "button": "Register Now"
-        },
-        {
-            "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mJXJq0z8VF7ys0Wq6JJdVqXYLTHo4gke3w&s",
-            "title": "Art & Culture Expo 2024",
-            "dateTime": "2024-06-10T11:00:00",
-            "companyName": "Creative Minds Co.",
-            "price": 30,
-            "location": "Art Gallery, San Francisco",
-            "category": "Art & Culture",
-            "organizer": {
-                "name": "Emily Clark",
-                "followers": '5.1 k'
-            },
-            "description": "An exhibition of contemporary art and cultural performances.",
-            "tags": ["#Art", "#Culture", "#Exhibition"],
-            "button": "Buy Tickets"
-        }
-    ]
+    //  console.log(eventsDataJson)
 
-    const categories = ['All', ...new Set(eventsData.map(event => event.category))];
+    const categories = ['All', ...new Set(eventsDataJson.map(event => event.category))];
 
     // Filter events based on selected category, price range, and date range
-    const filteredEvents = eventsData.filter(event => {
+    const filteredEvents = eventsDataJson.filter(event => {
         const eventDate = new Date(event.dateTime);
         const withinPriceRange = event.price >= priceRange[0] && event.price <= priceRange[1];
         const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
@@ -91,7 +28,7 @@ const EventsData = () => {
         return withinPriceRange && matchesCategory && withinDateRange;
     });
 
-    // Sort events by price (ascending)
+    // // Sort events by price (ascending)
     const sortedEvents = filteredEvents.sort((a, b) => a.price - b.price);
 
     // Function to handle adding to cart
@@ -161,13 +98,14 @@ const EventsData = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
-                {sortedEvents.map((event, index) => (
-                    <EventCard
-                        key={index}
-                        event={event}
-                        addToCart={addToCart}
-                        shareEvent={shareEvent}
-                    />
+                {eventsDataJson.map((event, index) => (
+                    <Link href={`/events/${event.id}`} key={event.id}>
+                        <EventCard
+                            event={event}
+                            addToCart={addToCart}
+                            shareEvent={shareEvent}
+                        />
+                    </Link>
                 ))}
             </div>
         </div>
