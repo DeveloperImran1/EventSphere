@@ -1,4 +1,5 @@
 import FactsSection from '@/components/About/FactsSection';
+import GallerySection from '@/components/About/GallerySection';
 import MainHeader from '@/components/About/MainHeader';
 import OurPhilosophy from '@/components/About/OurPhilosophy';
 import TestimonialsAbout from '@/components/About/TestimonialsAbout';
@@ -13,6 +14,7 @@ const page = () => {
             <OurPhilosophy/>
             <FactsSection/>
             <TestimonialsAbout/>
+            <GallerySection/>
         </div>
     );
 };
