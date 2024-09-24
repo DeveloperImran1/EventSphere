@@ -1,6 +1,7 @@
 import FactsSection from '@/components/About/FactsSection';
 import MainHeader from '@/components/About/MainHeader';
 import OurPhilosophy from '@/components/About/OurPhilosophy';
+import TestimonialsAbout from '@/components/About/TestimonialsAbout';
 import TopAbout from '@/components/About/TopAbout';
 import React from 'react';
 
@@ -11,6 +12,7 @@ const page = () => {
             <TopAbout/>
             <OurPhilosophy/>
             <FactsSection/>
+            <TestimonialsAbout/>
         </div>
     );
 };

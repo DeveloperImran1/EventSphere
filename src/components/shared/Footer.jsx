@@ -73,7 +73,7 @@ const Footer = () => {
                       
                         <div className="">
                             <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</h6>
-                            <div className="flex flex-col w-[320px]">
+                            <div className="flex flex-col">
                                 <Link href={'#'} className='pt-[15px] max-w-[100%]'>
                                     <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3e4e6bff71d1f1eb40b_Eventify%20AppStore.svg" width={180} height={100} alt='palyStor' />
                                 </Link>

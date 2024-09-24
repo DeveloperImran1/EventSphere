@@ -33,20 +33,20 @@ const FactsSection = () => {
                                 </div>
                                 <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Customers</p>
                             </div>
-                            {/* Logo and Counter 2 */}
+                            {/* Logo and Counter 1 */}
                             <div className="w-[calc(25%-15px)] text-center mb-9">
                                 <div className="mb-6 flex justify-center">
                                     <Image src="https://i.postimg.cc/g0XxKn0K/about-counter02.png" height={68} width={68} alt='counter-logo' />
                                 </div>
                                 {/* Count Number */}
                                 <div className="flex flex-wrap justify-center items-center">
-                                    <h3 className="flex justify-center m-0 font-bold text-[24px] md:text-[40px]leading-[1.3] text-white">
+                                    <h3 className="flex justify-center m-0 ml-3 font-bold text-[24px] md:text-[40px] leading-[1.3] text-white">
                                         11
                                     </h3>
                                 </div>
-                                    <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Contries</p>
+                                <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Customers</p>
                             </div>
-                            {/* Logo and Counter 3 */}
+                            {/* Logo and Counter 1 */}
                             <div className="w-[calc(25%-15px)] text-center mb-9">
                                 <div className="mb-6 flex justify-center">
                                     <Image src="https://i.postimg.cc/3xw4dL5V/about-counter03.png" height={68} width={68} alt='counter-logo' />
@@ -57,9 +57,8 @@ const FactsSection = () => {
                                         650+
                                     </h3>
                                 </div>
-                                    <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Towns & Cities</p>
+                                <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Customers</p>
                             </div>
-                            {/* Logo and Counter 1 */}
                             <div className="w-[calc(25%-15px)] text-center mb-9">
                                 <div className="mb-6 flex justify-center">
                                     <Image src="https://i.postimg.cc/4NPHfDMp/about-counter04.png" height={68} width={68} alt='counter-logo' />
@@ -67,10 +66,10 @@ const FactsSection = () => {
                                 {/* Count Number */}
                                 <div className="flex flex-wrap justify-center items-center">
                                     <h3 className="flex justify-center m-0 ml-3 font-bold text-[24px] md:text-[40px] leading-[1.3] text-white">
-                                        5,000+
+                                        5000+
                                     </h3>
-                                    <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Screens</p>
                                 </div>
+                                <p className='text-[#31d7a9] capitalize -mb-4 mt-2 text-[16px] md:text-[18px]'>Customers</p>
                             </div>
                         </div>
                     </div>

@@ -16,9 +16,9 @@ const OurPhilosophy = () => {
             <div className="w-full px-4 mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px]">
                 <div className="flex flex-wrap -mx-4">
                     <div className="bg-[#032055] pt-16 md:bg-[#001232] relative w-full px-4 lg:ml-[25%] lg:flex-[0_0_75%] lg:max-w-[75%]">
-                        <div className="px-[15px] md:py-[60px] md:px-[15px] text-base text-[#dbe2fb] leading-[28px]">
+                        <div className="px-[15px] md:pb-[30px] md:px-[15px] text-base text-[#dbe2fb] leading-[28px]">
                             {/* Content here */}
-                            <div className="mb-[60px] md:text-left">
+                            <div className="mb-[40px] md:text-left">
                                 <p className='uppercase text-[18px] md:text-[24px] mb-[25px] -mt-[6px] text-[#31d7a9]'>Take look at</p>
                                 <h2 className="uppercase font-bold mb-4 sm:mb-6 text-[30px] sm:text-[50px] sm:leading-[60px] sm:-mt-3 text-white">Our philosophy</h2>
                                 <p className="max-w-[700px] text-left text-[16px] text-[#dbe2fb] mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmtempor incididunt labore et dolore magna aliqu enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
