@@ -58,7 +58,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/find-events"
+              href="/events"
               className="hover:text-yellow-300 transition duration-300 ease-in-out"
             >
               Find Events
