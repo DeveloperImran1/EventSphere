@@ -10,7 +10,7 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-10 mt-11">
+        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-10 ">
             <div className="flex flex-col pt-8 md:pt-14 lg:pt-20 items-stretch border-[#40454f]  mx-6 md:mx-auto">
                 {/* Footer Header */}
                 <div className="text-white uppercase pb-9 md:pb-11 lg:pb-[60px]">
@@ -73,7 +73,7 @@ const Footer = () => {
                       
                         <div className="">
                             <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Download Eventify App</h6>
-                            <div className="flex flex-col w-[320px]">
+                            <div className="flex flex-col">
                                 <Link href={'#'} className='pt-[15px] max-w-[100%]'>
                                     <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3e4e6bff71d1f1eb40b_Eventify%20AppStore.svg" width={180} height={100} alt='palyStor' />
                                 </Link>
