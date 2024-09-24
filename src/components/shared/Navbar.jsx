@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // State to manage mobile menu
+
+  const session = useSession();
+  console.log("Navbar theke session ", session)
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -54,7 +58,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/find-events"
+              href="/events"
               className="hover:text-yellow-300 transition duration-300 ease-in-out"
             >
               Find Events
@@ -72,7 +76,7 @@ const Navbar = () => {
               Blogs
             </Link>
             <Link
-              href="/about"
+              href="/aboutUs"
               className="hover:text-yellow-300 transition duration-300 ease-in-out"
             >
               About Us
@@ -145,13 +149,21 @@ const Navbar = () => {
                     Request to be an Organizer
                   </Link>
                   <div className="border-t"></div>
-                  <a
-                    href="#"
+                {
+                  session?.data  ?   <Link
+                  href="/login"
+                  className="block px-4 py-2 text-red-600 hover:bg-red-100 transition"
+                  onClick={()=> signOut()}
+                >
+                  Logout
+                </Link> :   <Link
+                    href="/login"
                     className="block px-4 py-2 text-red-600 hover:bg-red-100 transition"
                     onClick={closeDropdown}
                   >
-                    Logout
-                  </a>
+                    Login
+                  </Link>
+                }
                 </div>
               )}
             </div>

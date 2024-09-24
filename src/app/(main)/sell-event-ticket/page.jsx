@@ -16,8 +16,6 @@ import React from 'react';
 const page = () => {
     return (
      <div>
-               
-         
          <SellEventTicket></SellEventTicket>
          <TicketManagesystem></TicketManagesystem>
          <EventHighlight></EventHighlight>
@@ -27,11 +25,8 @@ const page = () => {
           <CustomerSpeak></CustomerSpeak>
           <Services></Services>
              <FAQ></FAQ>
-               
-            
-
         </div>
     );
 };
-             
+
 export default page;

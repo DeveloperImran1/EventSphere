@@ -10,10 +10,25 @@ import Logo from "@/components/shared/Logo";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SocialSignIn from "@/components/shared/SocialSignIn";
+import Swal from 'sweetalert2'
+import { TbFidgetSpinner } from "react-icons/tb";
 
 
 const LoginPage = () => {
+
+    const successfullySignIn = () => {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Successfully SignIn",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
     const [viewPass, setViewPass] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -31,14 +46,17 @@ const LoginPage = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
 
+        setLoading(true)
         // nextJs dia login korar way: 
         const resp = await signIn('credentials', {
             email, password,
             redirect: false
         });
         console.log("responce is", resp)
+        setLoading(false)
         // thik vabe login hole home page a pathia dibo.
         if (resp.status === 200) {
+            successfullySignIn()
             router.push('/')
         }
     };
@@ -240,7 +258,10 @@ const LoginPage = () => {
                                 type="submit"
                                 className="bg-green-500 text-white rounded-md p-3 w-full font-bold hover:bg-green-600"
                             >
-                                Log In
+                                {
+                                    loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : "Login"
+                                }
+
                             </button>
                         </form>
 

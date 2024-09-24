@@ -1,11 +1,11 @@
 import React from 'react';
 
-const page = () => {
+const UserContainer = () => {
     return (
         <div>
-            User dashboard er all layout and design akhane thakbe.
+            User  dashboard er Home page akhane thakbe.
         </div>
     );
 };
 
-export default page;
+export default UserContainer;
