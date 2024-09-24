@@ -54,7 +54,7 @@ const CustomerSpeak = () => {
         ))}
          </div>
             <p className="mb-4 px-2 text-lg font-mono font-normal text-gray-700">
-            "Le système de billetterie en ligne utilise un taux fixe plutôt qu'une commission de pourcentage. Nous avons vraiment apprécié cela."
+            ``Le système de billetterie en ligne utilise un taux fixe plutôt qu`une commission de pourcentage. Nous avons vraiment apprécié cela.``
 
 
             </p>
@@ -68,7 +68,7 @@ const CustomerSpeak = () => {
 
 
              </div>
-
+                      
 
 
           </div>

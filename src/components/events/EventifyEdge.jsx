@@ -12,7 +12,7 @@ const EventifyEdge = () => {
     return (
     
 
-            <div className="container my-20 mx-auto">
+            <div className="container    mx-auto">
                 <div className="text-center">
                     <h1 className="text-xl font-semibold font-serif tracking-[.25em] text-blue-500">Eventify Edge</h1>
                     <h1 className="my-2 font-serif font-semibold text-black">Your Tickets, Your Way</h1>

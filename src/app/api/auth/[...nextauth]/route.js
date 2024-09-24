@@ -1,99 +1,138 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth/next";
-import { signIn } from "next-auth/react";
 import bcrypt from "bcrypt";
-
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { connectDB } from "@/lib/connectDB";
 
+// import FormData from "form-data";
+// import Mailgun from "mailgun.js";
+// import mailgun from 'mailgun-js'; 
+// import Mailgun from "mailgun.js";
+// import formData from "form-data";
+
+// const mg = new Mailgun(formData).client({
+//     username: 'api',
+//     key: process.env.NEXT_PUBLIC_MAILGUN_API_KEY
+// })
 export const authOptions = {
-    
-    // secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
     session: {
         strategy: 'jwt',
-        maxAge: 30 * 24 * 60 * 60,   // 366 day er jono cookies thakbe,, seita fixed kora hoi.
+        maxAge: 30 * 24 * 60 * 60, // 30 days session
     },
     providers: [
-        // email password dia signIn korar way
+        // Email/password login with credentials
         CredentialsProvider({
             credentials: {
-                email: {},
-                password: {}
+                email: { label: "Email", type: "text", placeholder: "email@example.com" },
+                password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                console.log("credentials", credentials)
-
                 const { email, password } = credentials;
+
+                // Validation
                 if (!email || !password) {
-                    console.log('Email or password nei')
-                    return null;
+                    throw new Error("Email and password are required");
                 }
 
-                const db = await connectDB()
-                const currentUser = await db.collection('users').findOne({ email })
-                console.log('currentUser ase', currentUser)
+                const db = await connectDB();
+                const currentUser = await db.collection('users').findOne({ email });
+
+                // User not found
                 if (!currentUser) {
-                    console.log('currentUser nei')
-                    return null;
+                    throw new Error("User not found");
                 }
 
-                //    const passwordMatched = bcrypt.compareSync(password, password);  // aita kaj hossena keno jani.
-                const passwordMatched = currentUser.password == password
-                console.log('hased password', passwordMatched)
+                // Password comparison using bcrypt
+                const passwordMatched = await bcrypt.compare(password, currentUser.password);
                 if (!passwordMatched) {
-                    return null;
+                    throw new Error("Invalid password");
                 }
 
-                return currentUser;
+                return currentUser; // Successful login
             },
         }),
-        // google dia sign In korar provider
+        // Google login provider
         GoogleProvider({
             clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
         }),
-        // Facebook dia sign In korar provider
+        // Facebook login provider
         FacebookProvider({
             clientId: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_SECRET
-        })
-
+            clientSecret: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_SECRET,
+        }),
     ],
 
     callbacks: {
-        async signIn({ user, account }) {
+        async signIn({ user, account, profile }) {
+            const { email, name, image } = user;
 
             if (account.provider === 'google' || account.provider === 'facebook') {
-                const { name, email, image } = user;
-                console.log("call back er moddhe dhukisa and provider is ", account.provider)
-                console.log("call back er moddhe dhukisa and user is ", user)
                 try {
-                    const db = await connectDB()
-                    // const userCollection = db.collection('users')
+                    const db = await connectDB();
 
-                    const userExist = await db.collection('users').findOne({ email });
-                    if (!userExist) {
-                        console.log("call back er moddhe dhukisa and User Exist", userExist)
-                        const res = await db.collection('users').insertOne(user);
-                        return user;
+                    // Check if user exists
+                    const existingUser = await db.collection('users').findOne({ email });
+
+                    if (!existingUser) {
+                        // Insert new user if they don't exist
+                        await db.collection('users').insertOne({
+                            email,
+                            name,
+                            image,
+                            provider: account.provider,
+                            createdAt: new Date(),
+                        });
+
+                        // // send email when create account our website
+                        // mg.messages
+                        // .create(process.env.NEXT_PUBLIC_MAILGUN_DOMAIN, {
+                        //     from: "ih9066588@gmail.com",
+                        //     to: "developerimran1122@gmail.com",
+                        //     subject: "Wellcome Our EventSphare Plat",
+                        //     text: "Testing wwelcome email with mailgun",
+                        //     html: `
+                        //     <div>
+                        //         <h2> Thankyou for visit our eventsphare website </h2>
+                        //         <p> We would like to get your feedback about the food </p>
+                        //     </div>
+                        //     `
+                        // })
+                        // .then(msg => console.log(msg))
+                        // .catch(err => console.log(err))
+
+
                     }
-                    console.log("call back er moddhe dhukisa and User Exist", userExist)
-                    return user;
+
+                    // Return user details
+                    return true;
                 } catch (error) {
-                    console.log("call back er moddhe dhukisa but kono error a catch er moddhe")
-                    console.log(error)
+                    console.error('Error during social sign-in:', error);
+                    return false; // Fail the sign-in process if error occurs
                 }
             }
-            else {
-                return user;
+
+            return true; // Allow normal sign-in for credentials
+        },
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user._id;
+                token.email = user.email;
             }
+            return token;
+        },
+        async session({ session, token }) {
+            session.user.id = token.id;
+            session.user.email = token.email;
+            return session;
         }
     },
+
     pages: {
-        signIn: '/login'
+        signIn: '/login' // Custom sign-in page
     }
-}
+};
 
 const handler = NextAuth(authOptions);
 

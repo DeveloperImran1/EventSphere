@@ -10,9 +10,21 @@ import Logo from "@/components/shared/Logo";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SocialSignIn from "@/components/shared/SocialSignIn";
+import Swal from 'sweetalert2'
 
 
 const LoginPage = () => {
+
+    const successfullySignIn = () => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully SignIn",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+
     const [viewPass, setViewPass] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
@@ -39,6 +51,7 @@ const LoginPage = () => {
         console.log("responce is", resp)
         // thik vabe login hole home page a pathia dibo.
         if (resp.status === 200) {
+            successfullySignIn()
             router.push('/')
         }
     };
