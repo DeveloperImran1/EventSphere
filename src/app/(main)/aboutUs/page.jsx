@@ -6,6 +6,7 @@ import TeamMembers from '@/components/About/TeamMembers';
 import TestimonialsAbout from '@/components/About/TestimonialsAbout';
 import TopAbout from '@/components/About/TopAbout';
 import TrustSection from '@/components/About/TrustSection';
+import Subscribe from '@/components/shared/Subscribe';
 import React from 'react';
 
 const page = () => {
@@ -19,6 +20,7 @@ const page = () => {
             <TeamMembers/>
             <GallerySection/>
             <TrustSection/>
+            <Subscribe/>
         </div>
     );
 };
