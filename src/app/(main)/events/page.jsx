@@ -1,11 +1,15 @@
-import React from 'react';
 
-const page = () => {
+import EventBanner from '@/components/allEventsPage/EventBanner';
+import EventsData from '@/components/allEventsPage/EventsData';
+
+
+const AllEventsPage = () => {
     return (
-        <div>
-            This is Events page
+        <div className='mb-20'>
+          <EventBanner></EventBanner>
+          <EventsData></EventsData>
         </div>
     );
 };
 
-export default page;
+export default AllEventsPage;

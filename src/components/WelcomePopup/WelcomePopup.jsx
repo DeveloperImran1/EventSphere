@@ -3,9 +3,13 @@ import React from 'react';
 
 const WelcomePopup = () => {
   return (
-    <div className="relative h-screen bg-[url('https://i.postimg.cc/KYXmLkry/bcc3716da3dabc9f944d1c30cea66036-background-Desktop.jpg')] bg-no-repeat bg-cover flex flex-col items-center justify-center text-center">
+    <div className="relative py-16 bg-[url('https://i.postimg.cc/KYXmLkry/bcc3716da3dabc9f944d1c30cea66036-background-Desktop.jpg')] bg-no-repeat bg-cover flex flex-col items-center justify-center text-center">
       <h1 className="text-3xl md:text-5xl font-bold text-[#1e0a3c] mb-4 px-5 md:px-0">
+<<<<<<< HEAD
         Welcome to Sphere! <span className="wave">👋</span>
+=======
+        Welcome to EventSphare! <span className="wave">👋</span>
+>>>>>>> ab46d8ef8cb3cc93340037fe05cdf8f99d25336b
       </h1>
       <p className="text-xl md:text-xl leading-[2rem] text-gray-700 mb-12 px-5 md:px-0">
         We're glad you're here! What can we help you with first?

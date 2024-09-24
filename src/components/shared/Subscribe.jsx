@@ -2,7 +2,7 @@ import React from 'react';
 
 const Subscribe = () => {
     return (
-        <div className="w-full px-4 mx-auto text-[#dbe2fb] leading-7 sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px]">
+        <div className="w-full px-4 mx-auto text-[#dbe2fb] leading-7 sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px] pb-11">
             <div
                 className="relative overflow-hidden rounded-[20px] p-[60px] px-[20px] text-center bg-cover bg-center bg-no-repeat"
                 style={{

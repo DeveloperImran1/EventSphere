@@ -3,7 +3,7 @@ import { FaStar } from 'react-icons/fa';
 import Image from 'next/image';
 const EventHighlight = () => {
   return (
-    <div className="text-center py-12">
+    <div className="text-center py-12 px-8">
       <h2 className="text-3xl md:text-4xl font-semibold  font-serif text-black ">Over 5K+ Events Growing with Eventify</h2>
       
       {/* Stars */}
