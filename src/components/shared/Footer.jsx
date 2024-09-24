@@ -10,10 +10,10 @@ import Logo from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-10 ">
-            <div className="flex flex-col pt-36 items-stretch border-[#40454f] max-w-[1280px] mx-6 md:mx-auto">
+        <footer className="bg-[rgb(15,31,61)] leading-[155%] box-border text-[rgb(64,69,79)] block text-[18px] [unicode-bidi:isolate] md:pl-6 lg:pl-10 mt-11">
+            <div className="flex flex-col pt-8 md:pt-14 lg:pt-20 items-stretch border-[#40454f]  mx-6 md:mx-auto">
                 {/* Footer Header */}
-                <div className="text-white uppercase pb-[100px]">
+                <div className="text-white uppercase pb-9 md:pb-11 lg:pb-[60px]">
                     <h1 className='text-transparent bg-clip-text max-w-[600px] text-[48px] font-bold leading-[120%] bg-gradient-to-r from-green-500 to-blue-400'>The future of <span>events</span>
                         <br />is here.</h1>
                 </div>

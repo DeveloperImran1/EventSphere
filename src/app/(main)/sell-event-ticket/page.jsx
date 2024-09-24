@@ -14,18 +14,18 @@ import React from 'react';
 
 const page = () => {
     return (
-     <div>
-         <SellEventTicket></SellEventTicket>
-         <TicketManagesystem></TicketManagesystem>
-         <EventHighlight></EventHighlight>
-         <TicketSellProcess></TicketSellProcess>
-         <Pricing></Pricing>
-          <EventifyEdge></EventifyEdge>
-          <CustomerSpeak></CustomerSpeak>
-          <Services></Services>
-             <FAQ></FAQ>
+        <div>
+            <SellEventTicket></SellEventTicket>
+            <TicketManagesystem></TicketManagesystem>
+            <EventHighlight></EventHighlight>
+            <TicketSellProcess></TicketSellProcess>
+            <Pricing></Pricing>
+            <EventifyEdge></EventifyEdge>
+            <CustomerSpeak></CustomerSpeak>
+            <Services></Services>
+            <FAQ></FAQ>
         </div>
     );
 };
-             
+
 export default page;

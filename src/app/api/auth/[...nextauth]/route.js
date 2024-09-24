@@ -83,6 +83,7 @@ export const authOptions = {
                             image,
                             provider: account.provider,
                             createdAt: new Date(),
+                            role: "user"
                         });
 
                         // // send email when create account our website
