@@ -1,12 +1,21 @@
+"use client"
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
+import { usePathname } from "next/navigation";
 
-const MainLayout = ({children}) => {
+const MainLayout = ({ children }) => {
+  const path = usePathname();
+  console.log(path.includes("login"))
   return (
     <div>
-      <Navbar></Navbar>
+      {
+        path.includes("login") ||  path.includes("register")  ? <></> : <Navbar></Navbar>
+      }
       {children}
-      <Footer></Footer>
+      {
+         path.includes("login") ||  path.includes("register")  ? <></> : <Footer></Footer>
+      }
+
     </div>
   );
 };

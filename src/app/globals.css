@@ -181,15 +181,6 @@ p {
   
  }
 
-
- 
-
-
-
-
-
-
-
 /* Button Styles */
 .button {
   display: inline-block;
@@ -197,7 +188,7 @@ p {
   /* px-6 py-2 equivalent */
   background-color: var(--color-logo);
   color: var(--color-light);
-  border-radius: var(--border-radius-large);
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: background-color 300ms, transform 300ms;
