@@ -4,10 +4,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // State to manage mobile menu
+
+  const session = useSession();
+  console.log("Navbar theke session ", session)
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -35,6 +39,7 @@ const Navbar = () => {
   };
 
   return (
+   
     <nav className="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center ">
@@ -63,7 +68,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              href="/find-events"
+              href="/events"
               className="hover:text-yellow-300 transition duration-300 ease-in-out"
             >
               Find Events
@@ -81,7 +86,7 @@ const Navbar = () => {
               Blogs
             </Link>
             <Link
-              href="/about"
+              href="/aboutUs"
               className="hover:text-yellow-300 transition duration-300 ease-in-out"
             >
               About Us
@@ -93,6 +98,81 @@ const Navbar = () => {
           <div className=" flex justify-center items-center gap-4">
             <div>
               {/* NEW: Desktop menu button */}
+            {/* If logged in */}
+            <div className="relative">
+              <Image
+                src="/profile-pic.jpg"
+                alt="Profile"
+                height="40"
+                width="40"
+                className=" rounded-full cursor-pointer border-2 border-white hover:border-yellow-300 transition duration-300 ease-in-out"
+                onClick={toggleDropdown} // Toggle dropdown on image click
+              />
+
+              {/* Dropdown */}
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20">
+                  <div className="px-4 py-3 border-b">
+                    <div className="flex justify-start items-center gap-2">
+                      <div>
+                        <Image
+                          src="/profile-pic.jpg"
+                          alt="Profile"
+                          height="6"
+                          width="6"
+                          className=" rounded-full cursor-pointer border-2 border-white hover:border-yellow-300 transition duration-300 ease-in-out"
+                          onClick={toggleDropdown} // Toggle dropdown on image click
+                        />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-800">John Doe</p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-500">johndoe@example.com</p>
+                  </div>
+                  <Link
+                    href="/dashboard"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                    onClick={closeDropdown}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/offer-announcement"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                    onClick={closeDropdown}
+                  >
+                    Offer Announcement
+                  </Link>
+                  <Link
+                    href="/organizer-request"
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                    onClick={closeDropdown}
+                  >
+                    Request to be an Organizer
+                  </Link>
+                  <div className="border-t"></div>
+                {
+                  session?.data  ?   <Link
+                  href="/login"
+                  className="block px-4 py-2 text-red-600 hover:bg-red-100 transition"
+                  onClick={()=> signOut()}
+                >
+                  Logout
+                </Link> :   <Link
+                    href="/login"
+                    className="block px-4 py-2 text-red-600 hover:bg-red-100 transition"
+                    onClick={closeDropdown}
+                  >
+                    Login
+                  </Link>
+                }
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
               <button
                 className="text-white focus:outline-none"
                 onClick={toggleDesktopMenu} // Toggle desktop menu
@@ -400,6 +480,7 @@ const Navbar = () => {
           </Link>
         </div>
       )}
+     </div>
     </nav>
   );
 };

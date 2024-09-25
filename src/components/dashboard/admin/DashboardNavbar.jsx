@@ -3,7 +3,7 @@ import { FaSearch, FaGlobe, FaUserCircle } from 'react-icons/fa';
 
 const DashboardNavbar = () => {
     return (
-        <header className="mt-4 md:mt-12 flex flex-col md:flex-row items-center justify-between bg-gradient-to-r bg-gray-200 text-slate-600 py-4 px-4 md:px-6 shadow-lg space-y-4 md:space-y-0">
+        <header className="  flex flex-col md:flex-row items-center justify-between bg-gradient-to-r bg-gray-200 text-slate-600 py-4 px-4 md:px-6 shadow-lg space-y-4 md:space-y-0">
             {/* Left side: Website Name and Search Bar */}
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full md:w-auto">
                 {/* Website Name */}
