@@ -1,7 +1,8 @@
-import CardSection from '@/components/dashboard/user/CardSection';
-import DashboardNavbar from '@/components/dashboard/user/DashboardNavbar';
-import DashboardSideBar from '@/components/dashboard/user/DashboardSideBar';
-import UserInfo from '@/components/dashboard/user/UserInfo';
+import AdminInfo from '@/components/dashboard/admin/AdminInfo';
+import CardSection from '@/components/dashboard/admin/CardSection';
+import DashboardNavbar from '@/components/dashboard/admin/DashboardNavbar';
+import DashboardSideBar from '@/components/dashboard/admin/DashboardSideBar';
+// import UserInfo from '@/components/dashboard/admin/AdminInfo';
 import React from 'react';
 
 const Page = () => {
@@ -16,7 +17,7 @@ const Page = () => {
 
                 {/* User Info Section */}
                 <div className="flex-grow">
-                    <UserInfo />
+                    <AdminInfo />
                 </div>
                 {/* Card section */}
                 <div className=''>
