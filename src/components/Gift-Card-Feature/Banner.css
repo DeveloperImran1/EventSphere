@@ -9,3 +9,19 @@
     padding: 0;
     clip-path: polygon(100% 0, 100% 30%, 100% 100%, 28% 100%, 0 0);
 }
+.custom-gradient {
+    background: linear-gradient(
+        coral,
+        transparent
+      ),
+      linear-gradient(
+        90deg,
+        skyblue,
+        transparent
+      ),
+      linear-gradient(
+        -90deg,
+        limegreen,
+        transparent
+      );
+  }
