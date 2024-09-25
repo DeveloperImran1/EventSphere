@@ -11,33 +11,33 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // State to manage mobile menu
   const [sticky, setSticky] = useState(false);
   const [scrollDirection, setScrollDirection] = useState(null);
-  
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
-  
+
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setSticky(true);  // Make navbar sticky once scrolled down
       } else {
         setSticky(false); // Remove sticky when near the top
       }
-  
+
       if (window.scrollY > lastScrollY) {
         setScrollDirection('down'); // Scrolling down
       } else {
         setScrollDirection('up');   // Scrolling up
       }
-  
+
       lastScrollY = window.scrollY;
     };
-  
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
-  
+
+
 
   const session = useSession();
   console.log("Navbar theke session is", session)
@@ -135,11 +135,36 @@ const Navbar = () => {
     },
 
   ]
+  const subMenu5 = [
+    {
+      title: "Home",
+      path: "/"
+    },
+    {
+      title: "Find Events",
+      path: "/find-events"
+    },
+    {
+      title: "Community",
+      path: "/community"
+    },
+    {
+      title: "Blogs",
+      path: "/blogs"
+    },
+    {
+      title: "About Us",
+      path: "/about"
+    },
+    {
+      title: "Contact Us",
+      path: "/contact"
+    },
+
+  ]
 
   return (
     <nav className={`
-      ${sticky ? 'sticky top-0 z-[999]' : 'bg-transparent top-[100px]'} 
-      ${scrollDirection === 'down' ? 'transform -translate-y-full' : 'transform translate-y-0'} 
       transition-transform duration-500 ease-in-out 
       bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg
     `}>
@@ -183,6 +208,7 @@ const Navbar = () => {
                   onClick={toggleDesktopMenu} // Toggle desktop menu
                 >
                   <svg
+                    style={{ '--tw-rotate': 'unset' }}
                     className="h-8 w-8"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -198,104 +224,116 @@ const Navbar = () => {
                 </button>
 
                 {/* Desktop Menu */}
-                {
-                  desktopMenuOpen &&    <div className={`top-[50px] right-0   w-full fixed bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg z-[999] 
-                  grid grid-cols-12  transform transition-transform duration-700 ease-in-out rounded-br-[100px]  overflow-hidden transition-max-height `} >
-                   {/* Components shown in a grid with responsive columns */}
-                   <div className="col-span-9">
-                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-full p-4">
-                       <div>
-                         <p className="block px-4 py-2 text-white font-bold transition text-start"
-                           onClick={closeDesktopMenu}
-                         >
-                           Category 1
-                         </p>
-                         {
-                           subMenu1?.map((menu, index) => <Link key={index}
-                             href={menu?.path}
-                             className="block px-4 py-2 text-white hover:text-[#eab308] transition text-start"
-                             onClick={closeDesktopMenu}
-                           >
-                             {menu?.title}
-                           </Link>)
-                         }
- 
-                       </div>
- 
-                       <div>
-                         <p className="block px-4 py-2  text-white   font-bold transition text-start"
-                           onClick={closeDesktopMenu}
-                         >
-                           Category 2
-                         </p>
-                         {
-                           subMenu2?.map((menu, index) => <Link key={index}
-                             href={menu?.path}
-                             className="block px-4 py-2 text-white hover:text-[#eab308]  hover:bg-gray-200 transition text-start"
-                             onClick={closeDesktopMenu}
-                           >
-                             {menu?.title}
-                           </Link>)
-                         }
- 
-                       </div>
-                       <div>
-                         <p className="block px-4 py-2  text-white  font-bold transition text-start"
-                           onClick={closeDesktopMenu}
-                         >
-                           Category 3
-                         </p>
-                         {
-                           subMenu3?.map((menu, index) => <Link key={index}
-                             href={menu?.path}
-                             className="block px-4 py-2  text-white hover:text-[#eab308]  transition text-start"
-                             onClick={closeDesktopMenu}
-                           >
-                             {menu?.title}
-                           </Link>)
-                         }
- 
-                       </div>
-                       <div>
-                         <p className="block px-4 py-2  text-white  font-bold transition text-start"
-                           onClick={closeDesktopMenu}
-                         >
-                           Category 4
-                         </p>
-                         {
-                           subMenu4?.map((menu, index) => <Link key={index}
-                             href={menu?.path}
-                             className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
-                             onClick={closeDesktopMenu}
-                           >
-                             {menu?.title}
-                           </Link>)
-                         }
- 
-                       </div>
-                     </div>
-                   </div>
- 
-                   <div className="col-span-3 mt-5 space-y-6">
- 
-                     <Logo></Logo>
-                     {
-                       session?.status === "unauthenticated" ? <Link
-                         href="/login"
-                         className="button"
-                         onClick={closeDropdown} > Login
-                       </Link> : <Link
-                         href="/login"
-                         className="button"
-                         onClick={() => signOut()}>Logout
-                       </Link>
-                     }
-                   </div>
-                 </div>
-                }
+                <div className={`${desktopMenuOpen ? 'top-[50px] right-0 translate-y-0 ' : 'top-[-850px] translate-y-[-100%]'} fixed w-full  bg-gradient-to-r from-blue-600 to-blue-800 rotate-0  shadow-lg z-[1000] grid grid-cols-12 overflow-y-auto transform transition-transform duration-700 ease-in-out rounded-br-[100px]  transition-max-height`} style={{ '--tw-rotate': 'unset' }}>
 
-             
+                  {/* Components shown in a grid with responsive columns */}
+                  <div className="col-span-9">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-full p-4">
+                      <div className="md:hidden block ">
+                        <p className="block px-4 py-2 text-white font-bold transition text-start"
+                          onClick={closeDesktopMenu}
+                        >
+                          Menu
+                        </p>
+                        {
+                          subMenu5?.map((menu, index) => <Link key={index}
+                            href={menu?.path}
+                            className="block px-4 py-2 text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            {menu?.title}
+                          </Link>)
+                        }
 
+                      </div>
+                      <div>
+                        <p className="block px-4 py-2 text-white font-bold transition text-start"
+                          onClick={closeDesktopMenu}
+                        >
+                          Category 1
+                        </p>
+                        {
+                          subMenu1?.map((menu, index) => <Link key={index}
+                            href={menu?.path}
+                            className="block px-4 py-2 text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            {menu?.title}
+                          </Link>)
+                        }
+
+                      </div>
+
+                      <div>
+                        <p className="block px-4 py-2  text-white   font-bold transition text-start"
+                          onClick={closeDesktopMenu}
+                        >
+                          Category 2
+                        </p>
+                        {
+                          subMenu2?.map((menu, index) => <Link key={index}
+                            href={menu?.path}
+                            className="block px-4 py-2 text-white hover:text-[#eab308]  hover:bg-gray-200 transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            {menu?.title}
+                          </Link>)
+                        }
+
+                      </div>
+                      <div>
+                        <p className="block px-4 py-2  text-white  font-bold transition text-start"
+                          onClick={closeDesktopMenu}
+                        >
+                          Category 3
+                        </p>
+                        {
+                          subMenu3?.map((menu, index) => <Link key={index}
+                            href={menu?.path}
+                            className="block px-4 py-2  text-white hover:text-[#eab308]  transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            {menu?.title}
+                          </Link>)
+                        }
+
+                      </div>
+                      <div>
+                        <p className="block px-4 py-2  text-white  font-bold transition text-start"
+                          onClick={closeDesktopMenu}
+                        >
+                          Category 4
+                        </p>
+                        {
+                          subMenu4?.map((menu, index) => <Link key={index}
+                            href={menu?.path}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            {menu?.title}
+                          </Link>)
+                        }
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-span-3 mt-5 space-y-6">
+
+                    <Logo></Logo>
+                    {
+                      session?.status === "unauthenticated" ? <Link
+                        href="/login"
+                        className="button"
+                        onClick={closeDropdown} > Login
+                      </Link> : <Link
+                        href="/login"
+                        className="button"
+                        onClick={() => signOut()}>Logout
+                      </Link>
+                    }
+                  </div>
+                </div>
 
               </div>
 
@@ -373,80 +411,14 @@ const Navbar = () => {
                   )}
                 </div>
 
-                {/* Mobile Menu Button */}
-                <div className="md:hidden">
-                  <button
-                    className="text-white focus:outline-none"
-                    onClick={toggleMobileMenu}
-                  >
-                    <svg
-                      className="h-8 w-8"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
-                    </svg>
-                  </button>
-                </div>
+             
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg">
-          <Link
-            href="/"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            Home
-          </Link>
-          <Link
-            href="/find-events"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            Find Events
-          </Link>
-          <Link
-            href="/community"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            Community
-          </Link>
-          <Link
-            href="/blogs"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            Blogs
-          </Link>
-          <Link
-            href="/about"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            About Us
-          </Link>
-          <Link
-            href="/login"
-            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 transition"
-            onClick={closeMobileMenu}
-          >
-            Login
-          </Link>
-        </div>
-      )}
+
     </nav>
   );
 };
@@ -454,96 +426,3 @@ const Navbar = () => {
 export default Navbar;
 
 
-// {/* <div className={`${desktopMenuOpen ? 'top-[50px] right-0 translate-y-0 min-h-[500px] ' : 'top-[-850px] translate-y-[-100%] max-h-0'} fixed w-full h-1/2 bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg z-[999] 
-// grid grid-cols-12  transform transition-transform duration-700 ease-in-out rounded-br-[100px]  overflow-hidden transition-max-height `} >
-//  {/* Components shown in a grid with responsive columns */}
-//  <div className="col-span-9">
-//    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  w-full p-4">
-//      <div>
-//        <p className="block px-4 py-2 text-white font-bold transition text-start"
-//          onClick={closeDesktopMenu}
-//        >
-//          Category 1
-//        </p>
-//        {
-//          subMenu1?.map((menu, index) => <Link key={index}
-//            href={menu?.path}
-//            className="block px-4 py-2 text-white hover:text-[#eab308] transition text-start"
-//            onClick={closeDesktopMenu}
-//          >
-//            {menu?.title}
-//          </Link>)
-//        }
-
-//      </div>
-
-//      <div>
-//        <p className="block px-4 py-2  text-white   font-bold transition text-start"
-//          onClick={closeDesktopMenu}
-//        >
-//          Category 2
-//        </p>
-//        {
-//          subMenu2?.map((menu, index) => <Link key={index}
-//            href={menu?.path}
-//            className="block px-4 py-2 text-white hover:text-[#eab308]  hover:bg-gray-200 transition text-start"
-//            onClick={closeDesktopMenu}
-//          >
-//            {menu?.title}
-//          </Link>)
-//        }
-
-//      </div>
-//      <div>
-//        <p className="block px-4 py-2  text-white  font-bold transition text-start"
-//          onClick={closeDesktopMenu}
-//        >
-//          Category 3
-//        </p>
-//        {
-//          subMenu3?.map((menu, index) => <Link key={index}
-//            href={menu?.path}
-//            className="block px-4 py-2  text-white hover:text-[#eab308]  transition text-start"
-//            onClick={closeDesktopMenu}
-//          >
-//            {menu?.title}
-//          </Link>)
-//        }
-
-//      </div>
-//      <div>
-//        <p className="block px-4 py-2  text-white  font-bold transition text-start"
-//          onClick={closeDesktopMenu}
-//        >
-//          Category 4
-//        </p>
-//        {
-//          subMenu4?.map((menu, index) => <Link key={index}
-//            href={menu?.path}
-//            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
-//            onClick={closeDesktopMenu}
-//          >
-//            {menu?.title}
-//          </Link>)
-//        }
-
-//      </div>
-//    </div>
-//  </div>
-
-//  <div className="col-span-3 mt-5 space-y-6">
-
-//    <Logo></Logo>
-//    {
-//      session?.status === "unauthenticated" ? <Link
-//        href="/login"
-//        className="button"
-//        onClick={closeDropdown} > Login
-//      </Link> : <Link
-//        href="/login"
-//        className="button"
-//        onClick={() => signOut()}>Logout
-//      </Link>
-//    }
-//  </div>
-// </div> */}

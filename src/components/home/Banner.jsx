@@ -25,9 +25,6 @@ const countrySections = [
 
 
 
-
-
-
 const Banner = () => {
   const [fromSearchTerm, setFromSearchTerm] = useState("");
   const [toSearchTerm, setToSearchTerm] = useState("");
