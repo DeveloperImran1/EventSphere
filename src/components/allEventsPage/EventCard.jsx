@@ -8,7 +8,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
             {/* Toast container to show toasts */}
             <ToastContainer />
             <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
-                <img className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" src={event.photo} alt={event.title} />
+                <img className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" src={event?.photo} alt={event?.title} />
 
                 {/* Love and Share Icons - visible on hover */}
                 <div className="absolute top-36 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
@@ -33,7 +33,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                 </div>
 
                 <div className="p-4">
-                    <h2 className="text-xl font-bold">{event.title}</h2>
+                    <h2 className="text-xl font-bold">{event?.title}</h2>
                     <div className="flex items-center text-gray-700 my-1">
                         <FaClock className="mr-2" />
                         <p>{event.dateTime}</p>
