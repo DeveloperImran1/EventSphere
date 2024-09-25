@@ -39,7 +39,7 @@ const EventDetailsPage = ({ params }) => {
                 {/* Left Side: Image, Gallery, Reviews */}
                 <section className="space-y-6">
                     {/* Event Image */}
-                    <img className="w-full h-80 object-cover rounded-lg" src={event.photo} alt={event.title} />
+                    <img className="w-full h-80 object-cover rounded-lg hover:scale-105 " src={event.photo} alt={event.title} />
 
                     {/* Event Gallery */}
                     {event.gallery && event.gallery.length > 0 && (
@@ -47,7 +47,7 @@ const EventDetailsPage = ({ params }) => {
 
                             <div className="grid grid-cols-2 gap-4">
                                 {event.gallery.map((image, index) => (
-                                    <img key={index} className="w-full h-32 object-cover rounded-lg" src={image} alt={`Gallery image ${index + 1}`} />
+                                    <img key={index} className="w-full h-32 object-cover hover:shadow-2xl hover:scale-105  rounded-lg" src={image} alt={`Gallery image ${index + 1}`} />
                                 ))}
                             </div>
                         </article>
@@ -55,11 +55,11 @@ const EventDetailsPage = ({ params }) => {
 
                     {/* Event Reviews */}
                     {event.reviews && event.reviews.length > 0 && (
-                        <article>
+                        <article className="">
                             <h3 className="text-xl font-semibold mb-2">Reviews</h3>
                             <ul className="space-y-3 flex gap-4">
                                 {event.reviews.map((review, index) => (
-                                    <div key={index} className=" italic rounded-md shadow-xl lg:p-10 p-5  w-72 ">
+                                    <div key={index} className=" italic rounded-md shadow-xl hover:shadow-2xl lg:p-10 p-5  w-72 ">
                                         <h3 className="">{review.name}</h3>
                                         <p className="">{review.review}</p>
                                     </div>
@@ -81,9 +81,9 @@ const EventDetailsPage = ({ params }) => {
                     </article>
 
                     {/* location map  */}
-                    <section>
+                    <section className="">
                         <h3>Event location map </h3>
-                        <Image src={event.locationMap} alt="map" width={320} height={400} className="object-cover rounded-xl"/>
+                        <Image src={event.locationMap} alt="map" width={320} height={400} className="object-cover rounded-xl hover:shadow-2xl"/>
                     </section>
 
                 </section>
@@ -153,7 +153,7 @@ const EventDetailsPage = ({ params }) => {
                         <ul className="space-y-4">
                             {event.faqs.map((faq, index) => (
                                 <li key={index}>
-                                    <div className="collapse collapse-arrow shadow-lg rounded-md">
+                                    <div className="collapse collapse-arrow shadow-lg hover:shadow-2xl rounded-md">
                                         <input type="radio" name="my-accordion-2" defaultChecked />
                                         <div className="collapse-title text-xl font-medium">{faq.question} </div>
                                         <div className="collapse-content">
