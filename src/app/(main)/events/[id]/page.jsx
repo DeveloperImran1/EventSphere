@@ -83,7 +83,7 @@ const EventDetailsPage = ({ params }) => {
                     {/* location map  */}
                     <section>
                         <h3>Event location map </h3>
-                        <img src={event.locationMap} alt="map" className="object-cover h-80 w-96 rounded-xl"/>
+                        <Image src={event.locationMap} alt="map" width={320} height={400} className="object-cover rounded-xl"/>
                     </section>
 
                 </section>
