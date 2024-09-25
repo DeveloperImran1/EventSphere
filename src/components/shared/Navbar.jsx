@@ -81,6 +81,12 @@ const Navbar = () => {
             >
               About Us
             </Link>
+            <Link
+              href="/contact"
+              className="hover:text-yellow-300 transition duration-300 ease-in-out"
+            >
+              Contact
+            </Link>
           </div>
 
           {/* Profile Section / Login/Register */}
