@@ -30,26 +30,25 @@ const EventsData = () => {
 
   const cities = selectedCountry === 'All' ? ['All'] : cityOptions[selectedCountry];
 
-  // Date filter logic based on day filters
   const filterByDay = (eventDate, filter) => {
     const today = new Date();
     const dayInMillis = 24 * 60 * 60 * 1000;
 
     switch (filter) {
-      case "Today":
-        return eventDate.toDateString() === today.toDateString();
-      case "Tomorrow":
-        return eventDate.toDateString() === new Date(today.getTime() + dayInMillis).toDateString();
-      case "This Week":
-        const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
-        return eventDate <= endOfWeek;
-      case "This Month":
-        const endOfMonth = new Date(today.getTime() + 30 * dayInMillis);
-        return eventDate <= endOfMonth;
-      default:
-        return true; // No filter
+        case "Today":
+            return eventDate.toDateString() === today.toDateString();
+        case "Tomorrow":
+            return eventDate.toDateString() === new Date(today.getTime() + dayInMillis).toDateString();
+        case "This Week":
+            const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
+            return eventDate <= endOfWeek;
+        case "This Month":
+            const endOfMonth = new Date(today.getTime() + 30 * dayInMillis);
+            return eventDate <= endOfMonth;
+        default:
+            return true; 
     }
-  };
+};
 
   // Filter events based on selected filters
   const filteredEvents = eventsDataJson.filter(event => {
