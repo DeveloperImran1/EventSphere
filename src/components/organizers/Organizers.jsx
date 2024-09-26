@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { MdPeople } from "react-icons/md";
 // import Link from 'next/link';
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import SectionTitle from '../shared/SectionTitle';
 
 
 const Organizers = () => {
@@ -90,7 +91,13 @@ const Organizers = () => {
 
     return (
         <div className="container mx-auto p-4 mb-20">
-            <h1 className="text-2xl font-bold text-center mb-6">Top Organizers</h1>
+         <SectionTitle 
+         subTitle="Our Team"
+         title={"top organizers"}
+         description={"Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life"}
+         >
+
+         </SectionTitle>
             <Swiper
                 modules={[Pagination, Navigation]}
                 spaceBetween={30}
@@ -107,7 +114,7 @@ const Organizers = () => {
                         slidesPerView: 3,
                     },
                     1280: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                     },
                 }}
             >
@@ -116,7 +123,7 @@ const Organizers = () => {
                         {/* Add group class here */}
                         <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 flex flex-col items-center text-center group">
                             <div className="relative w-32 h-32 mb-4">
-                                <Image
+                                <img
                                     src={organizer.profilePicture}
                                     alt={`${organizer.name}'s profile`}
                                     className="rounded-full object-cover w-full h-full animate-top-down"
@@ -148,12 +155,12 @@ const Organizers = () => {
                             </a>
 
                             {/* Add group-hover effect */}
-                            <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 flex gap-2 items-center">
+                            <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
+                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 pt-2 flex gap-2 items-center">
                                     <MdPeople className="text-xl" />
                                     Followers: {organizer.followers}
                                 </p>
-                                <div className="flex items-center gap-3 text-xl text-[--color-logo]">
+                                <div className="flex items-center gap-3 text-xl ">
                                     <FaLinkedin />
                                     <FaFacebook />
                                 </div>
