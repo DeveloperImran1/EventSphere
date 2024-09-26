@@ -16,7 +16,7 @@ const eventsData = [
         "type": "onsite",
         "organizer": {
             "name": "John Doe",
-            "followers": "20.3 k",
+            "followers": "20.3",
             "bio": "CEO of XYZ Innovations, expert in IoT solutions easy way.",
             "photo": "https://www.tcaa.co/wp-content/uploads/2023/09/motivational-speakers-in-usa.png"
         },
@@ -63,7 +63,7 @@ const eventsData = [
         "type": "onsite",
         "organizer": {
             "name": "Jane Smith",
-            "followers": "15 K",
+            "followers": "15",
             "bio": "Founder of Live Events Inc., with 20 years of experience in event management.",
             "photo": "https://as2.ftcdn.net/v2/jpg/04/70/59/93/1000_F_470599366_jGnuTnlqtSBZ39Ie2mZ8ahwKL8n65ymk.jpg"
         },
@@ -108,7 +108,7 @@ const eventsData = [
         "type": "online",
         "organizer": {
             "name": "Michael Lee",
-            "followers": "10.4 k",
+            "followers": "10.4",
             "bio": "Founder of Entrepreneur Hub, known for helping startups scale.",
             "photo": "https://t3.ftcdn.net/jpg/04/69/68/08/360_F_469680894_CwL075zQ3XutShPoaAt7n1VbaRosNoqM.jpg"
         },
@@ -153,7 +153,7 @@ const eventsData = [
         "type": "onsite",
         "organizer": {
             "name": "Emily Clark",
-            "followers": "5.1 k",
+            "followers": "5.1",
             "bio": "Curator at Creative Minds Co., specializing in contemporary art.",
             "photo": "https://img.freepik.com/premium-photo/female-motivational-speaker-stage-talking-about-how-success_146508-7260.jpg",
         },
