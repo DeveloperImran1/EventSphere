@@ -3,11 +3,17 @@ const eventsData = [
         "id": 1,
         "photo": "https://theinternetofthings.report/Images/EventImages/6d99b196-f9f7-4ba1-9999-a2d80a3bebc7_iot-tech-expo-europe.jpg",
         "title": "IOT Tech Expo 2024",
-        "dateTime": "2024-03-15T10:00:00",
+        "dateTime": "2024-10-15T10:00:00",
         "companyName": "XYZ Innovations",
         "price": 50,
-        "location": "Downtown Convention Center, New York",
+       "location": {
+            "country":  "USA",
+                "city": "New York",
+                "venue": "Downtown Convention Center"
+            
+        },
         "category": "Technology",
+        "type": "onsite",
         "organizer": {
             "name": "John Doe",
             "followers": "20.3 k",
@@ -44,11 +50,17 @@ const eventsData = [
         "id": 2,
         "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt7YxGKZzeOvM21OHoPWHFC9XR7q-NUv5wBQ&s",
         "title": "Music Fest 2024",
-        "dateTime": "2024-04-20T16:00:00",
+        "dateTime": "2024-09-26T16:00:00",
         "companyName": "Live Events Inc.",
         "price": 75,
-        "location": "Central Park, New York",
+        "location": {
+            "country": "Bangladesh",
+                "city": "Dhaka",
+                "venue": "Bangabandhu International Conference Centre"
+            
+        },
         "category": "Music",
+        "type": "onsite",
         "organizer": {
             "name": "Jane Smith",
             "followers": "15 K",
@@ -83,11 +95,17 @@ const eventsData = [
         "id": 3,
         "photo": "https://i.ytimg.com/vi/DNmhD8Scbj4/maxresdefault.jpg",
         "title": "Startup Summit 2024",
-        "dateTime": "2024-05-05T09:00:00",
+        "dateTime": "2024-0910-01T09:00:00",
         "companyName": "Entrepreneur Hub",
         "price": 0,
-        "location": "Silicon Valley Conference Center, California",
+        "location": {
+            "country": "Canada",
+                "city": "Toronto",
+                "venue": "Metro Convention Centre"
+            
+        },
         "category": "Business",
+        "type": "online",
         "organizer": {
             "name": "Michael Lee",
             "followers": "10.4 k",
@@ -122,11 +140,17 @@ const eventsData = [
         "id": 4,
         "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-mJXJq0z8VF7ys0Wq6JJdVqXYLTHo4gke3w&s",
         "title": "Art & Culture Expo 2024",
-        "dateTime": "2024-06-10T11:00:00",
+        "dateTime": "2024-10-10T11:00:00",
         "companyName": "Creative Minds Co.",
         "price": 30,
-        "location": "Art Gallery, San Francisco",
+        "location": {
+            "country": "India",
+                "city": "Bangalore",
+                "venue": "Bangalore International Exhibition Centre"
+            
+        },
         "category": "Art & Culture",
+        "type": "onsite",
         "organizer": {
             "name": "Emily Clark",
             "followers": "5.1 k",
