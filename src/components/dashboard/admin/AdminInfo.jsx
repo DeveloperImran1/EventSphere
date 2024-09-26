@@ -6,7 +6,7 @@ import Table from './Table';
 const AdminInfo = () => {
     return (
         <>
-            <div className="w-full mt-4 bg-gradient-to-r from-green-200 via-yellow-200 to-violet-200 flex flex-col md:flex-row items-center justify-center p-4 md:p-8 shadow-lg rounded-lg">
+            <div className="w-full bg-gradient-to-r from-green-200 via-yellow-200 to-violet-200 flex flex-col md:flex-row items-center justify-center p-4 md:p-8 shadow-lg rounded-lg">
                 {/* Left Side: User Image */}
                 <div className="flex-shrink-0">
                     <img
@@ -36,7 +36,7 @@ const AdminInfo = () => {
                 <CardSection />
             </div>
 
-            <div className="my-8">
+            <div className="mt-8">
                 <Chart />
             </div>
         </>

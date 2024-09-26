@@ -18,6 +18,7 @@ const Navbar = () => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setSticky(true);  // Make navbar sticky once scrolled down
+        closeDesktopMenu()
       } else {
         setSticky(false); // Remove sticky when near the top
       }
