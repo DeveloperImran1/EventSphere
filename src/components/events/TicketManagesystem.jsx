@@ -4,11 +4,11 @@ import { FaCheckCircle } from "react-icons/fa"; // Import the icon you want to u
 
 const HomepageSection = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20">
+    <section className="my-28 bg-white px-8">
+      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20   ">
         
         {/* First Section */}
-        <div className="flex flex-col justify-center h-[400px]">
+        <div className="flex flex-col justify-center   h-[400px]">
           <h2 className="lg:text-5xl md:text-3xl text-2xl text-black font-bold mb-4 text-center font-sans">
             Kickstart Your Event Ticketing System
           </h2>
@@ -25,13 +25,12 @@ const HomepageSection = () => {
           </ul>
 
         </div>
-        <div className="relative w-full h-[450px]">
+        <div className="relative  w-full h-[450px]">
           <img
             src="https://i.ibb.co.com/BjdY7FC/pexels-ono-kosuki-5999936.jpg" // Replace with your imagebb lin
             alt="Ticketing System"
             className="rounded-lg shadow-lg object-cover w-full h-full"
-            width="400" 
-            height="400" 
+            
           />
         </div>
 
@@ -107,7 +106,7 @@ const HomepageSection = () => {
             Effortlessly manage attendees and customer orders from your dashboard. You can assign tickets 
             to specific attendees and send them customized e-tickets. Plus, our ticketing platform enables 
             you to create a custom checkout form to collect all the information you need from your customers. 
-            Easily check in attendees with our ticket scanner app when it's time for your event.
+            Easily check in attendees with our ticket scanner app when it`s time for your event.
           </p>
           <ul className="list-disc list-inside mb-4 text-lg text-gray-600 ">
             <li className="flex items-center "><FaCheckCircle className="text-green-500 mr-2" />Promote your event on social networks.</li>
