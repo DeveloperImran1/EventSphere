@@ -61,7 +61,7 @@ const AboutSection = () => {
                     </div>
 
                     {/* Middle Content - Swiper Image Slider */}
-                    <div className="md:w-[450px]   ">
+                    <div className="md:w-[450px]  h-f ">
                         <Swiper
 
                             spaceBetween={30}

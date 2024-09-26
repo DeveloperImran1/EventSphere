@@ -1,0 +1,6 @@
+.textRed{
+    color: red;
+}
+.your-menu-class {
+    --tw-rotate: unset; /* Unsets the rotation applied by Tailwind */
+  }
