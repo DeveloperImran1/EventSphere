@@ -8,9 +8,10 @@ import Image from "next/image";
 import { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import SocialSignIn from "@/components/shared/SocialSignIn";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Swal from 'sweetalert2'
 import { useRouter } from "next/navigation";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const page = () => {
   const successfullySignIn = () => {
@@ -25,6 +26,7 @@ const page = () => {
   const router = useRouter();
   const [viewPass, setViewPass] = useState(false);
   const [viewConfirmPass, setViewConfirmPass] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,6 +34,9 @@ const page = () => {
     password: "",
     confirmPassword: "",
   });
+
+  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -48,9 +53,12 @@ const page = () => {
       name: `${e.target.firstName.value} ${e.target.lastName.value}`,
       email: e.target.email.value,
       password: e.target.password.value,
-      image
+      image, 
+      createdAt: new Date(),
+      role: "user"
     }
     console.log(newUser)
+    setLoading(true)
     const resp = await fetch('http://localhost:3000/register/api', {
       method: "POST",
       body: JSON.stringify(newUser),
@@ -66,10 +74,11 @@ const page = () => {
       redirect: false
     });
     console.log("responce is", responce)
+    setLoading(false)
     // thik vabe login hole home page a pathia dibo.
     if (responce.status === 200) {
       successfullySignIn()
-      router.push('/')
+      router.push('/register/wellcome-popup')
     }
   };
 
@@ -334,7 +343,10 @@ const page = () => {
                 type="submit"
                 className="bg-green-500 text-white rounded-md p-3 w-full font-bold hover:bg-green-600"
               >
-                Sign up
+                {
+                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> :"Sign up"
+                }
+                
               </button>
             </form>
 

@@ -1,10 +1,10 @@
+import GiftCard from '@/components/Gift-Card-Feature/GiftCard';
 import React from 'react';
 
 const page = () => {
-    const role = 'user'
     return (
         <div>
-          
+            <GiftCard></GiftCard>
         </div>
     );
 };

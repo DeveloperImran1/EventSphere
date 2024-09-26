@@ -1,9 +1,11 @@
+import BeOrganiger from '@/components/events/BeOrganiger/BeOrganiger';
 import React from 'react';
+
 
 const page = () => {
     return (
         <div>
-            About page 
+           <BeOrganiger></BeOrganiger>
         </div>
     );
 };

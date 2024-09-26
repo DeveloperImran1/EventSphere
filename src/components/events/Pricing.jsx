@@ -18,7 +18,7 @@ const Pricing = () => {
         </div>
       
         {/* Cards section */}
-        <div className="container mx-auto  flex flex-col md:flex-row justify-center gap-6 p-4">
+        <div className="  md:-mt-40  max-w-[1200px]     container mx-auto  flex flex-col md:flex-row justify-center gap-6 p-4">
           {/* First card */}
           <div className="w-full    md:w-1/2 p-8 bg-white border border-gray-200 rounded-lg shadow-md">
             <h5 className="mb-4 text-2xl font-serif font-bold tracking-tight text-gray-900">Free</h5>
