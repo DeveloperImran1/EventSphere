@@ -1,9 +1,11 @@
+import UserProfile from '@/components/dashboard/users/UserDashBoardHome/UserProfile';
 import React from 'react';
 
 const UserContainer = () => {
     return (
         <div>
-            User  dashboard er Home page akhane thakbe.
+            <UserProfile/>
+            
         </div>
     );
 };
