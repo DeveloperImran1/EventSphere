@@ -3,6 +3,7 @@ import Banner from './Banner';
 import AboutSection from './About-event';
 import EventSchedule from './EventScedule';
 import Booking from './Booking';
+import Testimonial from './Testimonial';
 
 const GiftCard = () => {
     return (
@@ -11,6 +12,7 @@ const GiftCard = () => {
           <AboutSection></AboutSection>
           <EventSchedule></EventSchedule>
          <Booking></Booking>
+         <Testimonial></Testimonial>
         </div>
     );
 };
