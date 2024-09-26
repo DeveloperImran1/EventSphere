@@ -1,4 +1,6 @@
+import { LucideFileType2 } from 'lucide-react';
 import { FaHeart, FaShareAlt, FaClock, FaMapMarkerAlt, FaTag, FaUserFriends, FaBuilding } from 'react-icons/fa';
+import { MdLocationCity } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the required styles
 
@@ -44,7 +46,14 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                     </div>
                     <div className="flex items-center text-gray-600 my-1">
                         <FaMapMarkerAlt className="mr-2" />
-                        <p>{event.location}</p>
+                        <p>{event.location.country},{event.location.city}</p>
+
+                    </div>
+                    <div>
+                        <div className="flex items-center text-gray-600 my-1">
+                        <LucideFileType2 className="mr-2" />
+                            <p>type: {event.type} </p>
+                        </div>
                     </div>
                     <div className="flex items-center text-gray-600 my-1">
                         <FaTag className="mr-2" />
@@ -67,10 +76,10 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                     <div className='flex justify-between items-center'>
 
                         <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
-                            {event.price}
+                            ${event.price}
                         </button>
                         <button className="bg-[--color-logo] text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
-                           Buy Ticket
+                            Buy Ticket
                         </button>
                     </div>
                 </div>
