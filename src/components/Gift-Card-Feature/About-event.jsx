@@ -43,12 +43,12 @@ const AboutSection = () => {
 
 
     return (
-        <section className="">
+        <section className="mt-10 p-2">
 
             <div className="md:flex  justify-end   items-center  ">
-                <div className='md:flex gap-10 -mr-40 h-96 items-center   '  >
+                <div className='md:flex space-y-4 gap-10 md:-mr-40 md:h-96 items-center'  >
                     {/* Left Content - Event Description */}
-                    <div className="    w-80  text-center lg:text-left">
+                    <div className="    lg:w-80  text-center lg:text-left">
                         <h2 className="text-3xl font-serif font-bold text-gray-800 mb-4">About Event</h2>
                         <p className="text-gray-600 ">Join us to celebrate the biggest event for the whole family this December!</p>
                         <p className="text-gray-600 mb-6">We have prepared a variety of entertaining activities for kids and adults to provide an unforgettable experience of celebrating Christmas the way you want it.</p>
@@ -61,7 +61,7 @@ const AboutSection = () => {
                     </div>
 
                     {/* Middle Content - Swiper Image Slider */}
-                    <div className="w-[350px]   ">
+                    <div className="md:w-[450px]   ">
                         <Swiper
 
                             spaceBetween={30}
@@ -99,10 +99,10 @@ const AboutSection = () => {
 
                 </div>
                 {/* Right Content - Event Details */}
-                <div className=" flex justify-center py-6  rounded-tl-full w-1/2 h-[443px] bg-gray-200 ">
+                   <div className=" flex justify-center py-6  rounded-tl-full md:w-1/2 md:h-[443px] bg-gray-200 ">
                 
      
-      <ul className=" grid grid-cols-2  gap-4  ">
+        <ul className=" grid  grid-cols-1  md:grid-cols-2  gap-4  ">
         {features.map((feature, index) => (
           <li
             key={index}
@@ -136,7 +136,12 @@ const AboutSection = () => {
            
 
         </section>
+
+  
+
     );
 };
 
 export default AboutSection;
+
+

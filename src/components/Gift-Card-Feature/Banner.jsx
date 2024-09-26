@@ -18,7 +18,7 @@ export default function ChristmasPromo() {
   const videoId = 'ncjuqj0WN6s'
 
   const opts = {
-    width: '100%',
+    width: '600',
     height: '400',
     playerVars: {
       autoplay: 1,
@@ -72,19 +72,19 @@ export default function ChristmasPromo() {
           ))}
         </div>
         <div className="relative z-10 ">
-          <h4 className="text-xl    mb-2">December 24-26, 2024</h4>
+          <h4 className="text-xl  font-poppins  mb-2">December 24-26, 2024</h4>
           <h1 className="text-6xl font-bold mb-6">Christmas Day</h1>
           <div className="grid grid-cols-4 gap-4 mb-8">
             {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="text-center">
-                <span className="text-4xl font-bold block">{value}</span>
-                <span className="text-sm">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
+              <div key={unit} className="">
+                <span className="text-4xl  font-sans  block">{value}</span>
+                <span className="text-sm       ">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
               </div>
             ))}
           </div>
           <div className="flex gap-4 ">
-            <Button variant="secondary" className="bg-white text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-white text-white hover:bg-red-400">EXPLORE</Button>
+            <Button variant="secondary" className="bg-white text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
+            <Button variant="outline" className="border-white text-lg  text-white hover:bg-blue-950">EXPLORE</Button>
           </div>
         </div>
       </div>
@@ -107,8 +107,8 @@ export default function ChristmasPromo() {
       </div>
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-          <div className="bg-white p-4 rounded-lg relative">
-            <button onClick={handleCloseModal} className="absolute text-2xl top-4 right-4 text-red-500">✖</button>
+          <div className="bg-white p-2 relative">
+            <button onClick={handleCloseModal} className="absolute text-3xl top-4 right-4 text-red-500">✖</button>
             {isPlaying && (
               <YouTube
                 videoId={videoId}
