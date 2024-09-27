@@ -46,10 +46,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                         <FaClock className="mr-2" />
                         <p>{event.dateTime}</p>
                     </div>
-                    <div className="flex items-center text-gray-700 my-1">
-                        <FaBuilding className="mr-2" />
-                        <p>Hosted by: {event.companyName}</p>
-                    </div>
+                   
                     <div className="flex items-center text-gray-600 my-1">
                         <FaMapMarkerAlt className="mr-2" />
                         <p>{event.location.country},{event.location.city}</p>
@@ -72,13 +69,13 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                             </span>
                         ))}
                     </div>
-                    <div className=" text-gray-600 mb-5">
+                    {/* <div className=" text-gray-600 mb-5">
                         <div className='flex items-center'>
                             <FaUserFriends className="mr-2" />
                             <p>speaker: <span className='font-bold'>{event.organizer.name} {event.organizer.followers}</span> Followers</p>
                         </div>
                         <p className="text-gray-500 "><span className='font-bold'>bio:</span> {event.organizer.bio}</p>
-                    </div>
+                    </div> */}
                     <div className='flex justify-between items-center'>
 
                         <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">

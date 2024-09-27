@@ -43,8 +43,8 @@ const EventsData = () => {
   // console.log(events)
 
   if (loading) {
-    return <Loading/>;
-}
+        return <Loading/>;
+    }
   // Extract unique countries from fetchEventsData
   const countries = ['All', ...new Set(events.map(event => event.location.country))];
 
@@ -168,7 +168,7 @@ const EventsData = () => {
           value={selectedCountry}
           onChange={(e) => {
             setSelectedCountry(e.target.value);
-            setSelectedCity('All'); 
+            setSelectedCity('All'); // Reset city when country changes
           }}
         >
           {countries.map((country, index) => (
