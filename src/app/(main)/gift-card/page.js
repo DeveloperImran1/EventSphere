@@ -1,9 +1,10 @@
+import GiftCard from '@/components/Gift-Card-Feature/GiftCard';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            admin dashboard er all layout and design akhane thakbe.
+            <GiftCard></GiftCard>
         </div>
     );
 };

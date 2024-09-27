@@ -4,7 +4,7 @@ import { FaCheckCircle } from "react-icons/fa"; // Import the icon you want to u
 
 const HomepageSection = () => {
   return (
-    <section className="my-28 bg-white">
+    <section className="my-28 bg-white px-8">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20   ">
         
         {/* First Section */}

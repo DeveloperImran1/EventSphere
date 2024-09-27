@@ -1,10 +1,11 @@
+import BeOrganiger from '@/components/events/BeOrganiger/BeOrganiger';
 import React from 'react';
 
+
 const page = () => {
-    const role = 'user'
     return (
         <div>
-          
+           <BeOrganiger></BeOrganiger>
         </div>
     );
 };

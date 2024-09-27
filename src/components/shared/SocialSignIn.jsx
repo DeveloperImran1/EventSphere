@@ -39,10 +39,11 @@ const SocialSignIn = () => {
         if (resp?.ok) {
             successfullSignIn();
             // Check session status after successful sign-in
-            router.push('/');
+            router.push('/register/wellcome-popup');
         } else {
             // errorSignIn();
             console.log("something went wrong for signIn")
+            router.push('/');
         }
     };
 

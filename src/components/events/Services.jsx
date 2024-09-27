@@ -5,7 +5,7 @@ import { HiTicket } from 'react-icons/hi';
 
 const Services = () => {
     return (
-        <div className='container mx-auto mt-10'>
+        <div className='container mx-auto mt-10 '>
             <div className="text-center    ">
                 <h1 className="text-xl font-semibold uppercase font-serif tracking-[.25em] text-blue-500">sERVICES</h1>
                 <h1 className="my-2 font-serif font-semibold text-black">Discover The Best Event <br />Ticketing Service System</h1>
@@ -13,7 +13,7 @@ const Services = () => {
                     Make online event ticketing and registrations simpler than ever before with Eventify. <br /> Create & customize fundraiser event tickets online, offer discounts, boost attendee engagement, and do a lot more.
                 </p>
                 {/*  */}
-                <div className='md:flex   p-2 mt-20  ' >
+                <div className='md:flex p-2 mt-20 px-8 ' >
                     {/* 1 */}
                     <div className='space-y-6 mb-10    '  >
                         <div className='text-left   '>
