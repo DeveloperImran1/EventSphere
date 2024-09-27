@@ -4,172 +4,249 @@ import { FaDiagramSuccessor } from "react-icons/fa6";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { LuSearch } from "react-icons/lu";
 import { CiFilter } from "react-icons/ci";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
-
 const EventOrderList = () => {
-    const invoices = [
-        {
-            invoice: "1",
-            eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-            eventName: "Reactive Conference",
-            eventPlace: "Uk",
-            status: "Pending",
-            Amount: "$250.00",
-            Date: "2-10-2024",
-            Refund: "Yes",
-        },
-        {
-            invoice: "2",
-            eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-            eventName: "Global Tech Summit 2024",
-            eventPlace: "USA",
-            status: "Complete",
-            Amount: "$250.00",
-            Date: "2-10-2024",
-            Refund: "No",
-        },
-        {
-            invoice: "3",
-            eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-            eventName: "Tech Conference",
-            eventPlace: "France",
-            status: "Rejected",
-            Amount: "$250.00",
-            Date: "2-10-2024",
-            Refund: "Yes",
-        },
-
-
-    ]
-    return  <div className="mx-auto p-4 text-black flex">
-           <div className=" w-[300px]">Order</div>
-        <div className="">
-            <div className=" flex justify-between my-5">
+  const invoices = [
+    {
+      invoice: "1",
+      eventImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
+      eventName: "Reactive Conference",
+      eventPlace: "Uk",
+      status: "Pending",
+      Amount: "$250.00",
+      Date: "2-10-2024",
+      Refund: "Yes",
+    },
+    {
+      invoice: "2",
+      eventImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
+      eventName: "Global Tech Summit 2024",
+      eventPlace: "USA",
+      status: "Complete",
+      Amount: "$250.00",
+      Date: "2-10-2024",
+      Refund: "No",
+    },
+    {
+      invoice: "3",
+      eventImage:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
+      eventName: "Tech Conference",
+      eventPlace: "France",
+      status: "Rejected",
+      Amount: "$250.00",
+      Date: "2-10-2024",
+      Refund: "Yes",
+    },
+  ];
+  return (
+    <div className=" text-black flex container mx-auto ml-4">
+      {/* <div className=" w-[300px]">Order</div> */}
+      <div className="">
+        <div className=" flex justify-between my-5 flex-col md:flex-row mt-4">
+          <div className="">
+            <p className=" font-semibold text-2xl text-black ml-5">Order List</p>
+          </div>
+          <div className=" flex gap-4 flex-col md:flex-row mt-4 mx-5">
+            <div className=" relative  md:w-[200px]">
+              <Input
+                type="search"
+                placeholder="Search"
+                className=" rounded-full pl-10"
+              />
+              <p className=" absolute top-3 left-4">
+                <LuSearch />
+              </p>
+            </div>
+            <div className=" relative md:w-[200px]   md:mr-2">
+              <Input
+                type="search"
+                placeholder="Filter"
+                className=" rounded-full pl-7"
+              />
+              <p className=" absolute top-3 left-2">
+                <CiFilter />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className=" flex  gap-12 flex-col md:flex-row mx-5">
+          <div className="md:w-[250px]  rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+            <div className=" px-4 py-3">
+              <div className="flex  justify-between  items-center ">
+                <div className="bg-[#f3f2ff] p-5 rounded-xl">
+                  <FaRegUser color="black" size={30} />
+                </div>
                 <div className="">
-                    <p className=" font-semibold text-2xl text-black">Order List</p>
-                    <p>Event <span className="bg-green-500 h-1.5 w-1.5 rounded-full"></span></p>
+                  <h2 className="font-bold text-xl text-gray-800">
+                    Total Order
+                  </h2>
+                  <p>158</p>
                 </div>
-             <div className=" flex gap-4">
-             <div className=" relative  w-[200px]">
-                    <Input type="search" placeholder="Search"  className=" rounded-full pl-10"/>
-                    <p className=" absolute top-3 left-4"><LuSearch /></p>
-                </div>
-                <div className=" relative w-[200px]">
-                    <Input type="search" placeholder="Filter"  className=" rounded-full pl-7"/>
-                    <p className=" absolute top-3 left-2"><CiFilter /></p>
-                </div>
-             </div>
+              </div>
             </div>
-            <div className=" flex  gap-10">
-                <div className="w-[230px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
-                    <div className=" px-4 py-3">
-                        <div className="flex  justify-between  items-center ">
-                            <div className="bg-[#f3f2ff] p-5 rounded-xl">
-                                <FaRegUser color="black" size={30} />
-                            </div>
-                            <div className="">
-                                <h2 className="font-bold text-xl text-gray-800">Total Order</h2>
-                                <p>158</p>
-                            </div>
-                        </div>
-                    </div>
+          </div>
+          <div className="md:w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+            <div className=" px-4 py-3">
+              <div className="flex  justify-between  items-center ">
+                <div className="bg-[#f3f2ff] p-5 rounded-xl">
+                  <FaMoneyCheck color="black" size={30} />
                 </div>
-                <div className="w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
-                    <div className=" px-4 py-3">
-                        <div className="flex  justify-between  items-center ">
-                            <div className="bg-[#f3f2ff] p-5 rounded-xl">
-                                <FaMoneyCheck color="black" size={30} />
-
-                            </div>
-                            <div className="">
-                                <h2 className="font-bold text-xl text-gray-800">Total Payment</h2>
-                                <p>158</p>
-                            </div>
-                        </div>
-                    </div>
+                <div className="">
+                  <h2 className="font-bold text-xl text-gray-800">
+                    Total Payment
+                  </h2>
+                  <p>158</p>
                 </div>
-                <div className="w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
-                    <div className=" px-4 py-3">
-                        <div className="flex  justify-between  items-center ">
-                            <div className="bg-[#f3f2ff] p-5 rounded-xl">
-                                <FaDiagramSuccessor color="black" size={30} />
-
-                            </div>
-                            <div className="">
-                                <h2 className="font-bold text-xl text-gray-800">Total Success</h2>
-                                <p>158</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+              </div>
             </div>
-            <div className=" mt-8">
-                <Table>
-                    <TableHeader >
-                        <TableRow>
-                            <TableHead >No</TableHead>
-                            <TableHead >Event info</TableHead>
-                            <TableHead >Booking Date</TableHead>
-                            <TableHead >Refund</TableHead>
-                            <TableHead >Amount</TableHead>
-                            <TableHead>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {invoices.map((invoice) => (
-                            <TableRow key={invoice.invoice} className="">
-                                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                                <TableCell className="font-medium">
-                                    <div className=" flex gap-3">
-                                        <Image src={invoice.eventImage} width={50} height={50} alt="fdsg" className=" border border-gray-200 rounded-lg" />
-                                        <div  >
-                                            <p className=" text-black">{invoice.eventName}</p>
-                                            <p className=" text-black">{invoice.eventPlace}</p>
-                                        </div>
-                                    </div>
-                                </TableCell>
-                                <TableCell className="font-medium">{invoice.Date}</TableCell>
-                                <TableCell className="font-medium">{invoice.Refund}</TableCell>
-                                <TableCell className="">{invoice.Amount}</TableCell>
-
-                                <TableCell className="flex items-center gap-2 mt-3 text-left"> <div className=' text-sm font-medium text-gray-700 whitespace-nowrap'>
-                                    <div
-                                        className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 ${invoice.status === 'Pending' &&
-                                            'bg-yellow-100/60 text-yellow-500'
-                                            }  ${invoice.status === 'Complete' &&
-                                            'bg-emerald-100/60 text-emerald-500'
-                                            } ${invoice.status === 'Rejected' &&
-                                            'bg-red-100/60 text-red-500'
-                                            }`}
-                                    >
-                                        <span
-                                            className={`h-1.5 w-1.5 rounded-full
-                                                ${invoice.status === 'Pending' && 'bg-yellow-500'
-                                                } ${invoice.status === 'Complete' && 'bg-green-500'
-                                                } ${invoice.status === 'Rejected' && 'bg-red-500'} `}
-                                        ></span>
-                                        <h2 className='text-sm font-normal '>{invoice.status}</h2>
-                                    </div>
-                                </div><div className=" cursor-pointer"> <BsThreeDotsVertical /></div></TableCell>
-
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+          </div>
+          <div className="md:w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+            <div className=" px-4 py-3">
+              <div className="flex  justify-between  items-center ">
+                <div className="bg-[#f3f2ff] p-5 rounded-xl">
+                  <FaDiagramSuccessor color="black" size={30} />
+                </div>
+                <div className="">
+                  <h2 className="font-bold text-xl text-gray-800">
+                    Total Success
+                  </h2>
+                  <p>158</p>
+                </div>
+              </div>
             </div>
-        </div>;
+          </div>
+        </div>
+
+        <div className="flex flex-col   mt-5">
+          <div className="-mx-4 -my-2 overflow-x-auto ">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div className="overflow-hidden border border-gray-200  md:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="py-3.5 md:px-4 text-sm font-normal text-left rtl:text-right text-gray-500 -ml-2"
+                      >
+                        <div className="flex items-center gap-x-3 ">
+                          <span>No</span>
+                        </div>
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="md:px-4  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        <span>Event info</span>
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="md:px-4 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        <button className="flex items-center gap-x-2">
+                          <span>Booking Date</span>
+                        </button>
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="md:px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        Refund
+                      </th>
+
+                      <th
+                        scope="col"
+                        className=" pl-5 md:px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200  text-sm">
+                    {invoices.map((invoice) => (
+                      <tr key={invoice._id}>
+                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap ml-2">
+                          {invoice.invoice}
+                        </td>
+
+                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                          <div className=" flex gap-3 flex-col md:flex-row flex-wrap">
+                            <Image
+                              src={invoice.eventImage}
+                              width={50}
+                              height={50}
+                              alt="fdsg"
+                              className=" border border-gray-200 rounded-lg"
+                            />
+                            <div>
+                              <p className=" text-black text-wrap">{invoice.eventName}</p>
+                              <p className=" text-black">
+                                {invoice.eventPlace}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          {invoice.Date}
+                        </td>
+                        <td className="md:px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                          {invoice.Refund}
+                        </td>
+                  
+                        <td className="md:px-4 py-4 text-sm whitespace-nowrap flex items-center md:gap-2 mt-8   my-auto text-left mr-3">
+                          <div className=" text-sm font-medium text-gray-700 whitespace-nowrap">
+                            <div
+                              className={`inline-flex items-center px-3 py-1 rounded-full gap-x-1 ${
+                                invoice.status === "Pending" &&
+                                "bg-yellow-100/60 text-yellow-500"
+                              }  ${
+                                invoice.status === "Complete" &&
+                                "bg-emerald-100/60 text-emerald-500"
+                              } ${
+                                invoice.status === "Rejected" &&
+                                "bg-red-100/60 text-red-500"
+                              }`}
+                            >
+                              <span
+                                className={`h-1.5 w-1.5 rounded-full
+                                                ${
+                                                  invoice.status ===
+                                                    "Pending" && "bg-yellow-500"
+                                                } ${
+                                  invoice.status === "Complete" &&
+                                  "bg-green-500"
+                                } ${
+                                  invoice.status === "Rejected" && "bg-red-500"
+                                } `}
+                              ></span>
+                              <h2 className="text-sm font-normal ">
+                                {invoice.status}
+                              </h2>
+                            </div>
+                          </div>
+                          <div className=" cursor-pointer">
+                            <BsThreeDotsVertical />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  );
 };
 
 export default EventOrderList;
