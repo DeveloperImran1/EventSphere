@@ -18,6 +18,7 @@ const Navbar = () => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setSticky(true);  // Make navbar sticky once scrolled down
+        closeDesktopMenu()
       } else {
         setSticky(false); // Remove sticky when near the top
       }
@@ -66,7 +67,56 @@ const Navbar = () => {
     setDesktopMenuOpen(false); // NEW: Close desktop menu
   };
 
+ 
   const subMenu1 = [
+    {
+      title: "Sell Event Ticket",
+      path: "/sell-event-ticket"
+    },
+    {
+      title: "Register",
+      path: "/register"
+    },
+    {
+      title: "Login",
+      path: "/login"
+    },
+    {
+      title: "All Events",
+      path: "/events"
+    },
+  ]
+  const subMenu2 = [
+    {
+      title: "Event Management Softwer",
+      path: "/event-management-software"
+    },
+    {
+      title: "About Us",
+      path: "/about-us"
+    },
+    {
+      title: "Contact Us",
+      path: "/contact-us"
+    },
+  
+  ]
+  const subMenu3 = [
+    {
+      title: "Events",
+      path: "/events"
+    },
+    {
+      title: "Gallery",
+      path: "/gallery"
+    },
+    {
+      title: "Subscription",
+      path: "/subscriptions"
+    },
+
+  ]
+  const subMenu4 = [
     {
       title: "Dashboard",
       path: "/dashboard"
@@ -84,82 +134,21 @@ const Navbar = () => {
       path: "/settings"
     },
   ]
-  const subMenu2 = [
-    {
-      title: "Profile",
-      path: "/profile"
-    },
-    {
-      title: "Notification",
-      path: "/notifications"
-    },
-    {
-      title: "Message",
-      path: "/messages"
-    },
-    {
-      title: "Help",
-      path: "/help"
-    },
-  ]
-  const subMenu3 = [
-    {
-      title: "Analitics",
-      path: "/analytics"
-    },
-    {
-      title: "Reports",
-      path: "/report"
-    },
-    {
-      title: "Feedback",
-      path: "/feedback"
-    },
-    {
-      title: "Tasks",
-      path: "/tasks"
-    },
-  ]
-  const subMenu4 = [
-    {
-      title: "Events",
-      path: "/events"
-    },
-    {
-      title: "Gallery",
-      path: "/gallery"
-    },
-    {
-      title: "Subscription",
-      path: "/subscriptions"
-    },
 
-  ]
   const subMenu5 = [
     {
       title: "Home",
       path: "/"
     },
     {
-      title: "Find Events",
-      path: "/find-events"
+      title: "All Events",
+      path: "/events"
     },
     {
       title: "Community",
       path: "/community"
     },
-    {
-      title: "Blogs",
-      path: "/blogs"
-    },
-    {
-      title: "About Us",
-      path: "/about"
-    },
-    {
-      title: "Contact Us",
-      path: "/contact"
-    },
+
 
   ]
 
@@ -204,7 +193,7 @@ const Navbar = () => {
               <div>
                 {/* NEW: Desktop menu button */}
                 <button
-                  className="text-white focus:outline-none"
+                  className="text-white focus:outline-none mt-2"
                   onClick={toggleDesktopMenu} // Toggle desktop menu
                 >
                   <svg
@@ -273,7 +262,7 @@ const Navbar = () => {
                         {
                           subMenu2?.map((menu, index) => <Link key={index}
                             href={menu?.path}
-                            className="block px-4 py-2 text-white hover:text-[#eab308]  hover:bg-gray-200 transition text-start"
+                            className="block px-4 py-2 text-white hover:text-[#eab308]   transition text-start"
                             onClick={closeDesktopMenu}
                           >
                             {menu?.title}
