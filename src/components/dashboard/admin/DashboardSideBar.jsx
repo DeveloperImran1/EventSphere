@@ -10,11 +10,13 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import AnimatedFormModal from '@/components/events/BeOrganiger/BeOrganiger';
 
 
 const DashboardSideBar = () => {
     const session = useSession();
     const [routes, setRoutes] = useState([])
+    const [modalOpen, setModalOpen] = useState(false);
     console.log("Dashboard sidebar theke session ", session);
 
 
@@ -33,57 +35,70 @@ const DashboardSideBar = () => {
     }, [])
 
     return (
-        <div className=" max-h-[calc(100vh-96px)] w-64 bg-gray-200 text-slate-600  h-screen flex-shrink-0 shadow-lg  relative">
-            <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
-                <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
-                <h1 className="text-2xl md:text-3xl font-bold text-black hover:text-white">Dashboard</h1>
-            </div>
+        <>
+            {/* <AnimatedFormModal modalOpen={modalOpen} setModalOpen={setModalOpen}></AnimatedFormModal> */}
+            <div className=" max-h-[calc(100vh-96px)] w-64 bg-gray-200 text-slate-600  h-screen flex-shrink-0 shadow-lg  relative">
+                <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
+                    <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
+                    <h1 className="text-2xl md:text-3xl font-bold text-black hover:text-white">Dashboard</h1>
+                </div>
 
-            <nav className="mt-6">
-                {
-                    routes?.map(route => {
-                        const Icon = route?.icon;
-                        return (
-                            <>
-                                <Link href={route?.path} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
-                                    <Icon className="mr-2 text-xl" />
+                <nav className="mt-6">
+                    {
+                        routes?.map(route => {
+                            const Icon = route?.icon;
+                            return (
+                                <>
+                                    <Link href={route?.path} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
+                                        <Icon className="mr-2 text-xl" />
 
-                                    <span>{route?.title}</span>
-                                </Link>
-                                <hr className="border-gray-400 mx-4" />
-                            </>
-                        )
-                    })
-                }
+                                        <span>{route?.title}</span>
+                                    </Link>
+                                    <hr className="border-gray-400 mx-4" />
+                                </>
+                            )
+                        })
+                    }
+{/* 
+                    <button onClick={() => setModalOpen(!modalOpen)} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
+                        <FaSignOutAlt className="mr-2 text-xl" />
 
-                <button onClick={()=> signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
-                    <FaSignOutAlt className="mr-2 text-xl" />
+                        <span>Sign Out</span>
+                    </button> */}
+                    <hr className="border-gray-400 mx-4" />
+                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
+                        <FaSignOutAlt className="mr-2 text-xl" />
 
-                    <span>Sign Out</span>
-                </button>
-                <hr className="border-gray-400 mx-4" />
+                        <span>Sign Out</span>
+                    </button>
+                    <hr className="border-gray-400 mx-4" />
 
-            </nav>
+                </nav>
 
-            <div className='flex gap-2 absolute bottom-0 left-[20%] '>
-                <div className="group relative w-[70px] h-[70px] rounded-md overflow-hidden cursor-pointer bg-gradient-to-r from-[#3b99f1] via-[#4FB5FF] to-[#4FB5FF] p-2 text-white shadow">
-                    <span className="absolute left-[-10%] top-[50%] z-10 h-[20px] w-[20px] rounded-full bg-gradient-to-r from-[#0064c2] via-[#49aef7] to-[#c7e0f1] duration-300 group-hover:top-[-10%] group-hover:blur-sm"></span>
-                    <span className="absolute right-[-5%] top-[10%] z-10 h-[20px] w-[30px] rounded-full bg-gradient-to-tr from-[#0064c2] via-[#4FB5FF] to-[#4FB5FF] duration-300 group-hover:top-[80%] group-hover:blur-sm"></span>
-                    <div className="relative z-20 space-y-6 flex flex-col items-center justify-center ">
-                        <IoChatbubbleEllipsesOutline size={23} className='text-white'></IoChatbubbleEllipsesOutline>
-                        Chating
+                <div className='flex gap-2 absolute bottom-0 left-[20%] '>
+                    <div className="group relative w-[70px] h-[70px] rounded-md overflow-hidden cursor-pointer bg-gradient-to-r from-[#3b99f1] via-[#4FB5FF] to-[#4FB5FF] p-2 text-white shadow">
+                        <span className="absolute left-[-10%] top-[50%] z-10 h-[20px] w-[20px] rounded-full bg-gradient-to-r from-[#0064c2] via-[#49aef7] to-[#c7e0f1] duration-300 group-hover:top-[-10%] group-hover:blur-sm"></span>
+                        <span className="absolute right-[-5%] top-[10%] z-10 h-[20px] w-[30px] rounded-full bg-gradient-to-tr from-[#0064c2] via-[#4FB5FF] to-[#4FB5FF] duration-300 group-hover:top-[80%] group-hover:blur-sm"></span>
+                        <div className="relative z-20 space-y-6 flex flex-col items-center justify-center ">
+                            <IoChatbubbleEllipsesOutline size={23} className='text-white'></IoChatbubbleEllipsesOutline>
+                            Chating
+                        </div>
+                    </div>
+                    <div className="group relative w-[70px] h-[70px] rounded-md overflow-hidden cursor-pointer bg-gradient-to-r from-[#3b99f1] via-[#4FB5FF] to-[#4FB5FF] p-2 text-white shadow">
+                        <span className="absolute left-[-10%] top-[50%] z-10 h-[20px] w-[20px] rounded-full bg-gradient-to-r from-[#0064c2] via-[#49aef7] to-[#c7e0f1] duration-300 group-hover:top-[-10%] group-hover:blur-sm"></span>
+                        <span className="absolute right-[-5%] top-[10%] z-10 h-[20px] w-[30px] rounded-full bg-gradient-to-tr from-[#0064c2] via-[#4FB5FF] to-[#4FB5FF] duration-300 group-hover:top-[80%] group-hover:blur-sm"></span>
+                        <div className="relative z-20 space-y-6 flex flex-col items-center justify-center ">
+                            <IoSettings size={23} className='text-white animate-spin'></IoSettings>
+                            Events
+                        </div>
                     </div>
                 </div>
-                <div className="group relative w-[70px] h-[70px] rounded-md overflow-hidden cursor-pointer bg-gradient-to-r from-[#3b99f1] via-[#4FB5FF] to-[#4FB5FF] p-2 text-white shadow">
-                    <span className="absolute left-[-10%] top-[50%] z-10 h-[20px] w-[20px] rounded-full bg-gradient-to-r from-[#0064c2] via-[#49aef7] to-[#c7e0f1] duration-300 group-hover:top-[-10%] group-hover:blur-sm"></span>
-                    <span className="absolute right-[-5%] top-[10%] z-10 h-[20px] w-[30px] rounded-full bg-gradient-to-tr from-[#0064c2] via-[#4FB5FF] to-[#4FB5FF] duration-300 group-hover:top-[80%] group-hover:blur-sm"></span>
-                    <div className="relative z-20 space-y-6 flex flex-col items-center justify-center ">
-                        <IoSettings size={23} className='text-white animate-spin'></IoSettings>
-                        Events
-                    </div>
-                </div>
             </div>
-        </div>
+
+
+
+        </>
+
     );
 };
 
@@ -92,7 +107,7 @@ export default DashboardSideBar;
 const userRoutes = [
     {
         title: "Profile",
-        path: "/dashboard/profile",
+        path: "/dashboard/user-profile",
         icon: RiMessage2Line
     },
     {
@@ -101,8 +116,13 @@ const userRoutes = [
         icon: RiMessage2Line
     },
     {
+        title: "Request Organizer",
+        path: "/dashboard/be-organizer",
+        icon: RiMessage2Line
+    },
+    {
         title: "Order",
-        path: "/dashboard/my-order",
+        path: "/dashboard/my-orderlist",
         icon: IoBagHandleOutline
     },
     {
@@ -193,3 +213,4 @@ const AdminRoutes = [
     },
 
 ]
+
