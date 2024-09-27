@@ -168,7 +168,7 @@ const EventsData = () => {
           value={selectedCountry}
           onChange={(e) => {
             setSelectedCountry(e.target.value);
-            setSelectedCity('All'); // Reset city when country changes
+            setSelectedCity('All'); 
           }}
         >
           {countries.map((country, index) => (

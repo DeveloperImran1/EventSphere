@@ -10,28 +10,28 @@ import Loading from "../loading";
 
 const EventDetailsPage = ({ params }) => {
     const router = useRouter();
-    const { id } = params; 
+    const { id } = params;
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/events/${id}`); 
+                const response = await axios.get(`http://localhost:9000/events/${id}`);
                 setEvent(response.data);
-                setLoading(false); 
+                setLoading(false);
             } catch (error) {
-                console.error("Error fetching event data:", error); 
+                console.error("Error fetching event data:", error);
                 setLoading(false);
             }
         };
-    
-        fetchEventsData(); 
-    
-    }, [id]); 
-    
+
+        fetchEventsData();
+
+    }, [id]);
+
     if (loading) {
-        return <Loading/>;
+        return <Loading />;
     }
 
     if (!event) {
@@ -49,18 +49,34 @@ const EventDetailsPage = ({ params }) => {
                 {/* Left Side: Image, Gallery, Reviews */}
                 <section className="space-y-6">
                     {/* Event Image */}
-                    <img className="w-full h-80 object-cover rounded-lg hover:scale-105" src={event.photo} alt={event.title} />
+                    <Image
+                        src={event.photo}
+                        alt={event.title}
+                        layout="responsive"
+                        objectFit="cover"
+                        width={500}
+                        height={400}
+                        className="w-full h-80 object-cover rounded-lg hover:scale-105" />
 
                     {/* Event Gallery */}
                     {event.gallery && event.gallery.length > 0 && (
                         <article>
                             <div className="grid grid-cols-2 gap-4">
                                 {event.gallery.map((image, index) => (
-                                    <img key={index} className="w-full h-32 object-cover hover:shadow-2xl hover:scale-105 rounded-lg" src={image} alt={`Gallery image ${index + 1}`} />
+                                    <div key={index} className="relative aspect-w-1 aspect-h-1 h-32">
+                                        <Image
+                                            src={image}
+                                            alt={`Gallery image ${index + 1}`}
+                                            layout="fill"
+                                            objectFit="cover"
+                                            className="hover:shadow-2xl hover:scale-105 rounded-lg"
+                                        />
+                                    </div>
                                 ))}
                             </div>
                         </article>
                     )}
+
 
                     {/* Event Reviews */}
                     {event.reviews && event.reviews.length > 0 && (
@@ -93,7 +109,12 @@ const EventDetailsPage = ({ params }) => {
                     {/* location map */}
                     <section>
                         <h3>Event location map</h3>
-                        <Image src={event.locationMap} alt="map" width={320} height={400} className="object-cover rounded-xl hover:shadow-2xl"/>
+                        <Image
+                            src={event.locationMap}
+                            alt="map"
+                            width={320}
+                            height={400}
+                            className="object-cover rounded-xl hover:shadow-2xl" />
                     </section>
                 </section>
 
@@ -143,7 +164,16 @@ const EventDetailsPage = ({ params }) => {
                     <article className="border-t pt-4">
                         <h3 className="text-xl font-semibold">Speaker</h3>
                         <div className="flex items-center mt-3">
-                            <img className="w-20 h-20 rounded-full" src={event.organizer.photo || "/default-profile.png"} alt={event.organizer.name} />
+                            <div className="w-28 h-28">
+                                <Image
+                                    src={event?.organizer?.photo}
+                                    alt={event?.organizer?.name}
+                                    layout="responsive"
+                                    objectFit="cover"
+                                    width={40}
+                                    height={40}
+                                    className=" rounded-full" />
+                            </div>
                             <div className="ml-4">
                                 <p className="font-bold">{event.organizer.name}</p>
                                 <p className="text-gray-600">
@@ -159,7 +189,12 @@ const EventDetailsPage = ({ params }) => {
                     <div>
                         <h3>Sponsor</h3>
                         <div className="flex gap-4 items-center">
-                            <img src={event.sponsor.logo} alt="sponsor" width={120} height={100} className="object-cover hover:scale-105"/>
+                            <Image
+                                src={event.sponsor.logo}
+                                alt="sponsor"
+                                width={120}
+                                height={100}
+                                className="object-cover hover:scale-105" />
                             <p>{event.sponsor.name}</p>
                         </div>
                     </div>
