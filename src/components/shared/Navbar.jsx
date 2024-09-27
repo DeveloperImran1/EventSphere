@@ -107,6 +107,10 @@ const Navbar = () => {
       path: "/events"
     },
     {
+      title: "Gift Card",
+      path: "/gift-card"
+    },
+    {
       title: "Gallery",
       path: "/gallery"
     },

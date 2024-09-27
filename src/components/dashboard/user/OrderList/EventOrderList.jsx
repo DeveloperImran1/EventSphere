@@ -51,8 +51,7 @@ const EventOrderList = () => {
 
 
     ]
-    return  <div className="mx-auto p-4 text-black flex">
-           <div className=" w-[300px]">Order</div>
+    return  <div className=" p-4 text-black flex border-2 w-full md:w-[calc(100vw-290px))]">
         <div className="">
             <div className=" flex justify-between my-5">
                 <div className="">
@@ -60,18 +59,18 @@ const EventOrderList = () => {
                     <p>Event <span className="bg-green-500 h-1.5 w-1.5 rounded-full"></span></p>
                 </div>
              <div className=" flex gap-4">
-             <div className=" relative  w-[200px]">
+             <div className=" relative w-[140px] md:w-[170px] lg:w-[200px]">
                     <Input type="search" placeholder="Search"  className=" rounded-full pl-10"/>
                     <p className=" absolute top-3 left-4"><LuSearch /></p>
                 </div>
-                <div className=" relative w-[200px]">
+                <div className=" relative w-[140px] md:w-[170px] lg:w-[200px]">
                     <Input type="search" placeholder="Filter"  className=" rounded-full pl-7"/>
                     <p className=" absolute top-3 left-2"><CiFilter /></p>
                 </div>
              </div>
             </div>
-            <div className=" flex  gap-10">
-                <div className="w-[230px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+                <div className="w-[230px] rounded-lg  shadow-sm border bg-white  transition-shadow duration-300">
                     <div className=" px-4 py-3">
                         <div className="flex  justify-between  items-center ">
                             <div className="bg-[#f3f2ff] p-5 rounded-xl">
@@ -84,7 +83,7 @@ const EventOrderList = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+                <div className="w-[250px] rounded-lg  shadow-sm border bg-white  transition-shadow duration-300">
                     <div className=" px-4 py-3">
                         <div className="flex  justify-between  items-center ">
                             <div className="bg-[#f3f2ff] p-5 rounded-xl">

@@ -137,13 +137,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 
-export default function AnimatedFormModal() {
+export default function AnimatedFormModal({modalOpen, setModalOpen}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="relative w-full  flex flex-col justify-start items-center p-8 bg-gradient-to-br from-purple-400 to-indigo-600">
       {/* Modal Button aligned to the top */}
-      <motion.button
+      {/* <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className=" w-40 bg-white rounded-full text-purple-600 font-bold text-lg shadow-lg"
@@ -165,11 +165,11 @@ export default function AnimatedFormModal() {
             background: 'linear-gradient(45deg, #8B5CF6, #3B82F6)',
           }}
         />
-      </motion.button>
+      </motion.button> */}
 
       <AnimatePresence>
-        {isOpen && (
-          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        {modalOpen && (
+          <Dialog open={modalOpen} onOpenChange={setModalOpen}>
             {/* Modal Content: full width and height */}
             <DialogContent className=" w-full mt-4 bg-transparent border-none shadow-none flex items-center justify-center">
               <motion.div
