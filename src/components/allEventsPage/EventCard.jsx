@@ -1,4 +1,5 @@
 import { LucideFileType2 } from 'lucide-react';
+import Image from 'next/image';
 import { FaHeart, FaShareAlt, FaClock, FaMapMarkerAlt, FaTag, FaUserFriends, FaBuilding } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
@@ -10,7 +11,12 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
             {/* Toast container to show toasts */}
             <ToastContainer />
             <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
-                <img className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" src={event?.photo} alt={event?.title} />
+                <Image 
+                src={event?.photo} 
+                alt={event?.title}
+                width={200}
+                height={200}
+                className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"  />
 
                 {/* Love and Share Icons - visible on hover */}
                 <div className="absolute top-36 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">

@@ -1,14 +1,17 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EventCard from './EventCard';
 import { toast } from 'react-toastify';
 import { Range } from 'react-range';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Link from 'next/link';
-import eventsDataJson from '@/components/allEventsPage/EventDataJson';
+import axios from 'axios';
+import Loading from '@/app/(main)/events/loading';
+// import fetchEventsData from '@/components/allEventsPage/EventDataJson';
 
 const EventsData = () => {
+  const [events, setEvents] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [priceRange, setPriceRange] = useState([0, 100]);
@@ -18,14 +21,37 @@ const EventsData = () => {
   const [selectedCity, setSelectedCity] = useState('All');
   const [selectedDay, setSelectedDay] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
+  const [loading, setLoading] = useState(true);
 
-  // Extract unique countries from eventsDataJson
-  const countries = ['All', ...new Set(eventsDataJson.map(event => event.location.country))];
+
+  useEffect(() => {
+
+    const fetchEventsData = async () => {
+      try {
+        const response = await axios.get('http://localhost:9000/events'); 
+        setEvents(response.data); 
+        setLoading(false)
+       
+      } catch (error) {
+        console.log(error)
+        setLoading(false)
+      }
+    };
+
+    fetchEventsData(); // Call the fetch function inside useEffect
+  }, []);
+  // console.log(events)
+
+  if (loading) {
+    return <Loading/>;
+}
+  // Extract unique countries from fetchEventsData
+  const countries = ['All', ...new Set(events.map(event => event.location.country))];
 
   // Extract unique cities based on selected country
   const cityOptions = {};
   countries.forEach(country => {
-    cityOptions[country] = ['All', ...new Set(eventsDataJson.filter(event => event.location.country === country).map(event => event.location.city))];
+    cityOptions[country] = ['All', ...new Set(events.filter(event => event.location.country === country).map(event => event.location.city))];
   });
 
   const cities = selectedCountry === 'All' ? ['All'] : cityOptions[selectedCountry];
@@ -35,23 +61,23 @@ const EventsData = () => {
     const dayInMillis = 24 * 60 * 60 * 1000;
 
     switch (filter) {
-        case "Today":
-            return eventDate.toDateString() === today.toDateString();
-        case "Tomorrow":
-            return eventDate.toDateString() === new Date(today.getTime() + dayInMillis).toDateString();
-        case "This Week":
-            const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
-            return eventDate <= endOfWeek;
-        case "This Month":
-            const endOfMonth = new Date(today.getTime() + 30 * dayInMillis);
-            return eventDate <= endOfMonth;
-        default:
-            return true; 
+      case "Today":
+        return eventDate.toDateString() === today.toDateString();
+      case "Tomorrow":
+        return eventDate.toDateString() === new Date(today.getTime() + dayInMillis).toDateString();
+      case "This Week":
+        const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
+        return eventDate <= endOfWeek;
+      case "This Month":
+        const endOfMonth = new Date(today.getTime() + 30 * dayInMillis);
+        return eventDate <= endOfMonth;
+      default:
+        return true;
     }
-};
+  };
 
   // Filter events based on selected filters
-  const filteredEvents = eventsDataJson.filter(event => {
+  const filteredEvents = events.filter(event => {
     const eventDate = new Date(event.dateTime);
     const withinPriceRange = event.price >= priceRange[0] && event.price <= priceRange[1];
     const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
@@ -60,7 +86,7 @@ const EventsData = () => {
     const matchesCity = selectedCity === 'All' || event.location.city === selectedCity;
     const matchesDay = selectedDay === 'All' || filterByDay(eventDate, selectedDay);
     const matchesType = selectedType === 'All' || event.type === selectedType;
-    
+
     return withinPriceRange && matchesCategory && withinDateRange && matchesCountry && matchesCity && matchesDay && matchesType;
   });
 
@@ -83,7 +109,7 @@ const EventsData = () => {
       <div className='w-1/5'>
         {/* Category Filter */}
         <h5 className="font-bold mb-4">Filter by Category</h5>
-        {['All', ...new Set(eventsDataJson.map(event => event.category))].map((category, index) => (
+        {['All', ...new Set(events.map(event => event.category))].map((category, index) => (
           <button
             key={index}
             onClick={() => setSelectedCategory(category)}
@@ -179,7 +205,7 @@ const EventsData = () => {
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
         >
-          {["All", ...new Set(eventsDataJson.map(event => event.type))].map((type, index) => (
+          {["All", ...new Set(events.map(event => event.type))].map((type, index) => (
             <option key={index} value={type}>{type}</option>
           ))}
         </select>
@@ -188,7 +214,7 @@ const EventsData = () => {
       {/* Events Display */}
       <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
         {sortedEvents.map((event) => (
-          <Link href={`/events/${event.id}`} key={event.id}>
+          <Link href={`/events/${event._id}`} key={event._id}>
             <EventCard
               event={event}
               addToCart={addToCart}
