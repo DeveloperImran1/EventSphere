@@ -98,7 +98,8 @@ export default function ChristmasPromo() {
     </div>
           <div className="flex gap-4 ">
             <Button variant="secondary" className="bg-white text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-white text-lg  text-white hover:bg-blue-950">EXPLORE</Button>
+            <Button variant="outline" className="border-black text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+
           </div>
         </div>
       </div>
