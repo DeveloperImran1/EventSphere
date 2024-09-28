@@ -171,7 +171,7 @@ const EventOrderList = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200  text-sm">
                     {invoices.map((invoice) => (
-                      <tr key={invoice._id}>
+                      <tr key={invoice.invoice}>
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap ml-2">
                           {invoice.invoice}
                         </td>
