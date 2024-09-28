@@ -84,7 +84,7 @@ const Banner = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
-          className="mySwiper h-[520px] "
+          className="mySwiper h-[calc(100vh-57px)] "
         >
           <div className="absolute inset-0 bg-black/50  backdrop-blur-[1px]  z-10"></div>
           <SwiperSlide>

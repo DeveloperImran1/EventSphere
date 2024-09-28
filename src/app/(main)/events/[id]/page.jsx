@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import eventsDataJson from "@/components/allEventsPage/EventDataJson";
 import { FaRegClock, FaMapMarkerAlt, FaUserFriends, FaEnvelope, FaPhoneAlt, FaTag, FaBuilding } from "react-icons/fa";
 import Image from "next/image";
+import { MdLocationCity } from "react-icons/md";
+import { LucideFileType2 } from "lucide-react";
 // import EventCard from "@/components/allEventsPage/EventCard";
 
 const EventDetailsPage = ({ params }) => {
@@ -102,7 +104,15 @@ const EventDetailsPage = ({ params }) => {
                     </p>
                     <p className="text-gray-600">
                         <FaMapMarkerAlt className="inline mr-1" />
-                        Location: {event.location}
+                        Location: {event.location.country},{event.location.city}
+                    </p>
+                    <p className="text-gray-600">
+                        <MdLocationCity className="inline mr-1" />
+                        Venue: {event.location.venue}
+                    </p>
+                    <p className="text-gray-600">
+                        <LucideFileType2 className="inline mr-1" />
+                        Type: {event.type}
                     </p>
                     <div className="flex items-center text-gray-600 my-1">
                         <FaTag className="mr-2" />

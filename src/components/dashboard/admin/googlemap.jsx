@@ -3,7 +3,7 @@ import React from "react";
 const GoogleMap = () => {
   return (
     <div className="" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div
+      <div className=" "
         style={{
           position: 'relative',
           paddingBottom: '56.25%', // This ratio is for 16:9 aspect ratio
