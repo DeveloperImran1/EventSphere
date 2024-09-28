@@ -4,7 +4,7 @@ const FirstCard = () => {
     return (
         <div className="max-w-md mx-start mt-6 bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
             <div className="p-4">
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">Today Highlights</h2>
+                <h2 className="text-2xl font-bold text-green-500  mb-2">Today Highlights</h2>
                 <div className="w-full">
                     <img 
                         src="https://i.postimg.cc/zXfXjX4L/1-94052b5dcef62c048766.jpg" 

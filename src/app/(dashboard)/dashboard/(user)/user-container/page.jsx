@@ -5,6 +5,7 @@ import Cards from '@/components/dashboard/users/UserDashBoardHome/Cards';
 import React from 'react';
 import FirstCard from '@/components/dashboard/users/UserDashBoardHome/FirstCard';
 import ImageSection from '@/components/dashboard/users/UserDashBoardHome/ImageSection';
+import LatestNews from '@/components/dashboard/users/UserDashBoardHome/LatestNews';
 
 const UserContainer = () => {
     return (
@@ -19,6 +20,9 @@ const UserContainer = () => {
             </div>
             <div>
                 <ImageSection/>
+            </div>
+            <div>
+                <LatestNews/>
             </div>
             </div>
             
