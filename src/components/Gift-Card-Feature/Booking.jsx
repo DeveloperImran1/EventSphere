@@ -24,9 +24,9 @@ const Booking = () => {
                  
                 <div   id="Container">
                     <h1  className=' font-serif text-white  mt-5'>
-                    Are you ready to join our event?</h1>
+                    🎉 Are you ready to join our event? 🎊</h1>
                     <form className="form  w-full">
-                        <div id="login-lable">Register Now</div>
+                        <div id="login-lable">Register Now ✍️</div>
                         <input required className="form-content" type="text" placeholder="Name" />
                         <input required className="form-content" type="text" placeholder="Phone number" />
                         <input required className="form-content" type="email" placeholder="Email Address" />

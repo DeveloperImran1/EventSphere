@@ -5,10 +5,11 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import YouTube from 'react-youtube'
-import Image from 'next/image'
+
 import { FaPlayCircle } from 'react-icons/fa'
 import './Banner.css'
-const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪']
+const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
+
 
 export default function ChristmasPromo() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
@@ -55,7 +56,7 @@ export default function ChristmasPromo() {
 
   return (
     <div className="flex flex-col  bg-[rgb(15,31,61)]    md:flex-row ">
-      <div className="w-full clipPathSection1 md:w-1/2  bg-red-500 text-white  relative overflow-hidden flex flex-col justify-center items-center">
+      <div className="w-full clipPathSection1 md:w-1/2  bg-red-500 text-white  relative overflow-hidden flex flex-col justify-center">
         <div className="absolute inset-0 opacity-70">
           {festiveEmojis.map((emoji, index) => (
             <span
@@ -71,20 +72,34 @@ export default function ChristmasPromo() {
             </span>
           ))}
         </div>
-        <div className="relative z-10 ">
+        <div className="relative z-10  p-20">
           <h4 className="text-xl  font-poppins  mb-2">December 24-26, 2024</h4>
-          <h1 className="text-6xl font-bold mb-6">Christmas Day</h1>
-          <div className="grid grid-cols-4 gap-4 mb-8">
+          <h1 className="md:text-5xl  font-serif   md:font-extrabold mb-6">Christmas Day</h1>
+          {/* <div className="grid grid-cols-4 gap-4 mb-8">
             {Object.entries(timeLeft).map(([unit, value]) => (
               <div key={unit} className="">
                 <span className="text-4xl  font-sans  block">{value}</span>
                 <span className="text-sm       ">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
               </div>
             ))}
+          </div> */}
+         <div className="flex mb-6">
+      <div className="grid grid-cols-4 gap-6">
+        {Object.entries(timeLeft).map(([unit, value]) => (
+          <div 
+            key={unit} 
+            className="bg-white bg-opacity-10 backdrop-blur-md p-4 rounded-lg shadow-lg text-white text-center transform transition-transform duration-300 hover:scale-105"
+          >
+            <span className="text-5xl font-bold block">{value}</span>
+            <span className="text-sm uppercase">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
           </div>
+        ))}
+      </div>
+    </div>
           <div className="flex gap-4 ">
             <Button variant="secondary" className="bg-white text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-white text-lg  text-white hover:bg-blue-950">EXPLORE</Button>
+            <Button variant="outline" className="border-black text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+
           </div>
         </div>
       </div>
