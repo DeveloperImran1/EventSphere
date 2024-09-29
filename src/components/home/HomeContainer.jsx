@@ -10,7 +10,6 @@ const HomeContainer = () => {
     return (
         <div className='space-y-20'>
             <Banner></Banner>
-            
             <PopularEvents></PopularEvents>
             <EventTime></EventTime>
             <Organizers></Organizers>

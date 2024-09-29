@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; // Import the CSS for the date picker
 import Image from "next/image";
 import Typewriter from 'typewriter-effect';
-import { useTypewriter } from 'react-simple-typewriter'
 
 // Country sections with grouped countries
 const countrySections = [
@@ -34,12 +33,9 @@ const Banner = () => {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
 
-  const [text, helper] = useTypewriter({
-    /* Hook Config */
-  })
 
   /** Hook Output */
-  const { isType, isDelete, isDelay, isDone } = helper
+  // const { isType, isDelete, isDelay, isDone } = helper
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
@@ -84,7 +80,7 @@ const Banner = () => {
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
-          className="mySwiper h-[520px] "
+          className="mySwiper h-[calc(100vh-57px)] "
         >
           <div className="absolute inset-0 bg-black/50  backdrop-blur-[1px]  z-10"></div>
           <SwiperSlide>
