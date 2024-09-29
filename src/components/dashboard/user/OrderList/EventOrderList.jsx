@@ -47,7 +47,7 @@ const EventOrderList = () => {
     <div className=" text-black flex container mx-auto ml-4">
       {/* <div className=" w-[300px]">Order</div> */}
       <div className="">
-        <div className=" flex justify-between my-5 flex-col md:flex-row mt-4">
+        <div className=" flex justify-between my-5 flex-col md:flex-row mt-4 -z-10">
           <div className="">
             <p className=" font-semibold text-2xl text-black ml-5">Order List</p>
           </div>

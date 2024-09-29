@@ -35,7 +35,7 @@ const Banner = () => {
 
 
   /** Hook Output */
-  const { isType, isDelete, isDelay, isDone } = helper
+  // const { isType, isDelete, isDelay, isDone } = helper
 
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
