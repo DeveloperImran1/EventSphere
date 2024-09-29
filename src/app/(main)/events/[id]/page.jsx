@@ -31,7 +31,7 @@ const EventDetailsPage = ({ params }) => {
     }, [id]);
 
     if (loading) {
-        return < Loading/>;
+        return < Loading />;
     }
 
     if (!event) {
@@ -201,23 +201,23 @@ const EventDetailsPage = ({ params }) => {
 
                     <div className="collapse collapse-arrow bg-base-200">
                         <input type="radio" name="my-accordion-2" defaultChecked />
-                        <div className="collapse-title text-xl font-medium">Click to open this one and close others</div>
+                        <div className="collapse-title text-xl font-medium">What is event management?</div>
                         <div className="collapse-content">
-                            <p>hello</p>
+                            <p>Event management refers to the comprehensive process of planning, organizing, and executing various types of events such as conferences, weddings, corporate functions, and concerts. It involves overseeing all aspects of the event, including venue selection, catering, entertainment, guest management, and promotional efforts. Essentially, event managers ensure that everything runs smoothly from the initial concept to the conclusion of the event.</p>
                         </div>
                     </div>
                     <div className="collapse collapse-arrow bg-base-200">
                         <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title text-xl font-medium">Click to open this one and close others</div>
+                        <div className="collapse-title text-xl font-medium">What tasks are involved in event planning?</div>
                         <div className="collapse-content">
-                            <p>hello</p>
+                            <p>Event planning encompasses a wide array of tasks that ensure the event's success. This includes creating a budget, selecting and booking a suitable venue, setting a clear timeline for all event activities, and coordinating with vendors for catering, lighting, and sound. Additionally, event planners manage guest lists, send out invitations, and oversee marketing efforts to promote the event. On the day of the event, logistics are managed to make sure everything goes according to plan.</p>
                         </div>
                     </div>
                     <div className="collapse collapse-arrow bg-base-200">
                         <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title text-xl font-medium">Click to open this one and close others</div>
+                        <div className="collapse-title text-xl font-medium"> Do you need any specific software or tools for event management?</div>
                         <div className="collapse-content">
-                            <p>hello</p>
+                            <p>Yes, specific software and tools are highly beneficial in managing events efficiently. Event planners often use platforms like Eventbrite for ticketing and registration, Trello or Asana for organizing tasks, and Zoom for hosting virtual events. Google Calendar helps in scheduling important dates, while Slack is commonly used for team communication and collaboration. These tools streamline the planning process and help in managing multiple tasks at once.</p>
                         </div>
                     </div>
                 </section>
