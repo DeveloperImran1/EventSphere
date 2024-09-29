@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -43,9 +44,9 @@ export default function TestimonialSlider() {
 
 
 
-      <div className='md:p-6  md:w-1/2 ' >
+      <div className='md:w-1/2 ' >
         <Card >
-          <CardContent className="p-10">
+          <CardContent className="mp-10">
             <h2 className="text-3xl font-extrabold font-serif mb-6 ">What People Say</h2>
             <div className="relative">
               <div className="flex items-start space-x-4">
@@ -54,7 +55,7 @@ export default function TestimonialSlider() {
                 
                 </Avatar>
                 <div className="flex-1  ">
-                  <p className="text-lg  mb-4">{testimonials[currentIndex].content}</p>
+                  <p className="text-lg mb-4">{testimonials[currentIndex].content}</p>
                   <p className="font-semibold">{testimonials[currentIndex].name}</p>
                 </div>
               </div>
@@ -70,7 +71,7 @@ export default function TestimonialSlider() {
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute  -translate-y-1/2 left-0 -ml-4 rounded-full bg-red-400 text-white hover:bg-red-600 hover:text-white border-none shadow-md"
+                className="absolute -translate-y-1/2 left-0 -ml-4 rounded-full bg-red-400 text-white hover:bg-red-600 hover:text-white border-none shadow-md"
                 onClick={prevTestimonial}
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -89,22 +90,41 @@ export default function TestimonialSlider() {
           </CardContent>
         </Card>
       </div>
-      <div className='md:w-1/2  grid grid-cols-2 gap-8   '  >
-        <img src="https://i.ibb.co/pdKXjSQ/concertgoers-watching-majestic-concert-many-spotlight-people-see-music-show-crowd-ambience-1235831-9.jpg"
-          alt="Christmas Event 1"  className='rounded-xl    '
+      <div className='md:w-1/2  grid grid-cols-1 md:grid-cols-2 gap-8   '  >
+      <Image
+                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
 
-        />
+                                            width={400}
+                                            height={400}
+                                            alt="Christmas Event 2"
+                                            className=" rounded-xl w-full object-cover"
+                                        />
+  <Image
+                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
 
-        <img src="https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg"
-          alt="Christmas Event 2"  className='rounded-xl'
-        />
-        <img src="https://i.ibb.co.com/HhgGKX8/pexels-asadphoto-169198.jpg"
-          alt="Christmas Event 3"  className='rounded-xl'
-        />
+                                            width={400}
+                                            height={400}
+                                            alt="Christmas Event 2"
+                                            className=" rounded-xl w-full object-cover"
+                                        />
+  <Image
+                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
 
-        <img src="https://i.ibb.co.com/bHqhHrR/pexels-teddy-2263436.jpg"
-          alt="Christmas Event 4"  className='rounded-xl'
-        />
+                                            width={400}
+                                            height={400}
+                                            alt="Christmas Event 2"
+                                            className=" rounded-xl w-full object-cover"
+                                        />
+  <Image
+                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
+
+                                            width={400}
+                                            height={400}
+                                            alt="Christmas Event 2"
+                                            className=" rounded-xl w-full object-cover"
+                                        />
+
+                                          
 
       </div>
 

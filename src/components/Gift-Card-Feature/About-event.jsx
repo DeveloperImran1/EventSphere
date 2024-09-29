@@ -3,7 +3,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'animate.css';
-import {  MdPersonAdd, MdLocationPin,  MdEventAvailable } from 'react-icons/md'; // Import React Icons
+import { MdPersonAdd, MdLocationPin, MdEventAvailable } from 'react-icons/md'; // Import React Icons
 import Image from "next/image";
 
 import 'swiper/swiper-bundle.css';
@@ -71,60 +71,63 @@ const AboutSection = () => {
           </div>
 
           {/* Middle Content - Swiper Image Slider */}
-          <div className="md:max-w-[450px]  ">
+          <div className="md:max-w-[450px] ">
             <Swiper
 
-spaceBetween={30}
-navigation
-autoplay={{ delay: 1000 }}
-loop={true}
-modules={[Navigation, Autoplay]}
-className="rounded-lg overflow-hidden shadow-lg"
+              spaceBetween={30}
+              navigation
+              autoplay={{ delay: 1000 }}
+              loop={true}
+              modules={[Navigation, Autoplay]}
+              className="rounded-lg overflow-hidden   shadow-lg"
             >
 
               <SwiperSlide>
-              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
-            <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
-                  alt=""
+
+                <Image
+                  src="https://i.postimg.cc/wB5gTmPZ/pexels-pixabay-433452.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full h-full '
                 />
-              </div>
-              </div>
+
               </SwiperSlide>
               <SwiperSlide>
-              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
-            <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
-                  alt=""
+
+                <Image
+                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full'
                 />
-              </div>
-              </div>
+
+              </SwiperSlide>
+              <SwiperSlide>
+
+                <Image
+                  src="https://i.postimg.cc/Y05sWXL3/pexels-asadphoto-169198.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full '
+                />
+
+              </SwiperSlide>
+              <SwiperSlide>
+
+                <Image
+                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full'
+                />
+
               </SwiperSlide>
 
-              <SwiperSlide>
-              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
-            <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg"
-                  alt=""
-                
-                />
-              </div>
-              </div>
-              </SwiperSlide>
-              <SwiperSlide>
-              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
-            <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
-                  alt=""
-                />
-              </div>
-              </div>
-              </SwiperSlide>   
-                    
+
 
             </Swiper>
 
