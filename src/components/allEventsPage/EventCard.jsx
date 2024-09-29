@@ -64,7 +64,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                     </div>
                     <div className="my-2">
                         {event.tags?.map((tag, index) => (
-                            <span key={index} className="inline-block bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 mr-2">
+                            <span key={index} className="inline-block bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 mr-1 ">
                                 {tag}
                             </span>
                         ))}
