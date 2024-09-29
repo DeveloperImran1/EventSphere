@@ -203,7 +203,7 @@ const EventDetailsPage = ({ params }) => {
                         <input type="radio" name="my-accordion-2" defaultChecked />
                         <div className="collapse-title text-xl font-medium">What is event management?</div>
                         <div className="collapse-content">
-                            <p>Event management refers to the comprehensive process of planning, organizing, and executing various types of events such as conferences, weddings, corporate functions, and concerts. It involves overseeing all aspects of the event, including venue selection, catering, entertainment, guest management, and promotional efforts. Essentially, event managers ensure that everything runs smoothly from the initial concept to the conclusion of the event.</p>
+                            <p>Event management refers to the comprehensive process of planning, organizing, and executing various types of events such as conferences, weddings, corporate functions, and concerts. It involves overseeing all aspects of the event, including venue selection.</p>
                         </div>
                     </div>
                     <div className="collapse collapse-arrow bg-base-200">
