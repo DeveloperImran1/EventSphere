@@ -10,17 +10,16 @@ import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import AnimatedFormModal from '@/components/events/BeOrganiger/BeOrganiger';
+import AnimatedFormModal from '@/components/modal/BeOrganiger/BeOrganiger';
+import RequestOrganizer from '@/components/modal/RequestOrganizer';
 
 
 const DashboardSideBar = () => {
     const session = useSession();
     const [routes, setRoutes] = useState([])
-    const [modalOpen, setModalOpen] = useState(false);
     console.log("Dashboard sidebar theke session ", session);
 
-
-
+   
     let role = "user";
     useEffect(() => {
         if (role === 'user') {
@@ -36,8 +35,8 @@ const DashboardSideBar = () => {
 
     return (
         <>
-            {/* <AnimatedFormModal modalOpen={modalOpen} setModalOpen={setModalOpen}></AnimatedFormModal> */}
-            <div className=" max-h-[calc(100vh-96px)] w-64 bg-gray-200 text-slate-600  h-screen flex-shrink-0 shadow-lg  relative">
+       
+            <div className=" min-h-[calc(100vh-96px)] w-64 bg-white text-slate-600  scrool-auto flex-shrink-0 shadow-lg  relative">
                 <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
                     <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
                     <h1 className="text-2xl md:text-3xl font-bold text-black hover:text-white">Dashboard</h1>
@@ -59,12 +58,7 @@ const DashboardSideBar = () => {
                             )
                         })
                     }
-{/* 
-                    <button onClick={() => setModalOpen(!modalOpen)} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
-                        <FaSignOutAlt className="mr-2 text-xl" />
 
-                        <span>Sign Out</span>
-                    </button> */}
                     <hr className="border-gray-400 mx-4" />
                     <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
                         <FaSignOutAlt className="mr-2 text-xl" />
