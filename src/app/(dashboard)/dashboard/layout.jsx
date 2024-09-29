@@ -11,7 +11,7 @@ const DashboarLayout = ({ children }) => {
         <>
             <div className="min-h-screen bg-white">
                 {/* Navbar */}
-                <div className='fixed  h-full w-full z-50'>
+                <div className='fixed w-full'>
                     <div className=' relative  bg-gray-200'>
                         <div className='flex justify-start items-start md:block'>
                             <DashboardNavbar />
@@ -22,20 +22,19 @@ const DashboarLayout = ({ children }) => {
 
                 <div className="flex flex-col md:flex-row gap-4 p-4 pt-[90px] ">
                     {/* Sidebar */}
-                    <div className={`  md:flex h-full w-full z-50`}>
+                    <div className={`  md:flex h-full w-full`}>
                         <div className={`${showSidebar ? 'left-0 top-[77px] md:top-[90px]' : '-left-[500px] md:left-0 '}  absolute  h-full z-50 duration-300 `}>
                             <div className='fixed'>
                                 <DashboardSideBar />
                             </div>
                         </div>
-
-                        <div className='md:pl-[270px] overflow-x-auto'>
-                            {
-                                children
-                            }
-                        </div>
                     </div>
 
+                    <div className='md:pl-[270px] min-w-[calc(100%)]'>
+                        {
+                            children
+                        }
+                    </div>
                 </div>
             </div>
 
