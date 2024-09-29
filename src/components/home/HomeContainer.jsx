@@ -5,11 +5,11 @@ import EventTime from './EventTime';
 import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
 
+
 const HomeContainer = () => {
     return (
         <div className='space-y-20'>
             <Banner></Banner>
-            
             <PopularEvents></PopularEvents>
             <EventTime></EventTime>
             <Organizers></Organizers>

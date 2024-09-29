@@ -6,7 +6,7 @@ import { FaRegClock, FaMapMarkerAlt, FaUserFriends, FaEnvelope, FaPhoneAlt, FaTa
 import Image from "next/image";
 import { MdLocationCity } from "react-icons/md";
 import { LucideFileType2 } from "lucide-react";
-import Loading from "../loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 const EventDetailsPage = ({ params }) => {
     const router = useRouter();
@@ -31,7 +31,7 @@ const EventDetailsPage = ({ params }) => {
     }, [id]);
 
     if (loading) {
-        return <Loading />;
+        return < Loading/>;
     }
 
     if (!event) {

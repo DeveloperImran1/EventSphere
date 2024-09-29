@@ -77,7 +77,7 @@ module.exports = {
   	},
     extend: {
       fontFamily: {
-        sans: ['"Space Grotesk"', 'sans-serif'], // Adding Space Grotesk to the sans family
+        sans: ['"Space Grotesk"', 'sans-serif'], 
       },
       poppins: ['Poppins', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],

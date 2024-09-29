@@ -42,11 +42,11 @@ const CardSection = () => {
 
   return (
     <>
-    <div className="w-full my-8">
+    <div className="w-full my-3 md:my-4 lg:my-6">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">Today's Sales</h2>
+          <h2 className="text-xl font-semibold text-gray-800">Todays Sales</h2>
           <span className="text-sm text-gray-500">Sales Summary</span>
         </div>
         <div className="flex items-center space-x-4">

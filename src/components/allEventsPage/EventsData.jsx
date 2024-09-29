@@ -6,10 +6,10 @@ import { Range } from 'react-range';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
-import Loading from '@/app/(main)/events/loading';
 import { FaBars, FaTimes } from 'react-icons/fa'; // For drawer icon
 import { Dialog } from '@headlessui/react'; // Drawer system
 import Link from 'next/link';
+import Loading from '../shared/LoadingSpiner/Loading';
 
 const EventsData = () => {
   const [events, setEvents] = useState([]);
@@ -41,7 +41,7 @@ const EventsData = () => {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return <Loading/>;
   }
 
   const countries = ['All', ...new Set(events.map(event => event.location.country))];
@@ -350,7 +350,7 @@ const EventsData = () => {
         {/* Event Cards Section */}
           <div className='w-full lg:w-4/5'>
             {sortedEvents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
                 {sortedEvents.map((event) => (
                  <Link  href={`/events/${event._id}`} key={event.id}> <EventCard
                 
