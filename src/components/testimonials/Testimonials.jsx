@@ -45,7 +45,7 @@ const Testimonials = () => {
     ]
 
     return (
-        <div className=" w-full mx-auto p-4">
+        <div className=" w-[calc(100vw-17px)] mx-auto p-4 mb-20">
             <div>
                 <SectionTitle
                 subTitle="Users Reviews"
@@ -89,12 +89,15 @@ const Testimonials = () => {
                 {reviews.map((review, index) => (
                     <SwiperSlide key={index}>
 
-                        <div className="review-card p-6 pt-20 bg-[#013730] opacity-80  rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 lg:relative">
+                        <div className="review-card p-6 pt-20 shadow-2xl opacity-80  rounded-lg   transform hover:scale-105 transition duration-300 lg:relative">
                             
 
-                            <img src={review.profile_pic} alt={review.user_name} className="w-20 h-20 rounded-full lg:-ml-20 lg:-mt-20 mx-auto lg:absolute" width={200} height={200} />
-                            <h3 className="text-xl font-semibold text-center text-white">{review.user_name}</h3>
-                            <p className="text-center text-gray-300">{review.country}</p>
+                            <Image 
+                            src={review.profile_pic} 
+                            alt={review.user_name} 
+                            className="w-20 h-20 rounded-full lg:-ml-20 lg:-mt-20 mx-auto lg:absolute" width={200} height={200} />
+                            <h3 className="text-xl font-semibold text-center ">{review.user_name}</h3>
+                            <p className="text-center text-black font-bold">{review.country}</p>
                             <div className="flex justify-center my-2">
                                 <Rating
                                     value={review.rating}
@@ -102,7 +105,7 @@ const Testimonials = () => {
                                     style={{ maxWidth: 150 }}
                                 />
                             </div>
-                            <p className="text-center text-sm text-gray-300">{review.comment}</p>
+                            <p className="text-center text-sm text-black">{review.comment}</p>
                         </div>
                     </SwiperSlide>
                 ))}

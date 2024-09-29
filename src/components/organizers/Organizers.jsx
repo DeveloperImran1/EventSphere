@@ -90,7 +90,7 @@ const Organizers = () => {
 
 
     return (
-        <div className="container mx-auto p-4 mb-20">
+        <div className="w-[calc(100vw-17px)] mx-auto p-4 mb-20">
          <SectionTitle 
          subTitle="Our Team"
          title={"top organizers"}
@@ -116,6 +116,9 @@ const Organizers = () => {
                     1280: {
                         slidesPerView: 3,
                     },
+                    1536: {
+                        slidesPerView: 4,
+                    },
                 }}
             >
                 {organizers.map((organizer, index) => (
@@ -123,7 +126,7 @@ const Organizers = () => {
                         {/* Add group class here */}
                         <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 flex flex-col items-center text-center group">
                             <div className="relative w-32 h-32 mb-4">
-                                <img
+                                <Image
                                     src={organizer.profilePicture}
                                     alt={`${organizer.name}'s profile`}
                                     className="rounded-full object-cover w-full h-full animate-top-down"
