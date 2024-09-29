@@ -215,9 +215,9 @@ const EventDetailsPage = ({ params }) => {
                     </div>
                     <div className="collapse collapse-arrow bg-base-200">
                         <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title text-xl font-medium"> Do you need any specific software or tools for event management?</div>
+                        <div className="collapse-title text-xl font-medium">  What challenges are commonly faced in event management?</div>
                         <div className="collapse-content">
-                            <p>Yes, specific software and tools are highly beneficial in managing events efficiently. Event planners often use platforms like Eventbrite for ticketing and registration, Trello or Asana for organizing tasks, and Zoom for hosting virtual events. Google Calendar helps in scheduling important dates, while Slack is commonly used for team communication and collaboration. These tools streamline the planning process and help in managing multiple tasks at once.</p>
+                            <p>Event management often involves overcoming a range of challenges. Budget constraints can be difficult to manage while still delivering a high-quality experience. Unexpected problems, such as technical failures or weather disruptions, can arise, requiring quick solutions. Ensuring guest satisfaction is another major challenge, as event managers need to cater to a wide range of preferences. Coordinating with vendors, managing timelines, and avoiding delays are all part of the complex process that event planners must navigate.</p>
                         </div>
                     </div>
                 </section>
