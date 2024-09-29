@@ -10,8 +10,8 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background: url("http://codingstella.com/wp-content/uploads/2024/01/download-8-scaled.jpeg")
-      no-repeat;
+    /* background: url("http://codingstella.com/wp-content/uploads/2024/01/download-8-scaled.jpeg") */
+      /* no-repeat; */
     background-position: center;
     background-size: cover;
   }
