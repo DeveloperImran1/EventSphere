@@ -1,4 +1,5 @@
 "use client"
+import Image from "next/image";
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -147,13 +148,21 @@ export default function EventSchedule() {
                         {tabs.find((tab) => tab.date === activeTab)?.events.map((event, index) => (
                             <div key={index} className="overflow-hidden rounded-lg bg-gray-100 shadow">
                                 <div className="md:flex gap-10 items-center p-2 border-2 ">
-                                    <div className="w-52 ">
+                                    {/* <div className="w-52 ">
                                         <img
                                             src={event.image}
                                             alt={event.title}
                                             className=" rounded-xl  object-cover"
                                         />
-                                    </div>
+                                    </div> */}
+                                          <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
+            <div>
+                <Image layout="fill" objectFit="cover"
+                 src={event.image}
+                  alt=""
+                />
+              </div>
+              </div>
                                     <div className="w-2/3 ">
                                         <h3 className="mb-2 font-mono text-xl font-semibold text-red-500">{event.title}</h3>
                                         <p className="mb-4 font-serif text-gray-600">{event.description}</p>

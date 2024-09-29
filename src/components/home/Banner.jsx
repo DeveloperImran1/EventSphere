@@ -89,7 +89,7 @@ const Banner = () => {
           <div className="absolute inset-0 bg-black/50  backdrop-blur-[1px]  z-10"></div>
           <SwiperSlide>
             <div className="flex justify-center items-center h-[480px]   rounded-lg shadow-lg">
-              <div>
+            <div>
                 <Image layout="fill" objectFit="cover"
                   src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
                   alt=""

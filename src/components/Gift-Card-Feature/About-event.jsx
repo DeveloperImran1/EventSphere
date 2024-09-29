@@ -4,6 +4,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'animate.css';
 import {  MdPersonAdd, MdLocationPin,  MdEventAvailable } from 'react-icons/md'; // Import React Icons
+import Image from "next/image";
 
 import 'swiper/swiper-bundle.css';
 import { Navigation, Autoplay } from 'swiper/modules';
@@ -82,36 +83,46 @@ className="rounded-lg overflow-hidden shadow-lg"
             >
 
               <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/HhgGKX8/pexels-asadphoto-169198.jpg"
-                  alt="Christmas Event 2"
-                  className="object-cover w-full h-full"
+              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
+            <div>
+                <Image layout="fill" objectFit="cover"
+                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
+                  alt=""
                 />
+              </div>
+              </div>
               </SwiperSlide>
               <SwiperSlide>
-                <img
+              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
+            <div>
+                <Image layout="fill" objectFit="cover"
+                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
+                  alt=""
+                />
+              </div>
+              </div>
+              </SwiperSlide>
+
+              <SwiperSlide>
+              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
+            <div>
+                <Image layout="fill" objectFit="cover"
                   src="https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg"
-                  alt="Christmas Event 1"
-
-                  className="object-cover w-full h-full"
+                  alt=""
+                
                 />
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/bHqhHrR/pexels-teddy-2263436.jpg"
-                  alt="Christmas Event 3"
-
-                  className="object-cover w-full h-full"
-                />
+              </div>
+              </div>
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/pdKXjSQ/concertgoers-watching-majestic-concert-many-spotlight-people-see-music-show-crowd-ambience-1235831-9.jpg"
-                  alt="Christmas Event 3"
-
-                  className="object-cover w-full h-full"
+              <div className="flex justify-center items-center   h-[300px]  rounded-lg shadow-lg">
+            <div>
+                <Image layout="fill" objectFit="cover"
+                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
+                  alt=""
                 />
+              </div>
+              </div>
               </SwiperSlide>   
                     
 
