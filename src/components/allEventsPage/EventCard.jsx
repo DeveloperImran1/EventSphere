@@ -1,4 +1,5 @@
 import { LucideFileType2 } from 'lucide-react';
+import Image from 'next/image';
 import { FaHeart, FaShareAlt, FaClock, FaMapMarkerAlt, FaTag, FaUserFriends, FaBuilding } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
@@ -10,7 +11,12 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
             {/* Toast container to show toasts */}
             <ToastContainer />
             <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
-                <img className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" src={event?.photo} alt={event?.title} />
+                <Image 
+                src={event?.photo} 
+                alt={event?.title}
+                width={200}
+                height={200}
+                className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"  />
 
                 {/* Love and Share Icons - visible on hover */}
                 <div className="absolute top-36 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
@@ -40,10 +46,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                         <FaClock className="mr-2" />
                         <p>{event.dateTime}</p>
                     </div>
-                    <div className="flex items-center text-gray-700 my-1">
-                        <FaBuilding className="mr-2" />
-                        <p>Hosted by: {event.companyName}</p>
-                    </div>
+                   
                     <div className="flex items-center text-gray-600 my-1">
                         <FaMapMarkerAlt className="mr-2" />
                         <p>{event.location.country},{event.location.city}</p>
@@ -61,18 +64,18 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                     </div>
                     <div className="my-2">
                         {event.tags?.map((tag, index) => (
-                            <span key={index} className="inline-block bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 mr-2">
+                            <span key={index} className="inline-block bg-blue-500 text-white text-xs  rounded-full px-1 py-1 mr-1 mb-4">
                                 {tag}
                             </span>
                         ))}
                     </div>
-                    <div className=" text-gray-600 mb-5">
+                    {/* <div className=" text-gray-600 mb-5">
                         <div className='flex items-center'>
                             <FaUserFriends className="mr-2" />
                             <p>speaker: <span className='font-bold'>{event.organizer.name} {event.organizer.followers}</span> Followers</p>
                         </div>
                         <p className="text-gray-500 "><span className='font-bold'>bio:</span> {event.organizer.bio}</p>
-                    </div>
+                    </div> */}
                     <div className='flex justify-between items-center'>
 
                         <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
