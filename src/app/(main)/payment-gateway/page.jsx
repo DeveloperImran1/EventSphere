@@ -1,7 +1,7 @@
 import EnhancedPaymentGateway from '@/components/PayMentGetway/Paymentgetway';
 import React from 'react';
 
-const page = () => {
+const PaymentGateway = () => {
     return (
         <div>
             <EnhancedPaymentGateway></EnhancedPaymentGateway>
@@ -9,4 +9,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default PaymentGateway;
