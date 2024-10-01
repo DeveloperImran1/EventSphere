@@ -1,12 +1,15 @@
+import Image from 'next/image';
 import React from 'react';
 
 const UserProfile = () => {
     return (
         <div className='relative w-full bg-white bg-opacity-80 pt-6 md:pb-32 pb-56 rounded-lg shadow-lg'>
             {/* Background Image */}
-            <img 
+            <Image
+                   height={675}
+                   width={1200}
                 className='w-screen px-4 rounded-lg h-[32vh] object-cover' 
-                src="https://img.freepik.com/premium-photo/abstract-shadowy-textures-subtle-highlights-luminescence-seep-through-dark-background_764067-9315.jpg" 
+                src="https://i.postimg.cc/SsKD0y3T/8-99faf7b2987b5c6cc652.jpg" 
                 alt="Background"
             />
             
@@ -14,7 +17,9 @@ const UserProfile = () => {
             <div className='absolute mt-[48px] md:left-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-4 items-center'>
                 {/* User Image */}
                 <div>
-                    <img 
+                    <Image 
+                       height={675}
+                       width={1200}
                         className='w-32 h-32 rounded-full border-4 border-white shadow-md' 
                         src="https://i.postimg.cc/7LBHXz1c/image.png" 
                         alt="User"

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const LatestNews = () => {
@@ -7,7 +8,9 @@ const LatestNews = () => {
             <div className="  ">
                 {/* News Card 1 */}
                 <div className="max-w-md md:flex bg-white shadow-md  overflow-hidden p-6">
-                    <img 
+                    <Image
+                         height={675}
+                         width={1200} 
                         src="https://i.postimg.cc/hvmfLY04/dag3.jpg" 
                         alt="News" 
                         className="w-1/3 md:w-1/3 h-20 md:h-auto object-cover rounded-md mb-4 md:mb-0"
@@ -20,7 +23,9 @@ const LatestNews = () => {
 
                 {/* News Card 2 */}
                 <div className="max-w-md  md:flex bg-white shadow-md  overflow-hidden p-6">
-                    <img 
+                    <Image 
+                        height={675}
+                        width={1200}
                         src="https://i.postimg.cc/wMY6pjhH/download.jpg" 
                         alt="News" 
                         className="w-1/3  md:w-1/3 h-20  md:h-auto object-cover rounded-md mb-4 md:mb-0"
@@ -33,7 +38,9 @@ const LatestNews = () => {
 
                 {/* News Card 3 */}
                 <div className="max-w-md  md:flex bg-white shadow-md rounded-b-lg overflow-hidden p-6">
-                    <img 
+                    <Image 
+                        height={675}
+                        width={1200}
                         src="https://i.postimg.cc/WzmfM1FF/download-1.jpg" 
                         alt="News" 
                         className="w-1/3  md:w-1/3 h-20  md:h-auto object-cover rounded-md mb-4 md:mb-0"

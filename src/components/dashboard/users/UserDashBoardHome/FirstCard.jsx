@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const FirstCard = () => {
@@ -6,7 +7,10 @@ const FirstCard = () => {
             <div className="p-4">
                 <h2 className="text-2xl font-bold text-green-500  mb-2">Today Highlights</h2>
                 <div className="w-full">
-                    <img 
+                    <Image
+                        height={675}
+                        width={1200}
+                        
                         src="https://i.postimg.cc/zXfXjX4L/1-94052b5dcef62c048766.jpg" 
                         alt="Darwin Creative Agency" 
                         className="w-full h-48 object-cover"
