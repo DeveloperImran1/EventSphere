@@ -1,10 +1,16 @@
 import EnhancedPaymentGateway from '@/components/PayMentGetway/Paymentgetway';
+import SeatBookingWidget from '@/components/Seat-booking-widgets/SeatBookingWidget';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
+        <div  className="space-y-10 mt-14">
+            <SeatBookingWidget></SeatBookingWidget>
+
             <EnhancedPaymentGateway></EnhancedPaymentGateway>
+             
+
+
         </div>
     );
 };
