@@ -1,8 +1,13 @@
+"use client"
 import LogoBlue from '@/components/shared/LogoBlue';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import React from 'react';
 import { FaSearch, FaGlobe, FaUserCircle } from 'react-icons/fa';
 
 const DashboardNavbar = () => {
+    const session = useSession();
+// const {name, email, image} = session?.data?.user;
     return (
         <header className="  flex flex-col md:flex-row items-center justify-between  bg-white text-slate-600 py-4 px-4 md:px-6 md:shadow-lg space-y-4 md:space-y-0 z-50">
             {/* Left side: Website Name and Search Bar */}
@@ -35,10 +40,10 @@ const DashboardNavbar = () => {
 
                 {/* User Info */}
                 <div className="flex items-center space-x-2 md:space-x-4">
-                    <FaUserCircle className="w-8 h-8 md:w-10 md:h-10" />
+                    <Image height={675} width={1200} src={session?.data?.user?.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'} alt='Profile Image' className='h-8 w-8 rounded-full'></Image>
                     <div className="text-left">
-                        <h4 className="text-sm md:text-lg font-medium">John Doe</h4>
-                        <p className="text-xs md:text-sm font-light">Admin</p>
+                        <h4 className="text-sm md:text-lg font-medium">{session?.data?.user?.name || 'Imran'}</h4>
+                        <p className="text-xs md:text-sm font-light">{session?.data?.user?.role || 'Admin'}</p>
                     </div>
                 </div>
             </div>
