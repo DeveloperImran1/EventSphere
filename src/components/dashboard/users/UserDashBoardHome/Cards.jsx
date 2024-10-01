@@ -1,4 +1,6 @@
 import React from "react";
+import { AiFillMessage } from "react-icons/ai";
+import { RiUserFollowFill } from "react-icons/ri";
 
 const Cards = () => {
   return (
@@ -19,12 +21,10 @@ const Cards = () => {
       </div>
       
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <button className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600 transition duration-300">
-          Follow
-        </button>
-        <button className="w-full sm:w-auto px-4 py-2 bg-green-500 text-white font-semibold rounded-md shadow hover:bg-green-600 transition duration-300">
-          Send Message
-        </button>
+      <button className="w-full sm:w-auto ml-4 flex items-center gap-2 text-xl px-3 py-2 rounded-md bg-blue-400 font-bold "><RiUserFollowFill />Follow</button>
+
+        <button className="w-full sm:w-auto ml-4 flex items-center gap-2 text-xl px-3 py-2 rounded-md bg-green-400 font-bold "><AiFillMessage /> Message</button>
+
       </div>
     </div>
   );
