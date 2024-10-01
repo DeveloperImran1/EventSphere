@@ -135,7 +135,7 @@ const TicketingManagementSection = () => {
           </li>
         ))}
       </ul>
-    </div>
+        </div>
         </div>
       </section>
 

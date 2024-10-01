@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 
 const EventFormSection = () => {
@@ -28,16 +29,35 @@ const EventFormSection = () => {
         <div className="flex flex-col lg:flex-row justify-center items-center bg-gray-100 p-10 gap-4 lg:gap-10">
             {/* Left side with image and text */}
             <div className="lg:w-1/2 flex flex-col items-center">
-                <img
+                <Image
                     src="https://img.freepik.com/free-photo/well-dressed-businesspeople-office_1098-3175.jpg?ga=GA1.1.245323466.1722741120&semt=ais_hybrid"
+                    
                     alt="Event Image"
+                    layout="responsive"
+                    objectFit="cover"
+                    height={500}
+                    width={500}
                     className="w-full h-auto mb-5"
                 />
                 <h2 className="text-2xl font-bold mb-2">Love the Smell Of Events Every Morning Like Us?</h2>
-                <h4>We're Totally Obsessed To Make Your Event Succeed!
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <h4>We are  Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
-                * PS: Nobody can match our pricing :-)</p>
+                 PS Nobody can match our pricing </p>
+=======
+                <h4>Were Totally Obsessed To Make Your Event Succeed!
+                </h4>
+                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
+                * PS: Nobody can match our pricing :-</p>
+>>>>>>> fb5602f560bfb8313122dbe0e0866b381e6279cb
+=======
+                <h4>Were Totally Obsessed To Make Your Event Succeed!
+                </h4>
+                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
+                * PS: Nobody can match our pricing :-</p>
+>>>>>>> fb5602f560bfb8313122dbe0e0866b381e6279cb
             </div>
 
             {/* Right side with form */}

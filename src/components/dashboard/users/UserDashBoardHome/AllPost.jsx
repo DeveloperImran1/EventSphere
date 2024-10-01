@@ -20,19 +20,19 @@ const AllPost = () => {
 
   
   <div class="p-6 bg-white">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+    <h2 class="text-2xl font-bold text-left text-gray-800 mb-4">
       Collection of textile samples lay spread
     </h2>
-    <h2 class="text-lg text-gray-600 leading-relaxed">
+    <h2 class="text-lg text-left text-gray-600 leading-relaxed">
       A wonderful serenity has taken possession of my entire soul like these
       sweet mornings of spring which I enjoy with my whole heart. A wonderful
       serenity has taken possession of my entire soul like these sweet mornings
       of spring which I enjoy with my whole heart.
     </h2>
   </div>
-  <div className="flex gap-4 pl-4 pb-4">
-    <button className="flex items-center gap-2 text-xl px-6 py-3 rounded-md bg-green-300 font-bold "><GiSelfLove /> Love</button>
-    <button className="flex items-center gap-2 text-xl px-6 py-3 rounded-md bg-orange-400 font-bold "><RiReplyAllFill /> Reply</button>
+  <div className="flex gap-4 ">
+    <button className="w-full sm:w-auto ml-4  flex items-center  gap-2 text-xl px-3 py-2 rounded-md bg-green-300 font-bold "><GiSelfLove /> Love</button>
+    <button className="w-full sm:w-auto ml-4  flex items-center gap-2 text-xl px-3 py-2 rounded-md bg-orange-400 font-bold "><RiReplyAllFill /> Reply</button>
 
   </div>
 </div>
@@ -51,19 +51,19 @@ const AllPost = () => {
 
   
   <div class="p-6 bg-white">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+    <h2 class="text-2xl text-left font-bold text-gray-800 mb-4">
       Collection of textile samples lay spread
     </h2>
-    <h2 class="text-lg text-gray-600 leading-relaxed">
+    <h2 class="text-lg text-left text-gray-600 leading-relaxed">
       A wonderful serenity has taken possession of my entire soul like these
       sweet mornings of spring which I enjoy with my whole heart. A wonderful
       serenity has taken possession of my entire soul like these sweet mornings
       of spring which I enjoy with my whole heart.
     </h2>
   </div>
-  <div className="flex gap-4 pl-4 pb-4">
-    <button className="flex items-center gap-2 text-xl px-6 py-3 rounded-md bg-green-300 font-bold "><GiSelfLove /> Love</button>
-    <button className="flex items-center gap-2 text-xl px-6 py-3 rounded-md bg-orange-400 font-bold "><RiReplyAllFill /> Reply</button>
+  <div className="flex gap-4 ">
+    <button className="w-full sm:w-auto ml-4 flex items-center gap-2 text-xl px-3 py-2 rounded-md bg-green-300 font-bold "><GiSelfLove /> Love</button>
+    <button className="w-full sm:w-auto ml-4 flex items-center gap-2 text-xl px-3 py-2 rounded-md bg-orange-400 font-bold "><RiReplyAllFill /> Reply</button>
 
   </div>
 </div>

@@ -5,7 +5,7 @@ const ImageSection = () => {
     return (
         <div className="max-w-md mx-start mt-4 bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-4">
-                <h2 className="text-2xl font-bold text-green-500 0 mb-4">Interest</h2>
+                <h2 className="text-2xl text-start font-bold text-green-500 0 mb-4">Interest</h2>
                 <div className="grid grid-cols-3 gap-2">
                     <div>
                         <Image
