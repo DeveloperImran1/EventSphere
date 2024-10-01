@@ -27,7 +27,7 @@ export default function EnhancedPaymentGateway() {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
-            <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-105">
+            <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-105">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
                         <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
@@ -122,6 +122,10 @@ export default function EnhancedPaymentGateway() {
                                 'Pay Now'
                             )}
                         </button>
+                        <button className="mt-10 text-blue-600 flex items-center hover:text-blue-800 transition-colors duration-300">
+                            <ArrowLeft size={20} className="mr-2" />
+                            Back to Shopping
+                        </button>
                     </div>
 
                     <div className="w-full md:w-72">
@@ -178,10 +182,7 @@ export default function EnhancedPaymentGateway() {
                             </div>
                         </div>
 
-                        <button className="mt-6 text-blue-600 flex items-center hover:text-blue-800 transition-colors duration-300">
-                            <ArrowLeft size={20} className="mr-2" />
-                            Back to Shopping
-                        </button>
+                      
                     </div>
                 </div>
             </div>
