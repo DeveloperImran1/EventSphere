@@ -31,7 +31,9 @@
   --color-warning: #ff9800;
   /* Warning messages */
 
- 
+  /* Font Variables */
+  --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-serif: 'Merriweather', serif;
 }
 
   h1,
@@ -77,7 +79,107 @@ p {
 
 }
 
+/* Responsive Containers */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
 
+@media (min-width: var(--breakpoint-sm)) {
+  .container {
+    max-width: var(--container-width-sm);
+  }
+}
+
+@media (min-width: var(--breakpoint-md)) {
+  .container {
+    max-width: var(--container-width-md);
+  }
+}
+
+@media (min-width: var(--breakpoint-lg)) {
+  .container {
+    max-width: var(--container-width-lg);
+  }
+}
+
+@media (min-width: var(--breakpoint-xl)) {
+  .container {
+    max-width: var(--container-width-xl);
+  }
+}
+
+/* Utility Classes */
+.mt-sm {
+  margin-top: var(--space-sm);
+}
+
+.mt-md {
+  margin-top: var(--space-md);
+}
+
+.mt-lg {
+  margin-top: var(--space-lg);
+}
+
+.p-sm {
+  padding: var(--space-sm);
+}
+
+.p-md {
+  padding: var(--space-md);
+}
+
+.p-lg {
+  padding: var(--space-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+   /* --color-hover: #2332c4; Normal blue for hover or selection */
+   
+   /* Utility Colors */
+   /* --color-border: #d1d1d1; Neutral color for borders */
+   /* --color-error: #ff4c4c; Error messages */
+   /* --color-success: #4caf50; Success messages */
+   /* --color-warning: #ff9800; Warning messages */
+ 
+   /* Font Variables */
+   /* --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+   --font-family-serif: 'Merriweather', serif; */
+  
+ 
+
+ 
+ 
+ /* ===== GLOBAL STYLES ===== */
+ *,
+ *::before,
+ *::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+ }
+ 
+ html {
+   font-size: var(--font-size-base);
+   scroll-behavior: smooth;
+ }
+ 
+ body {
+   font-family: var(--font-family-sans);
+   background-color: var(--color-light);
+   line-height: 1.5;
+ }
+ 
+ p{
+  color: #6b7280;
+  
+ }
 
 /* Button Styles */
 .button {
@@ -86,7 +188,7 @@ p {
   /* px-6 py-2 equivalent */
   background-color: var(--color-logo);
   color: var(--color-light);
-  border-radius: var(--border-radius-large);
+  border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: background-color 300ms, transform 300ms;
@@ -101,6 +203,40 @@ p {
 
 
 
+/* Responsive Typography */
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+@media (min-width: var(--breakpoint-sm)) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+}
  /* Responsive Typography */
  h1 {
    font-size: 2rem;
@@ -150,7 +286,7 @@ p {
 
 
 
- /* event company */
+ /* Star Animation by Atik */
  @keyframes starAnimation {
   0%, 100% {
     transform: scale(1);
@@ -174,4 +310,38 @@ p {
 }
 
 
+ 
 
+ @layer base {
+  :root {
+      --radius: 0.5rem;
+  
+ 
+   }
+  
+ 
+} 
+ 
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.textRed{
+  color: red;
+}
+.your-menu-class {
+  --tw-rotate: unset; /* Unsets the rotation applied by Tailwind */
+}

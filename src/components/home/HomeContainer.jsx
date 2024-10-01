@@ -6,15 +6,16 @@ import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
 import EventOrderList from '../events/EventOrderList';
 
+
 const HomeContainer = () => {
     return (
         <div className='space-y-20'>
             <Banner></Banner>
-            
             <PopularEvents></PopularEvents>
-            <EventOrderList/>
+    <EventTime/>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
+         
         </div>
     );
 };
