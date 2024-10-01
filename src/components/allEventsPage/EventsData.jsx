@@ -10,9 +10,13 @@ import { FaBars, FaTimes } from 'react-icons/fa'; // For drawer icon
 import { Dialog } from '@headlessui/react'; // Drawer system
 import Link from 'next/link';
 import Loading from '../shared/LoadingSpiner/Loading';
+import useEvents from '@/hooks/useEvents';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
 
 const EventsData = () => {
-  const [events, setEvents] = useState([]);
+
+    const axiosPublic=useAxiosPublic()
   const [cartItems, setCartItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [priceRange, setPriceRange] = useState([0, 100]);
@@ -22,29 +26,25 @@ const EventsData = () => {
   const [selectedCity, setSelectedCity] = useState('All');
   const [selectedDay, setSelectedDay] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
-  const [loading, setLoading] = useState(true);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State for drawer
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [totalPages, setTotalPages] = useState(0); 
+  const [filters, setFilters] = useState({
+    category: '',
+    country: '',
+    city: '',
+});
 
-  useEffect(() => {
-    const fetchEventsData = async () => {
-      try {
-        const response = await axios.get('http://localhost:9000/events');
-        setEvents(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
-
-    fetchEventsData();
-  }, []);
-
-  if (loading) {
-    return <Loading/>;
+const {data: events = [], isPending: loading, refetch} = useQuery({
+  queryKey: ['events'], 
+  queryFn: async() =>{
+      const res = await axiosPublic.get('/events',{ params: filters });
+      // console.log(res.data)
+      return res.data;
   }
+})
+console.log(events)
 
-  const countries = ['All', ...new Set(events.map(event => event.location.country))];
+const countries = ['All', ...new Set(events.map(event => event.location.country))];
   const cityOptions = {};
   countries.forEach(country => {
     cityOptions[country] = ['All', ...new Set(events.filter(event => event.location.country === country).map(event => event.location.city))];
@@ -52,6 +52,12 @@ const EventsData = () => {
 
   const cities = selectedCountry === 'All' ? ['All'] : cityOptions[selectedCountry];
 
+
+  if (loading) {
+    return <Loading/>;
+  }
+
+ 
   const filterByDay = (eventDate, filter) => {
     const today = new Date();
     const dayInMillis = 24 * 60 * 60 * 1000;
@@ -75,18 +81,19 @@ const EventsData = () => {
   const filteredEvents = events.filter(event => {
     const eventDate = new Date(event.dateTime);
     const withinPriceRange = event.price >= priceRange[0] && event.price <= priceRange[1];
-    const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
+    // const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
     const withinDateRange = (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate);
     const matchesCountry = selectedCountry === 'All' || event.location.country === selectedCountry;
     const matchesCity = selectedCity === 'All' || event.location.city === selectedCity;
     const matchesDay = selectedDay === 'All' || filterByDay(eventDate, selectedDay);
     const matchesType = selectedType === 'All' || event.type === selectedType;
 
-    return withinPriceRange && matchesCategory && withinDateRange && matchesCountry && matchesCity && matchesDay && matchesType;
+    return withinPriceRange  && withinDateRange && matchesCountry && matchesCity && matchesDay && matchesType;
   });
 
   const sortedEvents = filteredEvents.sort((a, b) => a.price - b.price);
 
+  // bookmark and share icon for work 
   const addToCart = (event) => {
     setCartItems([...cartItems, event]);
     toast.success(`${event.title} added to cart!`);
