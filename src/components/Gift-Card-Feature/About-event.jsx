@@ -3,7 +3,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'animate.css';
-import {  MdPersonAdd, MdLocationPin,  MdEventAvailable } from 'react-icons/md'; // Import React Icons
+import { MdPersonAdd, MdLocationPin, MdEventAvailable } from 'react-icons/md'; // Import React Icons
+import Image from "next/image";
 
 import 'swiper/swiper-bundle.css';
 import { Navigation, Autoplay } from 'swiper/modules';
@@ -70,50 +71,63 @@ const AboutSection = () => {
           </div>
 
           {/* Middle Content - Swiper Image Slider */}
-          <div className="md:max-w-[450px]  ">
+          <div className="md:max-w-[450px] ">
             <Swiper
 
-spaceBetween={30}
-navigation
-autoplay={{ delay: 1000 }}
-loop={true}
-modules={[Navigation, Autoplay]}
-className="rounded-lg overflow-hidden shadow-lg"
+              spaceBetween={30}
+              navigation
+              autoplay={{ delay: 1000 }}
+              loop={true}
+              modules={[Navigation, Autoplay]}
+              className="rounded-lg overflow-hidden   shadow-lg"
             >
 
               <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/HhgGKX8/pexels-asadphoto-169198.jpg"
-                  alt="Christmas Event 2"
-                  className="object-cover w-full h-full"
+
+                <Image
+                  src="https://i.postimg.cc/wB5gTmPZ/pexels-pixabay-433452.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full h-full '
                 />
+
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg"
-                  alt="Christmas Event 1"
 
-                  className="object-cover w-full h-full"
+                <Image
+                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full'
                 />
-              </SwiperSlide>
 
-              <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/bHqhHrR/pexels-teddy-2263436.jpg"
-                  alt="Christmas Event 3"
-
-                  className="object-cover w-full h-full"
-                />
               </SwiperSlide>
               <SwiperSlide>
-                <img
-                  src="https://i.ibb.co.com/pdKXjSQ/concertgoers-watching-majestic-concert-many-spotlight-people-see-music-show-crowd-ambience-1235831-9.jpg"
-                  alt="Christmas Event 3"
 
-                  className="object-cover w-full h-full"
+                <Image
+                  src="https://i.postimg.cc/Y05sWXL3/pexels-asadphoto-169198.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full '
                 />
-              </SwiperSlide>   
-                    
+
+              </SwiperSlide>
+              <SwiperSlide>
+
+                <Image
+                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
+                  alt="404 gif"
+                  width={400}
+                  height={400}
+                  className='w-full  h-full'
+                />
+
+              </SwiperSlide>
+
+
 
             </Swiper>
 

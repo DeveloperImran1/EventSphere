@@ -5,16 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { connectDB } from "@/lib/connectDB";
 
-// import FormData from "form-data";
-// import Mailgun from "mailgun.js";
-// import mailgun from 'mailgun-js'; 
-// import Mailgun from "mailgun.js";
-// import formData from "form-data";
 
-// const mg = new Mailgun(formData).client({
-//     username: 'api',
-//     key: process.env.NEXT_PUBLIC_MAILGUN_API_KEY
-// })
 export const authOptions = {
     session: {
         strategy: 'jwt',
@@ -86,24 +77,7 @@ export const authOptions = {
                             role: "user"
                         });
 
-                        // // send email when create account our website
-                        // mg.messages
-                        // .create(process.env.NEXT_PUBLIC_MAILGUN_DOMAIN, {
-                        //     from: "ih9066588@gmail.com",
-                        //     to: "developerimran1122@gmail.com",
-                        //     subject: "Wellcome Our EventSphare Plat",
-                        //     text: "Testing wwelcome email with mailgun",
-                        //     html: `
-                        //     <div>
-                        //         <h2> Thankyou for visit our eventsphare website </h2>
-                        //         <p> We would like to get your feedback about the food </p>
-                        //     </div>
-                        //     `
-                        // })
-                        // .then(msg => console.log(msg))
-                        // .catch(err => console.log(err))
-
-
+          
                     }
 
                     // Return user details
