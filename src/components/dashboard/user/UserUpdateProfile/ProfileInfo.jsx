@@ -9,7 +9,7 @@ const { MdPhotoCamera } = require("react-icons/md");
 const ProfileInfo = () => {
   const session = useSession();
 
-  console.log("ProfileInfo",session);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
@@ -17,7 +17,7 @@ const ProfileInfo = () => {
         res.json()
       ),
   });
-  console.log(data);
+
   
     return (
       <div className="w-full lg:max-w-[20%] mt-0 shadow-2xl pb-10 rounded-xl h-[80%]">

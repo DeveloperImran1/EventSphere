@@ -1,8 +1,13 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
-
+import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 // Client Component (form handling part)
 const UpdateFrom = () => {
+    const session = useSession();
+    console.log("Up",session);
+    
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -21,9 +26,21 @@ const UpdateFrom = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Form Submitted:", formData);
+        try {
+      const { data } = await axios.put(
+        `http://localhost:9000/user/${session?.data?.user?.email}`,
+      formData
+      )
+      console.log(data)
+      toast.success('Data Updated Successfully!')
+  
+    } catch (err) {
+      console.log(err)
+
+    }
     };
 
     return (
