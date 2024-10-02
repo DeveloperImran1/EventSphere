@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const TanstackProvider = ({ children }) => {
+const TansTackProvider  = ({ children }) => {
     const queryClient = new QueryClient();
     return (
         // Provide the client to your App
@@ -16,4 +16,4 @@ const TanstackProvider = ({ children }) => {
     );
 };
 
-export default TanstackProvider;
+export default TansTackProvider ;
