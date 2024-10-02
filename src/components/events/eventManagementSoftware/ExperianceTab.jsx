@@ -1,4 +1,5 @@
 "use client";
+import { Image } from 'lucide-react';
 import React from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
@@ -35,7 +36,15 @@ const ExperianceTab = () => {
                                 <button className='text-2xl lg:text-3xl px-6 p-3 bg-blue-600 rounded-full cursor-pointer hover:bg-green-500 mb-10 text-white'>Learn More</button>
                             </div>
                             <div className="w-1/2 p-5 bg-blue-600 lg:p-10">
-                                <img src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65cdb1fa94287623d0aa3428_chatnmeet.png" alt="Content 1" className="w-full h-auto rounded-lg shadow-lg" />
+                                <div className='w-full'>
+                                    <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOp62K2fJxT5QNceG5IMZYCxSIWaFJmLaRMw&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAJpnyGD_3WoCEplVFnBi5F_9lw286iS6Jwg&s"
+                                        alt="Content 1"
+                                        height={500}
+                                        width={500}
+                                        layout='responsive'
+                                        objectFit='cover'
+                                        className="w-full h-auto rounded-lg shadow-lg" />
+                                </div>
                             </div>
                         </div>
                     </TabPanel>
@@ -48,7 +57,14 @@ const ExperianceTab = () => {
                                 <button className='text-2xl lg:text-3xl px-6 p-3 bg-blue-600 rounded-full cursor-pointer hover:bg-green-500 mb-10 text-white'>Learn More</button>
                             </div>
                             <div className="w-1/2 p-5">
-                                <img src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65cddebfd5648946423d1e54_meetings.png" alt="Content 2" className="w-full h-auto rounded-lg shadow-lg" />
+                                <Image
+                                    src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65cddebfd5648946423d1e54_meetings.png"
+                                    alt="Content 2"
+                                    height={700}
+                                    width={400}
+                                    layout='responsive'
+                                    objectFit='cover'
+                                    className="rounded-lg shadow-lg" />
                             </div>
                         </div>
                     </TabPanel>
@@ -61,7 +77,14 @@ const ExperianceTab = () => {
                                 <button className='text-2xl lg:text-3xl px-6 p-3 bg-blue-600 rounded-full cursor-pointer hover:bg-green-500 mb-10 text-white'>Learn More</button>
                             </div>
                             <div className="w-1/2 p-5">
-                                <img src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65cde42839dc5b5eebffe9a4_gamification%20tab.png" alt="Content 3" className="w-full h-auto rounded-lg shadow-lg" />
+                                <Image
+                                    src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/65cde42839dc5b5eebffe9a4_gamification%20tab.png"
+                                    alt="Content 3"
+                                    layout='responsive'
+                                    objectFit='cover'
+                                    height={700}
+                                    width={500}
+                                    className="w-full h-auto rounded-lg shadow-lg" />
                             </div>
                         </div>
                     </TabPanel>

@@ -41,7 +41,7 @@ const Navbar = () => {
 
 
   const session = useSession();
-  console.log("Navbar theke session is", session)
+  // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };

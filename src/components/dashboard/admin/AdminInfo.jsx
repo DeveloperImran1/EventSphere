@@ -2,6 +2,7 @@ import React from 'react';
 import CardSection from './CardSection';
 import Chart from './Chart';
 import Table from './Table';
+import Image from 'next/image';
 
 const AdminInfo = () => {
     return (
@@ -9,8 +10,10 @@ const AdminInfo = () => {
             <div className="w-full bg-gradient-to-r from-green-200 via-yellow-200 to-violet-200 flex flex-col md:flex-row items-center justify-center p-4 md:p-6 shadow-lg rounded-lg">
                 {/* Left Side: User Image */}
                 <div className="flex-shrink-0">
-                    <img
-                        src="https://i.ibb.co.com/9VgTHmn/Max-R-Headshot-1.jpg"
+                    <Image
+                         height={675}
+                         width={1200}
+                        src="https://via.placeholder.com/150"
                         alt="User Profile"
                         className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg"
                     />

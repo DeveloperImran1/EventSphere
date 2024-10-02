@@ -84,7 +84,7 @@ export default function ChristmasPromo() {
             ))}
           </div> */}
          <div className="flex mb-6">
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div 
             key={unit} 
@@ -96,9 +96,9 @@ export default function ChristmasPromo() {
         ))}
       </div>
     </div>
-          <div className="flex gap-4 ">
-            <Button variant="secondary" className="bg-white text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-black text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+          <div className=" md:flex  gap-4 ">
+            <Button variant="secondary" className="bg-white md:text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
+            <Button variant="outline" className="border-black md:text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
 
           </div>
         </div>
