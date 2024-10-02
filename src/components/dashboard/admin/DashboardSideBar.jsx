@@ -39,7 +39,7 @@ const DashboardSideBar = () => {
             <div className=" min-h-[calc(100vh-96px)] w-64 bg-white text-slate-600  scrool-auto flex-shrink-0 shadow-lg  relative">
                 <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 hover:bg-purple-800 hover:text-white">
                     <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
-                    <h1 className="text-2xl md:text-3xl font-bold text-black hover:text-white">Dashboard</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold">Dashboard</h1>
                 </div>
 
                 <nav className="mt-6">

@@ -4,6 +4,7 @@ import PopularEvents from './PopularEvents';
 import EventTime from './EventTime';
 import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
+import DestinationSlider from './DestinationSlider';
 
 
 const HomeContainer = () => {
@@ -14,7 +15,9 @@ const HomeContainer = () => {
             <EventTime></EventTime>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
-         
+            <div className=''>
+                <DestinationSlider />
+            </div>
         </div>
     );
 };

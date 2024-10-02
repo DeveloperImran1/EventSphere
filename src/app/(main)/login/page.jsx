@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";
@@ -271,7 +269,7 @@ const LoginPage = () => {
 
                         {/* Sign up Link */}
                         <p className="text-center mt-4">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <Link href="register" className="text-green-500 font-bold hover:underline">
                                 Sign Up
                             </Link>
@@ -279,7 +277,7 @@ const LoginPage = () => {
 
                         {/* Terms & Privacy */}
                         <p className="text-center text-xs text-gray-500 mt-2">
-                            By clicking "Log In", you agree to EventBookings{" "}
+                            By clicking &quot;Log In&quot;, you agree to EventBookings{" "}
                             <Link href="#" className="text-green-500 underline">
                                 Terms & Conditions
                             </Link>{" "}
