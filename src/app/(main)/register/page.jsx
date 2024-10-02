@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from "next/navigation";
 import { TbFidgetSpinner } from "react-icons/tb";
 
-const page = () => {
+const SignUp = () => {
   const successfullySignIn = () => {
     Swal.fire({
       position: "center",
@@ -364,7 +364,7 @@ const page = () => {
 
             {/* Terms & Privacy */}
             <p className="text-center text-xs text-gray-500 mt-2">
-              By clicking "Sign up", you agree to EventBookings{" "}
+              By clicking Sign up, you agree to EventBookings{" "}
               <Link href="#" className="text-green-500 underline">
                 Terms & Conditions
               </Link>{" "}
@@ -381,4 +381,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUp;

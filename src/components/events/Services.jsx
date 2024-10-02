@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { BsFillTicketPerforatedFill } from 'react-icons/bs';
 import { FcDataBackup } from 'react-icons/fc';
@@ -41,7 +42,7 @@ const Services = () => {
                     {/* 2 */}
                     <div className='w-full flex justify-center' >
 
-                        <img src="https://i.postimg.cc/bYL6ppD0/63f3141f0314aa80234ae4a9-schedule-p-500.png" alt="" />
+                    <Image height={675} width={1200} src="https://i.postimg.cc/bYL6ppD0/63f3141f0314aa80234ae4a9-schedule-p-500.png" alt="" />
 
                     </div>
                     {/* 3 */}

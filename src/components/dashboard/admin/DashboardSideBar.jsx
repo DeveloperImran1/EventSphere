@@ -31,7 +31,7 @@ const DashboardSideBar = () => {
         else {
             setRoutes(AdminRoutes)
         }
-    }, [])
+    }, [role])
 
     return (
         <>
