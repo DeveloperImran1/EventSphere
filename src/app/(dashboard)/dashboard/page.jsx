@@ -1,5 +1,5 @@
 import React from 'react';
-import UserContainer from './(user)/user-container/page';
+import UserContainer from './(user)/user-profile/page';
 import AdminContainer from './(admin)/admin-container/page';
 import OrganizerContainer from './(organizer)/organizer-container/page';
 

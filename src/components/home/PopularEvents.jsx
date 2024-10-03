@@ -1,9 +1,11 @@
 import React from 'react';
+import PopularEvent from '../PopularEvent/PopularEvent';
 
 const PopularEvents = () => {
     return (
         <div>
-            Popular Envents
+             NOW ITS MY TURN (ATIK)
+             <PopularEvent></PopularEvent>
         </div>
     );
 };
