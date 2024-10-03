@@ -1,4 +1,5 @@
 import SectionTitle from '@/components/shared/SectionTitle';
+import Image from 'next/image';
 import React from 'react';
 
 const EventRegister = () => {
@@ -31,7 +32,13 @@ const EventRegister = () => {
 
                 </div>
                 <div className='flex-1'>
-                    <img src="https://img.freepik.com/premium-vector/newest-smartphone-with-blue-background-mock-up-email_628973-80.jpg?w=740" alt="register" className='object-cover rounded-2xl'/>
+                    <Image src="https://img.freepik.com/premium-vector/newest-smartphone-with-blue-background-mock-up-email_628973-80.jpg?w=740" 
+                    alt="register" 
+                    height={500}
+                    width={500}
+                    layout='responsive'
+                    objectFit='cover'
+                    className='object-cover rounded-2xl'/>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import './Button.css'
-
+import Image  from 'next/image';
 const TicketSellProcess = () => {
   return (
     <div className='my-24  container mx-auto px-8' >
@@ -15,12 +15,14 @@ const TicketSellProcess = () => {
 
       {/* 2 card  */}
       <div className='flex justify-center gap-16'   >
-        <div className="card  w-[600px] ">
+        <div className="card  w-[600px] h-[800px] ">
           <figure className="">
-            <img
-              src="https://i.postimg.cc/bNqgCP1t/64107f7457a29a59b4be58da-Badge-Printing-p-500.png"
+            <Image
+              src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
               alt="Shoes"
-              className="rounded-3xl md:w-[600px] " />
+              width={600}
+              height={800}
+              className="rounded-3xl h-full " />
           </figure>
           <div className="mt-10 p-2 md:p-6">
             <h2 className="card-title  font-serif text-3xl text-black "> QR Scan and Badge Printing  </h2>
@@ -28,12 +30,15 @@ const TicketSellProcess = () => {
 
           </div>
         </div>
-        <div className="card  w-[600px] ">
+        <div className="card  w-[600px] h-[800px]  ">
           <figure className="">
-            <img
-              src="https://i.postimg.cc/yN0SCgHY/64107f7435643631fa7bfb01-Integration.png"
+            <Image
+              src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
               alt="Shoes"
+              width={600}
+              height={800}
               className="rounded-xl " />
+
           </figure>
           <div className="mt-10 p-2 md:p-6">
             <h2 className="card-title  font-serif text-3xl text-black "> API and Integration  </h2>
@@ -52,9 +57,10 @@ const TicketSellProcess = () => {
 
       <div className="hero my-20  bg-slate-200 rounded-2xl px-16  ">
         <div className="hero-content gap-6 flex-col lg:flex-row">
-          <img
+          <Image
             src="https://i.postimg.cc/kgjqLTnb/freepik-br-3a9f85c1-f113-45f7-9db0-387fde6ebda5.png"
-            className="w-[650px] h-[350px] " />
+            width={400}
+            height={400}   alt="Shoes"  className="w-[650px] h-[350px]        " />
           <div className='p-2 md:p-8'>
             <h1 className="text-5xl text-black font-serif font-medium">Already selling tickets online? Use us as an Additional Source of Sales.</h1>
             <p className="py-4 text-lg font-serif text-slate-600 ">

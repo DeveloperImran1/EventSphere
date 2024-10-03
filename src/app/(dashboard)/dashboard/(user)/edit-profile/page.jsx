@@ -1,8 +1,12 @@
+"use client"
 import ProfileInfo from '@/components/dashboard/user/UserUpdateProfile/ProfileInfo';
 import UpdateFrom from '@/components/dashboard/user/UserUpdateProfile/UpdateForm';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 const UpdateProfile = () => {
+  const session = useSession();
+  console.log("User profile a session", session)
     return (
       <div className="w-full text-[#727272] text-base overflow-hidden px-3 mx-auto box-border pb-28">
       <div className="flex flex-col lg:flex-row gap-x-4">
