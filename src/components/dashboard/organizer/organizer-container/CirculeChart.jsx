@@ -1,6 +1,11 @@
 "use client";
+
 import React, { useEffect, useRef } from 'react';
 import { Chart, ArcElement } from 'chart.js';
+import { PieController } from 'chart.js';
+
+Chart.register(PieController);
+
 
 const CirculeChart = () => {
     const chartRef = useRef(null);
