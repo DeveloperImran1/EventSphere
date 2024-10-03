@@ -271,7 +271,7 @@ const LoginPage = () => {
 
                         {/* Sign up Link */}
                         <p className="text-center mt-4">
-                            Don't have an account?{" "}
+                            Dont have an account?
                             <Link href="register" className="text-green-500 font-bold hover:underline">
                                 Sign Up
                             </Link>
@@ -279,7 +279,7 @@ const LoginPage = () => {
 
                         {/* Terms & Privacy */}
                         <p className="text-center text-xs text-gray-500 mt-2">
-                            By clicking "Log In", you agree to EventBookings{" "}
+                            By clicking Log In, you agree to EventBookings{" "}
                             <Link href="#" className="text-green-500 underline">
                                 Terms & Conditions
                             </Link>{" "}
@@ -287,7 +287,7 @@ const LoginPage = () => {
                             <Link href="#" className="text-green-500 underline">
                                 Privacy Policy
                             </Link>
-                            .
+                            
                         </p>
                     </div>
                 </div>

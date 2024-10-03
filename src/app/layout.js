@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import AuthProvider from "@/services/AuthProvider";
-import TanstackProvider from "providers/TansTackProvider";
+import TanStackProvider from "providers/TanstackProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,11 +26,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `} >
-        <TanstackProvider>
+        <TanStackProvider>
           <AuthProvider>
             {children}
           </AuthProvider>
-        </TanstackProvider>
+        </TanStackProvider>
       </body>
     </html>
   );
