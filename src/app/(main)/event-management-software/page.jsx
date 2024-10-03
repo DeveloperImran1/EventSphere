@@ -1,5 +1,5 @@
+import EventManagementSoftware from '@/components/events/eventManagementSoftware/EventManagementSoftware';
 import React from 'react';
-import EventManagementSoftware from '../../../components/events/eventManagementSoftware/EventManagementSoftware'
 const EventManagementSoftwarePage = () => {
     return (
         <>

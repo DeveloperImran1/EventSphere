@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -6,9 +7,10 @@ import { Input } from '@/components/ui/input';
 
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
+import { FcAdvertising } from 'react-icons/fc';
 
 const ROWS = 10;
-const SEATS_PER_ROW = 10;
+const SEATS_PER_ROW = 12;
 const VIP_ROWS = 2;
 
 const SEAT_PRICES = {
@@ -21,14 +23,14 @@ function SeatButton({ seat, onClick }) {
     seat.status === 'available'
       ? seat.category === 'vip'
         ? 'bg-yellow-500'
-        : 'bg-gray-400'
+        : 'bg-gray-300'
       : seat.status === 'sold'
-      ? 'bg-red-600'
-      : 'bg-green-500';
+        ? 'bg-red-500'
+        : 'bg-green-500';
 
   return (
     <motion.button
-      className={`w-12 h-12 m-1 rounded-md ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
+      className={`w-12 h-12 m-1 rounded-md  text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
       onClick={onClick}
       disabled={seat.status === 'sold'}
       whileHover={{ scale: 1.1 }}
@@ -54,7 +56,7 @@ export default function SeatBookingWidget() {
       );
 
     // Pre-book 2-3 random seats
-    const numPreBooked = Math.floor(Math.random() * 2) + 2;
+    const numPreBooked = Math.floor(Math.random() * 5) + 5;
     for (let i = 0; i < numPreBooked; i++) {
       const row = Math.floor(Math.random() * ROWS);
       const seat = Math.floor(Math.random() * SEATS_PER_ROW);
@@ -71,9 +73,9 @@ export default function SeatBookingWidget() {
 
   useEffect(() => {
     Swal.fire({
-      title: 'Special Offer!',
+      title: '🎉🎁 Special Offer!',
       text: 'Book 5 or more seats and get a 15% discount on each seat!',
-      icon: 'info',
+      icon: 'warning',
       confirmButtonText: 'Got it!',
     });
   }, []);
@@ -139,28 +141,37 @@ export default function SeatBookingWidget() {
   const finalTotal = calculateTotal();
 
   return (
-    <div className="p-10 max-w-5xl mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
+    <div className="p-10 max-w-6xl mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
       <h1 className="text-3xl border-b-2 py-4 font-serif  font-bold mb-4 text-center">Multiplex Theatre Showing Screen 1</h1>
 
       <div className="flex flex-col md:flex-row">
         <div className="flex-1">
-          <div className="bg-yellow-500 text-black text-center py-2 mb-4 rounded-t-lg font-bold">SCREEN</div>
-          <div className="bg-opacity-50 bg-black rounded-b-lg p-4">
+          <div className="bg-yellow-500 text-black text-center py-2  rounded-t-lg font-bold">SCREEN</div>
+          <div className="bg-opacity-50 bg-black py-10  rounded-b-lg p-4">
             {seats.map((row, rowIndex) => (
-              <div key={rowIndex} className="flex justify-center">
+              <div
+                key={rowIndex}
+                className={`flex justify-center ${rowIndex === 2 ? 'mt-6' : ''}`} // 2nd row por gap
+              >
                 {row.map((seat, seatIndex) => (
-                  <SeatButton
-                    key={`${rowIndex}-${seatIndex}`}
-                    seat={seat}
-                    onClick={() => handleSeatClick(rowIndex, seatIndex)}
-                  />
+                  <React.Fragment key={`${rowIndex}-${seatIndex}`}>
+                    <SeatButton
+                      seat={seat}
+                      onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                    />
+                    {/* Every 4th seat gap */}
+                    {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
+                      <div className="w-4"></div> // add a gap after every 4th seat except the last one
+                    )}
+                  </React.Fragment>
                 ))}
               </div>
             ))}
+
           </div>
         </div>
         <div className="ml-4 flex-shrink-0 w-full md:w-64 mt-4 md:mt-0">
-          <div className="bg-white text-black p-4 rounded-lg">
+          <div className="bg-white bg-opacity-20 backdrop-blur-md  rounded-lg shadow-lg  transform transition-transform duration-300  p-4 text-xl space-y-4 ">
             <div className="mb-2">
               <span className="font-bold">Movie:</span> Gingerclown
             </div>
@@ -174,7 +185,7 @@ export default function SeatBookingWidget() {
               <span className="font-bold">Subtotal:</span> ${total}
             </div>
             {selectedSeats >= 5 && (
-              <div className="mb-2 text-green-600">15% Bulk Discount Applied!</div>
+              <div className="mb-2 text-purple-800 flex font-mono ">  <FcAdvertising className='text-3xl' /> 15% Bulk Discount Applied!</div>
             )}
             <div className="mb-2">
               <span className="font-bold">Coupon Discount:</span> ${discount}
@@ -188,36 +199,40 @@ export default function SeatBookingWidget() {
                 placeholder="Enter coupon code"
                 value={couponCode}
                 onChange={(e) => setCouponCode(e.target.value)}
-                className="mb-2"
+                className="mb-2  text-black "
               />
               <Button onClick={applyCoupon} className="w-full   mb-2">
                 Apply Coupon
               </Button>
-              <Button 
+              <Button
 
-        onClick={() => {
-          Swal.fire({
-            title: 'Booking Confirmed!',
-            text: `You have booked ${selectedSeats} seats for ${finalTotal}`,
-            icon: 'success',
-          });
-        }} 
-        className="w-full button text-lg font-serif uppercase my-4 "
-        disabled={selectedSeats === 0} // Disable if no seats are selected
-      >
-        Book Now
-      </Button>
+                onClick={() => {
+                  Swal.fire({
+                    title: 'Booking Confirmed!',
+                    text: `You have booked ${selectedSeats} seats for ${finalTotal}`,
+                    icon: 'success',
+                  });
+                }}
+                className="w-full button text-lg font-serif uppercase my-4 "
+                disabled={selectedSeats === 0} // Disable if no seats are selected
+              >
+                Book Now
+              </Button>
             </div>
-        
+
           </div>
+
+
+          <div className="mt-4 flex  justify-between bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-lg shadow-lg text-white text-center transform transition-transform duration-300 hover:scale-105">
+            <div><span className="inline-block w-4 h-4 bg-white mr-2"></span> Available</div>
+            <div><span className="inline-block w-4 h-4 bg-red-500 mr-2"></span> Sold</div>
+            <div><span className="inline-block w-4 h-4 bg-green-500 mr-2"></span> Selected</div>
+            <div><span className="inline-block w-4 h-4 bg-yellow-500 mr-2"></span> VIP</div>
+          </div>
+
         </div>
       </div>
-      <div className="mt-4 flex justify-between bg-white text-black p-2 rounded-lg">
-        <div><span className="inline-block w-4 h-4 bg-gray-400 mr-2"></span> Available</div>
-        <div><span className="inline-block w-4 h-4 bg-red-500 mr-2"></span> Sold</div>
-        <div><span className="inline-block w-4 h-4 bg-green-500 mr-2"></span> Selected</div>
-        <div><span className="inline-block w-4 h-4 bg-yellow-500 mr-2"></span> VIP</div>
-      </div>
+
     </div>
   );
 }

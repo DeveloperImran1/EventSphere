@@ -9,7 +9,7 @@ const SectionTitle = ({ title, description,subTitle }) => {
                 <p className="w-12 h-[2px] bg-yellow-500 "></p>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold uppercase mb-4 ">{title}</h2>
-            <h3 className=" text-sm text-gray-500">{description}</h3>
+            <h3 className=" text-base text-gray-500">{description}</h3>
         </div>
     );
 };

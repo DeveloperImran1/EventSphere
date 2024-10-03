@@ -210,7 +210,7 @@ const EventDetailsPage = ({ params }) => {
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title text-xl font-medium">What tasks are involved in event planning?</div>
                         <div className="collapse-content">
-                            <p>Event planning encompasses a wide array of tasks that ensure the event's success. This includes creating a budget, selecting and booking a suitable venue, setting a clear timeline for all event activities, and coordinating with vendors for catering, lighting, and sound. Additionally, event planners manage guest lists, send out invitations, and oversee marketing efforts to promote the event. On the day of the event, logistics are managed to make sure everything goes according to plan.</p>
+                            <p>Event planning encompasses a wide array of tasks that ensure the events success. This includes creating a budget, selecting and booking a suitable venue, setting a clear timeline for all event activities, and coordinating with vendors for catering, lighting, and sound. Additionally, event planners manage guest lists, send out invitations, and oversee marketing efforts to promote the event. On the day of the event, logistics are managed to make sure everything goes according to plan.</p>
                         </div>
                     </div>
                     <div className="collapse collapse-arrow bg-base-200">
