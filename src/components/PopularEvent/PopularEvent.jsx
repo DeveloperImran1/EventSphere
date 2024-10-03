@@ -312,7 +312,7 @@ export default function PopularEvent() {
 
     return (
         <div className="w-full py-12 bg-gradient-to-r from-gray-50 to-gray-100">
-            <div className="container mx-auto px-4">
+            <div className="container  mx-auto px-4">
                 <SectionTitle
                     subTitle="Popular Events"
                     title="Explore Top Events"
@@ -320,7 +320,7 @@ export default function PopularEvent() {
                 />
 
                 <Tabs defaultValue={categories[0]} className="w-full" onValueChange={setActiveCategory}>
-                    <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8 bg-white rounded-lg shadow-lg">
+                    <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-14 mb-8 bg-white rounded-lg shadow-lg">
                         {categories.map((category) => (
                             <TabsTrigger
                                 key={category}
