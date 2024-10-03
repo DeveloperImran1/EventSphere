@@ -2,14 +2,14 @@ import React from "react";
 import { GrFormClose } from "react-icons/gr";
 import { IoTimeOutline } from "react-icons/io5";
 
-const page = () => {
+const Notifications = () => {
   return (
-    <div className="bg-gray-200 h-screen w-[97%] p-5">
+    <div className="h-screen w-[97%] p-5">
       <h2 className="font-bold text-xl md:text-2xl text-black text-start mb-7">
         Notifications
       </h2>
       {/* Notifications Box */}
-      <div className="px-2 md:px-12 py-5 mt-2 rounded-md bg-white">
+      <div className="px-2 md:px-12 py-5 mt-2 rounded-md bg-white shadow-lg">
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex flex-wrap gap-x-10">
             <div className="flex gap-x-5">
@@ -31,7 +31,7 @@ const page = () => {
         </div>
       </div>
       {/* Notifications Box */}
-      <div className="px-2 md:px-12 py-5 mt-2 rounded-md bg-white">
+      <div className="px-2 md:px-12 py-5 mt-2 rounded-md bg-white shadow-lg">
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex flex-wrap gap-x-10">
             <div className="flex gap-x-5">
@@ -56,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Notifications;
