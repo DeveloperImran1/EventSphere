@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";
@@ -353,7 +351,6 @@ const SignUp = () => {
             {/* Sign up with Google, Facebook, Apple */}
 
             <SocialSignIn></SocialSignIn>
-
             {/* Log in Link */}
             <p className="text-center mt-4">
               Already have an account?{" "}

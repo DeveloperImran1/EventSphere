@@ -1,14 +1,31 @@
+'use client'
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+
 const { default: Image } = require("next/image");
 const { default: Link } = require("next/link");
 const { MdPhotoCamera } = require("react-icons/md");
 
 const ProfileInfo = () => {
+  const session = useSession();
+
+
+  const { data} = useQuery({
+    queryKey: ["users"],
+    queryFn: () =>
+      fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
+console.log(data);
+
+  
     return (
       <div className="w-full lg:max-w-[20%] mt-0 shadow-2xl pb-10 rounded-xl h-[80%]">
         <div className="flex flex-col items-center pt-10">
           <div className="relative">
             <Image
-              src="https://i.ibb.co.com/cDRfsr2/1-0ae182fa-8c71-468e-850b-23fc81cb3bf4-540x.webp"
+              src={data?.image}
               height={130}
               width={130}
               alt="Profile"
@@ -24,8 +41,8 @@ const ProfileInfo = () => {
               <input id="fileInput" type="file" className="hidden" accept="image/*" />
             </div>
           </div>
-          <h2 className="mt-4 text-lg font-semibold">Nella Vita</h2>
-          <p className="text-gray-600">Developer</p>
+          <h2 className="mt-4 text-lg font-semibold">{data?.name}</h2>
+          <p className="text-gray-600">{data?.role}</p>
         </div>
         <div className="mt-6">
           <ul>

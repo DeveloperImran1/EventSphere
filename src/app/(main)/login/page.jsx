@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";

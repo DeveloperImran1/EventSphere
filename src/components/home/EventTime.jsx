@@ -1,81 +1,171 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
+"use client";
 
-import { MdFavoriteBorder } from "react-icons/md";
-import { FaArrowRight } from "react-icons/fa";
-import { ImShare } from "react-icons/im";
+import { Tabs } from "@/components/ui/tabs";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { LucideFileType2 } from "lucide-react";
+import { FaClock, FaMapMarkerAlt, FaTag, FaBuilding } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+
+import { useEffect } from "react";
+import axios from "axios";
+import Link from "next/link";
+
+let tabs = [
+  { id: 1, label: "All" },
+  { id: 2, label: "Today" },
+  { id: 3, label: "Tomorrow" },
+  { id: 4, label: "Next Week" },
+  { id: 5, label: "Next Month" },
+];
 
 const EventTime = () => {
+  let [activeTab, setActiveTab] = useState(tabs[0].label);
+  const [events, setEvents] = useState([]);
+  const [seeMore, setSeeMore] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:9000/events")
+      .then((res) => {
+        if (res.data.length > 6) {
+          const arr = res.data.slice(0, 6);
+          setEvents(arr);
+          setSeeMore(true);
+          return;
+        }
+        setEvents(res.data);
+        setSeeMore(false);
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
+
   return (
-   <div className="mx-auto p-4 ">
- <Tabs defaultValue="account" className="">
-      <TabsList className="grid w-full md:grid-cols-5 gap-2  grid-cols-3">
-        <TabsTrigger value="account" className="w-14 ">
-          All
-        </TabsTrigger>
-        <TabsTrigger value="Today" className="w-14">
-          Today
-        </TabsTrigger>
-        <TabsTrigger value="Tomorrow" className="w-20">
-          Tomorrow
-        </TabsTrigger>
-        <TabsTrigger value="Next Week" className="w-24">
-          Next Week
-        </TabsTrigger>
-        <TabsTrigger value="This Month" className="w-24">
-          This Month
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <Card className="md:w-[350px] py-5 h-[500px] md:my-5 my-12">
-          <CardContent>
-            <div className=" ">
-              <div className="max-w-[300px] ">
-              <Image
-                src="https://i.ibb.co.com/mXPHSQf/58d479834a200acdff41c0086f0f80ba.jpg"
-                alt="Picture of the author"
-                width={200}
-                height={200}
+    <div className="mx-auto p-4 ">
+      <Tabs defaultValue="All" className="my-5 container ">
+        <div className="space-x-2 md:space-x-8 grid grid-cols-2 md:grid-cols-6 items-center justify-center mx-auto gap-y-2">
+          {tabs.map((tab) => (
+            <button
+              key={tab.label}
+              onClick={() => setActiveTab(tab.label)}
+              className={`${
+                activeTab === tab.label
+                  ? " text-white bg-[--color-logo]"
+                  : "text-[--color-logo] bg-gray-100"
+              } relative rounded-lg px-3 py-1.5 text-sm font-medium   transition focus-visible:outline-2`}
+              style={{
+                WebkitTapHighlightColor: "transparent",
+              }}
+            >
+              {activeTab == tab.label && (
+                <motion.span
+                  layoutId="bubble"
+                  className="absolute inset-0 -z-20 "
+                  style={{ borderRadius: 9999 }}
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.3 }}
+                />
+              )}
 
-                className="rounded-md hover:scale-105 transition-all duration-300"
-              />
-              </div>
-              <div className="">
-                <div className=" flex justify-between pt-2">
-                  <div className="  flex gap-2 ">
-                  <ImShare size={20}/>
-                    <MdFavoriteBorder size={20} />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[40px] gap-x-[58px] w-full bg-transparent mt-16">
+          <AnimatePresence>
+            {events
+              ?.filter((n) => {
+                if (activeTab == "All") {
+                  return n;
+                } else if (activeTab == "Today") {
+                  return n.when == "Today";
+                } else if (activeTab == "Tomorrow") {
+                  return n.when == "Tomorrow";
+                } else if (activeTab == "Next Week") {
+                  return n.when == "Next Week";
+                } else if (activeTab == "Next Month") {
+                  return n.when == "Next Month";
+                }
+              })
+              .map((event) => (
+                <>
+                <Link href={`/events/${event._id}`}>
+                  <div className=" group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
+                    <Image
+                      className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
+                      src={event?.photo}
+                      alt={event?.title}
+                      width={200}
+                      height={300}
+                    />
+
+                    <div className="p-4">
+                      <h2 className="text-xl font-bold">{event?.title}</h2>
+                      <div className="flex items-center text-gray-700 my-1">
+                        <FaClock className="mr-2" />
+                        <p>{event?.dateTime}</p>
+                      </div>
+                      <div className="flex items-center text-gray-700 my-1">
+                        <FaBuilding className="mr-2" />
+                        <p>Hosted by: {event?.companyName}</p>
+                      </div>
+                      <div className="flex items-center text-gray-600 my-1">
+                        <FaMapMarkerAlt className="mr-2" />
+                        <p>
+                          {event?.location?.country},{event?.location?.city}
+                        </p>
+                      </div>
+                      <div>
+                        <div className="flex items-center text-gray-600 my-1">
+                          <LucideFileType2 className="mr-2" />
+                          <p>type: {event?.type} </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center text-gray-600 my-1">
+                        <FaTag className="mr-2" />
+                        <p>category: {event?.category}</p>
+                      </div>
+                      <p className="flex items-center text-gray-600 text-sm">
+                        {event?.when}
+                      </p>
+                      <div className="my-2">
+                        {event?.tags?.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="inline-block bg-blue-500 text-white text-xs font-bold rounded-full px-2 py-1 mr-2"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    
+                      <div className="flex justify-between items-center">
+                        <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
+                          ${event?.price}
+                        </button>
+                        <button className="bg-[--color-logo] text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
+                          Buy Ticket
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <FaArrowRight
-                    size={25}
-                    className=" border-2 px-1 py-1 border-[#00a88f]  rounded-full cursor-pointer  "
-                  />
-                </div>
-                <div className="  py-3">
-                  <p className="font-semibold">
-                    Info Session : Great Hostel Give Back Program.
-                  </p>
-                  <p className=" text-base text-gray-600 my-2">
-                    Date : Thu , Sep 26 • 5:30 AM{" "}
-                  </p>
-                  <p className=" text-gray-500 font-semibold">
-                    Organizer : Mindset Mastery
-                  </p>
-                  <p className=" text-gray-500 my-2">Via : Zoom</p>
-                  <p className=" text-gray-500 font-semibold">Aligned Being</p>
-                  <p className=" text-gray-500 my-2">174 followers</p>
-
-                  <p>Fee : 100 $ </p>
-                  <p className=" text-gray-500 text-sm my-2">Promoted</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </TabsContent>
-    </Tabs>
-   </div>
+                  </Link>
+                </>
+              ))}
+          </AnimatePresence>
+        </div>
+      </Tabs>
+      <div className="text-center mt-16">
+        {seeMore ? (
+          <Link href="/events" className="mx-auto button ">
+            See All
+          </Link>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
   );
 };
 

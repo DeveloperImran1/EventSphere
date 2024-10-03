@@ -1,3 +1,4 @@
+'use client'
 import { FaRegUser } from "react-icons/fa";
 import { FaMoneyCheck } from "react-icons/fa6";
 import { FaDiagramSuccessor } from "react-icons/fa6";
@@ -6,43 +7,24 @@ import { LuSearch } from "react-icons/lu";
 import { CiFilter } from "react-icons/ci";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import { useQuery } from "@tanstack/react-query";
 
 const EventOrderList = () => {
-  const invoices = [
-    {
-      invoice: "1",
-      eventImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-      eventName: "Reactive Conference",
-      eventPlace: "Uk",
-      status: "Pending",
-      Amount: "$250.00",
-      Date: "2-10-2024",
-      Refund: "Yes",
-    },
-    {
-      invoice: "2",
-      eventImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-      eventName: "Global Tech Summit 2024",
-      eventPlace: "USA",
-      status: "Complete",
-      Amount: "$250.00",
-      Date: "2-10-2024",
-      Refund: "No",
-    },
-    {
-      invoice: "3",
-      eventImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOd3VFXjHHkslwN3ksKwTGaSaS3ojs0MnQ&s",
-      eventName: "Tech Conference",
-      eventPlace: "France",
-      status: "Rejected",
-      Amount: "$250.00",
-      Date: "2-10-2024",
-      Refund: "Yes",
-    },
-  ];
+
+  const { data:invoice} = useQuery({
+    queryKey: ["users"],
+    queryFn: () =>
+      fetch(`http://localhost:9000/orders`).then((res) =>
+        res.json()
+      ),
+  });
+console.log(invoice);
+
+  const confirmedOrders = invoice?.filter(order => order?.status === "Completed");
+
+
+  const totalConfirmedAmount = confirmedOrders?.reduce((total, order) => total + order?.amount, 0);
+
   return (
     <div className=" text-black flex container mx-auto ml-4">
       {/* <div className=" w-[300px]">Order</div> */}
@@ -85,7 +67,7 @@ const EventOrderList = () => {
                   <h2 className="font-bold text-xl text-gray-800">
                     Total Order
                   </h2>
-                  <p>158</p>
+                  <p>{invoice?.length}</p>
                 </div>
               </div>
             </div>
@@ -100,7 +82,7 @@ const EventOrderList = () => {
                   <h2 className="font-bold text-xl text-gray-800">
                     Total Payment
                   </h2>
-                  <p>158</p>
+                  <p>{totalConfirmedAmount}</p>
                 </div>
               </div>
             </div>
@@ -115,7 +97,7 @@ const EventOrderList = () => {
                   <h2 className="font-bold text-xl text-gray-800">
                     Total Success
                   </h2>
-                  <p>158</p>
+                  <p>{confirmedOrders?.length}</p>
                 </div>
               </div>
             </div>
@@ -134,7 +116,7 @@ const EventOrderList = () => {
                         className="py-3.5 md:px-4 text-sm font-normal text-left rtl:text-right text-gray-500 -ml-2"
                       >
                         <div className="flex items-center gap-x-3 ">
-                          <span>No</span>
+                          <span>Invoice No</span>
                         </div>
                       </th>
 
@@ -151,6 +133,22 @@ const EventOrderList = () => {
                       >
                         <button className="flex items-center gap-x-2">
                           <span>Booking Date</span>
+                        </button>
+                      </th>
+                      <th
+                        scope="col"
+                        className="md:px-4  pl-3 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        <button className="flex items-center gap-x-2">
+                          <span>Ammount</span>
+                        </button>
+                      </th>
+                      <th
+                        scope="col"
+                        className="md:px-4  pl-3 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                      >
+                        <button className="flex items-center gap-x-2">
+                          <span>orderdBy</span>
                         </button>
                       </th>
 
@@ -170,65 +168,71 @@ const EventOrderList = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200  text-sm">
-                    {invoices.map((invoice) => (
-                      <tr key={invoice.invoice}>
+                    {invoice?.map((invoice) => (
+                      <tr key={invoice?._id}>
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap ml-2">
-                          {invoice.invoice}
+                          {(invoice?._id).slice(5,10)}
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           <div className=" flex gap-3 flex-col md:flex-row flex-wrap">
                             <Image
-                              src={invoice.eventImage}
+                              src={invoice?.eventImage}
                               width={50}
                               height={50}
                               alt="fdsg"
                               className=" border border-gray-200 rounded-lg"
                             />
                             <div>
-                              <p className=" text-black text-wrap">{invoice.eventName}</p>
+                              <p className=" text-black text-wrap">{invoice?.eventName}</p>
                               <p className=" text-black">
-                                {invoice.eventPlace}
+                                {invoice?.eventPlace}
                               </p>
                             </div>
                           </div>
                         </td>
 
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          {invoice.Date}
+                          {invoice?.date}
+                        </td>
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          {invoice?.amount}
+                        </td>
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          {invoice?.orderdBy?.email}
                         </td>
                         <td className="md:px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                          {invoice.Refund}
+                          {invoice?.refund}
                         </td>
                   
-                        <td className="md:px-4 py-4 text-sm whitespace-nowrap flex items-center md:gap-2 mt-8   my-auto text-left mr-3">
+                        <td className="md:px-4 py-4 text-sm whitespace-nowrap flex items-center md:gap-2 mt-8 md:mt-0     my-auto text-left mr-3">
                           <div className=" text-sm font-medium text-gray-700 whitespace-nowrap">
                             <div
                               className={`inline-flex items-center px-3 py-1 rounded-full gap-x-1 ${
-                                invoice.status === "Pending" &&
+                                invoice?.status === "Pending" &&
                                 "bg-yellow-100/60 text-yellow-500"
                               }  ${
-                                invoice.status === "Complete" &&
+                                invoice?.status === "Completed" &&
                                 "bg-emerald-100/60 text-emerald-500"
                               } ${
-                                invoice.status === "Rejected" &&
+                                invoice?.status === "Rejected" &&
                                 "bg-red-100/60 text-red-500"
                               }`}
                             >
                               <span
                                 className={`h-1.5 w-1.5 rounded-full
                                                 ${
-                                                  invoice.status ===
+                                                  invoice?.status ===
                                                     "Pending" && "bg-yellow-500"
                                                 } ${
-                                  invoice.status === "Complete" &&
+                                  invoice?.status === "Completed" &&
                                   "bg-green-500"
                                 } ${
-                                  invoice.status === "Rejected" && "bg-red-500"
+                                  invoice?.status === "Rejected" && "bg-red-500"
                                 } `}
                               ></span>
                               <h2 className="text-sm font-normal ">
-                                {invoice.status}
+                                {invoice?.status}
                               </h2>
                             </div>
                           </div>

@@ -1,7 +1,21 @@
+'use client'
 import Image from 'next/image';
 import React from 'react';
+import { useSession } from "next-auth/react";
+import { useQuery } from '@tanstack/react-query';
 
 const UserProfile = () => {
+    const session = useSession();
+
+    console.log("ProfileInfo",session);
+    const { data} = useQuery({
+      queryKey: ["users"],
+      queryFn: () =>
+        fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
+          res.json()
+        ),
+    });
+
     return (
         <div className='relative w-full bg-white bg-opacity-80 pt-6 md:pb-32 pb-56 rounded-lg shadow-lg'>
             {/* Background Image */}
@@ -9,7 +23,7 @@ const UserProfile = () => {
                    height={675}
                    width={1200}
                 className='w-screen px-4 rounded-lg h-[32vh] object-cover' 
-                src="https://i.postimg.cc/SsKD0y3T/8-99faf7b2987b5c6cc652.jpg" 
+                 src="https://i.postimg.cc/SsKD0y3T/8-99faf7b2987b5c6cc652.jpg"
                 alt="Background"
             />
             
@@ -21,7 +35,7 @@ const UserProfile = () => {
                        height={675}
                        width={1200}
                         className='w-32 h-32 rounded-full border-4 border-white shadow-md' 
-                        src="https://i.postimg.cc/7LBHXz1c/image.png" 
+                        src={data?.image}
                         alt="User"
                     />
                 </div>
@@ -30,11 +44,11 @@ const UserProfile = () => {
                 <div className='flex flex-col'>
                     <div className='flex pl-3  md:flex-row md:gap-4 gap-2'>
                         <div>
-                            <h2 className='text-xl font-bold'>Tauhid Hossen</h2>
+                            <h2 className='text-xl font-bold'>{data?.name}</h2>
                             <h3 className='text-lg text-gray-600 text-green-600'>UX / UI Designer</h3>
                         </div>
                         <div  >
-                            <h2 className='text-xl'>tauhidhossen04@gmail.com</h2>
+                            <h2 className='text-xl'>{data?.email}</h2>
                             <h3 className='text-lg text-gray-600'>Email</h3>
                         </div>
                     </div>
