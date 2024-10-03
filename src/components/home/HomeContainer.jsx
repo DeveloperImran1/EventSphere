@@ -4,6 +4,7 @@ import PopularEvents from './PopularEvents';
 import EventTime from './EventTime';
 import Organizers from '../organizers/Organizers';
 import Testimonials from '../testimonials/Testimonials';
+import EventOrderList from '../events/EventOrderList';
 
 
 const HomeContainer = () => {
@@ -11,7 +12,7 @@ const HomeContainer = () => {
         <div className='space-y-20'>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
-            <EventTime></EventTime>
+    <EventTime/>
             <Organizers></Organizers>
             <Testimonials></Testimonials>
          
