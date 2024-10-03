@@ -58,11 +58,11 @@ const SocialSignIn = () => {
                         <FcGoogle className="m-2 w-5 h-5" /> Google
                     </button>
                     {/* Facebook Sign Up Button */}
-                    <button onClick={() => handleSocialLogin('facebook')} className="border w-full border-gray-300 rounded-md px-4 flex items-center justify-center">
+                    <button onClick={() => handleSocialLogin('facebook')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center justify-center">
                         <FaFacebook className="m-2 w-5 h-5 text-blue-600" /> Facebook
                     </button>
                     {/* Apple Sign Up Button */}
-                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 rounded-md  flex items-center justify-center">
+                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md  flex items-center justify-center">
                         <FaApple className="m-2 w-5 h-5" /> Apple
                     </button>
                 </div>
