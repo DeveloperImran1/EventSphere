@@ -10,13 +10,14 @@ const ProfileInfo = () => {
   const session = useSession();
 
 
-  const { data, isLoading, isError } = useQuery({
+  const { data} = useQuery({
     queryKey: ["users"],
     queryFn: () =>
       fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
+console.log(data);
 
   
     return (
