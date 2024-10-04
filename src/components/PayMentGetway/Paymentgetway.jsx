@@ -26,7 +26,7 @@ export default function EnhancedPaymentGateway() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-200">
             <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-105">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
@@ -138,7 +138,7 @@ export default function EnhancedPaymentGateway() {
                             <div className="text-gray-200 mb-4">•••• 3456</div>
                             <div className="flex items-center justify-between text-sm">
                                 <span>09/22</span>
-                              
+
                                 <Image
                                     src="https://i.postimg.cc/SsS5kYc8/card-15398050.png"
                                     alt="Mastercard logo"
@@ -148,32 +148,34 @@ export default function EnhancedPaymentGateway() {
                                 />
                             </div>
                         </div>
-
                         <div className="space-y-3 bg-gray-50 p-4 rounded-xl">
                             <div className="flex justify-between items-center">
-                                <span className="text-gray-600">Company</span>
-                                <span className="font-medium flex items-center"><Apple size={16} className="mr-1" /> Apple</span>
+                                <span className="font-bold ">Event :</span>
+                                <span className="font-medium flex items-center">Concert </span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-600">Order Number</span>
-                                <span className="font-medium">1266201</span>
+                                <span className="font-bold ">Seat Number :</span>
+                                <span className="font-medium">B11 & B 12 </span>
+                            </div>
+                           
+    
+                            <div className="flex justify-between">
+                                <span className="font-bold ">Event Date :</span>
+                                <span className="font-medium">Oct 15, 24</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-600">Product</span>
-                                <span className="font-medium">MacBook Air</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-gray-600">VAT (20%)</span>
-                                <span className="font-medium">$100.00</span>
+                                <span className="font-bold ">Venue :</span>
+                                <span className="font-medium">City Auditorium : </span>
                             </div>
                         </div>
+
 
                         <div className="mt-6 pt-6 border-t border-gray-200">
                             <div className="flex justify-between items-center">
                                 <div>
                                     <span className="text-gray-600">You have to Pay</span>
                                     <div className="text-2xl font-bold">
-                                        549<span className="text-sm font-normal">.99 USD</span>
+                                        50<span className="text-sm font-normal">.99 USD</span>
                                     </div>
                                 </div>
                                 <div className="bg-blue-100 p-2 rounded-full">
@@ -182,7 +184,7 @@ export default function EnhancedPaymentGateway() {
                             </div>
                         </div>
 
-                      
+
                     </div>
                 </div>
             </div>
