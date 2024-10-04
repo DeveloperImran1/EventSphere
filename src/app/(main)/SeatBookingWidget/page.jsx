@@ -2,10 +2,12 @@ import EnhancedPaymentGateway from '@/components/PayMentGetway/Paymentgetway';
 import SeatBookingWidget from '@/components/Seat-booking-widgets/SeatBookingWidget';
 import React from 'react';
 
-const PaymentGateway = () => {
+const SeatBooking = () => {
     return (
-        <div  className="space-y-10 mt-14">
-            <SeatBookingWidget></SeatBookingWidget>
+        <div  className="py-10  bg-gradient-to-br from-blue-200 to-purple-200 ">
+        
+        
+           <SeatBookingWidget></SeatBookingWidget>
 
             <EnhancedPaymentGateway></EnhancedPaymentGateway>
              
@@ -15,4 +17,4 @@ const PaymentGateway = () => {
     );
 };
 
-export default PaymentGateway;
+export default SeatBooking;
