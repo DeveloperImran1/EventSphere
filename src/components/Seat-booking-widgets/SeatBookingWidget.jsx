@@ -141,32 +141,36 @@ export default function SeatBookingWidget() {
   const finalTotal = calculateTotal();
 
   return (
-    <div className="p-10 max-w-6xl mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
+    <div className="p-10 max-w-6xl min-h-screen  mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
       <h1 className="text-3xl border-b-2 py-4 font-serif  font-bold mb-4 text-center">Multiplex Theatre Showing Screen 1</h1>
 
       <div className="flex flex-col md:flex-row">
         <div className="flex-1">
           <div className="bg-yellow-500 text-black text-center py-2  rounded-t-lg font-bold">SCREEN</div>
           <div className="bg-opacity-50 bg-black py-10  rounded-b-lg p-4">
-            {seats.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className={`flex justify-center ${rowIndex === 2 ? 'mt-6' : ''}`} // 2nd row por gap
-              >
-                {row.map((seat, seatIndex) => (
-                  <React.Fragment key={`${rowIndex}-${seatIndex}`}>
-                    <SeatButton
-                      seat={seat}
-                      onClick={() => handleSeatClick(rowIndex, seatIndex)}
-                    />
-                    {/* Every 4th seat gap */}
-                    {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
-                      <div className="w-4"></div> // add a gap after every 4th seat except the last one
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-            ))}
+          {seats.map((row, rowIndex) => (
+  <div
+    key={rowIndex}
+    className={`flex justify-center ${rowIndex === 2 ? 'mt-6' : ''}`} // 2nd row por gap
+  >
+    {row.map((seat, seatIndex) => (
+      <React.Fragment key={`${rowIndex}-${seatIndex}`}>
+        <div className="lg:mr-1"> {/* Use a div to create spacing */}
+          <SeatButton
+            seat={seat}
+            onClick={() => handleSeatClick(rowIndex, seatIndex)}
+          />
+        </div>
+        {/* Every 4th seat gap */}
+        {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
+          <div className="w-4"></div> // Add a gap after every 4th seat except the last one
+        )}
+       
+      </React.Fragment>
+    ))}
+  </div>
+))}
+
 
           </div>
         </div>
@@ -176,7 +180,7 @@ export default function SeatBookingWidget() {
               <span className="font-bold">Movie:</span> Gingerclown
             </div>
             <div className="mb-2">
-              <span className="font-bold">Time:</span> April 3, 21:00
+              <span className="font-bold">Time:</span> Nov 3, 21:00
             </div>
             <div className="mb-2">
               <span className="font-bold">Tickets:</span> {selectedSeats}
