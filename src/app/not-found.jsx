@@ -19,7 +19,7 @@ export default function Custom404() {
       <p className="text-lg mb-6">
         Please check that the website address is spelled correctly. Or,
       </p>
-      <Link href="/user" 
+      <Link href="/" 
         className="px-6 py-3 text-lg bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
         Go to Homepage
       </Link>
