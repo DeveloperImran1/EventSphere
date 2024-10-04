@@ -9,8 +9,7 @@ const SeatBooking = () => {
         
            <SeatBookingWidget></SeatBookingWidget>
 
-            <EnhancedPaymentGateway></EnhancedPaymentGateway>
-             
+       
 
 
         </div>
