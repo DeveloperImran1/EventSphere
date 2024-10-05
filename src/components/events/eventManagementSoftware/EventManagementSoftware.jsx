@@ -1,14 +1,14 @@
 import React from 'react';
 import EventTitle from './EventTitle';
+import Testimonials from '@/components/testimonials/Testimonials';
+import AnimatedImageSection from './AnimateImageSection';
 import EventStaticSection from './EventStaticSection';
 import EventRegister from './EventRegister';
 import EventLimeLights from './EventLimeLights';
 import HandyFeatured from './HandyFeatured';
 import ExperianceTab from './ExperianceTab';
-import Testimonials from '@/components/testimonials/Testimonials';
 import AppleLogoSection from './AppleLogoSection';
 import InputSchedule from './InputSchedule';
-import AnimatedImageSection from './AnimateImageSection';
 
 const EventManagementSoftware = () => {
   return (

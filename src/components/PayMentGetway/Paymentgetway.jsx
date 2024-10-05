@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import { CreditCard, Wifi, Edit2, Grid, CheckCircle, ArrowLeft, Apple } from 'lucide-react'
 import Image from 'next/image'
+import Link from "next/link";
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 export default function EnhancedPaymentGateway() {
     const [timeLeft, setTimeLeft] = useState(119) // 1:59 in seconds
@@ -23,10 +25,21 @@ export default function EnhancedPaymentGateway() {
     const handlePayNow = () => {
         setIsPaymentComplete(true)
         setTimeout(() => setIsPaymentComplete(false), 3000)
+
+        // Show SweetAlert for successful payment
+        Swal.fire({
+            title: 'Payment Successful!',
+            text: 'Your payment has been completed successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            timer: 3000, // Optional: auto-close the alert after 3 seconds
+        });
+
+
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100">
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-200">
             <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-105">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
@@ -52,7 +65,7 @@ export default function EnhancedPaymentGateway() {
                                     type="text"
                                     value={cardNumber}
                                     onChange={(e) => setCardNumber(e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                                     placeholder="Enter card number"
                                 />
                                 <button className="absolute right-2 top-2 text-blue-600 hover:text-blue-800 transition-colors duration-300">
@@ -70,7 +83,7 @@ export default function EnhancedPaymentGateway() {
                                 <div className="relative">
                                     <input
                                         type="text"
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                        className="w-full text-black px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                                         placeholder="***"
                                     />
                                     <button className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 transition-colors duration-300">
@@ -79,7 +92,7 @@ export default function EnhancedPaymentGateway() {
                                 </div>
                             </div>
                             <div className="flex-1">
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                                <label className="block text-sm font-medium text-black text-gray-700 mb-1">Expiry Date</label>
                                 <div className="flex gap-2">
                                     <input
                                         type="text"
@@ -100,7 +113,7 @@ export default function EnhancedPaymentGateway() {
                             <div className="relative">
                                 <input
                                     type="password"
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                    className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                                     placeholder="Enter your password"
                                 />
                                 <button className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 transition-colors duration-300">
@@ -108,7 +121,6 @@ export default function EnhancedPaymentGateway() {
                                 </button>
                             </div>
                         </div>
-
                         <button
                             onClick={handlePayNow}
                             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-md font-medium transition-all duration-300 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -122,13 +134,15 @@ export default function EnhancedPaymentGateway() {
                                 'Pay Now'
                             )}
                         </button>
-                        <button className="mt-10 text-blue-600 flex items-center hover:text-blue-800 transition-colors duration-300">
-                            <ArrowLeft size={20} className="mr-2" />
-                            Back to Shopping
-                        </button>
+                        <Link href='/SeatBookingWidget' >
+                            <button className="mt-10 text-blue-600 flex items-center hover:text-blue-800 transition-colors duration-300">
+                                <ArrowLeft size={20} className="mr-2" />
+                                Back to Booking Seat
+                            </button>
+                        </Link>
                     </div>
 
-                    <div className="w-full md:w-72">
+                    <div className="w-full md:w-80">
                         <div className="bg-gradient-to-br from-blue-500 to-purple-500 p-6 rounded-xl mb-6 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
                             <div className="flex justify-between items-center mb-4">
                                 <div className="w-12 h-8 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded"></div>
@@ -138,7 +152,7 @@ export default function EnhancedPaymentGateway() {
                             <div className="text-gray-200 mb-4">•••• 3456</div>
                             <div className="flex items-center justify-between text-sm">
                                 <span>09/22</span>
-                              
+
                                 <Image
                                     src="https://i.postimg.cc/SsS5kYc8/card-15398050.png"
                                     alt="Mastercard logo"
@@ -148,32 +162,34 @@ export default function EnhancedPaymentGateway() {
                                 />
                             </div>
                         </div>
-
-                        <div className="space-y-3 bg-gray-50 p-4 rounded-xl">
+                        <div className="space-y-3 text-gray-700 bg-gradient-to-br from-blue-200 to-purple-200 p-4 rounded-xl">
                             <div className="flex justify-between items-center">
-                                <span className="text-gray-600">Company</span>
-                                <span className="font-medium flex items-center"><Apple size={16} className="mr-1" /> Apple</span>
+                                <span className="font-bold ">Event :</span>
+                                <span className="font-medium flex items-center">Concert </span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-600">Order Number</span>
-                                <span className="font-medium">1266201</span>
+                                <span className="font-bold ">Seat Number :</span>
+                                <span className="font-medium">B11</span>
+                            </div>
+
+
+                            <div className="flex justify-between">
+                                <span className="font-bold ">Event Date :</span>
+                                <span className="font-medium">Oct 15, 24</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-600">Product</span>
-                                <span className="font-medium">MacBook Air</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-gray-600">VAT (20%)</span>
-                                <span className="font-medium">$100.00</span>
+                                <span className="font-bold ">Venue :</span>
+                                <span className="font-medium">City Auditorium </span>
                             </div>
                         </div>
 
+
                         <div className="mt-6 pt-6 border-t border-gray-200">
                             <div className="flex justify-between items-center">
-                                <div>
+                                <div  >
                                     <span className="text-gray-600">You have to Pay</span>
-                                    <div className="text-2xl font-bold">
-                                        549<span className="text-sm font-normal">.99 USD</span>
+                                    <div className="text-2xl text-slate-700   font-bold">
+                                        50<span className="text-sm font-normal">.99 USD</span>
                                     </div>
                                 </div>
                                 <div className="bg-blue-100 p-2 rounded-full">
@@ -182,7 +198,7 @@ export default function EnhancedPaymentGateway() {
                             </div>
                         </div>
 
-                      
+
                     </div>
                 </div>
             </div>
