@@ -12,12 +12,8 @@ const HomeContainer = () => {
         <div className='space-y-20'>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
-<<<<<<< HEAD
-            <EventTime></EventTime>
+            <EventTime />
             <DestinationSlider />
-=======
-    <EventTime/>
->>>>>>> f5dd87cc69cbc729889c539c3ff596da82400866
             <Organizers></Organizers>
             <Testimonials></Testimonials>
         </div>
