@@ -13,11 +13,9 @@ const HomeContainer = () => {
             <Banner></Banner>
             <PopularEvents></PopularEvents>
             <EventTime></EventTime>
+            <DestinationSlider />
             <Organizers></Organizers>
             <Testimonials></Testimonials>
-            <div className=''>
-                <DestinationSlider />
-            </div>
         </div>
     );
 };
