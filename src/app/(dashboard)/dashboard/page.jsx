@@ -1,4 +1,8 @@
 import React from 'react';
+
+export const dynamic = "force-dynamic";  // vercel a deploy korar por cassing kore rakhena
+
+import UserContainer from './(user)/user-profile/page';
 import AdminContainer from './(admin)/admin-container/page';
 import OrganizerContainer from './(organizer)/organizer-container/page';
 import UserProfile from '@/components/dashboard/users/UserDashBoardHome/UserProfile';
