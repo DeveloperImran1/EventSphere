@@ -4,14 +4,15 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from "react";
 import Swal from 'sweetalert2';
 
 const SocialSignIn = () => {
     const router = useRouter();
     const { status } = useSession(); // Session status only
-
+    const searchParams = useSearchParams();
+    const path = searchParams.get("redirect")
     const successfullSignIn = () => {
         Swal.fire({
             position: "center",
@@ -26,24 +27,20 @@ const SocialSignIn = () => {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Something Went Wrong",
+            title: "SignIn Error",
             showConfirmButton: false,
             timer: 1500
         });
     };
 
     const handleSocialLogin = async (provider) => {
-        const resp = await signIn(provider, { redirect: false }); // Avoid auto redirect
+        const resp = await signIn(provider, { redirect: true, callbackUrl: path ? path : "/" }); // Avoid auto redirect
         console.log("Response from signIn:", resp);
 
         if (resp?.ok) {
             successfullSignIn();
-            // Check session status after successful sign-in
-            router.push('/register/wellcome-popup');
         } else {
-            // errorSignIn();
-            console.log("something went wrong for signIn")
-            router.push('/');
+            errorSignIn();
         }
     };
 
