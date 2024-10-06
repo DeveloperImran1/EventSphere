@@ -65,8 +65,8 @@ const DestinationSlider = () => {
 export default DestinationSlider;
 
 const sectionTitle = {
-  description: "Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life",
-  subTitle: "Our Team",
-  title: "top organizers",
+  // description: "Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life",
+  subTitle: "COUNTRY",
+  title: "top Destination",
 
 }
