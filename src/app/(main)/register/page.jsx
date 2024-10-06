@@ -21,6 +21,16 @@ const SignUp = () => {
       timer: 1500
     });
   }
+  const errorSignIn = () => {
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "SignIn Error",
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
   const router = useRouter();
   const [viewPass, setViewPass] = useState(false);
   const [viewConfirmPass, setViewConfirmPass] = useState(false)
@@ -77,6 +87,9 @@ const SignUp = () => {
     if (responce.status === 200) {
       successfullySignIn()
       router.push('/register/wellcome-popup')
+    }
+    else{
+      errorSignIn()
     }
   };
 
