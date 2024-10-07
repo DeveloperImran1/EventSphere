@@ -7,7 +7,7 @@ import useAuth from '@/hooks/useAuth';
 
 const UserProfile = () => {
    
-    const data = useAuth();
+    const {data} = useAuth();
     console.log("ProfileInfo", data);
 
     return (
@@ -38,12 +38,12 @@ const UserProfile = () => {
                 <div className='flex flex-col'>
                     <div className='flex pl-3  md:flex-row md:gap-4 gap-2'>
                         <div>
-                            <h2 className='text-xl font-bold'>{data?.name}</h2>
-                            <h3 className='text-lg text-gray-600 text-green-600'>UX / UI Designer</h3>
+                            <h2 className='text-xl text-left font-bold'>{data?.name}</h2>
+                            <h3 className='text-lg  text-green-600'>UX / UI Designer</h3>
                         </div>
-                        <div  >
-                            <h2 className='text-xl'>{data?.email}</h2>
+                        <div className='flex justify-center items-start gap-1' >
                             <h3 className='text-lg text-gray-600'>Email</h3>
+                            <h2 className='text-xl'>{data?.email}</h2>
                         </div>
                     </div>
                 </div>
