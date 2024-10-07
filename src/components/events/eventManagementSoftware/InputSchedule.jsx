@@ -40,24 +40,19 @@ const EventFormSection = () => {
                     className="w-full h-auto mb-5"
                 />
                 <h2 className="text-2xl font-bold mb-2">Love the Smell Of Events Every Morning Like Us?</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <h4>We are  Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
                  PS Nobody can match our pricing </p>
-=======
                 <h4>Were Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
                 * PS: Nobody can match our pricing :-</p>
->>>>>>> fb5602f560bfb8313122dbe0e0866b381e6279cb
-=======
+
                 <h4>Were Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
                 * PS: Nobody can match our pricing :-</p>
->>>>>>> fb5602f560bfb8313122dbe0e0866b381e6279cb
             </div>
 
             {/* Right side with form */}

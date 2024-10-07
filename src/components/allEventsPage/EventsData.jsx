@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import Loading from '../shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
+import { Slider } from "@nextui-org/react";
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
@@ -22,16 +23,18 @@ const EventsData = () => {
   const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 6; // Items per page
-  const [priceRange, setPriceRange] = useState([0, 100]);
+  const [minimumPrice, setMinimumPrice] = useState(0);
+  const [maximumPrice, setMaximumPrice] = useState(300);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [selectedDay, setSelectedDay] = useState('All');
 
 
   const [filters, setFilters] = useState({
     search: '',
     category: '',
-    priceMin: 0,
-    priceMax: 100,
+    minimumPrice: 0,
+    maximumPrice: 300,
     type: '',
     country: '',
     city: '',
@@ -45,7 +48,7 @@ const EventsData = () => {
   };
 
   const handlePriceChange = (min, max) => {
-    setFilters({ ...filters, priceMin: min, priceMax: max });
+    setFilters({ ...filters, minimumPrice: min, maximumPrice: max });
   };
 
   const handleDateChange = (startDate, endDate) => {
@@ -56,9 +59,6 @@ const EventsData = () => {
     setFilters({ ...filters, day: e.target.value });
   };
 
-  const handleDayFilterChange = (filterType) => {
-    setFilters({ ...filters, dayFilter: filterType });
-  };
 
   const [allCountries, setAllCountries] = useState([]); // Store unique countries
   const [cities, setCities] = useState([]);
@@ -85,7 +85,7 @@ const EventsData = () => {
     setFilters(newFilters); // Update the filters state
   }, [startDate, endDate]);
 
-  // Filter data based on priceRange
+ 
 
   // Fetch events with useQuery and filters
   const { data: events = [], isLoading, refetch } = useQuery({
@@ -116,22 +116,35 @@ const EventsData = () => {
     const uniqueCities = Array.from(new Set(selectedCountryCities));
     setCities(uniqueCities);
   };
+  const filterByDay = (events, filter) => {
+    const today = new Date();
+    const dayInMillis = 24 * 60 * 60 * 1000; // এক দিনের মিলিসেকেন্ড
 
-  // useEffect(() => {
-  //   const filtered = events.filter(item => {
-  //     return item.price >= priceRange[0] && item.price <= priceRange[1];
-  //   });
-  //   setFilteredData(filtered);
-  // }, [priceRange,events]);
+    switch (filter) {
+      case "Today":
+        // আজকের তারিখের ইভেন্টগুলি ফিল্টার করা হচ্ছে
+        return events.filter(event => new Date(event.date).toDateString() === today.toDateString());
+      case "Tomorrow":
+        const tomorrow = new Date(today.getTime() + dayInMillis);
+        // আগামী দিনের ইভেন্টগুলি ফিল্টার করা হচ্ছে
+        return events.filter(event => new Date(event.date).toDateString() === tomorrow.toDateString());
+      case "This Week":
+        const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
+        // এই সপ্তাহের মধ্যে ইভেন্টগুলি ফিল্টার করা হচ্ছে
+        return events.filter(event => new Date(event.date) <= endOfWeek);
+      case "This Month":
+        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // বর্তমান মাসের শেষ দিন
+        // এই মাসের মধ্যে ইভেন্টগুলি ফিল্টার করা হচ্ছে
+        return events.filter(event => new Date(event.date) <= endOfMonth);
+      default:
+        return events; // সব ইভেন্ট প্রদর্শন করুন
+    }
+    refetch()
+};
 
 
 
-  // const sortedEvents = filteredEvents.sort((a, b) => a.price - b.price);
 
-  // const indexOfLastEvent = currentPage * eventsPerPage;
-  // const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  // const currentEvents = sortedEvents.slice(indexOfFirstEvent, indexOfLastEvent);
-  // const totalPages = Math.ceil(sortedEvents.length / eventsPerPage);
 
   // Add to cart and share event functionality
   const addToCart = (event) => {
@@ -166,7 +179,7 @@ const EventsData = () => {
               </select>
             </div>
 
-            {/* Price Filter */}
+            {/* Price Filter
             <div>
               <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
               <Range
@@ -185,7 +198,7 @@ const EventsData = () => {
                 )}
               />
               <p className="text-center mt-2">Price: {priceRange[0]} - {priceRange[1]}</p>
-            </div>
+            </div> */}
 
             {/* Type Filter */}
             <div>
@@ -225,19 +238,17 @@ const EventsData = () => {
             </div>
 
             {/* Date Picker */}
-            <input type="date" name="startDate" onChange={(e) => handleDateChange(e.target.value, filters.endDate)} />
-            <input type="date" name="endDate" onChange={(e) => handleDateChange(filters.startDate, e.target.value)} />
+            <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
+            <select
+              className="block w-full p-2 rounded border-2"
+              value={selectedDay}
+              onChange={(e) => setSelectedDay(e.target.value)}
+            >
+              {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
+                <option key={index} value={day}>{day}</option>
+              ))}
+            </select>
 
-            {/* Day Filter using Date Picker */}
-            <input type="date" name="day" value={filters.day} onChange={handleDayChange} />
-
-            {/* Day Filters for Today, Tomorrow, This Week, This Month */}
-            <div>
-              <button onClick={() => handleDayFilterChange('today')}>Today</button>
-              <button onClick={() => handleDayFilterChange('tomorrow')}>Tomorrow</button>
-              <button onClick={() => handleDayFilterChange('thisWeek')}>This Week</button>
-              <button onClick={() => handleDayFilterChange('thisMonth')}>This Month</button>
-            </div>
 
           </div>
         </div>
@@ -302,48 +313,20 @@ const EventsData = () => {
             </div>
 
             {/* Price Filter */}
-            <div>
-              {/* Price Filter */}
-              <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
-              <Range
-                values={priceRange}
-                step={1}
-                min={0}
-                max={100}
-                onChange={(values) => setPriceRange(values)}
-                renderTrack={({ props, children }) => (
-                  <div
-                    {...props}
-                    style={{
-                      ...props.style,
-                      height: '6px',
-                      background: '#ccc',
-                    }}
-                  >
-                    {children}
-                  </div>
-                )}
-                renderThumb={({ props }) => (
-                  <div
-                    {...props}
-                    style={{
-                      ...props.style,
-                      height: '24px',
-                      width: '24px',
-                      backgroundColor: 'var(--color-logo)',
-                      borderRadius: '50%',
-                    }}
-                  />
-                )}
+            <div className="" >
+              <Slider
+                label="Price Range"
+                step={50}
+                minValue={0}
+                maxValue={1000}
+                defaultValue={[0, 300]}
+                formatOptions={{ style: "currency", currency: "USD" }}
+                className="max-w-md"
+                onChange={(newValue) => {
+                  setMinimumPrice(newValue?.[0]); setMaximumPrice(newValue?.[1])
+                }}
               />
-              <p className="text-center mt-2">
-                Price: {priceRange[0]} - {priceRange[1]}
-              </p>
-              <p className="text-center mt-2">
-                Price: {priceRange[0]} - {priceRange[1]}
-              </p>
             </div>
-
 
             {/* Date Filter */}
             <h5 className="font-bold mt-4 mb-3">Filter by Date</h5>
@@ -370,12 +353,16 @@ const EventsData = () => {
 
 
             {/* Day Filters for Today, Tomorrow, This Week, This Month */}
-            <div>
-              <button onClick={() => handleDayFilterChange('today')}>Today</button>
-              <button onClick={() => handleDayFilterChange('tomorrow')}>Tomorrow</button>
-              <button onClick={() => handleDayFilterChange('thisWeek')}>This Week</button>
-              <button onClick={() => handleDayFilterChange('thisMonth')}>This Month</button>
-            </div>
+            <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
+            <select
+              className="block w-full p-2 rounded border-2"
+              value={selectedDay}
+              onChange={(e) => setSelectedDay(e.target.value)}
+            >
+              {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
+                <option key={index} value={day}>{day}</option>
+              ))}
+            </select>
 
 
 
