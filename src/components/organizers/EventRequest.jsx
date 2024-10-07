@@ -58,68 +58,68 @@ export default function EventRequestForm() {
     });
   };
 
-// HoverButton component
-const HoverButton = ({ text }) => {
-  const buttonRef = useRef(null);
+  // HoverButton component
+  const HoverButton = ({ text }) => {
+    const buttonRef = useRef(null);
 
-  useEffect(() => {
-    const button = buttonRef.current;
-    const spanElements = [];
+    useEffect(() => {
+      const button = buttonRef.current;
+      const spanElements = [];
 
-    // Clear button innerHTML and create spans for each character
-    button.innerHTML = '';
-    for (let char of text) {
-      const span = document.createElement('span');
-      span.textContent = char === ' ' ? '\u00A0' : char;
-      button.appendChild(span);
-      spanElements.push(span); // Store spans for reference
-    }
+      // Clear button innerHTML and create spans for each character
+      button.innerHTML = '';
+      for (let char of text) {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        button.appendChild(span);
+        spanElements.push(span); // Store spans for reference
+      }
 
-    // Event listeners for mouse enter and leave
-    const handleMouseEnter = () => {
-      spanElements.forEach((span, index) => {
-        setTimeout(() => {
-          span.classList.add('hover');
-        }, index * 50);
-      });
-    };
+      // Event listeners for mouse enter and leave
+      const handleMouseEnter = () => {
+        spanElements.forEach((span, index) => {
+          setTimeout(() => {
+            span.classList.add('hover');
+          }, index * 50);
+        });
+      };
 
-    const handleMouseLeave = () => {
-      spanElements.forEach((span, index) => {
-        setTimeout(() => {
-          span.classList.remove('hover');
-        }, index * 50);
-      });
-    };
+      const handleMouseLeave = () => {
+        spanElements.forEach((span, index) => {
+          setTimeout(() => {
+            span.classList.remove('hover');
+          }, index * 50);
+        });
+      };
 
-    // Attach the event listeners
-    button.addEventListener('mouseenter', handleMouseEnter);
-    button.addEventListener('mouseleave', handleMouseLeave);
+      // Attach the event listeners
+      button.addEventListener('mouseenter', handleMouseEnter);
+      button.addEventListener('mouseleave', handleMouseLeave);
 
-    // Cleanup event listeners on component unmount
-    return () => {
-      button.removeEventListener('mouseenter', handleMouseEnter);
-      button.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [text]);
+      // Cleanup event listeners on component unmount
+      return () => {
+        button.removeEventListener('mouseenter', handleMouseEnter);
+        button.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }, [text]);
+
+    return (
+      <button ref={buttonRef} className="btn my-10  text-lg font-mono  " style={{ "--clr": "#b731e5" }}>
+        {text}
+      </button>
+    );
+  };
+
 
   return (
-    <button ref={buttonRef} className="btn my-10" style={{ "--clr": "#b731e5"}}>
-      {text}
-    </button>
-  );
-};
 
+    <div className='all py-10   bg-slate-950  ' >
 
-  return (
-
-    <div className='all py-10        ' >
-
-      <div className='box w-full  h-[950px] lg:w-1/2   '  >
+      <div className='box w-full h-[1400px] md:h-[950px] lg:w-1/2   '  >
         <form onSubmit={handleSubmit} action="">
           <h2 className='text-center  border-b-2 my-4 font-serif text-yellow-100'  >Event Information </h2>
 
-          <div className="grid grid-cols-2 gap-x-4  space-y-5  "> {/* Adjusts the grid to 2 columns with gap */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4  space-y-5  "> {/* Adjusts the grid to 2 columns with gap */}
             <div className="inputBox">
               <input
                 type="text"
@@ -151,16 +151,17 @@ const HoverButton = ({ text }) => {
             </div>
 
 
+          
             <div className="inputBox">
               <input
-                type="url"
-                name="photo"
-                id="photo"
+                type="text"
+                name="companyName"
+                id="companyName"
                 required
-                value={formData.photo}
+                value={formData.companyName}
                 onChange={handleChange}
               />
-              <span>Event Photo URL</span>
+              <span>Company Name</span>
               <i></i>
             </div>
             <div className="inputBox">
@@ -175,18 +176,20 @@ const HoverButton = ({ text }) => {
               <span>  $ Event Price</span>
               <i></i>
             </div>
+
             <div className="inputBox">
+
               <input
-                type="text"
-                name="companyName"
-                id="companyName"
+                type="file"
+                name="photo"
+                id="photo"
                 required
-                value={formData.companyName}
+                value={formData.photo}
                 onChange={handleChange}
               />
-              <span>Company Name</span>
+            
               <i></i>
-            </div>
+            </div> 
             <div className="inputBox">
               <select
                 name="type"
@@ -206,9 +209,9 @@ const HoverButton = ({ text }) => {
           </div>
           {/* End of the grid */}
           {/* PLACE  */}
-          <h3 className="text-xl  text-yellow-100 my-2 font-semibold">Place </h3>
+          <h3 className="text-xl  text-yellow-100 my-2 font-semibold">Event  Place </h3>
 
-          <div className='grid grid-cols-3  gap-3 '    >
+          <div className='grid grid-cols-1  md:grid-cols-3  gap-3 '    >
 
             <div className="inputBox">
               <input
@@ -253,7 +256,7 @@ const HoverButton = ({ text }) => {
 
           <h3 className="text-xl  text-yellow-100 my-2 font-semibold">Sponsor Info</h3>
 
-          <div className="grid grid-cols-2 gap-4"> {/* Sponsor Info fields in two columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Sponsor Info fields in two columns */}
             <div className="inputBox">
               <input
                 type="text"
@@ -283,7 +286,7 @@ const HoverButton = ({ text }) => {
 
           <h3 className="text-xl  text-yellow-100 my-2 font-semibold">Contact Info</h3>
 
-          <div className="grid grid-cols-2 gap-4"> {/* Contact Info fields in two columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Contact Info fields in two columns */}
             <div className="inputBox">
               <input
                 type="email"
@@ -310,8 +313,8 @@ const HoverButton = ({ text }) => {
               <i></i>
             </div>
           </div> {/* End of Contact Info grid */}
-         
-          <div className='grid grid-cols-2 gap-4  mt-5 '   >
+
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4  mt-5 '   >
             <div className="inputBox">
               <input
                 className='placeholder-black'
@@ -331,10 +334,10 @@ const HoverButton = ({ text }) => {
 
 
           {/* HoverButton */}
-             
-               <HoverButton text="Send Request" />
-              
-      
+
+          <HoverButton text="Send Request" />
+
+
         </form>
 
 
