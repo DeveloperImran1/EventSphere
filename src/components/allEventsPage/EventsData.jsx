@@ -22,12 +22,12 @@ const EventsData = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 6; // Items per page
   const [minimumPrice, setMinimumPrice] = useState(0);
   const [maximumPrice, setMaximumPrice] = useState(300);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedDay, setSelectedDay] = useState('All');
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
 
   const [filters, setFilters] = useState({
@@ -55,9 +55,11 @@ const EventsData = () => {
     setFilters({ ...filters, startDate, endDate });
   };
 
-  const handleDayChange = (e) => {
-    setFilters({ ...filters, day: e.target.value });
+
+  const handleDayChange = (date) => {
+    setFilters({ ...filters, date: new Date(date).toISOString() });
   };
+
 
 
   const [allCountries, setAllCountries] = useState([]); // Store unique countries
@@ -85,10 +87,10 @@ const EventsData = () => {
     setFilters(newFilters); // Update the filters state
   }, [startDate, endDate]);
 
- 
+
 
   // Fetch events with useQuery and filters
-  const { data: events = [], isLoading, refetch } = useQuery({
+  const { data: events = {}, isLoading, refetch } = useQuery({
     queryKey: ['events', filters],
     queryFn: async () => {
       const { data } = await axiosPublic.get('/events', { params: filters });
@@ -96,6 +98,7 @@ const EventsData = () => {
     },
     keepPreviousData: true,
   });
+  console.log(events)
 
   const [filteredData, setFilteredData] = useState(events);
 
@@ -116,34 +119,47 @@ const EventsData = () => {
     const uniqueCities = Array.from(new Set(selectedCountryCities));
     setCities(uniqueCities);
   };
-  const filterByDay = (events, filter) => {
+  const filterByDay = (events, day) => {
     const today = new Date();
-    const dayInMillis = 24 * 60 * 60 * 1000; // এক দিনের মিলিসেকেন্ড
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay());
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
 
-    switch (filter) {
-      case "Today":
-        // আজকের তারিখের ইভেন্টগুলি ফিল্টার করা হচ্ছে
+    switch (day) {
+      case "today":
         return events.filter(event => new Date(event.date).toDateString() === today.toDateString());
-      case "Tomorrow":
-        const tomorrow = new Date(today.getTime() + dayInMillis);
-        // আগামী দিনের ইভেন্টগুলি ফিল্টার করা হচ্ছে
+      case "tomorrow":
         return events.filter(event => new Date(event.date).toDateString() === tomorrow.toDateString());
-      case "This Week":
-        const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
-        // এই সপ্তাহের মধ্যে ইভেন্টগুলি ফিল্টার করা হচ্ছে
-        return events.filter(event => new Date(event.date) <= endOfWeek);
-      case "This Month":
-        const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // বর্তমান মাসের শেষ দিন
-        // এই মাসের মধ্যে ইভেন্টগুলি ফিল্টার করা হচ্ছে
-        return events.filter(event => new Date(event.date) <= endOfMonth);
+      case "this_week":
+        return events.filter(event => new Date(event.date) >= weekStart && new Date(event.date) <= weekEnd);
       default:
-        return events; // সব ইভেন্ট প্রদর্শন করুন
+        return events;
     }
-    refetch()
-};
+  };
 
 
 
+  const handleNextPage = () => {
+    if (currentPage < events.totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
+    }
+  };
+
+  const handlePaginationButton = (pageNum) => {
+    setCurrentPage(pageNum);
+    refetch(); // নির্দিষ্ট পেজের জন্য ডাটা রিফেচ
+  };
 
 
   // Add to cart and share event functionality
@@ -179,27 +195,6 @@ const EventsData = () => {
               </select>
             </div>
 
-            {/* Price Filter
-            <div>
-              <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
-              <Range
-                values={priceRange}
-                step={1}
-                min={0}
-                max={100}
-                onChange={values => handlePriceChange(values)}
-                renderTrack={({ props, children }) => (
-                  <div {...props} style={{ ...props.style, height: '6px', background: '#ccc' }}>
-                    {children}
-                  </div>
-                )}
-                renderThumb={({ props }) => (
-                  <div {...props} style={{ ...props.style, height: '24px', width: '24px', backgroundColor: 'var(--color-logo)', borderRadius: "50%" }} />
-                )}
-              />
-              <p className="text-center mt-2">Price: {priceRange[0]} - {priceRange[1]}</p>
-            </div> */}
-
             {/* Type Filter */}
             <div>
               <select name="type" value={filters.type} onChange={handleFilterChange}>
@@ -213,8 +208,7 @@ const EventsData = () => {
             <div>
               <select name="country" value={filters.country} onChange={handleFilterChange}>
                 <option value="">All Countries</option>
-                {events
-                  .map((event) => event.location.country)
+                {events?.events?.map((event) => event.location.country)
                   .filter((country, index, self) => self.indexOf(country) === index)
                   .map((country) => (
                     <option key={country} value={country}>
@@ -225,8 +219,7 @@ const EventsData = () => {
 
               <select name="city" value={filters.city} onChange={handleFilterChange}>
                 <option value="">All Cities</option>
-                {events
-                  .filter((event) => event.location.country === filters.country)
+                {events?.events?.filter((event) => event.location.country === filters.country)
                   .map((event) => event.location.city)
                   .filter((city, index, self) => self.indexOf(city) === index)
                   .map((city) => (
@@ -276,8 +269,7 @@ const EventsData = () => {
             <div>
               <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
                 <option value="">All Countries</option>
-                {events
-                  .map((event) => event.location.country)
+                {events?.events?.map((event) => event.location.country)
                   .filter((country, index, self) => self.indexOf(country) === index)
                   .map((country) => (
                     <option key={country} value={country}>
@@ -290,8 +282,7 @@ const EventsData = () => {
             <div>
               <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
                 <option value="">All Cities</option>
-                {events
-                  .filter((event) => event.location.country === filters.country)
+                {events?.events?.filter((event) => event.location.country === filters.country)
                   .map((event) => event.location.city)
                   .filter((city, index, self) => self.indexOf(city) === index)
                   .map((city) => (
@@ -313,18 +304,23 @@ const EventsData = () => {
             </div>
 
             {/* Price Filter */}
-            <div className="" >
-              <Slider
-                label="Price Range"
-                step={50}
-                minValue={0}
-                maxValue={1000}
-                defaultValue={[0, 300]}
-                formatOptions={{ style: "currency", currency: "USD" }}
-                className="max-w-md"
-                onChange={(newValue) => {
-                  setMinimumPrice(newValue?.[0]); setMaximumPrice(newValue?.[1])
-                }}
+            {/* Price Filter */}
+            <div className="flex gap-4 flex-col">
+              <input
+                type="number"
+                name="minimumPrice"
+                placeholder="Min Price"
+                value={filters.minimumPrice}
+                onChange={handleFilterChange}
+                className="input input-bordered"
+              />
+              <input
+                type="number"
+                name="maximumPrice"
+                placeholder="Max Price"
+                value={filters.maximumPrice}
+                onChange={handleFilterChange}
+                className="input input-bordered"
               />
             </div>
 
@@ -366,30 +362,13 @@ const EventsData = () => {
 
 
 
-            {/* Pagination */}
-            {/* <div className="flex justify-center mt-5">
-            <nav>
-              <ul className="flex space-x-2">
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <li key={i}>
-                    <button
-                      onClick={() => paginate(i + 1)}
-                      className={`px-4 py-2 ${currentPage === i + 1 ? 'bg-[--color-logo] text-white' : 'bg-gray-200'}`}
-                    >
-                      {i + 1}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div> */}
-          </div>
 
+          </div>
         </div>
         {/* Event Cards */}
         <div className="w-full lg:w-4/5">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {events.map(event => (
+            {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
                 <EventCard
 
@@ -399,7 +378,37 @@ const EventsData = () => {
                 /></Link>
             ))}
           </div>
-
+          {/* Pagination */}
+          <div className="flex my-12 gap-4 lg:mx-20">
+            <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="btn"
+            >
+              Previous
+            </button>
+            <div>
+              {Array.from({ length: events.totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePaginationButton(index + 1)}
+                  className={`${currentPage === index + 1
+                    ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white'
+                    : 'btn px-7 mx-1'
+                    }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === events.totalPages}
+              className="btn"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
