@@ -19,7 +19,7 @@ const Booking = () => {
             bgImageAlt="the menu"
             strength={-500}
         >
-            <div className="hero h-[800px]">
+            <div className="hero md:h-[800px]">
                 <div className="hero-overlay bg-opacity-60"></div>
                  
                 <div   id="Container">

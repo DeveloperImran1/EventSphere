@@ -8,7 +8,7 @@ const WelcomePopup = () => {
         Welcome to EventSphare! <span className="wave">👋</span>
       </h1>
       <p className="text-xl md:text-xl leading-[2rem] text-gray-700 mb-12 px-5 md:px-0">
-        We're glad you're here! What can we help you with first?
+        Were glad youre here! What can we help you with first?
       </p>
 
       <div className="flex space-x-6 px-5 lg:px-0">

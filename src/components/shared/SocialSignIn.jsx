@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const SocialSignIn = () => {
     const router = useRouter();
-    const { status } = useSession(); // Session status only
+    const { status } = useSession(); // Get session status
 
     const successfullSignIn = () => {
         Swal.fire({
@@ -26,7 +26,7 @@ const SocialSignIn = () => {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "Something Went Wrong",
+            title: "SignIn Error",
             showConfirmButton: false,
             timer: 1500
         });
@@ -36,16 +36,20 @@ const SocialSignIn = () => {
         const resp = await signIn(provider, { redirect: false }); // Avoid auto redirect
         console.log("Response from signIn:", resp);
 
-        if (resp?.ok) {
-            successfullSignIn();
-            // Check session status after successful sign-in
-            router.push('/register/wellcome-popup');
-        } else {
-            // errorSignIn();
-            console.log("something went wrong for signIn")
-            router.push('/');
+        if (resp?.error) {
+            errorSignIn(); // Show error modal
         }
     };
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            // Show success modal and redirect to homepage
+            successfullSignIn();
+            setTimeout(() => {
+                router.push('/');
+            }, 1500); // Wait for the modal to disappear before redirecting
+        }
+    }, [status, router]);
 
     return (
         <div>
@@ -58,11 +62,11 @@ const SocialSignIn = () => {
                         <FcGoogle className="m-2 w-5 h-5" /> Google
                     </button>
                     {/* Facebook Sign Up Button */}
-                    <button onClick={() => handleSocialLogin('facebook')} className="border w-full border-gray-300 rounded-md px-4 flex items-center justify-center">
+                    <button onClick={() => handleSocialLogin('facebook')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center justify-center">
                         <FaFacebook className="m-2 w-5 h-5 text-blue-600" /> Facebook
                     </button>
                     {/* Apple Sign Up Button */}
-                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 rounded-md  flex items-center justify-center">
+                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md  flex items-center justify-center">
                         <FaApple className="m-2 w-5 h-5" /> Apple
                     </button>
                 </div>

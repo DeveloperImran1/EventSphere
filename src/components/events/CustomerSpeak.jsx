@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 
@@ -32,7 +33,7 @@ const CustomerSpeak = () => {
               </p>
 
               <div className='flex gap-2 mt-6 md:p-2'>
-                <img className='w-14 h-14 rounded-full' src="https://i.postimg.cc/1zTXQjNQ/6437df6dd96a225d4d62bf77-Ellipse-1921-p-500.png" alt="" />
+              <Image height={675} width={1200} className='w-14 h-14 rounded-full' src="https://i.postimg.cc/1zTXQjNQ/6437df6dd96a225d4d62bf77-Ellipse-1921-p-500.png" alt="" />
                 <div>
                   <h1 className='text-2xl  font-medium text-blue-500' > Fabian Schuster</h1>
                   <p className='text-gray-600'>     Conference Host, Intersolar Europe </p>
@@ -60,7 +61,7 @@ const CustomerSpeak = () => {
               </p>
 
               <div className='flex gap-2 mt-6 md:p-2'>
-                <img className='w-14 h-14 rounded-full' src="https://i.postimg.cc/FHpk2pZr/6437df6d35666621f575e486-Ellipse-1920-p-500.png" alt="" />
+              <Image height={675} width={1200} className='w-14 h-14 rounded-full' src="https://i.postimg.cc/FHpk2pZr/6437df6d35666621f575e486-Ellipse-1920-p-500.png" alt="" />
                 <div>
                   <h1 className='text-2xl  font-medium text-blue-500' > Jacques Dubois</h1>
                   <p className='text-gray-600'>     Program Director, The Global Summit </p>

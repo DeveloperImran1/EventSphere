@@ -1,14 +1,12 @@
 "use client";
 import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SocialSignIn from "@/components/shared/SocialSignIn";
 import Swal from 'sweetalert2'
 import { TbFidgetSpinner } from "react-icons/tb";
@@ -21,6 +19,15 @@ const LoginPage = () => {
             position: "center",
             icon: "success",
             title: "Successfully SignIn",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+    const errorSignIn = () => {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "SignIn Error",
             showConfirmButton: false,
             timer: 1500
         });
@@ -40,7 +47,9 @@ const LoginPage = () => {
 
     // navigate kore onno page conditinaly jaoer jonno
     const router = useRouter();
-
+    const searchParams = useSearchParams();
+    const path = searchParams.get("redirect");
+    console.log("search params is a ", searchParams, "path is a ", path)
     const handleSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -50,14 +59,17 @@ const LoginPage = () => {
         // nextJs dia login korar way: 
         const resp = await signIn('credentials', {
             email, password,
-            redirect: false
+            redirect: true,
+            callbackUrl: path ? path : "/"
         });
         console.log("responce is", resp)
         setLoading(false)
         // thik vabe login hole home page a pathia dibo.
         if (resp.status === 200) {
             successfullySignIn()
-            router.push('/')
+        }
+        else{
+            errorSignIn()
         }
     };
 
@@ -271,7 +283,7 @@ const LoginPage = () => {
 
                         {/* Sign up Link */}
                         <p className="text-center mt-4">
-                            Don't have an account?{" "}
+                            Dont have an account?
                             <Link href="register" className="text-green-500 font-bold hover:underline">
                                 Sign Up
                             </Link>
@@ -279,7 +291,7 @@ const LoginPage = () => {
 
                         {/* Terms & Privacy */}
                         <p className="text-center text-xs text-gray-500 mt-2">
-                            By clicking "Log In", you agree to EventBookings{" "}
+                            By clicking Log In, you agree to EventBookings{" "}
                             <Link href="#" className="text-green-500 underline">
                                 Terms & Conditions
                             </Link>{" "}
@@ -287,7 +299,7 @@ const LoginPage = () => {
                             <Link href="#" className="text-green-500 underline">
                                 Privacy Policy
                             </Link>
-                            .
+                            
                         </p>
                     </div>
                 </div>

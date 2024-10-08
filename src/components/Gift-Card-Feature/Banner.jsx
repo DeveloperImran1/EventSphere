@@ -8,6 +8,7 @@ import YouTube from 'react-youtube'
 
 import { FaPlayCircle } from 'react-icons/fa'
 import './Banner.css'
+import Image from 'next/image'
 const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
 
 
@@ -75,16 +76,8 @@ export default function ChristmasPromo() {
         <div className="relative z-10  p-20">
           <h4 className="text-xl  font-poppins  mb-2">December 24-26, 2024</h4>
           <h1 className="md:text-5xl  font-serif   md:font-extrabold mb-6">Christmas Day</h1>
-          {/* <div className="grid grid-cols-4 gap-4 mb-8">
-            {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="">
-                <span className="text-4xl  font-sans  block">{value}</span>
-                <span className="text-sm       ">{unit.charAt(0).toUpperCase() + unit.slice(1)}</span>
-              </div>
-            ))}
-          </div> */}
          <div className="flex mb-6">
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
         {Object.entries(timeLeft).map(([unit, value]) => (
           <div 
             key={unit} 
@@ -96,20 +89,18 @@ export default function ChristmasPromo() {
         ))}
       </div>
     </div>
-          <div className="flex gap-4 ">
-            <Button variant="secondary" className="bg-white text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-black text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+          <div className=" md:flex  gap-4 ">
+            <Button variant="secondary" className="bg-white md:text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
+            <Button variant="outline" className="border-black md:text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
 
           </div>
         </div>
       </div>
       <div className="w-full clipPathSection2   md:w-1/2   flex items-center justify-center relative">
         <div className="relative"> 
-          <img
+        <Image height={675} width={1200}
             src="https://i.ibb.co.com/kB2XJkB/people-taking-part-high-protocol-event.jpg"
             alt="Concertgoers Watching Majestic Concert"
-           
-            
             onClick={handlePlayClick}
           />
           <Button 

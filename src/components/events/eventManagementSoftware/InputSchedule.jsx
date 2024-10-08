@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const EventFormSection = () => {
+const InputSchedule = () => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -31,7 +31,7 @@ const EventFormSection = () => {
             <div className="lg:w-1/2 flex flex-col items-center">
                 <Image
                     src="https://img.freepik.com/free-photo/well-dressed-businesspeople-office_1098-3175.jpg?ga=GA1.1.245323466.1722741120&semt=ais_hybrid"
-                    
+
                     alt="Event Image"
                     layout="responsive"
                     objectFit="cover"
@@ -40,6 +40,7 @@ const EventFormSection = () => {
                     className="w-full h-auto mb-5"
                 />
                 <h2 className="text-2xl font-bold mb-2">Love the Smell Of Events Every Morning Like Us?</h2>
+<<<<<<< HEAD
                 <h4>We are  Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
@@ -54,6 +55,12 @@ const EventFormSection = () => {
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
                 * PS: Nobody can match our pricing :-</p>
             </div>
+=======
+                <h4>Were Totally Obsessed To Make Your Event Succeed!
+                </h4>
+                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
+                    * PS: Nobody can match our pricing :-</p>            </div>
+>>>>>>> b690f891b3fc89dff0b7b5a82e4b7ec5a27afeed
 
             {/* Right side with form */}
             <div className="lg:w-1/2 bg-white p-8 shadow-lg rounded-lg">
@@ -190,4 +197,4 @@ const EventFormSection = () => {
     );
 };
 
-export default EventFormSection;
+export default InputSchedule;

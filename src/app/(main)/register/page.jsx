@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
 import { useState } from "react";
@@ -13,7 +11,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from "next/navigation";
 import { TbFidgetSpinner } from "react-icons/tb";
 
-const page = () => {
+const SignUp = () => {
   const successfullySignIn = () => {
     Swal.fire({
       position: "center",
@@ -23,6 +21,16 @@ const page = () => {
       timer: 1500
     });
   }
+  const errorSignIn = () => {
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "SignIn Error",
+        showConfirmButton: false,
+        timer: 1500
+    });
+}
+
   const router = useRouter();
   const [viewPass, setViewPass] = useState(false);
   const [viewConfirmPass, setViewConfirmPass] = useState(false)
@@ -79,6 +87,9 @@ const page = () => {
     if (responce.status === 200) {
       successfullySignIn()
       router.push('/register/wellcome-popup')
+    }
+    else{
+      errorSignIn()
     }
   };
 
@@ -353,7 +364,6 @@ const page = () => {
             {/* Sign up with Google, Facebook, Apple */}
 
             <SocialSignIn></SocialSignIn>
-
             {/* Log in Link */}
             <p className="text-center mt-4">
               Already have an account?{" "}
@@ -364,7 +374,7 @@ const page = () => {
 
             {/* Terms & Privacy */}
             <p className="text-center text-xs text-gray-500 mt-2">
-              By clicking "Sign up", you agree to EventBookings{" "}
+              By clicking Sign up, you agree to EventBookings{" "}
               <Link href="#" className="text-green-500 underline">
                 Terms & Conditions
               </Link>{" "}
@@ -381,4 +391,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUp;
