@@ -3,13 +3,14 @@ import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Logo from "@/components/shared/Logo";
 import SocialSignIn from "@/components/shared/SocialSignIn";
 import { signIn, useSession } from "next-auth/react";
 import Swal from 'sweetalert2'
 import { useRouter } from "next/navigation";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { uploadCloudinary } from "@/hooks/upload";
 
 const SignUp = () => {
   const successfullySignIn = () => {
@@ -23,13 +24,13 @@ const SignUp = () => {
   }
   const errorSignIn = () => {
     Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "SignIn Error",
-        showConfirmButton: false,
-        timer: 1500
+      position: "center",
+      icon: "error",
+      title: "SignIn Error",
+      showConfirmButton: false,
+      timer: 1500
     });
-}
+  }
 
   const router = useRouter();
   const [viewPass, setViewPass] = useState(false);
@@ -42,13 +43,25 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+  const [images, setImages] = useState([]);
+  const [links, setLinks] = useState([]);
+  const [showName, setShowName] = useState({})
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  
+  // Handle file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]; // Get the selected file
+    if (file) {
+      // Create a URL for the selected file to display as an image
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  };
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
 
 
   const handleSubmit = async (e) => {
@@ -56,15 +69,38 @@ const SignUp = () => {
     const name = `${e.target.firstName.value} ${e.target.lastName.value}`
     const email = e.target.email.value
     const password = e.target.password.value
-    const image = 'https://i.ibb.co.com/7GvpDBs/Blue-Modern-Facebook-Profile-Picture-1.jpg'
+    const image = links?.[0] 
+    console.log("db te image pathassi", image);
+
+
+    // image upload in cloudinary
+    try {
+      let arr = [];
+      for (let i = 0; i < images.length; i++) {
+        const data = await uploadCloudinary(images[i])
+        arr.push(data?.url)
+      }
+      setLinks(arr)
+    }
+    catch (error) {
+      console.log(error)
+    }
+    console.log("multiple images ", links)
+    console.log("iMAGE FILE IS ", images)
+
+    if(!image){
+      return;
+    }
+
     const newUser = {
       name: `${e.target.firstName.value} ${e.target.lastName.value}`,
       email: e.target.email.value,
       password: e.target.password.value,
-      image, 
+      image,
       createdAt: new Date(),
       role: "user"
     }
+
     console.log(newUser)
     setLoading(true)
     const resp = await fetch('http://localhost:3000/register/api', {
@@ -88,7 +124,7 @@ const SignUp = () => {
       successfullySignIn()
       router.push('/register/wellcome-popup')
     }
-    else{
+    else {
       errorSignIn()
     }
   };
@@ -247,8 +283,32 @@ const SignUp = () => {
             </h1>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="w-full flex flex-col justify-center items-center ">
+                <Image src={selectedImage || "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"} height={500} width={1200} alt="Profile Image" id="img" className="h-[100px] w-[100px] rounded-full" />
+                <div onChange={handleImageChange} className="my-4 flex justify-center">
+                  <label className="flex h-full w-max items-end gap-4 rounded-md bg-cyan-500 px-6 py-4 text-white active:ring-4 " htmlFor="file">
+                    <svg width={30} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><g id="Complete"><g id="upload"><g><path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path><g><polyline data-name="Right" fill="none" id="Right-2" points="7.9 6.7 12 2.7 16.1 6.7" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></polyline><line fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12" x2="12" y1="16.3" y2="4.8"></line></g></g></g></g></g>
+                    </svg>
+                    <p className="text-lg font-medium text-white"> {showName.name ? showName?.name?.slice(0, 20) : 'Upload'}</p>
+                  </label>
+                  <input
+                    type="file"
+                    multiple={true}
+                    placeholder="Your Image"
+                    required
+                    onChange={(e) => {
+                      setImages(e.target.files)
+                      if (e.target.files && e.target.files[0]) {
+                        const imageFile = e.target.files[0];
+                        setShowName(imageFile)
+                      }
+                    }} className="hidden" id="file" />
+                </div>
+
+              </div>
               {/* First and Last Name */}
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+
                 <div className="w-full">
                   <label className="block text-[15px] font-medium mb-1">
                     First name
@@ -355,9 +415,9 @@ const SignUp = () => {
                 className="bg-green-500 text-white rounded-md p-3 w-full font-bold hover:bg-green-600"
               >
                 {
-                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> :"Sign up"
+                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : "Sign up"
                 }
-                
+
               </button>
             </form>
 
