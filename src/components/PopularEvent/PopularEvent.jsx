@@ -63,6 +63,8 @@ const eventData2 = [
 
 
 
+
+
 const CountdownUnit = ({ value, label }) => (
   <div className="flex gap-2 items-center justify-center w-16 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
     <span className="text-xl font-mono font-bold text-white">{value.toString().padStart(2, '0')}</span>
@@ -235,7 +237,6 @@ function EventCard({ event, categoryName, setCategoryName }) {
   console.log(event, setCategoryName)
   console.log(categoryName)
   console.log(setCategoryName)
-
 
   const handleAddFavorite = (id) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
