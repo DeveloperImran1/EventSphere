@@ -94,19 +94,70 @@ const AnimatedNumber = ({ n }) => {
 
 const SummaryCard = ({ title, value, icon: Icon, color }) => (
   <Card className={`bg-gradient-to-br ${color} text-white`}>
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      <Icon className="h-4 w-4 text-white/70" />
+    <CardHeader className="flex flex-row items-center gap-3  space-y-0 pb-2">
+      <CardTitle className="text-xl  font-medium">{title}</CardTitle>
+      <Icon className="h-8 w-8   text-white/70" />
     </CardHeader>
     <CardContent>
-      <div className="text-2xl font-bold">
+      <div className="text-4xl  font-bold">
         <AnimatedNumber n={parseFloat(value.replace(/[^0-9.-]+/g, ""))} />
-        {value.includes("$") && " $"}
+        {value.includes("$") && "$"}
+     
       </div>
     </CardContent>
   </Card>
 )
 
+
+
+export default function Component() {
+  return (
+    <div className=" px-4 py-8 bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen">
+      <h1 className="text-4xl font-bold  text-center font-serif text-amber-100 ">Profit Dashboard</h1>
+{/*  2 card */}
+      <div className="grid my-10 gap-16 max-w-4xl mx-auto md:grid-cols-2 ">
+        <SummaryCard
+          title="Total Sell Amount"
+          value={`${totalSellAmount.toLocaleString()}$`}
+          icon={DollarSign}
+          color="from-green-400 to-emerald-600"
+        />
+        <SummaryCard
+          title="Overall Ticket Sales"
+          value={totalTicketsSold.toLocaleString()}
+          icon={Ticket}
+          color="from-blue-400 to-indigo-600"
+        />
+      </div>
+
+      <Card className=" bg-white/10 backdrop-blur-lg border-none text-white">
+     
+        <CardContent>
+          <div className="rounded-md border overflow-x-auto  border-gray-700 ">
+            <table className="w-full  mt-4 caption-bottom text-sm">
+              <thead className="border-b-2  text-lg border-amber-100">
+                <tr className="bg-gray-800/50">
+                  <th className="h-12 md:pl-10 px-4 text-left align-middle font-medium text-yellow-50">Event</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Total Sell</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Total Revenue</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Trend</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Change</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Monthly Chart</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y  divide-gray-600">
+                {events.map((event) => (
+                  <EventRow key={event.id} event={event} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+// TABLE BODY //
 const EventRow = ({ event }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const expandAnimation = useSpring({
@@ -117,13 +168,13 @@ const EventRow = ({ event }) => {
 
   return (
     <React.Fragment>
-      <tr className="hover:bg-muted/50 transition-colors">
-        <td className="p-4">
+      <tr className=" hover:shadow-2xl   hover:-translate-y-2 hover:scale-[1.04] transition-all duration-300 ease-in-out transform-gpu">
+        <td className="md:pl-10 p-2">
           <div className="flex items-center space-x-4">
             
             <div>
-              <p className="text-sm font-medium leading-none">{event.name}</p>
-              <p className="text-sm text-muted-foreground">ID: {event.id}</p>
+              <p className="text-sm text-white font-medium leading-none">{event.name}</p>
+     
             </div>
           </div>
         </td>
@@ -162,8 +213,8 @@ const EventRow = ({ event }) => {
       <tr>
         <td colSpan={6} className="p-0">
           <animated.div style={expandAnimation} className="overflow-hidden">
-            <div className="p-4 bg-muted/50">
-              <h4 className="text-sm font-semibold mb-2">Monthly Sales Trend</h4>
+            <div className="p-4 mb-4 bg-muted/50">
+              <h4 className="text-base font-semibold mb-2">Monthly Sales Trend</h4>
               <ResponsiveContainer width="100%" height={200}>
                 <AreaChart data={event.monthlyData}>
                   <defs>
@@ -184,56 +235,5 @@ const EventRow = ({ event }) => {
         </td>
       </tr>
     </React.Fragment>
-  )
-}
-
-export default function Component() {
-  return (
-    <div className=" px-4 py-8 bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen">
-      <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">Profit Dashboard</h1>
-
-      <div className="grid gap-6 container mx-auto md:grid-cols-2 lg:grid-cols-2">
-        <SummaryCard
-          title="Total Sell Amount"
-          value={`${totalSellAmount.toLocaleString()}$`}
-          icon={DollarSign}
-          color="from-green-400 to-emerald-600"
-        />
-        <SummaryCard
-          title="Overall Ticket Sales"
-          value={totalTicketsSold.toLocaleString()}
-          icon={Ticket}
-          color="from-blue-400 to-indigo-600"
-        />
-      </div>
-
-      <Card className="mt-8 bg-white/10 backdrop-blur-lg border-none text-white">
-        <CardHeader>
-          <CardTitle className="text-2xl">Event Performance</CardTitle>
-          <CardDescription className="text-gray-300">A detailed breakdown of each event`s performance</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="rounded-md border border-gray-700 overflow-hidden">
-            <table className="w-full caption-bottom text-sm">
-              <thead className="[&_tr]:border-b border-gray-700">
-                <tr className="bg-gray-800/50">
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Event</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Total Sell</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Total Revenue</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Trend</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Change</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-yellow-50">Monthly Chart</th>
-                </tr>
-              </thead>
-              <tbody className="[&_tr:last-child]:border-0">
-                {events.map((event) => (
-                  <EventRow key={event.id} event={event} />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
   )
 }
