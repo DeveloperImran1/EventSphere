@@ -1,4 +1,3 @@
-
 "use client"
 import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 import React, { useState, useEffect } from 'react'
@@ -14,6 +13,48 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link";
 const categories = ['Sports', 'Theater', 'Concerts', 'MusicFestivals']
 
+const eventData2 = [
+  { id: 1,  category: 'Sports', title: 'NBA Finals', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Los Angeles, CA' },
+  { id: 2,  category: 'Sports', title: 'World Cup Soccer', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Doha, Qatar' },
+  { id: 3,  category: 'Sports', title: 'Wimbledon', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
+  { id: 4,  category: 'Sports', title: 'Super Bowl', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
+  { id: 5,  category: 'Sports', title: 'Olympics', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Tokyo, Japan' },
+  { id: 6,  category: 'Sports', title: 'Tour de France', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'France' },
+  { id: 7,  category: 'Sports', title: 'Masters Golf', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Augusta, GA' },
+  { id: 8,  category: 'Sports', title: 'UFC Championship', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
+  { id: 9,  category: 'Sports', title: 'Formula 1 Grand Prix', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Monaco' },
+  { id: 10, category: 'Sports', title: 'Cricket World Cup', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
+  { id: 11, category: 'Theater', title: 'Hamilton', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 12, category: 'Theater', title: 'The Lion King', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 13, category: 'Theater', title: 'Phantom of the Opera', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 14, category: 'Theater', title: 'Wicked', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 15, category: 'Theater', title: 'Les Misérables', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'London, UK' },
+  { id: 16, category: 'Theater', title: 'To Kill a Mockingbird', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 17, category: 'Theater', title: 'The Crucible', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 18, category: 'Theater', title: 'A Streetcar Named Desire', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 19, category: 'Theater', title: 'Death of a Salesman', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
+  { id: 20, category: 'Theater', title: 'Macbeth', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'London, UK' },
+  { id: 21, category: 'Concerts', title: 'Coachella', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Indio, CA' },
+  { id: 22, category: 'Concerts', title: 'Glastonbury Festival', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Glastonbury, UK' },
+  { id: 23, category: 'Concerts', title: 'Tomorrowland', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Boom, Belgium' },
+  { id: 24, category: 'Concerts', title: 'Burning Man', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Black Rock City, NV' },
+  { id: 25, category: 'Concerts', title: 'Ultra Music Festival', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Miami, FL' },
+  { id: 26, category: 'Concerts', title: 'Lollapalooza', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Chicago, IL' },
+  { id: 27, category: 'Concerts', title: 'Rock in Rio', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Rio de Janeiro, Brazil' },
+  { id: 28, category: 'Concerts', title: 'Bonnaroo', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Manchester, TN' },
+  { id: 29, category: 'Concerts', title: 'EDC Las Vegas', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Las Vegas, NV' },
+  { id: 30, category: 'Concerts', title: 'SXSW', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Austin, TX' },
+  { id: 31, category: 'MusicFestivals', title: 'Glastonbury Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Glastonbury, UK' },
+  { id: 32, category: 'MusicFestivals', title: 'Coachella', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Indio, CA' },
+  { id: 33, category: 'MusicFestivals', title: 'Tomorrowland', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Boom, Belgium' },
+  { id: 34, category: 'MusicFestivals', title: 'Ultra Music Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Miami, FL' },
+  { id: 35, category: 'MusicFestivals', title: 'Lollapalooza', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Chicago, IL' },
+  { id: 36, category: 'MusicFestivals', title: 'Burning Man', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Black Rock City, NV' },
+  { id: 37, category: 'MusicFestivals', title: 'Bonnaroo', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Manchester, TN' },
+  { id: 38, category: 'MusicFestivals', title: 'Electric Daisy Carnival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Las Vegas, NV' },
+  { id: 39, category: 'MusicFestivals', title: 'Rock in Rio', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Rio de Janeiro, Brazil' },
+  { id: 40, category: 'MusicFestivals', title: 'Sziget Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Budapest, Hungary' },
+]
 const eventData = {
   Sports: [
     { id: 1, title: 'NBA Finals', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Los Angeles, CA' },
@@ -180,7 +221,7 @@ export default function PopularEvent() {
                     }}
                     className="mySwiper"
                   >
-                    {eventData[category].map((event) => (
+                    {eventData2.map((event) => (
                       <SwiperSlide key={event.id} className="pb-12">
                         <EventCard event={event} />
                       </SwiperSlide>
@@ -199,9 +240,19 @@ export default function PopularEvent() {
 
 
 function EventCard({ event }) {
-  const [isLiked, setIsLiked] = useState(false);
+  const [favorite, setFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // New hover state
 
+  const handleAddFavorite = (id) => {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      if (favorites.includes(id)) {
+      favorites = favorites.filter(favId => favId !== id);
+    } else {
+      favorites.push(id);
+      setFavorite(true)
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  };
   return (
     <div className="w-full">
       <div
@@ -219,9 +270,9 @@ function EventCard({ event }) {
             <div className="flex justify-end space-x-2">
               <button
                 className="p-2 rounded-full bg-white/10 backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
-                onClick={() => setIsLiked(!isLiked)}
+                onClick={() => handleAddFavorite(event.id)}
               >
-                <Heart className={`w-6 h-6 ${isLiked ? 'text-red-500 fill-red-500' : 'text-white'}`} />
+                <Heart className={`w-6 h-6 ${favorite ? 'text-red-500 fill-red-500' : 'text-white'}`} />
               </button>
               <button className="p-2 rounded-full bg-white/10 backdrop-blur-sm transition-colors duration-300 hover:bg-white/20">
                 <Share2 className="w-6 h-6 text-white" />
