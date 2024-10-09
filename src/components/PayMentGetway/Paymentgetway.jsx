@@ -39,8 +39,8 @@ export default function EnhancedPaymentGateway() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 to-purple-200">
-            <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-105">
+        <div className="flex justify-center items-center min-h-[90vh] bg-gradient-to-br from-blue-200 to-purple-200">
+            <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-x-105 h-[95vh]">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
                         <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
@@ -121,6 +121,21 @@ export default function EnhancedPaymentGateway() {
                                 </button>
                             </div>
                         </div>
+
+                        <div className="mt-6 pt-6 border-t border-gray-200">
+                            <div className="flex justify-between items-center">
+                                <div  >
+                                    <span className="text-gray-600">You have to Pay</span>
+                                    <div className="text-2xl text-slate-700   font-bold">
+                                        50<span className="text-sm font-normal">.99 USD</span>
+                                    </div>
+                                </div>
+                                <div className="bg-blue-100 p-2 rounded-full">
+                                    <CreditCard size={24} className="text-blue-600" />
+                                </div>
+                            </div>
+                        </div>
+
                         <button
                             onClick={handlePayNow}
                             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-md font-medium transition-all duration-300 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -134,12 +149,7 @@ export default function EnhancedPaymentGateway() {
                                 'Pay Now'
                             )}
                         </button>
-                        <Link href='/SeatBookingWidget' >
-                            <button className="mt-10 text-blue-600 flex items-center hover:text-blue-800 transition-colors duration-300">
-                                <ArrowLeft size={20} className="mr-2" />
-                                Back to Booking Seat
-                            </button>
-                        </Link>
+
                     </div>
 
                     <div className="w-full md:w-80">
@@ -182,23 +192,6 @@ export default function EnhancedPaymentGateway() {
                                 <span className="font-medium">City Auditorium </span>
                             </div>
                         </div>
-
-
-                        <div className="mt-6 pt-6 border-t border-gray-200">
-                            <div className="flex justify-between items-center">
-                                <div  >
-                                    <span className="text-gray-600">You have to Pay</span>
-                                    <div className="text-2xl text-slate-700   font-bold">
-                                        50<span className="text-sm font-normal">.99 USD</span>
-                                    </div>
-                                </div>
-                                <div className="bg-blue-100 p-2 rounded-full">
-                                    <CreditCard size={24} className="text-blue-600" />
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>

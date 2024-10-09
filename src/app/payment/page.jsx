@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcAdvertising } from "react-icons/fc";
 import { motion } from "framer-motion";
 import EnhancedPaymentGateway from "@/components/PayMentGetway/Paymentgetway";
@@ -20,8 +20,8 @@ function SeatButton({ seat, onClick }) {
     seat.status === "available"
       ? "bg-gray-300"
       : seat.status === "sold"
-      ? "bg-red-500"
-      : "bg-green-500";
+        ? "bg-red-500"
+        : "bg-green-500";
 
   return (
     <motion.button
@@ -43,7 +43,43 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
+
+  // Fetch event data from API
+  useEffect(() => {
+    const fetchEventsData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:9000/events/${id}`);
+        setEvent(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchEventsData();
+  }, [id]);
+
+  // Calculate total price based on ticket quantity
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      if (event) {
+        let price = event.price * ticketQuantity;
+        if (ticketQuantity >= 5) {
+          price *= 0.9; // 10% discount for bulk purchases
+        }
+        setTotalPrice(price.toFixed(2));
+      }
+    };
+
+    calculateTotalPrice();
+  }, [ticketQuantity, event]);
+
+  const handleTicketQuantityChange = (e) => {
+    setTicketQuantity(parseInt(e.target.value));
+  };
+
+  // Initializing seats
   const [seats, setSeats] = useState(() => {
     return Array(ROWS)
       .fill(null)
@@ -56,69 +92,44 @@ const Payment = () => {
           }))
       );
   });
-  const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const [selectedSeats, setSelectedSeats] = useState(0);
   const [total, setTotal] = useState(0);
   const [couponCode, setCouponCode] = useState("");
-  const [couponDiscount, setCouponDiscount] = useState(0);
+  const [discount, setDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch event data from API
+  // Alert for bulk purchase discount
   useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:9000/events/${id}`);
-        setEvent(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching event data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchEventData();
-  }, [id]);
-
-  // Calculate total price based on ticket quantity
-  useEffect(() => {
-    if (event) {
-      let price = event.price * ticketQuantity;
-      if (ticketQuantity >= 5) {
-        const discount = price * 0.1; // 10% discount
-        price -= discount;
-        setDiscount(discount);
-      } else {
-        setDiscount(0);
-      }
-      setTotalPrice(price.toFixed(2));
-    }
-  }, [ticketQuantity, event]);
-
-  const handleTicketQuantityChange = (e) => {
-    setTicketQuantity(parseInt(e.target.value));
-  };
+    Swal.fire({
+      title: "🎉🎁 Special Offer!",
+      text: "Book 5 or more seats and get a 10% discount on each seat!",
+      icon: "warning",
+      confirmButtonText: "Got it!",
+    });
+  }, []);
 
   // Handle seat selection and deselection
   const handleSeatClick = (row, seat) => {
     const newSeats = [...seats];
-    const selectedSeat = newSeats[row][seat];
-    if (selectedSeat.status === "available") {
-      selectedSeat.status = "selected";
-      setSelectedSeats([...selectedSeats, selectedSeat]);
+    if (newSeats[row][seat].status === "available") {
+      newSeats[row][seat].status = "selected";
+      setSelectedSeats(selectedSeats + 1);
       setTotal(total + event.price);
       Swal.fire({
         title: "Seat Selected",
-        text: `You've selected seat ${selectedSeat.number}`,
+        text: `You've selected seat ${newSeats[row][seat].number}`,
         icon: "success",
         timer: 1500,
         showConfirmButton: false,
       });
-    } else if (selectedSeat.status === "selected") {
-      selectedSeat.status = "available";
-      setSelectedSeats(selectedSeats.filter((s) => s !== selectedSeat));
+    } else if (newSeats[row][seat].status === "selected") {
+      newSeats[row][seat].status = "available";
+      setSelectedSeats(selectedSeats - 1);
       setTotal(total - event.price);
       Swal.fire({
         title: "Seat Deselected",
-        text: `You've deselected seat ${selectedSeat.number}`,
+        text: `You've deselected seat ${newSeats[row][seat].number}`,
         icon: "info",
         timer: 1500,
         showConfirmButton: false,
@@ -130,7 +141,7 @@ const Payment = () => {
   // Apply coupon code
   const applyCoupon = () => {
     if (couponCode === "DISCOUNT20") {
-      setCouponDiscount(20);
+      setDiscount(20);
       Swal.fire({
         title: "Coupon Applied",
         text: "You got a $20 discount!",
@@ -139,7 +150,7 @@ const Payment = () => {
         showConfirmButton: false,
       });
     } else {
-      setCouponDiscount(0);
+      setDiscount(0);
       Swal.fire({
         title: "Invalid Coupon",
         text: "The coupon code is not valid.",
@@ -151,18 +162,15 @@ const Payment = () => {
   };
 
   // Calculate final total after discounts
-  const calculateTotal = useCallback(() => {
+  const calculateTotal = () => {
     let subtotal = total;
-    let calculatedDiscount = 0;
-    if (selectedSeats.length >= 5) {
-      calculatedDiscount = subtotal * 0.1; // 10% discount
-      subtotal -= calculatedDiscount;
+    if (selectedSeats >= 5) {
+      subtotal *= 0.9; // 10% bulk discount
     }
-    subtotal -= couponDiscount;
-    return { finalTotal: Math.max(0, subtotal), calculatedDiscount };
-  }, [total, selectedSeats, couponDiscount]);
+    return Math.max(0, subtotal - discount);
+  };
 
-  const { finalTotal } = calculateTotal();
+  const finalTotal = calculateTotal();
 
   if (loading) {
     return <Loading />;
@@ -240,27 +248,54 @@ const Payment = () => {
               </Button>
             </div>
             <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg">
-              <p>Selected Seats: <span>{selectedSeats.length}</span></p>
-              <p>Subtotal: <span>${total.toFixed(2)}</span></p>
-              <p>Discount: <span>${discount.toFixed(2)}</span></p>
-              <p>Total: <span>${finalTotal.toFixed(2)}</span></p>
+              <p>
+                Selected Seats: <span>{selectedSeats}</span>
+              </p>
+              <p>
+                Subtotal: <span>${total.toFixed(2)}</span>
+              </p>
+              <p>
+                Discount: <span>${discount.toFixed(2)}</span>
+              </p>
+              <p className="font-bold text-2xl">
+                Final Total: <span>${finalTotal.toFixed(2)}</span>
+              </p>
             </div>
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              disabled={selectedSeats === 0}
+              className="w-full py-2 mt-4"
+            >
+              Book Now
+            </Button>
           </div>
-          <Button
-            variant="default"
-            className="w-full mt-4"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Pay Now
-          </Button>
         </div>
       </div>
 
       {isModalOpen && (
-        <EnhancedPaymentGateway
-          total={finalTotal}
-          closeModal={() => setIsModalOpen(false)}
-        />
+        <motion.div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            className="bg-white p-6 rounded-lg shadow-lg relative"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+          >
+            <div className="absolute top-10 right-0 z-50">
+              <Button
+                onClick={() => setIsModalOpen(false)}
+                className="bg-purple-600 text-white w-20"
+              >
+                <TbXboxX className='text-2xl' />
+              </Button>
+            </div>
+            <EnhancedPaymentGateway total={finalTotal} />
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );
