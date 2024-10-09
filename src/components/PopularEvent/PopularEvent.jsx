@@ -11,18 +11,20 @@ import SectionTitle from '../shared/SectionTitle'
 import 'swiper/swiper-bundle.css'
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 const categories = ['Sports', 'Theater', 'Concerts', 'MusicFestivals']
 
 const eventData2 = [
-  { id: 1,  category: 'Sports', title: 'NBA Finals', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Los Angeles, CA' },
-  { id: 2,  category: 'Sports', title: 'World Cup Soccer', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Doha, Qatar' },
-  { id: 3,  category: 'Sports', title: 'Wimbledon', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
-  { id: 4,  category: 'Sports', title: 'Super Bowl', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
-  { id: 5,  category: 'Sports', title: 'Olympics', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Tokyo, Japan' },
-  { id: 6,  category: 'Sports', title: 'Tour de France', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'France' },
-  { id: 7,  category: 'Sports', title: 'Masters Golf', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Augusta, GA' },
-  { id: 8,  category: 'Sports', title: 'UFC Championship', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
-  { id: 9,  category: 'Sports', title: 'Formula 1 Grand Prix', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Monaco' },
+  { id: 1, category: 'Sports', title: 'NBA Finals', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Los Angeles, CA' },
+  { id: 2, category: 'Sports', title: 'World Cup Soccer', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Doha, Qatar' },
+  { id: 3, category: 'Sports', title: 'Wimbledon', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
+  { id: 4, category: 'Sports', title: 'Super Bowl', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
+  { id: 5, category: 'Sports', title: 'Olympics', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Tokyo, Japan' },
+  { id: 6, category: 'Sports', title: 'Tour de France', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'France' },
+  { id: 7, category: 'Sports', title: 'Masters Golf', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Augusta, GA' },
+  { id: 8, category: 'Sports', title: 'UFC Championship', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
+  { id: 9, category: 'Sports', title: 'Formula 1 Grand Prix', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Monaco' },
   { id: 10, category: 'Sports', title: 'Cricket World Cup', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
   { id: 11, category: 'Theater', title: 'Hamilton', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
   { id: 12, category: 'Theater', title: 'The Lion King', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
@@ -106,6 +108,8 @@ const eventData = {
   ]
 };
 
+
+
 const CountdownUnit = ({ value, label }) => (
   <div className="flex gap-2 items-center justify-center w-16 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
     <span className="text-xl font-mono font-bold text-white">{value.toString().padStart(2, '0')}</span>
@@ -166,6 +170,19 @@ const EnhancedCountdown = ({ date }) => {
 export default function PopularEvent() {
   const [activeCategory, setActiveCategory] = useState(categories[0])
   const [mounted, setMounted] = useState(false)
+  const [categoryName, setCategoryName] = useState("Business")
+  const axiosPublic = useAxiosPublic();
+  const { data: eventData, isLoading } = useQuery({
+    queryKey: ["categoryEvent"],
+    queryFn: () => {
+      const eventData = axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`).then((res) =>
+        res.json()
+      )
+      return eventData;
+
+    }
+  })
+  console.log("Popular event theke data: ", eventData)
 
   useEffect(() => {
     setMounted(true)
@@ -223,7 +240,7 @@ export default function PopularEvent() {
                   >
                     {eventData2.map((event) => (
                       <SwiperSlide key={event.id} className="pb-12">
-                        <EventCard event={event} />
+                        <EventCard event={event} categoryName={categoryName} setCategoryName={setCategoryName} />
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -239,13 +256,17 @@ export default function PopularEvent() {
 
 
 
-function EventCard({ event }) {
+function EventCard({ event, categoryName, setCategoryName }) {
   const [favorite, setFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // New hover state
+  // const {event, categoryName, setCategoryName} = eventsInfo;
+  console.log(event, setCategoryName)
+  console.log(categoryName)
+  console.log(setCategoryName)
 
   const handleAddFavorite = (id) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      if (favorites.includes(id)) {
+    if (favorites.includes(id)) {
       favorites = favorites.filter(favId => favId !== id);
     } else {
       favorites.push(id);
@@ -298,7 +319,7 @@ function EventCard({ event }) {
           >
 
             <Button className="button  font-serif font-semibold   hover:text-white transition-colors duration-300">
-            Read More
+              Read More
             </Button>
             <Link href="/SeatBookingWidget">
               <Button className="bg-white m-2  font-serif font-semibold  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
