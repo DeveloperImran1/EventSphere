@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { CalendarDays, DollarSign, Users, ChevronUp, ChevronDown } from 'lucide-react'
 import Swal from 'sweetalert2';
+import SectionTitle from '../shared/SectionTitle';
+import Image from "next/image";
 
 const bookings = [
   {
@@ -14,6 +16,7 @@ const bookings = [
     tickets: 3,
     status: 'Confirmed',
     revenue: 450,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
   },
   {
     id: 2,
@@ -24,6 +27,7 @@ const bookings = [
     tickets: 2,
     status: 'Refund',
     revenue: -600,
+    photo: 'https://i.ibb.co.com/hyZL9gH/pexels-linkedin-2182970.jpg',
   },
   {
     id: 3,
@@ -34,6 +38,7 @@ const bookings = [
     tickets: 4,
     status: 'Confirmed',
     revenue: 800,
+    photo: 'https://i.ibb.co.com/L8k4xhk/pexels-tima-miroshnichenko-5452268.jpg',
   },
   {
     id: 4,
@@ -44,6 +49,7 @@ const bookings = [
     tickets: 1,
     status: 'Canceled',
     revenue: 0,
+    photo: 'https://i.ibb.co.com/CPvQDkk/MAN.jpg',
   },
   {
     id: 5,
@@ -54,8 +60,42 @@ const bookings = [
     tickets: 5,
     status: 'Confirmed',
     revenue: 1000,
+    photo: 'https://i.ibb.co.com/0M0cZSm/pexels-chloekalaartist-1043473.jpg',
   },
-]
+  {
+    id: 6,
+    customerName: 'Emily Davis',
+    eventName: 'Business Leadership Summit',
+    bookingDate: '2024-07-25',
+    eventDate: '2024-10-25',
+    tickets: 3,
+    status: 'Confirmed',
+    revenue: 750,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
+  },
+  {
+    id: 7,
+    customerName: 'Michael Miller',
+    eventName: 'Art Expo 2024',
+    bookingDate: '2024-06-05',
+    eventDate: '2024-09-10',
+    tickets: 2,
+    status: 'Confirmed',
+    revenue: 400,
+    photo: 'https://i.ibb.co.com/0M0cZSm/pexels-chloekalaartist-1043473.jpg',
+  },
+  {
+    id: 8,
+    customerName: 'Sophia Clark',
+    eventName: 'Startup Pitch Night',
+    bookingDate: '2024-08-15',
+    eventDate: '2024-11-05',
+    tickets: 1,
+    status: 'Confirmed',
+    revenue: 200,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
+  },
+];
 
 const StatusBadge = ({ status }) => {
   const colorMap = {
@@ -124,6 +164,12 @@ const EventBookingsTable = () => {
 
   return (
     <div className="overflow-x-auto my-10 px-4  rounded-lg shadow-lg">
+            
+        <SectionTitle
+          subTitle="Popular Events"
+          title="Explore Top Events"
+        />
+       
       <table className="min-w-full     ">
         <thead className="bg-[#1b88c0]">
           <tr>
@@ -145,7 +191,8 @@ const EventBookingsTable = () => {
               className="hover:bg-gradient-to-br  from-blue-200 to-purple-200  hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.04] transition-all duration-300 ease-in-out transform-gpu"
               
             >
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{booking.customerName}</td>
+               
+              <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2 text-sm font-medium text-gray-900"><span><img className='w-10 h-10 rounded-full '  src={booking.photo} alt="photo" /></span>   {booking.customerName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                 <Tooltip content={new Date(booking.bookingDate).toLocaleDateString()}>
