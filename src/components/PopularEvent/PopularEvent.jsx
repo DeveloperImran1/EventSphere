@@ -1,6 +1,6 @@
 
 "use client"
-import { FaMagnifyingGlassLocation } from "react-icons/fa6";
+
 import React, { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,8 +10,7 @@ import { Heart, Share2 } from 'lucide-react'
 import SectionTitle from '../shared/SectionTitle'
 
 import 'swiper/swiper-bundle.css'
-import { Button } from "@/components/ui/button"
-import Link from "next/link";
+
 import EventCard from "./EventCard";
 const categories = ['Sports', 'Theater', 'Concerts', 'MusicFestivals']
 

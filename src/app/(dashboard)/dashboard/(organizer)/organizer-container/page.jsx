@@ -21,9 +21,7 @@ const OrganizerContainer = () => {
         <div className="flex-1">
           <Chart />
         </div>
-        {/* <div className="flex-1">
-          <CirculeChart />
-        </div> */}
+       
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4 p-4">
     <div className="flex-1">
