@@ -125,7 +125,7 @@ const SummaryCard = ({ title, value, icon: Icon, color }) => (
   </Card>
 )
 
-export default function Component() {
+export default function ProfitPage() {
   return (
     <div className=" px-4 py-8 bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen">
       <h1 className="text-4xl font-bold  text-center font-serif text-amber-100 ">Profit Dashboard</h1>

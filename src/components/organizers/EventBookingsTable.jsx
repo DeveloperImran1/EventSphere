@@ -125,7 +125,7 @@ const EventBookingsTable = () => {
   return (
     <div className="overflow-x-auto my-10 px-4  rounded-lg shadow-lg">
       <table className="min-w-full     ">
-        <thead className="bg-gradient-to-r from-purple-500  to-indigo-600">
+        <thead className="bg-[#1b88c0]">
           <tr>
             {['customerName', 'eventName', 'bookingDate', 'eventDate', 'tickets', 'status', 'revenue'].map((column) => (
               <th 

@@ -113,7 +113,7 @@ export default function EventRequestForm() {
 
   return (
 
-    <div className='all py-10   bg-slate-950  ' >
+    <div className='all py-10' >
 
       <div className='box w-full h-[1400px] md:h-[950px] lg:w-1/2   '  >
         <form onSubmit={handleSubmit} action="">
