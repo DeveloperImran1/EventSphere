@@ -1,4 +1,3 @@
-
 "use client"
 import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 import React, { useState, useEffect } from 'react'
@@ -243,7 +242,7 @@ export default function PopularEvent() {
 function EventCard({ event }) {
   const [favorite, setFavorite] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // New hover state
-  
+
   const handleAddFavorite = (id) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
       if (favorites.includes(id)) {
