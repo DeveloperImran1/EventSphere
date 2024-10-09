@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import SocialSignIn from "@/components/shared/SocialSignIn";
 import Swal from 'sweetalert2'
 import { TbFidgetSpinner } from "react-icons/tb";
@@ -19,6 +19,15 @@ const LoginPage = () => {
             position: "center",
             icon: "success",
             title: "Successfully SignIn",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+    const errorSignIn = () => {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "SignIn Error",
             showConfirmButton: false,
             timer: 1500
         });
@@ -38,7 +47,9 @@ const LoginPage = () => {
 
     // navigate kore onno page conditinaly jaoer jonno
     const router = useRouter();
-
+    const searchParams = useSearchParams();
+    const path = searchParams.get("redirect");
+    console.log("search params is a ", searchParams, "path is a ", path)
     const handleSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -48,14 +59,17 @@ const LoginPage = () => {
         // nextJs dia login korar way: 
         const resp = await signIn('credentials', {
             email, password,
-            redirect: false
+            redirect: true,
+            callbackUrl: path ? path : "/"
         });
         console.log("responce is", resp)
         setLoading(false)
         // thik vabe login hole home page a pathia dibo.
         if (resp.status === 200) {
             successfullySignIn()
-            router.push('/')
+        }
+        else{
+            errorSignIn()
         }
     };
 

@@ -9,9 +9,17 @@ export const Avatar = ({ children, className }) => (
 );
 
 export const AvatarImage = ({ src, alt }) => (
-  <Image height={675} width={1200} src={src} alt={alt} className="rounded-full" />
+  <Image
+    height={675}
+    width={1200}
+    src={src}
+    alt={alt}
+    className="rounded-full"
+  />
 );
 
 export const AvatarFallback = ({ children }) => (
-  <div className="bg-gray-300 rounded-full flex items-center justify-center">{children}</div>
+  <div className="bg-gray-300 rounded-full flex items-center justify-center h-full w-full">
+    {children}
+  </div>
 );
