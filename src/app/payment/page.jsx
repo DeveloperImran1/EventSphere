@@ -1,41 +1,33 @@
-"use client"
-import Loading from '@/components/shared/LoadingSpiner/Loading';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import axios from 'axios';
-import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { FcAdvertising } from 'react-icons/fc';
-import { motion } from 'framer-motion';
-import EnhancedPaymentGateway from '@/components/PayMentGetway/Paymentgetway';
-import { TbXboxX } from 'react-icons/tb';
-import Swal from 'sweetalert2';
-
+"use client";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import { FcAdvertising } from "react-icons/fc";
+import { motion } from "framer-motion";
+import EnhancedPaymentGateway from "@/components/PayMentGetway/Paymentgetway";
+import { TbXboxX } from "react-icons/tb";
+import Swal from "sweetalert2";
 
 const ROWS = 10;
 const SEATS_PER_ROW = 12;
-const VIP_ROWS = 2;
 
-const SEAT_PRICES = {
-  normal: 10,
-  vip: 20,
-};
-
+// SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick }) {
   const bgColor =
-    seat.status === 'available'
-      ? seat.category === 'vip'
-        ? 'bg-yellow-500'
-        : 'bg-gray-300'
-      : seat.status === 'sold'
-        ? 'bg-red-500'
-        : 'bg-green-500';
+    seat.status === "available"
+      ? "bg-gray-300"
+      : seat.status === "sold"
+      ? "bg-red-500"
+      : "bg-green-500";
 
   return (
     <motion.button
       className={`w-12 h-12 m-1 rounded-md text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
       onClick={onClick}
-      disabled={seat.status === 'sold'}
+      disabled={seat.status === "sold"}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -44,277 +36,234 @@ function SeatButton({ seat, onClick }) {
   );
 }
 
-
 const Payment = () => {
-    const searchParams=useSearchParams()
-    const id=searchParams.get("id")
-    const [event, setEvent] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchEventsData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:9000/events/${id}`);
-                setEvent(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching event data:", error);
-                setLoading(false);
-            }
-        };
-
-        fetchEventsData();
-
-    }, [id]);
-
-
-
-    // atik vai 
-    const [seats, setSeats] = useState(() => {
-        const initialSeats = Array(ROWS)
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [ticketQuantity, setTicketQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [seats, setSeats] = useState(() => {
+    return Array(ROWS)
+      .fill(null)
+      .map((_, rowIndex) =>
+        Array(SEATS_PER_ROW)
           .fill(null)
-          .map((_, rowIndex) =>
-            Array(SEATS_PER_ROW)
-              .fill(null)
-              .map((_, seatIndex) => ({
-                status: 'available',
-                category: rowIndex < VIP_ROWS ? 'vip' : 'normal',
-                number: `${String.fromCharCode(65 + rowIndex)}${seatIndex + 1}`,
-              }))
-          );
-    
-        // Pre-book 2-3 random seats
-        const numPreBooked = Math.floor(Math.random() * 5) + 5;
-        for (let i = 0; i < numPreBooked; i++) {
-          const row = Math.floor(Math.random() * ROWS);
-          const seat = Math.floor(Math.random() * SEATS_PER_ROW);
-          initialSeats[row][seat].status = 'sold';
-        }
-        return initialSeats;
+          .map((_, seatIndex) => ({
+            status: "available",
+            number: `${String.fromCharCode(65 + rowIndex)}${seatIndex + 1}`,
+          }))
+      );
+  });
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [couponCode, setCouponCode] = useState("");
+  const [couponDiscount, setCouponDiscount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Fetch event data from API
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:9000/events/${id}`);
+        setEvent(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchEventData();
+  }, [id]);
+
+  // Calculate total price based on ticket quantity
+  useEffect(() => {
+    if (event) {
+      let price = event.price * ticketQuantity;
+      if (ticketQuantity >= 5) {
+        const discount = price * 0.1; // 10% discount
+        price -= discount;
+        setDiscount(discount);
+      } else {
+        setDiscount(0);
+      }
+      setTotalPrice(price.toFixed(2));
+    }
+  }, [ticketQuantity, event]);
+
+  const handleTicketQuantityChange = (e) => {
+    setTicketQuantity(parseInt(e.target.value));
+  };
+
+  // Handle seat selection and deselection
+  const handleSeatClick = (row, seat) => {
+    const newSeats = [...seats];
+    const selectedSeat = newSeats[row][seat];
+    if (selectedSeat.status === "available") {
+      selectedSeat.status = "selected";
+      setSelectedSeats([...selectedSeats, selectedSeat]);
+      setTotal(total + event.price);
+      Swal.fire({
+        title: "Seat Selected",
+        text: `You've selected seat ${selectedSeat.number}`,
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
       });
-    
-      const [selectedSeats, setSelectedSeats] = useState(0);
-      const [total, setTotal] = useState(0);
-      const [couponCode, setCouponCode] = useState('');
-      const [discount, setDiscount] = useState(0);
-      const [isModalOpen, setIsModalOpen] = useState(false); // State for Modal open/close
-    
-      useEffect(() => {
-        Swal.fire({
-          title: '🎉🎁 Special Offer!',
-          text: 'Book 5 or more seats and get a 15% discount on each seat!',
-          icon: 'warning',
-          confirmButtonText: 'Got it!',
-        });
-      }, []);
-    
-      const handleSeatClick = (row, seat) => {
-        const newSeats = [...seats];
-        if (newSeats[row][seat].status === 'available') {
-          newSeats[row][seat].status = 'selected';
-          setSelectedSeats(selectedSeats + 1);
-          setTotal(total + SEAT_PRICES[newSeats[row][seat].category]);
-          Swal.fire({
-            title: 'Seat Selected',
-            text: `You've selected seat ${newSeats[row][seat].number}`,
-            icon: 'success',
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        } else if (newSeats[row][seat].status === 'selected') {
-          newSeats[row][seat].status = 'available';
-          setSelectedSeats(selectedSeats - 1);
-          setTotal(total - SEAT_PRICES[newSeats[row][seat].category]);
-          Swal.fire({
-            title: 'Seat Deselected',
-            text: `You've deselected seat ${newSeats[row][seat].number}`,
-            icon: 'info',
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        }
-        setSeats(newSeats);
-      };
-    
-      const applyCoupon = () => {
-        if (couponCode === 'DISCOUNT20') {
-          setDiscount(20);
-          Swal.fire({
-            title: 'Coupon Applied',
-            text: 'You got a $20 discount!',
-            icon: 'success',
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        } else {
-          setDiscount(0);
-          Swal.fire({
-            title: 'Invalid Coupon',
-            text: 'The coupon code is not valid.',
-            icon: 'error',
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        }
-      };
-    
-      const calculateTotal = () => {
-        let subtotal = total;
-        if (selectedSeats >= 5) {
-          subtotal *= 0.85; // 15% discount
-        }
-        return Math.max(0, subtotal - discount);
-      };
-    
-      const finalTotal = calculateTotal();
-
-    if (loading) {
-        return < Loading />;
+    } else if (selectedSeat.status === "selected") {
+      selectedSeat.status = "available";
+      setSelectedSeats(selectedSeats.filter((s) => s !== selectedSeat));
+      setTotal(total - event.price);
+      Swal.fire({
+        title: "Seat Deselected",
+        text: `You've deselected seat ${selectedSeat.number}`,
+        icon: "info",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     }
+    setSeats(newSeats);
+  };
 
-    if (!event) {
-        return (
-            <div className="text-center mt-20">
-                <h2 className="text-2xl font-bold">Event Not Found</h2>
-                <p className="mt-2">We could not find the event you are looking for.</p>
-            </div>
-        );
+  // Apply coupon code
+  const applyCoupon = () => {
+    if (couponCode === "DISCOUNT20") {
+      setCouponDiscount(20);
+      Swal.fire({
+        title: "Coupon Applied",
+        text: "You got a $20 discount!",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } else {
+      setCouponDiscount(0);
+      Swal.fire({
+        title: "Invalid Coupon",
+        text: "The coupon code is not valid.",
+        icon: "error",
+        timer: 1500,
+        showConfirmButton: false,
+      });
     }
+  };
+
+  // Calculate final total after discounts
+  const calculateTotal = useCallback(() => {
+    let subtotal = total;
+    let calculatedDiscount = 0;
+    if (selectedSeats.length >= 5) {
+      calculatedDiscount = subtotal * 0.1; // 10% discount
+      subtotal -= calculatedDiscount;
+    }
+    subtotal -= couponDiscount;
+    return { finalTotal: Math.max(0, subtotal), calculatedDiscount };
+  }, [total, selectedSeats, couponDiscount]);
+
+  const { finalTotal } = calculateTotal();
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (!event) {
     return (
-        <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
-        <h1 className="text-3xl border-b-2 py-4 font-serif font-bold mb-4 text-center">
-          Multiplex Theatre Showing Screen 1
-        </h1>
-  
-        <div className="flex flex-col md:flex-row">
-          <div className="flex-1">
-            <div className="bg-yellow-500 text-black text-center py-2 rounded-t-lg font-bold">
-              SCREEN
-            </div>
-            <div className="bg-opacity-50 bg-black py-10 rounded-b-lg p-4">
-              {seats.map((row, rowIndex) => (
-                <div
-                  key={rowIndex}
-                  className={`flex justify-center ${rowIndex === 2 ? 'mt-6' : ''}`} // 2nd row por gap
-                >
-                  {row.map((seat, seatIndex) => (
-                    <React.Fragment key={`${rowIndex}-${seatIndex}`}>
-                      <div className="lg:mr-1">
-                        <SeatButton
-                          seat={seat}
-                          onClick={() => handleSeatClick(rowIndex, seatIndex)}
-                        />
-                      </div>
-                      {(seatIndex + 1) % 4 === 0 &&
-                        seatIndex !== row.length - 1 && (
-                          <div className="w-4"></div>
-                        )}
-                    </React.Fragment>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="ml-4 flex-shrink-0 w-full md:w-64 mt-4 md:mt-0">
-            <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg transform transition-transform duration-300 p-4 text-xl space-y-4">
-              <div className="mb-2">
-                <span className="font-bold"> event:</span> {event.title}
-              </div>
-              <div className="mb-2">
-                <span className="font-bold">Time:</span> Nov 3, 21:00
-              </div>
-              <div className="mb-2">
-                <span className="font-bold">Tickets:</span> {selectedSeats}
-              </div>
-              <div className="mb-2">
-                <span className="font-bold">Subtotal:</span> ${event.price}
-              </div>
-              {selectedSeats >= 5 && (
-                <div className="mb-2 text-purple-800 flex font-mono">
-                  <FcAdvertising className="text-3xl" /> 15% Bulk Discount
-                  Applied!
-                </div>
-              )}
-              <div className="mb-2">
-                <span className="font-bold">Coupon Discount:</span> ${discount}
-              </div>
-              <div className="mb-2">
-                <span className="font-bold">Final Total:</span> ${event.price}
-              </div>
-              <div className="mb-2">
-                <Input
-                  type="text"
-                  placeholder="Enter coupon code"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
-                  className="mb-2 text-black"
-                />
-                <Button onClick={applyCoupon} className="w-full mb-2">
-                  Apply Coupon
-                </Button>
-                <Button
-                  onClick={() => setIsModalOpen(true)} // Open Modal on click
-                  className="w-full button text-lg font-serif uppercase my-4"
-                  disabled={selectedSeats === 0}
-                >
-                  Book Now
-                </Button>
-              </div>
-            </div>
-  
-            <div className="mt-4 flex justify-between bg-white bg-opacity-20 backdrop-blur-md p-4 rounded-lg shadow-lg text-white text-center transform transition-transform duration-300 hover:scale-105">
-              <div>
-                <span className="inline-block w-4 h-4 bg-white mr-2"></span>{' '}
-                Available
-              </div>
-              <div>
-                <span className="inline-block w-4 h-4 bg-red-500 mr-2"></span>{' '}
-                Sold
-              </div>
-              <div>
-                <span className="inline-block w-4 h-4 bg-green-500 mr-2"></span>{' '}
-                Selected
-              </div>
-              <div>
-                <span className="inline-block w-4 h-4 bg-yellow-500 mr-2"></span>{' '}
-                VIP
-              </div>
-            </div>
-          </div>
-        </div>
-                
-  {isModalOpen && (
-    <motion.div
-      className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-      initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-      animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-      exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-      transition={{ duration: 0.5 }}
-      onClick={() => setIsModalOpen(false)} 
-    >
-      <motion.div
-        className="bg-white p-8 rounded-lg text-center shadow-xl w-full max-w-4xl relative"
-        onClick={(e) => e.stopPropagation()}  
-      >
-        {/* Payment Gateway */}
-        <EnhancedPaymentGateway />
-  
-        {/* Close Button */}
-        <div className="absolute top-14 right-0">
-          <Button
-            onClick={() => setIsModalOpen(false)}
-            className="bg-purple-600 text-white w-20"
-          >
-           <TbXboxX className='text-2xl' />
-          </Button>
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-  
-    
+      <div className="text-center mt-20">
+        <h2 className="text-2xl font-bold">Event Not Found</h2>
+        <p className="mt-2">We could not find the event you are looking for.</p>
       </div>
     );
+  }
+
+  return (
+    <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
+      <h1 className="text-3xl border-b-2 py-4 font-serif font-bold mb-4 text-center">
+        Multiplex Theatre Showing Screen 1
+      </h1>
+
+      <div className="flex flex-col md:flex-row">
+        <div className="flex-1">
+          <div className="bg-yellow-500 text-black text-center py-2 rounded-t-lg font-bold">
+            SCREEN
+          </div>
+          <div className="bg-opacity-50 bg-black py-10 rounded-b-lg p-4">
+            {seats.map((row, rowIndex) => (
+              <div
+                key={rowIndex}
+                className={`flex justify-center ${rowIndex === 2 ? "mt-6" : ""}`}
+              >
+                {row.map((seat, seatIndex) => (
+                  <React.Fragment key={`${rowIndex}-${seatIndex}`}>
+                    <div className="lg:mr-1">
+                      <SeatButton
+                        seat={seat}
+                        onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                      />
+                    </div>
+                    {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
+                      <div className="w-4"></div>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="ml-4 flex-shrink-0 w-full md:w-64 mt-4 md:mt-0">
+          <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg transform transition-transform duration-300 p-4 text-xl space-y-4">
+            <div className="mb-2">
+              <span className="font-bold">Event:</span> {event.title}
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Date:</span> {event.date}
+            </div>
+            <div className="mb-2">
+              <span className="font-bold">Time:</span> {event.time}
+            </div>
+            <div className="flex items-center gap-2 mb-4">
+              <Input
+                className="w-36"
+                type="number"
+                min={1}
+                value={ticketQuantity}
+                onChange={handleTicketQuantityChange}
+              />
+              <FcAdvertising size={30} />
+              <Button
+                variant="primary"
+                onClick={applyCoupon}
+                className="py-1 px-2 bg-blue-700 rounded-lg"
+              >
+                Apply Coupon
+              </Button>
+            </div>
+            <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg">
+              <p>Selected Seats: <span>{selectedSeats.length}</span></p>
+              <p>Subtotal: <span>${total.toFixed(2)}</span></p>
+              <p>Discount: <span>${discount.toFixed(2)}</span></p>
+              <p>Total: <span>${finalTotal.toFixed(2)}</span></p>
+            </div>
+          </div>
+          <Button
+            variant="default"
+            className="w-full mt-4"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Pay Now
+          </Button>
+        </div>
+      </div>
+
+      {isModalOpen && (
+        <EnhancedPaymentGateway
+          total={finalTotal}
+          closeModal={() => setIsModalOpen(false)}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Payment;
