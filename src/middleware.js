@@ -19,6 +19,4 @@ export const middleware = async(request) => {
 export const config = {
     // matcher: ["/SeatBookingWidget", "/dashboard/:path*"]
     matcher: []
-
-
 }

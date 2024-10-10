@@ -15,53 +15,9 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-const categories = ['Sports', 'Theater', 'Concerts', 'MusicFestivals']
-
-
-const eventData2 = [
-  { id: 1, category: 'Sports', title: 'NBA Finals', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Los Angeles, CA' },
-  { id: 2, category: 'Sports', title: 'World Cup Soccer', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Doha, Qatar' },
-  { id: 3, category: 'Sports', title: 'Wimbledon', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
-  { id: 4, category: 'Sports', title: 'Super Bowl', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
-  { id: 5, category: 'Sports', title: 'Olympics', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Tokyo, Japan' },
-  { id: 6, category: 'Sports', title: 'Tour de France', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'France' },
-  { id: 7, category: 'Sports', title: 'Masters Golf', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Augusta, GA' },
-  { id: 8, category: 'Sports', title: 'UFC Championship', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Las Vegas, NV' },
-  { id: 9, category: 'Sports', title: 'Formula 1 Grand Prix', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'Monaco' },
-  { id: 10, category: 'Sports', title: 'Cricket World Cup', image: 'https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg', location: 'London, UK' },
-  { id: 11, category: 'Theater', title: 'Hamilton', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 12, category: 'Theater', title: 'The Lion King', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 13, category: 'Theater', title: 'Phantom of the Opera', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 14, category: 'Theater', title: 'Wicked', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 15, category: 'Theater', title: 'Les Misérables', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'London, UK' },
-  { id: 16, category: 'Theater', title: 'To Kill a Mockingbird', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 17, category: 'Theater', title: 'The Crucible', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 18, category: 'Theater', title: 'A Streetcar Named Desire', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 19, category: 'Theater', title: 'Death of a Salesman', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'New York, NY' },
-  { id: 20, category: 'Theater', title: 'Macbeth', image: 'https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg', location: 'London, UK' },
-  { id: 21, category: 'Concerts', title: 'Coachella', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Indio, CA' },
-  { id: 22, category: 'Concerts', title: 'Glastonbury Festival', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Glastonbury, UK' },
-  { id: 23, category: 'Concerts', title: 'Tomorrowland', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Boom, Belgium' },
-  { id: 24, category: 'Concerts', title: 'Burning Man', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Black Rock City, NV' },
-  { id: 25, category: 'Concerts', title: 'Ultra Music Festival', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Miami, FL' },
-  { id: 26, category: 'Concerts', title: 'Lollapalooza', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Chicago, IL' },
-  { id: 27, category: 'Concerts', title: 'Rock in Rio', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Rio de Janeiro, Brazil' },
-  { id: 28, category: 'Concerts', title: 'Bonnaroo', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Manchester, TN' },
-  { id: 29, category: 'Concerts', title: 'EDC Las Vegas', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Las Vegas, NV' },
-  { id: 30, category: 'Concerts', title: 'SXSW', image: 'https://i.ibb.co.com/80YxNW0/pexels-wendywei-1540406.jpg', location: 'Austin, TX' },
-  { id: 31, category: 'MusicFestivals', title: 'Glastonbury Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Glastonbury, UK' },
-  { id: 32, category: 'MusicFestivals', title: 'Coachella', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Indio, CA' },
-  { id: 33, category: 'MusicFestivals', title: 'Tomorrowland', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Boom, Belgium' },
-  { id: 34, category: 'MusicFestivals', title: 'Ultra Music Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Miami, FL' },
-  { id: 35, category: 'MusicFestivals', title: 'Lollapalooza', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Chicago, IL' },
-  { id: 36, category: 'MusicFestivals', title: 'Burning Man', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Black Rock City, NV' },
-  { id: 37, category: 'MusicFestivals', title: 'Bonnaroo', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Manchester, TN' },
-  { id: 38, category: 'MusicFestivals', title: 'Electric Daisy Carnival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Las Vegas, NV' },
-  { id: 39, category: 'MusicFestivals', title: 'Rock in Rio', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Rio de Janeiro, Brazil' },
-  { id: 40, category: 'MusicFestivals', title: 'Sziget Festival', image: 'https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg', location: 'Budapest, Hungary' },
-]
-
-
+import Loading from "../shared/LoadingSpiner/Loading";
+import toast, { Toaster } from 'react-hot-toast';
+const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Business', 'Music']
 
 
 
@@ -134,17 +90,14 @@ const EnhancedCountdown = ({ date }) => {
 export default function PopularEvent() {
   const [activeCategory, setActiveCategory] = useState(categories[0])
   const [mounted, setMounted] = useState(false)
-  const [categoryName, setCategoryName] = useState("Business")
+  const [categoryName, setCategoryName] = useState("All")
   const axiosPublic = useAxiosPublic();
   const { data: eventData, isLoading } = useQuery({
-    queryKey: ["categoryEvent"],
-    queryFn: () => {
-      const eventData = axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`).then((res) =>
-        res.json()
-      )
-      return eventData;
-
-
+    queryKey: ["categoryEvent", categoryName],
+    queryFn: async () => {
+      const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
+      console.log("Popular event theke data: ", eventData?.data)
+      return eventData?.data;
     }
   })
   console.log("Popular event theke data: ", eventData)
@@ -172,6 +125,7 @@ export default function PopularEvent() {
           <TabsList className="   w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
             {categories.map((category) => (
               <TabsTrigger
+                onClick={() => setCategoryName(category)}
                 key={category}
                 value={category}
                 className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-gradient-to-r from-emerald-400 to-teal-500 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-emerald-500 data-[state=active]:text-white"
@@ -182,9 +136,9 @@ export default function PopularEvent() {
             ))}
           </TabsList>
 
-
-
-
+          {
+            isLoading && <Loading></Loading>
+          }
           {categories.map((category) => (
             <TabsContent key={category} value={category} className="mt-0">
               <AnimatePresence mode="wait">
@@ -209,7 +163,7 @@ export default function PopularEvent() {
                     }}
                     className="mySwiper"
                   >
-                    {eventData2.map((event) => (
+                    {eventData?.map((event) => (
                       <SwiperSlide key={event.id} className="pb-12">
                         <EventCard event={event} categoryName={categoryName} setCategoryName={setCategoryName} />
                       </SwiperSlide>
@@ -231,29 +185,37 @@ export default function PopularEvent() {
 
 
 function EventCard({ event, categoryName, setCategoryName }) {
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState([]);
+  const [favoriteUpdate, setFavoriteUpdate] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // New hover state
-  // const {event, categoryName, setCategoryName} = eventsInfo;
-  console.log(event, setCategoryName)
-  console.log(categoryName)
-  console.log(setCategoryName)
+
 
   const handleAddFavorite = (id) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     if (favorites.includes(id)) {
       favorites = favorites.filter(favId => favId !== id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      setFavoriteUpdate(!favoriteUpdate)
+      toast.error('Removed Bookmark!')
     } else {
       favorites.push(id);
-      setFavorite(true)
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      setFavoriteUpdate(!favoriteUpdate)
+      toast.success('Successfully Bookmarked!')
     }
-    localStorage.setItem('favorites', JSON.stringify(favorites));
   };
+  
+  useEffect(()=>{
+    let currentFavorute = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorite(currentFavorute)
+  }, [favoriteUpdate])
+
   return (
     <div className="w-full">
       <div
         className="relative h-[550px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
         style={{
-          backgroundImage: `url(${event.image})`,
+          backgroundImage: `url(${event?.photo})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
@@ -265,9 +227,9 @@ function EventCard({ event, categoryName, setCategoryName }) {
             <div className="flex justify-end space-x-2">
               <button
                 className="p-2 rounded-full bg-white/10 backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
-                onClick={() => handleAddFavorite(event.id)}
+                onClick={() => handleAddFavorite(event._id)}
               >
-                <Heart className={`w-6 h-6 ${favorite ? 'text-red-500 fill-red-500' : 'text-white'}`} />
+                <Heart className={`w-6 h-6 ${favorite?.includes(event?._id) ? 'text-red-500 fill-red-500' : 'text-white fill-white'}`} />
               </button>
               <button className="p-2 rounded-full bg-white/10 backdrop-blur-sm transition-colors duration-300 hover:bg-white/20">
                 <Share2 className="w-6 h-6 text-white" />
@@ -275,7 +237,7 @@ function EventCard({ event, categoryName, setCategoryName }) {
             </div>
             <div className="space-y-2">
               <h2 className="text-2xl font-bold  font-serif text-white">{event.title}</h2>
-              <p className="text-lg flex  items-center gap-2 font-bold font-mono text-white"> <FaMagnifyingGlassLocation className="text-2xl text-emerald-400 " /> {event.location}       </p>
+              <p className="text-lg flex  items-center gap-2 font-bold font-mono text-white"> <FaMagnifyingGlassLocation className="text-2xl text-emerald-400 " /> {event?.location?.country}       </p>
               <div className="pt-2 ">
                 <EnhancedCountdown date={Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000} />
               </div>
@@ -293,11 +255,11 @@ function EventCard({ event, categoryName, setCategoryName }) {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             style={{ transformStyle: "preserve-3d" }}
           >
-
-
-            <Button className="button  font-serif font-semibold   hover:text-white transition-colors duration-300">
-              Read More
-            </Button>
+            <Link href={`events/${event?._id}`}>
+              <Button className="button  font-serif font-semibold   hover:text-white transition-colors duration-300">
+                Read More
+              </Button>
+            </Link>
             <Link href="/SeatBookingWidget">
               <Button className="bg-white m-2  font-serif font-semibold  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
                 Book Now !
