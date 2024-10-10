@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";  // vercel a deploy korar por cassing kore rakhena
 
 import HomeContainer from "@/components/home/HomeContainer";
 

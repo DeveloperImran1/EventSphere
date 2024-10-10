@@ -41,7 +41,7 @@ const Navbar = () => {
 
 
   const session = useSession();
-  // console.log("Navbar theke session is", session)
+  console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };
@@ -336,9 +336,9 @@ const Navbar = () => {
                 {/* If logged in */}
                 <div className="relative">
                   <div className="flex items-center gap-1 bg-[#00a88f] rounded-3xl cursor-pointer">
-                    <p className="text-white text-xl ml-1">Imran</p>
+                    <p className="text-white text-xl ml-1">{session?.data?.user?.name || "User"}</p>
                     <Image
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzW-urHcT-YYyuY1KznWC9AqrEoBsRWBgiuMJcfBXS9X8vV3zXr73raRYN7yHlTQwLOXE&usqp=CAU"
+                      src={session?.data?.user?.image || "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
                       alt="Profile"
                       height="40"
                       width="40"
@@ -352,7 +352,7 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 font-bold">
                       <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
                         <Image
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzW-urHcT-YYyuY1KznWC9AqrEoBsRWBgiuMJcfBXS9X8vV3zXr73raRYN7yHlTQwLOXE&usqp=CAU"
+                          src={session?.data?.user?.image}
                           alt="Profile"
                           height="60"
                           width="60"
@@ -362,12 +362,12 @@ const Navbar = () => {
 
                         <div>
                           <p className="font-semibold text-gray-800">
-                            John Doe
+                          {session?.data?.user?.name || "Imran"}
                           </p>
                         </div>
 
                         <p className="text-sm text-gray-500">
-                          johndoe@example.com
+                        {session?.data?.user?.email || "johndoe@example.com"} 
                         </p>
                       </div>
                       <Link
