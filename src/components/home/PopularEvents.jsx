@@ -1,4 +1,3 @@
-import React from 'react';
 import PopularEvent from '../PopularEvent/PopularEvent';
 
 const PopularEvents = () => {
