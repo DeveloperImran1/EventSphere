@@ -117,10 +117,10 @@ form{
 
   background: transparent;
   border: 2px solid var(--clr);
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 40px;
  
-color :antiquewhite;
+color :azure;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   transition: 1s;
@@ -143,20 +143,3 @@ color :antiquewhite;
 .btn:hover span.hover{
   transform: translateY(-35px);
 }
-/* input[type="submit"]{
-  font-size: 20px;
-  border: none;
-  outline: none;
- 
-  padding: 5px;
-  margin-top: 40px;
-  border-radius: 90px;
-    background: linear-gradient(90deg, #45f3ff, #d9138a);
-  font-weight: 600;
-  cursor: pointer;
-  
-}
-input[type="submit"]:active{
-  background: linear-gradient(90deg, #45f3ff, #d9138a);
-  opacity: 0.8;
-} */
