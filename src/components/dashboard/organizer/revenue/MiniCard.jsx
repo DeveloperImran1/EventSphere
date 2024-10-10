@@ -10,7 +10,7 @@ const MiniCard = () => {
       <div className="mb-8 text-center">
         <div className="p-5 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl shadow-md">
           <h2 className="text-4xl font-extrabold text-blue-700 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-500">
-            Stay Informed with Today's Updates
+            Stay Informed with Todays Updates
           </h2>
         </div>
       </div>

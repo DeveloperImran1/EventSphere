@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const Subscriber = () => {
@@ -7,7 +8,7 @@ const Subscriber = () => {
             <div className="flex flex-col gap-4 flex-1">
                 <div className="flex items-center gap-3 p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition duration-200">
                     <div className="w-12 h-12 rounded-full overflow-hidden">
-                        <img src="https://via.placeholder.com/50" alt="Subscriber" className="w-full h-full object-cover" />
+                        <Image height={676} width={1200} src="https://via.placeholder.com/50" alt="Subscriber" className="w-full h-full object-cover" />
                     </div>
                     <div>
                         <h2 className="font-bold text-gray-800 text-xl text-start">Crafts Corner</h2>

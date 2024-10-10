@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const Table = () => {
@@ -50,7 +51,7 @@ const Table = () => {
                         {users.map((user, index) => (
                             <tr key={index} className="border-b hover:bg-gray-50 transition duration-200">
                                 <td className="py-4 px-4">
-                                    <img src={user.img} alt={user.name} className="w-12 h-12 rounded-full object-cover" />
+                                    <Image height={676} width={1200}  src={user.img} alt={user.name} className="w-12 h-12 rounded-full object-cover" />
                                 </td>
                                 <td className="py-4 px-4 font-bold text-gray-800">{user.name}</td>
                                 <td className="py-4 px-4 text-red-500">{user.email}</td>

@@ -40,27 +40,12 @@ const InputSchedule = () => {
                     className="w-full h-auto mb-5"
                 />
                 <h2 className="text-2xl font-bold mb-2">Love the Smell Of Events Every Morning Like Us?</h2>
-<<<<<<< HEAD
                 <h4>We are  Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
                  PS Nobody can match our pricing </p>
-                <h4>Were Totally Obsessed To Make Your Event Succeed!
-                </h4>
-                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
-                * PS: Nobody can match our pricing :-</p>
-
-                <h4>Were Totally Obsessed To Make Your Event Succeed!
-                </h4>
-                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
-                * PS: Nobody can match our pricing :-</p>
+        
             </div>
-=======
-                <h4>Were Totally Obsessed To Make Your Event Succeed!
-                </h4>
-                <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
-                    * PS: Nobody can match our pricing :-</p>            </div>
->>>>>>> b690f891b3fc89dff0b7b5a82e4b7ec5a27afeed
 
             {/* Right side with form */}
             <div className="lg:w-1/2 bg-white p-8 shadow-lg rounded-lg">

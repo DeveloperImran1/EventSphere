@@ -150,13 +150,7 @@ export default function EventSchedule() {
                         {tabs.find((tab) => tab.date === activeTab)?.events.map((event, index) => (
                             <div key={index} className="overflow-hidden rounded-lg bg-gray-100 shadow">
                                 <div className="md:flex gap-10 items-center p-2 border-2 ">
-                                    {/* <div className="w-52 ">
-                                        <img
-                                            src={event.image}
-                                            alt={event.title}
-                                            className=" rounded-xl  object-cover"
-                                        />
-                                    </div> */}
+                                   
                                     <div className="w-56 ">
 
                                         <Image
