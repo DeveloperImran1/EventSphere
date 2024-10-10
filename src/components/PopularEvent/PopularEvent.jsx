@@ -95,7 +95,7 @@ export default function PopularEvent() {
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
-      const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
+      const eventData = await axiosPublic.get(`https://event-sphare-server.vercel.app/events/getCategoryEvent/${categoryName}`)
       console.log("Popular event theke data: ", eventData?.data)
       return eventData?.data;
     }
@@ -213,9 +213,9 @@ function EventCard({ event, categoryName, setCategoryName }) {
   return (
     <div className="w-full">
       <div
-        className="relative h-[550px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
+        className="relative h-[450px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
         style={{
-          backgroundImage: `url(${event?.photo})`,
+          backgroundImage: `url(${event?.gallery[0]})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
