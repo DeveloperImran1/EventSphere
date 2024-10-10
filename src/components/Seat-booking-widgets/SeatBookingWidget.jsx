@@ -42,6 +42,7 @@ function SeatButton({ seat, onClick }) {
 }
 
 export default function SeatBookingWidget() {
+  
   const [seats, setSeats] = useState(() => {
     const initialSeats = Array(ROWS)
       .fill(null)
