@@ -336,9 +336,9 @@ const Navbar = () => {
                 {/* If logged in */}
                 <div className="relative">
                   <div className="flex items-center gap-1 bg-[#00a88f] rounded-3xl cursor-pointer">
-                    <p className="text-white text-xl ml-1">Imran</p>
+                    <p className="text-white text-xl ml-1">{session?.data?.user?.name || "User"}</p>
                     <Image
-                      src={session?.data?.user?.image}
+                      src={session?.data?.user?.image || "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
                       alt="Profile"
                       height="40"
                       width="40"
