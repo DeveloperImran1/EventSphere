@@ -1,21 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from "react"
-import {
-  DollarSign,
-  Ticket,
-  TrendingUp,
-  TrendingDown,
-  BarChart2,
-} from "lucide-react"
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts"
+import {DollarSign, Ticket, TrendingUp, TrendingDown, BarChart2,} from "lucide-react"
+import {AreaChart,Area, XAxis, YAxis, Tooltip,ResponsiveContainer,} from "recharts"
 import { useSpring, animated } from "react-spring"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -23,7 +10,7 @@ import Badge from "@/components/ui/Badge"
 
 // Assuming these components exist in your project
 import ProfitRow from "./ProfitRow"
-import SectionTitle from "../shared/SectionTitle"
+
 
 const events = [
   {
@@ -31,15 +18,15 @@ const events = [
     name: "Summer Music Festival",
     photo: "/placeholder.svg?height=100&width=100",
     totalSell: 15000,
-    totalRevenue: 450000,
+    totalRevenue: 45000,
     trend: "up",
     percentage: 12,
     monthlyData: [
       { month: "jun", sales: 1000 },
       { month: "july", sales: 1200 },
       { month: "Aug", sales: 1500 },
-      { month: "Apr", sales: 1800 },
-      { month: "May", sales: 2000 },
+      { month: "Sep", sales: 1800 },
+      { month: "Oct", sales: 2000 },
     ],
   },
   {
@@ -47,7 +34,7 @@ const events = [
     name: "Tech Conference 2024",
     photo: "/placeholder.svg?height=100&width=100",
     totalSell: 5000,
-    totalRevenue: 250000,
+    totalRevenue: 25000,
     trend: "down",
     percentage: 5,
     monthlyData: [
@@ -63,7 +50,7 @@ const events = [
     name: "Food & Wine Expo",
     photo: "/placeholder.svg?height=100&width=100",
     totalSell: 8000,
-    totalRevenue: 320000,
+    totalRevenue: 32000,
     trend: "up",
     percentage: 8,
     monthlyData: [
@@ -79,7 +66,7 @@ const events = [
     name: "Art Gallery Opening",
     photo: "/placeholder.svg?height=100&width=100",
     totalSell: 3000,
-    totalRevenue: 150000,
+    totalRevenue: 15000,
     trend: "up",
     percentage: 3,
     monthlyData: [
@@ -112,8 +99,8 @@ const AnimatedNumber = ({ n }) => {
 
   return <animated.span>{number.to(n => n.toFixed(0))}</animated.span>
 }
-
-const SummaryCard = ({ title, value, icon: Icon, gradient, isCurrency = false }) => (
+//SUMMARY CARD //
+const SummaryCard = ({ title, value, icon: Icon,  isCurrency = false }) => (
   <Card  className='bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow-lg text-white text-center transform transition-transform duration-300 hover:scale-105'>
     <div className="absolute inset-0 opacity-50 mix-blend-overlay">
       <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -127,7 +114,7 @@ const SummaryCard = ({ title, value, icon: Icon, gradient, isCurrency = false })
     </div>
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-xl font-medium">{title}</CardTitle>
-      <Icon className="w-8 h-10  text-fuchsia-400 " />
+      <Icon className="w-8 h-10  text-fuchsia-500 " />
     </CardHeader>
     <CardContent>
       <div className="text-4xl font-bold">
@@ -139,27 +126,30 @@ const SummaryCard = ({ title, value, icon: Icon, gradient, isCurrency = false })
 )
 
 const ChartCard = ({ title, data, dataKey, color }) => (
-  <Card className="bg-white/10 backdrop-blur-lg border-none text-white">
-    <CardHeader>
-      <CardTitle className="text-lg font-medium">{title}</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <ResponsiveContainer width="100%" height={200}>
+  <div className="bg-white/10 backdrop-blur-lg text-white rounded-lg p-2 md:p-6 shadow-lg">
+  <div className="mb-2">
+    <h2 className="text-3xl text-center my-4 text-white font-serif " >{title}</h2>
+  </div>
+  <div>
+    <div className="w-full h-52">
+      <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data}>
-          <defs>
-            <linearGradient id={`color${color}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
-              <stop offset="95%" stopColor={color} stopOpacity={0}/>
-            </linearGradient>
-          </defs>
-          <Area type="monotone" dataKey={dataKey} stroke={color} fillOpacity={1} fill={`url(#color${color})`} />
-          <XAxis dataKey="month" stroke="#ffffff60" />
-          <YAxis stroke="#ffffff60" />
-          <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none' }} />
+
+          <Area
+            type="monotone"
+            dataKey="sales"
+            stroke="#A855F7" // Tailwind purple-500 color
+  fill="rgba(168, 85, 247, 0.6)" // Purple color with 30% opacity
+          />
+          <XAxis dataKey="month" stroke="#ffffff" />
+          <YAxis stroke="#ffffff" />
+          <Tooltip contentStyle={{ backgroundColor: 'white', border: 'none' }} />
         </AreaChart>
       </ResponsiveContainer>
-    </CardContent>
-  </Card>
+    </div>
+  </div>
+</div>
+
 )
 
 export default function ProfitPage() {
@@ -197,6 +187,8 @@ export default function ProfitPage() {
           isCurrency
         />
       </div>
+
+ {/*Monthly seels trend and event perfomance  */}
       <div className="grid gap-8 max-w-7xl mx-auto md:grid-cols-2">
         <ChartCard 
           title="Monthly Sales Trend" 
@@ -204,16 +196,18 @@ export default function ProfitPage() {
           dataKey="sales" 
           color="#4ade80" 
         />
-        <Card className="bg-white/10 backdrop-blur-lg border-none text-white">
-          <CardHeader>
-            <CardTitle className="text-lg font-medium">Event Performance</CardTitle>
-          </CardHeader>
+        <Card className="bg-white/10 P-2 md:p-4  backdrop-blur-lg border-none text-white">
+          {/* <CardHeader>
+            <CardTitle className="text-3xl text-center  text-white font-serif">Event Performance</CardTitle>
+          </CardHeader> */}
+    <h2 className="text-3xl text-center my-4 text-white font-serif " >Event Performance</h2>
+
           <CardContent>
             <div className="space-y-4">
               {events.map((event) => (
                 <Button
                   key={event.id}
-                  className={`w-full justify-between ${selectedEvent.id === event.id ? 'bg-violet-700' : 'bg-gray-700'}`}
+                  className={`w-full hover:bg-purple-400 justify-between ${selectedEvent.id === event.id ? 'bg-purple-400' : 'bg-gray-800'}`}
                   onClick={() => setSelectedEvent(event)}
                 >
                   <span>{event.name}</span>
