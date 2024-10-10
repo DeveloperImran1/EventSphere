@@ -33,7 +33,7 @@ const UpdateFrom = () => {
         console.log("Form Submitted:", formData);
         try {
       const { data } = await axios.put(
-        `http://localhost:9000/user/${session?.data?.user?.email}`,
+        `https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`,
       formData
       )
       console.log(data)
@@ -47,7 +47,7 @@ const UpdateFrom = () => {
     const { data:userInfo} = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-          fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
+          fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
             res.json()
           ),
       });

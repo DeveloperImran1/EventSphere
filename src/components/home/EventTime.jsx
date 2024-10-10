@@ -27,7 +27,7 @@ const EventTime = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:9000/events")
+      .get("https://event-sphare-server.vercel.app/events")
       .then((res) => {
         if (res.data.length > 6) {
           const arr = res.data.slice(0, 6);
@@ -94,7 +94,7 @@ const EventTime = () => {
                   <div className=" group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
                     <Image
                       className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
-                      src={event?.photo}
+                      src={event?.gallery[0]}
                       alt={event?.title}
                       width={200}
                       height={300}

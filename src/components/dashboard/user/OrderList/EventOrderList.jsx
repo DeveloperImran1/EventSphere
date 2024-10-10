@@ -14,7 +14,7 @@ const EventOrderList = () => {
   const { data:invoice} = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`http://localhost:9000/orders`).then((res) =>
+      fetch(`https://event-sphare-server.vercel.app/orders`).then((res) =>
         res.json()
       ),
   });
