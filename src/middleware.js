@@ -1,3 +1,4 @@
+import { matchQuery } from "@tanstack/react-query";
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
@@ -17,5 +18,6 @@ export const middleware = async(request) => {
 }
 
 export const config = {
-    matcher: ["/SeatBookingWidget", "/dashboard/:path*"]
+    // matcher: ["/SeatBookingWidget", "/dashboard/:path*"]
+    matcher: []
 }
