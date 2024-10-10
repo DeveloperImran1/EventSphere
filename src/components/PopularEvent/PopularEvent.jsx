@@ -1,3 +1,4 @@
+
 "use client"
 import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 import React, { useState, useEffect } from 'react'
@@ -7,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
 import { Heart, Share2 } from 'lucide-react'
 import SectionTitle from '../shared/SectionTitle'
+
 
 import 'swiper/swiper-bundle.css'
 import { Button } from "@/components/ui/button"
@@ -26,12 +28,15 @@ const CountdownUnit = ({ value, label }) => (
   </div>
 )
 
+
 const EnhancedCountdown = ({ date }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
+
 
   function calculateTimeLeft() {
     const difference = date - Date.now()
     let timeLeft = {}
+
 
     if (difference > 0) {
       timeLeft = {
@@ -45,18 +50,23 @@ const EnhancedCountdown = ({ date }) => {
       timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 }
     }
 
+
     return timeLeft
   }
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft())
     }, 1000)
 
+
     return () => clearTimeout(timer)
   }, [timeLeft]) // Added timeLeft as dependency to update when it changes
 
+
   const { days = 0, hours = 0, minutes = 0, seconds = 0 } = timeLeft
+
 
   return (
     <div className="flex flex-col items-center space-y-4">
@@ -76,6 +86,7 @@ const EnhancedCountdown = ({ date }) => {
   )
 }
 
+
 export default function PopularEvent() {
   const [activeCategory, setActiveCategory] = useState(categories[0])
   const [mounted, setMounted] = useState(false)
@@ -91,11 +102,14 @@ export default function PopularEvent() {
   })
   console.log("Popular event theke data: ", eventData)
 
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
+
   if (!mounted) return null
+
 
   return (
     <div className="w-full  py-12 bg-gradient-to-r from-gray-50 to-gray-100">
@@ -105,6 +119,7 @@ export default function PopularEvent() {
           title="Explore Top Events"
           description="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
         />
+
 
         <Tabs defaultValue={categories[0]} className="w-full" onValueChange={setActiveCategory}>
           <TabsList className="   w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
@@ -166,6 +181,9 @@ export default function PopularEvent() {
 
 
 
+
+
+
 function EventCard({ event, categoryName, setCategoryName }) {
   const [favorite, setFavorite] = useState([]);
   const [favoriteUpdate, setFavoriteUpdate] = useState(false);
@@ -224,9 +242,11 @@ function EventCard({ event, categoryName, setCategoryName }) {
                 <EnhancedCountdown date={Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000} />
               </div>
 
+
             </div>
           </div>
         </div>
+
 
         <div className="h-full flex  items-center justify-center">
           <motion.div
@@ -245,7 +265,10 @@ function EventCard({ event, categoryName, setCategoryName }) {
                 Book Now !
               </Button>
 
+
             </Link>
+
+
 
 
           </motion.div>
@@ -254,4 +277,3 @@ function EventCard({ event, categoryName, setCategoryName }) {
     </div>
   );
 }
-
