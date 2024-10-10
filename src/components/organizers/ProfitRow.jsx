@@ -122,7 +122,7 @@ const ProfitRow = ({ event, index }) => {
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
-                  <YAxis />
+                  <YAxis   />
                   <Tooltip content={<CustomTooltip />} />
                   <Area
                     type="monotone"
