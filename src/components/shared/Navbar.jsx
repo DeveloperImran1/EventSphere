@@ -159,9 +159,9 @@ const Navbar = () => {
   return (
     <nav className={`
       transition-transform duration-500 ease-in-out 
-      bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg
+      bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg 
     `}>
-      <div className=" mx-auto px-4">
+      <div className=" mx-auto px-4 container">
         <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
           <Logo></Logo>

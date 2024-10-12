@@ -11,7 +11,7 @@ const HomeContainer = () => {
         <div className='space-y-20'>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
-            {/* <EventTime /> */}
+            <EventTime />
             <DestinationSlider />
             <Organizers></Organizers>
             <Testimonials></Testimonials>
