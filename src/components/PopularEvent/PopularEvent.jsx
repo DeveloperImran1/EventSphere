@@ -112,8 +112,8 @@ export default function PopularEvent() {
 
 
   return (
-    <div className="w-full  py-12 bg-gradient-to-r from-gray-50 to-gray-100">
-      <div className="px-4">
+    <div className="w-full  py-12 bg-gradient-to-r from-gray-50 to-gray-100 ">
+      <div className="px-4 container">
         <SectionTitle
           subTitle="Popular Events"
           title="Explore Top Events"

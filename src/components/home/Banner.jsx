@@ -63,7 +63,7 @@ const Banner = () => {
 
   return (
     <>
-      <div className="w-full h-full  md:rounded-bl-full bg-gradient-to-r from-blue-50 to-blue-100 relative ">
+      <div className="w-full h-full  relative ">
 
 
 
