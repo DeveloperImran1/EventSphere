@@ -37,7 +37,7 @@ const sliderItems = [
 ];
 
 
-export default function AnimatedImageSlider() {
+export default function Banner() {
   const [items, setItems] = useState(sliderItems);
   const [isAnimating, setIsAnimating] = useState(false);
   const [bgTransition, setBgTransition] = useState(false);
@@ -111,7 +111,7 @@ export default function AnimatedImageSlider() {
         </ul>
         <nav className="nav absolute flex gap-4 bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
           <ArrowLeftIcon
-            className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
+           className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
             onClick={() => activate('prev')}
           />
           <ArrowRightIcon
