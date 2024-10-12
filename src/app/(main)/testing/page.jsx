@@ -15,7 +15,7 @@ const sliderItems = [
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
   },
   {
-    image: "https://i.ibb.co.com/HhgGKX8/pexels-asadphoto-169198.jpg",
+    image: "https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg",
     title: "\"The Gate Keeper\"",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
   },
@@ -25,7 +25,7 @@ const sliderItems = [
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
   },
   {
-    image: "https://i.ibb.co.com/v4LBLc2/pexels-wendywei-1190298.jpg",
+    image: "https://i.ibb.co.com/XsBTnSL/pexels-thibault-trillet-44912-167491.jpg",
     title: "\"Urban Decay\"",
     description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
   },
@@ -97,12 +97,14 @@ export default function AnimatedImageSlider() {
                 boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
             >
-              <div className={`bg-white bg-opacity-10 backdrop-blur-sm  p-3 rounded-lg  text-yellow-50  transform  hover:scale-105 absolute top-1/2 left-10 lg:left-44 -translate-y-1/2 w-[min(30vw,400px)] text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
-                <h2 className="title font-['arial-black'] uppercase">{item.title}</h2>
-                <p className=" text-yellow-50 my-2 text-lg ">{item.description}</p>
-                <a href="#" className='btnRotate w-32 h-8 text-lg '>
+              <div className={`bg-white bg-opacity-10 backdrop-blur-sm  p-2 md:p-4  rounded-lg  text-white  transform  hover:scale-105 absolute top-1/2 left-4 md:left-10 lg:left-44 -translate-y-1/2 w-44   md:w-60 lg:w-96 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
+                <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
+                <p className="  text-white my-2 text-sm font-normal  ">{item.description}</p>
+               <div className='flex justify-center'>
+               <a href="#" className='btnRotate w-24 h-6 md:w-32 md:h-8 md:text-lg '>
                  Details
                 </a>
+               </div>
               </div>
             </li>
           ))}
@@ -158,7 +160,32 @@ export default function AnimatedImageSlider() {
         .animate-zoomInUp {
           animation: zoomInUp .5s ease-out;
         }
-       
+        @media (min-width: 651px) and (max-width: 900px) {
+          .content .title { font-size: 1rem; }
+          .content .description { font-size: 0.7rem; }
+          .content button { font-size: 0.7rem; }
+          .item {
+            width: 160px;
+            height: 270px;
+          }
+          .item:nth-child(3) { left: 50%; }
+          .item:nth-child(4) { left: calc(50% + 170px); }
+          .item:nth-child(5) { left: calc(50% + 340px); }
+          .item:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
+        }
+        @media (max-width: 650px) {
+          .content .title { font-size: 0.9rem; }
+          .content .description { font-size: 0.65rem; }
+          .content button { font-size: 0.7rem; }
+          .item {
+            width: 130px;
+            height: 220px;
+          }
+          .item:nth-child(3) { left: 50%; }
+          .item:nth-child(4) { left: calc(50% + 140px); }
+          .item:nth-child(5) { left: calc(50% + 280px); }
+          .item:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
+        }
       
 
       `}</style>
