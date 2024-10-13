@@ -20,6 +20,8 @@ import "aos/dist/aos.css";
 
 import axios from "axios";
 import Link from "next/link";
+import FireTextTitle from "../shared/FireText";
+import RotateButton from "../shared/RotateButton";
 
 let tabs = [
   { id: 1, label: "All" },
@@ -69,7 +71,7 @@ const EventTime = () => {
 
   return (
     <div className="mx-auto my-20 p-4 ">
-      <Tabs defaultValue="All" className="my-5 container ">
+      <Tabs defaultValue="All" className="my-5 max-w-[1250px] mx-auto px-2 ">
         {/* Tab List */}
         <TabsList className="w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
           {tabs.map((category) => (
@@ -85,7 +87,7 @@ const EventTime = () => {
           ))}
         </TabsList>
 
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  w-full bg-transparent ">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  w-full bg-transparent ">
           <AnimatePresence>
             {events
               ?.filter((n) => {
@@ -104,7 +106,7 @@ const EventTime = () => {
               .map((event) => (
                 <Link href={`/events/${event._id}`} key={event._id}>
                   <motion.div
-                    className="group rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-all duration-300 hover:scale-105"
+                    className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 m-4 transform transition-all duration-300 hover:scale-105"
                     whileHover={{ y: -5 }}
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -122,9 +124,9 @@ const EventTime = () => {
                     </div>
 
                     <div className="p-6 space-y-4">
-                      <h2 className="text-2xl font-bold text-gray-800" data-aos="fade-up">
-                        {event.title}
-                      </h2>
+
+                      <FireTextTitle  title={event.title} />
+
 
                       <div className="space-y-2" data-aos="fade-up" data-aos-delay="100">
                         <InfoItem icon={<Clock className="w-5 h-5" />} text={event.dateTime} />
@@ -134,27 +136,27 @@ const EventTime = () => {
                         <InfoItem icon={<Tag className="w-5 h-5" />} text={`Category: ${event.category}`} />
                       </div>
 
-                      <p className="text-gray-600 text-sm" data-aos="fade-up" data-aos-delay="200">
-                        {event.when}
-                      </p>
+                    
 
-                     
 
-                      <div className="flex justify-between items-center pt-4" data-aos="fade-up" data-aos-delay="400">
+
+                      <div className="flex justify-between items-center " data-aos="fade-up" data-aos-delay="400">
                         <motion.button
-                          className="bg-green-500 text-white py-2 px-6 rounded-full font-semibold shadow-md hover:bg-green-600 transition-colors duration-300"
+                          className="bg-emerald-400 text-white p-2 rounded-xl font-semibold shadow-md hover:bg-green-600 transition-colors duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          ${event.price}
+                          $ {event.price}
                         </motion.button>
                         <motion.button
-                          className="bg-green-500 text-white py-2 px-6 rounded-full font-semibold shadow-md hover:bg-green-600 transition-colors duration-300 flex items-center"
+                          
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          Buy Ticket
-                          <ArrowRight className="ml-2 w-4 h-4" />
+                          <RotateButton >
+                            Buy Ticket 
+                          </RotateButton>
+                       
                         </motion.button>
                       </div>
                     </div>

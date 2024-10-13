@@ -34,7 +34,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
     <motion.div 
       ref={ref}
       style={{ opacity, y, scale }}
-      className="mx-auto text-center max-w-4xl px-4 py-10"
+      className="mx-auto text-center container px-2  "
     >
       <motion.div className="">
         <motion.span 
@@ -56,8 +56,9 @@ export default function SectionTitle({ title = '', description, subTitle }) {
       >
         {description}
       </motion.p>
+ {/* loading  */}
       <motion.div 
-        className="mt-8 flex justify-center space-x-2"
+        className=" my-6 flex justify-center space-x-2"
       >
         {[...Array(5)].map((_, i) => (
           <motion.div
@@ -74,32 +75,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
           />
         ))}
       </motion.div>
-      <motion.div
-        className="absolute inset-0 -z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 1 }}
-      >
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-blue-500 rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </motion.div>
+     
       <style jsx>{`
         .words {
           color:  rgb(16, 160, 185);
