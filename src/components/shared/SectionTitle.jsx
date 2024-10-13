@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { motion, useAnimation, useScroll, useTransform } from 'framer-motion'
 
-export default function SectionTitle({ title, description, subTitle }) {
+export default function SectionTitle({ title = '', description, subTitle }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -15,7 +15,6 @@ export default function SectionTitle({ title, description, subTitle }) {
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1])
 
   const subTitleControls = useAnimation()
-  const titleControls = useAnimation()
 
   useEffect(() => {
     const sequence = async () => {
@@ -31,26 +30,13 @@ export default function SectionTitle({ title, description, subTitle }) {
     sequence()
   }, [subTitleControls])
 
-  useEffect(() => {
-    const titleAnimation = async () => {
-      await titleControls.start(i => ({
-        opacity: 1,
-        y: 0,
-        transition: { delay: i * 0.1 }
-      }))
-    }
-    titleAnimation()
-  }, [titleControls])
-
-  const letters = title.split('')
-
   return (
     <motion.div 
       ref={ref}
       style={{ opacity, y, scale }}
       className="mx-auto text-center max-w-4xl px-4 py-10"
     >
-      <motion.div className="mb-6">
+      <motion.div className="">
         <motion.span 
           className="inline-block py-2 px-4 text-white text-sm font-semibold rounded-full shadow-lg cursor-pointer"
           animate={subTitleControls}
@@ -60,31 +46,11 @@ export default function SectionTitle({ title, description, subTitle }) {
           {subTitle}
         </motion.span>
       </motion.div>
-      <motion.h2
-        className="text-3xl md:text-4xl font-serif lg:text-5xl font-bold mb-6 relative overflow-hidden"
-      >
-        {letters.map((letter, index) => (
-          <motion.span
-            key={index}
-            custom={index}
-            animate={titleControls}
-            initial={{ opacity: 0, y: 50 }}
-            className="inline-block"
-            style={{
-              background: "linear-gradient(45deg, #3b82f6, #60a5fa)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent"
-            }}
-            whileHover={{
-              scale: 1.2,
-              rotate: [0, 5, -5, 0],
-              transition: { duration: 0.6 }
-            }}
-          >
-            {letter}
-          </motion.span>
+      <div className="words word-1 my-4 text-2xl font-bold md:text-5xl ">
+        {(title || '').split('').map((letter, index) => (
+          <span key={index}>{letter}</span>
         ))}
-      </motion.h2>
+      </div>
       <motion.p
         className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto relative"
       >
@@ -134,6 +100,66 @@ export default function SectionTitle({ title, description, subTitle }) {
           />
         ))}
       </motion.div>
+      <style jsx>{`
+        .words {
+          color:  rgb(16, 160, 185);
+    
+         
+          font-family: "Archivo Black", sans-serif;
+       
+        }
+
+        .words span {
+         
+          display: inline-block;
+          animation: move 3s ease-in-out infinite;
+        }
+
+        @keyframes move {
+          0% {
+            transform: translate(-30%, 0);
+          }
+          50% {
+            text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+          }
+          100% {
+            transform: translate(30%, 0);
+          }
+        }
+
+        .words span:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+
+        .words span:nth-child(3) {
+          animation-delay: 1s;
+        }
+
+        .words span:nth-child(4) {
+          animation-delay: 1.5s;
+        }
+
+        .words span:nth-child(5) {
+          animation-delay: 2s;
+        }
+
+        .words span:nth-child(6) {
+          animation-delay: 2.5s;
+        }
+
+        .words span:nth-child(7) {
+          animation-delay: 3s;
+
+        .words span:nth-child(8) {
+          animation-delay: 3.5s;
+
+        .words span:nth-child(9) {
+          animation-delay: 4s;
+
+       .words span:nth-child(10) {
+          animation-delay: 4.5s;
+        }
+      `}</style>
     </motion.div>
   )
 }

@@ -9,7 +9,7 @@ import Banner from './banner/page';
 
 const HomeContainer = () => {
     return (
-        <div className='space-y-20'>
+        <div className=''>
              <Banner></Banner>
             <PopularEvents></PopularEvents>
             <EventTime />
