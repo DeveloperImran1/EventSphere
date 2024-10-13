@@ -9,23 +9,40 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import { RiRefund2Fill } from "react-icons/ri";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 const EventOrderList = () => {
-
-  const { data:invoice} = useQuery({
+  const session = useSession();
+  const { data: invoice = [], refetch, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`http://localhost:9000/myAllOrder/webavengers@gmail.com`).then((res) =>
+      fetch(`http://localhost:9000/myAllOrder/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
-console.log(invoice);
+  console.log(invoice);
 
+  const handleRefundRequest = async (id) => {
+    const res = await axios.put(`http://localhost:9000/refundRequest/${id}`)
+    console.log(res)
+    if (res?.data?.modifiedCount) {
+      toast.success('Successfully Refund Requested 😊')
+      refetch()
+    }
+  }
+  const handleRefundAlert = () => {
+    toast.error('Already Requested for Refund 😊')
+  }
   const confirmedOrders = invoice?.filter(order => order?.refundRequested === "NotRequested");
-
-
   const totalConfirmedAmount = confirmedOrders?.reduce((total, order) => total + order?.amount, 0);
 
+
+  invoice?.length === 0 && <div>
+    <h1>You have not purchase any ticket</h1>
+  </div>
   return (
     <div className=" text-black flex container mx-auto ml-4">
       {/* <div className=" w-[300px]">Order</div> */}
@@ -132,31 +149,31 @@ console.log(invoice);
                         scope="col"
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                          <span>Booking Date</span>
+                        <span>Booking Date</span>
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                          <span>Event Date</span>
+                        <span>Event Date</span>
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                          <span>Amount</span>
+                        <span>Amount</span>
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                          <span>Ticket</span>
+                        <span>Ticket</span>
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                          <span>Status</span>
+                        <span>Status</span>
                       </th>
 
                       <th
@@ -167,9 +184,12 @@ console.log(invoice);
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200  text-sm">
+                    {
+                        // isLoading && <Loading></Loading>
+                    }
                     {invoice?.map((invoice) => (
                       <tr key={invoice?._id}>
-                 
+
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           <div className=" flex gap-3 flex-col md:flex-row flex-wrap">
@@ -180,7 +200,7 @@ console.log(invoice);
                               alt="fdsg"
                               className=" border border-gray-200 rounded-lg"
                             />
-                          
+
                           </div>
                         </td>
 
@@ -194,23 +214,26 @@ console.log(invoice);
                           {new Date(invoice?.eventDate).toLocaleDateString("en-US")}
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                         $ {invoice?.amount}
+                          $ {invoice?.amount}
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                         {invoice?.totalTickets} P
+                          {invoice?.totalTickets} P
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
                           <span className="bg-emerald-100/60 text-emerald-500 px-2 py-1 rounded-3xl">
-                          {invoice?.refundRequested === "NotRequested" ? "Success" : "Refunded"}</span>
+                            {invoice?.refundRequested === "NotRequested" ? "Success" : invoice?.refundRequested === "Requested" ? "Requested" : "Refunded"}</span>
                         </td>
-                     
-                        <td className={`md:px-4 px-2 py-4 text-sm   whitespace-nowrap text-wrap text-center  flex flex-col items-center jsutify-center`}>
+
+                        <td onClick={() => {
+                          invoice?.refundRequested === "Requested" ? handleRefundAlert() : handleRefundRequest(invoice?._id)
+                        }
+                        } className={`md:px-4 px-2 py-4 text-sm   whitespace-nowrap text-wrap text-center  flex flex-col items-center jsutify-center`}>
                           <span>
-                          <RiRefund2Fill size={22} className="text-red-500 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill>
+                            <RiRefund2Fill size={22} className="text-red-500 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill>
                           </span>
                         </td>
-                     
-                 
+
+
                       </tr>
                     ))}
                   </tbody>

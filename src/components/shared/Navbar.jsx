@@ -352,7 +352,7 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 font-bold">
                       <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
                         <Image
-                          src={session?.data?.user?.image}
+                          src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                           alt="Profile"
                           height="60"
                           width="60"
@@ -362,7 +362,7 @@ const Navbar = () => {
 
                         <div>
                           <p className="font-semibold text-gray-800">
-                          {session?.data?.user?.name || "Imran"}
+                          {session?.data?.user?.name || "User Name"}
                           </p>
                         </div>
 
@@ -371,7 +371,7 @@ const Navbar = () => {
                         </p>
                       </div>
                       <Link
-                        href="/dashboard/user-profile"
+                        href={`/dashboard/user-profile/${session?.data?.user?.email}`}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                         onClick={closeDropdown}
                       >

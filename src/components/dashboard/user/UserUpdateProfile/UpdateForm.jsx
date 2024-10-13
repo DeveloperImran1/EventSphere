@@ -1,26 +1,25 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import toast, { Toaster } from 'react-hot-toast';
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 
 // Client Component (form handling part)
 const UpdateFrom = () => {
     const session = useSession();
+    const [isLoading, setIsLoading] = useState(false)
 
-    
     const [formData, setFormData] = useState({
-        name: "",
-        surname: "",
-        specialty: "",
-        skills: "",
-        gender: "",
-        birth: "",
-        phone: "",
-        email: "",
-        country: "",
-        city: "",
+        name: session?.data?.user?.name,
+        specialty: session?.data?.user?.specialty,
+        skills: session?.data?.user?.skills,
+        gender: session?.data?.user?.gender,
+        birth: session?.data?.user?.birth,
+        phone: session?.data?.user?.phone,
+        email: session?.data?.user?.email,
+        country: session?.data?.user?.country,
+        city: session?.data?.user?.city,
     });
 
     const handleInputChange = (e) => {
@@ -32,26 +31,32 @@ const UpdateFrom = () => {
         e.preventDefault();
         console.log("Form Submitted:", formData);
         try {
-      const { data } = await axios.put(
-        `https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`,
-      formData
-      )
-      console.log(data)
-      toast.success('Data Updated Successfully!')
-  
-    } catch (err) {
-      console.log(err)
+            setIsLoading(true)
+            const result = await axios.put(
+                `http://localhost:9000/user/${session?.data?.user?.email}`,
+                formData
+            )
+            console.log(result)
+            if(result?.data?.modifiedCount){
+                console.log(result)
+                toast.success('Data Updated Successfully!')
+            }
+            setIsLoading(false)
+            e.target.reset()
 
-    }
+        } catch (err) {
+            setIsLoading(false)
+
+        }
     };
-    const { data:userInfo} = useQuery({
+    const { data: userInfo } = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-          fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
-            res.json()
-          ),
-      });
-console.log(userInfo);
+            fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
+                res.json()
+            ),
+    });
+    console.log(userInfo);
 
     return (
         <div>
@@ -65,7 +70,8 @@ console.log(userInfo);
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder={userInfo ? userInfo?.name: "Name"} className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
+                        defaultValue={userInfo?.name}
+                        placeholder={userInfo ? userInfo?.name : "Name"} className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
 
                     />
                 </div>
@@ -76,8 +82,8 @@ console.log(userInfo);
                         value={formData.surname}
                         onChange={handleInputChange}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
-                        placeholder={userInfo ? userInfo?.surname: "Surname"}
-      
+                        placeholder={userInfo ? userInfo?.surname : "Surname"}
+
                     />
                 </div>
                 <div className="mb-5">
@@ -86,6 +92,7 @@ console.log(userInfo);
                         name="specialty"
                         value={formData.specialty}
                         onChange={handleInputChange}
+                        defaultValue={userInfo?.specialty}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
                         placeholder={userInfo ? userInfo?.specialty : "Specialty"}
                     />
@@ -96,9 +103,10 @@ console.log(userInfo);
                         name="skills"
                         value={formData.skills}
                         onChange={handleInputChange}
+                        defaultValue={userInfo?.skills}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
-                        placeholder={userInfo ? userInfo?.skills:"Skills"}
-           
+                        placeholder={userInfo ? userInfo?.skills : "Skills"}
+
                     />
                 </div>
                 <div className="mb-5">
@@ -119,10 +127,11 @@ console.log(userInfo);
                     <input
                         name="birth"
                         value={formData.birth}
+                        defaultValue={userInfo?.birth}
                         onChange={handleInputChange}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
                         placeholder="Birth (dd.mm.yyyy)"
-                        
+
                     />
                 </div>
                 <div className="mb-5">
@@ -132,7 +141,7 @@ console.log(userInfo);
                         value={formData.phone}
                         onChange={handleInputChange}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
-        
+
                         placeholder={userInfo ? userInfo?.phone : "Phone"}
                     />
                 </div>
@@ -142,6 +151,8 @@ console.log(userInfo);
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        readOnly
+                        defaultValue={session?.data?.user?.email}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
                         placeholder={userInfo ? userInfo?.email : "Email address"}
                     />
@@ -152,7 +163,7 @@ console.log(userInfo);
                         name="country"
                         value={formData.country}
                         // value={ userInfo ? userInfo?.country : formData?.country}
-              
+
                         onChange={handleInputChange}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
                     >
@@ -169,6 +180,7 @@ console.log(userInfo);
                         placeholder={userInfo ? userInfo?.city : "City"}
                         value={formData.city}
                         onChange={handleInputChange}
+                        defaultValue={userInfo?.city}
                         className="border py-4 px-2 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-green-100"
 
                     />
@@ -177,8 +189,7 @@ console.log(userInfo);
                     <button
                         type="submit"
                         className=" -mt-6 mb-6 bg-green-500 text-white py-2 px-4 rounded-lg max-w-52"
-                    >
-                        Update
+                    > {isLoading ? <p>Loading..</p> : "Update"}
                     </button>
                 </div>
             </form>
