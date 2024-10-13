@@ -72,6 +72,25 @@ const OrganizerRequest = () => {
                     ))}
                 </tbody>
             </table>
+
+            {/* Mobile View */}
+            {users.map((user, index) => (
+                <div key={index} className="block md:hidden bg-white border border-gray-200 mb-4 p-4 rounded-lg shadow-md">
+                    <div className="flex justify-between mb-2">
+                        <Image src="https://plus.unsplash.com/premium_photo-1664015982598-283bcdc9cae8?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height={80}  width={80} alt={user.username} className="w-20 h-20 rounded-full mr-4" />
+                        <div className="flex space-x-4 mt-2">
+                            {/* Actions can be defined here */}
+                            <Link href={user?.socialPlatform} target='_blank'><FaChrome className='text-4xl rounded-xl text-white bg-[#0000008b] p-2 cursor-pointer' /></Link>
+                            <MdOutlineCancel className='text-4xl rounded-xl text-white bg-red-500 p-2 cursor-pointer' />
+                            <FaRegCircleCheck className='text-4xl rounded-xl text-white bg-green-500 p-2 cursor-pointer' />
+                        </div>
+                    </div>
+                    <p className="font-semibold text-gray-900">{user.name}</p>
+                    <p className='text-sm'><span className='font-semibold text-gray-700'>Company:</span> {user.companyName}</p>
+                    <p className='text-sm'><span className='font-semibold text-gray-700'>CEO Email:</span> {user.CEOEmail}</p>
+                    <p className='text-sm'><span className='font-semibold text-gray-700'>Location:</span> {user.location}</p>
+                </div>
+            ))}
         </div>
     );
 };
