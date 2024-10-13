@@ -1,94 +1,167 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ total, selectedSeatNames }) => {
+    const searchParams = useSearchParams();
+    const id = searchParams.get("id");
+    const axiosPublic = useAxiosPublic()
+    const [event, setEvent] = useState(null);
+    const [loading, setLoading] = useState(true);
     const stripe = useStripe();
     const elements = useElements();
+    const session = useSession();
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [cardNumber, setCardNumber] = useState('');
     const [expiryMonth, setExpiryMonth] = useState('');
     const [expiryYear, setExpiryYear] = useState('');
     const [cvv, setCvv] = useState('');
+    const [clientSecret, setClientSecret] = useState('')
+    const [transactionId, setTransactionId] = useState('');
+    console.log(session)
+    console.log(selectedSeatNames)
+
+    useEffect(() => {
+        if (total > 0) {
+            axiosPublic.post('/create-payment-intent', { total })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+        }
+
+    }, [axiosPublic, total])
+
+    // Fetch event data from API
+    useEffect(() => {
+        const fetchEventsData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:9000/events/${id}`);
+                setEvent(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching event data:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchEventsData();
+    }, [id]);
+    console.log(event)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!stripe || !elements) {
-            return;
+            return
         }
 
-        // Card validation can be added here
-        const cardElement = elements.getElement(CardElement);
+        const card = elements.getElement(CardElement)
+
+        if (card === null) {
+            return
+        }
+
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
-            card: cardElement,
-        });
+            card
+        })
 
         if (error) {
+            console.log('payment error', error);
             setError(error.message);
-            setSuccess(null);
-        } else {
-            setError(null);
-            setSuccess('Payment successful! Payment Method ID: ' + paymentMethod.id);
-            // Send paymentMethod.id to your server to complete the payment
         }
-    };
+        else {
+            console.log('payment method', paymentMethod)
+            setError('');
+        }
+
+
+        // confirm payment
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: session?.data?.email || 'anonymous',
+                    name: session?.data?.displayName || 'anonymous'
+                }
+            }
+        })
+
+        if (confirmError) {
+            console.log('confirm error')
+        }
+        else {
+            console.log('payment intent', paymentIntent)
+            if (paymentIntent.status === 'succeeded') {
+                console.log('transaction id', paymentIntent.id);
+                setTransactionId(paymentIntent.id);
+
+                // now save the payment in the database
+                const payment = {
+                    email: session?.data?.email,
+                    price: total,
+                    transactionId: paymentIntent.id,
+                    selectedSeatNames,
+                    // date: new Date(), // utc date convert. use moment js to 
+                    // cartIds: cart.map(item => item._id),
+                    // menuItemIds: cart.map(item => item.menuId),
+                    status: 'pending'
+                }
+
+                const res = await axiosPublic.post('/orders', payment);
+                console.log('payment saved', res.data);
+                refetch();
+                if (res.data?.paymentResult?.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Thank you for the taka paisa",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    // navigate('/dashboard/paymentHistory')
+                }
+
+            }
+        }
+
+    }
+
 
     return (
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Payment Information</h2>
-            
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-1" htmlFor="cardNumber">Card Number</label>
-                <input
-                    type="text"
-                    id="cardNumber"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-lg"
-                    placeholder="1234 5678 9012 3456"
-                    required
-                />
-            </div>
+            <p className="mt-4">Selected Seats:</p>
+            <ol type="1" className="flex gap-4 flex-wrap">
+                {selectedSeatNames?.map((seatName, index) => (
+                    <li key={index}>{seatName}</li>
+                ))}
+            </ol>
 
-            <div className="flex justify-between mb-4">
-                <div className="w-1/2 pr-2">
-                    <label className="block text-sm font-medium mb-1" htmlFor="expiryMonth">Expiry Month</label>
-                    <input
-                        type="text"
-                        id="expiryMonth"
-                        value={expiryMonth}
-                        onChange={(e) => setExpiryMonth(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
-                        placeholder="MM"
-                        required
-                    />
-                </div>
-                <div className="w-1/2 pl-2">
-                    <label className="block text-sm font-medium mb-1" htmlFor="expiryYear">Expiry Year</label>
-                    <input
-                        type="text"
-                        id="expiryYear"
-                        value={expiryYear}
-                        onChange={(e) => setExpiryYear(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
-                        placeholder="YY"
-                        required
-                    />
-                </div>
-            </div>
-
+            {/* Stripe Card Element */}
             <div className="mb-4">
-                <label className="block text-sm font-medium mb-1" htmlFor="cvv">CVV</label>
-                <input
-                    type="text"
-                    id="cvv"
-                    value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
+                <label className="block text-sm font-medium mb-1">Card Information</label>
+                <CardElement
                     className="w-full p-2 border border-gray-300 rounded-lg"
-                    placeholder="123"
-                    required
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
+                            },
+                        },
+                    }}
                 />
             </div>
 
@@ -97,9 +170,9 @@ const CheckOutForm = () => {
                 disabled={!stripe}
                 className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-500 transition duration-300"
             >
-                Pay
+                Pay {total}$
             </button>
-
+  
             {error && <div className="text-red-600 mt-2">{error}</div>}
             {success && <div className="text-green-600 mt-2">{success}</div>}
         </form>
