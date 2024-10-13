@@ -2,9 +2,37 @@
 import { AlertDialog } from '@radix-ui/react-alert-dialog';
 import Image from 'next/image';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { FaChrome, FaRegCircleCheck, } from 'react-icons/fa6';
 import { MdOutlineCancel } from 'react-icons/md';
 const OrganizerRequest = () => {
+    const [users, setUsers] = useState([]); // State to hold user data
+    console.log(users);
+
+    const [loading, setLoading] = useState(true); // State to manage loading status
+    const [error, setError] = useState(null); // State to handle errors
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('http://localhost:9000/organizerRequest');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUsers(data); // Set users data
+            } catch (error) {
+                setError(error.message); // Handle any errors
+            } finally {
+                setLoading(false); // Set loading to false after fetching
+            }
+        };
+
+        fetchUsers();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="overflow-x-auto w-[97%]">
