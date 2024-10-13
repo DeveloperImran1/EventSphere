@@ -19,7 +19,6 @@ const BeOrganizer = () => {
         phone: "",
         country: "",
         city: "",
-        organizer: false
     });
 
     const handleSubmit = async (e) => {
