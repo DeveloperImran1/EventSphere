@@ -86,8 +86,8 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
             payment_method: {
                 card: card,
                 billing_details: {
-                    email: session?.data?.email || 'anonymous',
-                    name: session?.data?.displayName || 'anonymous'
+                    email: session?.data?.user?.email || 'anonymous',
+                    name: session?.data?.user?.displayName || 'anonymous'
                 }
             }
         })
@@ -103,7 +103,7 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
 
                 // now save the payment in the database
                 const payment = {
-                    email: session?.data?.email,
+                    email: session?.data?.user?.email,
                     price: total,
                     transactionId: paymentIntent.id,
                     selectedSeatNames,
