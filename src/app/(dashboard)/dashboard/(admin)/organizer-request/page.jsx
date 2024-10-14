@@ -1,38 +1,53 @@
 "use client"
-import { AlertDialog } from '@radix-ui/react-alert-dialog';
+import OrganizerRequestButtons from '@/components/dashboard/admin/OrganizerRequestButtons';
 import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { FaChrome, FaRegCircleCheck, } from 'react-icons/fa6';
-import { MdOutlineCancel } from 'react-icons/md';
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+const fetchUsers = async () => {
+    const response = await axios.get('http://localhost:9000/organizerRequest');
+    return response.data;
+};
+
 const OrganizerRequest = () => {
-    const [users, setUsers] = useState([]); // State to hold user data
-    console.log(users);
+    const [dialogType, setDialogType] = useState(null);
+    const [updatedUserId, setUpdatedUserId] = useState();
 
-    const [loading, setLoading] = useState(true); // State to manage loading status
-    const [error, setError] = useState(null); // State to handle errors
+    // Fetching users using react-query
+    const { data: users, isLoading, error } = useQuery({
+        queryKey: ['users'],
+        queryFn: fetchUsers
+    });
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch('http://localhost:9000/organizerRequest');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setUsers(data); // Set users data
-            } catch (error) {
-                setError(error.message); // Handle any errors
-            } finally {
-                setLoading(false); // Set loading to false after fetching
-            }
-        };
+    {/* Cancel Button */ }
+    const handleCancel = () => {
+        setDialogType('Cancel');
+    };
 
-        fetchUsers();
-    }, []);
+    {/* Accept Button */ }
+    const handleAccept = (userId) => {
+        setUpdatedUserId(userId);
+        setDialogType('Accept');
+    };
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+
+    // If users array is empty or undefined, display the image
+    if (!users || users.length === 0) {
+        return (
+            <div className="flex flex-col justify-center items-center md:-ml-40">
+                <Image
+                    src="https://cdni.iconscout.com/illustration/premium/thumb/data-not-found-illustration-download-in-svg-png-gif-file-formats--message-empty-communication-emptystate-no-pack-design-development-illustrations-9404367.png" 
+                    alt="No data available"
+                    width={400}
+                    height={400}
+                />
+                <p className="text-center text-ellipsis font-semibold text-gray-900 mt-4 text-xl">Request no found.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="overflow-x-auto w-[97%]">
@@ -61,12 +76,7 @@ const OrganizerRequest = () => {
                             <td className="py-3 px-6">{user.CEOEmail}</td>
                             <td className="py-3 px-6">{user.location}</td>
                             <td className="">
-                                <div className="flex space-x-4 ">
-                                    {/* Actions can be defined here */}
-                                    <Link href={user?.socialPlatform} target='_blank'><FaChrome className='text-4xl rounded-xl text-white bg-[#0000008b] p-2 cursor-pointer' /></Link>
-                                    <MdOutlineCancel className='text-4xl rounded-xl text-white bg-red-500 p-2 cursor-pointer' />
-                                    <FaRegCircleCheck className='text-4xl rounded-xl text-white bg-green-500 p-2 cursor-pointer' />
-                                </div>
+                                <OrganizerRequestButtons user={user} handleAccept={handleAccept} handleCancel={handleCancel} dialogType={dialogType} />
                             </td>
                         </tr>
                     ))}
@@ -77,13 +87,8 @@ const OrganizerRequest = () => {
             {users.map((user, index) => (
                 <div key={index} className="block md:hidden bg-white border border-gray-200 mb-4 p-4 rounded-lg shadow-md">
                     <div className="flex justify-between mb-2">
-                        <Image src="https://plus.unsplash.com/premium_photo-1664015982598-283bcdc9cae8?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height={80}  width={80} alt={user.username} className="w-20 h-20 rounded-full mr-4" />
-                        <div className="flex space-x-4 mt-2">
-                            {/* Actions can be defined here */}
-                            <Link href={user?.socialPlatform} target='_blank'><FaChrome className='text-4xl rounded-xl text-white bg-[#0000008b] p-2 cursor-pointer' /></Link>
-                            <MdOutlineCancel className='text-4xl rounded-xl text-white bg-red-500 p-2 cursor-pointer' />
-                            <FaRegCircleCheck className='text-4xl rounded-xl text-white bg-green-500 p-2 cursor-pointer' />
-                        </div>
+                        <Image src="https://plus.unsplash.com/premium_photo-1664015982598-283bcdc9cae8?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height={80} width={80} alt={user.username} className="w-20 h-20 rounded-full mr-4" />
+                        <OrganizerRequestButtons user={user} handleAccept={handleAccept} handleCancel={handleCancel} dialogType={dialogType} />
                     </div>
                     <p className="font-semibold text-gray-900">{user.name}</p>
                     <p className='text-sm'><span className='font-semibold text-gray-700'>Company:</span> {user.companyName}</p>
