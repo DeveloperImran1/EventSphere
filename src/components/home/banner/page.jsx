@@ -93,15 +93,15 @@ export default function Banner() {
                 width: index === 0 || index === 1 ? '100%' : '200px',
                 height: index === 0 || index === 1 ? '100%' : '300px',
                 transform: index === 0 || index === 1 ? 'none' : 'translateY(-50%)',
-                borderRadius: index === 0 || index === 1 ? '0' : '20px',
+                borderRadius: index === 0 || index === 1 ? '0' : '30px',
                 boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
             >
-              <div className={`bg-white bg-opacity-10 backdrop-blur-sm  p-2 md:p-4  rounded-lg  text-white  transform  hover:scale-105 absolute top-1/2 left-4 md:left-10 lg:left-44 -translate-y-1/2 w-44   md:w-60 lg:w-96 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={` bg-opacity-10 backdrop-blur-2xl   p-4   rounded-lg text-lime-100   transform  hover:scale-105 absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-96 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
-                <p className="  text-white my-2 text-sm font-normal  ">{item.description}</p>
+                <p className="  text-lime-100 my-2 text-sm font-normal  ">{item.description}</p>
                <div className='flex justify-center'>
-               <a href="#" className='btnRotate w-24 h-6 md:w-32 md:h-8 md:text-lg '>
+               <a href="#" className='btnRotate  w-24 h-6 md:w-32 md:h-8 md:text-lg '>
                  Details
                 </a>
                </div>
@@ -109,7 +109,7 @@ export default function Banner() {
             </li>
           ))}
         </ul>
-        <nav className="nav absolute flex gap-4 bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
+        <nav className="nav absolute flex  gap-4  bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
           <ArrowLeftIcon
            className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
             onClick={() => activate('prev')}
