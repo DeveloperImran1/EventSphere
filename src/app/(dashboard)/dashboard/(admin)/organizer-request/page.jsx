@@ -21,8 +21,9 @@ const OrganizerRequest = () => {
     });
 
     {/* Cancel Button */ }
-    const handleCancel = () => {
+    const handleCancel = (userId) => {
         setDialogType('Cancel');
+        setUpdatedUserId(userId);
     };
 
     {/* Accept Button */ }
@@ -44,7 +45,7 @@ const OrganizerRequest = () => {
                     width={400}
                     height={400}
                 />
-                <p className="text-center text-ellipsis font-semibold text-gray-900 mt-4 text-xl">Request no found.</p>
+                <p className="text-center text-ellipsis font-semibold text-gray-900 mt-4 text-xl">Request no found...</p>
             </div>
         );
     }

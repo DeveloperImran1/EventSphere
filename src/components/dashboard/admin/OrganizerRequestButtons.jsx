@@ -40,9 +40,31 @@ const OrganizerRequestButtons = ({ user, dialogType, handleCancel, handleAccept 
         }
     });
 
+    // * RequestCancel
+    const mutation2 = useMutation({
+        mutationFn: async (id) => {
+            const res = await axios.put(`http://localhost:9000/organizingRequestCancel/${id}`);
+            return res.data;
+        },
+        onSuccess: (data) => {
+            if (data.success) {
+                toast.success(data.message);
+            } else {
+                toast.error(data.message);
+            }
+            queryClient.invalidateQueries('users'); // Refetch users after mutation
+        },
+        onError: () => {
+            toast.error("An error occurred while updating user role!");
+        }
+    });
+
     const handleUpdateRoll = () => {
         mutation.mutate(user._id);
     };
+    const handelRequestCancel = () =>{
+        mutation2.mutate(user._id);
+    }
 
     return (
         <div>
@@ -65,23 +87,23 @@ const OrganizerRequestButtons = ({ user, dialogType, handleCancel, handleAccept 
                     {dialogType === 'Cancel' ? (
                         <>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you sure you want to cancel?</AlertDialogTitle>
-                                <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+                                <AlertDialogTitle className="mb-5">Are you sure you want to Request Rejected ?</AlertDialogTitle>
+                                {/* <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription> */}
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction>Continue</AlertDialogAction>
+                                <AlertDialogCancel>No</AlertDialogCancel>
+                                <AlertDialogAction className="bg-gray-800" onClick={handelRequestCancel}>Yes</AlertDialogAction>
                             </AlertDialogFooter>
                         </>
                     ) : (
                         <>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>Are you sure you want to accept?</AlertDialogTitle>
-                                <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+                                <AlertDialogTitle className='mb-5'>Are you sure you want to Request Accept ?</AlertDialogTitle>
+                                {/* <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription> */}
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={handleUpdateRoll}>Continue</AlertDialogAction>
+                                <AlertDialogCancel>No</AlertDialogCancel>
+                                <AlertDialogAction className="bg-gray-800" onClick={handleUpdateRoll}>Yes</AlertDialogAction>
                             </AlertDialogFooter>
                         </>
                     )}
