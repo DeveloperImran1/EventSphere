@@ -9,6 +9,7 @@ import CheckOutForm from './CheckOutPage';
 export default function PaymentPage({ total, selectedSeatNames }) {
     const [timeLeft, setTimeLeft] = useState(119); // 1:59 in seconds
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    // console.log(selectedSeatNames)
 
     useEffect(() => {
         const timer = setInterval(() => {

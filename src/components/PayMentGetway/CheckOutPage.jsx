@@ -27,14 +27,14 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
 
     useEffect(() => {
         if (total > 0) {
-            axiosPublic.post('/create-payment-intent', { total })
+            axiosPublic.post('/payment', { price: total }) 
                 .then(res => {
                     console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
+                .catch(err => console.error("Error creating payment intent:", err)); 
         }
-
-    }, [axiosPublic, total])
+    }, [axiosPublic, total]);
 
     // Fetch event data from API
     useEffect(() => {
@@ -82,15 +82,16 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
 
 
         // confirm payment
-        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+        const { paymentIntent, error: confirmError } = await stripe?.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
                 billing_details: {
                     email: session?.data?.user?.email || 'anonymous',
-                    name: session?.data?.user?.displayName || 'anonymous'
+                    name: session?.data?.user?.name || 'anonymous'
                 }
             }
-        })
+        });
+        
 
         if (confirmError) {
             console.log('confirm error')
@@ -103,10 +104,20 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
 
                 // now save the payment in the database
                 const payment = {
-                    email: session?.data?.user?.email,
-                    price: total,
+                    eventImage:event?.gallery?.[0],
+                    eventName:event?.title,
+                    eventId:event?._id,
+                    eventOrganizerEmail:event?.organizer?.email,
+                    eventOrganizerName:event?.organizer?.name,
+                    eventOrganizerPhoto:event?.organizer?.photo,
+                    bookedUserName: session?.data?.user?.name,
+                    bookedUserPhoto: session?.data?.user?.image,
+                    bookedUserEmail: session?.data?.user?.email,
+                    amount: total,
+                    eventDate:event?.dateTime,
+                    refundRequested:"Requested",
                     transactionId: paymentIntent.id,
-                    selectedSeatNames,
+                    seat:selectedSeatNames,
                     // date: new Date(), // utc date convert. use moment js to 
                     // cartIds: cart.map(item => item._id),
                     // menuItemIds: cart.map(item => item.menuId),
@@ -115,7 +126,7 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
 
                 const res = await axiosPublic.post('/orders', payment);
                 console.log('payment saved', res.data);
-                refetch();
+                // refetch();
                 if (res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         position: "top-end",

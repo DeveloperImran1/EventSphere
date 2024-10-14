@@ -44,7 +44,7 @@ const Payment = () => {
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedSeatNames, setSelectedSeatNames] = useState([]);
-  // console.log(selectedSeatNames)
+  console.log(selectedSeatNames)
 
   // Fetch event data from API
   useEffect(() => {
