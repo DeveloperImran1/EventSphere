@@ -97,12 +97,12 @@ export default function Banner() {
                 boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
             >
-              <div className={` bg-opacity-10 backdrop-blur-2xl   p-4   rounded-lg text-lime-100   transform  hover:scale-105 absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-96 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={` bg-opacity-10 backdrop-blur-3xl   p-4  lg:p-6 rounded-2xl text-lime-100   transform  hover:scale-105 absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
-                <p className="  text-lime-100 my-2 text-sm font-normal  ">{item.description}</p>
-               <div className='flex justify-center'>
+                <p className="  text-white my-2 text-sm   ">{item.description}</p>
+               <div className='  ml-2 '>
                <a href="#" className='btnRotate  w-24 h-6 md:w-32 md:h-8 md:text-lg '>
-                 Details
+              See  Details
                 </a>
                </div>
               </div>
@@ -111,11 +111,11 @@ export default function Banner() {
         </ul>
         <nav className="nav absolute flex  gap-4  bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
           <ArrowLeftIcon
-           className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
+           className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 rounded-full cursor-pointer transition-all duration-300 bg-emerald-200  hover:bg-emerald-100    "
             onClick={() => activate('prev')}
           />
           <ArrowRightIcon
-            className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
+            className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 bg-emerald-200   hover:bg-emerald-100 "
             onClick={() => activate('next')}
           />
         </nav>

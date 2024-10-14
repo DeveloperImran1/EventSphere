@@ -22,6 +22,8 @@ import axios from "axios";
 import Link from "next/link";
 import FireTextTitle from "../shared/FireText";
 import RotateButton from "../shared/RotateButton";
+import SectionTitle from "../shared/SectionTitle";
+import Button from "../shared/CercleBuuton/Button";
 
 let tabs = [
   { id: 1, label: "All" },
@@ -34,7 +36,7 @@ let tabs = [
 // Define InfoItem component
 const InfoItem = ({ icon, text }) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center   space-x-2">
       {icon}
       <span>{text}</span>
     </div>
@@ -120,6 +122,13 @@ const EventTime = () => {
     <div >
       <Tabs defaultValue="All" className="">
         {/* Tab List */}
+        <SectionTitle
+          subTitle="Pick a Time"
+          title="Event Timing Options"
+          description="Browse events by time: today, tomorrow, this weekend, or this month."
+        >
+        </SectionTitle>
+
         <TabsList className="w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
           {tabs.map((category) => (
             <TabsTrigger
@@ -152,63 +161,7 @@ const EventTime = () => {
               })
               .map((event) => (
                 <Link href={`/events/${event._id}`} key={event._id}>
-                  {/* <motion.div
-                    className="group rounded-lg overflow-hidden shadow-lg bg-slate-100  transform transition-all duration-300 hover:scale-105"
-                    whileHover={{ y: -5 }}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div className="relative overflow-hidden h-48">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        src={event.gallery[0]}
-                        alt={event.title}
-                        layout="fill"
-                        data-aos="zoom-in"
-                         
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
-                    </div>
-
-                    <div className="p-6 space-y-4">
-
-                      <FireTextTitle  title={event.title} />
-
-
-                      <div className="space-y-2" data-aos="fade-up" data-aos-delay="100">
-                        <InfoItem icon={<Clock className="w-5 h-5" />} text={event.dateTime} />
-                        <InfoItem icon={<Building2 className="w-5 h-5" />} text={`Hosted by: ${event.companyName}`} />
-                        <InfoItem icon={<MapPin className="w-5 h-5" />} text={`${event.location.country}, ${event.location.city}`} />
-                        <InfoItem icon={<FileType className="w-5 h-5" />} text={`Type: ${event.type}`} />
-                        <InfoItem icon={<Tag className="w-5 h-5" />} text={`Category: ${event.category}`} />
-                      </div>
-
-                    
-
-
-
-                      <div className="flex justify-between items-center " data-aos="fade-up" data-aos-delay="400">
-                        <motion.button
-                          className="bg-emerald-400 text-white p-2 rounded-xl font-semibold shadow-md hover:bg-green-600 transition-colors duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          $ {event.price}
-                        </motion.button>
-                        <motion.button
-                          
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <RotateButton >
-                            Buy Ticket 
-                          </RotateButton>
-                       
-                        </motion.button>
-                      </div>
-                    </div>
-                  </motion.div> */}
+           
                   <motion.div
                     ref={cardRef}
                     className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300"
@@ -235,17 +188,17 @@ const EventTime = () => {
                         <FireTextTitle title={event.title} />
                       </motion.div>
 
-                      <motion.div className="space-y-2" data-aos="fade-up" data-aos-delay="100" >
-                        <InfoItem icon={<Clock className="w-5 h-5" />} text={event.dateTime} />
-                        <InfoItem icon={<Building2 className="w-5 h-5" />} text={`Hosted by: ${event.companyName}`} />
-                        <InfoItem icon={<MapPin className="w-5 h-5" />} text={`${event.location.country}, ${event.location.city}`} />
-                        <InfoItem icon={<FileType className="w-5 h-5" />} text={`Type: ${event.type}`} />
-                        <InfoItem icon={<Tag className="w-5 h-5" />} text={`Category: ${event.category}`} />
+                      <motion.div className="space-y-2   text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
+                        <InfoItem icon={<Clock className=" text-blue-400 " />} text={event.dateTime} />
+                        <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} />
+                        <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${event.location.country}, ${event.location.city}`} />
+                        <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${event.type}`} />
+                        <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${event.category}`} />
                       </motion.div>
 
                       <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="400" >
                         <motion.button
-                          className=" text-white p-2 rounded-xl font-semibold shadow-md bg-green-500 transition-colors duration-300"
+                          className=" text-white p-2 rounded-xl font-semibold shadow-md bg-blue-400  transition-colors duration-300"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
@@ -262,10 +215,10 @@ const EventTime = () => {
           </AnimatePresence>
         </div>
       </Tabs>
-      <div className="text-center mt-16">
+      <div className="text-center mt-10">
         {seeMore ? (
-          <Link href="/events" className="mx-auto button ">
-            See All
+          <Link href="/events" className="flex justify-center">
+         <Button  >    See All  </Button>
           </Link>
         ) : (
           ""
