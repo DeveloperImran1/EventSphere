@@ -12,7 +12,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
             <ToastContainer />
             <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
                 <Image 
-                src={event?.photo} 
+                src={event?.gallery[0]} 
                 alt={event?.title}
                 width={200}
                 height={200}

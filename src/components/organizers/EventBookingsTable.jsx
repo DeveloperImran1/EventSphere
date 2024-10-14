@@ -192,7 +192,7 @@ const EventBookingsTable = () => {
               
             >
                
-              <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2 text-sm font-medium text-gray-900"><span><img className='w-10 h-10 rounded-full '  src={booking.photo} alt="photo" /></span>   {booking.customerName}</td>
+              <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2 text-sm font-medium text-gray-900"><span><Image height={676} width={1200}  className='w-10 h-10 rounded-full '  src={booking.photo} alt="photo" /></span>   {booking.customerName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                 <Tooltip content={new Date(booking.bookingDate).toLocaleDateString()}>

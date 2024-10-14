@@ -65,7 +65,7 @@ const LoginPage = () => {
         console.log("responce is", resp)
         setLoading(false)
         // thik vabe login hole home page a pathia dibo.
-        if (resp.status === 200) {
+        if (resp?.status === 200) {
             successfullySignIn()
         }
         else{

@@ -105,7 +105,7 @@ export default function EventRequestForm() {
     }, [text]);
 
     return (
-      <button ref={buttonRef} className="btn my-10  text-lg font-mono  " style={{ "--clr": "#007bff" }}>
+      <button ref={buttonRef} className="btn my-10  text-xl   " style={{ "--clr": "#7d0bee" }}>
         {text}
       </button>
     );
