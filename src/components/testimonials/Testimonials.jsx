@@ -45,12 +45,12 @@ const Testimonials = () => {
     ]
 
     return (
-        <div className=" w-[calc(100vw-17px)] mx-auto p-4 mb-20">
+        <div className="max-w-7xl  mx-auto p-4 mb-20">
             <div>
                 <SectionTitle
                 subTitle="Users Reviews"
                     title="Testimonials"
-                    description="Read our testimonials to hear from satisfied customers. Their experiences highlight our commitment to quality and service, showcasing how we've positively impacted their journeys. Join our community of happy clients!"
+                    description="Read our testimonials to hear from satisfied customers. Their experiences highlight our commitment to quality and service, showcasing how we've positively impacted their journeys!"
                 >
 
                 </SectionTitle>
