@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Post from './Post';
 import AboutMe from './AboutMe';
-import Setting from './Setting';
+import Review from './Review';
 
 const RightSide = () => {
   return (
@@ -12,7 +12,7 @@ const RightSide = () => {
         <TabList >
           <Tab>Post</Tab>
           <Tab>About Me</Tab>
-          <Tab>Setting</Tab>
+          <Tab>Review</Tab>
         </TabList>
 
         <TabPanel >
@@ -22,7 +22,9 @@ const RightSide = () => {
           <h2><AboutMe /></h2>
         </TabPanel>
         <TabPanel>
-          <h2><Setting /></h2>
+         <div className='max-w-[500px] '>
+         <Review/>
+         </div>
         </TabPanel>
       </Tabs>
     </div>
