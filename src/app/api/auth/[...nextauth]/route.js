@@ -77,8 +77,8 @@ export const authOptions = {
                             createdAt: new Date(),
                             role: "user"
                         });
-
-          
+                   
+                          
                     }
 
                     // Return user details
