@@ -15,7 +15,7 @@ import { Slider } from "@nextui-org/react";
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('All');
   const [selectedCity, setSelectedCity] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
@@ -162,15 +162,15 @@ const EventsData = () => {
   };
 
 
-  // Add to cart and share event functionality
-  const addToCart = (event) => {
-    setCartItems([...cartItems, event]);
-    toast.success(`${event.title} added to cart!`);
-  };
+  // // Add to cart and share event functionality
+  // const addToCart = (event) => {
+  //   setCartItems([...cartItems, event]);
+  //   toast.success(`${event.title} added to cart!`);
+  // };
 
-  const shareEvent = (event) => {
-    toast.info(`Sharing options for ${event.title}`);
-  };
+  // const shareEvent = (event) => {
+  //   toast.info(`Sharing options for ${event.title}`);
+  // };
 
   return (
     <div className='w-11/12 mx-auto mt-20'>
@@ -371,10 +371,8 @@ const EventsData = () => {
             {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
                 <EventCard
-
                   event={event}
-                  addToCart={addToCart}
-                  shareEvent={shareEvent}
+                  // addToCart={addToCart}
                 /></Link>
             ))}
           </div>

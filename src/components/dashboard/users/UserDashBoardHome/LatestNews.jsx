@@ -3,7 +3,7 @@ import React from 'react';
 
 const LatestNews = () => {
     return (
-        <div className="bg-gray-100 py-8 w-full max-w-md  mx-start">
+        <div className="bg-gray-100 pt-8 w-full max-w-md  mx-start">
             <h2 className="text-2xl font-bold bg-white p-6 shadow-md rounded-t-lg text-green-500  text-start">Our Latest News</h2>
             <div className="  ">
                 {/* News Card 1 */}
