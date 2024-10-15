@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { CalendarDays, DollarSign, Users, ChevronUp, ChevronDown } from 'lucide-react'
 import Swal from 'sweetalert2';
-import SectionTitle from '../shared/SectionTitle';
 import Image from "next/image";
+import { MdEventNote } from "react-icons/md";
 
 const bookings = [
   {
@@ -163,20 +163,15 @@ const EventBookingsTable = () => {
   }
 
   return (
-    <div className="overflow-x-auto my-10 px-4  rounded-lg shadow-lg">
-            
-        <SectionTitle
-          subTitle="Popular Events"
-          title="Explore Top Events"
-        />
-       
-      <table className="min-w-full     ">
+    <div className="overflow-x-auto px-4 rounded-lg shadow-lg min-w-full inline w-full">
+      <div className="w-[95%] hidden md:block">
+      <table className="w-full">
         <thead className="bg-[#1b88c0]">
           <tr>
             {['customerName', 'eventName', 'bookingDate', 'eventDate', 'tickets', 'status', 'revenue'].map((column) => (
-              <th 
+              <th
                 key={column}
-                onClick={() => handleSort(column)} 
+                onClick={() => handleSort(column)}
                 className="px-6 py-4 text-left text-xs rounded-t-xl text-white font-semibold uppercase tracking-wider cursor-pointer transition duration-300 ease-in-out"
               >
                 {column.charAt(0).toUpperCase() + column.slice(1).replace('Name', '')} <SortIcon column={column} />
@@ -186,13 +181,21 @@ const EventBookingsTable = () => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {sortedBookings.map((booking) => (
-            <tr 
-              key={booking.id} 
-              className="hover:bg-gradient-to-br  from-blue-200 to-purple-200  hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.04] transition-all duration-300 ease-in-out transform-gpu"
-              
+            <tr
+              key={booking.id}
+              className="transition-all duration-300 ease-in-out transform-gpu"
+
             >
-               
-              <td className="px-6 py-4 whitespace-nowrap flex items-center gap-2 text-sm font-medium text-gray-900"><span><Image height={676} width={1200}  className='w-10 h-10 rounded-full '  src={booking.photo} alt="photo" /></span>   {booking.customerName}</td>
+
+              {/* <td className="px-6 py-4 flex whitespace-nowrap items-center gap-2 text-sm font-medium text-gray-900 text-wrap"><span><Image height={500} width={500} className='w-full h-10 rounded-full ' src={booking.photo} alt="photo" /></span>   {booking.customerName}</td> */}
+              <td>
+                <div className="flex space-x-4 items-center">
+                  <div className="max-w-40">
+                    <Image height={500} width={500} className=' w-12 h-12 rounded-full ' src={booking.photo} alt="photo" />
+                  </div>
+                  <p>{booking.customerName}</p>
+                </div>
+              </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                 <Tooltip content={new Date(booking.bookingDate).toLocaleDateString()}>
@@ -229,6 +232,42 @@ const EventBookingsTable = () => {
           ))}
         </tbody>
       </table>
+      </div>
+      {/* Mobile View */}
+      <div className="block md:hidden">
+        {sortedBookings.map((booking) => (
+          <div key={booking.id} className="bg-white shadow-md rounded-lg mb-4 p-4">
+            <div className="flex flex-col mb-2">
+              <Image height={60} width={60} className='w-16 h-16 rounded-full' src={booking.photo} alt="photo" />
+              <div className="mt-2">
+                <p className="font-medium text-gray-900">{booking.customerName}</p>
+                <p className="text-gray-950 text-xl">{booking.eventName}</p>
+              </div>
+            </div>
+            <div className="text-sm text-gray-600">
+              <p className="flex items-center mb-2">
+                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                Booking Date: {new Date(booking.bookingDate).toLocaleDateString()}
+              </p>
+              <p className="flex items-center mb-2">
+                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                Event Date: {new Date(booking.eventDate).toLocaleDateString()}
+              </p>
+              <p className="flex items-center mb-2">
+                <Users className="mr-2 h-4 w-4 text-indigo-600" />
+                Tickets: {booking.tickets}
+              </p>
+              <p className="flex items-center mb-2">
+                <StatusBadge status={booking.status} />
+              </p>
+              <p className={`flex items-center ${booking.revenue < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                <DollarSign className="mr-1 h-4 w-4" />
+                {Math.abs(booking.revenue).toFixed(2)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
