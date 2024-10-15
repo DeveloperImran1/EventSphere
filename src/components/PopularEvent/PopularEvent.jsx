@@ -260,7 +260,7 @@ function EventCard({ event }) {
                 Read More
               </Button>
             </Link>
-            <Link href="/SeatBookingWidget">
+            <Link href={`/payment?id=${event?._id}`}>
               <Button className="bg-white m-2 p-1 font-serif  h-8  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
                 Book Now !
               </Button>

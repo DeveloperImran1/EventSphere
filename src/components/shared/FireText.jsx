@@ -92,7 +92,7 @@ export default function FireTextTitle({ title }) {
 
   return (
     <motion.h2
-      className="text-3xl text-center font-bold relative "
+      className="text-2xl text-center font-bold relative "
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

@@ -184,7 +184,7 @@ const EventTime = () => {
                     </div>
 
                     <motion.div className="p-6 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
-                      <motion.div style={{ transform: "translateZ(40px)" }}>
+                      <motion.div  style={{ transform: "translateZ(40px)" }}>
                         <FireTextTitle title={event.title} />
                       </motion.div>
 
@@ -196,7 +196,7 @@ const EventTime = () => {
                         <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${event.category}`} />
                       </motion.div>
 
-                      <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="400" >
+                      <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="300" >
                         <motion.button
                           className=" text-white p-2 rounded-xl font-semibold shadow-md bg-blue-400  transition-colors duration-300"
                           whileHover={{ scale: 1.05 }}
