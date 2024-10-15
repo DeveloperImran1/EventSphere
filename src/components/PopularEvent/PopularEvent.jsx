@@ -22,7 +22,7 @@ const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Busines
 
 
 const CountdownUnit = ({ value, label }) => (
-  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-emerald-500 to-indigo-800 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-blue-500 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
     <span className=" text-lg font-mono  text-white">{value.toString().padStart(2, '0')}</span>
     <span className="text-xs font-serif  text-purple-200">{label}</span>
   </div>

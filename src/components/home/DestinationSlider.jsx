@@ -21,15 +21,16 @@ const DestinationSlider = () => {
         <SectionTitle description={sectionTitle.description} title={sectionTitle.title} subTitle={sectionTitle.subTitle}/>
         <div className="flex justify-end mb-6 -mt-12">
           <div className="flex gap-x-2">
-            <button
-              onClick={scrollLeft}
-              className="bg-white border-2 p-2 border-[#dddae3] hover:border-cyan-400 duration-300 grid place-content-center rounded-full h-11 w-11 shadow-md"
-            >
+          <button
+  onClick={scrollLeft}
+  className="bg-white border-2 p-2 border-cyan-400 duration-300 hover:text-black  grid place-content-center rounded-full h-11 w-11 shadow-md hover:bg-cyan-100 hover:scale-105 transition-all"
+>
               <FaChevronLeft className='text-xl' />
             </button>
             <button
               onClick={scrollRight}
-              className="bg-white border-2 p-2 border-[#dddae3] hover:border-cyan-400 duration-300 grid place-content-center rounded-full h-11 w-11 shadow-md"
+  className="bg-white border-2 p-2 border-cyan-400 duration-300 hover:text-black  grid place-content-center rounded-full h-11 w-11 shadow-md hover:bg-cyan-100 hover:scale-105 transition-all"
+          
             >
               <FaChevronRight className='text-xl' />
             </button>
