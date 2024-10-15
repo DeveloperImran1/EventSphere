@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import Image from 'next/image';
 import CheckOutForm from './CheckOutPage';
 
-export default function PaymentPage({ total, selectedSeatNames }) {
+export default function PaymentPage({ total, selectedSeatNames,selectedSeats }) {
     const [timeLeft, setTimeLeft] = useState(119); // 1:59 in seconds
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
     // console.log(selectedSeatNames)
@@ -49,6 +49,7 @@ export default function PaymentPage({ total, selectedSeatNames }) {
                             <CheckOutForm
                                 total={total}
                                 selectedSeatNames={selectedSeatNames}
+                                selectedSeats={selectedSeats}
                             />
                         </Elements>
                     </div>

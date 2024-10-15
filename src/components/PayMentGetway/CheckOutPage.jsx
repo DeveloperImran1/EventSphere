@@ -4,12 +4,14 @@ import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
 
-const CheckOutForm = ({ total, selectedSeatNames }) => {
+const CheckOutForm = ({ total, selectedSeatNames ,selectedSeats}) => {
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
     const axiosPublic = useAxiosPublic()
-    const [event, setEvent] = useState(null);
+    // const [events, setEvents] = useState(null);
     const [loading, setLoading] = useState(true);
     const stripe = useStripe();
     const elements = useElements();
@@ -22,126 +24,157 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
     const [cvv, setCvv] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
+    const [isProcessing, setIsProcessing] = useState(false);
     console.log(session)
+    console.log(total)
     console.log(selectedSeatNames)
+    console.log(selectedSeats)
 
     useEffect(() => {
         if (total > 0) {
-            axiosPublic.post('/payment', { price: total }) 
-                .then(res => {
-                    console.log(res.data.clientSecret);
+            const createPaymentIntent = async () => {
+                try {
+                    const res = await axiosPublic.post('/payment', { price: total });
+                    console.log('Client Secret:', res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
-                })
-                .catch(err => console.error("Error creating payment intent:", err)); 
+                } catch (err) {
+                    console.error("Error creating payment intent:", err);
+                }
+            };
+            createPaymentIntent();
         }
     }, [axiosPublic, total]);
 
-    // Fetch event data from API
-    useEffect(() => {
-        const fetchEventsData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:9000/events/${id}`);
-                setEvent(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching event data:", error);
-                setLoading(false);
-            }
-        };
+    const { data: events = {}, isLoading, refetch } = useQuery({
+        queryKey: ['events'],
+        queryFn: async () => {
+            const { data } = await axiosPublic.get(`/events/${id}`,);
+            return data;
+        },
+        keepPreviousData: true,
+    });
+    console.log(events)
+    // Fetch events data from API
+    // useEffect(() => {
+    //     const fetchEventsData = async () => {
+    //         try {
+    //             const response = await axios.get(`http://localhost:9000/events/${id}`);
+    //             setEvents(response.data);
+    //             setLoading(false);
+    //         } catch (error) {
+    //             console.error("Error fetching event data:", error);
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchEventsData();
-    }, [id]);
-    console.log(event)
+    //     fetchEventsData();
+    // }, [id]);
+    // console.log(events)
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!stripe || !elements) {
-            return
+    
+        if (!stripe || !elements || isProcessing) {
+            return;
         }
-
-        const card = elements.getElement(CardElement)
-
+        setIsProcessing(true);
+    
+        const card = elements.getElement(CardElement);
+    
         if (card === null) {
-            return
+            return;
         }
-
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card
-        })
-
-        if (error) {
-            console.log('payment error', error);
-            setError(error.message);
-        }
-        else {
-            console.log('payment method', paymentMethod)
-            setError('');
-        }
-
-
-        // confirm payment
-        const { paymentIntent, error: confirmError } = await stripe?.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    email: session?.data?.user?.email || 'anonymous',
-                    name: session?.data?.user?.name || 'anonymous'
-                }
+    
+        try {
+            if (!clientSecret) {
+                console.error("Client secret is missing");
+                setError("Client secret is missing");
+                setIsProcessing(false);
+                return;
             }
-        });
-        
-
-        if (confirmError) {
-            console.log('confirm error')
-        }
-        else {
-            console.log('payment intent', paymentIntent)
+    
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card
+            });
+    
+            if (error) {
+                console.log('Payment error', error);
+                setError(error.message);
+                setIsProcessing(false);
+                return;
+            }
+    
+            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: paymentMethod.id,
+            });
+    
+            if (confirmError) {
+                console.log('Confirm error', confirmError);
+                setError(confirmError.message);
+                setIsProcessing(false);
+                return;
+            }
+    
             if (paymentIntent.status === 'succeeded') {
-                console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
-
-                // now save the payment in the database
+    
                 const payment = {
-                    eventImage:event?.gallery?.[0],
-                    eventName:event?.title,
-                    eventId:event?._id,
-                    eventOrganizerEmail:event?.organizer?.email,
-                    eventOrganizerName:event?.organizer?.name,
-                    eventOrganizerPhoto:event?.organizer?.photo,
+                    eventImage: events?.gallery?.[0],
+                    eventName: events?.title,
+                    eventId: events?._id,
+                    eventOrganizerName: events?.organizer?.name,
+                    eventOrganizerPhoto: events?.organizer?.photo,
+                    eventOrganizerEmail: events?.organizer?.email,
                     bookedUserName: session?.data?.user?.name,
                     bookedUserPhoto: session?.data?.user?.image,
                     bookedUserEmail: session?.data?.user?.email,
                     amount: total,
-                    eventDate:event?.dateTime,
-                    refundRequested:"Requested",
+                    eventDate: events?.dateTime,
+                    totalTickets: selectedSeats,
+                    refundRequested: "Requested",
                     transactionId: paymentIntent.id,
-                    seat:selectedSeatNames,
-                    // date: new Date(), // utc date convert. use moment js to 
-                    // cartIds: cart.map(item => item._id),
-                    // menuItemIds: cart.map(item => item.menuId),
-                    status: 'pending'
-                }
-
+                };
+    
+                // পেমেন্ট তথ্য সংরক্ষণের জন্য রিকোয়েস্ট পাঠানো
                 const res = await axiosPublic.post('/orders', payment);
-                console.log('payment saved', res.data);
-                // refetch();
-                if (res.data?.paymentResult?.insertedId) {
+                console.log('Payment saved', res.data);
+    
+                // পেমেন্ট সফল হলে Swal.fire দেখানো
+                if (res.data?.success && res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Thank you for the taka paisa",
+                        title: "Thank you for the Event Booking",
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    // navigate('/dashboard/paymentHistory')
+                    
+                    // ইনপুট ফিল্ডগুলো খালি করা
+                    elements.getElement(CardElement).clear();
+    
+                    // refetch কল করা
+                    refetch();
+                } else {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Failed to save payment. Please try again.",
+                        showConfirmButton: true,
+                    });
                 }
-
             }
+        } catch (error) {
+            console.error('Error creating payment intent:', error);
+            setError(error.message);
+        } finally {
+            setIsProcessing(false);
         }
+    };
+    
+    
 
-    }
 
 
     return (
@@ -172,18 +205,21 @@ const CheckOutForm = ({ total, selectedSeatNames }) => {
                                 color: '#9e2146',
                             },
                         },
+                        hidePostalCode: false,
                     }}
                 />
+
             </div>
 
             <button
                 type="submit"
-                disabled={!stripe}
-                className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-500 transition duration-300"
+                disabled={!stripe || isProcessing}
+                className={`w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-500 transition duration-300 ${isProcessing ? "cursor-not-allowed opacity-50" : ""
+                    }`}
             >
-                Pay {total}$
+                {isProcessing ? "Processing..." : `Pay ${total}$`}
             </button>
-  
+
             {error && <div className="text-red-600 mt-2">{error}</div>}
             {success && <div className="text-green-600 mt-2">{success}</div>}
         </form>

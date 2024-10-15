@@ -197,6 +197,11 @@ const Payment = () => {
     );
   }
 
+  const selectSeat=selectedSeatNames.map((seatName, index) => (
+    <>{seatName}</>
+  ))
+  console.log(selectSeat)
+
   return (
     <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
       <h1 className="text-3xl border-b-2 py-4 font-serif font-bold mb-4 text-center">
@@ -283,6 +288,7 @@ const Payment = () => {
               disabled={selectedSeats === 0}
               total={finalTotal}
               selectedSeatNames={selectedSeatNames}
+              selectedSeats={selectedSeats}
               className="w-full py-2 mt-4"
             >
               Book Now
