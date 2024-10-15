@@ -7,8 +7,8 @@ import Review from './Review';
 
 const RightSide = () => {
   return (
-    <div className='bg-white rounded-md p-6 shadow-md mt-4 flex gap-4'>
-      <Tabs>
+    <div className='bg-white rounded-md  shadow-md mt-4 flex gap-4'>
+      <Tabs className="max-w-md lg:max-w-xl mt-4 mx-auto bg-white rounded-lg space-y-6">
         <TabList >
           <Tab>Post</Tab>
           <Tab>About Me</Tab>
@@ -16,15 +16,13 @@ const RightSide = () => {
         </TabList>
 
         <TabPanel >
-          <h2><Post /></h2>
+          <Post />
         </TabPanel>
         <TabPanel>
-          <h2><AboutMe /></h2>
+          <AboutMe />
         </TabPanel>
         <TabPanel>
-         <div className='max-w-[500px] '>
-         <Review/>
-         </div>
+          <Review />
         </TabPanel>
       </Tabs>
     </div>
