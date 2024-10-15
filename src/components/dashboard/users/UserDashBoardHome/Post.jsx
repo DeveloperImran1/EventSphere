@@ -1,6 +1,7 @@
 import React from "react";
 import Social from "./Social";
 import AllPost from "./AllPost";
+import PostCard from "../../user/UserProfile/PostCard";
 
 const Post = () => {
   return (
@@ -26,7 +27,8 @@ const Post = () => {
     <div>
       <Social/>
     </div>
-    <AllPost/>
+    {/* <AllPost/> */}
+    <PostCard/>
     </>
   );
 };
