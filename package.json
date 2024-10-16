@@ -79,6 +79,7 @@
     "react-youtube": "^10.1.0",
     "recharts": "^2.12.7",
     "stripe": "^17.1.0",
+    "styled-components": "^6.1.13",
     "sweetalert2": "^11.14.1",
     "swiper": "^11.1.14",
     "tailwind-merge": "^2.5.2",

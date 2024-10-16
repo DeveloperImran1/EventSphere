@@ -38,7 +38,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
     >
       <motion.div className="">
         <motion.span 
-          className="inline-block py-2 px-4 text-white text-sm font-semibold rounded-full shadow-lg cursor-pointer"
+          className="inline-block py-2 px-4 text-white text-xl font-semibold rounded-full shadow-lg cursor-pointer"
           animate={subTitleControls}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
