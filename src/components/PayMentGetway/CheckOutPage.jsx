@@ -7,11 +7,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
 
-const CheckOutForm = ({ total, selectedSeatNames ,selectedSeats}) => {
+const CheckOutForm = (props) => {
     const searchParams = useSearchParams();
+    const { total, selectedSeatNames,selectedSeats }=props
     const id = searchParams.get("id");
     const axiosPublic = useAxiosPublic()
-    // const [events, setEvents] = useState(null);
     const [loading, setLoading] = useState(true);
     const stripe = useStripe();
     const elements = useElements();
@@ -25,7 +25,8 @@ const CheckOutForm = ({ total, selectedSeatNames ,selectedSeats}) => {
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
-    console.log(session)
+    // console.log(session)
+    console.log(props)
     console.log(total)
     console.log(selectedSeatNames)
     console.log(selectedSeats)
@@ -35,7 +36,7 @@ const CheckOutForm = ({ total, selectedSeatNames ,selectedSeats}) => {
             const createPaymentIntent = async () => {
                 try {
                     const res = await axiosPublic.post('/payment', { price: total });
-                    console.log('Client Secret:', res.data.clientSecret);
+                    // console.log('Client Secret:', res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 } catch (err) {
                     console.error("Error creating payment intent:", err);
@@ -54,22 +55,6 @@ const CheckOutForm = ({ total, selectedSeatNames ,selectedSeats}) => {
         keepPreviousData: true,
     });
     console.log(events)
-    // Fetch events data from API
-    // useEffect(() => {
-    //     const fetchEventsData = async () => {
-    //         try {
-    //             const response = await axios.get(`http://localhost:9000/events/${id}`);
-    //             setEvents(response.data);
-    //             setLoading(false);
-    //         } catch (error) {
-    //             console.error("Error fetching event data:", error);
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchEventsData();
-    // }, [id]);
-    // console.log(events)
 
 
     const handleSubmit = async (event) => {

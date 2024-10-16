@@ -44,6 +44,13 @@ const Payment = () => {
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedSeatNames, setSelectedSeatNames] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [finalTotal, setFinalTotal] = useState()
+  console.log(selectedSeats)
   console.log(selectedSeatNames)
 
   // Fetch event data from API
@@ -95,12 +102,7 @@ const Payment = () => {
       );
   });
 
-  const [selectedSeats, setSelectedSeats] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [finalTotal, setFinalTotal] = useState()
+
 
   // Alert for bulk purchase discount
   useEffect(() => {
@@ -197,7 +199,7 @@ const Payment = () => {
     );
   }
 
-  const selectSeat=selectedSeatNames.map((seatName, index) => (
+  const selectSeat = selectedSeatNames.map((seatName, index) => (
     <>{seatName}</>
   ))
   console.log(selectSeat)
@@ -243,7 +245,7 @@ const Payment = () => {
             </div>
             <div className="mb-2">
               <span className="font-bold">Date: </span>
-              {event.dateTime.slice(0, 10) + " " + "Time:"+ event.dateTime.slice(11, 16)} AM
+              {event.dateTime.slice(0, 10) + " " + "Time:" + event.dateTime.slice(11, 16)} AM
             </div>
 
             <div className="flex items-center gap-2 mb-4">
@@ -283,16 +285,18 @@ const Payment = () => {
                 Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              disabled={selectedSeats === 0}
-              total={finalTotal}
-              selectedSeatNames={selectedSeatNames}
-              selectedSeats={selectedSeats}
-              className="w-full py-2 mt-4"
-            >
-              Book Now
-            </Button>
+            {
+              total && selectedSeatNames && selectSeat && (<Button
+                onClick={() => setIsModalOpen(true)}
+                disabled={selectedSeats === 0}
+                total={finalTotal}
+                selectedSeatNames={selectedSeatNames || []}
+                selectedSeats={selectedSeats || 0}
+                className="w-full py-2 mt-4"
+              >
+                Book Now
+              </Button>)
+            }
           </div>
         </div>
       </div>
