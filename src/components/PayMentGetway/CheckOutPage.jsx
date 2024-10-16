@@ -26,7 +26,7 @@ const CheckOutForm = (props) => {
     const [transactionId, setTransactionId] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
     // console.log(session)
-    console.log(props)
+    console.log("CheckoutForm page theke props is", props)
     console.log(total)
     console.log(selectedSeatNames)
     console.log(selectedSeats)
