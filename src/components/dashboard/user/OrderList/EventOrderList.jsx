@@ -8,23 +8,41 @@ import { CiFilter } from "react-icons/ci";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
+import { RiRefund2Fill } from "react-icons/ri";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 const EventOrderList = () => {
-
-  const { data:invoice} = useQuery({
+  const session = useSession();
+  const { data: invoice = [], refetch, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`http://localhost:9000/orders`).then((res) =>
+      fetch(`http://localhost:9000/myAllOrder/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
-console.log(invoice);
+  console.log(invoice);
 
-  const confirmedOrders = invoice?.filter(order => order?.status === "Completed");
-
-
+  const handleRefundRequest = async (id) => {
+    const res = await axios.put(`http://localhost:9000/refundRequest/${id}`)
+    console.log(res)
+    if (res?.data?.modifiedCount) {
+      toast.success('Successfully Refund Requested 😊')
+      refetch()
+    }
+  }
+  const handleRefundAlert = () => {
+    toast.error('Already Requested for Refund 😊')
+  }
+  const confirmedOrders = invoice?.filter(order => order?.refundRequested === "NotRequested");
   const totalConfirmedAmount = confirmedOrders?.reduce((total, order) => total + order?.amount, 0);
 
+
+  invoice?.length === 0 && <div>
+    <h1>You have not purchase any ticket</h1>
+  </div>
   return (
     <div className=" text-black flex container mx-auto ml-4">
       {/* <div className=" w-[300px]">Order</div> */}
@@ -82,7 +100,7 @@ console.log(invoice);
                   <h2 className="font-bold text-xl text-gray-800">
                     Total Payment
                   </h2>
-                  <p>{totalConfirmedAmount}</p>
+                  <p>$ {totalConfirmedAmount}</p>
                 </div>
               </div>
             </div>
@@ -97,7 +115,7 @@ console.log(invoice);
                   <h2 className="font-bold text-xl text-gray-800">
                     Total Success
                   </h2>
-                  <p>{confirmedOrders?.length}</p>
+                  <p>{confirmedOrders?.length} Tickets</p>
                 </div>
               </div>
             </div>
@@ -109,70 +127,69 @@ console.log(invoice);
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="overflow-hidden border border-gray-200  md:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 ">
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-normal text-left rtl:text-right text-gray-500 -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
                         <div className="flex items-center gap-x-3 ">
-                          <span>Invoice No</span>
+                          <span>Image</span>
                         </div>
                       </th>
 
                       <th
                         scope="col"
-                        className="md:px-4  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                        <span>Event info</span>
+                        <span>Title</span>
                       </th>
 
                       <th
                         scope="col"
-                        className="md:px-4 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                        <button className="flex items-center gap-x-2">
-                          <span>Booking Date</span>
-                        </button>
+                        <span>Booking Date</span>
                       </th>
                       <th
                         scope="col"
-                        className="md:px-4  pl-3 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                        <button className="flex items-center gap-x-2">
-                          <span>Ammount</span>
-                        </button>
+                        <span>Event Date</span>
                       </th>
                       <th
                         scope="col"
-                        className="md:px-4  pl-3 px-2  py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
                       >
-                        <button className="flex items-center gap-x-2">
-                          <span>orderdBy</span>
-                        </button>
+                        <span>Amount</span>
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                      >
+                        <span>Ticket</span>
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                      >
+                        <span>Status</span>
                       </th>
 
                       <th
                         scope="col"
-                        className="md:px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                      >
-                        Refund
-                      </th>
-
-                      <th
-                        scope="col"
-                        className=" pl-5 md:px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                      >
-                        Status
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2">
+                        Refund Request
                       </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200  text-sm">
+                    {
+                        // isLoading && <Loading></Loading>
+                    }
                     {invoice?.map((invoice) => (
                       <tr key={invoice?._id}>
-                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap ml-2">
-                          {(invoice?._id).slice(5,10)}
-                        </td>
+
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           <div className=" flex gap-3 flex-col md:flex-row flex-wrap">
@@ -183,63 +200,40 @@ console.log(invoice);
                               alt="fdsg"
                               className=" border border-gray-200 rounded-lg"
                             />
-                            <div>
-                              <p className=" text-black text-wrap">{invoice?.eventName}</p>
-                              <p className=" text-black">
-                                {invoice?.eventPlace}
-                              </p>
-                            </div>
+
                           </div>
                         </td>
 
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          {invoice?.date}
+                          {invoice?.eventName?.slice(0, 15)}
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          {invoice?.amount}
+                          {new Date(invoice?.createdAt).toLocaleDateString("en-US")}
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          {invoice?.orderdBy?.email}
+                          {new Date(invoice?.eventDate).toLocaleDateString("en-US")}
                         </td>
-                        <td className="md:px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                          {invoice?.refund}
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          $ {invoice?.amount}
                         </td>
-                  
-                        <td className="md:px-4 py-4 text-sm whitespace-nowrap flex items-center md:gap-2 mt-8 md:mt-0     my-auto text-left mr-3">
-                          <div className=" text-sm font-medium text-gray-700 whitespace-nowrap">
-                            <div
-                              className={`inline-flex items-center px-3 py-1 rounded-full gap-x-1 ${
-                                invoice?.status === "Pending" &&
-                                "bg-yellow-100/60 text-yellow-500"
-                              }  ${
-                                invoice?.status === "Completed" &&
-                                "bg-emerald-100/60 text-emerald-500"
-                              } ${
-                                invoice?.status === "Rejected" &&
-                                "bg-red-100/60 text-red-500"
-                              }`}
-                            >
-                              <span
-                                className={`h-1.5 w-1.5 rounded-full
-                                                ${
-                                                  invoice?.status ===
-                                                    "Pending" && "bg-yellow-500"
-                                                } ${
-                                  invoice?.status === "Completed" &&
-                                  "bg-green-500"
-                                } ${
-                                  invoice?.status === "Rejected" && "bg-red-500"
-                                } `}
-                              ></span>
-                              <h2 className="text-sm font-normal ">
-                                {invoice?.status}
-                              </h2>
-                            </div>
-                          </div>
-                          <div className=" cursor-pointer">
-                            <BsThreeDotsVertical />
-                          </div>
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          {invoice?.totalTickets} P
                         </td>
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          <span className="bg-emerald-100/60 text-emerald-500 px-2 py-1 rounded-3xl">
+                            {invoice?.refundRequested === "NotRequested" ? "Success" : invoice?.refundRequested === "Requested" ? "Requested" : "Refunded"}</span>
+                        </td>
+
+                        <td onClick={() => {
+                          invoice?.refundRequested === "Requested" ? handleRefundAlert() : handleRefundRequest(invoice?._id)
+                        }
+                        } className={`md:px-4 px-2 py-4 text-sm   whitespace-nowrap text-wrap text-center  flex flex-col items-center jsutify-center`}>
+                          <span>
+                            <RiRefund2Fill size={22} className="text-red-500 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill>
+                          </span>
+                        </td>
+
+
                       </tr>
                     ))}
                   </tbody>

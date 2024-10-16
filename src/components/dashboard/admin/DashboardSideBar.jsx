@@ -17,9 +17,117 @@ import RequestOrganizer from '@/components/modal/RequestOrganizer';
 const DashboardSideBar = () => {
     const session = useSession();
     const [routes, setRoutes] = useState([])
-    console.log("Dashboard sidebar theke session ", session);
+    console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
-   
+    const userRoutes = [
+        {
+            title: "Profile",
+            path: `/dashboard/user-profile/${session?.data?.user?.email}`,
+            icon: RiMessage2Line
+        },
+        {
+            title: "Edit Profile",
+            path: "/dashboard/edit-profile",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Request Organizer",
+            path: "/dashboard/be-organizer",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Order",
+            path: "/dashboard/my-orderlist",
+            icon: IoBagHandleOutline
+        },
+        {
+            title: "Comunity",
+            path: "/community",
+            icon: FaSignOutAlt
+        },
+        {
+            title: "Message",
+            path: "/message",
+            icon: FaSignOutAlt
+        },
+    
+    ]
+    
+    const organizerRoutes = [
+        {
+            title: "Profile",
+            path: "/dashboard/profile",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Edit Profile",
+            path: "/dashboard/edit-profile",
+            icon: RiMessage2Line
+        },
+        {
+            title: "My Events",
+            path: "/dashboard/my-events",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Order List",
+            path: "/dashboard/orderlist",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Payment History",
+            path: "/dashboard/payment-history",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Community",
+            path: "/community",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Message",
+            path: "/message",
+            icon: RiMessage2Line
+        },
+    
+    ]
+    const AdminRoutes = [
+        {
+            title: "Profile",
+            path: "/dashboard/profile",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Edit Profile",
+            path: "/dashboard/edit-profile"
+        },
+        {
+            title: "All Events",
+            path: "/dashboard/all-events",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Users",
+            path: "/dashboard/users",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Organizer Request",
+            path: "/dashboard/payment-history",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Community",
+            path: "/community",
+            icon: RiMessage2Line
+        },
+        {
+            title: "Message",
+            path: "/message",
+            icon: RiMessage2Line
+        },
+    
+    ]
     let role = "user";
     useEffect(() => {
         if (role === 'user') {
@@ -31,7 +139,10 @@ const DashboardSideBar = () => {
         else {
             setRoutes(AdminRoutes)
         }
-    }, [role])
+    }, [role, session])
+
+ 
+    
 
     return (
         <>
@@ -94,117 +205,10 @@ const DashboardSideBar = () => {
         </>
 
     );
+
+    
 };
 
 export default DashboardSideBar;
 
-const userRoutes = [
-    {
-        title: "Profile",
-        path: "/dashboard/user-profile",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Edit Profile",
-        path: "/dashboard/edit-profile",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Request Organizer",
-        path: "/dashboard/be-organizer",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Order",
-        path: "/dashboard/my-orderlist",
-        icon: IoBagHandleOutline
-    },
-    {
-        title: "Comunity",
-        path: "/community",
-        icon: FaSignOutAlt
-    },
-    {
-        title: "Message",
-        path: "/message",
-        icon: FaSignOutAlt
-    },
-
-]
-
-const organizerRoutes = [
-    {
-        title: "Profile",
-        path: "/dashboard/profile",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Edit Profile",
-        path: "/dashboard/edit-profile",
-        icon: RiMessage2Line
-    },
-    {
-        title: "My Events",
-        path: "/dashboard/my-events",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Order List",
-        path: "/dashboard/orderlist",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Payment History",
-        path: "/dashboard/payment-history",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Community",
-        path: "/community",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Message",
-        path: "/message",
-        icon: RiMessage2Line
-    },
-
-]
-const AdminRoutes = [
-    {
-        title: "Profile",
-        path: "/dashboard/profile",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Edit Profile",
-        path: "/dashboard/edit-profile"
-    },
-    {
-        title: "All Events",
-        path: "/dashboard/all-events",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Users",
-        path: "/dashboard/users",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Organizer Request",
-        path: "/dashboard/payment-history",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Community",
-        path: "/community",
-        icon: RiMessage2Line
-    },
-    {
-        title: "Message",
-        path: "/message",
-        icon: RiMessage2Line
-    },
-
-]
 

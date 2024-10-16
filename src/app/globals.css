@@ -81,28 +81,32 @@ p {
 
 /* Responsive Containers */
 .container {
-  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: 0 15px;
+  width: 100%;
 }
 
-@media (min-width: var(--breakpoint-sm)) {
+@media (max-width: 1200px) {
   .container {
-    max-width: var(--container-width-sm);
+    max-width: 1000px;
   }
 }
 
-@media (min-width: var(--breakpoint-md)) {
+@media (max-width: 1000px) {
   .container {
-    max-width: var(--container-width-md);
+    max-width: 768px;
   }
 }
 
-@media (min-width: var(--breakpoint-lg)) {
+@media (max-width: 768px) {
   .container {
-    max-width: var(--container-width-lg);
+    max-width: 100%;
+    padding: 0 10px;
   }
 }
+
+
 
 @media (min-width: var(--breakpoint-xl)) {
   .container {
