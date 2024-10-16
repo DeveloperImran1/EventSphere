@@ -6,10 +6,12 @@ import { loadStripe } from '@stripe/stripe-js';
 import Image from 'next/image';
 import CheckOutForm from './CheckOutPage';
 
-export default function PaymentPage() {
+export default function PaymentPage(props) {
     const [timeLeft, setTimeLeft] = useState(119); // 1:59 in seconds
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-
+    const { total, selectedSeatNames,selectedSeats }=props
+    // console.log(selectedSeatNames)
+console.log(props)
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
@@ -24,8 +26,8 @@ export default function PaymentPage() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[90vh] bg-gradient-to-br from-blue-200 to-purple-200">
-            <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-4xl w-full transition-all duration-300 ease-in-out transform hover:scale-x-105 h-[95vh]">
+        <div className="min-h-[90vh] w-screen bg-gradient-to-br from-blue-200 to-purple-200">
+            <div className="bg-white p-12 rounded-3xl shadow-2xl w-full h-[95vh] max-w-[75vw] mx-auto transition-all duration-300 ease-in-out transform hover:scale-105">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
                         <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
@@ -41,16 +43,16 @@ export default function PaymentPage() {
                     </div>
                 </div>
 
-                <div className="flex gap-8 flex-col md:flex-row">
+                <div className="">
                     <div className="flex-grow">
                         {/* Stripe Payment Form */}
                         <Elements stripe={stripePromise}>
-                            <CheckOutForm />
+                            <CheckOutForm
+                                total={total}
+                                selectedSeatNames={selectedSeatNames}
+                                selectedSeats={selectedSeats}
+                            />
                         </Elements>
-                    </div>
-
-                    <div className="relative">
-                        <Image src="/path/to/card-image.jpg" alt="Credit Card" width={400} height={300} className="rounded-lg" />
                     </div>
                 </div>
             </div>
