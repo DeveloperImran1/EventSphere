@@ -50,9 +50,10 @@ const Payment = () => {
   const [discount, setDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
-  console.log(selectedSeats)
-  console.log(selectedSeatNames)
 
+
+  const propsObj = {total, selectedSeats, selectedSeatNames }
+  console.log(propsObj)
   // Fetch event data from API
   useEffect(() => {
     const fetchEventsData = async () => {
@@ -285,18 +286,13 @@ const Payment = () => {
                 Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
-            {
-              total && selectedSeatNames && selectSeat && (<Button
+             <Button
                 onClick={() => setIsModalOpen(true)}
                 disabled={selectedSeats === 0}
-                total={finalTotal}
-                selectedSeatNames={selectedSeatNames || []}
-                selectedSeats={selectedSeats || 0}
                 className="w-full py-2 mt-4"
               >
                 Book Now
-              </Button>)
-            }
+              </Button>
           </div>
         </div>
       </div>
@@ -322,7 +318,7 @@ const Payment = () => {
                 <TbXboxX className='text-2xl' />
               </Button>
             </div>
-            <EnhancedPaymentGateway total={finalTotal} />
+            <EnhancedPaymentGateway total={total} selectedSeats={selectedSeats} selectedSeatNames={selectedSeatNames} />
           </motion.div>
         </motion.div>
       )}

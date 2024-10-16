@@ -29,19 +29,19 @@ const UserProfile = () => {
             <Image
                 height={675}
                 width={1200}
-                className='w-screen px-4  h-[32vh] object-cover rounded-2xl'
+                className='w-full px-4  h-[32vh] object-cover rounded-2xl'
                 src="https://i.postimg.cc/SsKD0y3T/8-99faf7b2987b5c6cc652.jpg"
                 alt="Background"
             />
 
             {/* User Information */}
-            <div className='absolute mt-[48px] md:left-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-4 items-center'>
+            <div className='absolute mt-[44px] left-1/2 md:left-[260px] lg:left-80  transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-4 items-center'>
                 {/* User Image */}
                 <div>
                     <Image
                         height={675}
                         width={1200}
-                        className='w-32 h-32 rounded-full border-4 border-white shadow-md'
+                        className='max-w-32 h-32 rounded-full border-4 border-white shadow-md'
                         src={data?.image}
                         alt="User"
                     />

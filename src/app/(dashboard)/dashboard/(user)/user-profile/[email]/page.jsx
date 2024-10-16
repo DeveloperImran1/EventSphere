@@ -14,10 +14,10 @@ const UserContainer = () => {
   const axiosPublic = useAxiosPublic();
 
   return (
-    <>
+    <div>
       <UserProfile />
-      <div className="flex flex-col-reverse md:flex-row gap-4">
-        <div className="min-w-[400px]">
+      <div className="flex flex-col-reverse lg:flex-row gap-4">
+        <div className="">
           <div>
             <Cards />
           </div>
@@ -36,7 +36,7 @@ const UserContainer = () => {
             <RightSide />
           </div>
       </div>
-    </>
+    </div>
   );
 };
 
