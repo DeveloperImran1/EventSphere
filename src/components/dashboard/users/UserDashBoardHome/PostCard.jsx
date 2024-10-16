@@ -58,6 +58,11 @@ const PostCard = ({ post }) => {
                 </div>
             </div>
 
+            <div className="px-4 pb-4">
+                <p className="text-[17px] font-semibold text-black">{post?.content?.title}</p>
+                <h5>{post?.content?.text}</h5>
+            </div>
+
             {/* Image Swiper */}
             <Swiper spaceBetween={50} slidesPerView={1} pagination={true} modules={[Pagination]} >
                 {
@@ -103,22 +108,6 @@ const PostCard = ({ post }) => {
                                     </div>
                                 </div>
 
-                                {/* Reply Input Field */}
-                                {/* {replyOpen === 1 && (
-                                <div className=" relative flex items-start mx-8 mb-4">
-                                    <input
-                                        type="text"
-                                        placeholder="Write a reply..."
-                                        className="border rounded-lg w-full block h-9 outline-none px-7 text-base"
-                                        value={replies[1] || ""}
-                                        onChange={(e) => setReplies({ ...replies, 1: e.target.value })}
-                                    />
-                                    <div className="absolute text-blue-500 top-[6px] right-4" onClick={handleCommentSubmit}>
-                                        <Image src='https://i.postimg.cc/x1wXp5Qd/send-message.png' height={20} width={20} alt="send" className="w-6 cursor-pointer" />
-                                    </div>
-                                </div>
-                                
-                            )} */}
                             </div>)
                         }
 
