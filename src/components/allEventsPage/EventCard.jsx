@@ -1,22 +1,35 @@
 import { LucideFileType2 } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 import { FaHeart, FaShareAlt, FaClock, FaMapMarkerAlt, FaTag, FaUserFriends, FaBuilding } from 'react-icons/fa';
 import { MdLocationCity } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the required styles
 
-const EventCard = ({ event, addToCart, shareEvent, }) => {
+const EventCard = ({ event }) => {
+    const [cartItems, setCartItems] = useState([]);
+
+    const shareEvent = (event) => {
+        toast.info(`Sharing options for ${event.title}`);
+    };
+
+    // Add to cart and share event functionality
+    const addToCart = (event) => {
+        setCartItems([...cartItems, event]);
+        toast.success(`${event.title} added to cart!`);
+    };
+
     return (
         <div>
             {/* Toast container to show toasts */}
             <ToastContainer />
             <div className="relative group rounded-lg overflow-hidden shadow-lg bg-white m-4 ">
-                <Image 
-                src={event?.gallery[0]} 
-                alt={event?.title}
-                width={200}
-                height={200}
-                className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"  />
+                <Image
+                    src={event?.gallery[0]}
+                    alt={event?.title}
+                    width={200}
+                    height={200}
+                    className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300" />
 
                 {/* Love and Share Icons - visible on hover */}
                 <div className="absolute top-36 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
@@ -46,7 +59,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                         <FaClock className="mr-2" />
                         <p>{event.dateTime}</p>
                     </div>
-                   
+
                     <div className="flex items-center text-gray-600 my-1">
                         <FaMapMarkerAlt className="mr-2" />
                         <p>{event.location.country},{event.location.city}</p>
@@ -54,7 +67,7 @@ const EventCard = ({ event, addToCart, shareEvent, }) => {
                     </div>
                     <div>
                         <div className="flex items-center text-gray-600 my-1">
-                        <LucideFileType2 className="mr-2" />
+                            <LucideFileType2 className="mr-2" />
                             <p>type: {event.type} </p>
                         </div>
                     </div>

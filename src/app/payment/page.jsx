@@ -50,9 +50,10 @@ const Payment = () => {
   const [discount, setDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
-  console.log(selectedSeats)
-  console.log(selectedSeatNames)
 
+
+  const propsObj = {total, selectedSeats, selectedSeatNames }
+  console.log(propsObj)
   // Fetch event data from API
   useEffect(() => {
     const fetchEventsData = async () => {

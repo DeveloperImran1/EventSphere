@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useSession } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
+// import { useRouter } from 'next/router';
 
 const CheckOutForm = (props) => {
     const searchParams = useSearchParams();
-    const { total, selectedSeatNames,selectedSeats }=props
+    const { total, selectedSeatNames, selectedSeats } = props
     const id = searchParams.get("id");
     const axiosPublic = useAxiosPublic()
     const [loading, setLoading] = useState(true);
@@ -24,8 +25,9 @@ const CheckOutForm = (props) => {
     const [cvv, setCvv] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
+    const router = useRouter()
     const [isProcessing, setIsProcessing] = useState(false);
-    
+
 
     useEffect(() => {
         if (total > 0) {
@@ -45,7 +47,7 @@ const CheckOutForm = (props) => {
     const { data: events = {}, isLoading, refetch } = useQuery({
         queryKey: ['events'],
         queryFn: async () => {
-            const { data } = await axiosPublic.get(`/events/${id}`,);
+            const { data } = await axiosPublic.get(`/events/${id}`);
             return data;
         },
         keepPreviousData: true,
@@ -55,18 +57,18 @@ const CheckOutForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         if (!stripe || !elements || isProcessing) {
             return;
         }
         setIsProcessing(true);
-    
+
         const card = elements.getElement(CardElement);
-    
+
         if (card === null) {
             return;
         }
-    
+
         try {
             if (!clientSecret) {
                 console.error("Client secret is missing");
@@ -74,33 +76,33 @@ const CheckOutForm = (props) => {
                 setIsProcessing(false);
                 return;
             }
-    
+
             const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
                 card
             });
-    
+
             if (error) {
                 console.log('Payment error', error);
                 setError(error.message);
                 setIsProcessing(false);
                 return;
             }
-    
+
             const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: paymentMethod.id,
             });
-    
+
             if (confirmError) {
                 console.log('Confirm error', confirmError);
                 setError(confirmError.message);
                 setIsProcessing(false);
                 return;
             }
-    
+
             if (paymentIntent.status === 'succeeded') {
                 setTransactionId(paymentIntent.id);
-    
+
                 const payment = {
                     eventImage: events?.gallery?.[0],
                     eventName: events?.title,
@@ -112,33 +114,55 @@ const CheckOutForm = (props) => {
                     bookedUserPhoto: session?.data?.user?.image,
                     bookedUserEmail: session?.data?.user?.email,
                     amount: total,
-                    selectedSeatNames:selectedSeatNames,
-                    totalTickets:selectedSeats,
+                    selectSeatNames: selectedSeatNames,
+                    totalTickets: selectedSeats,
                     eventDate: events?.dateTime,
                     totalTickets: selectedSeats,
                     refundRequested: "Requested",
-                    transactionId: paymentIntent.id,
+                    transitionId: paymentIntent.id,
                 };
-    
-                // পেমেন্ট তথ্য সংরক্ষণের জন্য রিকোয়েস্ট পাঠানো
+
+
                 const res = await axiosPublic.post('/orders', payment);
                 console.log('Payment saved', res.data);
-    
-                // পেমেন্ট সফল হলে Swal.fire দেখানো
+
+
                 if (res.data?.success && res.data?.paymentResult?.insertedId) {
                     Swal.fire({
-                        position: "top-end",
+                        position: "top-center",
                         icon: "success",
                         title: "Thank you for the Event Booking",
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    
-                    // ইনপুট ফিল্ডগুলো খালি করা
+
+                    // Update the booked seats in the events collection
+                    const updateResponse = await axiosPublic.patch(`/events/${id}`, {
+                        eventId: id,
+                        newBookedSeats:selectedSeatNames
+                    });
+
+                    if (updateResponse.data.success) {
+                        Swal.fire({
+                            position: "top-center",
+                            icon: "success",
+                            title: "Booked seats updated successfully",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            title: "Failed to update booked seats",
+                            showConfirmButton: true,
+                        });
+                    }
+
                     elements.getElement(CardElement).clear();
-    
-                    // refetch কল করা
                     refetch();
+
+                    router.push('/payment-qr-code');
                 } else {
                     Swal.fire({
                         position: "top-end",
@@ -155,9 +179,6 @@ const CheckOutForm = (props) => {
             setIsProcessing(false);
         }
     };
-    
-    
-
 
 
     return (

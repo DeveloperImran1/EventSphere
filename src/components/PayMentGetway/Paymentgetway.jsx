@@ -6,12 +6,11 @@ import { loadStripe } from '@stripe/stripe-js';
 import Image from 'next/image';
 import CheckOutForm from './CheckOutPage';
 
-export default function PaymentPage(props) {
+export default function PaymentPage({ total, selectedSeats, selectedSeatNames }) {
     const [timeLeft, setTimeLeft] = useState(119); // 1:59 in seconds
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    const { total, selectedSeatNames,selectedSeats }=props
     // console.log(selectedSeatNames)
-console.log(props)
+    console.log("PaymentGateway page theke props er data", total, selectedSeats, selectedSeatNames)
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));

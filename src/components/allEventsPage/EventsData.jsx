@@ -17,7 +17,7 @@ import { AnimatePresence } from 'framer-motion';
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('All');
   const [selectedCity, setSelectedCity] = useState('All');
   const [selectedType, setSelectedType] = useState('All');

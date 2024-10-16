@@ -3,7 +3,7 @@ import React from 'react';
 
 const ImageSection = () => {
     return (
-        <div className="max-w-md mx-start mt-4 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className=" mx-start  overflow-hidden max-w-md lg:max-w-xl mt-4 mx-auto p-6 bg-white rounded-lg shadow-lg space-y-6">
             <div className="p-4">
                 <h2 className="text-2xl text-start font-bold text-green-500 0 mb-4">Interest</h2>
                 <div className="grid grid-cols-3 gap-2">
