@@ -35,7 +35,7 @@ const UserManageTable = ({ handleBlock, users }) => {
                         </thead>
                         <tbody>
                             {currentUsers.map(user => (
-                                <tr key={user?.id} className="border-b border-gray-200 hover:bg-gray-50">
+                                <tr key={user?._id} className="border-b border-gray-200 hover:bg-gray-50">
                                     <td className="flex items-center py-4 px-4">
                                         <img src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
                                         {user?.name}
@@ -49,7 +49,7 @@ const UserManageTable = ({ handleBlock, users }) => {
                                     </td>
                                     <td className="py-4 px-4">
                                         <button
-                                            onClick={() => handleBlock(user?.id)}
+                                            onClick={() => handleBlock(user?._id)}
                                             className="bg-red-600 text-white rounded-md px-3 py-1 hover:bg-red-700 transition duration-300"
                                         >
                                             Block
@@ -76,7 +76,7 @@ const UserManageTable = ({ handleBlock, users }) => {
                         </thead>
                         <tbody>
                             {currentUsers.map(user => (
-                                <tr key={user?.id} className="border-b border-gray-200 hover:bg-gray-50 transition duration-300">
+                                <tr key={user?._id} className="border-b border-gray-200 hover:bg-gray-50 transition duration-300">
                                     <td className="flex items-center py-4 px-4 text-sm md:text-base">
                                         <img src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
                                         <div>
@@ -92,7 +92,7 @@ const UserManageTable = ({ handleBlock, users }) => {
                                     </td>
                                     <td className="py-4 px-4 text-sm md:text-base">
                                         <button
-                                            onClick={() => handleBlock(user?.id)}
+                                            onClick={() => handleBlock(user?._id)}
                                             className="bg-red-600 text-white rounded-md px-3 py-1 hover:bg-red-700 transition duration-300"
                                         >
                                             Block
