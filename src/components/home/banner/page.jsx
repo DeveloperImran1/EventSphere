@@ -5,34 +5,34 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import './Slider.css'
 const sliderItems = [
   {
-    image: "https://i.ibb.co.com/bHqhHrR/pexels-teddy-2263436.jpg",
-    title: "\"Lossless Youths\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/bHqhHrR/pexels-teddy-2263436.jpg",
+    title: "\"Epic Concert Night\"",
+    description: "Experience an unforgettable night of live performances with world-renowned artists and electrifying music. Join the crowd and feel the energy!"
   },
   {
-    image: "https://i.ibb.co.com/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg",
-    title: "\"Estrange Bond\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg",
+    title: "\"Championship Finals\"",
+    description: "The ultimate showdown is here! Witness the best athletes compete for the title in an exhilarating game that will keep you on the edge of your seat."
   },
   {
-    image: "https://i.ibb.co.com/JKqLxzx/pexels-pixabay-433452.jpg",
-    title: "\"The Gate Keeper\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/JKqLxzx/pexels-pixabay-433452.jpg",
+    title: "\"Festival of Colors\"",
+    description: "Join the vibrant celebration at the Festival of Colors, where music, art, and culture collide in a day full of fun, food, and festivities."
   },
   {
-    image: "https://i.ibb.co.com/wCx39XM/pexels-elly-fairytale-3811051.jpg",
-    title: "\"Last Trace Of Us\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/wCx39XM/pexels-elly-fairytale-3811051.jpg",
+    title: "\"Christmas Wonderland\"",
+    description: "Step into a magical world this Christmas! Enjoy holiday markets, festive lights, and seasonal cheer with family and friends."
   },
   {
-    image: "https://i.ibb.co.com/XsBTnSL/pexels-thibault-trillet-44912-167491.jpg",
-    title: "\"Urban Decay\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/XsBTnSL/pexels-thibault-trillet-44912-167491.jpg",
+    title: "\"Summer Music Fest\"",
+    description: "Dance the summer away at the hottest music festival! With live performances from top bands and artists, it's an event you don't want to miss."
   },
   {
-    image: "https://i.ibb.co.com/6RJ67ZN/pexels-prismattco-2372945.jpg",
-    title: "\"The Migration\"",
-    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi."
+    image: "https://i.ibb.co/6RJ67ZN/pexels-prismattco-2372945.jpg",
+    title: "\"Premiere Movie Night\"",
+    description: "Grab your popcorn and get ready for the latest blockbuster release! Enjoy the cinematic experience at its best in our premium movie hall."
   }
 ];
 
@@ -93,29 +93,29 @@ export default function Banner() {
                 width: index === 0 || index === 1 ? '100%' : '200px',
                 height: index === 0 || index === 1 ? '100%' : '300px',
                 transform: index === 0 || index === 1 ? 'none' : 'translateY(-50%)',
-                borderRadius: index === 0 || index === 1 ? '0' : '20px',
+                borderRadius: index === 0 || index === 1 ? '0' : '30px',
                 boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
             >
-              <div className={`bg-white bg-opacity-10 backdrop-blur-sm  p-2 md:p-4  rounded-lg  text-white  transform  hover:scale-105 absolute top-1/2 left-4 md:left-10 lg:left-44 -translate-y-1/2 w-44   md:w-60 lg:w-96 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={` bg-opacity-10 backdrop-blur-3xl   p-4  lg:p-6 rounded-2xl text-lime-100   transform  hover:scale-105 absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
-                <p className="  text-white my-2 text-sm font-normal  ">{item.description}</p>
-               <div className='flex justify-center'>
-               <a href="#" className='btnRotate w-24 h-6 md:w-32 md:h-8 md:text-lg '>
-                 Details
+                <p className="  text-white my-2 text-sm   ">{item.description}</p>
+               <div className='  ml-2 '>
+               <a href="#" className='btnRotate  md:mt-3 md:text-xl '>
+              See  Details
                 </a>
                </div>
               </div>
             </li>
           ))}
         </ul>
-        <nav className="nav absolute flex gap-4 bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
+        <nav className="nav absolute flex  gap-4  bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
           <ArrowLeftIcon
-           className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
+           className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 rounded-full cursor-pointer transition-all duration-300 bg-emerald-200  hover:bg-emerald-100    "
             onClick={() => activate('prev')}
           />
           <ArrowRightIcon
-            className="w-9 h-9 bg-[rgba(255,255,255,0.5)] text-[rgba(0,0,0,0.7)] border-2 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.3)]"
+            className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 bg-emerald-200   hover:bg-emerald-100 "
             onClick={() => activate('next')}
           />
         </nav>

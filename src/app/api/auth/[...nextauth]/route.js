@@ -79,8 +79,8 @@ export const authOptions = {
                             followers: [],
                             review: []
                         });
-
-          
+                   
+                          
                     }
 
                     // Return user details

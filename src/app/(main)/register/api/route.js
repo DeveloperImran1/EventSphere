@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
+import { sendEmail } from "@/lib/sendMail";
 import bcrypt from "bcrypt";
 
 export const POST = async (request) => {
@@ -23,7 +24,10 @@ export const POST = async (request) => {
             ...newUser,
             password: hashedPassword // Overwrite the plain-text password
         });
-
+        sendEmail(newUser.email, {
+            subject: 'Registration Successful!',
+            message: `Thank you for registering on EventSphere.`,
+          });
         // Return success response
         return new Response(JSON.stringify({ message: "User created successfully" }), { status: 201 });
 

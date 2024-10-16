@@ -8,7 +8,7 @@ import OrganizerContainer from './(organizer)/organizer-container/page';
 import UserProfile from '@/components/dashboard/users/UserDashBoardHome/UserProfile';
 
 const page = () => {
-    const role = "user"
+    const role = "event organizer"
     return (
         <div>
             {
