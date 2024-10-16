@@ -285,18 +285,15 @@ const Payment = () => {
                 Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
-            {
+            
               total && selectedSeatNames && selectSeat && (<Button
                 onClick={() => setIsModalOpen(true)}
                 disabled={selectedSeats === 0}
-                total={finalTotal}
-                selectedSeatNames={selectedSeatNames || []}
-                selectedSeats={selectedSeats || 0}
                 className="w-full py-2 mt-4"
               >
                 Book Now
               </Button>)
-            }
+            
           </div>
         </div>
       </div>
@@ -322,7 +319,8 @@ const Payment = () => {
                 <TbXboxX className='text-2xl' />
               </Button>
             </div>
-            <EnhancedPaymentGateway total={finalTotal} />
+            <EnhancedPaymentGateway total={finalTotal} selectedSeatNames={selectedSeatNames}
+                selectedSeats={selectedSeats}/>
           </motion.div>
         </motion.div>
       )}

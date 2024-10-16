@@ -25,11 +25,7 @@ const CheckOutForm = (props) => {
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
     const [isProcessing, setIsProcessing] = useState(false);
-    // console.log(session)
-    console.log(props)
-    console.log(total)
-    console.log(selectedSeatNames)
-    console.log(selectedSeats)
+    
 
     useEffect(() => {
         if (total > 0) {
@@ -116,6 +112,8 @@ const CheckOutForm = (props) => {
                     bookedUserPhoto: session?.data?.user?.image,
                     bookedUserEmail: session?.data?.user?.email,
                     amount: total,
+                    selectedSeatNames:selectedSeatNames,
+                    totalTickets:selectedSeats,
                     eventDate: events?.dateTime,
                     totalTickets: selectedSeats,
                     refundRequested: "Requested",
