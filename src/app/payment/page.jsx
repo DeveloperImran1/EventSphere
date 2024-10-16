@@ -43,6 +43,15 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedSeatNames, setSelectedSeatNames] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [finalTotal, setFinalTotal] = useState()
+  console.log(selectedSeats)
+  console.log(selectedSeatNames)
 
   // Fetch event data from API
   useEffect(() => {
@@ -93,11 +102,7 @@ const Payment = () => {
       );
   });
 
-  const [selectedSeats, setSelectedSeats] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   // Alert for bulk purchase discount
   useEffect(() => {
@@ -110,15 +115,20 @@ const Payment = () => {
   }, []);
 
   // Handle seat selection and deselection
+  // Handle seat selection and deselection 
   const handleSeatClick = (row, seat) => {
     const newSeats = [...seats];
+    const seatName = newSeats[row][seat].number;
+
     if (newSeats[row][seat].status === "available") {
       newSeats[row][seat].status = "selected";
       setSelectedSeats(selectedSeats + 1);
       setTotal(total + event.price);
+      setSelectedSeatNames([...selectedSeatNames, seatName]); // Add selected seat name
+
       Swal.fire({
         title: "Seat Selected",
-        text: `You've selected seat ${newSeats[row][seat].number}`,
+        text: `You've selected seat ${seatName}`,
         icon: "success",
         timer: 1500,
         showConfirmButton: false,
@@ -127,9 +137,11 @@ const Payment = () => {
       newSeats[row][seat].status = "available";
       setSelectedSeats(selectedSeats - 1);
       setTotal(total - event.price);
+      setSelectedSeatNames(selectedSeatNames.filter(name => name !== seatName)); // Remove deselected seat name
+
       Swal.fire({
         title: "Seat Deselected",
-        text: `You've deselected seat ${newSeats[row][seat].number}`,
+        text: `You've deselected seat ${seatName}`,
         icon: "info",
         timer: 1500,
         showConfirmButton: false,
@@ -161,16 +173,18 @@ const Payment = () => {
     }
   };
 
-  // Calculate final total after discounts
-  const calculateTotal = () => {
-    let subtotal = total;
-    if (selectedSeats >= 5) {
-      subtotal *= 0.9; // 10% bulk discount
-    }
-    return Math.max(0, subtotal - discount);
-  };
+  useEffect(() => {
+    const calculateTotal = () => {
+      let subtotal = total;
+      if (selectedSeats >= 5) {
+        subtotal *= 0.9; // 10% bulk discount
+      }
+      return Math.max(0, subtotal - discount);
+    };
 
-  const finalTotal = calculateTotal();
+    const newTotal = calculateTotal(); // Calculate new total
+    setFinalTotal(newTotal); // Set finalTotal state
+  }, [selectedSeats, discount, total]);
 
   if (loading) {
     return <Loading />;
@@ -184,6 +198,11 @@ const Payment = () => {
       </div>
     );
   }
+
+  const selectSeat = selectedSeatNames.map((seatName, index) => (
+    <>{seatName}</>
+  ))
+  console.log(selectSeat)
 
   return (
     <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
@@ -225,11 +244,10 @@ const Payment = () => {
               <span className="font-bold">Event:</span> {event.title}
             </div>
             <div className="mb-2">
-              <span className="font-bold">Date:</span> {event.date}
+              <span className="font-bold">Date: </span>
+              {event.dateTime.slice(0, 10) + " " + "Time:" + event.dateTime.slice(11, 16)} AM
             </div>
-            <div className="mb-2">
-              <span className="font-bold">Time:</span> {event.time}
-            </div>
+
             <div className="flex items-center gap-2 mb-4">
               <Input
                 className="w-36"
@@ -249,25 +267,36 @@ const Payment = () => {
             </div>
             <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg">
               <p>
-                Selected Seats: <span>{selectedSeats}</span>
+                Total seat Select: <span className="text-xl font-bold">{selectedSeats}</span>
+              </p>
+              <p className="mt-4  ">Selected Seats:</p>
+              <ol type="1" className=" flex gap-4 flex-wrap">
+                {selectedSeatNames.map((seatName, index) => (
+                  <li key={index}>{seatName}</li>
+                ))}
+              </ol >
+              <p>
+                Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
               </p>
               <p>
-                Subtotal: <span>${total.toFixed(2)}</span>
+                Discount: <span className="ml-4">${discount.toFixed(2)}</span>
               </p>
-              <p>
-                Discount: <span>${discount.toFixed(2)}</span>
-              </p>
-              <p className="font-bold text-2xl">
-                Final Total: <span>${finalTotal.toFixed(2)}</span>
+              <p className="">
+                Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              disabled={selectedSeats === 0}
-              className="w-full py-2 mt-4"
-            >
-              Book Now
-            </Button>
+            {
+              total && selectedSeatNames && selectSeat && (<Button
+                onClick={() => setIsModalOpen(true)}
+                disabled={selectedSeats === 0}
+                total={finalTotal}
+                selectedSeatNames={selectedSeatNames || []}
+                selectedSeats={selectedSeats || 0}
+                className="w-full py-2 mt-4"
+              >
+                Book Now
+              </Button>)
+            }
           </div>
         </div>
       </div>
