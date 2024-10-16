@@ -22,6 +22,7 @@ function SeatButton({ seat, onClick }) {
       : seat.status === "sold"
         ? "bg-red-500"
         : "bg-green-500";
+        console.log(seat)
 
   return (
     <motion.button
@@ -228,6 +229,7 @@ const Payment = () => {
                       <SeatButton
                         seat={seat}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                        className={``}
                       />
                     </div>
                     {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
@@ -258,6 +260,7 @@ const Payment = () => {
                 onChange={handleTicketQuantityChange}
               />
               <FcAdvertising size={30} />
+               <br />
               <Button
                 variant="primary"
                 onClick={applyCoupon}
@@ -287,13 +290,13 @@ const Payment = () => {
               </p>
             </div>
             
-              total && selectedSeatNames && selectSeat && (<Button
+              <Button
                 onClick={() => setIsModalOpen(true)}
                 disabled={selectedSeats === 0}
                 className="w-full py-2 mt-4"
               >
                 Book Now
-              </Button>)
+              </Button>
             
           </div>
         </div>

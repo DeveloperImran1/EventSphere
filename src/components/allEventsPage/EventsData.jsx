@@ -372,15 +372,14 @@ const EventsData = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
-                  <AnimatePresence>
-                <CardForEvents
-
-                  event={event}
-                  addToCart={addToCart}
-                  shareEvent={shareEvent}
-                />
-                 </AnimatePresence>
-                 </Link>
+                <AnimatePresence>
+                  <CardForEvents
+                    event={event}
+                    addToCart={addToCart}
+                    shareEvent={shareEvent}
+                  />
+                </AnimatePresence>
+              </Link>
             ))}
           </div>
           {/* Pagination */}
