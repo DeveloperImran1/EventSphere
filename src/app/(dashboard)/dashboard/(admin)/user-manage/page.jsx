@@ -1,42 +1,43 @@
-'use client'; // This line makes the component a Client Component
-
-import React from 'react';
+'use client'; 
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Top from '@/components/dashboard/admin/UserManagePage/Top';
 import UserManageTable from '@/components/dashboard/admin/UserManagePage/UserManageTable';
 
-// Sample data for demonstration
-const users = [
-    {
-        id: 1,
-        name: "John Doe",
-        email: "john@example.com",
-        role: "Admin",
-        status: "Active",
-        image: "https://via.placeholder.com/50"
-    },
-    {
-        id: 2,
-        name: "Jane Smith",
-        email: "jane@example.com",
-        role: "User",
-        status: "Inactive",
-        image: "https://via.placeholder.com/50"
-    },
-    // Add more users as needed
-];
-
 const UserManage = () => {
+    const [users, setUsers] = useState([]); 
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null);
+
     const handleBlock = (userId) => {
-        // Logic to block the user
         console.log(`User with ID ${userId} blocked.`);
     };
+
+    // Fetch users from the API
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get('http://localhost:9000/user');
+            setUsers(response.data); // Set the fetched users into state
+        } catch (err) {
+            setError(err.message); 
+        } finally {
+            setLoading(false); 
+        }
+    };
+
+    useEffect(() => {
+        fetchUsers();
+    }, [users]);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>; 
 
     return (
         <div className="font-sans">
             {/* Input And Filter */}
             <Top />
             {/* Table */}
-            <UserManageTable users={users} handleBlock={handleBlock}/>
+            <UserManageTable users={users} handleBlock={handleBlock} />
         </div>
     );
 };

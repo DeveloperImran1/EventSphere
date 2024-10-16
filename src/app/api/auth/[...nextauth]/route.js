@@ -77,7 +77,8 @@ export const authOptions = {
                             createdAt: new Date(),
                             role: "user",
                             followers: [],
-                            review: []
+                            review: [],
+                            block: false,
                         });
 
           
