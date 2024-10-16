@@ -12,6 +12,8 @@ import Loading from '../shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
 import { Slider } from "@nextui-org/react";
+import CardForEvents from './CardForEvents';
+import { AnimatePresence } from 'framer-motion';
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
@@ -162,15 +164,15 @@ const EventsData = () => {
   };
 
 
-  // // Add to cart and share event functionality
-  // const addToCart = (event) => {
-  //   setCartItems([...cartItems, event]);
-  //   toast.success(`${event.title} added to cart!`);
-  // };
+  // Add to cart and share event functionality
+  const addToCart = (event) => {
+    setCartItems([...cartItems, event]);
+    toast.success(`${event.title} added to cart!`);
+  };
 
-  // const shareEvent = (event) => {
-  //   toast.info(`Sharing options for ${event.title}`);
-  // };
+  const shareEvent = (event) => {
+    toast.info(`Sharing options for ${event.title}`);
+  };
 
   return (
     <div className='w-11/12 mx-auto mt-20'>
@@ -370,10 +372,14 @@ const EventsData = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
-                <EventCard
-                  event={event}
-                  // addToCart={addToCart}
-                /></Link>
+                <AnimatePresence>
+                  <CardForEvents
+                    event={event}
+                    addToCart={addToCart}
+                    shareEvent={shareEvent}
+                  />
+                </AnimatePresence>
+              </Link>
             ))}
           </div>
           {/* Pagination */}
