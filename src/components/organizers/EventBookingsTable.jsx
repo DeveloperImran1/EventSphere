@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { CalendarDays, DollarSign, Users, ChevronUp, ChevronDown } from 'lucide-react'
 import Swal from 'sweetalert2';
 import Image from "next/image";
-import { MdEventNote } from "react-icons/md";
 
+// Booking Data 
 const bookings = [
   {
     id: 1,
