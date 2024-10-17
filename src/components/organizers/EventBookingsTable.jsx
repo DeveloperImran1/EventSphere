@@ -10,7 +10,6 @@ import axios from 'axios';
 import { data } from 'autoprefixer';
 import { useSession } from 'next-auth/react';
 
-
 const StatusBadge = ({ status }) => {
   const colorMap = {
     Confirmed: 'bg-green-100 text-green-800',

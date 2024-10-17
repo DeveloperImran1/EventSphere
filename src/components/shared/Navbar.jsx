@@ -157,11 +157,11 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className={`
+    <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg 
+      bg-[#1b85db] shadow-lg 
     `}>
-      <div className=" mx-auto px-4 container">
+      <div className=" mx-auto py-1  px-4 max-w-7xl">
         <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
           <Logo></Logo>
@@ -197,7 +197,7 @@ const Navbar = () => {
               <div>
                 {/* NEW: Desktop menu button */}
                 <button
-                  className="text-white focus:outline-none mt-2"
+                  className="text-white focus:outline-none m-2  "
                   onClick={toggleDesktopMenu} // Toggle desktop menu
                 >
                   <svg
@@ -217,7 +217,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Desktop Menu */}
-                <div className={`${desktopMenuOpen ? 'top-[50px] right-0 translate-y-0 ' : 'top-[-850px] translate-y-[-100%]'} fixed w-full  bg-gradient-to-r from-blue-600 to-blue-800 rotate-0  shadow-lg z-[1000] grid grid-cols-12 overflow-y-auto transform transition-transform duration-700 ease-in-out rounded-br-[100px]  transition-max-height`} style={{ '--tw-rotate': 'unset' }}>
+                <div className={`${desktopMenuOpen ? 'top-[66px] right-0 translate-y-0 ' : 'top-[-850px] translate-y-[-100%]'} fixed w-full  bg-gradient-to-r bg-[#1b85dbce] rotate-0  shadow-lg z-[1000] grid grid-cols-12 overflow-y-auto transform transition-transform duration-700 ease-in-out rounded-br-[100px]  transition-max-height`} style={{ '--tw-rotate': 'unset' }}>
 
                   {/* Components shown in a grid with responsive columns */}
                   <div className="col-span-9">
@@ -335,7 +335,7 @@ const Navbar = () => {
 
                 {/* If logged in */}
                 <div className="relative">
-                  <div className="flex items-center gap-1 bg-[#00a88f] rounded-3xl cursor-pointer ">
+                  <div className="flex items-center gap-1 bg-emerald-500 rounded-3xl cursor-pointer ">
                     <p className="text-white text-xl ml-1">{session?.data?.user?.name || "User"}</p>
                     <Image
                       src={session?.data?.user?.image || "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
