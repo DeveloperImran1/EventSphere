@@ -56,7 +56,7 @@ const Table = () => {
     </div>
 
     <div>
-      <GoogleMapComponent/>
+      {/* <GoogleMapComponent/> */}
     </div>
     
     </>
