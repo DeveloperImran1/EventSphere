@@ -10,34 +10,41 @@ import { FaTicketSimple } from "react-icons/fa6";
 import { TbCoinTaka  } from "react-icons/tb";
 import Chart from "./Chart";
 
-const CardSection = () => {
+const CardSection = ({metrics}) => {
   const cards = [
     {
       id: 1,
-      title: "Total Events",
+      title: "Events ",
       icon: <MdEventNote />,
-      value: "$10,000",
+      // value: "$10,000",
+      text: "Total ",
+      value: metrics.totalEvents,
       description: "+1.2 from yesterday",
     },
     {
       id: 2,
       title: "Tickets Sales",
       icon: <FaTicketSimple />,
-      value: "150 Orders",
+      // value: "150 Orders",
+      text: "Total ",
+      value: metrics.totalTickets,
       description: "+1.2 from yesterday",
     },
     {
       id: 3,
-      title: "Total Sales",
+      title: "Sales",
       icon: <TbCoinTaka />,
-      value: "$ 50 Products",
+      text: "Total $ ",
+      textEnd: "Taka",
+      value: metrics.totalSales,
       description: "+1.2 from yesterday",
     },
     {
       id: 4,
-      title: "New Organizer",
+      title: "Organizers",
       icon: <FaUserPlus />,
-      value: "25 Customers",
+      text: " Total ",
+      value:metrics.newOrganizers,
       description: "+1.2 from yesterday",
     },
   ];
@@ -78,7 +85,7 @@ const CardSection = () => {
                 <h3 className="text-md font-semibold text-gray-700">
                   {card.title}
                 </h3>
-                <p className="text-xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-xl font-bold text-gray-900">{card.text}{card.value}{card.textEnd}</p>
               </div>
             </div>
           </div>

@@ -4,15 +4,15 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 const data = [
   { name: 'Jan', totalEvents: 120, ticketSales: 1500, totalSales: 15000, newOrganizers: 5 },
-  { name: 'Feb', totalEvents: 150, ticketSales: 1800, totalSales: 18000, newOrganizers: 7 },
-  { name: 'Mar', totalEvents: 180, ticketSales: 2200, totalSales: 22000, newOrganizers: 10 },
-  { name: 'Apr', totalEvents: 200, ticketSales: 2500, totalSales: 25000, newOrganizers: 8 },
-  { name: 'May', totalEvents: 220, ticketSales: 2800, totalSales: 28000, newOrganizers: 12 },
+  { name: 'Feb', totalEvents: 150, ticketSales: 1800, totalSales: 18000, newOrganizers: 50 },
+  { name: 'Mar', totalEvents: 180, ticketSales: 2200, totalSales: 22000, newOrganizers: 100 },
+  { name: 'Apr', totalEvents: 200, ticketSales: 2500, totalSales: 25000, newOrganizers: 80 },
+  { name: 'May', totalEvents: 220, ticketSales: 2800, totalSales: 28000, newOrganizers: 120 },
   { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-  { name: 'Apr', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
+  { name: 'Apr', totalEvents: 250, ticketSales: 3000, totalSales: 3000, newOrganizers: 156 },
+  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 400 },
   { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
+  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 40000, newOrganizers: 15 },
   { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
 ];
 

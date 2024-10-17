@@ -1,10 +1,34 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import CardSection from './CardSection';
 import Table from './Table';
 import NewChart from './UserManagePage/NewChart';
+import axios from 'axios';
 
 const AdminInfo = () => {
+    const [metrics, setMetrics] = useState(null);
+    console.log(metrics);
     
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const fetchMetrics = async () => {
+        try {
+          const response = await axios.get('http://localhost:9000/metricsForAdminChart');
+          setMetrics(response.data);
+        } catch (error) {
+          setError('Error fetching metrics');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchMetrics();
+    }, []); // Empty array means this effect runs once when the component mounts
+  
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
 
     return (
         <>
@@ -34,7 +58,7 @@ const AdminInfo = () => {
                 </div>
             </div> */}
             <div className="mt-3 md:mt-5 mr-6">
-                <CardSection />
+                <CardSection metrics={metrics}/>
             </div>
             <div className="mt-8 mr-6">
                 {/* <Chart /> */}
