@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLink } from "react-icons/fa6";
 import { FaCamera } from "react-icons/fa";
 import { MdLocalPostOffice } from "react-icons/md";
@@ -8,15 +8,23 @@ import useMyAllPostWithEmail from "@/hooks/useMyAllPostWithEmail";
 import Image from "next/image";
 import { uploadCloudinary } from "@/hooks/upload";
 import { useSession } from "next-auth/react";
-
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { TbFidgetSpinner } from "react-icons/tb";
+import toast, { Toaster } from 'react-hot-toast';
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 const Post = () => {
 
   const [images, setImages] = useState([]);
   const [links, setLinks] = useState([]);
   const [showName, setShowName] = useState({})
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const axiosPublic = useAxiosPublic()
   const session = useSession()
+  const [loading, setLoading] = useState(false)
+
+  const { data: posts = [], isLoading, refetch } = useMyAllPostWithEmail();
+  console.log("all my post is ", posts)
+
   // Handle file selection
   const handleImageChange = async (e) => {
     const file = e.target.files[0]; // Get the selected file
@@ -26,22 +34,6 @@ const Post = () => {
       setSelectedImage(imageUrl);
     }
 
-
-
-    // image upload in cloudinary
-    try {
-      let arr = [];
-      for (let i = 0; i < images.length; i++) {
-        const data = await uploadCloudinary(images[i])
-        arr.push(data?.url)
-      }
-      setLinks(arr)
-    }
-    catch (error) {
-      console.log(error)
-    }
-    console.log("Uploaded Images", links)
-
   };
 
   const handlePostSubmit = async (e) => {
@@ -49,33 +41,65 @@ const Post = () => {
     const form = e.target;
     const title = form?.title?.value;
     const message = form?.message?.value;
-    
-    const postObj = {
-      comments: [],
-      content: {
-       title, text: message, media: links,  
-       reactions: {
-        love: 0
-       },
-       user: {
-        email: session?.data?.user?.email,
-        name: session?.data?.user?.name,
-        profile_picture: session?.data?.user?.photo,
-       }
+    setLoading(true)
+    try {
+      // Create an array to store the uploaded image URLs
+      let uploadedLinks = [];
+      for (let i = 0; i < images?.length; i++) {
+        const data = await uploadCloudinary(images[i]); // Upload each image
+        uploadedLinks.push(data?.url); // Add the URL to the array
       }
-    }
-    console.log("post info is: ", postObj)
- 
-  }
 
-  const { data: posts = [] } = useMyAllPostWithEmail();
-  console.log("all my post is ", posts)
+      // After all images are uploaded, update the `links` state
+      setLinks(uploadedLinks);
+      console.log(session)
+      // Now use `uploadedLinks` directly instead of the state, because the state will update asynchronously
+      const postObj = {
+        comments: [],
+        content: {
+          title,
+          text: message,
+          media: uploadedLinks, // Use the uploadedLinks array here
+        },
+        user: {
+          email: session?.data?.user?.email,
+          name: session?.data?.user?.name,
+          profile_picture: session?.data?.user?.image,
+        },
+        reactions: {
+          love: 0,
+        },
+      };
+
+      console.log("Post Object: ", postObj);
+
+      // You can now send `postObj` to the server or perform further actions
+      const res = await axiosPublic.post('/createPost', postObj)
+      console.log("post er responce ", res)
+      if (res?.status === 201) {
+        toast.success('Successfully Posted 👏');
+        setLoading(false)
+        form.reset()
+        refetch()
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      toast.error('Something Went Wrong 😒');
+    }
+  };
+
+
 
   return (
-    <div className="">
+    <div className=" md:min-w-[350px] lg:min-w-[450px]">
       <div>
         <form onSubmit={handlePostSubmit}>
-          <Image src={selectedImage || "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"} height={500} width={1200} alt="Profile Image" id="img" className="h-[100px] w-[100px] rounded-full" />
+          {
+            selectedImage && <div className="flex gap-1 justify-center items-center ">
+              <Image src={selectedImage || "https://res.cloudinary.com/dqdircc96/image/upload/v1728834438/e7nhywmrjz43tmuctpwq.png"} height={500} width={1200} alt="Profile Image" id="img" className="h-[200px] w-[300px] rounded-md" />
+            </div>
+          }
+
 
           <div className="p-4 pb-0">
             <label
@@ -109,7 +133,7 @@ const Post = () => {
 
           <div>
             <div className='flex justify-start pl-4 items-center gap-6'>
-              <div className='p-2 bg-green-200 rounded-md'><FaLink /></div>
+              <div className='p-2 bg-green-200 rounded-md'><FaLink size={22} /></div>
 
               <div onChange={handleImageChange} className="my-4 flex justify-center">
                 <label className="w-full gap-2 sm:w-auto cursor-pointer flex items-center  text-xl px-3 py-2 rounded-md bg-green-200 font-bold " htmlFor="file">
@@ -129,8 +153,15 @@ const Post = () => {
                     }
                   }} className="hidden" id="file" />
               </div>
+              <button type="submit" className='p-2 cursor-pointer bg-green-400 rounded-md flex gap-1 justify-center items-center w-[120px]'>
+                {
+                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : <div className="flex justify-center items-center "><MdLocalPostOffice /> <p className="text-black text-[17px] ">Post</p></div>
+                }
+              </button>
 
-              <button type="submit" className='p-2 cursor-pointer bg-green-400 rounded-md flex gap-1 justify-center items-center'><MdLocalPostOffice /> <p className="text-black text-[17px] ">Post</p></button>
+
+
+
 
 
             </div>
@@ -139,7 +170,9 @@ const Post = () => {
       </div>
       <div className="gird grid-cols-1 gap-y-3">
         {
-          posts?.map(post => <PostCard key={post?._id} post={post}></PostCard>)
+          isLoading ? <Loading></Loading> : posts?.length < 0 ? <div className="flex gap-1 justify-center items-center">
+            <Image src={"https://cdn.vectorstock.com/i/500p/30/21/data-search-not-found-concept-vector-36073021.jpg"} height={500} width={1200} alt="Profile Image" id="img" className="h-[200px] w-[300px] rounded-md" />
+          </div> : posts?.map(post => <PostCard key={post?._id} post={post} refetch={refetch}></PostCard>)
         }
       </div>
 
