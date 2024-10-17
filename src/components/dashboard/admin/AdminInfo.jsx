@@ -1,11 +1,11 @@
 import React from 'react';
 import CardSection from './CardSection';
-import Chart from './Chart';
 import Table from './Table';
-import Image from 'next/image';
 import NewChart from './UserManagePage/NewChart';
 
 const AdminInfo = () => {
+    
+
     return (
         <>
             {/* <div className="w-full bg-gradient-to-r from-green-200 via-yellow-200 to-violet-200 flex flex-col md:flex-row items-center justify-center p-4 md:p-6 shadow-lg rounded-lg">
