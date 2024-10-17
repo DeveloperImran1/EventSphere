@@ -1,39 +1,41 @@
 import React from "react";
 import {
   FaShoppingCart,
-  FaDollarSign,
   FaAppleAlt,
   FaUserPlus,
 } from "react-icons/fa";
 import { PiExportLight } from "react-icons/pi";
+import { MdEventNote } from "react-icons/md";
+import { FaTicketSimple } from "react-icons/fa6";
+import { TbCoinTaka  } from "react-icons/tb";
 import Chart from "./Chart";
 
 const CardSection = () => {
   const cards = [
     {
       id: 1,
-      title: "Total Sales",
-      icon: <FaDollarSign />,
+      title: "Total Events",
+      icon: <MdEventNote />,
       value: "$10,000",
       description: "+1.2 from yesterday",
     },
     {
       id: 2,
-      title: "Total Orders",
-      icon: <FaShoppingCart />,
+      title: "Tickets Sales",
+      icon: <FaTicketSimple />,
       value: "150 Orders",
       description: "+1.2 from yesterday",
     },
     {
       id: 3,
-      title: "Product Salad",
-      icon: <FaAppleAlt />,
-      value: "50 Products",
+      title: "Total Sales",
+      icon: <TbCoinTaka />,
+      value: "$ 50 Products",
       description: "+1.2 from yesterday",
     },
     {
       id: 4,
-      title: "New Customers",
+      title: "New Organizer",
       icon: <FaUserPlus />,
       value: "25 Customers",
       description: "+1.2 from yesterday",
@@ -46,7 +48,7 @@ const CardSection = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">Todays Sales</h2>
+          <h2 className="text-xl font-semibold text-gray-800">Monthly Sales</h2>
           <span className="text-sm text-gray-500">Sales Summary</span>
         </div>
         <div className="flex items-center space-x-4">
@@ -66,11 +68,11 @@ const CardSection = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="bg-gradient-to-r from-white to-gray-100 hover:from-blue-50 shadow-lg rounded-lg p-5 transform transition-all duration-300 hover:-translate-y-2"
+            className="bg-gradient-to-r from-blue-100  to-gray-100 hover:from-blue-200 shadow-lg rounded-lg p-5 transform transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="flex items-center space-x-4">
+            <div className="flex space-x-4">
               {/* Icon */}
-              <div className="text-3xl text-blue-500">{card.icon}</div>
+              <div className="text-4xl items-start text-blue-500">{card.icon}</div>
               {/* Text Content */}
               <div>
                 <h3 className="text-md font-semibold text-gray-700">
@@ -79,8 +81,6 @@ const CardSection = () => {
                 <p className="text-xl font-bold text-gray-900">{card.value}</p>
               </div>
             </div>
-            {/* Description */}
-            <p className="text-sm text-green-500 mt-4">{card.description}</p>
           </div>
         ))}
       </div>

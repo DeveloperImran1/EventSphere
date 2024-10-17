@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Top from "@/components/dashboard/admin/UserManagePage/Top";
 import UserManageTable from "@/components/dashboard/admin/UserManagePage/UserManageTable";
+import toast from "react-hot-toast";
 
 const UserManage = () => {
   const [users, setUsers] = useState([]);
@@ -11,10 +12,30 @@ const UserManage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all"); 
 
-  const handleBlock = (userId) => {
-    console.log(`User with ID ${userId} blocked.`);
-  };
-
+  const handleBlock = async (userId) => {
+    try {
+        const response = await axios.put(`http://localhost:9000/blockedUser/${userId}`,{
+            block: true,
+        });
+        if (response.data.success) {
+            toast.success('User Block')
+        }
+    } catch (error) {
+        console.error('Error blocking user:', error);
+    }
+};
+  const handleUnBlock = async (userId) => {    
+    try {
+        const response = await axios.put(`http://localhost:9000/blockedUser/${userId}`,{
+            block: false,
+        });
+        if (response.data.success) {
+            toast.success('User UnBlock')
+        }
+    } catch (error) {
+        console.error('Error blocking user:', error);
+    }
+};
   // Fetch users from the API
   const fetchUsers = async () => {
     try {
@@ -29,7 +50,7 @@ const UserManage = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [users]);
 
   // Filtered users based on search and role filter
   const filteredUsers = users.filter((user) => {
@@ -56,7 +77,7 @@ const UserManage = () => {
         handleRoleFilter={setRoleFilter} 
       />
       {/* Table */}
-      <UserManageTable users={filteredUsers} handleBlock={handleBlock} />
+      <UserManageTable users={filteredUsers} handleBlock={handleBlock} handleUnBlock={handleUnBlock} />
     </div>
   );
 };

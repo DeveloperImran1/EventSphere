@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import BlockButton from './BlockButton';
+import UnBlockButton from './UnBlockButton';
 
-const UserManageTable = ({ handleBlock, users }) => {
+const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 8; // Number of users per page
 
@@ -48,12 +50,16 @@ const UserManageTable = ({ handleBlock, users }) => {
                                         </span>
                                     </td>
                                     <td className="py-4 px-4">
-                                        <button
+                                        {/* <button
                                             onClick={() => handleBlock(user?._id)}
                                             className="bg-red-600 text-white rounded-md px-3 py-1 hover:bg-red-700 transition duration-300"
                                         >
                                             Block
-                                        </button>
+                                        </button> */}
+                                        {
+                                            user.block === false && <BlockButton handleBlock={handleBlock} user={user} handleUnBlock={handleUnBlock} /> || <UnBlockButton handleBlock={handleBlock} user={user} handleUnBlock={handleUnBlock} />
+                                        }
+                                        {/* <BlockButton handleBlock={handleBlock} user={user} handleUnBlock={handleUnBlock} /> */}
                                     </td>
                                 </tr>
                             ))}
@@ -91,12 +97,13 @@ const UserManageTable = ({ handleBlock, users }) => {
                                         </span>
                                     </td>
                                     <td className="py-4 px-4 text-sm md:text-base">
-                                        <button
+                                        {/* <button
                                             onClick={() => handleBlock(user?._id)}
                                             className="bg-red-600 text-white rounded-md px-3 py-1 hover:bg-red-700 transition duration-300"
                                         >
                                             Block
-                                        </button>
+                                        </button> */}
+                                        <BlockButton handleBlock={handleBlock} user={user} />
                                     </td>
                                 </tr>
                             ))}
