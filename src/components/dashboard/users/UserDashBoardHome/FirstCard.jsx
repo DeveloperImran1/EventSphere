@@ -3,7 +3,7 @@ import React from 'react';
 
 const FirstCard = () => {
     return (
-        <div className="max-w-md mx-start mt-6 bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+        <div className=" mx-start overflow-hidden transform hover:scale-105 transition-transform duration-300 max-w-md lg:max-w-xl mt-4 mx-auto p-6 bg-white rounded-lg shadow-lg space-y-6">
             <div className="p-4">
                 <h2 className="text-2xl font-bold text-start text-green-500  mb-2">Today Highlights</h2>
                 <div className="w-full">

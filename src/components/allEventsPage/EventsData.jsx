@@ -12,10 +12,12 @@ import Loading from '../shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
 import { Slider } from "@nextui-org/react";
+import CardForEvents from './CardForEvents';
+import { AnimatePresence } from 'framer-motion';
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('All');
   const [selectedCity, setSelectedCity] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
@@ -370,12 +372,14 @@ const EventsData = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
-                <EventCard
-
-                  event={event}
-                  addToCart={addToCart}
-                  shareEvent={shareEvent}
-                /></Link>
+                <AnimatePresence>
+                  <CardForEvents
+                    event={event}
+                    addToCart={addToCart}
+                    shareEvent={shareEvent}
+                  />
+                </AnimatePresence>
+              </Link>
             ))}
           </div>
           {/* Pagination */}

@@ -80,8 +80,8 @@ export const authOptions = {
                             review: [],
                             block: false,
                         });
-
-          
+                   
+                          
                     }
 
                     // Return user details
