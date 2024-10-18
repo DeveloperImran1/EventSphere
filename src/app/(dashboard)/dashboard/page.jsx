@@ -8,11 +8,11 @@ import OrganizerContainer from './(organizer)/organizer-container/page';
 import UserProfile from '@/components/dashboard/users/UserDashBoardHome/UserProfile';
 
 const page = () => {
-    const role = "event organizer"
+    const role = "organizer"
     return (
         <div>
             {
-                role === "user"? <UserProfile/> : role === "event organizer" ? <OrganizerContainer></OrganizerContainer> : <AdminContainer></AdminContainer>
+                role === "user"? <UserProfile/> : role === "organizer" ? <OrganizerContainer></OrganizerContainer> : <AdminContainer></AdminContainer>
             }
         </div>
     );

@@ -12,6 +12,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { TbFidgetSpinner } from "react-icons/tb";
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from "@/components/shared/LoadingSpiner/Loading";
+import { usePathname } from "next/navigation";
 const Post = () => {
 
   const [images, setImages] = useState([]);
@@ -24,6 +25,10 @@ const Post = () => {
 
   const { data: posts = [], isLoading, refetch } = useMyAllPostWithEmail();
   console.log("all my post is ", posts)
+
+  // last path or email k access korbe
+  const pathname = usePathname();
+    const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
 
   // Handle file selection
   const handleImageChange = async (e) => {
@@ -41,6 +46,11 @@ const Post = () => {
     const form = e.target;
     const title = form?.title?.value;
     const message = form?.message?.value;
+
+    if (session?.data?.user?.email !== lastPathSegment) {
+      return toast.error('You cannot post another user profile 😒');
+    }
+
     setLoading(true)
     try {
       // Create an array to store the uploaded image URLs
@@ -80,6 +90,7 @@ const Post = () => {
         toast.success('Successfully Posted 👏');
         setLoading(false)
         form.reset()
+        selectedImage("")
         refetch()
       }
     } catch (error) {
@@ -170,8 +181,9 @@ const Post = () => {
       </div>
       <div className="gird grid-cols-1 gap-y-3">
         {
-          isLoading ? <Loading></Loading> : posts?.length < 0 ? <div className="flex gap-1 justify-center items-center">
-            <Image src={"https://cdn.vectorstock.com/i/500p/30/21/data-search-not-found-concept-vector-36073021.jpg"} height={500} width={1200} alt="Profile Image" id="img" className="h-[200px] w-[300px] rounded-md" />
+          isLoading ? <Loading></Loading> : posts?.length < 1 ? <div className="flex flex-col mt-5 gap-1 justify-center items-center">
+            <h5 className="text-[20px] font-bold text-center">You have not post</h5>
+            <Image src={"https://cdn.vectorstock.com/i/500p/30/21/data-search-not-found-concept-vector-36073021.jpg"} height={500} width={1200} alt="Profile Image" id="img" className="h-[300px] w-[300px] rounded-md" />
           </div> : posts?.map(post => <PostCard key={post?._id} post={post} refetch={refetch}></PostCard>)
         }
       </div>

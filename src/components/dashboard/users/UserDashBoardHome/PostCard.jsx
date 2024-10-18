@@ -10,7 +10,7 @@ import moment from 'moment';
 import { useSession } from "next-auth/react";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import toast, { Toaster } from 'react-hot-toast';
-
+import EditPost from "@/components/modal/EditPost";
 
 const PostCard = ({ post, refetch }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +29,12 @@ const PostCard = ({ post, refetch }) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
 
+    const [isOpen, setIsOpen] = useState(false)
+    const closeModal = ()=> {
+        setIsOpen(false)
+    }
+
+    console.log(isOpen)
     const handleCommentSubmit = async () => {
 
         const commentObj = {
@@ -84,13 +90,26 @@ const PostCard = ({ post, refetch }) => {
     };
 
 
-    // const handleDelete = ()=> {
-    //     const deletePost
-    // }
+    const handleDelete = async () => {
+        if (session?.data?.user?.email !== post?.user?.email) {
+            return toast.error('You cannot delete another user post 😒');
+        }
+        const res = await axiosPublic.delete(`/deletePost/${post?._id}`);
+        console.log(res)
+        if (res?.data?.deletedCount) {
+            toast.success('Successfully Deleted Post 👏');
+            refetch()
+        }
+        else {
+            toast.error('Something Went Wrong 😒');
+        }
+    }
 
 
     return (
         <div className="mx-auto max-w-[400px] md:max-w-[480px]  bg-white border rounded-lg shadow-md overflow-hidden mt-7">
+
+            <EditPost isOpen={isOpen} closeModal={closeModal} post={post} refetch={refetch}></EditPost>
             {/* Username & Options */}
             <div className="flex justify-between p-4">
                 <Link href={`http://localhost:3000/dashboard/user-profile/${post?.user?.email}`} className="flex items-center gap-x-1">
@@ -106,8 +125,8 @@ const PostCard = ({ post, refetch }) => {
                     </button>
                     {menuOpen && (
                         <ul className="absolute z-40 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
-                            <Link href="#"><p className="px-4 py-2 text-[18px] hover:bg-gray-100 cursor-pointer">Edit Post</p></Link>
-                            <Link href="#"><p className="px-4 py-2 text-[18px] hover:bg-gray-100 cursor-pointer">Delete Post</p></Link>
+                            <div onClick={() => setIsOpen(!isOpen)} href=""><p className="px-4 py-2 text-[18px] hover:bg-gray-100 cursor-pointer">Edit Post</p></div>
+                            <div onClick={handleDelete} href=""><p className="px-4 py-2 text-[18px] hover:bg-gray-100 cursor-pointer">Delete Post</p></div>
                         </ul>
                     )}
                 </div>
@@ -189,3 +208,6 @@ const PostCard = ({ post, refetch }) => {
     );
 }
 export default PostCard;
+
+
+
