@@ -166,7 +166,7 @@ const DashboardSideBar = () => {
     return (
         <>
 
-            <div className="fixed h-[500px] max-h-[600px] w-64 bg-white text-slate-600   flex-shrink-0 shadow-lg overflow-y-auto ">
+            <div className="fixed pl-2 pt-4 w-64  text-slate-600   min-h-screen flex-shrink-0 shadow-2xl overflow-y-auto ">
                 {/* <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 bg-[#3b99f1] text-white">
                     <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
                     <h1 className="text-2xl md:text-3xl font-bold">Dashboard</h1>

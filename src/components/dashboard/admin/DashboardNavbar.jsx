@@ -17,7 +17,7 @@ const DashboardNavbar = () => {
 
                 {/* Search Bar */}
                 <div className="relative hidden lg:flex items-center w-full md:w-auto text-gray-600">
-                    <FaSearch className="absolute left-3 text-black" />
+                    <FaSearch className="absolute left-3 text-yellow-50" />
                     <input 
                         type="text" 
                         placeholder="Search..." 
@@ -31,7 +31,7 @@ const DashboardNavbar = () => {
                 {/* Language Selector */}
                 <div className="relative flex items-center">
                     <FaGlobe className="mr-2" />
-                    <select className=" text-black py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    <select className=" text-black bg-white py-2 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
                         <option value="en">English</option>
                         <option value="fr">French</option>
                         <option value="es">Spanish</option>
