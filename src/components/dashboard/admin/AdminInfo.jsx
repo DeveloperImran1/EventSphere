@@ -15,7 +15,7 @@ const AdminInfo = () => {
     useEffect(() => {
       const fetchMetrics = async () => {
         try {
-          const response = await axios.get('process.env.SERVER_SIDE_BASE_URL/metricsForAdminChart');
+          const response = await axios.get('process.env.https://event-sphare-server.vercel.app/metricsForAdminChart');
           setMetrics(response.data);
         } catch (error) {
           setError('Error fetching metrics');

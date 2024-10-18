@@ -19,14 +19,14 @@ const EventOrderList = () => {
   const { data: invoice = [], refetch, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`process.env.SERVER_SIDE_BASE_URL/myAllOrder/${session?.data?.user?.email}`).then((res) =>
+      fetch(`process.env.https://event-sphare-server.vercel.app/myAllOrder/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
   console.log(invoice);
 
   const handleRefundRequest = async (id) => {
-    const res = await axios.put(`process.env.SERVER_SIDE_BASE_URL/refundRequest/${id}`)
+    const res = await axios.put(`process.env.https://event-sphare-server.vercel.app/refundRequest/${id}`)
     console.log(res)
     if (res?.data?.modifiedCount) {
       toast.success('Successfully Refund Requested 😊')
