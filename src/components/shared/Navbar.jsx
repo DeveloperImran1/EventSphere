@@ -159,9 +159,9 @@ const Navbar = () => {
   return (
     <nav className={`
       transition-transform duration-500 ease-in-out 
-      bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg
+      bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg 
     `}>
-      <div className=" mx-auto px-4">
+      <div className=" mx-auto px-4 container">
         <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
           <Logo></Logo>
@@ -335,14 +335,14 @@ const Navbar = () => {
 
                 {/* If logged in */}
                 <div className="relative">
-                  <div className="flex items-center gap-1 bg-[#00a88f] rounded-3xl cursor-pointer">
-                    <p className="text-white text-xl ml-1">Imran</p>
+                  <div className="flex items-center gap-1 bg-[#00a88f] rounded-3xl cursor-pointer ">
+                    <p className="text-white text-xl ml-1">{session?.data?.user?.name || "User"}</p>
                     <Image
-                      src={session?.data?.user?.image}
+                      src={session?.data?.user?.image || "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
                       alt="Profile"
                       height="40"
                       width="40"
-                      className="rounded-full  border-2 border-white hover:border-yellow-300  transition duration-300 ease-in-out"
+                      className="rounded-full  border-2 border-white hover:border-yellow-300  transition duration-300 ease-in-out h-11 w-11"
                       onClick={toggleDropdown} // Toggle dropdown on image click
                     />
                   </div>
@@ -352,7 +352,7 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 font-bold">
                       <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
                         <Image
-                          src={session?.data?.user?.image}
+                          src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                           alt="Profile"
                           height="60"
                           width="60"
@@ -362,7 +362,7 @@ const Navbar = () => {
 
                         <div>
                           <p className="font-semibold text-gray-800">
-                          {session?.data?.user?.name || "Imran"}
+                          {session?.data?.user?.name || "User Name"}
                           </p>
                         </div>
 
@@ -371,7 +371,7 @@ const Navbar = () => {
                         </p>
                       </div>
                       <Link
-                        href="/dashboard/user-profile"
+                        href={`/dashboard/user-profile/${session?.data?.user?.email}`}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                         onClick={closeDropdown}
                       >

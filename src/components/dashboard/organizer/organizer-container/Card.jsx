@@ -8,7 +8,7 @@ import { FaSackDollar } from "react-icons/fa6";
 
 
 const Card = ({data}) => {
-console.log(data);
+
 const totalAmount = data?.reduce((total, order) => total + order?.amount, 0);
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>

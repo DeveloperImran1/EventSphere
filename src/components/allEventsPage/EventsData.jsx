@@ -1,92 +1,168 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
-import EventCard from './EventCard';
 import { toast } from 'react-toastify';
 import { Range } from 'react-range';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
-import { FaBars, FaTimes } from 'react-icons/fa'; // For drawer icon
-import { Dialog } from '@headlessui/react'; // Drawer system
-import Link from 'next/link';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Dialog } from '@headlessui/react';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
 import Loading from '../shared/LoadingSpiner/Loading';
+import Link from 'next/link';
+import EventCard from './EventCard';
+import { Slider } from "@nextui-org/react";
 
 const EventsData = () => {
-  const [events, setEvents] = useState([]);
+  const axiosPublic = useAxiosPublic();
   const [cartItems, setCartItems] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [priceRange, setPriceRange] = useState([0, 100]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState('All');
   const [selectedCity, setSelectedCity] = useState('All');
-  const [selectedDay, setSelectedDay] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
-  const [loading, setLoading] = useState(true);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State for drawer
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [category, setCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [minimumPrice, setMinimumPrice] = useState(0);
+  const [maximumPrice, setMaximumPrice] = useState(300);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [selectedDay, setSelectedDay] = useState('All');
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
-  useEffect(() => {
-    const fetchEventsData = async () => {
-      try {
-        const response = await axios.get('http://localhost:9000/events');
-        setEvents(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
 
-    fetchEventsData();
-  }, []);
-
-  if (loading) {
-    return <Loading/>;
-  }
-
-  const countries = ['All', ...new Set(events.map(event => event.location.country))];
-  const cityOptions = {};
-  countries.forEach(country => {
-    cityOptions[country] = ['All', ...new Set(events.filter(event => event.location.country === country).map(event => event.location.city))];
+  const [filters, setFilters] = useState({
+    search: '',
+    category: '',
+    minimumPrice: 0,
+    maximumPrice: 300,
+    type: '',
+    country: '',
+    city: '',
+    startDate: '',
+    endDate: '',
   });
 
-  const cities = selectedCountry === 'All' ? ['All'] : cityOptions[selectedCountry];
 
-  const filterByDay = (eventDate, filter) => {
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const handlePriceChange = (min, max) => {
+    setFilters({ ...filters, minimumPrice: min, maximumPrice: max });
+  };
+
+  const handleDateChange = (startDate, endDate) => {
+    setFilters({ ...filters, startDate, endDate });
+  };
+
+
+  const handleDayChange = (date) => {
+    setFilters({ ...filters, date: new Date(date).toISOString() });
+  };
+
+
+
+  const [allCountries, setAllCountries] = useState([]); // Store unique countries
+  const [cities, setCities] = useState([]);
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  useEffect(() => {
+    const newFilters = {};
+
+    if (startDate) {
+      newFilters.startDate = startDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+    }
+
+    if (endDate) {
+      newFilters.endDate = endDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+    }
+
+    setFilters(newFilters); // Update the filters state
+  }, [startDate, endDate]);
+
+
+
+  // Fetch events with useQuery and filters
+  const { data: events = {}, isLoading, refetch } = useQuery({
+    queryKey: ['events', filters],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get('/events', { params: filters });
+      return data;
+    },
+    keepPreviousData: true,
+  });
+  console.log(events)
+
+  const [filteredData, setFilteredData] = useState(events);
+
+  // Handle Country change to dynamically load cities
+  const handleCountryChange = (e) => {
+    const selectedCountry = e.target.value;
+    setFilters({
+      ...filters,
+      country: selectedCountry,
+      city: '' // Reset city when country changes
+    });
+
+    // Find cities based on the selected country
+    const selectedCountryCities = events
+      .filter(event => event.location.country === selectedCountry)
+      .map(event => event.location.city);
+
+    const uniqueCities = Array.from(new Set(selectedCountryCities));
+    setCities(uniqueCities);
+  };
+  const filterByDay = (events, day) => {
     const today = new Date();
-    const dayInMillis = 24 * 60 * 60 * 1000;
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay());
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
 
-    switch (filter) {
-      case "Today":
-        return eventDate.toDateString() === today.toDateString();
-      case "Tomorrow":
-        return eventDate.toDateString() === new Date(today.getTime() + dayInMillis).toDateString();
-      case "This Week":
-        const endOfWeek = new Date(today.getTime() + 7 * dayInMillis);
-        return eventDate <= endOfWeek;
-      case "This Month":
-        const endOfMonth = new Date(today.getTime() + 30 * dayInMillis);
-        return eventDate <= endOfMonth;
+    switch (day) {
+      case "today":
+        return events.filter(event => new Date(event.date).toDateString() === today.toDateString());
+      case "tomorrow":
+        return events.filter(event => new Date(event.date).toDateString() === tomorrow.toDateString());
+      case "this_week":
+        return events.filter(event => new Date(event.date) >= weekStart && new Date(event.date) <= weekEnd);
       default:
-        return true;
+        return events;
     }
   };
 
-  const filteredEvents = events.filter(event => {
-    const eventDate = new Date(event.dateTime);
-    const withinPriceRange = event.price >= priceRange[0] && event.price <= priceRange[1];
-    const matchesCategory = selectedCategory === 'All' || event.category === selectedCategory;
-    const withinDateRange = (!startDate || eventDate >= startDate) && (!endDate || eventDate <= endDate);
-    const matchesCountry = selectedCountry === 'All' || event.location.country === selectedCountry;
-    const matchesCity = selectedCity === 'All' || event.location.city === selectedCity;
-    const matchesDay = selectedDay === 'All' || filterByDay(eventDate, selectedDay);
-    const matchesType = selectedType === 'All' || event.type === selectedType;
 
-    return withinPriceRange && matchesCategory && withinDateRange && matchesCountry && matchesCity && matchesDay && matchesType;
-  });
 
-  const sortedEvents = filteredEvents.sort((a, b) => a.price - b.price);
+  const handleNextPage = () => {
+    if (currentPage < events.totalPages) {
+      setCurrentPage(prevPage => prevPage + 1);
+      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
+    }
+  };
 
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prevPage => prevPage - 1);
+      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
+    }
+  };
+
+  const handlePaginationButton = (pageNum) => {
+    setCurrentPage(pageNum);
+    refetch(); // নির্দিষ্ট পেজের জন্য ডাটা রিফেচ
+  };
+
+
+  // Add to cart and share event functionality
   const addToCart = (event) => {
     setCartItems([...cartItems, event]);
     toast.success(`${event.title} added to cart!`);
@@ -100,69 +176,153 @@ const EventsData = () => {
     <div className='w-11/12 mx-auto mt-20'>
       {/* For mobile - Drawer button */}
       <div className="block lg:hidden">
-        <button
-          onClick={() => setIsDrawerOpen(true)}
-          className="text-2xl p-2 bg-[--color-logo] text-white rounded-full"
-        >
+        <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-logo] text-white rounded-full">
           <FaBars />
         </button>
       </div>
-
-      {/* Drawer for mobile filter */}
-      <Dialog
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        className="fixed inset-0 z-50 overflow-hidden"
-      >
-        <div className="flex justify-end p-4">
-          <button
-            onClick={() => setIsDrawerOpen(false)}
-            className="text-2xl"
-          >
-            <FaTimes />
-          </button>
-        </div>
-        <div className="bg-white p-5 h-full w-[60%] md:w-[40%] overflow-y-scroll"> {/* Drawer width set to 60% */}
-          {/* Filter Options in Drawer */}
+      <Dialog open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} className="fixed inset-0 z-50 overflow-hidden">
+        <div className="bg-white p-5 h-full w-[60%] md:w-[40%] overflow-y-scroll">
           <div className="w-full">
+            {/* Filters for mobile drawer */}
             {/* Category Filter */}
-            <div className="flex justify-end p-4">
-              <button
-                onClick={() => setIsDrawerOpen(false)}
-                className="text-2xl"
-              >
-                <FaTimes />
-              </button>
+            <div>
+              <select name="category" value={filters.category} onChange={handleFilterChange}>
+                <option value="">All Categories</option>
+                <option value="Business">Business</option>
+                <option value="Technology">Technology</option>
+                <option value="Music">Music</option>
+                {/* More categories dynamically */}
+              </select>
             </div>
-            <h5 className="font-bold mb-4">Filter by Category</h5>
-            {['All', ...new Set(events.map(event => event.category))].map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(category)}
-                className={`block w-full rounded-lg text-center mb-2 py-2 ${selectedCategory === category ? 'bg-[--color-logo] text-white' : 'bg-gray-200'}`}
-              >
-                {category}
-              </button>
-            ))}
+
+            {/* Type Filter */}
+            <div>
+              <select name="type" value={filters.type} onChange={handleFilterChange}>
+                <option value="">All Types</option>
+                <option value="online">Online</option>
+                <option value="onsite">Onsite</option>
+              </select>
+            </div>
+
+            {/* Location Filters */}
+            <div>
+              <select name="country" value={filters.country} onChange={handleFilterChange}>
+                <option value="">All Countries</option>
+                {events?.events?.map((event) => event.location.country)
+                  .filter((country, index, self) => self.indexOf(country) === index)
+                  .map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+              </select>
+
+              <select name="city" value={filters.city} onChange={handleFilterChange}>
+                <option value="">All Cities</option>
+                {events?.events?.filter((event) => event.location.country === filters.country)
+                  .map((event) => event.location.city)
+                  .filter((city, index, self) => self.indexOf(city) === index)
+                  .map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            {/* Date Picker */}
+            <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
+            <select
+              className="block w-full p-2 rounded border-2"
+              value={selectedDay}
+              onChange={(e) => setSelectedDay(e.target.value)}
+            >
+              {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
+                <option key={index} value={day}>{day}</option>
+              ))}
+            </select>
+
+
+          </div>
+        </div>
+      </Dialog>
+
+      {/* Filter and large device */}
+      <div className='flex flex-col lg:flex-row gap-4'>
+        {/* Filter Section for larger screens */}
+        <div className="hidden lg:block w-full lg:w-1/5">
+
+          <div className="w-full p-3 space-y-3" >
+            <h2 className="text-[17px] text-gray-500" >Filter by Category</h2>
+            {/* Category Filter */}
+            <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+              <option value="">All Categories</option>
+              <option value="Business">Business</option>
+              <option value="Technology">Technology</option>
+              <option value="Music">Music</option>
+              {/* More categories dynamically */}
+            </select>
+
+
+
+            {/* Location Filters */}
+            <div>
+              <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+                <option value="">All Countries</option>
+                {events?.events?.map((event) => event.location.country)
+                  .filter((country, index, self) => self.indexOf(country) === index)
+                  .map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div>
+              <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+                <option value="">All Cities</option>
+                {events?.events?.filter((event) => event.location.country === filters.country)
+                  .map((event) => event.location.city)
+                  .filter((city, index, self) => self.indexOf(city) === index)
+                  .map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+
+            {/* Type Filter */}
+            <div>
+              <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+                <option value="">All Types</option>
+                <option value="online">Online</option>
+                <option value="onsite">Onsite</option>
+              </select>
+            </div>
 
             {/* Price Filter */}
-            <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
-            <Range
-              values={priceRange}
-              step={1}
-              min={0}
-              max={100}
-              onChange={values => setPriceRange(values)}
-              renderTrack={({ props, children }) => (
-                <div {...props} style={{ ...props.style, height: '6px', background: '#ccc' }}>
-                  {children}
-                </div>
-              )}
-              renderThumb={({ props }) => (
-                <div {...props} style={{ ...props.style, height: '24px', width: '24px', backgroundColor: 'var(--color-logo)', borderRadius: "50%" }} />
-              )}
-            />
-            <p className="text-center mt-2">Price: {priceRange[0]} - {priceRange[1]}</p>
+            {/* Price Filter */}
+            <div className="flex gap-4 flex-col">
+              <input
+                type="number"
+                name="minimumPrice"
+                placeholder="Min Price"
+                value={filters.minimumPrice}
+                onChange={handleFilterChange}
+                className="input input-bordered"
+              />
+              <input
+                type="number"
+                name="maximumPrice"
+                placeholder="Max Price"
+                value={filters.maximumPrice}
+                onChange={handleFilterChange}
+                className="input input-bordered"
+              />
+            </div>
 
             {/* Date Filter */}
             <h5 className="font-bold mt-4 mb-3">Filter by Date</h5>
@@ -187,32 +347,8 @@ const EventsData = () => {
               />
             </div>
 
-            {/* Location Filter */}
-            <h5 className="font-bold mt-4 mb-3">Filter by Location</h5>
-            <select
-              className="block w-full p-2 mb-2 rounded border-2"
-              value={selectedCountry}
-              onChange={(e) => {
-                setSelectedCountry(e.target.value);
-                setSelectedCity('All');
-              }}
-            >
-              {countries.map((country, index) => (
-                <option key={index} value={country}>{country}</option>
-              ))}
-            </select>
 
-            <select
-              className="block w-full p-2 rounded border-2"
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-            >
-              {cities.map((city, index) => (
-                <option key={index} value={city}>{city}</option>
-              ))}
-            </select>
-
-            {/* Day Filter */}
+            {/* Day Filters for Today, Tomorrow, This Week, This Month */}
             <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
             <select
               className="block w-full p-2 rounded border-2"
@@ -224,149 +360,60 @@ const EventsData = () => {
               ))}
             </select>
 
-            {/* Type Filter */}
-            <h5 className="font-bold mt-4 mb-3">Filter by Type</h5>
-            <select
-              className="block w-full p-2 rounded border-2"
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
-              {['All', 'Online', 'Offline'].map((type, index) => (
-                <option key={index} value={type}>{type}</option>
-              ))}
-            </select>
+
+
+
           </div>
         </div>
-      </Dialog>
+        {/* Event Cards */}
+        <div className="w-full lg:w-4/5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {events?.events?.map(event => (
+              <Link href={`/events/${event._id}`} key={event._id}>
+                <EventCard
 
-      {/* Filter and Event Cards */}
-      <div className='flex flex-col lg:flex-row gap-4'>
-        {/* Filter Section for larger screens */}
-        <div className="hidden lg:block w-full lg:w-1/5">
-          {/* Place all filter options here as it was in the original code */}
-          <h5 className="font-bold mb-4">Filter by Category</h5>
-          {['All', ...new Set(events.map(event => event.category))].map((category, index) => (
+                  event={event}
+                  addToCart={addToCart}
+                  shareEvent={shareEvent}
+                /></Link>
+            ))}
+          </div>
+          {/* Pagination */}
+          <div className="flex my-12 gap-4 lg:mx-20">
             <button
-              key={index}
-              onClick={() => setSelectedCategory(category)}
-              className={`block w-full rounded-lg text-center mb-2 py-2 ${selectedCategory === category ? 'bg-[--color-logo] text-white' : 'bg-gray-200'}`}
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="btn"
             >
-              {category}
+              Previous
             </button>
-          ))}
-
-          {/* Price Filter */}
-          <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
-          <Range
-            values={priceRange}
-            step={1}
-            min={0}
-            max={100}
-            onChange={values => setPriceRange(values)}
-            renderTrack={({ props, children }) => (
-              <div {...props} style={{ ...props.style, height: '6px', background: '#ccc' }}>
-                {children}
-              </div>
-            )}
-            renderThumb={({ props }) => (
-              <div {...props} style={{ ...props.style, height: '24px', width: '24px', backgroundColor: 'var(--color-logo)', borderRadius: "50%" }} />
-            )}
-          />
-          <p className="text-center mt-2">Price: {priceRange[0]} - {priceRange[1]}</p>
-
-          {/* Date Filter */}
-          <h5 className="font-bold mt-4 mb-3">Filter by Date</h5>
-          <div className="flex flex-col gap-2">
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              placeholderText="Start Date"
-              className="p-2 rounded border"
-            />
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              placeholderText="End Date"
-              className="p-2 rounded border"
-            />
+            <div>
+              {Array.from({ length: events.totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePaginationButton(index + 1)}
+                  className={`${currentPage === index + 1
+                    ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white'
+                    : 'btn px-7 mx-1'
+                    }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === events.totalPages}
+              className="btn"
+            >
+              Next
+            </button>
           </div>
-
-          {/* Location Filter */}
-          <h5 className="font-bold mt-4 mb-3">Filter by Location</h5>
-          <select
-            className="block w-full p-2 mb-2 rounded border-2"
-            value={selectedCountry}
-            onChange={(e) => {
-              setSelectedCountry(e.target.value);
-              setSelectedCity('All');
-            }}
-          >
-            {countries.map((country, index) => (
-              <option key={index} value={country}>{country}</option>
-            ))}
-          </select>
-
-          <select
-            className="block w-full p-2 rounded border-2"
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-          >
-            {cities.map((city, index) => (
-              <option key={index} value={city}>{city}</option>
-            ))}
-          </select>
-
-          {/* Day Filter */}
-          <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
-          <select
-            className="block w-full p-2 rounded border-2"
-            value={selectedDay}
-            onChange={(e) => setSelectedDay(e.target.value)}
-          >
-            {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
-              <option key={index} value={day}>{day}</option>
-            ))}
-          </select>
-
-          {/* Type Filter */}
-          <h5 className="font-bold mt-4 mb-3">Filter by Type</h5>
-          <select
-            className="block w-full p-2 rounded border-2"
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
-          >
-            {['All', 'Online', 'Offline'].map((type, index) => (
-              <option key={index} value={type}>{type}</option>
-            ))}
-          </select>
         </div>
-
-        {/* Event Cards Section */}
-          <div className='w-full lg:w-4/5'>
-            {sortedEvents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-                {sortedEvents.map((event) => (
-                 <Link  href={`/events/${event._id}`} key={event.id}> <EventCard
-                
-                 event={event}
-                 addToCart={addToCart}
-                 shareEvent={shareEvent}
-               /></Link>
-                ))}
-              </div>
-            ) : (
-              <div className='text-center text-gray-500 text-xl'>No events found</div>
-            )}
-          </div>
       </div>
     </div>
-  );
+
+  )
 };
 
 export default EventsData;

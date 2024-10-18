@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { CalendarDays, DollarSign, Users, ChevronUp, ChevronDown } from 'lucide-react'
 import Swal from 'sweetalert2';
+import Image from "next/image";
+import { MdEventNote } from "react-icons/md";
 
 const bookings = [
   {
@@ -14,6 +16,7 @@ const bookings = [
     tickets: 3,
     status: 'Confirmed',
     revenue: 450,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
   },
   {
     id: 2,
@@ -24,6 +27,7 @@ const bookings = [
     tickets: 2,
     status: 'Refund',
     revenue: -600,
+    photo: 'https://i.ibb.co.com/hyZL9gH/pexels-linkedin-2182970.jpg',
   },
   {
     id: 3,
@@ -34,6 +38,7 @@ const bookings = [
     tickets: 4,
     status: 'Confirmed',
     revenue: 800,
+    photo: 'https://i.ibb.co.com/L8k4xhk/pexels-tima-miroshnichenko-5452268.jpg',
   },
   {
     id: 4,
@@ -44,6 +49,7 @@ const bookings = [
     tickets: 1,
     status: 'Canceled',
     revenue: 0,
+    photo: 'https://i.ibb.co.com/CPvQDkk/MAN.jpg',
   },
   {
     id: 5,
@@ -54,8 +60,42 @@ const bookings = [
     tickets: 5,
     status: 'Confirmed',
     revenue: 1000,
+    photo: 'https://i.ibb.co.com/0M0cZSm/pexels-chloekalaartist-1043473.jpg',
   },
-]
+  {
+    id: 6,
+    customerName: 'Emily Davis',
+    eventName: 'Business Leadership Summit',
+    bookingDate: '2024-07-25',
+    eventDate: '2024-10-25',
+    tickets: 3,
+    status: 'Confirmed',
+    revenue: 750,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
+  },
+  {
+    id: 7,
+    customerName: 'Michael Miller',
+    eventName: 'Art Expo 2024',
+    bookingDate: '2024-06-05',
+    eventDate: '2024-09-10',
+    tickets: 2,
+    status: 'Confirmed',
+    revenue: 400,
+    photo: 'https://i.ibb.co.com/0M0cZSm/pexels-chloekalaartist-1043473.jpg',
+  },
+  {
+    id: 8,
+    customerName: 'Sophia Clark',
+    eventName: 'Startup Pitch Night',
+    bookingDate: '2024-08-15',
+    eventDate: '2024-11-05',
+    tickets: 1,
+    status: 'Confirmed',
+    revenue: 200,
+    photo: 'https://i.ibb.co.com/zQDLxpK/pexels-olly-842811.jpg',
+  },
+];
 
 const StatusBadge = ({ status }) => {
   const colorMap = {
@@ -123,14 +163,15 @@ const EventBookingsTable = () => {
   }
 
   return (
-    <div className="overflow-x-auto my-10 px-4  rounded-lg shadow-lg">
-      <table className="min-w-full     ">
-        <thead className="bg-gradient-to-r from-purple-500  to-indigo-600">
+    <div className="overflow-x-auto px-4 rounded-lg shadow-lg min-w-full inline w-full">
+      <div className="w-[95%] hidden md:block">
+      <table className="w-full">
+        <thead className="bg-[#1b88c0]">
           <tr>
             {['customerName', 'eventName', 'bookingDate', 'eventDate', 'tickets', 'status', 'revenue'].map((column) => (
-              <th 
+              <th
                 key={column}
-                onClick={() => handleSort(column)} 
+                onClick={() => handleSort(column)}
                 className="px-6 py-4 text-left text-xs rounded-t-xl text-white font-semibold uppercase tracking-wider cursor-pointer transition duration-300 ease-in-out"
               >
                 {column.charAt(0).toUpperCase() + column.slice(1).replace('Name', '')} <SortIcon column={column} />
@@ -140,12 +181,21 @@ const EventBookingsTable = () => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {sortedBookings.map((booking) => (
-            <tr 
-              key={booking.id} 
-              className="hover:bg-gradient-to-br  from-blue-200 to-purple-200  hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.04] transition-all duration-300 ease-in-out transform-gpu"
-              
+            <tr
+              key={booking.id}
+              className="transition-all duration-300 ease-in-out transform-gpu"
+
             >
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{booking.customerName}</td>
+
+              {/* <td className="px-6 py-4 flex whitespace-nowrap items-center gap-2 text-sm font-medium text-gray-900 text-wrap"><span><Image height={500} width={500} className='w-full h-10 rounded-full ' src={booking.photo} alt="photo" /></span>   {booking.customerName}</td> */}
+              <td>
+                <div className="flex space-x-4 items-center">
+                  <div className="max-w-40">
+                    <Image height={500} width={500} className=' w-12 h-12 rounded-full ' src={booking.photo} alt="photo" />
+                  </div>
+                  <p>{booking.customerName}</p>
+                </div>
+              </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                 <Tooltip content={new Date(booking.bookingDate).toLocaleDateString()}>
@@ -182,6 +232,42 @@ const EventBookingsTable = () => {
           ))}
         </tbody>
       </table>
+      </div>
+      {/* Mobile View */}
+      <div className="block md:hidden">
+        {sortedBookings.map((booking) => (
+          <div key={booking.id} className="bg-white shadow-md rounded-lg mb-4 p-4">
+            <div className="flex flex-col mb-2">
+              <Image height={60} width={60} className='w-16 h-16 rounded-full' src={booking.photo} alt="photo" />
+              <div className="mt-2">
+                <p className="font-medium text-gray-900">{booking.customerName}</p>
+                <p className="text-gray-950 text-xl">{booking.eventName}</p>
+              </div>
+            </div>
+            <div className="text-sm text-gray-600">
+              <p className="flex items-center mb-2">
+                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                Booking Date: {new Date(booking.bookingDate).toLocaleDateString()}
+              </p>
+              <p className="flex items-center mb-2">
+                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                Event Date: {new Date(booking.eventDate).toLocaleDateString()}
+              </p>
+              <p className="flex items-center mb-2">
+                <Users className="mr-2 h-4 w-4 text-indigo-600" />
+                Tickets: {booking.tickets}
+              </p>
+              <p className="flex items-center mb-2">
+                <StatusBadge status={booking.status} />
+              </p>
+              <p className={`flex items-center ${booking.revenue < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                <DollarSign className="mr-1 h-4 w-4" />
+                {Math.abs(booking.revenue).toFixed(2)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

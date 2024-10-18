@@ -21,7 +21,22 @@ const OrganizerContainer = () => {
           res.json()
         ),
     });
-    console.log(data);
+  const { data:organizerStats} = useQuery({
+      queryKey: ["organizer-stats"],
+      queryFn: () =>
+        fetch(`http://localhost:9000/organizer-stats/${session?.data?.user?.email}`).then((res) =>
+          res.json()
+        ),
+    });
+  const { data:PieChartData} = useQuery({
+      queryKey: ["organizer-pieChart"],
+      queryFn: () =>
+        fetch(`http://localhost:9000/organizer-pieChart/${session?.data?.user?.email}`).then((res) =>
+          res.json()
+        ),
+    });
+console.log(PieChartData);
+
   return (
     <div>
       <div>
@@ -30,21 +45,23 @@ const OrganizerContainer = () => {
       <div>
         <Card data={data}/>
       </div>
-      <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
-        <div className="flex-1">
-          <Chart />
+      <div className=" mt-8">
+          <Chart organizerStats={organizerStats}/>
         </div>
-        {/* <div className="flex-1">
-          <CirculeChart />
-        </div> */}
+      <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
+        
+        <div className="flex-1">
+          <CirculeChart PieChartData={PieChartData}/>
+        </div>
+        <div className="flex-1">
+        <StatsChart  email={session?.data?.user?.email} />
+    </div>
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4 p-4">
     <div className="flex-1">
         <Top />
     </div>
-    <div className="flex-1">
-        <StatsChart />
-    </div>
+   
     <div className="flex-1">
         <Subscriber />
     </div>

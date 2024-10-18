@@ -7,6 +7,7 @@ import Image from "next/image";
 import { MdLocationCity } from "react-icons/md";
 import { LucideFileType2 } from "lucide-react";
 import Loading from "@/components/shared/LoadingSpiner/Loading";
+import Link from "next/link";
 
 const EventDetailsPage = ({ params }) => {
     const router = useRouter();
@@ -17,7 +18,7 @@ const EventDetailsPage = ({ params }) => {
     useEffect(() => {
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/events/${id}`);
+                const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`);
                 setEvent(response.data);
                 setLoading(false);
             } catch (error) {
@@ -50,26 +51,26 @@ const EventDetailsPage = ({ params }) => {
                 <section className="space-y-6">
                     {/* Event Image */}
                     <Image
-                        src={event.photo}
+                        src={event?.gallery[0]}
                         alt={event.title}
                         layout="responsive"
                         objectFit="cover"
                         width={500}
                         height={400}
-                        className="w-full h-80 object-cover rounded-lg hover:scale-105" />
+                        className="w-full h-80 object-cover rounded-lg hover:scale-105 transition-all duration-300" />
 
                     {/* Event Gallery */}
                     {event.gallery && event.gallery.length > 0 && (
                         <article>
                             <div className="grid grid-cols-2 gap-4">
-                                {event.gallery.map((image, index) => (
+                                {event?.gallery?.slice(1,3)?.map((image, index) => (
                                     <div key={index} className="relative aspect-w-1 aspect-h-1 h-32">
                                         <Image
                                             src={image}
                                             alt={`Gallery image ${index + 1}`}
                                             layout="fill"
                                             objectFit="cover"
-                                            className="hover:shadow-2xl hover:scale-105 rounded-lg"
+                                            className="hover:shadow-2xl hover:scale-105 rounded-lg transition-all duration-300"
                                         />
                                     </div>
                                 ))}
@@ -220,7 +221,12 @@ const EventDetailsPage = ({ params }) => {
                             <p>Event management often involves overcoming a range of challenges. Budget constraints can be difficult to manage while still delivering a high-quality experience. Unexpected problems, such as technical failures or weather disruptions, can arise, requiring quick solutions. Ensuring guest satisfaction is another major challenge, as event managers need to cater to a wide range of preferences. Coordinating with vendors, managing timelines, and avoiding delays are all part of the complex process that event planners must navigate.</p>
                         </div>
                     </div>
+                    <Link href={`/payment?id=${id}`}> <button className="bg-[--color-logo] text-white py-2 px-4 w-full mx-auto rounded-lg hover:bg-green-600 transition">
+                        Buy Ticket
+                    </button></Link>
                 </section>
+
+
             </div>
         </div>
     );
