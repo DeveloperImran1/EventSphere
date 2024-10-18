@@ -98,7 +98,10 @@ const SignUp = () => {
       password: e.target.password.value,
       image,
       createdAt: new Date(),
-      role: "user"
+      role: "user",
+      followers: [],
+      review: [],
+      block: false,
     }
 
     console.log(newUser)

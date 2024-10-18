@@ -22,9 +22,9 @@ const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Busines
 
 
 const CountdownUnit = ({ value, label }) => (
-  <div className="flex gap-2 items-center justify-center w-16 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
-    <span className="text-xl font-mono font-bold text-white">{value.toString().padStart(2, '0')}</span>
-    <span className="text-xs font-serif uppercase text-purple-200">{label}</span>
+  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-blue-500 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+    <span className=" text-lg font-mono  text-white">{value.toString().padStart(2, '0')}</span>
+    <span className="text-xs font-serif  text-purple-200">{label}</span>
   </div>
 )
 
@@ -69,16 +69,16 @@ const EnhancedCountdown = ({ date }) => {
 
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-2">
       <div className="flex space-x-2">
         <CountdownUnit value={days} label="D" />
-        <CountdownUnit value={hours} label="H" />
-        <CountdownUnit value={minutes} label="M" />
-        <CountdownUnit value={seconds} label="S" />
+        <CountdownUnit value={hours} label="h" />
+        <CountdownUnit value={minutes} label="m" />
+        <CountdownUnit value={seconds} label="s" />
       </div>
-      <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 transition-all duration-1000 ease-linear"
+          className="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 transition-all duration-1000 ease-linear"
           style={{ width: `${(seconds / 60) * 100}%` }}
         ></div>
       </div>
@@ -110,9 +110,9 @@ export default function PopularEvent() {
 
   if (!mounted) return null
 
-
+// main body//
   return (
-    <div className="w-full  py-12 bg-gradient-to-r from-gray-50 to-gray-100">
+    <div className="w-full  py-12 max-w-7xl mx-auto ">
       <div className="px-4">
         <SectionTitle
           subTitle="Popular Events"
@@ -164,7 +164,7 @@ export default function PopularEvent() {
                     className="mySwiper"
                   >
                     {eventData?.map((event) => (
-                      <SwiperSlide key={event.id} className="pb-12">
+                      <SwiperSlide key={event.id} className="pb-12 ">
                         <EventCard event={event} categoryName={categoryName} setCategoryName={setCategoryName} />
                       </SwiperSlide>
                     ))}
@@ -184,7 +184,7 @@ export default function PopularEvent() {
 
 
 
-function EventCard({ event, categoryName, setCategoryName }) {
+function EventCard({ event }) {
   const [favorite, setFavorite] = useState([]);
   const [favoriteUpdate, setFavoriteUpdate] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // New hover state
@@ -211,9 +211,9 @@ function EventCard({ event, categoryName, setCategoryName }) {
   }, [favoriteUpdate])
 
   return (
-    <div className="w-full">
+    <div className="w-full   ">
       <div
-        className="relative h-[450px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
+        className="relative h-[500px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
         style={{
           backgroundImage: `url(${event?.gallery[0]})`,
           backgroundSize: 'cover',
@@ -236,8 +236,8 @@ function EventCard({ event, categoryName, setCategoryName }) {
               </button>
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-bold  font-serif text-white">{event.title}</h2>
-              <p className="text-lg flex  items-center gap-2 font-bold font-mono text-white"> <FaMagnifyingGlassLocation className="text-2xl text-emerald-400 " /> {event?.location?.country}       </p>
+              <h2 className=" text-xl  font-semibold font-serif text-white">{event.title}</h2>
+              <p className="text-lg flex  items-center gap-2 font-mono text-white"> <FaMagnifyingGlassLocation className="text-xl text-emerald-400 " /> {event?.location?.country}       </p>
               <div className="pt-2 ">
                 <EnhancedCountdown date={Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000} />
               </div>
@@ -248,7 +248,7 @@ function EventCard({ event, categoryName, setCategoryName }) {
         </div>
 
 
-        <div className="h-full flex  items-center justify-center">
+        <div className="h-full   flex  items-center justify-center">
           <motion.div
             initial={{ y: "-100%", rotateX: -90, opacity: 0 }}
             animate={isHovered ? { y: 0, rotateX: 0, opacity: 1 } : { y: "-100%", rotateX: -90, opacity: 0 }}
@@ -256,12 +256,12 @@ function EventCard({ event, categoryName, setCategoryName }) {
             style={{ transformStyle: "preserve-3d" }}
           >
             <Link href={`events/${event?._id}`}>
-              <Button className="button  font-serif font-semibold   hover:text-white transition-colors duration-300">
+              <Button className=" p-2 font-serif bg-emerald-700  hover:bg-emerald-800 h-8 hover:text-white transition-colors duration-300">
                 Read More
               </Button>
             </Link>
-            <Link href="/SeatBookingWidget">
-              <Button className="bg-white m-2  font-serif font-semibold  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
+            <Link href={`/payment?id=${event?._id}`}>
+              <Button className="bg-white m-2 p-1 font-serif  h-8  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
                 Book Now !
               </Button>
 

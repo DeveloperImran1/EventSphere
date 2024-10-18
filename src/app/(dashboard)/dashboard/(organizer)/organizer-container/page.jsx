@@ -1,3 +1,4 @@
+"use client";
 import Card from "@/components/dashboard/organizer/organizer-container/Card";
 import Chart from "@/components/dashboard/organizer/organizer-container/Chart";
 import CirculeChart from "@/components/dashboard/organizer/organizer-container/CirculeChart";
@@ -6,16 +7,28 @@ import StatsChart from "@/components/dashboard/organizer/organizer-container/Sta
 import Subscriber from "@/components/dashboard/organizer/organizer-container/Suscriber";
 import Table from "@/components/dashboard/organizer/organizer-container/Table";
 import Top from "@/components/dashboard/organizer/organizer-container/Top";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const OrganizerContainer = () => {
+
+  const session = useSession();
+  const { data} = useQuery({
+      queryKey: ["organizer-orders"],
+      queryFn: () =>
+        fetch(`https://event-sphare-server.vercel.app/organizer-orders/${session?.data?.user?.email}`).then((res) =>
+          res.json()
+        ),
+    });
+    console.log(data);
   return (
     <div>
       <div>
         <Profile />
       </div>
       <div>
-        <Card />
+        <Card data={data}/>
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
         <div className="flex-1">
@@ -37,7 +50,7 @@ const OrganizerContainer = () => {
     </div>
 </div>
 <div className="mt-8">
-    <Table/>
+    <Table data={data}/>
 </div>
 
     </div>

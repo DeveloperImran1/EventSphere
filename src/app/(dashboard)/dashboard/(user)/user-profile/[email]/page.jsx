@@ -13,31 +13,11 @@ import React from "react";
 const UserContainer = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["todos"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      return res.data;
-    },
-  });
-  console.log(data);
-  // Loading and error states
-  if (isLoading)
-    return (
-      <div className="w-[90vw] md:w-[60vw] ">
-        {" "}
-        <Loading></Loading>{" "}
-      </div>
-    );
-  if (isError) return <h1>Error: {error.message}</h1>;
-
   return (
-    <>
+    <div>
       <UserProfile />
-      <div className="flex flex-col-reverse md:flex-row gap-4">
-        <div className="min-w-[400px]">
+      <div className="flex flex-col-reverse lg:flex-row gap-4">
+        <div className="">
           <div>
             <Cards />
           </div>
@@ -56,7 +36,7 @@ const UserContainer = () => {
             <RightSide />
           </div>
       </div>
-    </>
+    </div>
   );
 };
 

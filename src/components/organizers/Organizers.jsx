@@ -21,7 +21,7 @@ const Organizers = () => {
             followers: "9.5k",
             specialization: ["Real-Time Events", "Revenue Opt."],
             contactInfo: "imran.hassan@example.com",
-            bio: "Imran is leading the implementation of real-time ticket availability and dynamic pricing models to optimize user experience and maximize revenue."
+            bio: "Leads real-time ticketing and dynamic pricing to enhance revenue growth and user engagement."
         },
         {
             name: "Tauhid Hossen",
@@ -30,7 +30,7 @@ const Organizers = () => {
             followers: "7.9k",
             specialization: ["Live Streaming", "Tech Support"],
             contactInfo: "tauhid.hossen@example.com",
-            bio: "Tauhid ensures seamless technical integration, including live streaming features and secure, QR code-based ticketing for events."
+            bio: "Oversees live streaming and QR code-based ticketing, ensuring seamless technical performance."
         },
         {
             name: "Jowel Ahmed",
@@ -39,7 +39,7 @@ const Organizers = () => {
             followers: "6.5k",
             specialization: ["Multi-Booking", "User Flexibility"],
             contactInfo: "jowel.ahmed@example.com",
-            bio: "Jowel coordinates the logistics of customizable event packages and multi-category bookings, making the platform flexible and user-friendly."
+            bio: "Manages customizable event packages and multi-category bookings for user flexibility."
         },
         {
             name: "Mehedi Mehad",
@@ -48,7 +48,7 @@ const Organizers = () => {
             followers: "7.7k",
             specialization: ["Seat Selection", "AR Venue Tours"],
             contactInfo: "mehedi.mehad@example.com",
-            bio: "Mehedi focuses on providing interactive seat selection and AR-based venue tours, enhancing the user’s pre-event experience."
+            bio: "Focuses on seat selection and AR venue tours, improving the overall event experience."
         },
         {
             name: "Asadujjaman Atik",
@@ -57,7 +57,7 @@ const Organizers = () => {
             followers: "6.7k",
             specialization: ["Event Recomm.", "User Intuition"],
             contactInfo: "asadujjaman@example.com",
-            bio: "Atik ensures users receive personalized event recommendations through AI-driven algorithms, making the platform more intuitive."
+            bio: "Optimizes event recommendations using AI, making the platform more intuitive and engaging."
         },
         {
             name: "Zakia Sultana",
@@ -66,7 +66,7 @@ const Organizers = () => {
             followers: "6.8k",
             specialization: ["Eco Events", "Sustainability"],
             contactInfo: "zakia.sultana@example.com",
-            bio: "Zakia focuses on the platform’s sustainability scores, allowing users to choose eco-friendly event options that support green initiatives."
+            bio: "Promotes eco-friendly and sustainable events, contributing to green initiatives."
         },
         {
             name: "Riyad Hasan",
@@ -75,7 +75,7 @@ const Organizers = () => {
             followers: "6.9k",
             specialization: ["Music Events", "Wide Audience"],
             contactInfo: "riyad.hasan@example.com",
-            bio: "Riyad handles the marketing and promotion for entertainment, music, and arts events, helping to reach a wide audience."
+            bio: "Handles promotion for music and arts events, ensuring they reach a wider audience."
         },
         {
             name: "Mostafa Kamal",
@@ -84,13 +84,13 @@ const Organizers = () => {
             followers: "6.7k",
             specialization: ["Budgeting", "Financial Success"],
             contactInfo: "mostafa.kamal@example.com",
-            bio: "Mostafa manages the budget and financial planning for corporate and business-related events, ensuring financial success for each event."
+            bio: "Manages budgets and financial planning, ensuring financial success for every event."
         }
     ];
-
+    
 
     return (
-        <div className="w-[calc(100vw-17px)] mx-auto p-4 mb-20">
+        <div className="w-[calc(100vw-17px)]  mx-auto p-4 my-20">
          <SectionTitle 
          subTitle="Our Team"
          title={"top organizers"}
@@ -149,7 +149,7 @@ const Organizers = () => {
                                 ))}
                             </div>
 
-                            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">{organizer.bio.slice(0, 105)} ...</p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300 my-2">{organizer.bio}</p>
                             <a
                                 href={`mailto:${organizer.contactInfo}`}
                                 className="text-blue-500 dark:text-blue-400 text-sm font-medium mb-1"
