@@ -25,7 +25,7 @@ const BeOrganizer = () => {
         e.preventDefault();
         console.log("Form data", formData);
         try {
-            const response = await axios.put(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/beOrganizer/${user?.email}`, formData);
+            const response = await axios.put(`process.env.https://event-sphare-server.vercel.app/beOrganizer/${user?.email}`, formData);
             if(response?.data?.modifiedCount){
                 toast.success('Please Wait Fo Admin Approval! ✋')
             }

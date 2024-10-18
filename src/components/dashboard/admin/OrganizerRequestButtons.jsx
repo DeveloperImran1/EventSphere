@@ -24,7 +24,7 @@ const OrganizerRequestButtons = ({ user, dialogType, handleCancel, handleAccept 
     // Mutation for updating user role
     const mutation = useMutation({
         mutationFn: async (id) => {
-            const res = await axios.put(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/userRollUpdated/${id}`);
+            const res = await axios.put(`process.env.https://event-sphare-server.vercel.app/userRollUpdated/${id}`);
             return res.data;
         },
         onSuccess: (data) => {
@@ -43,7 +43,7 @@ const OrganizerRequestButtons = ({ user, dialogType, handleCancel, handleAccept 
     // * RequestCancel
     const mutation2 = useMutation({
         mutationFn: async (id) => {
-            const res = await axios.put(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/organizingRequestCancel/${id}`);
+            const res = await axios.put(`process.env.https://event-sphare-server.vercel.app/organizingRequestCancel/${id}`);
             return res.data;
         },
         onSuccess: (data) => {

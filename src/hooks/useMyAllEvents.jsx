@@ -7,7 +7,7 @@ const useMyAllEvents = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["myEvents"],
         queryFn: () =>
-            fetch(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/events/getMyEvent/${session?.data?.user?.email}`).then((res) =>
+            fetch(`process.env.https://event-sphare-server.vercel.app/events/getMyEvent/${session?.data?.user?.email}`).then((res) =>
                 res.json()
             ),
     });

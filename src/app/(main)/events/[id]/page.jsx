@@ -18,7 +18,7 @@
 //     useEffect(() => {
 //         const fetchEventsData = async () => {
 //             try {
-//                 const response = await axios.get(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/events/${id}`);
+//                 const response = await axios.get(`process.env.https://event-sphare-server.vercel.app/events/${id}`);
 //                 setEvent(response.data);
 //                 setLoading(false);
 //             } catch (error) {
@@ -264,7 +264,7 @@ const EventDetailsPage = ({ params }) => {
 
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/events/${id}`)
+                const response = await axios.get(`process.env.https://event-sphare-server.vercel.app/events/${id}`)
                 setEvent(response.data)
                 setLoading(false)
             } catch (error) {

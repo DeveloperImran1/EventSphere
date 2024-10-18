@@ -45,7 +45,7 @@ const EventBookingsTable = () => {
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/orders/${currentUserEmail}`);
+    const { data } = await axios.get(`process.env.https://event-sphare-server.vercel.app/orders/${currentUserEmail}`);
     return data;
   };
 
