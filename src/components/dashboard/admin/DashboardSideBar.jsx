@@ -13,6 +13,7 @@ import Link from 'next/link';
 import AnimatedFormModal from '@/components/modal/BeOrganiger/BeOrganiger';
 import RequestOrganizer from '@/components/modal/RequestOrganizer';
 import Image from 'next/image';
+import useAuth from '@/hooks/useAuth';
 
 
 const DashboardSideBar = () => {
@@ -146,12 +147,12 @@ const DashboardSideBar = () => {
         },
 
     ]
-    let role = "organizer";
+    let auth = useAuth();
     useEffect(() => {
-        if (role === 'user') {
+        if ( auth?.data?.role === "user") {
             setRoutes(userRoutes)
         }
-        else if (role === 'organizer') {
+        else if (auth?.data?.role === 'organizer') {
             setRoutes(organizerRoutes)
         }
         else {
