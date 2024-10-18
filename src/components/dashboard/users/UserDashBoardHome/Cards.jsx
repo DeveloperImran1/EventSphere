@@ -23,7 +23,7 @@ const Cards = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      fetch(`process.env.https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
+      fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
         res.json()
       ),
   });
@@ -33,7 +33,7 @@ const Cards = () => {
   const { data: myPosts } = useQuery({
     queryKey: ["myPost"],
     queryFn: () =>
-      fetch(`process.env.https://event-sphare-server.vercel.app/getUserPosts/${lastPathSegment}`).then((res) =>
+      fetch(`https://event-sphare-server.vercel.app/getUserPosts/${lastPathSegment}`).then((res) =>
         res.json()
       ),
   });
@@ -58,7 +58,7 @@ const Cards = () => {
     console.log("Updated info", addedFollower)
 
     try {
-      const result = await axios.put("process.env.https://event-sphare-server.vercel.app/userAddedFollower", addedFollower);
+      const result = await axios.put("https://event-sphare-server.vercel.app/userAddedFollower", addedFollower);
       console.log(result);
 
       if (result?.data?.modifiedCount) {

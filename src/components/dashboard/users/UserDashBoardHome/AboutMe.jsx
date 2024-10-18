@@ -8,7 +8,7 @@ const AboutMe = () => {
   const { data, isLoading, refetch } = useQuery({
       queryKey: ["user"],
       queryFn: () =>
-          fetch(`process.env.https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
+          fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
               res.json()
           ),
   });
