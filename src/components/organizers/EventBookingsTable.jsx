@@ -10,7 +10,6 @@ import axios from 'axios';
 import { data } from 'autoprefixer';
 import { useSession } from 'next-auth/react';
 
-
 const StatusBadge = ({ status }) => {
   const colorMap = {
     Confirmed: 'bg-green-100 text-green-800',
@@ -46,7 +45,7 @@ const EventBookingsTable = () => {
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`http://localhost:9000/orders/${currentUserEmail}`);
+    const { data } = await axios.get(`https://event-sphare-server.vercel.app/orders/${currentUserEmail}`);
     return data;
   };
 

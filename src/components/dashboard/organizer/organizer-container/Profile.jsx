@@ -9,7 +9,7 @@ const Profile = () => {
     const { data} = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-          fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
+          fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
             res.json()
           ),
       });
