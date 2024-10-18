@@ -272,7 +272,6 @@ const EventDetailsPage = ({ params }) => {
                 setLoading(false)
             }
         }
-
         fetchEventsData()
     }, [id])
 
