@@ -17,7 +17,7 @@ const OrganizerContainer = () => {
   const { data} = useQuery({
       queryKey: ["organizer-orders"],
       queryFn: () =>
-        fetch(`https://event-sphare-server.vercel.app/organizer-orders/${session?.data?.user?.email}`).then((res) =>
+        fetch(`http://localhost:9000/organizer-orders/${session?.data?.user?.email}`).then((res) =>
           res.json()
         ),
     });

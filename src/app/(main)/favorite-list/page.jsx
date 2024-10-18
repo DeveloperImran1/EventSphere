@@ -25,7 +25,7 @@ const FavoriteList = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://event-sphare-server.vercel.app/events');
+        const response = await fetch('http://localhost:9000/events');
         const data = await response.json();
         setAllEventsData(data); // Set the data to the state
       } catch (error) {

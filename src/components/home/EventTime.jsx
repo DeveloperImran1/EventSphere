@@ -43,7 +43,7 @@ const EventTime = () => {
 console.log(events,'ghgfhgfhgfhfghfghfghfh')
   useEffect(() => {
     axios
-      .get("https://event-sphare-server.vercel.app/events")
+      .get("http://localhost:9000/events")
       .then((res) => {
         if (res.data.length > 6) {
           const arr = res.data.slice(0, 6);
