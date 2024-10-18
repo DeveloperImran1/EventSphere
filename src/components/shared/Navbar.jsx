@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
 import { signOut, useSession } from "next-auth/react";
+import useAuth from "@/hooks/useAuth";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -41,6 +42,8 @@ const Navbar = () => {
 
 
   const session = useSession();
+  const auth = useAuth();
+  console.log(auth)
   // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -370,13 +373,22 @@ const Navbar = () => {
                         {session?.data?.user?.email || "johndoe@example.com"} 
                         </p>
                       </div>
-                      <Link
+                      {
+                        auth?.data?.role === "organizer" ? <Link
+                        href={`/dashboard/organizer-profile/${session?.data?.user?.email}`}
+                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                        onClick={closeDropdown}
+                      >
+                        Dashboard
+                      </Link> : <Link
                         href={`/dashboard/user-profile/${session?.data?.user?.email}`}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                         onClick={closeDropdown}
                       >
                         Dashboard
                       </Link>
+                      }
+                      
                       <Link
                         href="/offer-announcement"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"

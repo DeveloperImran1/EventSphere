@@ -20,7 +20,7 @@ const PaymentQRCodePage = () => {
 
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/orders/${transitionId}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/orders/${transitionId}`);
         setPaymentData(response.data);
         setLoading(false);
       } catch (error) {
