@@ -14,34 +14,11 @@ import Swal from "sweetalert2";
 const ROWS = 10;
 const SEATS_PER_ROW = 12;
 
-
-// SeatButton Component for rendering seat buttons
-// function SeatButton({ seat, onClick }) {
-//   const bgColor =
-//     seat.status === "available"
-//       ? "bg-gray-300"
-//       : seat.status === "sold"
-//         ? "bg-red-500"
-//         : "bg-green-500";
-
-//   return (
-//     <motion.button
-//       className={`w-12 h-12 m-1 rounded-md text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
-//       onClick={onClick}
-//       disabled={seat.status === "sold"}
-//       whileHover={{ scale: 1.1 }}
-//       whileTap={{ scale: 0.95 }}
-//     >
-//       {seat.number}
-//     </motion.button>
-//   );
-// }
-
 // SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick , event}) {
  const res = event?.bookedSeats?.includes(seat?.number)
  console.log("bokin naki chekc", res)
-  const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-400" : " bg-green-500";
+  const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
   console.log(seat)
 
   return (
@@ -71,6 +48,7 @@ const Payment = () => {
   const [discount, setDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
+
 
 
   const propsObj = { total, selectedSeats, selectedSeatNames }
@@ -207,6 +185,7 @@ const Payment = () => {
     const newTotal = calculateTotal(); // Calculate new total
     setFinalTotal(newTotal); // Set finalTotal state
   }, [selectedSeats, discount, total]);
+
 
   if (loading) {
     return <Loading />;
