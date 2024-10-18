@@ -91,10 +91,10 @@ const EventCard = ({ event }) => {
                     </div> */}
                     <div className='flex justify-between items-center'>
 
-                        <button className="bg-[--color-logo] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
+                        <button className="bg-[--color-primary] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">
                             ${event.price}
                         </button>
-                        <button className="bg-[--color-logo] text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
+                        <button className="bg-[--color-primary] text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
                             Buy Ticket
                         </button>
                     </div>

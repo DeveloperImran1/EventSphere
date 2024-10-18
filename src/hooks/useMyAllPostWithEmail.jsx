@@ -9,7 +9,7 @@ const useMyAllPostWithEmail = () => {
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["myPost"],
         queryFn: () =>
-            fetch(`https://event-sphare-server.vercel.app/getUserPosts/${lastPathSegment}`).then((res) =>
+            fetch(`process.env.SERVER_SIDE_BASE_URL/getUserPosts/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });
