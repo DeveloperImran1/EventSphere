@@ -7,14 +7,7 @@ import { motion, useMotionValue, useTransform, animate, AnimatePresence } from '
 import { useState } from "react";
 import React, { useEffect, useRef } from "react";
 
-import {
-  MapPin,
-  Building2,
-  Tag,
-  Clock,
-  FileType,
-  ArrowRight,
-} from "lucide-react";
+import { MapPin,Building2, Tag, Clock, FileType, ArrowRight,} from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -47,7 +40,7 @@ const EventTime = () => {
   let [activeTab, setActiveTab] = useState(tabs[0].label);
   const [events, setEvents] = useState([]);
   const [seeMore, setSeeMore] = useState(false);
-
+console.log(events,'ghgfhgfhgfhfghfghfghfh')
   useEffect(() => {
     axios
       .get("https://event-sphare-server.vercel.app/events")
@@ -58,7 +51,7 @@ const EventTime = () => {
           setSeeMore(true);
           return;
         }
-        setEvents(res.data);
+        setEvents(res.data.events);
         setSeeMore(false);
       })
       .catch((err) => console.log(err.message));
@@ -218,7 +211,7 @@ const EventTime = () => {
       <div className="text-center mt-10">
         {seeMore ? (
           <Link href="/events" className="flex justify-center">
-         <Button  >    See All  </Button>
+               <Button>See All</Button>  
           </Link>
         ) : (
           ""

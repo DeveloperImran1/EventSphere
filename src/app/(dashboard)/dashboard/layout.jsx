@@ -14,8 +14,8 @@ const DashboardLayout = ({ children }) => {
         <div className="min-h-screen bg-white">
             {/* Navbar */}
        <div className='h-[90px] '>
-       <div className="fixed z-50 w-full bg-white h-[90px] ">  {/* Set a height for the navbar */}
-                <div className="relative container">
+       <div className="fixed z-50 w-full bg-[#b3ddff] shadow-lg  ">  {/* Set a height for the navbar */}
+                <div className="relative w-full]">
                     <div className="flex justify-start items-start md:block">
                         <DashboardNavbar />
                     </div>
@@ -29,9 +29,9 @@ const DashboardLayout = ({ children }) => {
        </div>
 
             {/* Add margin-top equal to the height of the navbar */}
-            <div className="flex flex-col md:flex-row gap-4 p-4 mt-[90px] container"> 
+            <div className="flex flex-col md:flex-row gap-4  "> 
                 {/* Sidebar */}
-                <div className="w-full md:w-auto">
+                <div className="w-full md:w-auto    ">
                     <div className={`${showSidebar ? 'left-0 top-[77px] md:top-[90px]' : '-left-[500px] md:left-0'} absolute md:relative h-full z-50 transition-all duration-300`}>
                         <div className=" ">
                             <DashboardSideBar />
