@@ -84,11 +84,11 @@ const Chart = () => {
 
   return (
    <>
-    <div className="w-full">
+    <div className="w-full flex">
+      <Table/>
       <Line data={data} options={options} />
     </div>
     <div className=''>
-      <Table/>
     </div>
    
    </>

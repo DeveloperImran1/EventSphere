@@ -5,7 +5,7 @@ const useMyAllPost = () => {
     const session = useSession();
 
     const { data, isLoading, refetch }  = useQuery({
-        queryKey: ["myPost"],
+        queryKey: ["myPosts"],
         queryFn: () =>
             fetch(`https://event-sphare-server.vercel.app/getUserPosts/${session?.data?.user?.email}`).then((res) =>
                 res.json()

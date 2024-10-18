@@ -1,7 +1,20 @@
+"use client";
+import { useQuery } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React from 'react';
 
 const Profile = () => {
+    const session = useSession();
+    const { data} = useQuery({
+        queryKey: ["users"],
+        queryFn: () =>
+          fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
+            res.json()
+          ),
+      });
+      console.log(data);
+      
     return (
         <div className='mb-8'>
             <div 
@@ -18,7 +31,7 @@ const Profile = () => {
                     <Image
                         height={675}
                         width={1200}
-                        src="https://i.postimg.cc/XJtWkJtM/Basic-Ui-28186-29.jpg"
+                        src={data?.image}
                         alt="User Profile"
                         className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-white shadow-lg"
                     />
@@ -26,7 +39,7 @@ const Profile = () => {
 
                 {/* Right Side: User Details */}
                 <div className="mt-4  md:ml-8 md:mt-0 text-black flex flex-col items-center md:items-start space-y-3">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-wide text-violet-200">John Doe</h2>
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-wide text-violet-200">{data?.name}</h2>
                     <p className="text-lg md:text-xl font-light text-green-400">Event Manager</p>
                     <p className="text-sm md:text-base max-w-md text-center md:text-left text-white">
                         Welcome to your personalized dashboard. Manage your orders, track product status, and much more!
