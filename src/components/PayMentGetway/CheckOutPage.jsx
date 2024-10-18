@@ -52,8 +52,11 @@ const CheckOutForm = (props) => {
         },
         keepPreviousData: true,
     });
-    console.log(events)
+    // console.log(events)
 
+    // const handleBuyTicket = () => {
+    //     router.push(`/payment-qr-code?transitionId=${transitionId}`);
+    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -139,12 +142,12 @@ const CheckOutForm = (props) => {
                     // Update the booked seats in the events collection
                     const updateResponse = await axiosPublic.patch(`/events/${id}`, {
                         eventId: id,
-                        newBookedSeats:selectedSeatNames
+                        newBookedSeats: selectedSeatNames
                     });
 
                     if (updateResponse.data.success) {
                         Swal.fire({
-                            position: "top-center",
+                            position: "top-end",
                             icon: "success",
                             title: "Booked seats updated successfully",
                             showConfirmButton: false,
@@ -162,7 +165,7 @@ const CheckOutForm = (props) => {
                     elements.getElement(CardElement).clear();
                     refetch();
 
-                    router.push('/payment-qr-code');
+                     router.push(`/payment-qr-code?transitionId=${paymentIntent.id}`);
                 } else {
                     Swal.fire({
                         position: "top-end",
@@ -184,6 +187,7 @@ const CheckOutForm = (props) => {
     return (
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Payment Information</h2>
+            <p>Total seats: {selectedSeats}</p>
             <p className="mt-4">Selected Seats:</p>
             <ol type="1" className="flex gap-4 flex-wrap">
                 {selectedSeatNames?.map((seatName, index) => (

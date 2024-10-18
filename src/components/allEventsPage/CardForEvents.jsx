@@ -103,12 +103,12 @@ const CardForEvents = ({ event }) => {
                         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
                     </div>
 
-                    <motion.div className="p-6 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
+                    <motion.div className="p-6  space-y-4 " style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
                         <motion.div style={{ transform: "translateZ(40px)" }}>
-                            <FireTextTitle title={event.title} />
+                           <h2 className="text-2xl font-bold text-blue-500"> {event.title}</h2>
                         </motion.div>
 
-                        <motion.div className="space-y-2   text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
+                        <motion.div className="space-y-2 px-2  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
                             <InfoItem icon={<Clock className=" text-blue-400 " />} text={event.dateTime} />
                             <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} />
                             <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${event.location.country}, ${event.location.city}`} />
