@@ -51,7 +51,7 @@ console.log(events,'ghgfhgfhgfhfghfghfghfh')
           setSeeMore(true);
           return;
         }
-        setEvents(res.data.events);
+        setEvents(res.data);
         setSeeMore(false);
       })
       .catch((err) => console.log(err.message));
