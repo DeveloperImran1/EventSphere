@@ -4,9 +4,9 @@ import styles from './SocialIcons.module.css'
 
 function SocialIcon({ href, Icon }) {
   return (
-    <li>
+    <li className="">
       <a href={href} className={styles.socialLink}>
-        <Icon className="w-10 h-10 text-[#262626] hover:text-white transition-colors duration-500" />
+        <Icon className="w-8 h-8 text-[#262626] hover:text-white transition-colors duration-500" />
       </a>
     </li>
   )
@@ -21,7 +21,7 @@ export default function SocialIcons() {
     <div className={styles.socialContainer}>
       <ul className={styles.socialList}>
         <SocialIcon 
-          href="https://www.facebook.com/profile.php?id=100012512077239" 
+          href="https://www.facebook.com/" 
           Icon={Facebook} 
         />
         <SocialIcon 
