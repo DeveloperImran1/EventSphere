@@ -71,6 +71,7 @@ const EventTime = () => {
     });
   }, []);
 
+  console.log("Event timing page theke events ", events)
 
   // 3d card const Card3D = ({ event }) => {
   const cardRef = useRef(null);
@@ -117,6 +118,9 @@ const EventTime = () => {
     };
   }, [x, y]);
   // 
+  if (!events?.events?.length) {
+    return;
+  }
 
   return (
     <div >
@@ -145,23 +149,22 @@ const EventTime = () => {
 
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full bg-transparent ">
           <AnimatePresence>
-            {events
-              ?.filter((n) => {
-                if (activeTab === "All") {
-                  return n;
-                } else if (activeTab === "Today") {
-                  return n.when === "Today";
-                } else if (activeTab === "Tomorrow") {
-                  return n.when === "Tomorrow";
-                } else if (activeTab === "Next Week") {
-                  return n.when === "Next Week";
-                } else if (activeTab === "Next Month") {
-                  return n.when === "Next Month";
-                }
-              })
+            {events?.events?.filter((n) => {
+              if (activeTab === "All") {
+                return n;
+              } else if (activeTab === "Today") {
+                return n.when === "Today";
+              } else if (activeTab === "Tomorrow") {
+                return n.when === "Tomorrow";
+              } else if (activeTab === "Next Week") {
+                return n.when === "Next Week";
+              } else if (activeTab === "Next Month") {
+                return n.when === "Next Month";
+              }
+            })
               .map((event) => (
                 <Link href={`/events/${event._id}`} key={event._id}>
-           
+
                   <motion.div
                     ref={cardRef}
                     className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300"
@@ -184,7 +187,7 @@ const EventTime = () => {
                     </div>
 
                     <motion.div className="p-6 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
-                      <motion.div  style={{ transform: "translateZ(40px)" }}>
+                      <motion.div style={{ transform: "translateZ(40px)" }}>
                         <FireTextTitle title={event.title} />
                       </motion.div>
 
@@ -218,13 +221,13 @@ const EventTime = () => {
       <div className="text-center mt-10">
         {seeMore ? (
           <Link href="/events" className="flex justify-center">
-         <Button  >    See All  </Button>
+            <Button  >    See All  </Button>
           </Link>
         ) : (
           ""
         )}
       </div>
-      
+
     </div>
   );
 };
