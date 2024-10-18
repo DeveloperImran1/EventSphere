@@ -178,7 +178,7 @@ const EventsData = () => {
     <div className='w-11/12 mx-auto mt-20'>
       {/* For mobile - Drawer button */}
       <div className="block lg:hidden">
-        <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-logo] text-white rounded-full">
+        <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-primary] text-white rounded-full">
           <FaBars />
         </button>
       </div>
@@ -257,7 +257,7 @@ const EventsData = () => {
           <div className="w-full p-3 space-y-5" >
             <h2 className="text-[17px] text-gray-500" >Filter by Category</h2>
             {/* Category Filter */}
-            <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+            <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-primary] text-white w-full'>
               <option value="">All Categories</option>
               <option value="Business">Business</option>
               <option value="Technology">Technology</option>
@@ -269,7 +269,7 @@ const EventsData = () => {
 
             {/* Location Filters */}
             <div>
-              <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+              <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-primary] text-white w-full'>
                 <option value="">All Countries</option>
                 {events?.events?.map((event) => event.location.country)
                   .filter((country, index, self) => self.indexOf(country) === index)
@@ -282,7 +282,7 @@ const EventsData = () => {
             </div>
 
             <div>
-              <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+              <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-primary] text-white w-full'>
                 <option value="">All Cities</option>
                 {events?.events?.filter((event) => event.location.country === filters.country)
                   .map((event) => event.location.city)
@@ -298,7 +298,7 @@ const EventsData = () => {
 
             {/* Type Filter */}
             <div>
-              <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+              <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-primary] text-white w-full'>
                 <option value="">All Types</option>
                 <option value="online">Online</option>
                 <option value="onsite">Onsite</option>

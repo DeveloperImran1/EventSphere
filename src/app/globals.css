@@ -10,7 +10,9 @@
 :root {
 
   /* Brand Colors */
-  --color-logo: #00a88f;
+  --color-primary: #10a0b9;
+  --color-secondary: #1b85db;
+
   /* Logo color */
   --color-light: #ffffff;
   /* Light background color (white) */
@@ -190,7 +192,7 @@ p {
   display: inline-block;
   padding: 0.5rem 1.5rem;
   /* px-6 py-2 equivalent */
-  background-color: var(--color-logo);
+  background-color: var(--color-primary);
   color: var(--color-light);
   border-radius: 12px;
   text-align: center;
