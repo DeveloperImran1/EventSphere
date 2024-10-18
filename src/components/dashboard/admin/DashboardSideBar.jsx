@@ -158,7 +158,7 @@ const DashboardSideBar = () => {
         else {
             setRoutes(AdminRoutes)
         }
-    }, [role, session])
+    }, [session])
 
 
 
