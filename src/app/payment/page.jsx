@@ -14,26 +14,25 @@ import Swal from "sweetalert2";
 const ROWS = 10;
 const SEATS_PER_ROW = 12;
 
+// SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick , event}) {
-  const res = event?.bookedSeats?.includes(seat?.number)
-  console.log("bokin naki chekc", res)
-   const bgColor = res ? "bg-gray-200" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
-  //  console.log(seat)
- 
-   return (
-     <motion.button
-       className={`w-12 h-12 m-1 rounded-md text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
-       onClick={onClick}
-       whileHover={{ scale: 1.1 }}
-       whileTap={{ scale: 0.95 }}
-       disabled={res}
-     >
-       {seat.number}
-     </motion.button>
-   );
- }
- 
+ const res = event?.bookedSeats?.includes(seat?.number)
+ console.log("bokin naki chekc", res)
+  const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
+  console.log(seat)
 
+  return (
+    <motion.button
+      className={`w-12 h-12 m-1 rounded-md text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
+      onClick={onClick}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      disabled={res}
+    >
+      {seat.number}
+    </motion.button>
+  );
+}
 
 const Payment = () => {
   const searchParams = useSearchParams();
@@ -50,8 +49,9 @@ const Payment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
 
- 
-  const propsObj = {total, selectedSeats, selectedSeatNames }
+
+
+  const propsObj = { total, selectedSeats, selectedSeatNames }
   console.log(propsObj)
   // Fetch event data from API
   useEffect(() => {
@@ -227,8 +227,13 @@ const Payment = () => {
                     <div className="lg:mr-1">
                       <SeatButton
                         seat={seat}
+                        event={event}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
-                        className={``}
+                        // className={`${
+                          //  event?.bookedSeats?.includes(seat?.number) ? 'bg-red-700' : 'bg-green-500'
+                          // console.log(event)
+                          // console.log(seat)    //{status: 'available', number: 'A7'}
+                          // }`}
                       />
                     </div>
                     {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
@@ -259,7 +264,7 @@ const Payment = () => {
                 onChange={handleTicketQuantityChange}
               />
               <FcAdvertising size={30} />
-               <br />
+              <br />
               <Button
                 variant="primary"
                 onClick={applyCoupon}
@@ -288,15 +293,15 @@ const Payment = () => {
                 Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
-            
-              <Button
-                onClick={() => setIsModalOpen(true)}
-                disabled={selectedSeats === 0}
-                className="w-full py-2 mt-4"
-              >
-                Book Now
-              </Button>
-            
+
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              disabled={selectedSeats === 0}
+              className="w-full py-2 mt-4"
+            >
+              Book Now
+            </Button>
+
           </div>
         </div>
       </div>
@@ -323,7 +328,7 @@ const Payment = () => {
               </Button>
             </div>
             <EnhancedPaymentGateway total={finalTotal} selectedSeatNames={selectedSeatNames}
-                selectedSeats={selectedSeats}/>
+              selectedSeats={selectedSeats} />
           </motion.div>
         </motion.div>
       )}

@@ -100,7 +100,8 @@ const SignUp = () => {
       createdAt: new Date(),
       role: "user",
       followers: [],
-      review: []
+      review: [],
+      block: false,
     }
 
     console.log(newUser)

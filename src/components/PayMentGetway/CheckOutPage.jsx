@@ -187,6 +187,7 @@ const CheckOutForm = (props) => {
     return (
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Payment Information</h2>
+            <p>Total seats: {selectedSeats}</p>
             <p className="mt-4">Selected Seats:</p>
             <ol type="1" className="flex gap-4 flex-wrap">
                 {selectedSeatNames?.map((seatName, index) => (

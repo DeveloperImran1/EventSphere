@@ -25,7 +25,7 @@ const EventsData = () => {
   const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [minimumPrice, setMinimumPrice] = useState(0);
-  const [maximumPrice, setMaximumPrice] = useState(300);
+  const [maximumPrice, setMaximumPrice] = useState(3000);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedDay, setSelectedDay] = useState('All');
@@ -254,10 +254,10 @@ const EventsData = () => {
         {/* Filter Section for larger screens */}
         <div className="hidden lg:block w-full lg:w-1/5">
 
-          <div className="w-full p-3 space-y-3" >
+          <div className="w-full p-3 space-y-5" >
             <h2 className="text-[17px] text-gray-500" >Filter by Category</h2>
             {/* Category Filter */}
-            <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+            <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
               <option value="">All Categories</option>
               <option value="Business">Business</option>
               <option value="Technology">Technology</option>
@@ -269,7 +269,7 @@ const EventsData = () => {
 
             {/* Location Filters */}
             <div>
-              <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+              <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
                 <option value="">All Countries</option>
                 {events?.events?.map((event) => event.location.country)
                   .filter((country, index, self) => self.indexOf(country) === index)
@@ -282,7 +282,7 @@ const EventsData = () => {
             </div>
 
             <div>
-              <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+              <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
                 <option value="">All Cities</option>
                 {events?.events?.filter((event) => event.location.country === filters.country)
                   .map((event) => event.location.city)
@@ -298,14 +298,14 @@ const EventsData = () => {
 
             {/* Type Filter */}
             <div>
-              <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white'>
+              <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
                 <option value="">All Types</option>
                 <option value="online">Online</option>
                 <option value="onsite">Onsite</option>
               </select>
             </div>
 
-            {/* Price Filter */}
+        
             {/* Price Filter */}
             <div className="flex gap-4 flex-col">
               <input
@@ -369,7 +369,7 @@ const EventsData = () => {
         </div>
         {/* Event Cards */}
         <div className="w-full lg:w-4/5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {events?.events?.map(event => (
               <Link href={`/events/${event._id}`} key={event._id}>
                 <AnimatePresence>
