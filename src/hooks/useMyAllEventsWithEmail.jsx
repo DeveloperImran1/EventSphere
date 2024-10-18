@@ -8,7 +8,7 @@ const useMyAllEventsWithEmail = () => {
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["myEventsWithEmail"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/events/getMyEvent/${lastPathSegment}`).then((res) =>
+            fetch(`http://localhost:9000/events/getMyEvent/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: "process.env.SERVER_SIDE_BASE_URL"
+    baseURL: "http://localhost:9000"
 })
 
 const useAxiosPublic = () => {

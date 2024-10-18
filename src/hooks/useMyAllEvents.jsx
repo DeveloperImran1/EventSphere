@@ -7,7 +7,7 @@ const useMyAllEvents = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["myEvents"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/events/getMyEvent/${session?.data?.user?.email}`).then((res) =>
+            fetch(`http://localhost:9000/events/getMyEvent/${session?.data?.user?.email}`).then((res) =>
                 res.json()
             ),
     });

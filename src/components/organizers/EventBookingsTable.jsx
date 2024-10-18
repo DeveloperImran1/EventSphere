@@ -45,7 +45,7 @@ const EventBookingsTable = () => {
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`process.env.SERVER_SIDE_BASE_URL/orders/${currentUserEmail}`);
+    const { data } = await axios.get(`http://localhost:9000/orders/${currentUserEmail}`);
     return data;
   };
 

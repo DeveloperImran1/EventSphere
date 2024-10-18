@@ -20,7 +20,7 @@ const PaymentQRCodePage = () => {
 
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`process.env.SERVER_SIDE_BASE_URL/orders/${transitionId}`);
+        const response = await axios.get(`http://localhost:9000/orders/${transitionId}`);
         setPaymentData(response.data);
         setLoading(false);
       } catch (error) {
