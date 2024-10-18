@@ -57,7 +57,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const response = await axios.get(`process.env.SERVER_SIDE_BASE_URL/events/${id}`);
+        const response = await axios.get(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/events/${id}`);
         setEvent(response.data);
         setLoading(false);
       } catch (error) {

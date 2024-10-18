@@ -34,7 +34,7 @@ const UpdateFrom = () => {
         try {
             setIsLoading(true)
             const result = await axios.put(
-                `process.env.SERVER_SIDE_BASE_URL/user/${session?.data?.user?.email}`,
+                `process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/user/${session?.data?.user?.email}`,
                 formData
             )
             console.log(result)
@@ -53,7 +53,7 @@ const UpdateFrom = () => {
     const { data: userInfo } = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/user/${session?.data?.user?.email}`).then((res) =>
+            fetch(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/user/${session?.data?.user?.email}`).then((res) =>
                 res.json()
             ),
     });

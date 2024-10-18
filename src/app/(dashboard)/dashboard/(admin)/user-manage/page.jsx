@@ -14,7 +14,7 @@ const UserManage = () => {
 
   const handleBlock = async (userId) => {
     try {
-        const response = await axios.put(`process.env.SERVER_SIDE_BASE_URL/blockedUser/${userId}`,{
+        const response = await axios.put(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/blockedUser/${userId}`,{
             block: true,
         });
         if (response.data.success) {
@@ -26,7 +26,7 @@ const UserManage = () => {
 };
   const handleUnBlock = async (userId) => {    
     try {
-        const response = await axios.put(`process.env.SERVER_SIDE_BASE_URL/blockedUser/${userId}`,{
+        const response = await axios.put(`process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/blockedUser/${userId}`,{
             block: false,
         });
         if (response.data.success) {
@@ -39,7 +39,7 @@ const UserManage = () => {
   // Fetch users from the API
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("process.env.SERVER_SIDE_BASE_URL/user");
+      const response = await axios.get("process.env.NEXT_PUBLIC_SERVER_SIDE_BASE_URL/user");
       setUsers(response.data);
     } catch (err) {
       setError(err.message);
