@@ -109,7 +109,6 @@ p {
 }
 
 
-
 @media (min-width: var(--breakpoint-xl)) {
   .container {
     max-width: var(--container-width-xl);
