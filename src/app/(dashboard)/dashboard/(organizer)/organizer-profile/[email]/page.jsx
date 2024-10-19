@@ -14,6 +14,7 @@ import LatestNews from '@/components/dashboard/users/UserDashBoardHome/LatestNew
 import RightSide from '@/components/dashboard/users/UserDashBoardHome/RightSide';
 import EventCard from '@/components/allEventsPage/EventCard';
 import Loading from '@/components/shared/LoadingSpiner/Loading';
+import CardForEvents from '@/components/allEventsPage/CardForEvents';
 
 
 
@@ -33,7 +34,7 @@ const OrganizerProfile = () => {
             <div>
 
                 <div class="relative">
-                    <div class="h-[300px] bg-gradient-to-r from-cyan-500 via-cyan-500 to-emerald-300 rounded-2xl">
+                    <div class="h-[300px] bg-gradient-to-r from-cyan-500 via-cyan-500 to-[#1b85db] rounded-2xl">
                     </div>
                     <div className="max-w-[800px] mx-auto shadow-[0_15px_35px_rgba(50,50,93,0.1),_0_5px_15px_rgba(0,0,0,0.07)] rounded-3xl  -mt-[130px] z-40 p-8 ">
                         {/* Top */}
@@ -48,8 +49,8 @@ const OrganizerProfile = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-x-2 justify-between pt-32 cursor-pointer">
-                                <LuMessagesSquare className='text-green-500 text-2xl' />
-                                <p className='text-green-500 mt-[4px]'>Contact</p>
+                                <LuMessagesSquare className='text-blue-500 text-2xl' />
+                                <p className='text-blue-500 mt-[4px]'>Contact</p>
                             </div>
                         </div>
                         {/* Bottom */}
@@ -71,21 +72,21 @@ const OrganizerProfile = () => {
                                 </div>
                             </div>
                             {/* Button */}
-                            <Link href={'#'} className='bg-gradient-to-r from-cyan-500 via-cyan-500 to-emerald-300 max-w-[138px] mx-auto py-2 px-6 rounded-full text-white font-semibold mt-8'><button className='bg-gradient-to-r from-cyan-500 via-cyan-500 to-emerald-300'>Message</button></Link>
+                            <Link href={'#'} className=' mx-auto py-2 px-6 rounded-full text-white font-semibold mt-8'><button className='button'>Message</button></Link>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* bottom part of Profile section */}
-            <div className="flex flex-col-reverse md:flex-row gap-4">
+            <div className="flex flex-col-reverse md:flex-row gap-4 justify-center ">
                 <div className="min-w-[400px]">
-                    <div className="max-w-md mx-start mt-6 bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <div className="max-w-md mx-start mt-6 bg-white shadow-lg rounded-lg overflow-hidden transform  transition-transform duration-300">
                         <div className="p-4">
-                            <h2 className="text-2xl font-bold text-start text-green-500  mb-2">My Popular Events</h2>
+                            <h2 className="text-2xl font-bold text-start text-[--color-secondary]  mb-2">My Popular Events</h2>
                             <div>
                                 {
-                                   eventLoading ? <Loading></Loading> : myEvents?.length < 1 ? <h5 className='font-bold text-center my-8'>You Have Not Publish Any Events</h5> : myEvents?.map(event => <EventCard key={event?._id} event={event}></EventCard>)
+                                   eventLoading ? <Loading></Loading> : myEvents?.length < 1 ? <h5 className='font-bold text-center my-8'>You Have Not Publish Any Events</h5> : myEvents?.slice(0,2)?.map(event => <CardForEvents key={event?._id} event={event}></CardForEvents>)
                                 }
                             </div>
                         </div>

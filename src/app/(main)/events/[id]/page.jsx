@@ -411,7 +411,7 @@ const EventDetailsPage = ({ params }) => {
                                     Type: {event.type}
                                 </p>
                                 <p className="flex items-center">
-                                    <FaTag className="mr-2 text-pink-500 animate-spin" />
+                                    <FaTag className="mr-2 text-pink-500 " />
                                     Category: {event.category}
                                 </p>
                             </div>
