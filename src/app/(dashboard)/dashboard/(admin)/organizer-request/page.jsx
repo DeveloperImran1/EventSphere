@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchUsers = async () => {
-    const response = await axios.get('process.env.SERVER_SIDE_BASE_URL/organizerRequest');
+    const response = await axios.get('http://localhost:9000/organizerRequest');
     return response.data;
 };
 

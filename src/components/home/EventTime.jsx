@@ -43,7 +43,7 @@ const EventTime = () => {
 console.log(events,'ghgfhgfhgfhfghfghfghfh')
   useEffect(() => {
     axios
-      .get("process.env.SERVER_SIDE_BASE_URL/events")
+      .get("http://localhost:9000/events")
       .then((res) => {
         if (res.data.length > 6) {
           const arr = res.data.slice(0, 6);

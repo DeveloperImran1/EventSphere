@@ -23,7 +23,7 @@ const Cards = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      fetch(`process.env.SERVER_SIDE_BASE_URL/user/${lastPathSegment}`).then((res) =>
+      fetch(`http://localhost:9000/user/${lastPathSegment}`).then((res) =>
         res.json()
       ),
   });
@@ -33,7 +33,7 @@ const Cards = () => {
   const { data: myPosts } = useQuery({
     queryKey: ["myPost"],
     queryFn: () =>
-      fetch(`process.env.SERVER_SIDE_BASE_URL/getUserPosts/${lastPathSegment}`).then((res) =>
+      fetch(`http://localhost:9000/getUserPosts/${lastPathSegment}`).then((res) =>
         res.json()
       ),
   });
@@ -58,7 +58,7 @@ const Cards = () => {
     console.log("Updated info", addedFollower)
 
     try {
-      const result = await axios.put("process.env.SERVER_SIDE_BASE_URL/userAddedFollower", addedFollower);
+      const result = await axios.put("http://localhost:9000/userAddedFollower", addedFollower);
       console.log(result);
 
       if (result?.data?.modifiedCount) {

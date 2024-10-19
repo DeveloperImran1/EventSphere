@@ -9,7 +9,7 @@ const useMyAllPostWithEmail = () => {
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["myPost"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/getUserPosts/${lastPathSegment}`).then((res) =>
+            fetch(`http://localhost:9000/getUserPosts/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });

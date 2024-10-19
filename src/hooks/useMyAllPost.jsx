@@ -7,7 +7,7 @@ const useMyAllPost = () => {
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["myPosts"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/getUserPosts/${session?.data?.user?.email}`).then((res) =>
+            fetch(`http://localhost:9000/getUserPosts/${session?.data?.user?.email}`).then((res) =>
                 res.json()
             ),
     });

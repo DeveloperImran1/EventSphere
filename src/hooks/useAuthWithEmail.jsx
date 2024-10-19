@@ -8,7 +8,7 @@ const useAuthWithEmail = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["user"],
         queryFn: () =>
-            fetch(`process.env.SERVER_SIDE_BASE_URL/user/${lastPathSegment}`).then((res) =>
+            fetch(`http://localhost:9000/user/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });
