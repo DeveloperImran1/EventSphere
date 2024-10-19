@@ -57,7 +57,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
         {description}
       </motion.p>
  {/* loading  */}
-      <motion.div 
+      {/* <motion.div 
         className=" my-6 flex justify-center space-x-2"
       >
         {[...Array(5)].map((_, i) => (
@@ -74,7 +74,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
             whileHover={{ scale: 1.5, backgroundColor: "#60a5fa" }}
           />
         ))}
-      </motion.div>
+      </motion.div> */}
      
       <style jsx>{`
         .words {

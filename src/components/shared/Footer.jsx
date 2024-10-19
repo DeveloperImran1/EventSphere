@@ -8,8 +8,7 @@ import Image from "next/image";
 import Logo from './Logo';
 
 import GlowingCssText from './GlowingCssText';
-import Socialicon from './SocialIcons';
-import SocialSignIn from './SocialSignIn';
+
 import SocialIcons from './SocialIcons';
 
 const UnderwaterFooter = () => {
@@ -171,14 +170,14 @@ const UnderwaterFooter = () => {
             </div>
           </div>
           {/* Footer Down */}
-          <div className="text-[#fffc] flex flex-col md:flex-row justify-around items-center py-12 ">
+          <div className="text-[#fffc]  flex flex-col lg:flex-row justify-around items-center py-12 ">
             {/* Left Side */}
             <div className="flex flex-col md:flex-row items-center ">
               <Logo />
               <h1 className='px-5 text-[18px] font-semibold mx-auto my-5'><span>&copy;</span> Eventify 2024. All rights reserved.</h1>
             </div>
             {/* Right Side  social link  */}
-            <div className=" pr-[60px] md:mr-5">
+            <div className="">
 <SocialIcons></SocialIcons>
             </div>
           </div>
