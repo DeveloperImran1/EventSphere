@@ -14,7 +14,7 @@ const DashboardLayout = ({ children }) => {
         <div className="min-h-screen bg-white">
             {/* Navbar */}
        <div className='h-[90px] '>
-       <div className="fixed z-50 w-full bg-[#b3ddff] shadow-lg  ">  {/* Set a height for the navbar */}
+       <div className="fixed z-50 w-full bg-[#1b85db] shadow-lg  ">  {/* Set a height for the navbar */}
                 <div className="relative w-full]">
                     <div className="flex justify-start items-start md:block">
                         <DashboardNavbar />
