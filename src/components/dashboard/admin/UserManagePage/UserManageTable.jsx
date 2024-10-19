@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BlockButton from './BlockButton';
 import UnBlockButton from './UnBlockButton';
+import Image from 'next/image';
 
 const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -39,7 +40,7 @@ const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
                             {currentUsers.map(user => (
                                 <tr key={user?._id} className="border-b border-gray-200 hover:bg-gray-50">
                                     <td className="flex items-center py-4 px-4">
-                                        <img src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
+                                        <Image height={676} width={1200} src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
                                         {user?.name}
                                     </td>
                                     <td className="py-4 px-4">{user?.email}</td>
@@ -84,7 +85,7 @@ const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
                             {currentUsers.map(user => (
                                 <tr key={user?._id} className="border-b border-gray-200 hover:bg-gray-50 transition duration-300">
                                     <td className="flex items-center py-4 px-4 text-sm md:text-base">
-                                        <img src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
+                                        <Image height={676} width={1200} src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
                                         <div>
                                             <div className="font-semibold">{user?.name}</div>
                                             <div className="text-gray-500 text-xs">{user?.email.slice(0, 10)}...</div>

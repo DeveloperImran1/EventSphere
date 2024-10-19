@@ -14,21 +14,23 @@ import React from "react";
 const OrganizerContainer = () => {
 
   const session = useSession();
-  const { data} = useQuery({
-      queryKey: ["organizer-orders"],
-      queryFn: () =>
-        fetch(`http://localhost:9000/organizer-orders/${session?.data?.user?.email}`).then((res) =>
-          res.json()
-        ),
-    });
-    console.log(data);
+  console.log("sessin is ", session)
+  const { data } = useQuery({
+    queryKey: ["organizer-orders", session?.data?.user?.email],
+    queryFn: () =>
+      // fetch(`http://localhost:9000/organizer-orders/${session?.data?.user?.email}`).then((res) =>
+      fetch(`http://localhost:9000/ordersByGmail/${session?.data?.user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
+  console.log(data);
   return (
     <div>
       <div>
         <Profile />
       </div>
       <div>
-        <Card data={data}/>
+        <Card data={data} />
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
         <div className="flex-1">
@@ -39,19 +41,19 @@ const OrganizerContainer = () => {
         </div>
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4 p-4">
-    <div className="flex-1">
-        <Top />
-    </div>
-    <div className="flex-1">
-        <StatsChart />
-    </div>
-    <div className="flex-1">
-        <Subscriber />
-    </div>
-</div>
-<div className="mt-8">
-    <Table data={data}/>
-</div>
+        <div className="flex-1">
+          <Top />
+        </div>
+        <div className="flex-1">
+          <StatsChart />
+        </div>
+        <div className="flex-1">
+          <Subscriber />
+        </div>
+      </div>
+      <div className="mt-8">
+        <Table data={data} />
+      </div>
 
     </div>
   );
