@@ -1,19 +1,10 @@
 "use client";
-import { useQuery } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+
 import Image from 'next/image';
 import React from 'react';
 
-const Profile = () => {
-    const session = useSession();
-    const { data} = useQuery({
-        queryKey: ["users"],
-        queryFn: () =>
-          fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
-            res.json()
-          ),
-      });
-      console.log(data);
+const Profile = ({data}) => {
+
       
     return (
         <div className='mb-8'>
