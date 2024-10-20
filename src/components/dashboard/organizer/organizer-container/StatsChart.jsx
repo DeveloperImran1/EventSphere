@@ -1,11 +1,19 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Chart, LineElement, LinearScale, PointElement, CategoryScale } from "chart.js";
-import { useQuery } from '@tanstack/react-query';
+import {
+    Chart,
+    LineElement,
+    LinearScale,
+    PointElement,
+    CategoryScale,
+} from "chart.js";
+import { useQuery } from "@tanstack/react-query";
 
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {
-    const response = await fetch(`http://localhost:9000/organizer-waveChart/${email}`);
+    const response = await fetch(
+        `http://localhost:9000/organizer-waveChart/${email}`
+    );
     if (!response.ok) {
         throw new Error("Network response was not ok");
     }
@@ -16,30 +24,35 @@ const StatsChart = ({ email }) => {
     const chartRef = useRef(null);
     const chartInstance = useRef(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [timePeriod, setTimePeriod] = useState('week'); // Default to week
-
+    const [timePeriod, setTimePeriod] = useState("week"); // Default to week
 
     // Use TanStack Query to fetch stats data
-    const { data: chartData = { dayStats: [] }, error, isLoading } = useQuery(
-   
-        {
-            queryKey: ["organizer-wave"],
-            queryFn:() => fetchStatsData(email)
-            
-        }
-    );
-
+    const {
+        data: chartData = { dayStats: [] },
+        error,
+        isLoading,
+    } = useQuery({
+        queryKey: ["organizer-wave"],
+        queryFn: () => fetchStatsData(email),
+    });
     useEffect(() => {
-        if (chartRef.current) { // Check if chartRef.current is not null
+        Chart.register(LineElement, LinearScale, PointElement, CategoryScale);
+
+        if (chartRef.current) {
+            // Check if chartRef.current is not null
             const ctx = chartRef.current.getContext("2d");
-            
+
             if (chartInstance.current) {
                 chartInstance.current.destroy();
             }
-    
-            const labels = chartData?.dayStats?.map(stat => stat.day);
-            const data = chartData?.dayStats.map(stat => stat.eventCount);
-    
+
+            const labels = chartData?.dayStats?.map((stat) => stat.day);
+            const data = chartData?.dayStats.map((stat) => stat.eventCount);
+            let a =chartData.dayStats.map((stat) =>      console.log(stat.eventCount))
+       console.log(labels);
+       
+            
+
             const dataForChart = {
                 labels,
                 datasets: [
@@ -53,7 +66,7 @@ const StatsChart = ({ email }) => {
                     },
                 ],
             };
-    
+
             const options = {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -72,21 +85,20 @@ const StatsChart = ({ email }) => {
                     },
                 },
             };
-    
+
             chartInstance.current = new Chart(ctx, {
                 type: "line",
                 data: dataForChart,
                 options,
             });
         }
-    
+
         return () => {
             if (chartInstance.current) {
                 chartInstance.current.destroy();
             }
         };
     }, [chartData]); // This will run when chartData changes
-    
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
@@ -116,9 +128,24 @@ const StatsChart = ({ email }) => {
                     </button>
                     {dropdownOpen && (
                         <ul className="absolute bg-white shadow-lg rounded-lg mt-2 w-32 z-10 border border-gray-200">
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => changeTimePeriod('week')}>Week</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => changeTimePeriod('month')}>Month</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => changeTimePeriod('year')}>Year</li>
+                            <li
+                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                onClick={() => changeTimePeriod("week")}
+                            >
+                                Week
+                            </li>
+                            <li
+                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                onClick={() => changeTimePeriod("month")}
+                            >
+                                Month
+                            </li>
+                            <li
+                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                onClick={() => changeTimePeriod("year")}
+                            >
+                                Year
+                            </li>
                         </ul>
                     )}
                 </div>

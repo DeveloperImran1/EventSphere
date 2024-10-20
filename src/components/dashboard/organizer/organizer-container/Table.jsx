@@ -34,7 +34,7 @@ const Table = ({data}) => {
                                     <Image src={user?.bookedUserPhoto} alt={user.name} 
                                     width={12} height={12}
                                     className="w-12 h-12 rounded-full object-cover"/>
-                                                              </td>
+                                </td>
                                 <td className="py-4 px-4 font-bold text-gray-800">{user?.bookedUserName}</td>
                                 <td className="py-4 px-4 text-red-500">{user?.bookedUserEmail}</td>
                                 <td className="py-4 px-4 font-semibold text-gray-800">{user?.amount}</td>

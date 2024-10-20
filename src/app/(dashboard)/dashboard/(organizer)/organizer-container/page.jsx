@@ -13,62 +13,73 @@ import React from "react";
 
 const OrganizerContainer = () => {
 
+
   const session = useSession();
   const { data} = useQuery({
-      queryKey: ["organizer-orders"],
+      queryKey: ["users"],
       queryFn: () =>
-        fetch(`http://localhost:9000/organizer-orders/${session?.data?.user?.email}`).then((res) =>
+        fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
           res.json()
         ),
     });
-  const { data:organizerStats} = useQuery({
-      queryKey: ["organizer-stats"],
-      queryFn: () =>
-        fetch(`http://localhost:9000/organizer-stats/${session?.data?.user?.email}`).then((res) =>
-          res.json()
-        ),
-    });
-  const { data:PieChartData} = useQuery({
-      queryKey: ["organizer-pieChart"],
-      queryFn: () =>
-        fetch(`http://localhost:9000/organizer-pieChart/${session?.data?.user?.email}`).then((res) =>
-          res.json()
-        ),
-    });
-console.log(PieChartData);
+    console.log(data);
+  const { data: organizerOrders} = useQuery({
+    queryKey: ["organizer-orders"],
+    queryFn: () =>
+      fetch(`http://localhost:9000/organizer-orders/${session?.data?.user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
+  const { data: organizerStats } = useQuery({
+    queryKey: ["organizer-stats"],
+    queryFn: () =>
+      fetch(`http://localhost:9000/organizer-stats/${session?.data?.user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
+  const { data: PieChartData } = useQuery({
+    queryKey: ["organizer-pieChart"],
+    queryFn: () =>
+      fetch(`http://localhost:9000/organizer-pieChart/${session?.data?.user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
+
 
   return (
     <div>
       <div>
-        <Profile />
+        <Profile  data={data}/>
       </div>
       <div>
-        <Card data={data}/>
+        <Card data={organizerOrders} email={session?.data?.user?.email}/>
       </div>
       <div className=" mt-8">
-          <Chart organizerStats={organizerStats}/>
-        </div>
-      <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
-        
-        <div className="flex-1">
-          <CirculeChart PieChartData={PieChartData}/>
-        </div>
-        <div className="flex-1">
-        <StatsChart  email={session?.data?.user?.email} />
-    </div>
+        <Chart organizerStats={organizerStats} />
       </div>
+      <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
+
+        <div className="flex-1">
+          <CirculeChart PieChartData={PieChartData} />
+        </div>
+        <div className="flex-1">
+          <StatsChart email={session?.data?.user?.email} />
+        </div>
+ 
+      </div>
+
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4 p-4">
-    <div className="flex-1">
-        <Top />
-    </div>
-   
-    <div className="flex-1">
-        <Subscriber />
-    </div>
-</div>
-<div className="mt-8">
-    <Table data={data}/>
-</div>
+        <div className="flex-1">
+          <Top />
+        </div>
+
+        <div className="flex-1">
+          <Subscriber  data={data}/>
+        </div>
+      </div>
+      <div className="mt-8">
+        <Table data={organizerOrders} />
+      </div>
 
     </div>
   );
