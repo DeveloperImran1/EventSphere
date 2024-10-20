@@ -1,5 +1,3 @@
-// pages/payment-details.js
-
 "use client"
 import { useEffect, useState } from 'react';
 import axios from 'axios';

@@ -23,12 +23,12 @@ const EventsData = () => {
   const [selectedType, setSelectedType] = useState('All');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [category, setCategory] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [minimumPrice, setMinimumPrice] = useState(0);
   const [maximumPrice, setMaximumPrice] = useState(3000);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedDay, setSelectedDay] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
 
@@ -91,11 +91,17 @@ const EventsData = () => {
 
 
 
-  // Fetch events with useQuery and filters
+  // Data fetching using react-query
   const { data: events = {}, isLoading, refetch } = useQuery({
-    queryKey: ['events', filters],
+    queryKey: ['events', filters, currentPage],
     queryFn: async () => {
-      const { data } = await axiosPublic.get('/events', { params: filters });
+      const { data } = await axiosPublic.get('/events', {
+        params: {
+          ...filters,
+          page: currentPage,
+          limit: itemsPerPage,
+        },
+      });
       return data;
     },
     keepPreviousData: true,
@@ -103,6 +109,21 @@ const EventsData = () => {
   console.log(events)
 
   const [filteredData, setFilteredData] = useState(events);
+
+  // Update currentPage when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
+
+  // Trigger refetch when page changes
+  useEffect(() => {
+    refetch();
+  }, [currentPage, refetch])
+
+  // Handling page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   // Handle Country change to dynamically load cities
   const handleCountryChange = (e) => {
@@ -144,23 +165,21 @@ const EventsData = () => {
 
 
 
+  // Pagination handling
   const handleNextPage = () => {
     if (currentPage < events.totalPages) {
       setCurrentPage(prevPage => prevPage + 1);
-      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(prevPage => prevPage - 1);
-      refetch(); // নতুন পেজের জন্য ডাটা রিফেচ
     }
   };
 
   const handlePaginationButton = (pageNum) => {
     setCurrentPage(pageNum);
-    refetch(); // নির্দিষ্ট পেজের জন্য ডাটা রিফেচ
   };
 
 
@@ -305,7 +324,7 @@ const EventsData = () => {
               </select>
             </div>
 
-        
+
             {/* Price Filter */}
             <div className="flex gap-4 flex-col">
               <input
@@ -382,6 +401,7 @@ const EventsData = () => {
               </Link>
             ))}
           </div>
+
           {/* Pagination */}
           <div className="flex my-12 gap-4 lg:mx-20">
             <button

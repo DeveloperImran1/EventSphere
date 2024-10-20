@@ -49,8 +49,19 @@ const PaymentQRCodePage = () => {
         console.error("Error generating ticket image:", error);
       });
   };
-  console.log(ticketRef)
+  // console.log(ticketRef)
 
+
+  const dataforqr = {
+    transitionId: paymentData?.transitionId || 'N/A', 
+    amount: paymentData?.amount || '0', 
+    date: paymentData?.eventDate?.slice(0, 10) || 'Unknown Date', 
+    eventName: paymentData?.eventName || 'Unknown Event',
+    bookedUserName: paymentData?.bookedUserName || 'Anonymous', 
+    totalSeats: paymentData?.totalTickets || '0', 
+    seatNumbers: paymentData?.selectSeatNames || ['N/A'], 
+  };
+const qrData = JSON.stringify(dataforqr);
 
   if (loading) {
     return <Loading />;
@@ -107,9 +118,15 @@ const PaymentQRCodePage = () => {
         </div>
         <div>
           <QRCode
-            value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
+          value={qrData}
+          size={200} 
+          bgColor="#ffffff" 
+          fgColor="#000000" 
+            // value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
             className='mb-3 text-center m-2 mx-auto'
+            
           />
+          <p>{paymentData.transitionId} </p>
         </div>
       </div>
       <div className='text-center'>
