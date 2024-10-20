@@ -15,6 +15,7 @@ const OrganizerContainer = () => {
 
 
   const session = useSession();
+
   const { data} = useQuery({
       queryKey: ["users"],
       queryFn: () =>
@@ -52,10 +53,12 @@ const OrganizerContainer = () => {
         <Profile  data={data}/>
       </div>
       <div>
+
         <Card data={organizerOrders} email={session?.data?.user?.email}/>
       </div>
       <div className=" mt-8">
         <Chart organizerStats={organizerStats} />
+
       </div>
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4">
 

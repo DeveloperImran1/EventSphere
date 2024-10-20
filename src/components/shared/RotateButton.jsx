@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RotateButton = ({ onClick, className = '', children = 'see details' }) => {
+const RotateButton = ({ onClick, className = '', children  }) => {
   return (
     <button onClick={onClick} className={`btnRotate ${className}`}>
       {children}

@@ -22,7 +22,7 @@ const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Busines
 
 
 const CountdownUnit = ({ value, label }) => (
-  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-emerald-500 to-indigo-800 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-blue-500 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
     <span className=" text-lg font-mono  text-white">{value.toString().padStart(2, '0')}</span>
     <span className="text-xs font-serif  text-purple-200">{label}</span>
   </div>
@@ -95,7 +95,7 @@ export default function PopularEvent() {
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
-      const eventData = await axiosPublic.get(`https://event-sphare-server.vercel.app/events/getCategoryEvent/${categoryName}`)
+      const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
       console.log("Popular event theke data: ", eventData?.data)
       return eventData?.data;
     }
@@ -260,7 +260,7 @@ function EventCard({ event }) {
                 Read More
               </Button>
             </Link>
-            <Link href="/SeatBookingWidget">
+            <Link href={`/payment?id=${event?._id}`}>
               <Button className="bg-white m-2 p-1 font-serif  h-8  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
                 Book Now !
               </Button>

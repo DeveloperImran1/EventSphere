@@ -1,0 +1,133 @@
+/* components/FooterBackground.module.css */
+
+
+  
+  .surface {
+    mix-blend-mode: overlay;
+   
+    top: 0;
+    left: 0;
+ 
+  }
+  
+  .surface::before,
+  .surface::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background-image: url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTEyMTIwOTZ8&ixlib=rb-4.0.3&q=80&w=400");
+    background-repeat: repeat-x;
+    animation: surface 8s linear infinite;
+    opacity: 0.4;
+  }
+  
+  .surface::before {
+    transform: scale3d(1, -1, 1);
+  }
+  
+  .surface::after {
+    transform: scale3d(-1, -1, 1);
+  }
+  
+  .caustics {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    filter: url(#noise1);
+  }
+  
+  .caustics::before,
+  .caustics::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1568145675395-66a2eda0c6d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTEyMTAwNjh8&ixlib=rb-4.0.3&q=80&w=400");
+    background-repeat: repeat;
+    animation: caustics 10s linear infinite;
+    opacity: 0.3;
+  }
+  
+  .bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, white, gray 25%, gray 60%, khaki);
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+  }
+  
+  .sun {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .sun div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50vw 0;
+    animation: sun 7s ease infinite alternate;
+    mask-image: linear-gradient(to bottom, transparent 15%, white 50%, transparent 80%);
+  }
+  
+  .sun_layer1 {
+    background: linear-gradient(to right, transparent 39%, white 40%, transparent 41%);
+  }
+  
+  .sun_layer2 {
+    animation-delay: -2s;
+    background: linear-gradient(to right, transparent 32%, white 33%, transparent 34%);
+  }
+  
+  .sun_layer3 {
+    animation-delay: -5s;
+    background: linear-gradient(to right, transparent 38.5%, white 40%, transparent 41.5%);
+  }
+  
+  @keyframes surface {
+    0% {
+      background-position: center bottom;
+      background-size: 100% 70vh;
+    }
+    100% {
+      background-position: center bottom -30vh;
+      background-size: 100% 30vh;
+    }
+  }
+  
+  @keyframes caustics {
+    0% {
+      background-position: bottom left;
+    }
+    100% {
+      background-position: bottom left -100vw;
+    }
+  }
+  
+  @keyframes sun {
+    0% {
+      opacity: 0.1;
+      transform: skew(5deg) scale3d(3, 1.5, 1);
+    }
+    100% {
+      opacity: 0.1;
+      transform: skew(-5deg) scale3d(3, 1, 1);
+    }
+  }
+  

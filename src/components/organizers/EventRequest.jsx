@@ -105,7 +105,7 @@ export default function EventRequestForm() {
     }, [text]);
 
     return (
-      <button ref={buttonRef} className="btn my-10  text-xl   " style={{ "--clr": "#7d0bee" }}>
+      <button ref={buttonRef} className="btn my-10  text-xl   " style={{ "--clr": "#E0FFFF" }}>
         {text}
       </button>
     );
@@ -115,14 +115,13 @@ export default function EventRequestForm() {
   return (
 
     <div>
-              <SectionTitle  title="Create and Manage Your Events"
-  subTitle="New Event Submission"  > </SectionTitle>
+
 
       <div className='all px-10' >
 
         <div className='box w-full h-[1400px] md:h-[950px] lg:w-4/5  '  >
           <form onSubmit={handleSubmit} action="">
-            <h2 className='text-center  border-b-2 my-4 font-serif text-yellow-100'  >Event Information </h2>
+            <h2 className='text-center text-4xl  pb-2 my-4 font-serif text-yellow-100'  >``Event Information``</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4  space-y-5  "> {/* Adjusts the grid to 2 columns with gap */}
               <div className="inputBox">

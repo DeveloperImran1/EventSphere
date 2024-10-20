@@ -21,9 +21,9 @@
   left: -50%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(60deg, transparent, #45ffd4, #15aced);
+  background: linear-gradient(60deg, transparent, #45ffd47a, #15aced6f);
   transform-origin: bottom right;
-  animation: animate 6s linear infinite;
+  animation: animate 20s linear infinite;
 }
 .box::after{
   content: '';
@@ -32,10 +32,10 @@
   left: -50%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(60deg, transparent, #3a8dc8a2, #1387d998);
+  background: linear-gradient(60deg, transparent, #3a8dc877, #1387d970);
   transform-origin: bottom right;
-  animation: animate 6s linear infinite;
-  animation-delay: -3s;
+  animation: animate 20s linear infinite;
+  animation-delay: -10s;
 }
 @keyframes animate{
   0%
@@ -51,7 +51,7 @@ form{
   position: absolute;
   inset: 2px;
   border-radius: 50px 5px;
-  background: #235cade9;
+  background: #235caddd;
   z-index: 10;
   padding: 30px 50px;
   display: flex;
@@ -99,7 +99,7 @@ form{
   bottom: 0;
   width: 100%;
   height: 3px;
-  background: #45f3ff;
+  background: #ffffff;
   border-radius: 4px;
   transition: 0.5s;
   pointer-events: none;
@@ -120,7 +120,7 @@ form{
   font-weight: 600;
   border-radius: 40px;
  
-color :azure;
+color :wheat;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   transition: 1s;
@@ -132,12 +132,13 @@ color :azure;
   box-shadow: 0 0 25px var(--clr),
   0 0 100px var(--clr),
   0 0 150px var(--clr);
+  
 }
 .btn span{
   position: relative;
   display: inline-block;
   transition: transform 0.5s;
-  text-shadow: 0 35px #fff;
+  text-shadow: 0 35px black;
   transform: translateY(0px);
 }
 .btn:hover span.hover{

@@ -15,21 +15,19 @@ const ROWS = 10;
 const SEATS_PER_ROW = 12;
 
 // SeatButton Component for rendering seat buttons
-function SeatButton({ seat, onClick }) {
-  const bgColor =
-    seat.status === "available"
-      ? "bg-gray-300"
-      : seat.status === "sold"
-        ? "bg-red-500"
-        : "bg-green-500";
+function SeatButton({ seat, onClick , event}) {
+ const res = event?.bookedSeats?.includes(seat?.number)
+ console.log("bokin naki chekc", res)
+  const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
+  console.log(seat)
 
   return (
     <motion.button
       className={`w-12 h-12 m-1 rounded-md text-black ${bgColor} disabled:opacity-50 flex items-center justify-center text-xs`}
       onClick={onClick}
-      disabled={seat.status === "sold"}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
+      disabled={res}
     >
       {seat.number}
     </motion.button>
@@ -43,12 +41,23 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedSeatNames, setSelectedSeatNames] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [finalTotal, setFinalTotal] = useState()
 
+
+
+  const propsObj = { total, selectedSeats, selectedSeatNames }
+  console.log(propsObj)
   // Fetch event data from API
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`);
+        const response = await axios.get(`http://localhost:9000/events/${id}`);
         setEvent(response.data);
         setLoading(false);
       } catch (error) {
@@ -93,11 +102,7 @@ const Payment = () => {
       );
   });
 
-  const [selectedSeats, setSelectedSeats] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [couponCode, setCouponCode] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   // Alert for bulk purchase discount
   useEffect(() => {
@@ -110,15 +115,20 @@ const Payment = () => {
   }, []);
 
   // Handle seat selection and deselection
+  // Handle seat selection and deselection 
   const handleSeatClick = (row, seat) => {
     const newSeats = [...seats];
+    const seatName = newSeats[row][seat].number;
+
     if (newSeats[row][seat].status === "available") {
       newSeats[row][seat].status = "selected";
       setSelectedSeats(selectedSeats + 1);
       setTotal(total + event.price);
+      setSelectedSeatNames([...selectedSeatNames, seatName]); // Add selected seat name
+
       Swal.fire({
         title: "Seat Selected",
-        text: `You've selected seat ${newSeats[row][seat].number}`,
+        text: `You've selected seat ${seatName}`,
         icon: "success",
         timer: 1500,
         showConfirmButton: false,
@@ -127,9 +137,11 @@ const Payment = () => {
       newSeats[row][seat].status = "available";
       setSelectedSeats(selectedSeats - 1);
       setTotal(total - event.price);
+      setSelectedSeatNames(selectedSeatNames.filter(name => name !== seatName)); // Remove deselected seat name
+
       Swal.fire({
         title: "Seat Deselected",
-        text: `You've deselected seat ${newSeats[row][seat].number}`,
+        text: `You've deselected seat ${seatName}`,
         icon: "info",
         timer: 1500,
         showConfirmButton: false,
@@ -161,16 +173,19 @@ const Payment = () => {
     }
   };
 
-  // Calculate final total after discounts
-  const calculateTotal = () => {
-    let subtotal = total;
-    if (selectedSeats >= 5) {
-      subtotal *= 0.9; // 10% bulk discount
-    }
-    return Math.max(0, subtotal - discount);
-  };
+  useEffect(() => {
+    const calculateTotal = () => {
+      let subtotal = total;
+      if (selectedSeats >= 5) {
+        subtotal *= 0.9; // 10% bulk discount
+      }
+      return Math.max(0, subtotal - discount);
+    };
 
-  const finalTotal = calculateTotal();
+    const newTotal = calculateTotal(); // Calculate new total
+    setFinalTotal(newTotal); // Set finalTotal state
+  }, [selectedSeats, discount, total]);
+
 
   if (loading) {
     return <Loading />;
@@ -184,6 +199,11 @@ const Payment = () => {
       </div>
     );
   }
+
+  const selectSeat = selectedSeatNames.map((seatName, index) => (
+    <>{seatName}</>
+  ))
+  console.log(selectSeat)
 
   return (
     <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
@@ -207,7 +227,13 @@ const Payment = () => {
                     <div className="lg:mr-1">
                       <SeatButton
                         seat={seat}
+                        event={event}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                        // className={`${
+                          //  event?.bookedSeats?.includes(seat?.number) ? 'bg-red-700' : 'bg-green-500'
+                          // console.log(event)
+                          // console.log(seat)    //{status: 'available', number: 'A7'}
+                          // }`}
                       />
                     </div>
                     {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
@@ -225,11 +251,10 @@ const Payment = () => {
               <span className="font-bold">Event:</span> {event.title}
             </div>
             <div className="mb-2">
-              <span className="font-bold">Date:</span> {event.date}
+              <span className="font-bold">Date: </span>
+              {event.dateTime.slice(0, 10) + " " + "Time:" + event.dateTime.slice(11, 16)} AM
             </div>
-            <div className="mb-2">
-              <span className="font-bold">Time:</span> {event.time}
-            </div>
+
             <div className="flex items-center gap-2 mb-4">
               <Input
                 className="w-36"
@@ -239,6 +264,7 @@ const Payment = () => {
                 onChange={handleTicketQuantityChange}
               />
               <FcAdvertising size={30} />
+              <br />
               <Button
                 variant="primary"
                 onClick={applyCoupon}
@@ -249,18 +275,25 @@ const Payment = () => {
             </div>
             <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg">
               <p>
-                Selected Seats: <span>{selectedSeats}</span>
+                Total seat Select: <span className="text-xl font-bold">{selectedSeats}</span>
+              </p>
+              <p className="mt-4  ">Selected Seats:</p>
+              <ol type="1" className=" flex gap-4 flex-wrap">
+                {selectedSeatNames.map((seatName, index) => (
+                  <li key={index}>{seatName}</li>
+                ))}
+              </ol >
+              <p>
+                Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
               </p>
               <p>
-                Subtotal: <span>${total.toFixed(2)}</span>
+                Discount: <span className="ml-4">${discount.toFixed(2)}</span>
               </p>
-              <p>
-                Discount: <span>${discount.toFixed(2)}</span>
-              </p>
-              <p className="font-bold text-2xl">
-                Final Total: <span>${finalTotal.toFixed(2)}</span>
+              <p className="">
+                Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
+
             <Button
               onClick={() => setIsModalOpen(true)}
               disabled={selectedSeats === 0}
@@ -268,6 +301,7 @@ const Payment = () => {
             >
               Book Now
             </Button>
+
           </div>
         </div>
       </div>
@@ -293,7 +327,8 @@ const Payment = () => {
                 <TbXboxX className='text-2xl' />
               </Button>
             </div>
-            <EnhancedPaymentGateway total={finalTotal} />
+            <EnhancedPaymentGateway total={finalTotal} selectedSeatNames={selectedSeatNames}
+              selectedSeats={selectedSeats} />
           </motion.div>
         </motion.div>
       )}

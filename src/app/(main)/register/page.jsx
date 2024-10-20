@@ -100,12 +100,13 @@ const SignUp = () => {
       createdAt: new Date(),
       role: "user",
       followers: [],
-      review: []
+      review: [],
+      block: false,
     }
 
     console.log(newUser)
     setLoading(true)
-    const resp = await fetch('http://localhost:3000/register/api', {
+    const resp = await fetch('https://event-sphere-bice.vercel.app/register/api', {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
