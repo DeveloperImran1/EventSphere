@@ -8,6 +8,7 @@ import DestinationSlider from './DestinationSlider';
 import Banner from './banner/page';
 import EventTimed from './EventTime/page';
 
+
 const HomeContainer = () => {
     return (
         <div className=''>
