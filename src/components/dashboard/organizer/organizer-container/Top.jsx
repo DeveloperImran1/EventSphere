@@ -6,7 +6,7 @@ const Top = () => {
         toast.success(`${interest} Successfully Added as your interest!`)
      }
     return (
-        <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6 h-full flex flex-col justify-between">
+        <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6 h-full flex flex-col ">
             <div className="text-2xl font-semibold text-gray-800 mb-6 text-center">Choose Your Interests</div>
             <div className="flex flex-wrap justify-center gap-4">
                 <button onClick={()=>handleClick('Architecture')} className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300">

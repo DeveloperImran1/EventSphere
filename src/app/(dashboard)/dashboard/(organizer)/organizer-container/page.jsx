@@ -74,17 +74,11 @@ const OrganizerContainer = () => {
       </div>
 
       <div className="mt-8 flex flex-col-reverse md:flex-row gap-4 p-4">
-        <div className="flex-1">
+        <div className="flex-1 w-full border-2">
           <Top />
         </div>
 
-        <div className="flex-1">
-
-          {/* <StatsChart /> */}
-        </div>
-        <div className="flex-1">
-          <Subscriber />
-
+        <div className="flex-1 w-full border-2">
           <Subscriber  data={data}/>
         </div>
       </div>
