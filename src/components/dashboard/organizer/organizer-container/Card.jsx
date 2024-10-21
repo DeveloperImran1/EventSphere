@@ -76,14 +76,15 @@ const Card = ({ email, data }) => {
                   </div>
                </div>
             </div>
-         </div>
-         {/* Card 4 */}
-         <div className='bg-white shadow-lg rounded-lg p-6 flex flex-col items-start'>
-            <div className='flex justify-center items-center  gap-4'>
-               <div className='p-4 bg-rose-400 rounded-md'><FaSackDollar size={60} className='text-violet-100  ' /></div>
-               <div>
-                  <h2 className='text-3xl font-extrabold text-gray-800 text-start'>{totalAmount}$</h2>
-                  <p className='text-gray-500 text-start'>Revenue</p>
+
+            {/* Card 4 */}
+            <div className='bg-white shadow-lg rounded-lg p-6 flex flex-col items-start'>
+               <div className='flex justify-center items-center  gap-4'>
+                  <div className='p-4 bg-rose-400 rounded-md'><FaSackDollar size={60} className='text-violet-100  ' /></div>
+                  <div>
+                     <h2 className='text-3xl font-extrabold text-gray-800 text-start'>{totalAmount}$</h2>
+                     <p className='text-gray-500 text-start'>Revenue</p>
+                  </div>
                </div>
             </div>
          </div>
