@@ -42,7 +42,7 @@ const DashboardNavbar = () => {
 
                 {/* User Info */}
                 <div className="flex items-center space-x-2 md:space-x-4 text-white">
-                    <Image height={675} width={1200} src={session?.data?.user?.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'} alt='Profile Image' className='h-8 w-8 rounded-full'></Image>
+                    <Image height={675} width={1200} src={session?.data?.user?.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtuphMb4mq-EcVWhMVT8FCkv5dqZGgvn_QiA&s'} alt='Profile Image' className='h-11 w-11 rounded-full border-2 border-white '></Image>
                     <div className="text-left">
                         <h4 className="text-sm md:text-lg font-medium">{session?.data?.user?.name || 'Imran'}</h4>
                         <p className="text-xs md:text-sm font-light text-white">{session?.data?.user?.role || 'Admin'}</p>
