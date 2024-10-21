@@ -33,7 +33,6 @@ const DashboardSideBar = () => {
     // Get Booking Data 
     const fetchOrders = async () => {
       const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
-      console.log("My booking data ", data)
   
       return data;
     };
@@ -219,7 +218,6 @@ const DashboardSideBar = () => {
                         {
                             routes?.map((route, index) => {
                                 const Icon = route?.icon;
-                                console.log(lastPathSegment, route?.path)
                                 return (
                                     <Link key={index} href={route?.path} className={`${route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group`}>
                                         <div className='flex items-center'>
