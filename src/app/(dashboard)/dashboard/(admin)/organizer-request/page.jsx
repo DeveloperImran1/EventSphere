@@ -16,9 +16,11 @@ const OrganizerRequest = () => {
 
     // Fetching users using react-query
     const { data: users, isLoading, error } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['usersll'],
         queryFn: fetchUsers
     });
+    console.log('users ss', users);
+    
 
     {/* Cancel Button */ }
     const handleCancel = (userId) => {
