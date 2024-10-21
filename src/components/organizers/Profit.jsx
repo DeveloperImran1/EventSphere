@@ -68,6 +68,14 @@ const Dashboard = () => {
     // Sort events by revenue and return top 5
     return Object.values(revenueData).sort((a, b) => b.revenue - a.revenue).slice(0, 5);
   };
+
+  // Function to get the top 5 events by booked seats
+  const getTopEvents = () => {
+    return eventData
+      .sort((a, b) => b.bookedSeats.length - a.bookedSeats.length)
+      .slice(0, 5);
+  };
+
   return (
     <div className="p-4 space-y-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6">Event Organizer Dashboard</h1>
@@ -173,6 +181,29 @@ const Dashboard = () => {
         </Card>
       </div>
 
+      {/* Display top 5 events */}
+      <Card className="bg-white shadow-lg">
+        <CardHeader>
+          <CardTitle>Top 5 Events</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {getTopEvents().map((event, index) => (
+              <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
+                <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
+                <div className="flex-grow">
+                  <h3 className="font-semibold">{event.title}</h3>
+                  <p className="text-sm text-gray-500">{event.category}</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">{event.bookedSeats.length} tickets sold</p>
+                  <p className="text-sm text-gray-500">${event.price * event.bookedSeats.length} revenue</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
