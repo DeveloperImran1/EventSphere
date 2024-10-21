@@ -75,5 +75,5 @@ export default DestinationSlider;
 
 const sectionTitle = {
   subTitle: "COUNTRY",
-  title: "Top Destination",
+  title: "Top_Destination",
 };

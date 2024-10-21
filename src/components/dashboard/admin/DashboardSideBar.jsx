@@ -14,6 +14,8 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import { usePathname } from "next/navigation";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 
 const DashboardSideBar = () => {
@@ -26,6 +28,20 @@ const DashboardSideBar = () => {
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
+    const currentUserEmail = session?.data?.user?.email
+
+    // Get Booking Data 
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
+      console.log("My booking data ", data)
+  
+      return data;
+    };
+    const { data: bookings, error, isLoading } = useQuery({
+        queryKey: ['orders'],
+        queryFn: fetchOrders,
+      });
+    
     const userRoutes = [
         {
             title: "Profile",
@@ -90,7 +106,7 @@ const DashboardSideBar = () => {
             title: "Booked Events",
             path: "/dashboard/booked-event",
             icon: RiMessage2Line,
-            number: 2
+            number: bookings?.length
         },
         {
             title: "My Profit",
@@ -172,39 +188,40 @@ const DashboardSideBar = () => {
     return (
         <>
 
-            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
-        
+            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 flex flex-col justify-between">
 
-                <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
-                    <div className='p-2 rounded-full border-4 border-gray-200'>
-                        <Image
-                            src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
-                            alt="Profile"
-                            height="60"
-                            width="60"
-                            className="   transition duration-300 ease-in-out"
-                        />
-                    </div>
 
-                    <div>
-                        <p className="font-semibold text-gray-800">
-                            {session?.data?.user?.name || "User Name"}
+                <div>
+                    <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2 relative">
+                        <div className='p-2 rounded-full border-4 border-gray-200'>
+                            <Image
+                                src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
+                                alt="Profile"
+                                height="60"
+                                width="60"
+                                className="   transition duration-300 ease-in-out"
+                            />
+                        </div>
+
+                        <div>
+                            <p className="font-semibold text-gray-800">
+                                {session?.data?.user?.name || "User Name"}
+                            </p>
+                        </div>
+
+                        <p className="text-sm text-gray-500">
+                            {session?.data?.user?.email || "johndoe@example.com"}
                         </p>
                     </div>
 
-                    <p className="text-sm text-gray-500">
-                        {session?.data?.user?.email || "johndoe@example.com"}
-                    </p>
-                </div>
 
-
-                <nav className="mt-6  ">
-                    {
-                        routes?.map((route, index) => {
-                            const Icon = route?.icon;
-                            console.log(lastPathSegment, route?.path)
-                            return (
-                                    <Link key={index} href={route?.path} className={`${ route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group` }>
+                    <nav className="mt-6  ">
+                        {
+                            routes?.map((route, index) => {
+                                const Icon = route?.icon;
+                                console.log(lastPathSegment, route?.path)
+                                return (
+                                    <Link key={index} href={route?.path} className={`${route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group`}>
                                         <div className='flex items-center'>
                                             <Icon className="mr-2 text-xl" />
 
@@ -217,19 +234,23 @@ const DashboardSideBar = () => {
                                         }
 
                                     </Link>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
 
+
+
+                    </nav>
+                </div>
+
+                <div className="">
                     <hr className="border-gray-200 my-6" />
                     <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 ">
                         <FaSignOutAlt className="mr-2 text-xl" />
 
                         <span>Sign Out</span>
                     </button>
-
-                </nav>
-
+                </div>
 
             </div>
 
