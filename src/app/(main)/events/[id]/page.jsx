@@ -18,7 +18,7 @@
 //     useEffect(() => {
 //         const fetchEventsData = async () => {
 //             try {
-//                 const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`);
+//                 const response = await axios.get(`http://localhost:9000/events/${id}`);
 //                 setEvent(response.data);
 //                 setLoading(false);
 //             } catch (error) {
@@ -221,7 +221,7 @@
 //                             <p>Event management often involves overcoming a range of challenges. Budget constraints can be difficult to manage while still delivering a high-quality experience. Unexpected problems, such as technical failures or weather disruptions, can arise, requiring quick solutions. Ensuring guest satisfaction is another major challenge, as event managers need to cater to a wide range of preferences. Coordinating with vendors, managing timelines, and avoiding delays are all part of the complex process that event planners must navigate.</p>
 //                         </div>
 //                     </div>
-//                     <Link href={`/payment?id=${id}`}> <button className="bg-[--color-logo] text-white py-2 px-4 w-full mx-auto rounded-lg hover:bg-green-600 transition">
+//                     <Link href={`/payment?id=${id}`}> <button className="bg-[--color-primary] text-white py-2 px-4 w-full mx-auto rounded-lg hover:bg-green-600 transition">
 //                         Buy Ticket
 //                     </button></Link>
 //                 </section>
@@ -264,7 +264,7 @@ const EventDetailsPage = ({ params }) => {
 
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`)
+                const response = await axios.get(`http://localhost:9000/events/${id}`)
                 setEvent(response.data)
                 setLoading(false)
             } catch (error) {

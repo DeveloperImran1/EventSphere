@@ -1,23 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import useAuth from "@/hooks/useAuth";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaSignOutAlt } from "react-icons/fa";
+
 import { RiMessage2Line } from "react-icons/ri";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { MdOutlineEqualizer } from "react-icons/md";
-import { FaSignOutAlt } from "react-icons/fa";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
-import AnimatedFormModal from '@/components/modal/BeOrganiger/BeOrganiger';
-import RequestOrganizer from '@/components/modal/RequestOrganizer';
-import Image from 'next/image';
+import { usePathname } from "next/navigation";
 
 
 const DashboardSideBar = () => {
     const session = useSession();
     const [routes, setRoutes] = useState([])
+    const auth = useAuth();
+    const sessionData = session?.data;
+    const authInfo = auth?.data?.role;
+    const pathname = usePathname();
+    const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
     const userRoutes = [
@@ -117,7 +123,8 @@ const DashboardSideBar = () => {
         },
         {
             title: "Edit Profile",
-            path: "/dashboard/edit-profile"
+            path: "/dashboard/edit-profile",
+            icon: RiMessage2Line
         },
         {
             title: "All Events",
@@ -146,18 +153,18 @@ const DashboardSideBar = () => {
         },
 
     ]
-    let role = "organizer";
+
     useEffect(() => {
-        if (role === 'user') {
+        if (auth?.data?.role === "user") {
             setRoutes(userRoutes)
         }
-        else if (role === 'organizer') {
+        else if (auth?.data?.role === 'organizer') {
             setRoutes(organizerRoutes)
         }
         else {
             setRoutes(AdminRoutes)
         }
-    }, [role, session])
+    }, [sessionData, authInfo])
 
 
 
@@ -165,11 +172,8 @@ const DashboardSideBar = () => {
     return (
         <>
 
-            <div className="fixed h-[500px] max-h-[600px] w-64 bg-white text-slate-600   flex-shrink-0 shadow-lg overflow-y-auto ">
-                {/* <div className="flex items-center py-2 md:py-3 px-4 rounded transition duration-200 bg-[#3b99f1] text-white">
-                    <MdOutlineEqualizer size={30} className="mr-2 text-xl" />
-                    <h1 className="text-2xl md:text-3xl font-bold">Dashboard</h1>
-                </div> */}
+            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
+        
 
                 <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
                     <div className='p-2 rounded-full border-4 border-gray-200'>
@@ -196,24 +200,23 @@ const DashboardSideBar = () => {
 
                 <nav className="mt-6  ">
                     {
-                        routes?.map(route => {
+                        routes?.map((route, index) => {
                             const Icon = route?.icon;
+                            console.log(lastPathSegment, route?.path)
                             return (
-                                <>
-                                    <Link href={route?.path} className="flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1]  hover:text-white  transform ease-in delay-100 group">
+                                    <Link key={index} href={route?.path} className={`${ route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group` }>
                                         <div className='flex items-center'>
                                             <Icon className="mr-2 text-xl" />
 
                                             <span>{route?.title}</span>
                                         </div>
                                         {
-                                            route?.number &&  <span className='bg-[#3b99f1] group-hover:bg-green-500 text-white text-sm rounded-md px-1'>
-                                            <span>{route?.number}+</span>
-                                        </span>
+                                            route?.number && <span className='bg-[#3b99f1] group-hover:bg-green-500 text-white text-sm rounded-md px-1'>
+                                                <span>{route?.number}+</span>
+                                            </span>
                                         }
-                                       
+
                                     </Link>
-                                </>
                             )
                         })
                     }

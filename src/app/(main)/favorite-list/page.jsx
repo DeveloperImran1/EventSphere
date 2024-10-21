@@ -25,9 +25,9 @@ const FavoriteList = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://event-sphare-server.vercel.app/events');
+        const response = await fetch('http://localhost:9000/events');
         const data = await response.json();
-        setAllEventsData(data); // Set the data to the state
+        setAllEventsData(data?.events); // Set the data to the state
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -40,11 +40,12 @@ const FavoriteList = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      const filteredEvents = allEventsData.filter(event => favorites.includes(event._id));
+      const filteredEvents = allEventsData?.filter(event => favorites.includes(event._id));
       setFavoritesEvents(filteredEvents); // Set the filtered events to the state
     }
   }, [allEventsData]); //  This runs every time allEventsData changes
 
+  console.log(allEventsData)
   // handleRemoveFavoriteItem function to remove an item from the favorites
   const handleRemoveFavoriteItem = (id) => {
     if (typeof window !== 'undefined') {
