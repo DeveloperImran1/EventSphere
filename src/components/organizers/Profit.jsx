@@ -55,6 +55,19 @@ const Dashboard = () => {
     return Object.entries(categories).map(([name, value]) => ({ name, value }));
   };
 
+  // Function to calculate revenue and tickets sold for each event
+  const getRevenueAndTicketsByEvent = () => {
+    const revenueData = {};
+    orderData.forEach(order => {
+      if (!revenueData[order.eventName]) {
+        revenueData[order.eventName] = { name: order.eventName, revenue: 0, tickets: 0 };
+      }
+      revenueData[order.eventName].revenue += order.amount;
+      revenueData[order.eventName].tickets += order.totalTickets;
+    });
+    // Sort events by revenue and return top 5
+    return Object.values(revenueData).sort((a, b) => b.revenue - a.revenue).slice(0, 5);
+  };
   return (
     <div className="p-4 space-y-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6">Event Organizer Dashboard</h1>
@@ -131,6 +144,30 @@ const Dashboard = () => {
                 </Pie>
                 <Tooltip />
               </PieChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Bar chart to show top 5 events by revenue and tickets sold */}
+        <Card className="bg-white shadow-lg w-full">
+          <CardHeader>
+            <CardTitle>Top 5 Events by Revenue</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                data={getRevenueAndTicketsByEvent()}
+                margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+                <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
+                <Tooltip />
+                <Legend />
+                <Bar yAxisId="left" dataKey="revenue" name="Revenue ($)" fill="#8884d8" />
+                <Bar yAxisId="right" dataKey="tickets" name="Tickets Sold" fill="#82ca9d" />
+              </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
