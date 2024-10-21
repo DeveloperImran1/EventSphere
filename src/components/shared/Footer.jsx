@@ -179,7 +179,7 @@ const UnderwaterFooter = () => {
             {/* Right Side  social link  */}
 
             <div className="">
-              <SocialIcons></SocialIcons>
+              {/* <SocialIcons></SocialIcons> */}
 
               <div className=" pr-[60px] md:mr-5">
                 {/* <SocialIcons></SocialIcons> */}

@@ -1,4 +1,5 @@
 "use client";
+import BarChart2 from "@/components/dashboard/organizer/organizer-container/BarChart";
 import Card from "@/components/dashboard/organizer/organizer-container/Card";
 import Chart from "@/components/dashboard/organizer/organizer-container/Chart";
 import CirculeChart from "@/components/dashboard/organizer/organizer-container/CirculeChart";
@@ -65,9 +66,10 @@ const OrganizerContainer = () => {
         <div className="flex-1">
           <CirculeChart PieChartData={PieChartData} />
         </div>
-        {/* <div className="flex-1">
-          <StatsChart email={session?.data?.user?.email} />
-        </div> */}
+        <div className="flex-1">
+          {/* <StatsChart email={session?.data?.user?.email} /> */}
+          <BarChart2 email={session?.data?.user?.email}/>
+        </div>
  
       </div>
 
@@ -81,7 +83,7 @@ const OrganizerContainer = () => {
         </div>
       </div>
       <div className="mt-8">
-        <Table data={organizerOrders} />
+        <Table data={organizerOrders} email={session?.data?.user?.email}/>
       </div>
 
     </div>

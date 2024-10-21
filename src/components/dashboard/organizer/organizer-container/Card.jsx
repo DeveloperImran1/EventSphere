@@ -76,8 +76,6 @@ const Card = ({ email, data }) => {
                   </div>
                </div>
             </div>
-
-            {/* Card 4 */}
             <div className='bg-white shadow-lg rounded-lg p-6 flex flex-col items-start'>
                <div className='flex justify-center items-center  gap-4'>
                   <div className='p-4 bg-rose-400 rounded-md'><FaSackDollar size={60} className='text-violet-100  ' /></div>
@@ -89,6 +87,7 @@ const Card = ({ email, data }) => {
             </div>
          </div>
       </div>
+
    );
 };
 
