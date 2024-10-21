@@ -11,12 +11,12 @@ import EventTimed from './EventTime/page';
 const HomeContainer = () => {
     return (
         <div className=''>
-             <Banner></Banner>
+            <Banner></Banner>
             <PopularEvents></PopularEvents>
-          <EventTimed></EventTimed>
+            <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
-            <Testimonials></Testimonials>
+            {/* <Testimonials></Testimonials> */}
         </div>
     );
 };

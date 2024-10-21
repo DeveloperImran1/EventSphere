@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import './Slider.css'
+import Link from 'next/link';
 const sliderItems = [
   {
     image: "https://i.ibb.co/bHqhHrR/pexels-teddy-2263436.jpg",
@@ -76,12 +77,13 @@ export default function Banner() {
 
   return (
     <div className="h-screen  grid place-items-center overflow-hidden">
+
       <main className="relative  w-full h-full shadow-[0_3px_10px_rgba(0,0,0,0.3)]">
         <ul ref={sliderRef} className="slider">
           {items.map((item, index) => (
             <li
               key={index}
-              className={`item absolute top-1/2 -translate-y-1/2 z-[1] w-[200px] h-[300px] bg-center bg-cover rounded-[20px] shadow-[0_20px_30px_rgba(255,255,255,0.3)_inset] transition-all duration-1000 ease-in-out ${index === 5 ? 'opacity-0' : 'opacity-100'
+              className={` item absolute top-1/2 -translate-y-1/2 z-[1] w-[200px] h-[300px] bg-center bg-cover rounded-[20px] shadow-[0_20px_30px_rgba(255,255,255,0.3)_inset] transition-all duration-1000 ease-in-out ${index === 5 ? 'opacity-0' : 'opacity-100'
                 } ${bgTransition && index === 1 ? 'animate-zoomInUp' : ''}`}
               style={{
                 backgroundImage: `url(${item.image})`,
@@ -97,25 +99,23 @@ export default function Banner() {
                 boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
             >
-              <div className={` bg-opacity-10 backdrop-blur-3xl   p-4  lg:p-6 rounded-2xl text-lime-100   transform  hover:scale-105 absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
+              <div className={` bg-opacity-10 backdrop-blur-3xl   p-4  lg:p-6 rounded-2xl text-lime-100   transform   absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
                 <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
                 <p className="  text-white my-2 text-sm   ">{item.description}</p>
-               <div className='  ml-2 '>
-               <a href="#" className='btnRotate  md:mt-3 md:text-xl '>
-              See  Details
-                </a>
-               </div>
+                <div className='  ml-2 '>
+                  <Link className='button' href="/events">All Events</Link>
+                </div>
               </div>
             </li>
           ))}
         </ul>
         <nav className="nav absolute flex  gap-4  bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
           <ArrowLeftIcon
-           className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 rounded-full cursor-pointer transition-all duration-300 bg-emerald-200  hover:bg-emerald-100    "
+            className="w-9 h-9  text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db]   hover:bg-[#10a0b9]  "
             onClick={() => activate('prev')}
           />
           <ArrowRightIcon
-            className="w-9 h-9  text-[rgba(0,0,0,0.7)] border-2 border-cyan-300 border-[rgba(0,0,0,0.6)] rounded-full cursor-pointer transition-all duration-300 bg-emerald-200   hover:bg-emerald-100 "
+            className="w-9 h-9  text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db]   hover:bg-[#10a0b9] "
             onClick={() => activate('next')}
           />
         </nav>

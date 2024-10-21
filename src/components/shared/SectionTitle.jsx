@@ -34,17 +34,10 @@ export default function SectionTitle({ title = '', description, subTitle }) {
     <motion.div 
       ref={ref}
       style={{ opacity, y, scale }}
-      className="mx-auto text-center container px-2  "
+      className="mx-auto text-center container px-2"
     >
       <motion.div className="">
-        <motion.span 
-          className="inline-block py-2 px-4 text-white text-xl font-semibold rounded-full shadow-lg cursor-pointer"
-          animate={subTitleControls}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {subTitle}
-        </motion.span>
+    
       </motion.div>
       <div className="words word-1 my-4 text-2xl font-bold md:text-5xl ">
         {(title || '').split('').map((letter, index) => (
@@ -52,12 +45,12 @@ export default function SectionTitle({ title = '', description, subTitle }) {
         ))}
       </div>
       <motion.p
-        className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto relative"
+        className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto relative mb-[40px] "
       >
         {description}
       </motion.p>
  {/* loading  */}
-      <motion.div 
+      {/* <motion.div 
         className=" my-6 flex justify-center space-x-2"
       >
         {[...Array(5)].map((_, i) => (
@@ -74,7 +67,8 @@ export default function SectionTitle({ title = '', description, subTitle }) {
             whileHover={{ scale: 1.5, backgroundColor: "#60a5fa" }}
           />
         ))}
-      </motion.div>
+      </motion.div> */}
+
      
       <style jsx>{`
         .words {

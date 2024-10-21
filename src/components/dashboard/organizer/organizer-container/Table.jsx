@@ -2,27 +2,6 @@ import Image from 'next/image';
 import React from 'react';
 
 const Table = ({data}) => {
-    // const users = [
-    //     {
-    //         name: "John Doe",
-    //         email: "john@example.com",
-    //         number: 165,
-    //         img: "https://via.placeholder.com/50"
-    //     },
-    //     {
-    //         name: "Jane Smith",
-    //         email: "jane@example.com",
-    //         number: 250,
-    //         img: "https://via.placeholder.com/50"
-    //     },
-    //     {
-    //         name: "Sam Wilson",
-    //         email: "sam@example.com",
-    //         number: 340,
-    //         img: "https://via.placeholder.com/50"
-    //     }
-    // ];
-console.log(data);
 
     return (
         <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
