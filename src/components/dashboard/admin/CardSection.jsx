@@ -8,7 +8,6 @@ import { PiExportLight } from "react-icons/pi";
 import { MdEventNote } from "react-icons/md";
 import { FaTicketSimple } from "react-icons/fa6";
 import { TbCoinTaka  } from "react-icons/tb";
-import Chart from "./Chart";
 
 const CardSection = ({metrics}) => {
   const cards = [
@@ -17,7 +16,7 @@ const CardSection = ({metrics}) => {
       title: "Events ",
       icon: <MdEventNote />,
       // value: "$10,000",
-      text: "Total ",
+      text: "Total: ",
       value: metrics.totalEvents,
       description: "+1.2 from yesterday",
     },
@@ -26,7 +25,7 @@ const CardSection = ({metrics}) => {
       title: "Tickets Sales",
       icon: <FaTicketSimple />,
       // value: "150 Orders",
-      text: "Total ",
+      text: "Total: ",
       value: metrics.totalTickets,
       description: "+1.2 from yesterday",
     },
@@ -34,8 +33,8 @@ const CardSection = ({metrics}) => {
       id: 3,
       title: "Sales",
       icon: <TbCoinTaka />,
-      text: "Total $ ",
-      textEnd: "Taka",
+      text: "Total: ",
+      textEnd: "$",
       value: metrics.totalSales,
       description: "+1.2 from yesterday",
     },
@@ -43,7 +42,7 @@ const CardSection = ({metrics}) => {
       id: 4,
       title: "Organizers",
       icon: <FaUserPlus />,
-      text: " Total ",
+      text: " Total: ",
       value:metrics.newOrganizers,
       description: "+1.2 from yesterday",
     },
