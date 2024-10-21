@@ -1,12 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
-import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
-
-// Define color palette for the pie chart
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+import { Calendar, Users, DollarSign, Tag } from 'lucide-react';
 
 const Dashboard = () => {
   // State to store event data and order data
