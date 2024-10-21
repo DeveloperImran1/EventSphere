@@ -45,7 +45,7 @@ const OrganizerContainer = () => {
           <Top />
         </div>
         <div className="flex-1">
-          <StatsChart />
+          {/* <StatsChart /> */}
         </div>
         <div className="flex-1">
           <Subscriber />
