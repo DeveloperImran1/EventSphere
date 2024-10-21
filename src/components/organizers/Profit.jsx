@@ -1,9 +1,12 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
-import { Calendar, Users, DollarSign, Tag } from 'lucide-react';
+import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
 
+// Define color palette for the pie chart
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const Dashboard = () => {
   // State to store event data and order data
@@ -31,6 +34,17 @@ const Dashboard = () => {
     fetchData();
   }, [organizerEmail]);
 
+  // Function to calculate total revenue
+  const getTotalRevenue = () => orderData.reduce((total, order) => total + order.amount, 0);
+  
+  // Function to calculate total tickets sold
+  const getTotalTicketsSold = () => orderData.reduce((total, order) => total + order.totalTickets, 0);
+  
+  // Function to calculate the total number of events organized
+  const getTotalEvents = () => eventData.length;
+  
+  // Function to calculate the average ticket price
+  const getAverageTicketPrice = () => getTotalRevenue() / getTotalTicketsSold() || 0;
 
   return (
     <div className="p-4 space-y-6 bg-gray-100">
@@ -44,7 +58,7 @@ const Dashboard = () => {
             <DollarSign className="h-10 w-10 text-green-500 mr-4" />
             <div>
               <p className="text-sm text-gray-500">Total Revenue</p>
-              <p className="text-3xl font-bold">$9999</p>
+              <p className="text-3xl font-bold">${getTotalRevenue().toFixed(2)}</p>
             </div>
           </CardContent>
         </Card>
@@ -55,7 +69,7 @@ const Dashboard = () => {
             <Users className="h-10 w-10 text-blue-500 mr-4" />
             <div>
               <p className="text-sm text-gray-500">Tickets Sold</p>
-              <p className="text-3xl font-bold">999</p>
+              <p className="text-3xl font-bold">{getTotalTicketsSold()}</p>
             </div>
           </CardContent>
         </Card>
@@ -66,7 +80,7 @@ const Dashboard = () => {
             <Calendar className="h-10 w-10 text-purple-500 mr-4" />
             <div>
               <p className="text-sm text-gray-500">Total Events</p>
-              <p className="text-3xl font-bold">9999</p>
+              <p className="text-3xl font-bold">{getTotalEvents()}</p>
             </div>
           </CardContent>
         </Card>
@@ -77,7 +91,7 @@ const Dashboard = () => {
             <Tag className="h-10 w-10 text-yellow-500 mr-4" />
             <div>
               <p className="text-sm text-gray-500">Avg. Ticket Price</p>
-              <p className="text-3xl font-bold">$99</p>
+              <p className="text-3xl font-bold">${getAverageTicketPrice().toFixed(2)}</p>
             </div>
           </CardContent>
         </Card>
