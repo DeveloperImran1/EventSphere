@@ -90,10 +90,10 @@ const Organizers = () => {
     
 
     return (
-        <div className="w-[calc(100vw-17px)]  mx-auto p-4 my-20">
+        <div className="container  mx-auto p-4 my-20 ">
          <SectionTitle 
          subTitle="Our Team"
-         title={"top organizers"}
+         title={"Top_Organizers"}
          description={"Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life"}
          >
 

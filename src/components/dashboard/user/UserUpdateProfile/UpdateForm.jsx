@@ -203,7 +203,7 @@ const UpdateFrom = () => {
                 <div className="col-span-2">
                     <button
                         type="submit"
-                        className=" -mt-6 mb-6 bg-green-500 text-white py-2 px-4 rounded-lg max-w-52"
+                        className=" -mt-6 mb-6 button"
                     > {isLoading ? <p>Loading..</p> : "Update"}
                     </button>
                 </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect, useRef } from "react";
+import { FaDollarSign } from "react-icons/fa";
 
 import {
   MapPin,
@@ -15,6 +16,11 @@ import "aos/dist/aos.css";
 import Link from "next/link";
 import FireTextTitle from "../shared/FireText";
 import RotateButton from "../shared/RotateButton";
+import { format } from 'date-fns';
+import { IoMdArrowRoundForward } from "react-icons/io";
+import { MdArrowOutward } from "react-icons/md";
+import { Heart, Share2 } from 'lucide-react'
+import toast, { Toaster } from 'react-hot-toast';
 
 const InfoItem = ({ icon, text }) => {
   return (
@@ -26,6 +32,46 @@ const InfoItem = ({ icon, text }) => {
 };
 
 const CardForEvents = ({ event }) => {
+  const [hoverd, setHoverd] = useState(false)
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
+
+
+  const [favorite, setFavorite] = useState([]);
+  const [favoriteUpdate, setFavoriteUpdate] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // New hover state
+
+
+  const handleAddFavorite = (id) => {
+    const storedFavorites = localStorage.getItem('favorites');
+    let favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+
+    if (favorites.includes(id)) {
+      favorites = favorites.filter(favId => favId !== id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      setFavoriteUpdate(!favoriteUpdate)
+      toast.error('Removed Bookmark!')
+    } else {
+      favorites.push(id);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      setFavoriteUpdate(!favoriteUpdate)
+      toast.success('Successfully Bookmarked!')
+    }
+  };
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    let currentFavorute = storedFavorites ? JSON.parse(storedFavorites) : [];
+    setFavorite(currentFavorute)
+  }, [favoriteUpdate])
+
+
 
   useEffect(() => {
     AOS.init({
@@ -46,6 +92,7 @@ const CardForEvents = ({ event }) => {
   const cardVariants = {
     hover: {
       scale: 1.05,
+      // scale: 1.05,
       rotateX: 0,
       rotateY: 0,
       transition: { duration: 0.3 }
@@ -90,7 +137,7 @@ const CardForEvents = ({ event }) => {
 
       <motion.div
         ref={cardRef}
-        className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300"
+        className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         whileHover="hover"
         variants={cardVariants}
@@ -109,34 +156,41 @@ const CardForEvents = ({ event }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
         </div>
 
+        <div className="flex justify-end space-x-2 absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
+          <button
+            className={`p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 ${favorite?.includes(event?._id) ? 'bg-white' : 'bg-red-500'} `}
+            onClick={() => handleAddFavorite(event._id)}
+          >
+            <Heart className={`w-6 h-6 ${favorite?.includes(event?._id) ? 'text-red-500 fill-red-500' : 'text-white fill-white'}`} />
+          </button>
+          <button className="p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 bg-[#1b85db] ">
+            <Share2 className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
         <motion.div className="p-6  space-y-4 " style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
           <motion.div style={{ transform: "translateZ(40px)" }}>
             <h2 className="text-2xl font-bold text-blue-500"> {event.title}</h2>
           </motion.div>
 
-          <motion.div className="space-y-2 px-1  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
-            <InfoItem icon={<Clock className="text-blue-400" />} text={formatDateTime(event.dateTime)} />
-            <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} />
+          <motion.div className="space-y-2  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
+            <InfoItem icon={<Clock className=" text-blue-400 " />} text={format(new Date(event.dateTime), 'MMMM do, yyyy h:mm a')} />
+            {/* <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} /> */}
             <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${event.location.country}, ${event.location.city}`} />
-            <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${event.type}`} />
+            {/* <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${event.type}`} /> */}
             <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${event.category}`} />
           </motion.div>
 
-          <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="300" >
-            <motion.button
-              className=" text-white p-2 rounded-xl font-semibold shadow-md bg-blue-400  transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              $ {event.price}
-            </motion.button >
+          <motion.div className="flex justify-between items-center -mt-6" data-aos="fade-up" data-aos-delay="300" >
+            <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[25px] " />} text={`Price: ${event.price}`} />
 
-            <motion.div 
-            whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              >
-              <RotateButton >Buy Ticket</RotateButton>
-            </motion.div>
+            <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" >
+              {
+                hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
+
+              }
+            </Link>
+
           </motion.div>
         </motion.div>
       </motion.div>

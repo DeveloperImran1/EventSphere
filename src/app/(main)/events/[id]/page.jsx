@@ -233,6 +233,7 @@
 // };
 
 // export default EventDetailsPage;
+
 'use client'
 
 import { useRouter } from "next/navigation"
@@ -248,6 +249,9 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api"
 import Button from "@/components/shared/CercleBuuton/Button"
+import { useQuery } from "@tanstack/react-query"
+import PopularEvent from "@/components/PopularEvent/PopularEvent"
+import PopularEvents from "@/components/popularEvents/PopularEvents"
 
 const EventDetailsPage = ({ params }) => {
     const router = useRouter()
@@ -262,7 +266,7 @@ const EventDetailsPage = ({ params }) => {
             mirror: true,
         })
 
-        const fetchEventsData = async () => {
+     const fetchEventsData = async () => {
             try {
                 const response = await axios.get(`http://localhost:9000/events/${id}`)
                 setEvent(response.data)
@@ -275,10 +279,13 @@ const EventDetailsPage = ({ params }) => {
         fetchEventsData()
     }, [id])
 
+  
+
     if (loading) {
         return <Loading />
     }
 
+    
     if (!event) {
         return (
             <div className="text-center mt-20">
@@ -411,7 +418,7 @@ const EventDetailsPage = ({ params }) => {
                                     Type: {event.type}
                                 </p>
                                 <p className="flex items-center">
-                                    <FaTag className="mr-2 text-pink-500 animate-spin" />
+                                    <FaTag className="mr-2 text-pink-500 " />
                                     Category: {event.category}
                                 </p>
                             </div>
@@ -520,6 +527,7 @@ const EventDetailsPage = ({ params }) => {
 
                     </section>
                 </div>
+                <PopularEvents/>
             </div>
         </div>
     )

@@ -78,7 +78,7 @@ const EnhancedCountdown = ({ date }) => {
       </div>
       <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 transition-all duration-1000 ease-linear"
+          className="h-full bg-gradient-to-r from-[#1b85db] to-indigo-500 transition-all duration-1000 ease-linear"
           style={{ width: `${(seconds / 60) * 100}%` }}
         ></div>
       </div>
@@ -92,6 +92,8 @@ export default function PopularEvent() {
   const [mounted, setMounted] = useState(false)
   const [categoryName, setCategoryName] = useState("All")
   const axiosPublic = useAxiosPublic();
+
+  
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
@@ -110,13 +112,13 @@ export default function PopularEvent() {
 
   if (!mounted) return null
 
-// main body//
+  // main body//
   return (
     <div className="w-full  py-12 max-w-7xl mx-auto ">
       <div className="px-4">
         <SectionTitle
           subTitle="Popular Events"
-          title="Explore Top Events"
+          title="Explore_Popular_Events"
           description="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
         />
 
@@ -128,10 +130,10 @@ export default function PopularEvent() {
                 onClick={() => setCategoryName(category)}
                 key={category}
                 value={category}
-                className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-gradient-to-r from-emerald-400 to-teal-500 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-emerald-500 data-[state=active]:text-white"
+                className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
               >
                 {category}
-                <span className="absolute left-0 bottom-0 h-1  bg-emerald-500 transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+                <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
               </TabsTrigger>
             ))}
           </TabsList>
@@ -204,9 +206,10 @@ function EventCard({ event }) {
       toast.success('Successfully Bookmarked!')
     }
   };
-  
-  useEffect(()=>{
-    let currentFavorute = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    let currentFavorute = storedFavorites ? JSON.parse(storedFavorites) : [];
     setFavorite(currentFavorute)
   }, [favoriteUpdate])
 
@@ -237,7 +240,7 @@ function EventCard({ event }) {
             </div>
             <div className="space-y-2">
               <h2 className=" text-xl  font-semibold font-serif text-white">{event.title}</h2>
-              <p className="text-lg flex  items-center gap-2 font-mono text-white"> <FaMagnifyingGlassLocation className="text-xl text-emerald-400 " /> {event?.location?.country}       </p>
+              <p className="text-lg flex  items-center gap-2 font-mono text-white"> <FaMagnifyingGlassLocation className="text-xl text-[#10a0b9] " /> {event?.location?.country}       </p>
               <div className="pt-2 ">
                 <EnhancedCountdown date={Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000} />
               </div>
@@ -256,20 +259,17 @@ function EventCard({ event }) {
             style={{ transformStyle: "preserve-3d" }}
           >
             <Link href={`events/${event?._id}`}>
-              <Button className=" p-2 font-serif bg-emerald-700  hover:bg-emerald-800 h-8 hover:text-white transition-colors duration-300">
+              <Button className=" p-2 font-serif bg-[#1b85db]  hover:bg-[#1b85db] h-8 hover:text-white transition-colors duration-300">
                 Read More
               </Button>
             </Link>
             <Link href={`/payment?id=${event?._id}`}>
-              <Button className="bg-white m-2 p-1 font-serif  h-8  text-purple-600 hover:bg-purple-400 hover:text-white transition-colors duration-300">
+              <Button className=" m-2 p-1 font-serif  h-8 bg-[#1b85db]  hover:bg-[#1b85db] hover:text-white transition-colors duration-300">
                 Book Now !
               </Button>
 
 
             </Link>
-
-
-
 
           </motion.div>
         </div>

@@ -28,11 +28,9 @@ const EventsData = () => {
   const [maximumPrice, setMaximumPrice] = useState(3000);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [selectedDay, setSelectedDay] = useState('All');
+  const [selectedDay, setSelectedDay] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
-
-
   const [filters, setFilters] = useState({
     search: '',
     category: '',
@@ -43,6 +41,7 @@ const EventsData = () => {
     city: '',
     startDate: '',
     endDate: '',
+    day: 'all',
   });
 
 
@@ -118,6 +117,23 @@ const EventsData = () => {
   console.log(events)
 
   const [filteredData, setFilteredData] = useState(events);
+  
+  // Update filters
+  const handleDayFilterChange = (e) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      day: e.target.value.toLowerCase(), // Lowercase to match backend filtering
+    }));
+    setCurrentPage(1); // Reset to first page on filter change
+  };
+
+  // Update filters when selectedDay changes
+  useEffect(() => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      day: selectedDay.toLowerCase(), // Add day filter to the filters object
+    }));
+  }, [selectedDay]);
 
   // Update currentPage when filters change
   useEffect(() => {
@@ -151,26 +167,35 @@ const EventsData = () => {
     const uniqueCities = Array.from(new Set(selectedCountryCities));
     setCities(uniqueCities);
   };
-  const filterByDay = (events, day) => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    const weekStart = new Date(today);
-    weekStart.setDate(today.getDate() - today.getDay());
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 6);
 
-    switch (day) {
-      case "today":
-        return events.filter(event => new Date(event.date).toDateString() === today.toDateString());
-      case "tomorrow":
-        return events.filter(event => new Date(event.date).toDateString() === tomorrow.toDateString());
-      case "this_week":
-        return events.filter(event => new Date(event.date) >= weekStart && new Date(event.date) <= weekEnd);
-      default:
-        return events;
-    }
-  };
+
+  //   const filterByDay = (events, day) => {
+  //   const today = new Date();
+  //   const tomorrow = new Date(today);
+  //   tomorrow.setDate(today.getDate() + 1);
+  //   const weekStart = new Date(today);
+  //   weekStart.setDate(today.getDate() - today.getDay());
+  //   const weekEnd = new Date(weekStart);
+  //   weekEnd.setDate(weekStart.getDate() + 6);
+
+  //   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+  //   const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+  //   switch (day.toLowerCase()) {
+  //     case "today":
+  //       return events.filter(event => new Date(event.date).toDateString() === today.toDateString());
+  //     case "tomorrow":
+  //       return events.filter(event => new Date(event.date).toDateString() === tomorrow.toDateString());
+  //     case "this_week":
+  //       return events.filter(event => new Date(event.date) >= weekStart && new Date(event.date) <= weekEnd);
+  //     case "this_month":
+  //       return events.filter(event => new Date(event.date) >= monthStart && new Date(event.date) <= monthEnd);
+  //     case "all":
+  //       return events; // সমস্ত ইভেন্ট দেখাবে
+  //     default:
+  //       return events;
+  //   }
+  // };
 
 
 
@@ -283,15 +308,16 @@ const EventsData = () => {
           </div>
         </Dialog>
 
+
         {/* Filter and large device */}
         <div className='flex flex-col lg:flex-row gap-4'>
           {/* Filter Section for larger screens */}
           <div className="hidden lg:block w-full lg:w-1/5">
 
             <div className="w-full p-3 space-y-5" >
-              <h2 className="text-[17px] text-gray-500" >Filter by Category</h2>
+              <h5 className="font-bold mt-4 mb-3">Filter by Category</h5>
               {/* Category Filter */}
-              <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+              <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
                 <option value="">All Categories</option>
                 <option value="Business">Business</option>
                 <option value="Technology">Technology</option>
@@ -303,7 +329,7 @@ const EventsData = () => {
 
               {/* Location Filters */}
               <div>
-                <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+                <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
                   <option value="">All Countries</option>
                   {events?.events?.map((event) => event.location.country)
                     .filter((country, index, self) => self.indexOf(country) === index)
@@ -316,7 +342,7 @@ const EventsData = () => {
               </div>
 
               <div>
-                <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+                <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
                   <option value="">All Cities</option>
                   {events?.events?.filter((event) => event.location.country === filters.country)
                     .map((event) => event.location.city)
@@ -332,7 +358,7 @@ const EventsData = () => {
 
               {/* Type Filter */}
               <div>
-                <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-logo] text-white w-full'>
+                <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
                   <option value="">All Types</option>
                   <option value="online">Online</option>
                   <option value="onsite">Onsite</option>
@@ -341,6 +367,7 @@ const EventsData = () => {
 
 
               {/* Price Filter */}
+              <h5 className="font-bold mt-4 mb-3">Filter by Price</h5>
               <div className="flex gap-4 flex-col">
                 <input
                   type="number"
@@ -388,11 +415,11 @@ const EventsData = () => {
               <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
               <select
                 className="block w-full p-2 rounded border-2"
-                value={selectedDay}
-                onChange={(e) => setSelectedDay(e.target.value)}
+                value={filters.day}
+                onChange={(e) => setFilters({ ...filters, day: e.target.value })}
               >
                 {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
-                  <option key={index} value={day}>{day}</option>
+                  <option key={index} value={day.toLowerCase()}>{day}</option>
                 ))}
               </select>
 
@@ -405,48 +432,70 @@ const EventsData = () => {
           <div className="w-full lg:w-4/5">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {events?.events?.map(event => (
-                <Link href={`/events/${event._id}`} key={event._id}>
-                  <AnimatePresence>
-                    <CardForEvents
-                      event={event}
-                      addToCart={addToCart}
-                      shareEvent={shareEvent}
-                    />
-                  </AnimatePresence>
-                </Link>
+                <AnimatePresence key={event._id}>
+                  <CardForEvents
+                    event={event}
+                    addToCart={addToCart}
+                    shareEvent={shareEvent}
+                  />
+                </AnimatePresence>
               ))}
             </div>
-
             {/* Pagination */}
-            <div className="flex my-12 gap-4 lg:mx-20">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                className="btn"
-              >
-                Previous
-              </button>
-              <div>
-                {Array.from({ length: events.totalPages }, (_, index) => (
-                  <button
-                    key={index + 1}
-                    onClick={() => handlePaginationButton(index + 1)}
-                    className={`${currentPage === index + 1
-                      ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white'
-                      : 'btn px-7 mx-1'
-                      }`}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
+            <div className="flex my-12 gap-4 lg:mx-20  mx-auto justify-center items-center">
+              {/* <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="btn"
+            >
+              Previous
+            </button>
+            <div>
+              {Array.from({ length: events.totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePaginationButton(index + 1)}
+                  className={`${currentPage === index + 1
+                    ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white'
+                    : 'btn px-7 mx-1'
+                    }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div> */}
+
+              {/* Pagination */}
+              <div className="flex my-12 gap-4 lg:mx-20">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                  className="btn"
+                >
+                  Previous
+                </button>
+                <div>
+                  {Array.from({ length: events.totalPages }, (_, index) => (
+                    <button
+                      key={index + 1}
+                      onClick={() => handlePaginationButton(index + 1)}
+                      className={`${currentPage === index + 1
+                        ? 'btn mx-1 bg-gradient-to-r from-cyan-500 to-blue-500 px-7 text-2xl text-white'
+                        : 'btn px-7 mx-1'
+                        }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === events.totalPages}
+                  className="btn"
+                >
+                  Next
+                </button>
               </div>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === events.totalPages}
-                className="btn"
-              >
-                Next
-              </button>
             </div>
           </div>
         </div>
