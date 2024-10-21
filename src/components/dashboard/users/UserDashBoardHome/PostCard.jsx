@@ -113,7 +113,7 @@ const PostCard = ({ post, refetch }) => {
             {/* Username & Options */}
             <div className="flex justify-between p-4">
                 <Link href={`https://event-sphere-bice.vercel.app/dashboard/user-profile/${post?.user?.email}`} className="flex items-center gap-x-1">
-                    <Image height={1200} width={676} className="h-12 w-12 rounded-full" src={post?.profile_picture || "https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/462693222_2760356917475560_727695703016902358_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHzVvYiLv3bomd7zemCvnZkxkVPt0f_AQ_GRU-3R_8BD3soJz4PDgE5mpV5Yr1SxgzfMsRjuLETE7xEIPBNYZHf&_nc_ohc=nMVxA1uBxxQQ7kNvgH6eaCr&_nc_ht=scontent.fdac24-2.fna&_nc_gid=AvKeFToTQJi0Z_bP6Xc5-pE&oh=00_AYAXkHXpr42X3saBflBGc_8IMOFUmCnxzbuspV5mHcGN-Q&oe=6713D71C"} alt="user avatar" />
+                    <Image height={1200} width={676} className="h-12 w-12 rounded-full" src={post?.user?.profile_picture || "https://scontent.fdac24-2.fna.fbcdn.net/v/t39.30808-6/462693222_2760356917475560_727695703016902358_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHzVvYiLv3bomd7zemCvnZkxkVPt0f_AQ_GRU-3R_8BD3soJz4PDgE5mpV5Yr1SxgzfMsRjuLETE7xEIPBNYZHf&_nc_ohc=nMVxA1uBxxQQ7kNvgH6eaCr&_nc_ht=scontent.fdac24-2.fna&_nc_gid=AvKeFToTQJi0Z_bP6Xc5-pE&oh=00_AYAXkHXpr42X3saBflBGc_8IMOFUmCnxzbuspV5mHcGN-Q&oe=6713D71C"} alt="user avatar" />
                     <div className="ml-2">
                         <h4 className="text-xl font-bold">{post?.name || "Mehedi Hasan"}</h4>
                         <p className="text-sm text-gray-500 text-start">{moment(post?.created_at).fromNow() || "2 day ago"}</p>

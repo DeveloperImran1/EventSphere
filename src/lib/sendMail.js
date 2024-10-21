@@ -14,7 +14,7 @@ export const sendEmail = async (emailAddress, emailData) => {
         });
 
         const mailBody = {
-            from:EventSphare,
+            from:process.env.EMAIL_USER,
             to: emailAddress,
             subject: emailData?.subject,
             html: `<p>${emailData?.message}</p>`,

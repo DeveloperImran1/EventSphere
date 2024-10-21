@@ -55,7 +55,7 @@ const EventBanner = () => {
                     />
                     <button
                         onClick={handleSearch}
-                        className="absolute top-1/2 transform -translate-y-1/2 right-4 bg-indigo-500 text-white p-2 rounded-lg"
+                        className="absolute top-[9px] right-4  button"
                     >
                         Search
                     </button>

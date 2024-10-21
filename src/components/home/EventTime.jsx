@@ -7,7 +7,7 @@ import { motion, useMotionValue, useTransform, animate, AnimatePresence } from '
 import { useState } from "react";
 import React, { useEffect, useRef } from "react";
 
-import { MapPin,Building2, Tag, Clock, FileType, ArrowRight,} from "lucide-react";
+import { MapPin, Building2, Tag, Clock, FileType, ArrowRight, } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -17,6 +17,7 @@ import FireTextTitle from "../shared/FireText";
 import RotateButton from "../shared/RotateButton";
 import SectionTitle from "../shared/SectionTitle";
 import Button from "../shared/CercleBuuton/Button";
+import CardForEvents from "../allEventsPage/CardForEvents";
 
 let tabs = [
   { id: 1, label: "All" },
@@ -40,19 +41,18 @@ const EventTime = () => {
   let [activeTab, setActiveTab] = useState(tabs[0].label);
   const [events, setEvents] = useState([]);
   const [seeMore, setSeeMore] = useState(false);
-console.log(events,'ghgfhgfhgfhfghfghfghfh')
   useEffect(() => {
     axios
       .get("http://localhost:9000/events")
       .then((res) => {
-        if (res.data.length > 6) {
+        if (res?.data?.events?.length > 6) {
           const arr = res.data.slice(0, 6);
           setEvents(arr);
           setSeeMore(true);
           return;
         }
         setEvents(res.data);
-        setSeeMore(false);
+        console.log(res.data)
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -65,6 +65,7 @@ console.log(events,'ghgfhgfhgfhfghfghfghfh')
   }, []);
 
   console.log("Event timing page theke events ", events)
+
 
   // 3d card const Card3D = ({ event }) => {
   const cardRef = useRef(null);
@@ -121,7 +122,7 @@ console.log(events,'ghgfhgfhgfhfghfghfghfh')
         {/* Tab List */}
         <SectionTitle
           subTitle="Pick a Time"
-          title="Event Timing Options"
+          title="Event_Timing_Options"
           description="Browse events by time: today, tomorrow, this weekend, or this month."
         >
         </SectionTitle>
@@ -132,10 +133,10 @@ console.log(events,'ghgfhgfhgfhfghfghfghfh')
               onClick={() => setActiveTab(category.label)}
               key={category.id}
               value={category.label}
-              className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-gradient-to-r from-emerald-400 to-teal-500 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-emerald-500 data-[state=active]:text-white"
+              className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
             >
               {category.label}
-              <span className="absolute left-0 bottom-0 h-1 bg-emerald-500 transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+              <span className="absolute left-0 bottom-0 h-1 bg-[#10a0b9] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -154,71 +155,23 @@ console.log(events,'ghgfhgfhgfhfghfghfghfh')
               } else if (activeTab === "Next Month") {
                 return n.when === "Next Month";
               }
-            })
-              .map((event) => (
-                <Link href={`/events/${event._id}`} key={event._id}>
+            }).map((event) => (
+                <AnimatePresence>
+                  <CardForEvents
+                    event={event}
+                  />
+                </AnimatePresence>
+            ))}
 
-                  <motion.div
-                    ref={cardRef}
-                    className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300"
-                    style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                    whileHover="hover"
-                    variants={cardVariants}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.1 }}
-                  >
-                    <div className="relative overflow-hidden h-48">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        src={event.gallery[0]}
-                        alt={event.title}
-                        layout="fill"
-                        data-aos="zoom-in"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
-                    </div>
 
-                    <motion.div className="p-6 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
-                      <motion.div style={{ transform: "translateZ(40px)" }}>
-                        <FireTextTitle title={event.title} />
-                      </motion.div>
 
-                      <motion.div className="space-y-2   text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
-                        <InfoItem icon={<Clock className=" text-blue-400 " />} text={event.dateTime} />
-                        <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} />
-                        <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${event.location.country}, ${event.location.city}`} />
-                        <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${event.type}`} />
-                        <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${event.category}`} />
-                      </motion.div>
-
-                      <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="300" >
-                        <motion.button
-                          className=" text-white p-2 rounded-xl font-semibold shadow-md bg-blue-400  transition-colors duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          $ {event.price}
-                        </motion.button>
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <RotateButton>Buy Ticket</RotateButton>
-                        </motion.div>
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
-                </Link>
-              ))}
           </AnimatePresence>
         </div>
       </Tabs>
       <div className="text-center mt-10">
-        {seeMore ? (
           <Link href="/events" className="flex justify-center">
-               <Button>See All</Button>  
+            <Button>See All</Button>
           </Link>
-        ) : (
-          ""
-        )}
       </div>
 
     </div>

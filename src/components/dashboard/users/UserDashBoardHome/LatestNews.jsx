@@ -6,7 +6,7 @@ const LatestNews = () => {
         <div className="bg-gray-100 w-full mx-start max-w-md lg:max-w-xl mt-4 mx-auto  rounded-lg shadow-lg space-y-6">
            
             <div className="  ">
-            <h2 className="text-2xl font-bold bg-white p-6 pb-0 shadow-md rounded-t-lg text-green-500  text-start">Our Latest News</h2>
+            <h2 className="text-2xl font-bold bg-white p-6 pb-0 shadow-md rounded-t-lg text-[#1b85db]  text-start">Our Latest News</h2>
                 {/* News Card 1 */}
                 <div className=" md:flex bg-white shadow-md  overflow-hidden p-6">
                     <Image
