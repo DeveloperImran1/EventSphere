@@ -54,7 +54,7 @@ const ProfileInfo = () => {
             <span>1</span>
           </li>
         </ul>
-        <Link href="#" className="mt-4 block text-center bg-green-500 text-white py-2 rounded-lg mx-5">
+        <Link href="#" className="mt-4 button  ml-10">
           Portfolio
         </Link>
       </div>

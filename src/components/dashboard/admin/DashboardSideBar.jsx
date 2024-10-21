@@ -14,6 +14,8 @@ import { IoBagHandleOutline } from "react-icons/io5";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import { usePathname } from "next/navigation";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 
 const DashboardSideBar = () => {
@@ -26,6 +28,20 @@ const DashboardSideBar = () => {
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
+    const currentUserEmail = session?.data?.user?.email
+
+    // Get Booking Data 
+    const fetchOrders = async () => {
+      const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
+      console.log("My booking data ", data)
+  
+      return data;
+    };
+    const { data: bookings, error, isLoading } = useQuery({
+        queryKey: ['orders'],
+        queryFn: fetchOrders,
+      });
+    
     const userRoutes = [
         {
             title: "Profile",
@@ -90,7 +106,7 @@ const DashboardSideBar = () => {
             title: "Booked Events",
             path: "/dashboard/booked-event",
             icon: RiMessage2Line,
-            number: 2
+            number: bookings?.length
         },
         {
             title: "My Profit",
