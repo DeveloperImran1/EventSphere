@@ -69,6 +69,9 @@ export default function SectionTitle({ title = '', description, subTitle }) {
           />
         ))}
       </motion.div> */}
+=========
+ 
+>>>>>>>>> Temporary merge branch 2
      
       <style jsx>{`
         .words {

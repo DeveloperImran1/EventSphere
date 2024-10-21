@@ -1,7 +1,20 @@
+"use client";
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import React from 'react';
 
-const Table = ({data}) => {
+
+const Table = ({data,email}) => {
+    const axiosPublic = useAxiosPublic();
+    const {data: weeklySales= [], isPending: loading, refetch} = useQuery({
+        queryKey: ['weeklySales'], 
+        queryFn: async() =>{
+            const res = await axiosPublic.get(`/organizer-WeeklySales/${email}`);
+            // console.log(res.data)
+            return res.data;
+        }
+    })
+console.log(weeklySales);
 
     return (
         <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
@@ -9,11 +22,11 @@ const Table = ({data}) => {
             <div className='flex gap-6 my-4'>
                 <div>
                     <h2 className='text-sm text-gray-800 text-start mb-2'>This Week</h2>
-                    <h2 className='text-xl font-semibold text-red-500 text-start'>$5500.00</h2>
+                    <h2 className='text-xl font-semibold text-red-500 text-start'>${weeklySales.currentWeekSales}</h2>
                 </div>
                 <div>
                     <h2 className='text-sm text-gray-800 text-start mb-2'>Previous Week</h2>
-                    <h2 className='text-xl font-semibold text-red-500 text-start'>$6550.00</h2>
+                    <h2 className='text-xl font-semibold text-red-500 text-start'>${weeklySales.previousWeekSales}</h2>
                 </div>
             </div>
             <div className="overflow-x-auto">
