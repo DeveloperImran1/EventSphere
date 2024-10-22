@@ -194,6 +194,7 @@ const UnderwaterFooter = () => {
             </div>
           </div>
         </div>
+        </div>
       </footer>
 
       <style jsx>{`

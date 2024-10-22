@@ -43,6 +43,7 @@ const upcomingEvents=getUpcomingEventsForNextMonth(events)
 
 const totalAmount = data?.reduce((total, order) => total + order?.amount, 0);
     return (
+      <>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
             {/* Card 1 */}
             <div className='bg-white shadow-lg rounded-lg p-6  flex flex-col items-start'>
@@ -85,7 +86,7 @@ const totalAmount = data?.reduce((total, order) => total + order?.amount, 0);
                </div>
             </div>
          </div>
-      </div>
+      </>
    );
 };
 
