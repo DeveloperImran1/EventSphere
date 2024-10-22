@@ -46,7 +46,7 @@ const GiftCardDesign = () => {
 
 
     return (
-        <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 my-20 ' >
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 ' >
             {cards.map((card) => (
                 <div key={card.id} className="container ">
 
@@ -94,7 +94,7 @@ const GiftCardDesign = () => {
                             </div>
                             {/* button */}
                             <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
-
+                                 
                         </div>
 
 
