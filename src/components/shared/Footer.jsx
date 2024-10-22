@@ -9,7 +9,7 @@ import Logo from './Logo';
 
 import GlowingCssText from './GlowingCssText';
 
-import SocialIcons from './SocialIcons';
+
 import { FaLinkedin } from "react-icons/fa";
 
 const UnderwaterFooter = () => {
@@ -178,8 +178,11 @@ const UnderwaterFooter = () => {
             </div>
             {/* Right Side  social link  */}
 
-            <div className="">
-              {/* <SocialIcons></SocialIcons> */}
+          <div className="">
+{/* <SocialIcons></SocialIcons> */}
+
+            <div className=" pr-[60px] md:mr-5">
+      
 
               <div className=" pr-[60px] md:mr-5">
                 {/* <SocialIcons></SocialIcons> */}
@@ -196,6 +199,9 @@ const UnderwaterFooter = () => {
             </div>
 
           </div>
+        </div>
+      
+
       </footer>
 
       <style jsx>{`

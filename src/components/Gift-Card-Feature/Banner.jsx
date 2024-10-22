@@ -9,6 +9,8 @@ import YouTube from 'react-youtube'
 import { FaPlayCircle } from 'react-icons/fa'
 import './Banner.css'
 import Image from 'next/image'
+import CercleButton from '../shared/CercleBuuton/Button'
+import GiftCardDesign from './GiftCard/GiftCardDesign'
 const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
 
 
@@ -56,9 +58,10 @@ export default function ChristmasPromo() {
   }
 
   return (
-    <div className="flex flex-col  bg-[rgb(15,31,61)]    md:flex-row ">
-      <div className="w-full clipPathSection1 md:w-1/2  bg-red-500 text-white  relative overflow-hidden flex flex-col justify-center">
-        <div className="absolute inset-0 opacity-70">
+    <div className="flex flex-col  bg-[rgb(15,31,61)]  md:h-[600px]  md:flex-row ">
+      <div   className="w-full clipPathSection1 md:w-1/2    text-white  relative ">
+        
+        <div className="absolute inset-0 backdrop-blur-sm opacity-80">
           {festiveEmojis.map((emoji, index) => (
             <span
               key={index}
@@ -73,7 +76,7 @@ export default function ChristmasPromo() {
             </span>
           ))}
         </div>
-        <div className="relative z-10  p-20">
+        <div className="relative z-10   p-20">
           <h4 className="text-xl  font-poppins  mb-2">December 24-26, 2024</h4>
           <h1 className="md:text-5xl  font-serif   md:font-extrabold mb-6">Christmas Day</h1>
          <div className="flex mb-6">
@@ -90,14 +93,14 @@ export default function ChristmasPromo() {
       </div>
     </div>
           <div className=" md:flex  gap-4 ">
-            <Button variant="secondary" className="bg-white md:text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-black md:text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+            <Button className="button">BOOK NOW</Button>
+              <CercleButton>Explore More</CercleButton>
 
           </div>
         </div>
       </div>
-      <div className="w-full clipPathSection2   md:w-1/2   flex items-center justify-center relative">
-        <div className="relative"> 
+      <div className="w-full  md:w-1/2    relative">
+        {/* <div className="relative"> 
         <Image height={675} width={1200}
             src="https://i.ibb.co.com/kB2XJkB/people-taking-part-high-protocol-event.jpg"
             alt="Concertgoers Watching Majestic Concert"
@@ -109,22 +112,12 @@ export default function ChristmasPromo() {
           >
             <FaPlayCircle className="text-4xl" />
           </Button>
-        </div>
+        </div> */}
+{/*   Gift card       */}
+       <GiftCardDesign></GiftCardDesign>
       </div>
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-          <div className="bg-white p-2 relative">
-            <button onClick={handleCloseModal} className="absolute text-3xl top-4 right-4 text-red-500">✖</button>
-            {isPlaying && (
-              <YouTube
-                videoId={videoId}
-                opts={opts}
-                onEnd={handleCloseModal}
-              />
-            )}
-          </div>
-        </div>
-      )}
+    
+
     </div>
   )
 }
