@@ -50,29 +50,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
         {description}
       </motion.p>
  
- {/* loading  */}
-      {/* <motion.div 
-        className=" my-6 flex justify-center space-x-2"
-      >
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-3 h-3 rounded-full bg-blue-500"
-            animate={{ scale: [0, 1, 0] }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              delay: i * 0.2,
-              ease: "easeInOut"
-            }}
-            whileHover={{ scale: 1.5, backgroundColor: "#60a5fa" }}
-          />
-        ))}
-      </motion.div> */}
-=========
- 
->>>>>>>>> Temporary merge branch 2
-     
+
       <style jsx>{`
         .words {
           color:  rgb(16, 160, 185);

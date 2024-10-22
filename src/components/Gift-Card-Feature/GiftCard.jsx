@@ -8,7 +8,7 @@ import Testimonial from './Testimonial';
 
 const GiftCard = () => {
     return (
-        <div>
+        <div className=' overflow-hidden' >
             <Banner></Banner>
           <AboutSection></AboutSection>
           <EventSchedule></EventSchedule>

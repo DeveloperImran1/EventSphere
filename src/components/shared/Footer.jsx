@@ -9,7 +9,7 @@ import Logo from './Logo';
 
 import GlowingCssText from './GlowingCssText';
 
-import SocialIcons from './SocialIcons';
+
 import { FaLinkedin } from "react-icons/fa";
 
 const UnderwaterFooter = () => {
@@ -200,7 +200,8 @@ const UnderwaterFooter = () => {
 
           </div>
         </div>
-        </div>
+      
+
       </footer>
 
       <style jsx>{`

@@ -36,7 +36,7 @@
   
   #login-lable {
     text-align: center;
-    color: rgba(193, 34, 225, 0.52);
+    color: rgb(34, 114, 225);
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: 8px;
@@ -75,24 +75,7 @@
     text-shadow: 0px 1px 5px rgb(66, 66, 66);
   }
   
-  .form button {
-    cursor: pointer;
-    height: 3.5rem;
-    padding: 0%;
-    color: white;
-    font-size: 1.5em;
-    letter-spacing: 0.3rem;
-    border: 2px solid white;
-    background: linear-gradient(144deg, #aa50ebce, #4b36d7b6 50%, #15efffbb);
-  }
-  
-  .form button:hover {
-    position: relative;
-    bottom: 4px;
-    background: linear-gradient(144deg, #9c11ff, #2000ee 50%, #15fff3);
-    box-shadow: 0px 0px 2px 2px #ffffff;
-  }
-  
+
   #rays {
     z-index: 20;
     position: relative;
