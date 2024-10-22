@@ -165,7 +165,7 @@ const PopularEvents = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:4 2xl:6 gap-2 lg:gap-4 2xl:gap-6">
                 {popularEventsMax.map(popularEvents => <>
-                    <div className=" ">
+                    <div className=" " key={popularEvents._id}>
 
                         <motion.div
                             ref={cardRef}
