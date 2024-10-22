@@ -2,12 +2,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
     Chart,
-    LineElement,
-    LinearScale,
-    PointElement,
-    CategoryScale,
+    LineController,    // Import the LineController
+    LineElement,        // Import LineElement
+    PointElement,       // Import PointElement
+    LinearScale,        // Import LinearScale for axes
+    Title,              // Import Title if you're using chart titles
+    Tooltip,            // Import Tooltip if you're using tooltips
+    Legend,
+    CategoryScale
 } from "chart.js";
+
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {
@@ -20,11 +27,13 @@ const fetchStatsData = async (email) => {
     return response.json(); // Adjust based on your API response structure
 };
 
-const StatsChart = ({ email }) => {
+const StatsChart = () => {
     const chartRef = useRef(null);
     const chartInstance = useRef(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [timePeriod, setTimePeriod] = useState("week"); // Default to week
+    const session = useSession();
+    const email = session?.data?.user?.email;
 
     // Use TanStack Query to fetch stats data
     const {
@@ -32,11 +41,11 @@ const StatsChart = ({ email }) => {
         error,
         isLoading,
     } = useQuery({
-        queryKey: ["organizer-wave"],
+        queryKey: ["organizer-wave", email],
         queryFn: () => fetchStatsData(email),
     });
     useEffect(() => {
-        Chart.register(LineElement, LinearScale, PointElement, CategoryScale);
+        Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Title, Tooltip, Legend);
 
         if (chartRef.current) {
             // Check if chartRef.current is not null
@@ -48,10 +57,10 @@ const StatsChart = ({ email }) => {
 
             const labels = chartData?.dayStats?.map((stat) => stat.day);
             const data = chartData?.dayStats.map((stat) => stat.eventCount);
-            let a =chartData.dayStats.map((stat) =>      console.log(stat.eventCount))
-       console.log(labels);
-       
-            
+            let a = chartData.dayStats.map((stat) => console.log(stat.eventCount))
+            console.log(labels);
+
+
 
             const dataForChart = {
                 labels,
@@ -109,7 +118,7 @@ const StatsChart = ({ email }) => {
         setDropdownOpen(false);
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loading></Loading>;
     if (error) return <div>Error fetching data: {error.message}</div>;
 
     return (

@@ -1,11 +1,14 @@
 .socialContainer {
     display: flex;
     justify-content: center;
+   
+     
   }
   
   .socialList {
     display: flex;
-    gap: 3.4rem;
+    gap: 2rem;
+
   }
   
   .socialLink {
@@ -23,30 +26,7 @@
     box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5)
   }
   
-  .socialLink::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    left: -20px;
-    height: 100%;
-    width: 20px;
-    background: #b1b1b1;
-    transition: 0.5s;
-    transform: rotate(0deg) skewY(-45deg);
-  }
-  
-  .socialLink::after {
-    content: "";
-    position: absolute;
-    top: 50px;
-    left: -11px;
-    height: 20px;
-    width: 100%;
-    background: #b1b1b1;
-    transition: 0.5s;
-    transform: rotate(0deg) skewX(-45deg);
-  }
-  
+
   .socialLink:hover {
     
     transform: perspective(1000px) rotate(-30deg) skew(25deg) translate(20px, -20px);
@@ -112,3 +92,5 @@
     background: linear-gradient(#400080, transparent),
       linear-gradient(200deg, #d047d1, #ff0000, #ffff00);
   }
+
+

@@ -158,6 +158,7 @@ const EventTime = () => {
             }).map((event) => (
                 <AnimatePresence>
                   <CardForEvents
+               
                     event={event}
                   />
                 </AnimatePresence>

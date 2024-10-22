@@ -9,6 +9,7 @@ import Banner from './banner/page';
 import EventTimed from './EventTime/page';
 import PopularEvent from '../PopularEvent/PopularEvent';
 
+
 const HomeContainer = () => {
     return (
         <div className=''>

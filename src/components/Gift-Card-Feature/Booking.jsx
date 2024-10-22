@@ -3,6 +3,7 @@ import { Parallax } from 'react-parallax';
 
 
 import './LoginFrom.css'
+import { Button } from '../ui/button';
 
 
 const Booking = () => {
@@ -31,7 +32,7 @@ const Booking = () => {
                         <input required className="form-content" type="text" placeholder="Phone number" />
                         <input required className="form-content" type="email" placeholder="Email Address" />
 
-                        <button>Book Now</button>
+                       <Button  className='button' >BOOK NOW</Button>
                     </form>
 
                     <div id="rays">

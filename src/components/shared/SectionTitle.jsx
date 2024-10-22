@@ -50,7 +50,7 @@ export default function SectionTitle({ title = '', description, subTitle }) {
         {description}
       </motion.p>
  
-     
+
       <style jsx>{`
         .words {
           color:  rgb(16, 160, 185);
