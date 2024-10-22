@@ -184,7 +184,7 @@ const CardForEvents = ({ event }) => {
           <motion.div className="flex justify-between items-center -mt-6" data-aos="fade-up" data-aos-delay="300" >
             <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[25px] " />} text={`Price: ${event.price}`} />
 
-            <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" >
+            <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" > 
               {
                 hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
 

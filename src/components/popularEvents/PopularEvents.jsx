@@ -157,9 +157,11 @@ const PopularEvents = () => {
         return <Loading />
     }
     return (
-        <div>
-            <h2>Popular Events</h2>
-            <p>Explore the top popular events with the most booked seats, offering exciting experiences across various categories like entertainment, sports, and cultural activities, ensuring unforgettable moments for everyone.</p>
+        <div className="container">
+            <div className="my-16 max-w-2xl mx-auto">
+                <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4">Popular Events</h2>
+                <p className="text-center">Explore the top popular events with the most booked seats, offering exciting experiences across various categories like entertainment, sports, and cultural activities, ensuring unforgettable moments for everyone.</p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:4 2xl:6 gap-2 lg:gap-4 2xl:gap-6">
                 {popularEventsMax.map(popularEvents => <>
