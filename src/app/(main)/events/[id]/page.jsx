@@ -252,6 +252,7 @@ import Button from "@/components/shared/CercleBuuton/Button"
 import { useQuery } from "@tanstack/react-query"
 import PopularEvent from "@/components/PopularEvent/PopularEvent"
 import PopularEvents from "@/components/popularEvents/PopularEvents"
+import MapComponent from "@/components/shared/MapComponent"
 
 const EventDetailsPage = ({ params }) => {
     const router = useRouter()
@@ -376,20 +377,7 @@ const EventDetailsPage = ({ params }) => {
                         </article>
 
                         {/* Location Map */}
-                        <section data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-4">
-                            <h3 className="text-2xl font-semibold mb-4 text-center font-serif text-blue-500 border-b-2 border-purple-400 pb-2 ">Event Location</h3>
-                            <div className="relative aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
-                                <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-                                    <GoogleMap
-                                        mapContainerStyle={mapContainerStyle}
-                                        center={center}
-                                        zoom={14}
-                                    >
-                                        <Marker position={center} />
-                                    </GoogleMap>
-                                </LoadScript>
-                            </div>
-                        </section>
+                        <MapComponent city={event.city} />
                     </section>
 
                     {/* Right Side: Event Data */}

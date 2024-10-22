@@ -28,9 +28,9 @@ const EventsData = () => {
   const [maximumPrice, setMaximumPrice] = useState(3000);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [selectedDay, setSelectedDay] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [selectedDay, setSelectedDay] = useState('all');
   const [filters, setFilters] = useState({
     search: '',
     category: '',

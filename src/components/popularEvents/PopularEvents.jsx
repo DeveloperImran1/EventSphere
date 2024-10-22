@@ -55,9 +55,9 @@ const PopularEvents = () => {
         staleTime: 0,
         keepPreviousData: true,
     });
-    console.log(popularEventsMax)
-    console.log(popularEventsMax.title)
-    console.log(popularEventsMax.price)
+    // console.log(popularEventsMax)
+    // console.log(popularEventsMax.title)
+    // console.log(popularEventsMax.price)
 
 
 
