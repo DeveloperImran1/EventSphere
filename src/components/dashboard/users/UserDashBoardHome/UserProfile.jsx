@@ -24,12 +24,12 @@ const UserProfile = () => {
     console.log("ProfileInfo", data);
 
     return (
-        <div className='relative w-full bg-white bg-opacity-80 pt-6 md:pb-32 pb-56  shadow-lg'>
+        <div className='relative w-full bg-white bg-opacity-80 md:pb-32 pb-56  shadow-lg'>
             {/* Background Image */}
             <Image
                 height={675}
                 width={1200}
-                className='w-full px-4  h-[150px] object-cover rounded-[12px] '
+                className='w-full h-[150px] object-cover rounded-md '
                 src="https://media.istockphoto.com/id/1386705180/photo/abstract-blue-background.jpg?b=1&s=612x612&w=0&k=20&c=wdimBouyd8QHkg5iAeMRCvwq57yuACw0IkjzoF7uXvk="
                 alt="Background"
             />

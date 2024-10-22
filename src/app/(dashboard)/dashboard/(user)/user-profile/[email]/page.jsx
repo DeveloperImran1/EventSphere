@@ -12,6 +12,13 @@ import React from "react";
 
 const UserContainer = () => {
   const axiosPublic = useAxiosPublic();
+  const { data: events = [], isPending } = useQuery({
+    queryKey: ['allEventsForToday'],
+    queryFn: async () => {
+      const res = await axiosPublic.get('/events')
+      return res?.data?.events;
+    }
+  })
 
   return (
     <div>
@@ -21,20 +28,26 @@ const UserContainer = () => {
           <div>
             <Cards />
           </div>
-          <div>
+          {/* <div>
             <FirstCard />
-          </div>
+          </div> */}
           <div>
             <ImageSection />
           </div>
-          <div>
-            <LatestNews />
+          <div className="bg-white w-full mx-start max-w-md lg:max-w-xl mt-4 mx-auto  rounded-lg shadow-lg space-y-6">
+
+            <h2 className="text-2xl font-bold  p-6 pb-0 rounded-t-lg text-[#1b85db]  text-start">Today Highlight</h2>
+
+            {
+              events?.slice(0, 5)?.map(event => <LatestNews key={event?._id} event={event} isPending={isPending} />)
+            }
+
           </div>
-          
+
         </div>
         <div>
-            <RightSide />
-          </div>
+          <RightSide />
+        </div>
       </div>
     </div>
   );

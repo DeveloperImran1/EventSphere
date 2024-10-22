@@ -148,12 +148,12 @@ const DashboardSideBar = () => {
         },
         {
             title: "Users",
-            path: "/dashboard/users",
+            path: "/dashboard/user-manage",
             icon: RiMessage2Line
         },
         {
             title: "Organizer Request",
-            path: "/dashboard/payment-history",
+            path: "/dashboard/organizer-request",
             icon: RiMessage2Line
         },
         {
@@ -243,7 +243,7 @@ const DashboardSideBar = () => {
 
                 <div className="">
                     <hr className="border-gray-200 my-6" />
-                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 ">
+                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 w-full ">
                         <FaSignOutAlt className="mr-2 text-xl" />
 
                         <span>Sign Out</span>

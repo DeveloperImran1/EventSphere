@@ -1,58 +1,31 @@
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-const LatestNews = () => {
+const LatestNews = ({ event, isPending }) => {
+    console.log(event)
+
+    if (isPending) {
+        return <Loading></Loading>
+    }
     return (
-        <div className="bg-gray-100 w-full mx-start max-w-md lg:max-w-xl mt-4 mx-auto  rounded-lg shadow-lg space-y-6">
-           
-            <div className="  ">
-            <h2 className="text-2xl font-bold bg-white p-6 pb-0 shadow-md rounded-t-lg text-[#1b85db]  text-start">Our Latest News</h2>
-                {/* News Card 1 */}
-                <div className=" md:flex bg-white shadow-md  overflow-hidden p-6">
-                    <Image
-                         height={675}
-                         width={1200} 
-                        src="https://i.postimg.cc/hvmfLY04/dag3.jpg" 
-                        alt="News" 
-                        className="w-1/3 md:w-1/3 h-20 md:h-auto object-cover rounded-md mb-4 md:mb-0"
-                    />
-                    <div className="md:flex-1 md:ml-6">
-                        <h3 className="text-xl font-semibold text-gray-700 mb-2">Collection of textile samples</h3>
-                        <p className="text-gray-600">I shared this on my fb wall a few months back, and I thought.</p>
-                    </div>
+  
+            <Link href={`/events/${event?._id}`} className=" md:flex  shadow-md  overflow-hidden p-6">
+                <Image
+                    height={675}
+                    width={1200}
+                    src={event?.gallery[0] || "https://i.postimg.cc/hvmfLY04/dag3.jpg"} 
+                    alt="News"
+                    className="w-1/3 md:w-1/3 h-20 md:h-auto object-cover rounded-md mb-4 md:mb-0"
+                />
+                <div className="md:flex-1 md:ml-6">
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">{event?.title}</h3>
+                    <p className="text-gray-600">{event?.description?.slice(0, 50)}....</p>
                 </div>
+            </Link>
 
-                {/* News Card 2 */}
-                <div className=" md:flex bg-white shadow-md  overflow-hidden p-6">
-                    <Image 
-                        height={675}
-                        width={1200}
-                        src="https://i.postimg.cc/wMY6pjhH/download.jpg" 
-                        alt="News" 
-                        className="w-1/3  md:w-1/3 h-20  md:h-auto object-cover rounded-md mb-4 md:mb-0"
-                    />
-                    <div className="md:flex-1 md:ml-6">
-                        <h3 className="text-xl font-semibold text-gray-700 mb-2">Collection of textile samples</h3>
-                        <p className="text-gray-600">I shared this on my fb wall a few months back, and I thought.</p>
-                    </div>
-                </div>
-
-                {/* News Card 3 */}
-                <div className=" md:flex bg-white shadow-md rounded-b-lg overflow-hidden p-6">
-                    <Image 
-                        height={675}
-                        width={1200}
-                        src="https://i.postimg.cc/WzmfM1FF/download-1.jpg" 
-                        alt="News" 
-                        className="w-1/3  md:w-1/3 h-20  md:h-auto object-cover rounded-md mb-4 md:mb-0"
-                    />
-                    <div className="md:flex-1 md:ml-6">
-                        <h3 className="text-xl font-semibold text-gray-700 mb-2">Collection of textile samples</h3>
-                        <p className="text-gray-600">I shared this on my fb wall a few months back, and I thought.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
     );
 };
 

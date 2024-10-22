@@ -4,6 +4,7 @@ import axios from "axios";
 import Top from "@/components/dashboard/admin/UserManagePage/Top";
 import UserManageTable from "@/components/dashboard/admin/UserManagePage/UserManageTable";
 import toast from "react-hot-toast";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 const UserManage = () => {
   const [users, setUsers] = useState([]);
@@ -66,7 +67,7 @@ const UserManage = () => {
     return matchesSearch && matchesRole;
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading></Loading>;
   if (error) return <div>Error: {error}</div>;
 
   return (

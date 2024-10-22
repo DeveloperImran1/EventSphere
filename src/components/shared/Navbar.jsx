@@ -487,14 +487,20 @@ const Navbar = () => {
                         </p>
                       </div>
                       {
-                        auth?.data?.role === "organizer" ? <Link
-                          href={`/dashboard/organizer-profile/${session?.data?.user?.email}`}
+                        auth?.data?.role === "user" ? <Link
+                          href={`/dashboard/user-profile/${session?.data?.user?.email}`}
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                          onClick={closeDropdown}
+                        >
+                          Dashboard
+                        </Link> :   auth?.data?.role === "organizer" ? <Link
+                          href={`/dashboard/organizer-container`}
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                           onClick={closeDropdown}
                         >
                           Dashboard
                         </Link> : <Link
-                          href={`/dashboard/user-profile/${session?.data?.user?.email}`}
+                          href={`/dashboard/admin-container`}
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                           onClick={closeDropdown}
                         >

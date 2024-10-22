@@ -52,7 +52,8 @@ const OrganizerProfile = () => {
     const handleFollow = async () => {
   
       if(isFollowed){
-        return  toast.error('Already You Have Followed!');
+        setIsFollowed(false)
+        return  toast.success('Unfollowed!');
       }
       const updateFollowArrayDynamicUser = [...dynamicUserFollower, currentUser?.email]
       const updateFollowArrayCurrentuser = [...currentUserFollower, data?.email]
@@ -70,6 +71,7 @@ const OrganizerProfile = () => {
   
         if (result?.data?.modifiedCount) {
           toast.success('Successfully Followed!');
+          setIsFollowed(true)
           refetch()
         }
       } catch (error) {
@@ -105,7 +107,7 @@ const OrganizerProfile = () => {
                         <div className="flex justify-center md:justify-between ">
                             <div onClick={() => handleFollow()} className="hidden md:flex items-center gap-x-2 justify-between pt-32 cursor-pointer  ">
                                 <FaUserGroup className='text-blue-500 text-2xl' />
-                                <p className='text-blue-500 mt-[4px]'>{isFollowed ? 'Followed': 'Follow'}</p>
+                                <p className='text-blue-500 mt-[4px]'>{isFollowed ? 'Unfollow': 'Follow'}</p>
                             </div>
                             <div className="">
                                 <div className="rounded-full w-full ">

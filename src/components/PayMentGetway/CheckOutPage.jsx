@@ -121,7 +121,7 @@ const CheckOutForm = (props) => {
                     totalTickets: selectedSeats,
                     eventDate: events?.dateTime,
                     totalTickets: selectedSeats,
-                    refundRequested: "Requested",
+                    refundRequested: "NotRequested",
                     transitionId: paymentIntent.id,
                 };
 
