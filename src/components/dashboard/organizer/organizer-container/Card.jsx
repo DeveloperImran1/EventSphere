@@ -49,7 +49,7 @@ const Card = ({ email, data }) => {
             {/* Card 1 */}
             <div className='bg-white shadow-lg rounded-lg p-6  flex flex-col items-start'>
                <div className='flex justify-center items-center  gap-4'>
-                  <div className='p-4 bg-slate-600 rounded-md'><MdEventNote size={60} className='text-violet-100  ' /></div>
+                  <div className='p-4 bg-[#1b85db] rounded-md'><MdEventNote size={60} className='text-violet-100  ' /></div>
                   <div>
                      <h2 className='text-3xl font-extrabold text-start text-gray-800'>{events?.length}</h2>
                      <p className='text-gray-500  text-start'>Awesome Events</p>

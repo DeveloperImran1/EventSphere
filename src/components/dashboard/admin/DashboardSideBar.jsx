@@ -187,29 +187,29 @@ const DashboardSideBar = () => {
     return (
         <>
 
-            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 flex flex-col justify-between">
+            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 flex flex-col justify-between bg-white">
 
 
                 <div>
                     <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2 relative">
                         <div className='p-2 rounded-full border-4 border-gray-200'>
                             <Image
-                                src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
+                                src={auth?.data?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                                 alt="Profile"
                                 height="60"
                                 width="60"
-                                className="   transition duration-300 ease-in-out"
+                                className="   transition duration-300 ease-in-out rounded-full"
                             />
                         </div>
 
                         <div>
                             <p className="font-semibold text-gray-800">
-                                {session?.data?.user?.name || "User Name"}
+                                {auth?.data?.name || "User Name"}
                             </p>
                         </div>
 
                         <p className="text-sm text-gray-500">
-                            {session?.data?.user?.email || "johndoe@example.com"}
+                            {auth?.data?.email || "johndoe@example.com"}
                         </p>
                     </div>
 
