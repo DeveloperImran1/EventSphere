@@ -15,7 +15,7 @@ const BlockButton = ({handleBlock, user, handleUnBlock}) => {
     return (
         <div>
             <AlertDialog >
-                <AlertDialogTrigger className={`${user.block === true ? 'bg-green-600 text-white rounded-md' : 'bg-red-600 text-white rounded-md'}`}>Block</AlertDialogTrigger>
+                <AlertDialogTrigger className={`${user.block === true ? 'bg-[#1b85db] text-white rounded-md' : 'bg-red-600 text-white rounded-md'} text-[16px] px-[18px] py-1`}>Block</AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>Are you sure?</AlertDialogTitle>

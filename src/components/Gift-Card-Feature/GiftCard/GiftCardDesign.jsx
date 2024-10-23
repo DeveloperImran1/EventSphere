@@ -1,7 +1,12 @@
 import React from 'react';
 import './GiftCard.css'
 import { Button } from '@headlessui/react';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+
+
 const GiftCardDesign = () => {
+    const axiosPublic=useAxiosPublic()
 
     const cards = [
         {
@@ -43,7 +48,17 @@ const GiftCardDesign = () => {
             "validity": "6"
         }
     ]
-
+// Data fetching using react-query
+const { data: quality = {}, isLoading, refetch } = useQuery({
+    queryKey: ['quality'],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get('/geAllQuality');
+      return data;
+    },
+    keepPreviousData: true,
+  });
+  console.log(quality)
+console.log('try')
 
     return (
         <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 ' >
@@ -101,16 +116,7 @@ const GiftCardDesign = () => {
                     </div>
                 </div>
             ))}
-
-            {/*  */}
-
-
-
-
-        </div>
-
-
-
+      </div>
     );
 };
 
