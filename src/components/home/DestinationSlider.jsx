@@ -15,7 +15,7 @@ const DestinationSlider = () => {
   };
 
   return (
-    <div className="relative w-full py-10 px-2 bg-[#f8f7fa]">
+    <div className="relative w-full py-10 px-8 bg-[#f8f7fa]">
       {/* Scroll container */}
       <div className="relative overflow-hidden max-w-screen-xl mx-auto">
         <SectionTitle description={sectionTitle.description} title={sectionTitle.title} subTitle={sectionTitle.subTitle}/>

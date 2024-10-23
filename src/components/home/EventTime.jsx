@@ -141,7 +141,6 @@ const EventTime = () => {
         </TabsList>
 
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full bg-transparent ">
-          <AnimatePresence>
             {events?.events?.filter((n) => {
               if (activeTab === "All") {
                 return n;
@@ -155,23 +154,18 @@ const EventTime = () => {
                 return n.when === "Next Month";
               }
             }).map((event) => (
-                <AnimatePresence>
-                  <CardForEvents
-               
-                    event={event}
-                  />
-                </AnimatePresence>
+              <CardForEvents
+                key={event?._id}
+                event={event}
+              />
             ))}
 
-
-
-          </AnimatePresence>
         </div>
       </Tabs>
       <div className="text-center mt-10">
-          <Link href="/events" className="flex justify-center">
-            <Button>See All</Button>
-          </Link>
+        <Link href="/events" className="flex justify-center">
+          <Button>See All</Button>
+        </Link>
       </div>
 
     </div>

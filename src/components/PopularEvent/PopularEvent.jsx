@@ -114,7 +114,7 @@ export default function PopularEvent() {
 
   // main body//
   return (
-    <div className="w-full  py-12 max-w-7xl mx-auto ">
+    <div className="w-full  py-12 container mx-auto ">
       <div className="px-4">
         <SectionTitle
           subTitle="Popular Events"
@@ -216,7 +216,7 @@ function EventCard({ event }) {
   return (
     <div className="w-full   ">
       <div
-        className="relative h-[500px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out hover:scale-105 "
+        className="relative h-[500px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out "
         style={{
           backgroundImage: `url(${event?.gallery[0]})`,
           backgroundSize: 'cover',
