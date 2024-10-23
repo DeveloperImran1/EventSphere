@@ -7,8 +7,13 @@ import { Pagination } from 'swiper/modules';
 import Image from "next/image";
 import { FaHeart } from 'react-icons/fa6';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useSession } from 'next-auth/react';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
 
-const FeedPostItem = ({ item }) => {
+const FeedPostItem = ({ item, refetch }) => {
+    const session = useSession()
+    const axiosPublic = useAxiosPublic()
     const [menuOpen, setMenuOpen] = useState(false);
     const [commentsOpen, setCommentsOpen] = useState(false);
     const [replyOpen, setReplyOpen] = useState(null);
@@ -22,10 +27,6 @@ const FeedPostItem = ({ item }) => {
     const handleReplyClick = (commentId) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
-    // const handleCommentSubmit = () => {
-    //     console.log("New comment:", newComment);
-    //     setNewComment("");
-    // };
     const handleReplySubmit = (commentId) => {
         console.log("Reply for comment:", commentId, replies[commentId]);
         setReplies({ ...replies, [commentId]: "" });
@@ -62,6 +63,29 @@ const FeedPostItem = ({ item }) => {
             console.log("Something went wrong", error?.message);
         }
     };
+    // handleCommentSubmit
+    const handleCommentSubmit = async () => {
+
+        const commentObj = {
+            text: newComment,
+            user: {
+                email: session?.data?.user?.email,
+                name: session?.data?.user?.name,
+                profile_picture: session?.data?.user?.image,
+            },
+        }
+        const res = await axiosPublic.post(`/addedComment/${item?._id}`, commentObj)
+        console.log(res?.data)
+        if (res?.status === 201) {
+            toast.success('Successfully Commented 👏');
+            refetch()
+            setNewComment("");  // Clear the input field after submitting
+        }
+        else {
+            toast.error('Something Went Wrong 😒');
+        }
+    };
+
     return (
         <div className="bg-white border rounded-lg shadow-md">
             {/* Username & Options */}
