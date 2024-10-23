@@ -2,9 +2,9 @@
 import React from 'react';
 import './Button.css'; 
 
-const Button = ({ children, disabled }) => {
+const CercleButton = ({ children, disabled }) => {
   return (
-    <button className="btn-76     text-xl px-4 py-2  font-semibold font-mono rounded-2xl   " disabled={disabled}>
+    <button className="btn-76     text-xl px-4 py-1   font-mono rounded-xl   " disabled={disabled}>
       {children}
       <span className="top"></span>
       <span className="right"></span>
@@ -14,4 +14,4 @@ const Button = ({ children, disabled }) => {
   );
 };
 
-export default Button;
+export default CercleButton;

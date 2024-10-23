@@ -17,20 +17,20 @@ const UserProfile = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["user"],
         queryFn: () =>
-            fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
+            fetch(`http://localhost:9000/user/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });
     console.log("ProfileInfo", data);
 
     return (
-        <div className='relative w-full bg-white bg-opacity-80 pt-6 md:pb-32 pb-56 rounded-lg shadow-lg'>
+        <div className='relative w-full bg-white bg-opacity-80 md:pb-32 pb-56  shadow-lg'>
             {/* Background Image */}
             <Image
                 height={675}
                 width={1200}
-                className='w-full px-4  h-[32vh] object-cover rounded-2xl'
-                src="https://i.postimg.cc/SsKD0y3T/8-99faf7b2987b5c6cc652.jpg"
+                className='w-full h-[150px] object-cover rounded-md '
+                src="https://media.istockphoto.com/id/1386705180/photo/abstract-blue-background.jpg?b=1&s=612x612&w=0&k=20&c=wdimBouyd8QHkg5iAeMRCvwq57yuACw0IkjzoF7uXvk="
                 alt="Background"
             />
 
@@ -48,11 +48,11 @@ const UserProfile = () => {
                 </div>
 
                 {/* User Info */}
-                <div className='flex flex-col'>
-                    <div className='flex pl-3  md:flex-row md:gap-4 gap-2'>
+                <div className='flex '>
+                    <div className='flex pl-3  flex-col md:flex-row md:gap-4 gap-2'>
                         <div>
                             <h2 className='text-xl text-left font-bold'>{data?.name}</h2>
-                            <h3 className='text-lg  text-green-600'>{data?.specialty || "UX / UI Designer"}</h3>
+                            <h3 className='text-lg  text-[#1b85db]'>{data?.specialty || "UX / UI Designer"}</h3>
                         </div>
                         <div className='flex justify-center items-start gap-1' >
                             <h3 className='text-lg text-gray-600'>Email: </h3>

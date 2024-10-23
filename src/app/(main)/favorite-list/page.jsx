@@ -25,9 +25,9 @@ const FavoriteList = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('https://event-sphare-server.vercel.app/events');
+        const response = await fetch('http://localhost:9000/events');
         const data = await response.json();
-        setAllEventsData(data); // Set the data to the state
+        setAllEventsData(data?.events); // Set the data to the state
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -39,12 +39,15 @@ const FavoriteList = () => {
   // Filter favorite events based on localStorage
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      const filteredEvents = allEventsData.filter(event => favorites.includes(event._id));
+      const storedFavorites = localStorage.getItem('favorites');
+      const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+      const filteredEvents = allEventsData?.filter(event => favorites?.includes(event._id));
       setFavoritesEvents(filteredEvents); // Set the filtered events to the state
     }
   }, [allEventsData]); //  This runs every time allEventsData changes
 
+  console.log(allEventsData)
+  console.log(favoritesEvents)
   // handleRemoveFavoriteItem function to remove an item from the favorites
   const handleRemoveFavoriteItem = (id) => {
     if (typeof window !== 'undefined') {
@@ -81,31 +84,30 @@ const FavoriteList = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {
-          favoritesEvents.length === 0
+          favoritesEvents?.length === 0
             ? <div className="text-center text-2xl font-semibold mt-5 text-gray-600 col-span-5">You have not favorited any events</div>
-            : favoritesEvents.map((item) => {
+            : favoritesEvents?.map((item) => {
               return (
                 <div key={item.id} className="relative shadow-2xl rounded-2xl flex flex-col flex-wrap justify-between mx-14 sm:mx-0">
                   <div className="">
-                  <div className="py-5 px-3">
-                    <Image src="https://lh3.googleusercontent.com/p/AF1QipNq7-o6PLTgvfYKQROFIBAIMbwNziSW73qynPUn=s680-w680-h510" height={300} width={300} alt='Img' className='object-cover mx-auto' />
-                  </div>
-                  <div className="flex flex-col justify-center items-center px-5">
-                    <h2 className="font-bold text-2xl text-gray-900">{(item.title).slice(0, 16)}...</h2>
-                    <p className='max-w-[90%] text-center mt-1'>{(item.description).slice(0, 70)}...</p>
-                  </div>
-                  </div>
-                  <div className="px-5 py-5 flex justify-around">
-                    <div className='flex text-2xl items-center'>
-                      <h2 className='text-xl font-bold'>{item.price}</h2>
-                      <TbCoinTakaFilled />
+                    <div className="py-5 px-3">
+                      <Image src="https://lh3.googleusercontent.com/p/AF1QipNq7-o6PLTgvfYKQROFIBAIMbwNziSW73qynPUn=s680-w680-h510" height={300} width={300} alt='Img' className='object-cover mx-auto rounded-md' />
                     </div>
-                    <button className="text-xl font-bold bg-blue-500 px-6 py-1 rounded-full">
-                      <Link href={"#"}>Book</Link>
+                    <div className="flex flex-col justify-center items-center">
+                      <h2 className="font-bold text-2xl text-gray-900">{(item.title).slice(0, 16)}...</h2>
+                      <p className='max-w-[90%]  mt-1'>{(item.description).slice(0, 70)}...</p>
+                    </div>
+                  </div>
+                  <div className=" py-5 flex justify-around">
+                    <div className='flex text-2xl items-center'>
+                      <h2 className='text-xl font-bold'>$ {item.price}</h2>
+                    </div>
+                    <button className="text-xl text-white font-bold bg-[#1b85db] px-6 py-1 rounded-full">
+                      <Link href={`/events/${item?._id}`}>Book</Link>
                     </button>
                   </div>
-                  <span className='p-1 bg-slate-950/40 absolute top-12 right-12 text-2xl text-white hover:text-red-700 cursor-pointer hover:scale-110  duration-300'>
-                    <MdOutlineDelete onClick={() => handleRemoveFavoriteItem(item._id)} title='Remove' className='text-white' />
+                  <span className='p-1 bg-[#1b85db] absolute top-7 rounded-full right-5 text-2xl text-white hover:text-red-700 hover:bg-white cursor-pointer hover:scale-110  duration-300'>
+                    <MdOutlineDelete onClick={() => handleRemoveFavoriteItem(item._id)} title='Remove' className=' text-white hover:text-red-700 ' />
                   </span>
                 </div>
               );

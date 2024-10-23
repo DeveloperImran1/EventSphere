@@ -7,16 +7,19 @@ import Testimonials from '../testimonials/Testimonials';
 import DestinationSlider from './DestinationSlider';
 import Banner from './banner/page';
 import EventTimed from './EventTime/page';
+import PopularEvent from '../PopularEvent/PopularEvent';
+
 
 const HomeContainer = () => {
     return (
         <div className=''>
-             <Banner></Banner>
+            <Banner></Banner>
             <PopularEvents></PopularEvents>
-          <EventTimed></EventTimed>
+            <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
-            <Testimonials></Testimonials>
+            <PopularEvent/>
+            {/* <Testimonials></Testimonials> */}
         </div>
     );
 };

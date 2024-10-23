@@ -4,12 +4,11 @@ import AboutSection from './About-event';
 import EventSchedule from './EventScedule';
 import Booking from './Booking';
 import Testimonial from './Testimonial';
-import Pricing from '../events/Pricing';
-import EventPricing from './Pricing';
+
 
 const GiftCard = () => {
     return (
-        <div>
+        <div className=' overflow-hidden' >
             <Banner></Banner>
           <AboutSection></AboutSection>
           <EventSchedule></EventSchedule>

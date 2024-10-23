@@ -6,7 +6,7 @@ import EventsData from '@/components/allEventsPage/EventsData';
 const AllEventsPage = () => {
     return (
         <div className='mb-20 w-[calc(100vw-17px)]'>
-          <EventBanner></EventBanner>
+          {/* <EventBanner></EventBanner> */}
           <EventsData></EventsData>
         </div>
     );
