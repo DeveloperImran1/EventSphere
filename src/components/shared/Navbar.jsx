@@ -133,7 +133,7 @@ const Navbar = () => {
     },
     {
       title: "Contact Us",
-      path: "/contact-us"
+      path: "/contact"
     },
 
   ]
