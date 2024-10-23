@@ -18,33 +18,25 @@ const Navbar = () => {
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
 
-  useEffect(() => {
+  // useEffect(() => {
     const updateFavorites = () => {
       const storedFavorites = localStorage.getItem('favorites');
       const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
       setFavorite(myFavorites);
     };
   
-    // Run once on mount
-    updateFavorites();
+    // // Run once on mount
+    // updateFavorites();
   
-    // Add event listener for changes in localStorage
-    window.addEventListener('storage', updateFavorites);
+    // // Add event listener for changes in localStorage
+    // window.addEventListener('storage', updateFavorites);
   
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener('storage', updateFavorites);
-    };
-  }, [window.scrollY]);
+  //   // Clean up event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('storage', updateFavorites);
+  //   };
+  // }, []);
 
-  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
-  //   const { data: notification = [] } = useQuery({
-  //     queryKey: ['notification'],
-  //     queryFn: async () => {
-  //         const res = await axiosPublic.get('/notification')
-  //         return res.data;
-  //     }
-  // })
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -73,6 +65,14 @@ const Navbar = () => {
   }, []);
 
 
+  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
+  //   const { data: notification = [] } = useQuery({
+  //     queryKey: ['notification'],
+  //     queryFn: async () => {
+  //         const res = await axiosPublic.get('/notification')
+  //         return res.data;
+  //     }
+  // })
 
   const session = useSession();
   const auth = useAuth();
@@ -258,7 +258,7 @@ const Navbar = () => {
               >
                 Blogs
               </Link>
-              <Link
+              <Link onClick={updateFavorites}
                 href="/favorite-list"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out relative"
               >

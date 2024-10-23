@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
-import Loading from '../shared/LoadingSpiner/Loading';
+import Loading from '@/components/shared/LoadingSpinner/Loading';
 
 const PaymentDetailsPage = () => {
   const searchParams = useSearchParams();
@@ -18,7 +18,7 @@ const PaymentDetailsPage = () => {
 
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/orders/${transitionId}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/orders/${transitionId}`);
         setPaymentData(response.data);
         setLoading(false);
       } catch (error) {

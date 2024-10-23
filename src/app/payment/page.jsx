@@ -1,5 +1,5 @@
 "use client";
-import Loading from "@/components/shared/LoadingSpiner/Loading";
+import Loading from "@/components/shared/LoadingSpinner/Loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
@@ -55,7 +55,7 @@ console.log(discount)
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/events/${id}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`);
         setEvent(response.data);
         setLoading(false);
       } catch (error) {

@@ -1,4 +1,4 @@
-import Loading from '@/components/shared/LoadingSpiner/Loading';
+import Loading from '@/components/shared/LoadingSpinner/Loading';
 import React from 'react';
 
 const loading = () => {

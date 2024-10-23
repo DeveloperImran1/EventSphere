@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { TbFidgetSpinner } from "react-icons/tb";
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from "@/components/shared/LoadingSpiner/Loading";
+import Loading from "@/components/shared/LoadingSpinner/Loading";
 import { usePathname } from "next/navigation";
 const Post = () => {
 

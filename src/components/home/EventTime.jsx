@@ -42,7 +42,7 @@ const EventTime = () => {
   const [seeMore, setSeeMore] = useState(false);
   useEffect(() => {
     axios
-      .get("http://localhost:9000/events")
+      .get("https://event-sphare-server.vercel.app/events")
       .then((res) => {
         if (res?.data?.events?.length > 6) {
           const arr = res.data.slice(0, 6);
@@ -155,12 +155,11 @@ const EventTime = () => {
                 return n.when === "Next Month";
               }
             }).map((event) => (
-                <AnimatePresence>
-                  <CardForEvents
-               
-                    event={event}
-                  />
-                </AnimatePresence>
+              <AnimatePresence  key={event?._id}>
+                <CardForEvents
+                  event={event}
+                />
+              </AnimatePresence>
             ))}
 
 
@@ -169,9 +168,9 @@ const EventTime = () => {
         </div>
       </Tabs>
       <div className="text-center mt-10">
-          <Link href="/events" className="flex justify-center">
-            <Button>See All</Button>
-          </Link>
+        <Link href="/events" className="flex justify-center">
+          <Button>See All</Button>
+        </Link>
       </div>
 
     </div>
