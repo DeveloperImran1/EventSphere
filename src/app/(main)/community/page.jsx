@@ -14,11 +14,11 @@ const CommunityPage = () => {
                     <CommunitySidebar />
                 </div> */}
                 {/* Main Content */}
-                <div className="flex-1 border-2">
+                <div className="border-2 w-full md:w-[70%]">
                     {/* <CommunityHeader /> */}
-                    <div className="flex h-full">
+                    <div className="">
                         {/* Scrollable Feed */}
-                        <div className="w-[70%] md:w-full">
+                        <div className="">
                             {/* Main feed content */}
                             <FeedContent/>
                             <FeedPostCard/>
@@ -27,7 +27,7 @@ const CommunityPage = () => {
                     </div>
                 </div>
                 {/* Right Sidebar */}
-                <div className="w-[30%] p-5 border-2 hidden md:block">
+                <div className="md:w-[30%] p-5 border-2 hidden md:block">
                     <CommunityRightSidebar />
                 </div>
             </div>

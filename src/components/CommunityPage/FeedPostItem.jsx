@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Pagination } from 'swiper/modules';
 import Image from "next/image";
-import { FaHeart } from 'react-icons/fa6';
+import { FaHeart, FaRegComment } from 'react-icons/fa6';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
@@ -121,11 +121,18 @@ const FeedPostItem = ({ item, refetch }) => {
                     <button onClick={toggleMenu}>
                         <img src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
                     </button>
+
                     {menuOpen && (
                         <ul className="absolute z-40 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Post</li>
-                            <li onClick={handleDelete} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete Post</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save Post</li>
+                            {session?.data?.user?.email === item?.user?.email ? (
+                                <>
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Post</li>
+                                    <li onClick={handleDelete} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete Post</li>
+                                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save Post</li>
+                                </>
+                            ) : (
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save Post</li>
+                            )}
                         </ul>
                     )}
                 </div>
@@ -153,19 +160,18 @@ const FeedPostItem = ({ item, refetch }) => {
             {/* Footer */}
             <div className="p-4">
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-x-2">
-                    <FaHeart onClick={() => {
+                    <div className="flex items-center gap-x-3">
+                        <FaHeart  onClick={() => {
                             handleReact()
                             setReact(!react)
-                        }} size={22} className={`${react ? 'text-red-600' : 'text-gray-600'} cursor-pointer`}></FaHeart>
-                        <img src="https://i.postimg.cc/nhBPRgsF/chat-bubble.png" alt="comment" className="h-6 w-6 cursor-pointer" />
-                        <img src="https://i.postimg.cc/wvZrbpkB/direct.png" alt="share" className="h-6 w-6 cursor-pointer" />
+                        }} size={22} className={`${react ? 'text-red-600' : 'text-gray-600 bg-white'} cursor-pointer`}></FaHeart>
+                        <FaRegComment onClick={toggleComments} className='text-[22px] cursor-pointer '/>
                     </div>
-                    <p className="text-sm text-gray-500 flex items-center gap-x-1">{love} <FaHeart className='inline text-red-500' /></p>
+                    <p className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-x-1">{love} <FaHeart className='inline text-red-500' /></p>
                 </div>
 
                 {/* Comments Section */}
-                <button onClick={toggleComments} className="text-blue-500 text-sm">
+                <button onClick={toggleComments} className="gay-blue-500 text-sm">
                     View all {item.comments?.length || 0} comments
                 </button>
 
