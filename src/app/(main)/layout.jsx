@@ -2,6 +2,7 @@
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import { usePathname } from "next/navigation";
+import TanStackProvider from "providers/TanstackProvider";
 
 const MainLayout = ({ children }) => {
   const path = usePathname();

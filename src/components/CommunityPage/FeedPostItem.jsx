@@ -18,7 +18,7 @@ const FeedPostItem = ({ item, refetch }) => {
     const [commentsOpen, setCommentsOpen] = useState(false);
     const [replyOpen, setReplyOpen] = useState(null);
     const [newComment, setNewComment] = useState("");
-    const [replies, setReplies] = useState({});
+    const [replies, setReplies] = useState("");
     const [react, setReact] = useState(false);
     const [love, setLove] = useState(item.reactions.love)
 
@@ -27,9 +27,23 @@ const FeedPostItem = ({ item, refetch }) => {
     const handleReplyClick = (commentId) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
-    const handleReplySubmit = (commentId) => {
-        console.log("Reply for comment:", commentId, replies[commentId]);
-        setReplies({ ...replies, [commentId]: "" });
+    const handleReplySubmit = async (commentId, commenterEmail, id, replyUserPic, commentText) => {
+        // Create a reply object
+        const replyObj = {
+            replyComment: replies,  // Use commentText for reply content
+            commentId,  // The ID of the comment being replied to
+            commenterEmail,  // Email of the comment's author (corrected typo)
+            id,  // ID of the post
+            replyUserPic,  // Picture of the user replying
+            user: {  // User details
+                email: session?.data?.user?.email || "",  // Ensure these fields are not undefined
+                name: session?.data?.user?.name || "",
+                profile_picture: session?.data?.user?.image || "",
+            },
+        };
+    
+        console.log("New comment:", replyObj);
+    
     };
 
     // handleReact
@@ -204,10 +218,10 @@ const FeedPostItem = ({ item, refetch }) => {
                                             type="text"
                                             placeholder="Write a reply..."
                                             className="border rounded-lg w-full block h-9 outline-none px-7 text-base"
-                                            value={replies[comment._id] || ""}
-                                            onChange={(e) => setReplies({ ...replies, [comment._id]: e.target.value })}
+                                            value={replies}
+                                            onChange={(e) => setReplies(e.target.value)}
                                         />
-                                        <div className="absolute text-blue-500 top-[6px] right-4" onClick={() => handleReplySubmit(comment._id)}>
+                                        <div className="absolute text-blue-500 top-[6px] right-4" onClick={() => handleReplySubmit(comment._id, comment.user?.email, item?._id, item?.profile_picture, comment.text)}>
                                             <Image src="https://i.postimg.cc/x1wXp5Qd/send-message.png" height={20} width={20} alt="send" className="w-6 cursor-pointer" />
                                         </div>
                                     </div>
