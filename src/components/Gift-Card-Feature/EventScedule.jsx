@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { MapPin, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const tabs = [
     {
@@ -115,12 +116,12 @@ export default function EventSchedule() {
 
             <div className="mb-6 px-4 md:flex justify-between items-center ">
                 <h1 className=" text-black font-bold font-serif" >Event schedule</h1>
-                <Button variant="outline" className="border-black text-xl rounded-3xl   font-medium hover:text-white font-mono text-black hover:bg-red-500">BOOK NOW</Button>
+           
 
             </div>
 
             <div className="md:flex  bg-white  rounded-3xl  gap-20  ">
-                <div className="md:w-72 rounded-3xl bg-red-500  text-white">
+                <div className="md:w-72 rounded-3xl bg-[#1b85db]  text-white">
                     <h2 className=" p-6 text-lg text-gray-200 font-serif">
                         Learn more about the detailed schedule & activities of our event.
                     </h2>
@@ -131,7 +132,7 @@ export default function EventSchedule() {
                                 onClick={() => setActiveTab(tab.date)}
                                 className={` rounded-l-3xl py-2 text-2xl font-mono  transition-colors ${activeTab === tab.date
                                     ? "bg-white text-black"
-                                    : " bg-red-600 text-white hover:bg-red-400"
+                                    : " bg-[#1b85db] text-white hover:bg-[#1b85db]"
                                     }`}
                             >
                                 {tab.date}
@@ -164,19 +165,19 @@ export default function EventSchedule() {
 
                                     </div>
                                     <div className="w-2/3 ">
-                                        <h3 className="mb-2 font-mono text-xl font-semibold text-red-500">{event.title}</h3>
+                                        <h3 className="mb-2 font-mono text-xl font-semibold text-blue-500">{event.title}</h3>
                                         <p className="mb-4 font-serif text-gray-600">{event.description}</p>
                                         <div className="flex items-center space-x-4 text-sm text-gray-500">
                                             <div className="flex items-center">
-                                                <MapPin className="mr-1  text-red-500   h-4 w-4" />
+                                                <MapPin className="mr-1  text-[#1b48db]   h-4 w-4" />
                                                 {event.location}
                                             </div>
                                             <div className="flex items-center">
-                                                <Calendar className="mr-1 text-red-500  h-4 w-4" />
+                                                <Calendar className="mr-1 text-[#1b48db]   h-4 w-4" />
                                                 {event.eventDate}
                                             </div>
                                             <div className="flex items-center">
-                                                <MapPin className="mr-1 text-red-500  h-4 w-4" />
+                                                <MapPin className="mr-1 text-[#1b48db]   h-4 w-4" />
                                                 {event.venue}
                                             </div>
                                         </div>
