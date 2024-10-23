@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Pagination } from 'swiper/modules';
 import Image from "next/image";
-
-
+import { FaHeart } from 'react-icons/fa6';
+import axios from 'axios';
 
 const FeedPostItem = ({ item }) => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -14,6 +14,8 @@ const FeedPostItem = ({ item }) => {
     const [replyOpen, setReplyOpen] = useState(null);
     const [newComment, setNewComment] = useState("");
     const [replies, setReplies] = useState({});
+    const [react, setReact] = useState(false);
+    const [love, setLove] = useState(item.reactions.love)
 
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const toggleComments = () => setCommentsOpen(!commentsOpen);
@@ -27,6 +29,36 @@ const FeedPostItem = ({ item }) => {
     const handleReplySubmit = (commentId) => {
         console.log("Reply for comment:", commentId, replies[commentId]);
         setReplies({ ...replies, [commentId]: "" });
+    };
+    const handleReact = async () => {
+        // Get the current love count from the post
+        let updatedLove = 0;
+
+        // Toggle love count based on the current state of 'react'
+        if (react) {
+            updatedLove = updatedLove - 1;  // Decrease love if already reacted
+        } else {
+            updatedLove = updatedLove + 1;  // Increase love if not yet reacted
+        }
+
+        // Update the local state (for UI update) and print the value
+        setLove(love + updatedLove);
+        console.log("Total love ", updatedLove);
+
+        try {
+            // Send the updated love count to the server using the updated local value
+            const res = await axiosPublic.put(`/addedReact/${post?._id}`, { love: updatedLove });
+
+            // Check if the love count was successfully updated on the server
+            if (res?.data?.modifiedCount) {
+                refetch(); // Refetch the post data to update the UI
+                console.log("Refetch triggered");
+            } else {
+                console.log("No modification made to the love count");
+            }
+        } catch (error) {
+            console.log("Something went wrong", error?.message);
+        }
     };
     return (
         <div className="bg-white border rounded-lg shadow-md">
@@ -80,11 +112,14 @@ const FeedPostItem = ({ item }) => {
             <div className="p-4">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-x-2">
-                        <img src="https://i.postimg.cc/43GFrPtz/heart.png" alt="like" className="h-6 w-6 cursor-pointer" />
+                    <FaHeart onClick={() => {
+                            handleReact()
+                            setReact(!react)
+                        }} size={22} className={`${react ? 'text-red-600' : 'text-gray-600'} cursor-pointer`}></FaHeart>
                         <img src="https://i.postimg.cc/nhBPRgsF/chat-bubble.png" alt="comment" className="h-6 w-6 cursor-pointer" />
                         <img src="https://i.postimg.cc/wvZrbpkB/direct.png" alt="share" className="h-6 w-6 cursor-pointer" />
                     </div>
-                    <p className="text-sm text-gray-500">{item.views || 0} views</p>
+                    <p className="text-sm text-gray-500 flex items-center gap-x-1">{love} <FaHeart className='inline text-red-500' /></p>
                 </div>
 
                 {/* Comments Section */}
