@@ -6,7 +6,9 @@ import { uploadCloudinary } from "@/hooks/upload";
 import toast, { Toaster } from 'react-hot-toast';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 
-export default function FeedPost() {
+export default function FeedPost({post}) {
+    console.log("infinity", post);
+    
     const session = useSession();
     const currentUser = session.data?.user;
     const axiosPublic = useAxiosPublic();

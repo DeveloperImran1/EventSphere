@@ -7,25 +7,22 @@ import React from 'react';
 
 const CommunityPage = () => {
     return (
-        <div className="w-full container">
-            <div className="flex">
+        <div className="">
+            <div className="flex gap-x-4 w-full container">
                 {/* Sidebar */}
                 {/* <div className="w-1/6 border-2 hidden md:block">
                     <CommunitySidebar />
                 </div> */}
                 {/* Main Content */}
-                <div className="md:w-[70%] border-2">
+                <div className="flex-1 border-2">
                     {/* <CommunityHeader /> */}
                     <div className="flex h-full">
                         {/* Scrollable Feed */}
-                        <div className="w-full">
+                        <div className="w-[70%] md:w-full">
                             {/* Main feed content */}
                             <FeedContent/>
                             <FeedPostCard/>
-                            <FeedPostCard/>
-                            <FeedPostCard/>
-                            <FeedPostCard/>
-                            <FeedPostCard/>
+                            {/* <FeedPostCard/> */}
                         </div>
                     </div>
                 </div>
