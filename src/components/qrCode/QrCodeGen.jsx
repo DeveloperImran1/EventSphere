@@ -40,11 +40,8 @@ const PaymentQRCodePage = () => {
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
-    // Code to handle the feedback submission
-    console.log('Feedback:', feedback, 'Rating:', rating);
-    // Reset the form fields after submission
+    console.log('Feedback:', feedback);
     setFeedback('');
-    setRating('');
   };
 
   const handleDownload = () => {
@@ -164,7 +161,7 @@ const PaymentQRCodePage = () => {
                 onChange={(e) => setFeedback(e.target.value)}
                 required
               ></textarea>
-              <div className='rating mb-4'>
+              {/* <div className='rating mb-4'>
                 <label className='mr-2'>Rate the event:</label>
                 <select
                   className='border rounded-md p-2'
@@ -179,7 +176,7 @@ const PaymentQRCodePage = () => {
                   <option value='4'>4 - Very Good</option>
                   <option value='5'>5 - Excellent</option>
                 </select>
-              </div>
+              </div> */}
 
               <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
             </form>
