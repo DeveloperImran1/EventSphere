@@ -9,10 +9,11 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import { useSession } from 'next-auth/react';
+import Loading from '../shared/LoadingSpiner/Loading';
 
 const StatusBadge = ({ status }) => {
   const colorMap = {
-    Confirmed: 'bg-green-100 text-green-800',
+    Confirmed: 'bg-blue-100 text-blue-800',
     Refund: 'bg-yellow-100 text-yellow-800',
     Canceled: 'bg-red-100 text-red-800',
   };
@@ -41,11 +42,12 @@ const EventBookingsTable = () => {
   const [currentUser, setCurrentUser] = useState(session)
   const [sortColumn, setSortColumn] = useState('bookingDate');
   const [sortDirection, setSortDirection] = useState('desc');
-  const currentUserEmail = session?.data?.user?.email  
+  const currentUserEmail = session?.data?.user?.email
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`https://event-sphare-server.vercel.app/orders/${currentUserEmail}`);
+    const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
+
     return data;
   };
 
@@ -64,13 +66,12 @@ const EventBookingsTable = () => {
       confirmButtonText: 'Okay, got it!',
     });
   }, []);
-
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading></Loading>
   }
 
   if (error) {
-    return <p>Error loading data: {error.message}</p>;
+    return <h5 className='text-gray-800 text-center mt-14'>Error loading data: {error.message}</h5>;
   }
 
   const sortedBookings = [...bookings].sort((a, b) => {
@@ -92,12 +93,17 @@ const EventBookingsTable = () => {
     if (sortColumn !== column) return null;
     return sortDirection === 'asc' ? <ChevronUp className="inline-block w-4 h-4" /> : <ChevronDown className="inline-block w-4 h-4" />;
   };
-
+  if (bookings?.length === 0) {
+    return <div className='flex flex-col justify-center items-center  mt-14  mx-auto w-full'>
+      <h3 className='text-center font-semibold text-gray-800 block'>Your Event Is Not Booking Any User!</h3>
+      <Image height={676} width={1200} className='w-[50%] h-[50%] ' src="https://t4.ftcdn.net/jpg/05/86/21/03/360_F_586210337_WOGOw0l7raEB8F61Muc4hWbvVcyQdk9Z.jpg" alt='Not Foound Data'></Image>
+    </div>
+  }
   return (
     <div className="overflow-x-auto px-4 rounded-lg shadow-lg min-w-full inline w-full">
       <div className="w-[95%] hidden md:block">
         <table className="w-full">
-          <thead className="bg-[#1b88c0]">
+          <thead className="bg-[#1b85db]">
             <tr>
               {['customerName', 'eventName', 'bookingDate', 'eventDate', 'tickets', 'status', 'Revenue'].map((column) => (
                 <th
@@ -111,50 +117,52 @@ const EventBookingsTable = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {sortedBookings.map((booking) => (
-              <tr key={booking.id} className="transition-all duration-300 ease-in-out transform-gpu">
-                <td>
-                  <div className="flex space-x-4 items-center">
-                    <div className="max-w-40">
-                      <Image height={500} width={500} className=" w-12 h-12 rounded-full " src={booking?.bookedUserPhoto} alt="photo" />
+
+            {
+              sortedBookings.map((booking) => (
+                <tr key={booking.id} className="transition-all duration-300 ease-in-out transform-gpu bg-gray-100">
+                  <td>
+                    <div className="flex space-x-4 items-center">
+                      <div className="max-w-40">
+                        <Image height={500} width={500} className=" w-12 h-12 rounded-full " src={booking?.bookedUserPhoto} alt="photo" />
+                      </div>
+                      <p>{booking.customerName}</p>
                     </div>
-                    <p>{booking.customerName}</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                  <Tooltip content={new Date(booking.createdAt).toLocaleDateString()}>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{booking.eventName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <Tooltip content={new Date(booking.createdAt).toLocaleDateString()}>
+                      <span className="flex items-center">
+                        <CalendarDays className="mr-2 h-4 w-4 text-[#1b85db]" />
+                        {new Date(booking.createdAt).toLocaleDateString()}
+                      </span>
+                    </Tooltip>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    <Tooltip content={new Date(booking.eventDate).toLocaleDateString()}>
+                      <span className="flex items-center">
+                        <CalendarDays className="mr-2 h-4 w-4 text-[#1b85db]" />
+                        {new Date(booking.eventDate).toLocaleDateString()}
+                      </span>
+                    </Tooltip>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     <span className="flex items-center">
-                      <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
-                      {new Date(booking.createdAt).toLocaleDateString()}
+                      <Users className="mr-2 h-4 w-4 text-[#1b85db]" />
+                      {booking.totalTickets}
                     </span>
-                  </Tooltip>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                  <Tooltip content={new Date(booking.eventDate).toLocaleDateString()}>
-                    <span className="flex items-center">
-                      <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
-                      {new Date(booking.eventDate).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <StatusBadge status={booking.refundRequested ? 'Refunded' : 'Success'} />
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <span className={`flex items-center ${booking.amount < 0 ? 'text-red-600' : 'text-[#1b85db]'}`}>
+                      <DollarSign className="mr-1 h-4 w-4" />
+                      {Math.abs(booking.amount).toFixed(2)}
                     </span>
-                  </Tooltip>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                  <span className="flex items-center">
-                    <Users className="mr-2 h-4 w-4 text-indigo-600" />
-                    {booking.totalTickets}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <StatusBadge status={booking.status} />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <span className={`flex items-center ${booking.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                    <DollarSign className="mr-1 h-4 w-4" />
-                    {Math.abs(booking.amount).toFixed(2)}
-                  </span>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -171,22 +179,22 @@ const EventBookingsTable = () => {
             </div>
             <div className="text-sm text-gray-600">
               <p className="flex items-center mb-2">
-                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                <CalendarDays className="mr-2 h-4 w-4 text-[#1b85db]" />
                 Booking Date: {new Date(booking.bookingDate).toLocaleDateString()}
               </p>
               <p className="flex items-center mb-2">
-                <CalendarDays className="mr-2 h-4 w-4 text-indigo-600" />
+                <CalendarDays className="mr-2 h-4 w-4 text-[#1b85db]" />
                 Event Date: {new Date(booking.eventDate).toLocaleDateString()}
               </p>
               <p className="flex items-center mb-2">
-                <Users className="mr-2 h-4 w-4 text-indigo-600" />
+                <Users className="mr-2 h-4 w-4 text-[#1b85db]" />
                 Tickets: {booking.tickets}
               </p>
               <p className="flex items-center mb-2">
-                <DollarSign className="mr-2 h-4 w-4 text-indigo-600" />
+                <DollarSign className="mr-2 h-4 w-4 text-[#1b85db]" />
                 amount: {booking.amount < 0 ? '-' : ''}${Math.abs(booking.amount).toFixed(2)}
               </p>
-              <StatusBadge status={booking.status} />
+              <StatusBadge status={booking.refundRequested ? 'Refunded' : 'Success'} />
             </div>
           </div>
         ))}

@@ -1,26 +1,18 @@
 "use client";
-import { useQuery } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-const Profile = () => {
-    const session = useSession();
-    const { data} = useQuery({
-        queryKey: ["users"],
-        queryFn: () =>
-          fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
-            res.json()
-          ),
-      });
-      console.log(data);
+const Profile = ({data}) => {
+
       
     return (
         <div className='mb-8'>
             <div 
                 className="w-full flex flex-col md:flex-row items-center justify-center p-4 md:p-6 shadow-lg rounded-lg"
                 style={{ 
-                    backgroundImage: 'url(https://i.postimg.cc/YC5b6yc5/360-F-528982305-37-Y38-Qoq-Yo4-Jm-ASvfma-Wiq-DJg-MHMQw9-D.jpg)', // Replace with your background image URL
+                    backgroundImage: 'url(https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg)', // Replace with your background image URL
                     backgroundSize: 'cover', 
                     backgroundPosition: 'center',
                     backgroundBlendMode: 'overlay'
@@ -46,9 +38,9 @@ const Profile = () => {
                     </p>
 
                     <div className="mt-4">
-                        <button className="px-5 py-2 bg-white text-indigo-600 font-semibold rounded-full shadow-md hover:bg-gray-200 transition duration-200">
+                        <Link href={`/dashboard/organizer-profile/${data?.email}`} className="px-5 py-3 bg-white text-indigo-600 font-semibold rounded-full shadow-md hover:bg-gray-200 transition duration-200 ">
                             View Profile
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import {
 
 const Top = ({ handleSearch, handleRoleFilter }) => {
     return (
-        <div className="flex gap-x-2">
+        <div className="flex justify-between items-center gap-x-2">
             <div className="md:w-1/3">
                 <Input
                     placeholder='Type Name / Email'

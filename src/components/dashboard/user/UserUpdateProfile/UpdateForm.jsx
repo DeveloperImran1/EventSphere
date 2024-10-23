@@ -34,7 +34,7 @@ const UpdateFrom = () => {
         try {
             setIsLoading(true)
             const result = await axios.put(
-                `https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`,
+                `http://localhost:9000/user/${session?.data?.user?.email}`,
                 formData
             )
             console.log(result)
@@ -53,7 +53,7 @@ const UpdateFrom = () => {
     const { data: userInfo } = useQuery({
         queryKey: ["users"],
         queryFn: () =>
-            fetch(`https://event-sphare-server.vercel.app/user/${session?.data?.user?.email}`).then((res) =>
+            fetch(`http://localhost:9000/user/${session?.data?.user?.email}`).then((res) =>
                 res.json()
             ),
     });
@@ -203,7 +203,7 @@ const UpdateFrom = () => {
                 <div className="col-span-2">
                     <button
                         type="submit"
-                        className=" -mt-6 mb-6 bg-green-500 text-white py-2 px-4 rounded-lg max-w-52"
+                        className=" -mt-6 mb-6 button"
                     > {isLoading ? <p>Loading..</p> : "Update"}
                     </button>
                 </div>

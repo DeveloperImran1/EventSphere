@@ -13,20 +13,25 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Loading from "@/components/shared/LoadingSpiner/Loading";
+import { useState } from "react";
+import Link from "next/link";
+import { IoMdArrowRoundForward } from "react-icons/io";
+import { MdArrowOutward } from "react-icons/md";
 
 const EventOrderList = () => {
+  const [hoverd, setHoverd] = useState(false)
   const session = useSession();
   const { data: invoice = [], refetch, isLoading } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", session],
     queryFn: () =>
-      fetch(`https://event-sphare-server.vercel.app/myAllOrder/${session?.data?.user?.email}`).then((res) =>
+      fetch(`http://localhost:9000/myAllOrder/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
   console.log(invoice);
 
   const handleRefundRequest = async (id) => {
-    const res = await axios.put(`https://event-sphare-server.vercel.app/refundRequest/${id}`)
+    const res = await axios.put(`http://localhost:9000/refundRequest/${id}`)
     console.log(res)
     if (res?.data?.modifiedCount) {
       toast.success('Successfully Refund Requested 😊')
@@ -36,7 +41,7 @@ const EventOrderList = () => {
   const handleRefundAlert = () => {
     toast.error('Already Requested for Refund 😊')
   }
-  const confirmedOrders = invoice?.filter(order => order?.refundRequested === "NotRequested");
+  const confirmedOrders = invoice?.filter(order => order?.refundRequested === "Requested");
   const totalConfirmedAmount = confirmedOrders?.reduce((total, order) => total + order?.amount, 0);
 
 
@@ -44,15 +49,14 @@ const EventOrderList = () => {
     <h1>You have not purchase any ticket</h1>
   </div>
   return (
-    <div className=" text-black flex container mx-auto ml-4">
-      {/* <div className=" w-[300px]">Order</div> */}
+    <div className=" text-black ">
       <div className="">
         <div className=" flex justify-between my-5 flex-col md:flex-row mt-4 -z-10">
           <div className="">
             <p className=" font-semibold text-2xl text-black ml-5">Order List</p>
           </div>
           <div className=" flex gap-4 flex-col md:flex-row mt-4 mx-5">
-            <div className=" relative  md:w-[200px]">
+            <div className=" relative  w-full">
               <Input
                 type="search"
                 placeholder="Search"
@@ -62,7 +66,7 @@ const EventOrderList = () => {
                 <LuSearch />
               </p>
             </div>
-            <div className=" relative md:w-[200px]   md:mr-2">
+            <div className=" relative w-full   md:mr-2">
               <Input
                 type="search"
                 placeholder="Filter"
@@ -75,7 +79,7 @@ const EventOrderList = () => {
           </div>
         </div>
         <div className=" flex  gap-12 flex-col md:flex-row mx-5">
-          <div className="md:w-[250px]  rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+          <div className="w-full  rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
             <div className=" px-4 py-3">
               <div className="flex  justify-between  items-center ">
                 <div className="bg-[#f3f2ff] p-5 rounded-xl">
@@ -90,7 +94,7 @@ const EventOrderList = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+          <div className="w-full rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
             <div className=" px-4 py-3">
               <div className="flex  justify-between  items-center ">
                 <div className="bg-[#f3f2ff] p-5 rounded-xl">
@@ -105,7 +109,7 @@ const EventOrderList = () => {
               </div>
             </div>
           </div>
-          <div className="md:w-[250px] rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
+          <div className="w-full rounded-lg overflow-hidden shadow-sm border bg-white  transition-shadow duration-300">
             <div className=" px-4 py-3">
               <div className="flex  justify-between  items-center ">
                 <div className="bg-[#f3f2ff] p-5 rounded-xl">
@@ -122,16 +126,16 @@ const EventOrderList = () => {
           </div>
         </div>
 
-        <div className="flex flex-col   mt-5">
-          <div className="-mx-4 -my-2 overflow-x-auto ">
+        <div className="flex flex-col min-w-full  mt-5 overflow-x-auto">
+          <div className=" -my-2 overflow-x-auto ">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden border border-gray-200  md:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
+              <div className="border border-gray-200  md:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-200  pl-4">
                   <thead className="bg-gray-50 ">
                     <tr>
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right ml-2"
                       >
                         <div className="flex items-center gap-x-3 ">
                           <span>Image</span>
@@ -140,20 +144,14 @@ const EventOrderList = () => {
 
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2 "
                       >
                         <span>Title</span>
                       </th>
-
+                
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
-                      >
-                        <span>Booking Date</span>
-                      </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:block -ml-2"
                       >
                         <span>Event Date</span>
                       </th>
@@ -165,13 +163,13 @@ const EventOrderList = () => {
                       </th>
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2 "
                       >
                         <span>Ticket</span>
                       </th>
                       <th
                         scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:block -ml-2"
                       >
                         <span>Status</span>
                       </th>
@@ -181,11 +179,18 @@ const EventOrderList = () => {
                         className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2">
                         Refund Request
                       </th>
+
+                      <th
+                        scope="col"
+                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
+                      >
+                        <span>Details</span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200  text-sm">
                     {
-                        // isLoading && <Loading></Loading>
+                      // isLoading && <Loading></Loading>
                     }
                     {invoice?.map((invoice) => (
                       <tr key={invoice?._id}>
@@ -198,19 +203,16 @@ const EventOrderList = () => {
                               width={50}
                               height={50}
                               alt="fdsg"
-                              className=" border border-gray-200 rounded-lg"
+                              className="h-[50px] w-[50px] border border-gray-200 rounded-lg"
                             />
 
                           </div>
                         </td>
 
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap ">
                           {invoice?.eventName?.slice(0, 15)}
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          {new Date(invoice?.createdAt).toLocaleDateString("en-US")}
-                        </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap hidden lg:block">
                           {new Date(invoice?.eventDate).toLocaleDateString("en-US")}
                         </td>
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
@@ -219,20 +221,26 @@ const EventOrderList = () => {
                         <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
                           {invoice?.totalTickets} P
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          <span className="bg-emerald-100/60 text-emerald-500 px-2 py-1 rounded-3xl">
+                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap hidden lg:block">
+                          <span className="bg-[#cae0e7] text-[#3098ee] px-2 py-1 rounded-3xl">
                             {invoice?.refundRequested === "NotRequested" ? "Success" : invoice?.refundRequested === "Requested" ? "Requested" : "Refunded"}</span>
                         </td>
-
                         <td onClick={() => {
                           invoice?.refundRequested === "Requested" ? handleRefundAlert() : handleRefundRequest(invoice?._id)
-                        }
-                        } className={`md:px-4 px-2 py-4 text-sm   whitespace-nowrap text-wrap text-center  flex flex-col items-center jsutify-center`}>
-                          <span>
-                            <RiRefund2Fill size={22} className="text-red-500 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill>
-                          </span>
+                        }} className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                          <span className="  px-2 py-1 rounded-3xl">
+                            <RiRefund2Fill size={22} className="text-red-500 ml-3 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill></span>
                         </td>
+                        
+                        <Link href={"/events"} className="flex flex-col justify-center items-center  relative">
 
+                          <p onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300 w-9 absolute top-7" >
+                            {
+                              hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
+
+                            }
+                          </p>
+                        </Link>
 
                       </tr>
                     ))}

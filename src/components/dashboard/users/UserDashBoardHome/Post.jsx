@@ -44,8 +44,8 @@ const Post = () => {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const title = form?.title?.value;
-    const message = form?.message?.value;
+    const title = form?.title?.value || "";
+    const message = form?.message?.value || "";
 
     if (session?.data?.user?.email !== lastPathSegment) {
       return toast.error('You cannot post another user profile 😒');
@@ -95,7 +95,7 @@ const Post = () => {
       }
     } catch (error) {
       console.error("Error uploading images:", error);
-      toast.error('Something Went Wrong 😒');
+      // toast.error('Something Went Wrong 😒');
     }
   };
 
@@ -143,11 +143,11 @@ const Post = () => {
           </div>
 
           <div>
-            <div className='flex justify-start pl-4 items-center gap-6'>
-              <div className='p-2 bg-green-200 rounded-md'><FaLink size={22} /></div>
+            <div className='flex justify-start pl-4 items-center gap-6 text-white'>
+              <div className='p-2 bg-[--color-secondary] rounded-md'><FaLink size={22} /></div>
 
               <div onChange={handleImageChange} className="my-4 flex justify-center">
-                <label className="w-full gap-2 sm:w-auto cursor-pointer flex items-center  text-xl px-3 py-2 rounded-md bg-green-200 font-bold " htmlFor="file">
+                <label className="w-full gap-2 sm:w-auto cursor-pointer flex items-center  text-xl px-3 py-2 rounded-md bg-[--color-secondary] font-bold " htmlFor="file">
                   <FaCamera />
                   {/* <p className="text-lg font-medium text-black"> {showName.name ? "Post" : 'Upload'}</p> */}
                 </label>
@@ -155,7 +155,7 @@ const Post = () => {
                   type="file"
                   multiple={true}
                   placeholder="Your Image"
-                  required
+                  // required
                   onChange={(e) => {
                     setImages(e.target.files)
                     if (e.target.files && e.target.files[0]) {
@@ -164,9 +164,9 @@ const Post = () => {
                     }
                   }} className="hidden" id="file" />
               </div>
-              <button type="submit" className='p-2 cursor-pointer bg-green-400 rounded-md flex gap-1 justify-center items-center w-[120px]'>
+              <button type="submit" className='p-2 cursor-pointer bg-[--color-secondary] rounded-md flex gap-1 justify-center items-center w-[120px]'>
                 {
-                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : <div className="flex justify-center items-center "><MdLocalPostOffice /> <p className="text-black text-[17px] ">Post</p></div>
+                  loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : <div className="flex justify-center items-center "><MdLocalPostOffice /> <p className="text-white ml-1 text-[17px] ">Post</p></div>
                 }
               </button>
 
@@ -184,7 +184,7 @@ const Post = () => {
           isLoading ? <Loading></Loading> : posts?.length < 1 ? <div className="flex flex-col mt-5 gap-1 justify-center items-center">
             <h5 className="text-[20px] font-bold text-center">You have not post</h5>
             <Image src={"https://cdn.vectorstock.com/i/500p/30/21/data-search-not-found-concept-vector-36073021.jpg"} height={500} width={1200} alt="Profile Image" id="img" className="h-[300px] w-[300px] rounded-md" />
-          </div> : posts?.map(post => <PostCard key={post?._id} post={post} refetch={refetch}></PostCard>)
+          </div> : [...posts]?.reverse()?.slice(0, 3)?.map(post => <PostCard key={post?._id} post={post} refetch={refetch}></PostCard>)
         }
       </div>
 

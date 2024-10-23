@@ -26,7 +26,7 @@ const ProfileInfo = () => {
             alt="Profile"
             className="rounded-full w-36 h-36 shadow-md p-[2px]"
           />
-          <div className="absolute bottom-0 right-0">
+          {/* <div className="absolute bottom-0 right-0">
             <label
               htmlFor="fileInput"
               className="cursor-pointer flex items-center justify-center w-10 h-10 bg-blue-500 border-2 border-white shadow-md text-white rounded-full"
@@ -34,7 +34,7 @@ const ProfileInfo = () => {
               <MdPhotoCamera size={24} />
             </label>
             <input id="fileInput" type="file" className="hidden" accept="image/*" />
-          </div>
+          </div> */}
         </div>
         <h2 className="mt-4 text-lg font-semibold">{data?.name}</h2>
         <p className="text-gray-600">{data?.role}</p>
@@ -54,7 +54,7 @@ const ProfileInfo = () => {
             <span>1</span>
           </li>
         </ul>
-        <Link href="#" className="mt-4 block text-center bg-green-500 text-white py-2 rounded-lg mx-5">
+        <Link href="https://developerimran-portfolio.netlify.app/" className="mt-4 button  ml-10 " target="_blank">
           Portfolio
         </Link>
       </div>

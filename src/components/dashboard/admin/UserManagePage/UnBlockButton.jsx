@@ -15,7 +15,7 @@ const UnBlockButton = ({ user, handleUnBlock}) => {
     return (
         <div>
             <AlertDialog >
-                <AlertDialogTrigger className='bg-green-600 text-white rounded-md'>UnBlock</AlertDialogTrigger>
+                <AlertDialogTrigger className='bg-[#1b85db] text-white rounded-md text-base px-2 py-1'>UnBlock</AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>Are you sure?</AlertDialogTitle>

@@ -1,22 +1,17 @@
 'use client'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Jan', totalEvents: 120, ticketSales: 1500, totalSales: 15000, newOrganizers: 5 },
-  { name: 'Feb', totalEvents: 150, ticketSales: 1800, totalSales: 18000, newOrganizers: 50 },
-  { name: 'Mar', totalEvents: 180, ticketSales: 2200, totalSales: 22000, newOrganizers: 100 },
-  { name: 'Apr', totalEvents: 200, ticketSales: 2500, totalSales: 25000, newOrganizers: 80 },
-  { name: 'May', totalEvents: 220, ticketSales: 2800, totalSales: 28000, newOrganizers: 120 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-  { name: 'Apr', totalEvents: 250, ticketSales: 3000, totalSales: 3000, newOrganizers: 156 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 400 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 40000, newOrganizers: 15 },
-  { name: 'Jun', totalEvents: 250, ticketSales: 3000, totalSales: 30000, newOrganizers: 15 },
-];
-
 const NewChart = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:9000/monthlyMetrics')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
   return (
     <div className="w-full h-[500px] bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-lg shadow-lg py-6 sm:h-[400px] sm:p-4 md:h-[500px]">
       <h2 className="text-2xl font-bold text-center text-gray-800 sm:text-xl md:text-3xl">Monthly Metrics Overview</h2>

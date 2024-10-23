@@ -1,64 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GoogleMapComponent from './googlemap';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Table = () => {
-  // Mapping of colors based on popularity
-  const colorMap = {
-    "blue-500": "bg-blue-500",
-    "green-500": "bg-green-500",
-    "red-500": "bg-red-500",
-    "yellow-500": "bg-yellow-500",
-  };
+  const [eventData, setEventData] = useState([]);
 
-  const products = [
-    { no: 1, name: "John Doe", popularity: "blue-500", sales: "45%" },
-    { no: 2, name: "Jane Smith", popularity: "green-500", sales: "23%" },
-    { no: 3, name: "Alice Johnson", popularity: "red-500", sales: "30%" },
-    { no: 4, name: "Michael Brown", popularity: "yellow-500", sales: "60%" },
-  ];
+  // useEffect to fetch data from APIs once the component mounts or the organizerEmail changes
+  useEffect(() => {
+    const fetchData = async () => {
+      const eventsResponse = await fetch('http://localhost:9000/events');
+      const eventsData = await eventsResponse.json();
+      const events = eventsData.events;
+      setEventData(events);
+    };
+
+    fetchData();
+  }, []);
+
+  // Function to get the top 5 events by booked seats
+  const getTopEvents = () => {
+    return eventData
+      .sort((a, b) => b.bookedSeats.length - a.bookedSeats.length)
+      .slice(0, 5);
+  };
 
   return (
     <>
-    <div className="my-8 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Top Product</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">No</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Name</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Popularity</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">Sales</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((item) => (
-              <tr key={item.no}>
-                <td className="px-4 py-2 text-sm">{item.no}</td>
-                <td className="px-4 py-2 text-sm">{item.name}</td>
-                <td className="px-4 py-2 text-sm">
-                  {/* Use the mapped color class */}
-                  <hr
-                    className={`h-2 ${colorMap[item.popularity]} rounded`}
-                    style={{ width: `${item.sales.replace('%', '')}%` }}
-                  />
-                </td>
-                <td className="px-4 py-2 text-sm">
-                  <button className={`${colorMap[item.popularity]} text-white px-4 py-1 rounded-lg`}>
-                    {item.sales}
-                  </button>
-                </td>
-              </tr>
+      {/* Display top 5 events */}
+      <Card className="bg-white shadow-lg mt-5">
+        <CardHeader>
+          <CardTitle>Top 5 Events</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {getTopEvents().map((event, index) => (
+              <div key={index} className="flex items-center p-2 bg-gray-50 rounded-lg">
+                <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
+                <div className="flex-grow">
+                  <h5 className="font-semibold ">{event.title}</h5>
+                  <p className="text-sm text-gray-500">{event.category}</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">{event.bookedSeats.length} tickets sold</p>
+                  <p className="text-sm text-gray-500">${event.price * event.bookedSeats.length} revenue</p>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </div>
+        </CardContent>
+      </Card>
 
-    <div>
-      {/* <GoogleMapComponent/> */}
-    </div>
-    
+      <div>
+        {/* <GoogleMapComponent/> */}
+      </div>
+
     </>
   );
 };
