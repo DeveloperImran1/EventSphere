@@ -49,7 +49,7 @@ const EventDetailsPage = ({ params }) => {
 // console.log(event)
 //   console.log(event?.location?.city)
 const city=event?.location?.city
-console.log(city)
+// console.log(city)
     if (loading) {
         return <Loading />
     }
