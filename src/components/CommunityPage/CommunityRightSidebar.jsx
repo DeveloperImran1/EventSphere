@@ -12,7 +12,7 @@ const fetchUserData = async () => {
 
 const CommunityRightSidebar = () => {
     // Use TanStack Query to fetch user data
-    const { data: userData = [], isLoading, error } = useQuery({
+    const { data: userData = [], isLoading, error, refetch } = useQuery({
         queryKey: ['userData'],
         queryFn: fetchUserData,
     });
@@ -30,7 +30,7 @@ const CommunityRightSidebar = () => {
     return (
         <div className='sticky top-20'>
             {/* My Follower */}
-            <MyFollower userData={userData} />
+            <MyFollower userData={userData} refetch={refetch} />
         </div>
     );
 };
