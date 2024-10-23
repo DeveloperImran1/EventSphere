@@ -92,6 +92,8 @@ export default function PopularEvent() {
   const [mounted, setMounted] = useState(false)
   const [categoryName, setCategoryName] = useState("All")
   const axiosPublic = useAxiosPublic();
+
+  
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
