@@ -22,14 +22,16 @@ const FeedPostItem = ({ item }) => {
     const handleReplyClick = (commentId) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
-    const handleCommentSubmit = () => {
-        console.log("New comment:", newComment);
-        setNewComment("");
-    };
+    // const handleCommentSubmit = () => {
+    //     console.log("New comment:", newComment);
+    //     setNewComment("");
+    // };
     const handleReplySubmit = (commentId) => {
         console.log("Reply for comment:", commentId, replies[commentId]);
         setReplies({ ...replies, [commentId]: "" });
     };
+
+    // handleReact
     const handleReact = async () => {
         // Get the current love count from the post
         let updatedLove = 0;
