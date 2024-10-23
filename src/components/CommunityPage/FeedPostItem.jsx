@@ -85,6 +85,22 @@ const FeedPostItem = ({ item, refetch }) => {
             toast.error('Something Went Wrong 😒');
         }
     };
+    // handle Delete
+    const handleDelete = async () => {
+        if (session?.data?.user?.email !== item?.user?.email) {
+            return toast.error('You cannot delete another user post 😒');
+        }
+        const res = await axiosPublic.delete(`/deletePost/${item?._id}`);
+        console.log(res)
+        if (res?.data?.deletedCount) {
+            toast.success('Successfully Deleted Post 👏');
+            refetch()
+        }
+        else {
+            toast.error('Something Went Wrong 😒');
+        }
+    }
+
 
     return (
         <div className="bg-white border rounded-lg shadow-md">
@@ -108,7 +124,7 @@ const FeedPostItem = ({ item, refetch }) => {
                     {menuOpen && (
                         <ul className="absolute z-40 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
                             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Edit Post</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete Post</li>
+                            <li onClick={handleDelete} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Delete Post</li>
                             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save Post</li>
                         </ul>
                     )}
