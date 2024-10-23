@@ -17,9 +17,9 @@ const SEATS_PER_ROW = 12;
 // SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick , event}) {
  const res = event?.bookedSeats?.includes(seat?.number)
- console.log("bokin naki chekc", res)
+//  console.log("bokin naki chekc", res)
   const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
-  console.log(seat)
+  // console.log(seat)
 
   return (
     <motion.button
@@ -40,15 +40,13 @@ const Payment = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [ticketQuantity, setTicketQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [selectedSeatNames, setSelectedSeatNames] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState(0);
   const [total, setTotal] = useState(0);
-  const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
-
+console.log(discount)
 
 
   const propsObj = { total, selectedSeats, selectedSeatNames }
@@ -69,20 +67,7 @@ const Payment = () => {
     fetchEventsData();
   }, [id]);
 
-  // Calculate total price based on ticket quantity
-  useEffect(() => {
-    const calculateTotalPrice = () => {
-      if (event) {
-        let price = event.price * ticketQuantity;
-        if (ticketQuantity >= 5) {
-          price *= 0.9; // 10% discount for bulk purchases
-        }
-        setTotalPrice(price.toFixed(2));
-      }
-    };
-
-    calculateTotalPrice();
-  }, [ticketQuantity, event]);
+  
 
   const handleTicketQuantityChange = (e) => {
     setTicketQuantity(parseInt(e.target.value));
@@ -114,7 +99,6 @@ const Payment = () => {
     });
   }, []);
 
-  // Handle seat selection and deselection
   // Handle seat selection and deselection 
   const handleSeatClick = (row, seat) => {
     const newSeats = [...seats];
@@ -150,43 +134,29 @@ const Payment = () => {
     setSeats(newSeats);
   };
 
-  // Apply coupon code
-  const applyCoupon = () => {
-    if (couponCode === "DISCOUNT20") {
-      setDiscount(20);
-      Swal.fire({
-        title: "Coupon Applied",
-        text: "You got a $20 discount!",
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-    } else {
-      setDiscount(0);
-      Swal.fire({
-        title: "Invalid Coupon",
-        text: "The coupon code is not valid.",
-        icon: "error",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-    }
-  };
 
   useEffect(() => {
     const calculateTotal = () => {
       let subtotal = total;
       if (selectedSeats >= 5) {
-        subtotal *= 0.9; // 10% bulk discount
+        const discountAmount = total * 0.1; // ১০% ডিসকাউন্টের পরিমাণ
+        setDiscount(discountAmount); // ডিসকাউন্ট সেট করা হচ্ছে
+        subtotal -= discountAmount; // ডিসকাউন্ট বাদ দিয়ে সাবটোটাল
+      } else {
+        setDiscount(0); // যদি ৫টি সিটের কম হয়, ডিসকাউন্ট 0
       }
-      return Math.max(0, subtotal - discount);
+      return subtotal;
     };
+  
+    const newTotal = calculateTotal(); // নতুন টোটাল হিসাব করা
+    setFinalTotal(newTotal); // finalTotal state সেট করা
+  }, [selectedSeats, total]);
+  
+  
+  
 
-    const newTotal = calculateTotal(); // Calculate new total
-    setFinalTotal(newTotal); // Set finalTotal state
-  }, [selectedSeats, discount, total]);
-
-
+console.log(discount)
+console.log(finalTotal)
   if (loading) {
     return <Loading />;
   }
@@ -229,11 +199,6 @@ const Payment = () => {
                         seat={seat}
                         event={event}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
-                        // className={`${
-                          //  event?.bookedSeats?.includes(seat?.number) ? 'bg-red-700' : 'bg-green-500'
-                          // console.log(event)
-                          // console.log(seat)    //{status: 'available', number: 'A7'}
-                          // }`}
                       />
                     </div>
                     {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
@@ -255,49 +220,33 @@ const Payment = () => {
               {event.dateTime.slice(0, 10) + " " + "Time:" + event.dateTime.slice(11, 16)} AM
             </div>
 
-            <div className="flex items-center gap-2 mb-4">
-              <Input
-                className="w-36"
-                type="number"
-                min={1}
-                value={ticketQuantity}
-                onChange={handleTicketQuantityChange}
-              />
-              <FcAdvertising size={30} />
-              <br />
-              <Button
-                variant="primary"
-                onClick={applyCoupon}
-                className="py-1 px-2 bg-blue-700 rounded-lg"
-              >
-                Apply Coupon
-              </Button>
-            </div>
-            <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg">
-              <p>
-                Total seat Select: <span className="text-xl font-bold">{selectedSeats}</span>
+          
+            <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg mb-2">
+              <p className="mb-2">
+                Total select seat: <span className="text-xl font-bold">{selectedSeats}</span>
               </p>
-              <p className="mt-4  ">Selected Seats:</p>
+              <p className="mt-2  ">Selected Seats:</p>
               <ol type="1" className=" flex gap-4 flex-wrap">
                 {selectedSeatNames.map((seatName, index) => (
                   <li key={index}>{seatName}</li>
                 ))}
               </ol >
-              <p>
+              <p className="mt-2">
                 Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
               </p>
-              <p>
+              <p className="mb-1">
                 Discount: <span className="ml-4">${discount.toFixed(2)}</span>
               </p>
-              <p className="">
-                Final Total: <span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
+              <hr className=""/>
+              <p className="mt-1">
+                Final Total:<span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
               </p>
             </div>
 
             <Button
               onClick={() => setIsModalOpen(true)}
               disabled={selectedSeats === 0}
-              className="w-full py-2 mt-4"
+              className="w-full py-2 mt-4 bg-blue-700"
             >
               Book Now
             </Button>
@@ -319,7 +268,7 @@ const Payment = () => {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
           >
-            <div className="absolute top-10 right-0 z-50">
+            <div className="absolute top-10 right-10 z-50">
               <Button
                 onClick={() => setIsModalOpen(false)}
                 className="bg-purple-600 text-white w-20"

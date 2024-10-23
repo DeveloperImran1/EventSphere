@@ -1,16 +1,21 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import QRCode from 'react-qr-code';
 import Loading from '../shared/LoadingSpiner/Loading';
 import Image from 'next/image';
+import { toPng } from 'html-to-image';
+import download from 'downloadjs';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
   const transitionId = searchParams.get("transitionId");
   const [paymentData, setPaymentData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [feedback, setFeedback] = useState('');
+  const [rating, setRating] = useState('');
+  const ticketRef = useRef();
 
   useEffect(() => {
     if (!transitionId) {
@@ -33,6 +38,42 @@ const PaymentQRCodePage = () => {
   }, [transitionId]);
   console.log(paymentData)
 
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    // Code to handle the feedback submission
+    console.log('Feedback:', feedback, 'Rating:', rating);
+    // Reset the form fields after submission
+    setFeedback('');
+    setRating('');
+  };
+
+  const handleDownload = () => {
+    if (!ticketRef.current) {
+      console.log("Ticket reference not found.");
+      return;
+    }
+    toPng(ticketRef.current)
+      .then((dataUrl) => {
+        download(dataUrl, 'ticket.png'); // Download as ticket.png
+      })
+      .catch((error) => {
+        console.error("Error generating ticket image:", error);
+      });
+  };
+  // console.log(ticketRef)
+
+
+  const dataforqr = {
+    transitionId: paymentData?.transitionId || 'N/A',
+    amount: paymentData?.amount || '0',
+    date: paymentData?.eventDate?.slice(0, 10) || 'Unknown Date',
+    eventName: paymentData?.eventName || 'Unknown Event',
+    bookedUserName: paymentData?.bookedUserName || 'Anonymous',
+    totalSeats: paymentData?.totalTickets || '0',
+    seatNumbers: paymentData?.selectSeatNames || ['N/A'],
+  };
+  const qrData = JSON.stringify(dataforqr);
+
   if (loading) {
     return <Loading />;
   }
@@ -42,53 +83,120 @@ const PaymentQRCodePage = () => {
   }
 
   return (
-    <div className="payment-info flex w-11/12 mx-auto my-16 shadow-2xl justify-between p-10 bg-[#E3EAFF] rounded-2xl">
-      <div className='w-96'>
-        {/* <h2>Payment Successful</h2> */}
+    <div className='w-11/12 mx-auto'>
+      <div ref={ticketRef} className=' my-16 shadow-2xl  p-10 bg-[#E3EAFF] rounded-2xl'>
+        <div className="payment-info flex flex-col lg:flex-row justify-between mr-5">
+          <div className='w-96'>
+            {/* <h2>Payment Successful</h2> */}
 
-        <Image
-          src={paymentData.eventImage}
-          alt='event-Image'
-          height={150}
-          width={370}
-          className='h-[150px] w-[300px] rounded-lg mb-5 rounded-tl-full rounded-br-full' />
+            <Image
+              src={paymentData.eventImage}
+              alt='event-Image'
+              height={150}
+              width={370}
+              className='h-[150px] w-[300px] rounded-lg mb-5 rounded-tl-full rounded-br-full' />
 
-        <p className='text-3xl  font-bold ml-5 mb-2 font-mono'>{paymentData.eventName}</p>
-        <p className='ml-5'>Booked by: {paymentData.bookedUserName}</p>
-      </div>
+            <p className='text-3xl  font-bold ml-5 mb-2 font-mono'>{paymentData.eventName}</p>
+            <p className='ml-5'>Booked by: {paymentData.bookedUserName}</p>
+          </div>
 
-      <div className='flex flex-col justify-center items-center'>
-        <h1 className='text-5xl font-bold text-blue-500 mb-10 font-mono'>Event Tickets</h1>
-        <table className='border-2 border-blue-800 border-collapse mb-5 bg-white font-mono' >
-          <tr className='border-2 p-3'>
-            <td className='border-2 p-2 border-blue-500 text-center'>Total Seats</td>
-            <td className='border-2 p-2 border-blue-500 text-center'>{paymentData.totalTickets}</td>
-          </tr>
-          <tr>
-            <td className='border-2 p-2 border-blue-500 text-center'>Seat Number</td>
-            <td className='border-2 p-2 border-blue-500 text-center'>
-              <ol className='flex gap-3 flex-wrap'>
-                {paymentData?.selectSeatNames?.map((seatName, index) => (
-                  <li key={index} className='list-none flex'>{seatName}</li>
-                ))}
-              </ol>
-            </td>
+          <div className='flex flex-col justify-center items-center'>
+            <h1 className='text-5xl font-bold text-blue-500 mb-10 font-mono'>Event Tickets</h1>
+            <table className='border-2 border-blue-800 border-collapse mb-5 bg-white font-mono' >
+              <tr className='border-2 p-3'>
+                <td className='border-2 p-2 border-blue-500 text-center'>Total Seats</td>
+                <td className='border-2 p-2 border-blue-500 text-center'>{paymentData.totalTickets}</td>
+              </tr>
+              <tr>
+                <td className='border-2 p-2 border-blue-500 text-center'>Seat Number</td>
+                <td className='border-2 p-2 border-blue-500 text-center'>
+                  <ol className='flex gap-3 flex-wrap'>
+                    {paymentData?.selectSeatNames?.map((seatName, index) => (
+                      <li key={index} className='list-none flex'>{seatName}</li>
+                    ))}
+                  </ol>
+                </td>
 
-          </tr>
-          <tr>
-            <td className='border-2 p-2 border-blue-500 text-center'>Total Paid</td>
-            <td className='border-2 p-2 border-blue-500 text-center'>{paymentData.amount}$</td>
-          </tr>
-        </table>
-        <div className="mb-2">
-          <span className="font-bold">Date: </span>
-          {paymentData.eventDate?.slice(0, 10) + " " + "Time:" + paymentData?.eventDate?.slice(11, 16)} AM
+              </tr>
+              <tr>
+                <td className='border-2 p-2 border-blue-500 text-center'>Total Paid</td>
+                <td className='border-2 p-2 border-blue-500 text-center'>{paymentData.amount}$</td>
+              </tr>
+            </table>
+            <div className="mb-2">
+              <span className="font-bold">Date: </span>
+              {paymentData.eventDate?.slice(0, 10) + " " + "Time:" + paymentData?.eventDate?.slice(11, 16)} AM
+            </div>
+          </div>
+          <div>
+            <QRCode
+              value={qrData}
+              size={200}
+              bgColor="#ffffff"
+              fgColor="#000000"
+              // value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
+              className='mb-3 text-center m-2 mx-auto'
+
+            />
+            <p>{paymentData.transitionId} </p>
+          </div>
+        </div>
+        <div className='text-center'>
+          <button onClick={handleDownload} className="mt-5 bg-blue-500 text-white px-4 py-2 rounded-lg text-center">
+            Download Ticket
+          </button>
         </div>
       </div>
-      <div>
-        <QRCode value={paymentData.transitionId} className='mb-3 text-center m-2 mx-auto'/>
-        <p>Transaction ID: {paymentData.transitionId}</p>
+
+      {/* Feedback Section */}
+      <div className='my-16 shadow-xl rounded-xl'>
+        <div className=' max-w-2xl mx-auto my-10'>
+          <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4 ">User Feedback</h2>
+          <p className="text-center">Thank you for attending our event! Please share your valuable feedback about your experience to help us improve and deliver even better events in the future.</p>
+        </div>
+        <div className=' feedback-section flex flex-col lg:flex-row justify-between '>
+          <div className='flex-1 '>
+            <form onSubmit={handleFeedbackSubmit} className='flex flex-col items-center'>
+              <textarea
+                className='w-full lg:w-2/3 p-4 mb-4 border rounded-lg'
+                placeholder='Write your feedback here...'
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                required
+              ></textarea>
+              <div className='rating mb-4'>
+                <label className='mr-2'>Rate the event:</label>
+                <select
+                  className='border rounded-md p-2'
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                  required
+                >
+                  <option value='' disabled>Select a rating</option>
+                  <option value='1'>1 - Poor</option>
+                  <option value='2'>2 - Fair</option>
+                  <option value='3'>3 - Good</option>
+                  <option value='4'>4 - Very Good</option>
+                  <option value='5'>5 - Excellent</option>
+                </select>
+              </div>
+
+              <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
+            </form>
+          </div>
+
+          <div className='flex-1'>
+            <Image
+              src="https://img.freepik.com/free-vector/flat-design-feedback-concept_23-2148944236.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721520000&semt=ais_user"
+              height={200}
+              width={200}
+              alt="feedback image"
+              className='h-72 w-96'
+            />
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };

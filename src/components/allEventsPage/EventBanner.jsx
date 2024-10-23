@@ -3,38 +3,23 @@ import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState, useEffect } from 'react';
 
-const EventBanner = () => {
-    const [search, setSearch] = useState("");
-    const axiosPublic = useAxiosPublic();  
-    const [filters, setFilters] = useState({
-        search: '',
-        category: '',
-        minimumPrice: 0,
-        maximumPrice: 300,
-        type: '',
-        country: '',
-        city: '',
-        startDate: '',
-        endDate: '',
-      });;
+const EventBanner = ({ search, setFilters }) => {
+    const [searchResult, setSearchResult] = useState(search);
 
-    const { data: events = {}, isLoading } = useQuery({
-        queryKey: ['events', filters],
-        queryFn: async () => {
-            const { data } = await axiosPublic.get('/events', { params: filters });
-            return data;
-        },
-        keepPreviousData: true,
-        enabled: !!filters.search, // Only fetch if search is not empty
-    });
-
-    // Update filters when search changes
+    // Update filters and search result when the input changes
     useEffect(() => {
-        setFilters({ search });
+        setSearchResult(search); // Update local state when prop changes
     }, [search]);
-
+    
     const handleSearch = () => {
-        setFilters({ search });
+        setFilters({ search: searchResult });
+    };
+
+    // Handle input change and search automatically
+    const handleInputChange = (e) => {
+        const value = e.target.value;
+        setSearchResult(value);
+        setFilters({ search: value }); // Update filters based on input
     };
 
     return (
@@ -49,8 +34,8 @@ const EventBanner = () => {
                     <input
                         type="text"
                         placeholder="🔍 Search"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
+                        value={searchResult}
+                        onChange={handleInputChange}
                         className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
                     />
                     <button
