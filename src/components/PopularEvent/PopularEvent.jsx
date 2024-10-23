@@ -17,6 +17,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../shared/LoadingSpiner/Loading";
 import toast, { Toaster } from 'react-hot-toast';
+import SectionTitleSimple from "../shared/SectionTitleSimple";
 const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Business', 'Music']
 
 
@@ -93,7 +94,7 @@ export default function PopularEvent() {
   const [categoryName, setCategoryName] = useState("All")
   const axiosPublic = useAxiosPublic();
 
-  
+
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
@@ -116,32 +117,72 @@ export default function PopularEvent() {
   return (
     <div className="w-full  py-12 container mx-auto ">
       <div className="px-4">
-        <SectionTitle
-          subTitle="Popular Events"
-          title="Explore_Popular_Events"
-          description="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
+        <SectionTitleSimple
+          title="Explore Popular Events"
+          subtitle="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
         />
 
 
         <Tabs defaultValue={categories[0]} className="w-full" onValueChange={setActiveCategory}>
           <TabsList className="   w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
-            {categories.map((category) => (
-              <TabsTrigger
-                onClick={() => setCategoryName(category)}
-                key={category}
-                value={category}
-                className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
-              >
-                {category}
-                <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
-              </TabsTrigger>
-            ))}
+            {/* {categories.map((category) => ( */}
+            <TabsTrigger
+              onClick={() => setCategoryName("All")}
+              value={"All"}
+              className="hidden md:block relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              All
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+
+            <TabsTrigger
+              onClick={() => setCategoryName("Healthcare")}
+              value={"Healthcare"}
+              className="hidden md:block relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              Healthcare
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+            <TabsTrigger
+              onClick={() => setCategoryName("Technology")}
+              value={"Technology"}
+              className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              Technology
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+            <TabsTrigger
+              onClick={() => setCategoryName("Art & Culture")}
+              value={"Art & Culture"}
+              className="hidden md:block  relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              Art & Culture
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+            <TabsTrigger
+              onClick={() => setCategoryName("Business")}
+              value={"Business"}
+              className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              Business
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+
+            <TabsTrigger
+              onClick={() => setCategoryName("Music")}
+              value={"Music"}
+              className="relative text-sm sm:text-base   md:w-28   px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+            >
+              Music
+              <span className="absolute left-0 bottom-0 h-1  bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+            </TabsTrigger>
+            {/* ))} */}
           </TabsList>
 
           {
             isLoading && <Loading></Loading>
           }
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <TabsContent key={category} value={category} className="mt-0">
               <AnimatePresence mode="wait">
                 <motion.div
