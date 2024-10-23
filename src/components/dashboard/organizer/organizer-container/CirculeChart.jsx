@@ -58,7 +58,7 @@ const CirculeChart = ({ PieChartData }) => {
             <div className="flex flex-col md:flex-row justify-center items-center pt-5">
               <div className="flex justify-center items-center md:mr-12">
                 <p className="text-lg mr-4">Your Total Events</p>
-                <div className="w-16 h-3 rounded-sm bg-[#4460ff]"></div>
+                <div className="w-16 h-3 rounded-sm bg-[#1b85db]"></div>
               </div>
 
               <div className="flex justify-center items-center">

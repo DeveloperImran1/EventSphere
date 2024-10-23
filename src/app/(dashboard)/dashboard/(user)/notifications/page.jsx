@@ -14,7 +14,7 @@ const Notifications = () => {
           <div className="flex flex-wrap gap-x-10">
             <div className="flex gap-x-5">
               <GrFormClose className="text-3xl p-2 bg-slate-400/50 rounded-md" />
-              <p className="bg-green-600 text-white text-sm flex px-3 font-semibold items-center rounded-md">
+              <p className="bg-[#1b85db] text-white text-sm flex px-3 font-semibold items-center rounded-md">
                 Mehedi Hasan
               </p>
             </div>
@@ -27,7 +27,7 @@ const Notifications = () => {
         <div className="pl-12 mt-2">
             <h6 className="text-xl font-bold">Dusshopno Odd Signature Songs</h6>
             <p className="mb-2">The way the artist blends the instruments is incredible. This song is pure magic from start to finish</p>
-            <span className="bg-orange-300 text-xs font-semibold py-1 px-4 rounded-3xl text-center cursor-pointer">More Details</span>
+            <span className="bg-[#10a0b9] text-white text-xs font-semibold py-1 px-4 rounded-3xl text-center cursor-pointer">Details</span>
         </div>
       </div>
       {/* Notifications Box */}
@@ -36,7 +36,7 @@ const Notifications = () => {
           <div className="flex flex-wrap gap-x-10">
             <div className="flex gap-x-5">
               <GrFormClose className="text-3xl p-2 bg-slate-400/50 rounded-md" />
-              <p className="bg-green-600 text-white text-sm flex px-3 font-semibold items-center rounded-md">
+              <p className="bg-[#1b85db] text-white text-sm flex px-3 font-semibold items-center rounded-md">
                 Mehedi Hasan
               </p>
             </div>
@@ -49,7 +49,7 @@ const Notifications = () => {
         <div className="pl-12 mt-2">
             <h6 className="text-xl font-bold">Dusshopno Odd Signature Songs</h6>
             <p className="mb-2">The way the artist blends the instruments is incredible. This song is pure magic from start to finish</p>
-            <span className="bg-orange-300 text-xs font-semibold py-1 px-4 rounded-3xl text-center cursor-pointer">More Details</span>
+            <span className="bg-[#10a0b9] text-white text-xs font-semibold py-1 px-4 rounded-3xl text-center cursor-pointer">Details</span>
         </div>
       </div>
     </div>
