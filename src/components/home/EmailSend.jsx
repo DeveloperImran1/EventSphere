@@ -22,7 +22,7 @@ const EmailSend = () => {
             .then(
                 (response) => {
                     console.log('Email sent successfully:', response);
-                    setMessage('Subscription successful! Check your inbox.');
+                    setMessage('Subscription successful! ');
                     setEmail(''); // Clear the input field after success
                 },
                 (error) => {
