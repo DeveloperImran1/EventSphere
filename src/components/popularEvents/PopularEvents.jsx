@@ -25,6 +25,7 @@ import Loading from '../shared/LoadingSpiner/Loading';
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import SectionTitle from "../shared/SectionTitle";
+import SectionTitleSimple from "../shared/SectionTitleSimple";
 
 
 
@@ -46,7 +47,7 @@ const PopularEvents = () => {
 
 
     // Data fetching using react-query
-    const { data: popularEventsMax = {}, isLoading, refetch } = useQuery({
+    const { data: popularEventsMax = [], isLoading, refetch } = useQuery({
         queryKey: ['popularEventsMax'],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/events/popular-events');
@@ -55,7 +56,7 @@ const PopularEvents = () => {
         staleTime: 0,
         keepPreviousData: true,
     });
-    // console.log(popularEventsMax)
+    console.log(popularEventsMax)
     // console.log(popularEventsMax.title)
     // console.log(popularEventsMax.price)
 
@@ -158,13 +159,10 @@ const PopularEvents = () => {
     }
     return (
         <div className="container">
-            <div className="my-16 max-w-2xl mx-auto">
-                <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4">Popular Events</h2>
-                <p className="text-center">Explore the top popular events with the most booked seats, offering exciting experiences across various categories like entertainment, sports, and cultural activities, ensuring unforgettable moments for everyone.</p>
-            </div>
+            <SectionTitleSimple title="Popular Events" subtitle="Explore the top popular events with the most booked seats, offering exciting experiences across various categories like entertainment, sports, and cultural activities, ensuring unforgettable moments for everyone."></SectionTitleSimple>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:4 2xl:6 gap-2 lg:gap-4 2xl:gap-6">
-                {popularEventsMax.map(popularEvents => <>
+                {popularEventsMax?.map(popularEvents => <>
                     <div className=" " key={popularEvents._id}>
 
                         <motion.div

@@ -234,7 +234,7 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='w-11/12 mx-auto mt-20'>
+      <div className='  container mx-auto'>
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden">
           <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-logo] text-white rounded-full">
@@ -432,13 +432,13 @@ const EventsData = () => {
           <div className="w-full lg:w-4/5">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {events?.events?.map(event => (
-                <AnimatePresence key={event._id}>
                   <CardForEvents
+                  key={event._id}
                     event={event}
                     addToCart={addToCart}
                     shareEvent={shareEvent}
                   />
-                </AnimatePresence>
+         
               ))}
             </div>
             {/* Pagination */}
@@ -474,7 +474,7 @@ const EventsData = () => {
                 >
                   Previous
                 </button>
-                <div>
+                <div className='hidden md:flex'>
                   {Array.from({ length: events.totalPages }, (_, index) => (
                     <button
                       key={index + 1}

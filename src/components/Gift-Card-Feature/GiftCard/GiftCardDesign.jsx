@@ -51,7 +51,7 @@ const GiftCardDesign = () => {
     //     }
     // ]
     // Data fetching using react-query
-    const { data: quality = {}, isLoading, refetch } = useQuery({
+    const { data: quality = [], isLoading, refetch } = useQuery({
         queryKey: ['quality'],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/getQuality');
@@ -66,13 +66,8 @@ const GiftCardDesign = () => {
     }
 
     return (
-<<<<<<< HEAD
         <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 my-20 ' >
             {quality?.map((card) => (
-=======
-        <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 ' >
-            {cards.map((card) => (
->>>>>>> e2fb290861dea2b178f4398127902632af02c7de
                 <div key={card.id} className="container ">
 
                     <div className="card w-full h-full bg-black rounded-2xl  "
@@ -118,15 +113,10 @@ const GiftCardDesign = () => {
                                 </p>
                             </div>
                             {/* button */}
-<<<<<<< HEAD
                             <Link href={`/qualityPayment?id=${card?._id}`}>
                                 <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
                                 </Link>
 
-=======
-                            <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
-                                 
->>>>>>> e2fb290861dea2b178f4398127902632af02c7de
                         </div>
 
 

@@ -76,9 +76,9 @@ export default function Banner() {
   };
 
   return (
-    <div className="h-screen  grid place-items-center overflow-hidden">
+    <div className="h-screen grid place-items-center overflow-hidden  ">
 
-      <main className="relative  w-full h-full shadow-[0_3px_10px_rgba(0,0,0,0.3)]">
+      <main className="relative  w-full h-full shadow-[0_3px_10px_rgba(0,0,0,0.3)] ">
         <ul ref={sliderRef} className="slider">
           {items.map((item, index) => (
             <li
