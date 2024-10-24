@@ -46,7 +46,7 @@ const EmailSend = () => {
                         Stay Informed with Our Newsletter
                     </h2>
                     <p className="mb-6 text-lg font-serif lg:text-xl text-gray-700">
-                        Subscribe to receive the latest updates and exclusive offers right in your inbox. Don't miss out!
+                        Subscribe to receive the latest updates and exclusive offers right in your inbox. Dont miss out!
                     </p>
                     <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center">
                         <input
