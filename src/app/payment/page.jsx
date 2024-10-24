@@ -15,9 +15,9 @@ const ROWS = 10;
 const SEATS_PER_ROW = 12;
 
 // SeatButton Component for rendering seat buttons
-function SeatButton({ seat, onClick , event}) {
- const res = event?.bookedSeats?.includes(seat?.number)
-//  console.log("bokin naki chekc", res)
+function SeatButton({ seat, onClick, event }) {
+  const res = event?.bookedSeats?.includes(seat?.number)
+  //  console.log("bokin naki chekc", res)
   const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
   // console.log(seat)
 
@@ -44,9 +44,11 @@ const Payment = () => {
   const [selectedSeats, setSelectedSeats] = useState(0);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
+  const [couponCode, setCouponCode] = useState('');
+  const [couponDiscount, setCouponDiscount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [finalTotal, setFinalTotal] = useState()
-console.log(discount)
+  console.log(discount)
 
 
   const propsObj = { total, selectedSeats, selectedSeatNames }
@@ -67,7 +69,7 @@ console.log(discount)
     fetchEventsData();
   }, [id]);
 
-  
+
 
   const handleTicketQuantityChange = (e) => {
     setTicketQuantity(parseInt(e.target.value));
@@ -138,25 +140,42 @@ console.log(discount)
   useEffect(() => {
     const calculateTotal = () => {
       let subtotal = total;
+      let seatDiscount = 0;
+      let appliedCouponDiscount = 0;
+
+      // Apply seat-based discount
       if (selectedSeats >= 5) {
-        const discountAmount = total * 0.1; // ১০% ডিসকাউন্টের পরিমাণ
-        setDiscount(discountAmount); // ডিসকাউন্ট সেট করা হচ্ছে
-        subtotal -= discountAmount; // ডিসকাউন্ট বাদ দিয়ে সাবটোটাল
-      } else {
-        setDiscount(0); // যদি ৫টি সিটের কম হয়, ডিসকাউন্ট 0
+        seatDiscount = subtotal * 0.05; // 5% discount for 5 or more seats
+        subtotal -= seatDiscount;
       }
+
+      // Apply coupon code discount
+      if (couponCode === 'DIAMOND15ES') {
+        appliedCouponDiscount = subtotal * 0.15; // 15% discount
+        subtotal -= appliedCouponDiscount;
+      } else if (couponCode === 'GOLD10ES') {
+        appliedCouponDiscount = subtotal * 0.10; // 10% discount
+        subtotal -= appliedCouponDiscount;
+      } else if (couponCode === 'PLATINUM20ES') {
+        appliedCouponDiscount = subtotal * 0.20; // 20% discount
+        subtotal -= appliedCouponDiscount;
+      }
+
+      // Update the discount states
+      setDiscount(seatDiscount + appliedCouponDiscount);
+      setCouponDiscount(appliedCouponDiscount);
       return subtotal;
     };
-  
-    const newTotal = calculateTotal(); // নতুন টোটাল হিসাব করা
-    setFinalTotal(newTotal); // finalTotal state সেট করা
-  }, [selectedSeats, total]);
-  
-  
-  
 
-console.log(discount)
-console.log(finalTotal)
+    const newTotal = calculateTotal();
+    setFinalTotal(newTotal);
+  }, [selectedSeats, total, couponCode]);
+
+
+
+
+  console.log(discount)
+  console.log(finalTotal)
   if (loading) {
     return <Loading />;
   }
@@ -220,7 +239,7 @@ console.log(finalTotal)
               {event.dateTime.slice(0, 10) + " " + "Time:" + event.dateTime.slice(11, 16)} AM
             </div>
 
-          
+
             <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg mb-2">
               <p className="mb-2">
                 Total select seat: <span className="text-xl font-bold">{selectedSeats}</span>
@@ -231,56 +250,81 @@ console.log(finalTotal)
                   <li key={index}>{seatName}</li>
                 ))}
               </ol >
-              <p className="mt-2">
-                Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
-              </p>
-              <p className="mb-1">
-                Discount: <span className="ml-4">${discount.toFixed(2)}</span>
-              </p>
-              <hr className=""/>
-              <p className="mt-1">
-                Final Total:<span className="font-bold text-xl ml-4">${finalTotal?.toFixed(2)}</span>
-              </p>
+
+              {/* Coupon Code Input */}
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="Enter coupon code"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  className="w-full p-2 border rounded mb-2"
+                />
+              </div>
+
+              {/* Calculation Display */}
+              <div className="mt-4">
+                <p className="mt-2">
+                  Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
+                </p>
+                {/* Seat Discount Display */}
+                {selectedSeats >= 5 && (
+                  <p className="mb-1">
+                    Seat 5+ dis : <span className="ml-1">${(total * 0.05).toFixed(2)}</span>
+                  </p>
+                )}
+                <p className="mb-1">
+                  Coupon Dis: <span className="ml-1">${couponDiscount.toFixed(2)}</span>
+                </p>
+                <p className="mb-1">
+                  Total Dis: <span className="ml-2">${discount.toFixed(2)}</span>
+                </p>
+                <hr className="my-2" />
+                <p className="mt-1">
+                 Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
+                </p>
+              </div>
+
+
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                disabled={selectedSeats === 0}
+                className="w-full py-2 mt-4 bg-blue-700"
+              >
+                Book Now
+              </Button>
+
             </div>
-
-            <Button
-              onClick={() => setIsModalOpen(true)}
-              disabled={selectedSeats === 0}
-              className="w-full py-2 mt-4 bg-blue-700"
-            >
-              Book Now
-            </Button>
-
           </div>
         </div>
-      </div>
 
-      {isModalOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
+        {isModalOpen && (
           <motion.div
-            className="bg-white p-6 rounded-lg shadow-lg relative"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <div className="absolute top-10 right-10 z-50">
-              <Button
-                onClick={() => setIsModalOpen(false)}
-                className="bg-purple-600 text-white w-20"
-              >
-                <TbXboxX className='text-2xl' />
-              </Button>
-            </div>
-            <EnhancedPaymentGateway total={finalTotal} selectedSeatNames={selectedSeatNames}
-              selectedSeats={selectedSeats} />
+            <motion.div
+              className="bg-white p-6 rounded-lg shadow-lg relative"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+            >
+              <div className="absolute top-10 right-10 z-50">
+                <Button
+                  onClick={() => setIsModalOpen(false)}
+                  className="bg-purple-600 text-white w-20"
+                >
+                  <TbXboxX className='text-2xl' />
+                </Button>
+              </div>
+              <EnhancedPaymentGateway total={finalTotal} selectedSeatNames={selectedSeatNames}
+                selectedSeats={selectedSeats} />
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

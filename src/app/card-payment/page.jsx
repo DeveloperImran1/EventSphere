@@ -41,26 +41,14 @@ const CardPayment = () => {
     return (
         <div>
             <Navbar />
-            <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-                <div className="relative w-full max-w-4xl aspect-[2.5/1] rounded-2xl overflow-hidden shadow-xl flex bg-gradient-to-br from-sky-400 via-sky-600 to-sky-800">
+            <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 mb-32 mb-6 lg:mt-4">
+                <div className="relative w-full lg:w-11/12 rounded-2xl overflow-hidden shadow-xl flex  flex-col lg:flex-row bg-gradient-to-br from-sky-400 via-sky-600 to-sky-800">
                     {/* Left Section with User Info */}
-                    <div className="relative w-1/2 flex items-center justify-center p-6 bg-gradient-to-tl from-blue-500/60 to-sky-700/60">
+                    <div className="relative w-full lg:w-1/3 flex items-center justify-center p-6 bg-gradient-to-tl from-blue-500/60 to-sky-700/60">
                         {/* Avatar Circle with Starburst Animation */}
                         <div className="relative">
-                            <div className="absolute inset-0 animate-spin-slow">
-                                {[...Array(8)].map((_, i) => (
-                                    <div
-                                        key={i}
-                                        className="absolute w-1 h-1 bg-yellow-200 rounded-full"
-                                        style={{
-                                            left: '50%',
-                                            top: '50%',
-                                            transform: `rotate(${i * 45}deg) translateY(-3rem)`
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                            <div className="w-24 h-24 rounded-full bg-white/90 relative overflow-hidden shadow-lg">
+
+                            <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-white/90 relative overflow-hidden shadow-lg">
                                 <Image
                                     src={cardPaymentData?.bookedUserPhoto}
                                     alt="User avatar"
@@ -71,31 +59,33 @@ const CardPayment = () => {
                             </div>
                         </div>
                         <div className="absolute bottom-6 text-center">
-                            <h2 className="text-white font-semibold text-lg">{cardPaymentData?.bookedUserName || "Guest User"}</h2>
-                            <p className="text-white/80 text-sm">VIP Member since 2024</p>
+                            <h2 className="text-white font-bold text-lg lg:text-xl">{cardPaymentData?.bookedUserName || "Guest User"}</h2>
+                            <p className="text-white/80 text-xs lg:text-sm">VIP Member since 2024</p>
                         </div>
                     </div>
 
                     {/* Right Section with Card Details */}
-                    <div className="relative w-1/2 p-8 flex flex-col justify-between bg-gradient-to-br from-white/20 via-transparent to-white/10">
+                    <div className="relative w-full lg:w-2/3 p-4 lg:p-8 flex flex-col justify-between bg-gradient-to-br from-white/20 via-transparent to-white/10">
                         {/* Card Title and Description */}
                         <div className="space-y-2">
-                            <h1 className="text-4xl font-bold text-white drop-shadow-lg" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.5)' }}>
-                                Congratulations!
+                            <h1 className="text-2xl lg:text-3xl xl:text-5xl font-bold text-white drop-shadow-lg" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.5)' }}>
+                                Congratulations! <span className='text-yellow-300 font-bold text-xl'> {cardPaymentData?.bookedUserName}</span>
                             </h1>
-                            <p className="text-lg text-white/80 uppercase tracking-wider">{cardPaymentData?.type || "Event Pass"}</p>
+                            <p className="text-white/80">
+                                Welcome to our Exclusive <span className='text-lg font-bold uppercase tracking-wider'>{cardPaymentData?.type || "Event Pass"}</span> Membership
+                            </p>
                             <span className="text-sm text-yellow-300 tracking-wide">Exclusive Access Granted</span>
                         </div>
 
                         {/* Card Features */}
-                        <div className="grid grid-cols-3 gap-4 mt-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
                             <div className="bg-black/30 backdrop-blur-md rounded px-4 py-3 text-center">
                                 <div className="text-white/60 text-xs">MEMBER ID</div>
                                 <div className="text-white font-semibold">Y18</div>
                             </div>
                             <div className="bg-black/30 backdrop-blur-md rounded px-4 py-3 text-center">
                                 <div className="text-white/60 text-xs">VALID UNTIL</div>
-                                <div className="text-white font-semibold">12/2025</div>
+                                <div className="text-white font-semibold">{cardPaymentData?.validity}</div>
                             </div>
                             <div className="bg-black/30 backdrop-blur-md rounded px-4 py-3 text-center">
                                 <div className="text-white/60 text-xs">STATUS</div>
@@ -104,13 +94,16 @@ const CardPayment = () => {
                         </div>
 
                         {/* User Name Plate and Membership Badge */}
-                        <div className="flex items-center justify-between mt-8">
-                            <div className="bg-white/90 rounded-full px-6 py-2 text-sky-900 font-medium">
-                                {cardPaymentData?.coupon || "Guest User"}
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <Star className="w-5 h-5 text-yellow-300 animate-pulse" />
-                                <span className="text-white/90 text-sm tracking-wide">VIP MEMBER</span>
+                        <div className='mt-8'>
+                            <p className='text-white mb-4'>We are giving you a coupon code. Please keep it safe. By using this coupon code during payment, you will receive a <span className='text-yellow-300 font-bold'>{cardPaymentData?.benefits[0]}</span></p>
+                            <div className="flex items-center justify-between">
+                                <div className="bg-white/90 rounded-full font-bold px-4 lg:px-6 py-2 text-sky-900 ">
+                                    {cardPaymentData?.coupon || "Guest User"}
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                    <Star className="w-5 h-5 text-yellow-300 animate-pulse" />
+                                    <span className="text-white/90 text-sm tracking-wide">VIP MEMBER</span>
+                                </div>
                             </div>
                         </div>
                     </div>
