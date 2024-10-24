@@ -18,24 +18,13 @@ const Navbar = () => {
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
 
-  useEffect(() => {
     const updateFavorites = () => {
       const storedFavorites = localStorage.getItem('favorites');
       const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
       setFavorite(myFavorites);
     };
   
-    // Run once on mount
-    updateFavorites();
-  
-    // Add event listener for changes in localStorage
-    window.addEventListener('storage', updateFavorites);
-  
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener('storage', updateFavorites);
-    };
-  }, [window.scrollY]);
+
 
   // Notification er kaj akhono hoini... kora somoi comment out korte hobe
   //   const { data: notification = [] } = useQuery({
@@ -188,6 +177,11 @@ const Navbar = () => {
       title: "Community",
       path: "/community"
     },
+    {
+      title: "Bookmark",
+      path: "/favorite-list"
+    },
+  
 
 
   ]
@@ -229,7 +223,7 @@ const Navbar = () => {
   return (
     <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-[#1b85db] shadow-lg 
+      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50
     `}>
       <div className=" mx-auto py-1  px-4 max-w-7xl">
         <div className="flex justify-between items-center ">
@@ -252,13 +246,8 @@ const Navbar = () => {
               >
                 Community
               </Link>
-              <Link
-                href="/blogs"
-                className="hover:text-yellow-300 transition duration-300 ease-in-out"
-              >
-                Blogs
-              </Link>
-              <Link
+           
+              <Link onClick={updateFavorites}
                 href="/favorite-list"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out relative"
               >
@@ -268,7 +257,7 @@ const Navbar = () => {
               </Link>
 
               <button onClick={() => setNotification(!isNotification)} id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" className="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
-                <IoMdNotifications size={22} className="text-white"></IoMdNotifications>
+                <IoMdNotifications size={25} className="text-white"></IoMdNotifications>
 
                 <div className="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
               </button>
