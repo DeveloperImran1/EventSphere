@@ -12,8 +12,8 @@ import EmailSend from './EmailSend';
 
 import PopularEvent from '../PopularEvent/PopularEvent';
 import WhyUse from './WhyUse';
+import MembershipCard from './membership/MEmbershipCard';
 
-import MembershipCard from './membership/MembershipCard';
 
 
 const HomeContainer = () => {
