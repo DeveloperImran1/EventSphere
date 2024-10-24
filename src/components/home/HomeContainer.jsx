@@ -16,11 +16,12 @@ const HomeContainer = () => {
         <div className=''>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
+            <MembershipCard/>
             <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
             <PopularEvent/>
-            <MembershipCard/>
+           
             {/* <Testimonials></Testimonials> */}
             
         </div>
