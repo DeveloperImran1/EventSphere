@@ -11,6 +11,7 @@ import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css';
 import '@/components/testimonials/Testimonials';
 import SectionTitle from '../shared/SectionTitle';
+import SectionTitleSimple from '../shared/SectionTitleSimple';
 
 const Testimonials = () => {
     const reviews = [
@@ -47,13 +48,12 @@ const Testimonials = () => {
     return (
         <div className="max-w-7xl  mx-auto p-4 mb-20">
             <div>
-                <SectionTitle
-                subTitle="Users Reviews"
+                <SectionTitleSimple
                     title="Testimonials"
-                    description="Read our testimonials to hear from satisfied customers. Their experiences highlight our commitment to quality and service, showcasing how we've positively impacted their journeys!"
+                    subtitle="Read our testimonials to hear from satisfied customers. Their experiences highlight our commitment to quality and service, showcasing how we've positively impacted their journeys!"
                 >
 
-                </SectionTitle>
+                </SectionTitleSimple>
 
             </div>
             <Swiper
