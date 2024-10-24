@@ -21,6 +21,10 @@ const MyFollower = ({ userData, refetch }) => {
 
     // handleFollow Button
     const handleFollow = async (id) => {
+        if ( !myEmail) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         try {
           const response = await fetch(`http://localhost:9000/user/handleAddFollower/${id}`, {
             method: 'POST',
