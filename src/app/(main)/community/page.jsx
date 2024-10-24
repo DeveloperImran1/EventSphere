@@ -8,13 +8,13 @@ import React from 'react';
 const CommunityPage = () => {
     return (
         <div className="">
-            <div className="flex gap-x-4 w-full container">
+            <div className="flex gap-x-4 max-w-[1280px] mx-auto">
                 {/* Sidebar */}
                 {/* <div className="w-1/6 border-2 hidden md:block">
                     <CommunitySidebar />
                 </div> */}
                 {/* Main Content */}
-                <div className="border-2 w-full lg:max-w-[70%]">
+                <div className=" w-full md:w-[50%] mx-auto">
                     {/* <CommunityHeader /> */}
                     <div className="">
                         {/* Scrollable Feed */}

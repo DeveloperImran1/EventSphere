@@ -181,7 +181,7 @@ const FeedPostItem = ({ item, refetch }) => {
                         <img
                             src={imgSrc}
                             alt={`slide ${i + 1}`}
-                            className="w-full max-h-[700px] object-cover rounded-md"
+                            className="w-full max-h-[320px] object-cover rounded-md"
                         />
                     </SwiperSlide>
                 ))}

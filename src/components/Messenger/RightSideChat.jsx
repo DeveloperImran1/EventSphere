@@ -30,10 +30,10 @@ const RightSideChat = ({currentChat,currentUser}) => {
      }, [currentChat?.members,currentUser,axiosPublic])
 
   return (
-    <div className="mt-3">
+    <div className="mt-3 ">
     <div className=" flex  pb-2  flex-col  justify-center items-center ">
-        <Image src={user?.image}  width={50} height={50} alt="avatar"
-            className=" rounded-full" />
+        <Image src={user?.image || "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"}  width={50} height={50} alt="avatar"
+            className=" rounded-full h-[120px] w-[120px] " />
 
         <p className=" font-bold text-black">{user?.name}</p>
     
