@@ -52,7 +52,7 @@ const EventTime = () => {
           return;
         }
         setEvents(res.data);
-        console.log(res.data)
+        // console.log(res.data)
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -64,7 +64,7 @@ const EventTime = () => {
     });
   }, []);
 
-  console.log("Event timing page theke events ", events)
+  // console.log("Event timing page theke events ", events)
 
 
   // 3d card const Card3D = ({ event }) => {

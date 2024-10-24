@@ -134,7 +134,7 @@ const UnderwaterFooter = () => {
   
 
   return (
-    <div className="relative  overflow-hidden bg-blue-900 text-white mt-14 ">
+    <div className="relative  overflow-hidden bg-blue-900 text-white  ">
       <div id='surface'></div>
       <div id='caustics'></div>
       <div id='bg'></div>
@@ -151,8 +151,8 @@ const UnderwaterFooter = () => {
         </filter>
       </svg>
 
-      <footer className=" relative  text-[18px] [unicode-bidi:isolate]  container">
-        <div className="flex flex-col items-stretch border-[#40454f]  mx-6 md:mx-auto">
+      <footer className=" relative  text-[18px] [unicode-bidi:isolate] px-6  max-w-[1280px] mx-auto">
+        <div className="flex flex-col items-stretch border-[#40454f]  mx-6 md:mx-auto ">
           {/* Footer Header */}
           <div className="  uppercase mb-6 my-10  ">
             {/* <h1 className='text-transparent bg-clip-text max-w-[600px] text-[48px] font-bold leading-[120%] bg-gradient-to-r from-green-500 to-blue-400'>The future of <span>events</span>
@@ -228,14 +228,14 @@ const UnderwaterFooter = () => {
             {/* Left Side */}
             <div className="flex flex-col md:flex-row items-center ">
               <Logo />
-              <h1 className='px-5 text-[18px] font-semibold mx-auto my-5'><span>&copy;</span> EventSphare 2024. All rights reserved.</h1>
+              <h1 className='md:px-5 text-[18px] font-semibold mx-auto my-5'><span>&copy;</span> EventSphare 2024. All rights reserved.</h1>
             </div>
             {/* Right Side  social link  */}
 
             <div className="">
               {/* <SocialIcons></SocialIcons> */}
 
-              <div className=" pr-[60px] md:mr-5">
+              <div className=" md:pr-[60px] md:mr-5">
 
 
                 <div className=" ">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
 
@@ -37,7 +38,7 @@ function ChatBody() {
                     {
                         whichMessage?.map((person) => {
                             return (person === "her" ? <div className="flex  items-start gap-4 my-3">
-                                <img src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/409190995_2451672608340062_5052422953989411988_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=hh-ke09yg-gQ7kNvgERag7_&_nc_ht=scontent.fdac157-1.fna&oh=00_AYBrh0gfCKq1rErk1yb5DiQ3fzOpgeX1Fh8FuEEFVeb12A&oe=66D37960" alt="" className="w-10 h-auto rounded-full" />
+                                <Image height={676} width={1200} src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/409190995_2451672608340062_5052422953989411988_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=hh-ke09yg-gQ7kNvgERag7_&_nc_ht=scontent.fdac157-1.fna&oh=00_AYBrh0gfCKq1rErk1yb5DiQ3fzOpgeX1Fh8FuEEFVeb12A&oe=66D37960" alt="" className="w-10 h-auto rounded-full" />
 
                                 <div>
                                     <div className="flex flex-col text-white p-4 rounded-md items-start bg-[#71b6f9] relative">
@@ -66,7 +67,7 @@ function ChatBody() {
                                             <h1 className="text-sm text-right">10:05</h1>
                                         </div>
 
-                                        <img src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/409190995_2451672608340062_5052422953989411988_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=hh-ke09yg-gQ7kNvgERag7_&_nc_ht=scontent.fdac157-1.fna&oh=00_AYBrh0gfCKq1rErk1yb5DiQ3fzOpgeX1Fh8FuEEFVeb12A&oe=66D37960" alt="" className="w-10 h-auto rounded-full" />
+                                        <Image height={676} width={1200} src="https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/409190995_2451672608340062_5052422953989411988_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=hh-ke09yg-gQ7kNvgERag7_&_nc_ht=scontent.fdac157-1.fna&oh=00_AYBrh0gfCKq1rErk1yb5DiQ3fzOpgeX1Fh8FuEEFVeb12A&oe=66D37960" alt="" className="w-10 h-auto rounded-full" />
                                     </div>
                                 </div>)
                         })
