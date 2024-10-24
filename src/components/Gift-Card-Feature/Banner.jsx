@@ -3,29 +3,20 @@
 
 
 import { useState, useEffect } from 'react'
-import { Button } from "@/components/ui/button"
-import YouTube from 'react-youtube'
 
-import { FaPlayCircle } from 'react-icons/fa'
+
 import './Banner.css'
-import Image from 'next/image'
-const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
 
+import CercleButton from '../shared/CercleBuuton/Button'
+import GiftCardDesign from './GiftCard/GiftCardDesign'
+import Link from 'next/link'
+const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
 
 export default function ChristmasPromo() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isPlaying, setIsPlaying] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  const videoId = 'ncjuqj0WN6s'
-
-  const opts = {
-    width: '600',
-    height: '400',
-    playerVars: {
-      autoplay: 1,
-    },
-  }
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,20 +36,23 @@ export default function ChristmasPromo() {
     return () => clearInterval(timer)
   }, [])
 
+  
   const handlePlayClick = () => {
     setShowModal(true)
     setIsPlaying(true)
   }
 
+  
   const handleCloseModal = () => {
     setShowModal(false)
     setIsPlaying(false)
   }
 
   return (
-    <div className="flex flex-col  bg-[rgb(15,31,61)]    md:flex-row ">
-      <div className="w-full clipPathSection1 md:w-1/2  bg-red-500 text-white  relative overflow-hidden flex flex-col justify-center">
-        <div className="absolute inset-0 opacity-70">
+    <div className="flex flex-col  bg-[rgb(15,31,61)]  md:h-[600px]  md:flex-row ">
+      <div   className="w-full clipPathSection1 md:w-1/2    text-white  relative ">
+        
+        <div className="absolute inset-0 backdrop-blur-sm opacity-80">
           {festiveEmojis.map((emoji, index) => (
             <span
               key={index}
@@ -73,7 +67,7 @@ export default function ChristmasPromo() {
             </span>
           ))}
         </div>
-        <div className="relative z-10  p-20">
+        <div className="relative z-10   p-20">
           <h4 className="text-xl  font-poppins  mb-2">December 24-26, 2024</h4>
           <h1 className="md:text-5xl  font-serif   md:font-extrabold mb-6">Christmas Day</h1>
          <div className="flex mb-6">
@@ -90,41 +84,25 @@ export default function ChristmasPromo() {
       </div>
     </div>
           <div className=" md:flex  gap-4 ">
-            <Button variant="secondary" className="bg-white md:text-lg font-medium text-red-500 hover:bg-red-100">BOOK NOW</Button>
-            <Button variant="outline" className="border-black md:text-xl rounded-3xl   font-medium text-white font-mono uppercase bg-red-500">Explore</Button>
+          <Link className='button' href="/events">All Events</Link>
+              <CercleButton>Explore More</CercleButton>
 
           </div>
         </div>
       </div>
-      <div className="w-full clipPathSection2   md:w-1/2   flex items-center justify-center relative">
-        <div className="relative"> 
-        <Image height={675} width={1200}
-            src="https://i.ibb.co.com/kB2XJkB/people-taking-part-high-protocol-event.jpg"
-            alt="Concertgoers Watching Majestic Concert"
-            onClick={handlePlayClick}
-          />
-          <Button 
-            onClick={handlePlayClick} 
-            className="absolute inset-0  w-14  flex items-center justify-center bg-red-500 text-white rounded-full mx-auto my-auto"
-          >
-            <FaPlayCircle className="text-4xl" />
-          </Button>
-        </div>
+      <div className="w-full  md:w-1/2  py-10  relative">
+          <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold text-white font-serif">Exclusive Event Gift Cards</h2>
+        <p className="text-slate-200 mt-2">Choose the perfect card to unlock amazing benefits and enjoy premium experiences at our events.</p>
       </div>
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-          <div className="bg-white p-2 relative">
-            <button onClick={handleCloseModal} className="absolute text-3xl top-4 right-4 text-red-500">✖</button>
-            {isPlaying && (
-              <YouTube
-                videoId={videoId}
-                opts={opts}
-                onEnd={handleCloseModal}
-              />
-            )}
-          </div>
-        </div>
-      )}
+
+
+
+{/*   Gift card       */}
+       <GiftCardDesign></GiftCardDesign>
+      </div>
+    
+
     </div>
   )
 }

@@ -13,8 +13,7 @@ import "aos/dist/aos.css";
 
 import axios from "axios";
 import Link from "next/link";
-import FireTextTitle from "../shared/FireText";
-import RotateButton from "../shared/RotateButton";
+
 import SectionTitle from "../shared/SectionTitle";
 import Button from "../shared/CercleBuuton/Button";
 import CardForEvents from "../allEventsPage/CardForEvents";
@@ -158,6 +157,7 @@ const EventTime = () => {
             }).map((event) => (
                 <AnimatePresence>
                   <CardForEvents
+               
                     event={event}
                   />
                 </AnimatePresence>

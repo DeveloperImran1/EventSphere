@@ -37,7 +37,7 @@ const Table = () => {
               <div key={index} className="flex items-center p-2 bg-gray-50 rounded-lg">
                 <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
                 <div className="flex-grow">
-                  <h3 className="font-semibold">{event.title}</h3>
+                  <h5 className="font-semibold ">{event.title}</h5>
                   <p className="text-sm text-gray-500">{event.category}</p>
                 </div>
                 <div className="text-right">

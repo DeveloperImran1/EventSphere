@@ -1,7 +1,21 @@
+"use client";
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
 
-const Table = ({data}) => {
+
+const Table = ({ data, email }) => {
+    const axiosPublic = useAxiosPublic();
+    const { data: weeklySales = [], isPending: loading, refetch } = useQuery({
+        queryKey: ['weeklySales'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/organizer-WeeklySales/${email}`);
+            // console.log(res.data)
+            return res.data;
+        }
+    })
+    console.log(weeklySales);
 
     return (
         <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
@@ -9,11 +23,11 @@ const Table = ({data}) => {
             <div className='flex gap-6 my-4'>
                 <div>
                     <h2 className='text-sm text-gray-800 text-start mb-2'>This Week</h2>
-                    <h2 className='text-xl font-semibold text-red-500 text-start'>$5500.00</h2>
+                    <h2 className='text-xl font-semibold text-red-500 text-start'>${weeklySales.currentWeekSales}</h2>
                 </div>
                 <div>
                     <h2 className='text-sm text-gray-800 text-start mb-2'>Previous Week</h2>
-                    <h2 className='text-xl font-semibold text-red-500 text-start'>$6550.00</h2>
+                    <h2 className='text-xl font-semibold text-red-500 text-start'>${weeklySales.previousWeekSales}</h2>
                 </div>
             </div>
             <div className="overflow-x-auto">
@@ -22,7 +36,7 @@ const Table = ({data}) => {
                         <tr className="bg-gray-100 text-left">
                             <th className="py-3 px-4">Image</th>
                             <th className="py-3 px-4">User Name</th>
-                            <th className="py-3 px-4">Email</th>
+                            <th className="hidden md:block py-3 px-4">Email</th>
                             <th className="py-3 px-4">Booked Amount</th>
                             <th className="py-3 px-4">Action</th>
                         </tr>
@@ -31,17 +45,17 @@ const Table = ({data}) => {
                         {data?.map((user, index) => (
                             <tr key={index} className="border-b hover:bg-gray-50 transition duration-200">
                                 <td className="py-4 px-4">
-                                    <Image src={user?.bookedUserPhoto} alt={user.name} 
-                                    width={12} height={12}
-                                    className="w-12 h-12 rounded-full object-cover"/>
+                                    <Image src={user?.bookedUserPhoto} alt={user.name}
+                                        width={12} height={12}
+                                        className="w-12 h-12 rounded-full object-cover" />
                                 </td>
                                 <td className="py-4 px-4 font-bold text-gray-800">{user?.bookedUserName}</td>
-                                <td className="py-4 px-4 text-red-500">{user?.bookedUserEmail}</td>
+                                <td className="hidden md:block py-4 px-4 text-red-500">{user?.bookedUserEmail}</td>
                                 <td className="py-4 px-4 font-semibold text-gray-800">{user?.amount}</td>
                                 <td className="py-4 px-4">
-                                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+                                    <Link href={`/dashboard/user-profile/${user?.bookedUserEmail}`} className="button">
                                         Profile
-                                    </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
