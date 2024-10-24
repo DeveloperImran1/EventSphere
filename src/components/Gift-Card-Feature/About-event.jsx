@@ -47,19 +47,13 @@ const AboutSection = () => {
     },
   ]
 
-
-
-
-
-
-
   return (
-    <section className="">
+    <section className="py-14 h-full">
 
-      <div className="md:flex  justify-end   items-center  ">
-        <div className='md:flex space-y-4 gap-10  md:h-96 items-center'  >
+      <div className="md:flex max-w-[1280px] mx-auto justify-evenly  items-center h-full ">
+        <div className='md:flex space-y-4 gap-10  items-center'  >
           {/* Left Content - Event Description */}
-          <div className="    lg:w-80  text-center lg:text-left">
+          <div className="    lg:w-[50%]  text-center lg:text-left">
             <h2 className="text-3xl font-serif font-bold text-gray-800 mb-4">About Event</h2>
             <p className="text-gray-600 ">Join us to celebrate the biggest event for the whole family this December!</p>
             <p className="text-gray-600 mb-6">We have prepared a variety of entertaining activities for kids and adults to provide an unforgettable experience of celebrating Christmas the way you want it.</p>
@@ -67,7 +61,7 @@ const AboutSection = () => {
           </div>
 
           {/* Middle Content - Swiper Image Slider */}
-          <div className="lg:max-w-[400px]  ">
+          {/* <div className="lg:max-w-[400px]  ">
             <Swiper
 
               spaceBetween={30}
@@ -129,29 +123,22 @@ const AboutSection = () => {
 
 
 
-          </div>
+          </div> */}
 
         </div>
         {/* Right Content - Event Details */}
-        <div className=" flex justify-center py-10  rounded-tl-full md:w-1/2 md:h-[443px] bg-gray-200 ">
+        <div className=" flex justify-center py-10   md:w-1/2 md:h-[443px]  ">
 
 
           <ul className=" grid  grid-cols-1  md:grid-cols-2  gap-4  ">
             {features.map((feature, index) => (
               <li
                 key={index}
-                className="relative w-44 p-2 flex justify-center flex-col items-center  rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-[0_0_15px_var(--clr),0_0_30px_var(--clr)] group"
-                style={{
-                  '--clr': feature.color,
-                  '--i': index,
-                }}
+                className="relative w-44 p-2 flex justify-center flex-col items-center  rounded-lg shadow-md overflow-hidden transition-all duration-500 "
               >
                 <div
                   className="absolute w-10 h-[400%] opacity-20 transition-all duration-1100 animate-[spin_3s_linear_infinite]"
-                  style={{
-                    background: `linear-gradient(0deg, transparent 30%, ${feature.color} 70%)`,
-                    animationDelay: `calc(2s * ${index})`,
-                  }}
+                 
                 />
                 <div className="absolute inset-1 bg-gray-100 transition-all duration-500 z-[1] group-hover:bg-[var(--clr)] group-hover:opacity-5" />
                 <div className="relative z-[2]  flex flex-col items-center">

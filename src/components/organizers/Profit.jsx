@@ -4,7 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
 import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
+import DummyProfit from './DummyProfit';
 import Image from 'next/image';
+
 
 // Define color palette for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
@@ -12,6 +14,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 const Dashboard = () => {
   // State to store event data and order data
   const [eventData, setEventData] = useState([]);
+  console.log( "eeeeeeeeeee", eventData);
   const [orderData, setOrderData] = useState([]);
   
   // Retrieve session data for the current user
@@ -76,6 +79,10 @@ const Dashboard = () => {
       .sort((a, b) => b.bookedSeats.length - a.bookedSeats.length)
       .slice(0, 5);
   };
+
+  if (eventData.length === 0) {
+    return <DummyProfit/>
+  }
 
   return (
     <div className="p-4 space-y-6 bg-gray-100">

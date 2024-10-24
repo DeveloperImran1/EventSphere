@@ -7,6 +7,8 @@ import Loading from '../shared/LoadingSpinner/Loading';
 import Image from 'next/image';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
@@ -17,8 +19,10 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState('');
   const ticketRef = useRef();
 
+ 
+
   useEffect(() => {
-    if (!transitionId) {
+   if (!transitionId) {
       console.log("Transaction ID is missing.");
       return;
     }
@@ -40,11 +44,12 @@ const PaymentQRCodePage = () => {
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
-    // Code to handle the feedback submission
-    console.log('Feedback:', feedback, 'Rating:', rating);
-    // Reset the form fields after submission
+
+    // Show success toast
+    toast.success('Feedback successfully submitted!')
+
+    // Clear the form
     setFeedback('');
-    setRating('');
   };
 
   const handleDownload = () => {
@@ -63,6 +68,9 @@ const PaymentQRCodePage = () => {
   // console.log(ticketRef)
 
 
+
+
+
   const dataforqr = {
     transitionId: paymentData?.transitionId || 'N/A',
     amount: paymentData?.amount || '0',
@@ -74,6 +82,35 @@ const PaymentQRCodePage = () => {
   };
   const qrData = JSON.stringify(dataforqr);
 
+  // const handleFeedback = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const updateResponse = await axiosPublic.patch(`/events/${id}`, {
+  //       eventId: id,
+  //       newBookedSeats: selectedSeatNames
+  //   });
+  //     await axios.post(`/feedback`, { feedback });
+  //     // Show success message
+  //     Swal.fire({
+  //       title: 'Success!',
+  //       text: 'Your feedback has been submitted.',
+  //       icon: 'success',
+  //     });
+  //     // Clear feedback input
+  //     setFeedback('');
+  //     // Optionally refetch events or perform other actions
+  //     refetch();
+  //   } catch (error) {
+  //     // Show error message
+  //     Swal.fire({
+  //       title: 'Error!',
+  //       text: 'There was a problem submitting your feedback.',
+  //       icon: 'error',
+  //     });
+  //   }
+  // };
+
   if (loading) {
     return <Loading />;
   }
@@ -84,7 +121,7 @@ const PaymentQRCodePage = () => {
 
   return (
     <div className='w-11/12 mx-auto'>
-      <div ref={ticketRef} className=' my-16 shadow-2xl  p-10 bg-[#E3EAFF] rounded-2xl'>
+      <div ref={ticketRef} className=' mt-16 mb-24 shadow-xl  p-10 bg-[#E3EAFF] rounded-2xl'>
         <div className="payment-info flex flex-col lg:flex-row justify-between mr-5">
           <div className='w-96'>
             {/* <h2>Payment Successful</h2> */}
@@ -100,8 +137,8 @@ const PaymentQRCodePage = () => {
             <p className='ml-5'>Booked by: {paymentData.bookedUserName}</p>
           </div>
 
-          <div className='flex flex-col justify-center items-center'>
-            <h1 className='text-5xl font-bold text-blue-500 mb-10 font-mono'>Event Tickets</h1>
+          <div className='flex flex-col justify-center items-center gap-5'>
+            <h1 className='text-3xl lg:text-5xl font-bold lg:font-black text-blue-500 mb-10 font-mono'>Event Tickets</h1>
             <table className='border-2 border-blue-800 border-collapse mb-5 bg-white font-mono' >
               <tr className='border-2 p-3'>
                 <td className='border-2 p-2 border-blue-500 text-center'>Total Seats</td>
@@ -149,7 +186,7 @@ const PaymentQRCodePage = () => {
       </div>
 
       {/* Feedback Section */}
-      <div className='my-16 shadow-xl rounded-xl'>
+      <div className='my-16 shadow-xl rounded-xl p-4 lg:p-6 2xl:p-10'>
         <div className=' max-w-2xl mx-auto my-10'>
           <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4 ">User Feedback</h2>
           <p className="text-center">Thank you for attending our event! Please share your valuable feedback about your experience to help us improve and deliver even better events in the future.</p>
@@ -164,22 +201,7 @@ const PaymentQRCodePage = () => {
                 onChange={(e) => setFeedback(e.target.value)}
                 required
               ></textarea>
-              <div className='rating mb-4'>
-                <label className='mr-2'>Rate the event:</label>
-                <select
-                  className='border rounded-md p-2'
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                  required
-                >
-                  <option value='' disabled>Select a rating</option>
-                  <option value='1'>1 - Poor</option>
-                  <option value='2'>2 - Fair</option>
-                  <option value='3'>3 - Good</option>
-                  <option value='4'>4 - Very Good</option>
-                  <option value='5'>5 - Excellent</option>
-                </select>
-              </div>
+
 
               <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
             </form>

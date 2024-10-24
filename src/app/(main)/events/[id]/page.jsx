@@ -49,7 +49,7 @@ const EventDetailsPage = ({ params }) => {
 // console.log(event)
 //   console.log(event?.location?.city)
 const city=event?.location?.city
-console.log(city)
+// console.log(city)
     if (loading) {
         return <Loading />
     }
@@ -75,7 +75,7 @@ console.log(city)
     }
 
     return (
-        <div className="bg-slate-100 min-h-screen py-12">
+        <div className="bg-slate-100 min-h-screen py-12 mt-[60px] ">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Left Side: Image, Gallery, Reviews */}

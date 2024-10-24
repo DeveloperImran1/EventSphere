@@ -24,19 +24,19 @@ const EventBanner = ({ search, setFilters }) => {
 
     return (
         <div
-            className="relative bg-cover bg-center h-80"
+            className="relative bg-cover bg-center h-80 mb-6 md:mb-12 lg:mb-20"
             style={{ backgroundImage: `url('https://img.freepik.com/premium-photo/businessman-man-hold-hand-magnifying-glass-icon-business-technology-internet-concept_150455-10173.jpg?w=1060')` }}
         >
-            <h2 className='text-2xl lg:text-5xl font-bold text-center pt-20 text-white pr-10'> Enjoy Your Life With Us</h2>
+            <h2 className=' text-2xl md:text-4xl lg:text-5xl font-bold text-center pt-20 text-white '> Enjoy Your Life With Us</h2>
 
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="relative w-1/2 mx-auto">
+            <div className="absolute bottom-[10%] left-0 right-0 p-6">
+                <div className="relative w-[90%] md:w-1/2 mx-auto">
                     <input
                         type="text"
                         placeholder="🔍 Search"
                         value={searchResult}
                         onChange={handleInputChange}
-                        className="w-full p-4 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                        className="w-full p-4 md:pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
                     />
                     <button
                         onClick={handleSearch}

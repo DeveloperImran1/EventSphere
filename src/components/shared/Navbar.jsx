@@ -18,24 +18,11 @@ const Navbar = () => {
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
 
-  // useEffect(() => {
-    const updateFavorites = () => {
-      const storedFavorites = localStorage.getItem('favorites');
-      const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-      setFavorite(myFavorites);
-    };
-  
-    // // Run once on mount
-    // updateFavorites();
-  
-    // // Add event listener for changes in localStorage
-    // window.addEventListener('storage', updateFavorites);
-  
-  //   // Clean up event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('storage', updateFavorites);
-  //   };
-  // }, []);
+  const updateFavorites = () => {
+    const storedFavorites = localStorage.getItem('favorites');
+    const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+    setFavorite(myFavorites);
+  };
 
 
   useEffect(() => {
@@ -157,10 +144,7 @@ const Navbar = () => {
 
   ]
   const subMenu4 = [
-    {
-      title: "Dashboard",
-      path: "/dashboard"
-    },
+ 
     {
       title: "Offer Announcement",
       path: "/offer-announcement"
@@ -188,6 +172,11 @@ const Navbar = () => {
       title: "Community",
       path: "/community"
     },
+    {
+      title: "Bookmark",
+      path: "/favorite-list"
+    },
+
 
 
   ]
@@ -229,7 +218,7 @@ const Navbar = () => {
   return (
     <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-[#1b85db] shadow-lg 
+      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50
     `}>
       <div className=" mx-auto py-1  px-4 max-w-7xl">
         <div className="flex justify-between items-center ">
@@ -253,11 +242,12 @@ const Navbar = () => {
                 Community
               </Link>
               <Link
-                href="/blogs"
+                href="/messenger"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out"
               >
-                Blogs
+                Messenger
               </Link>
+
               <Link onClick={updateFavorites}
                 href="/favorite-list"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out relative"
@@ -268,7 +258,7 @@ const Navbar = () => {
               </Link>
 
               <button onClick={() => setNotification(!isNotification)} id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" className="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
-                <IoMdNotifications size={22} className="text-white"></IoMdNotifications>
+                <IoMdNotifications size={25} className="text-white"></IoMdNotifications>
 
                 <div className="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
               </button>
@@ -414,6 +404,29 @@ const Navbar = () => {
                         >
                           Category 4
                         </p>
+
+                        {
+                          auth?.data?.role === "user" ? <Link
+                            href={`/dashboard/user-profile/${session?.data?.user?.email}`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link> : auth?.data?.role === "organizer" ? <Link
+                            href={`/dashboard/organizer-container`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link> : <Link
+                            href={`/dashboard/admin-container`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link>
+                        }
+
                         {
                           subMenu4?.map((menu, index) => <Link key={index}
                             href={menu?.path}
@@ -493,7 +506,7 @@ const Navbar = () => {
                           onClick={closeDropdown}
                         >
                           Dashboard
-                        </Link> :   auth?.data?.role === "organizer" ? <Link
+                        </Link> : auth?.data?.role === "organizer" ? <Link
                           href={`/dashboard/organizer-container`}
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                           onClick={closeDropdown}

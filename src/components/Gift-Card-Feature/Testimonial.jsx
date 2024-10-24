@@ -39,7 +39,7 @@ export default function TestimonialSlider() {
   };
 
   return (
-    <div className='md:m-40  p-2 md:flex items-center gap-16  ' >
+    <div className='max-w-[1280px] mx-auto p-2 mt-14 flex flex-col md:flex-row justify-center items-center gap-16  ' >
 
 
 
@@ -52,7 +52,7 @@ export default function TestimonialSlider() {
               <div className="flex items-start space-x-4">
                 <Avatar className="w-16 h-16">
                   <AvatarImage src={testimonials[currentIndex].avatar} alt={testimonials[currentIndex].name} />
-                
+
                 </Avatar>
                 <div className="flex-1  ">
                   <p className="text-lg mb-4">{testimonials[currentIndex].content}</p>
@@ -91,40 +91,40 @@ export default function TestimonialSlider() {
         </Card>
       </div>
       <div className='md:w-1/2  grid grid-cols-1 md:grid-cols-2 gap-8   '  >
-      <Image
-                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
+        <Image
+          src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
 
-                                            width={400}
-                                            height={400}
-                                            alt="Christmas Event 2"
-                                            className=" rounded-xl w-full object-cover"
-                                        />
-  <Image
-                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
+          width={400}
+          height={400}
+          alt="Christmas Event 2"
+          className=" rounded-xl w-full object-cover"
+        />
+        <Image
+          src="https://www.shutterstock.com/image-photo/team-diverse-partners-sitting-table-600nw-2343004291.jpg"
 
-                                            width={400}
-                                            height={400}
-                                            alt="Christmas Event 2"
-                                            className=" rounded-xl w-full object-cover"
-                                        />
-  <Image
-                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
+          width={400}
+          height={400}
+          alt="Christmas Event 2"
+          className=" rounded-xl w-full object-cover"
+        />
+        <Image
+          src="https://blog.prezi.com/wp-content/uploads/2023/06/GettyImages-1382268979-min-1024x683.jpg"
 
-                                            width={400}
-                                            height={400}
-                                            alt="Christmas Event 2"
-                                            className=" rounded-xl w-full object-cover"
-                                        />
-  <Image
-                                            src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
+          width={400}
+          height={400}
+          alt="Christmas Event 2"
+          className=" rounded-xl w-full object-cover"
+        />
+        <Image
+          src="https://imageio.forbes.com/specials-images/imageserve/61f2270681c1bd09ede22686/Businesswoman-giving-presentation-to-colleagues/960x0.jpg?format=jpg&width=960"
 
-                                            width={400}
-                                            height={400}
-                                            alt="Christmas Event 2"
-                                            className=" rounded-xl w-full object-cover"
-                                        />
+          width={400}
+          height={400}
+          alt="Christmas Event 2"
+          className=" rounded-xl w-full object-cover"
+        />
 
-                                          
+
 
       </div>
 

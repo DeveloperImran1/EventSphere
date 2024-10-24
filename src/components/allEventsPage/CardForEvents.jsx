@@ -137,17 +137,15 @@ const CardForEvents = ({ event }) => {
 
       <motion.div
         ref={cardRef}
-        className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
+        className="group rounded-lg h-[440px] overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        whileHover="hover"
-        variants={cardVariants}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.1 }}
       >
         <div className="relative overflow-hidden h-48">
           <Image
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-300 "
             src={event.gallery[0]}
             alt={event.title}
             layout="fill"
@@ -170,19 +168,19 @@ const CardForEvents = ({ event }) => {
 
         <motion.div className="p-6  space-y-4 " style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
           <motion.div style={{ transform: "translateZ(40px)" }}>
-            <h2 className="text-2xl font-bold text-blue-500"> {event.title}</h2>
+            <h2 className="text-2xl font-bold text-blue-500"> {event?.title?.slice(0, 18)}</h2>
           </motion.div>
 
           <motion.div className="space-y-2  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
-            <InfoItem icon={<Clock className=" text-blue-400 " />} text={format(new Date(event.dateTime), 'MMMM do, yyyy h:mm a')} />
+            <InfoItem icon={<Clock className=" text-blue-400 " />} text={format(new Date(event.dateTime), 'MMMM do, yyyy')} />
             {/* <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${event.companyName}`} /> */}
             <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${event.location.country}, ${event.location.city}`} />
             {/* <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${event.type}`} /> */}
             <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${event.category}`} />
           </motion.div>
 
-          <motion.div className="flex justify-between items-center -mt-6" data-aos="fade-up" data-aos-delay="300" >
-            <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[25px] " />} text={`Price: ${event.price}`} />
+          <motion.div className="flex justify-between items-center " data-aos="fade-up" data-aos-delay="300" >
+            <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[24px] font-normal" />} text={`Price: ${event.price}`} />
 
             <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" > 
               {
