@@ -1,10 +1,14 @@
+"use client"
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
 
-function ChatList({ conversations, currentUser }) {
-    console.log(conversations, currentUser)
-    const profileNumsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+function ChatList({ user ,conversations,currentUser}) {
+
+
+    // const profileNumsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     return (
         <>
             <section className="p-5">
