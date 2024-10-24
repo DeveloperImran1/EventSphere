@@ -90,7 +90,7 @@ const TeamMembers = () => {
                 >
                     {TeamMembers.map((organizer, index) => (
                         <SwiperSlide key={index}>
-                            <div className="flex flex-col items-center justify-center py-12">
+                            <div className="flex flex-col items-center justify-center pb-12">
                                 <div className="bg-[url('https://i.ibb.co.com/ScJ4rFW/team-shape.png')] bg-no-repeat flex items-center justify-center">
                                     <Image
                                         className="rounded-md h-72 object-cover"
