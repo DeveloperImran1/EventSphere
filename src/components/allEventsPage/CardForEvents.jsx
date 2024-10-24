@@ -133,8 +133,59 @@ const CardForEvents = ({ event }) => {
     return formattedDateTime.slice(0, 16);
   };
   return (
-    <div className=" ">
+    <div className="">
 
+    <motion.div
+      ref={cardRef}
+      className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative h-[450px] mr-4 lg:mr-0" // Set fixed height here
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.1 }}
+    >
+      <div className="relative overflow-hidden h-48">
+        <Image
+          className="w-full h-full object-cover transition-transform duration-300 "
+          src={event.gallery[0]}
+          alt={event.title}
+          layout="fill"
+          data-aos="zoom-in"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
+      </div>
+  
+      <div className="flex justify-end space-x-2 absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
+        <button
+          className={`p-1 rounded-full backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 ${favorite?.includes(event?._id) ? 'bg-white' : 'bg-red-500'}`}
+          onClick={() => handleAddFavorite(event._id)}
+        >
+          <Heart className={`w-6 h-6 ${favorite?.includes(event?._id) ? 'text-red-500 fill-red-500' : 'text-white fill-white'}`} />
+        </button>
+        <button className="p-1 rounded-full backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 bg-[#1b85db] ">
+          <Share2 className="w-6 h-6 text-white" />
+        </button>
+      </div>
+  
+      <motion.div className="p-6 space-y-4 h-full" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
+        <motion.div style={{ transform: "translateZ(40px)" }}>
+          <h2 className="text-2xl font-bold text-blue-500">{event?.title?.slice(0, 18)}</h2>
+        </motion.div>
+  
+        <motion.div className="space-y-2 text-gray-600" data-aos="fade-up" data-aos-delay="100">
+          <InfoItem icon={<Clock className="text-blue-400" />} text={format(new Date(event.dateTime), 'MMMM do, yyyy')} />
+          <InfoItem icon={<MapPin className="text-blue-400" />} text={`${event.location.country}, ${event.location.city}`} />
+          <InfoItem icon={<Tag className="text-blue-400" />} text={`Category: ${event.category}`} />
+        </motion.div>
+  
+        <motion.div className="flex justify-between items-center" data-aos="fade-up" data-aos-delay="300">
+          <InfoItem icon={<FaDollarSign className="text-blue-400 text-[24px] font-normal" />} text={`Price: ${event.price}`} />
+  
+          <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300">
+            {
+              hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" /> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" />
+            }
+          </Link>
+  
       <motion.div
         ref={cardRef}
         className="group rounded-lg h-[440px] overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
@@ -192,8 +243,11 @@ const CardForEvents = ({ event }) => {
           </motion.div>
         </motion.div>
       </motion.div>
-
-    </div>
+    </motion.div>
+    </motion.div>
+    </motion.div>
+  </div>
+ 
   );
 };
 

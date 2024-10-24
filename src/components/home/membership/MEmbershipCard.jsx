@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
-import Loading from '@/components/shared/LoadingSpiner/Loading';
+// import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
+import Loading from '@/components/shared/LoadingSpinner/Loading';
 
 const MembershipCard = () => {
     const axiosPublic = useAxiosPublic()
