@@ -22,11 +22,8 @@ const HomeContainer = () => {
             <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
-            <Services></Services>
-            <EmailSend></EmailSend>
-           
-            {/* <Testimonials></Testimonials> */}
             <MembershipCard/>
+            <EmailSend></EmailSend>
            
             
         </div>
