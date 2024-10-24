@@ -4,6 +4,7 @@ import CardSection from './CardSection';
 import Table from './Table';
 import NewChart from './UserManagePage/NewChart';
 import axios from 'axios';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const AdminInfo = () => {
     const [metrics, setMetrics] = useState(null);
@@ -27,7 +28,7 @@ const AdminInfo = () => {
       fetchMetrics();
     }, []); // Empty array means this effect runs once when the component mounts
   
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Loading></Loading>;
     if (error) return <div>{error}</div>;
 
     return (

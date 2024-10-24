@@ -3,6 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+const demoData = [
+  { "month": "January", "Monthly_Sale": 2400 },
+  { "month": "February", "Monthly_Sale": 1398 },
+  { "month": "March", "Monthly_Sale": 9800 },
+  { "month": "April", "Monthly_Sale": 3908 },
+  { "month": "May", "Monthly_Sale": 4800 },
+  { "month": "June", "Monthly_Sale": 3800 },
+  { "month": "July", "Monthly_Sale": 4300 },
+  { "month": "August", "Monthly_Sale": 6490 },
+  { "month": "September", "Monthly_Sale": 4300 },
+  { "month": "October", "Monthly_Sale": 5100 },
+  { "month": "November", "Monthly_Sale": 6100 },
+  { "month": "December", "Monthly_Sale": 7200 }
+]
+
 
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {

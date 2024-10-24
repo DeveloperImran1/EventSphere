@@ -10,6 +10,8 @@ import EventTimed from './EventTime/page';
 import Services from '../events/Services';
 import EmailSend from './EmailSend';
 
+import PopularEvent from '../PopularEvent/PopularEvent';
+import MembershipCard from './membership/MembershipCard';
 
 
 const HomeContainer = () => {
@@ -24,6 +26,9 @@ const HomeContainer = () => {
             <EmailSend></EmailSend>
            
             {/* <Testimonials></Testimonials> */}
+            <MembershipCard/>
+           
+            
         </div>
     );
 };

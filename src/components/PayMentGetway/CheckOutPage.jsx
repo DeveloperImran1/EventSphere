@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 // import { useRouter } from 'next/router';
 
 const CheckOutForm = (props) => {
@@ -52,11 +53,6 @@ const CheckOutForm = (props) => {
         },
         keepPreviousData: true,
     });
-    // console.log(events)
-
-    // const handleBuyTicket = () => {
-    //     router.push(`/payment-qr-code?transitionId=${transitionId}`);
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -121,7 +117,7 @@ const CheckOutForm = (props) => {
                     totalTickets: selectedSeats,
                     eventDate: events?.dateTime,
                     totalTickets: selectedSeats,
-                    refundRequested: "Requested",
+                    refundRequested: "NotRequested",
                     transitionId: paymentIntent.id,
                 };
 
@@ -165,7 +161,7 @@ const CheckOutForm = (props) => {
                     elements.getElement(CardElement).clear();
                     refetch();
 
-                     router.push(`/payment-qr-code?transitionId=${paymentIntent.id}`);
+                    router.push(`/payment-qr-code?transitionId=${paymentIntent.id}`);
                 } else {
                     Swal.fire({
                         position: "top-end",
@@ -185,52 +181,72 @@ const CheckOutForm = (props) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4">Payment Information</h2>
-            <p>Total seats: {selectedSeats}</p>
-            <p className="mt-4">Selected Seats:</p>
-            <ol type="1" className="flex gap-4 flex-wrap">
-                {selectedSeatNames?.map((seatName, index) => (
-                    <li key={index}>{seatName}</li>
-                ))}
-            </ol>
+        <div className='flex flex-col lg:flex-row'>
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white p-6 rounded-lg shadow-md lg:w-2/3"
+            >
+                <p className="text-4xl font-bold mb-4 text-blue-500 for payment getway">Please provide your info</p>
+                <p className='font-bold'>Total seats: {selectedSeats}</p>
+                <p className="mt-4 font-bold ">Selected Seats:</p>
+                <ul className="flex  gap-4 list-none font-bold">
+                    {selectedSeatNames && selectedSeatNames.length > 0 ? (
+                        selectedSeatNames.map((seatName, index) => (
+                            <p key={index}><li  className="">{seatName}</li></p>
+                        ))
+                    ) : (
+                        <p className="text-red-500">No seats selected</p>
+                    )}
+                </ul>
 
-            {/* Stripe Card Element */}
-            <div className="mb-4">
-                <label className="block text-sm font-medium mb-1">Card Information</label>
-                <CardElement
-                    className="w-full p-2 border border-gray-300 rounded-lg"
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#424770',
-                                '::placeholder': {
-                                    color: '#aab7c4',
+
+                {/* Stripe Card Element */}
+                <div className="mb-4">
+                    <label className="block text-sm font-medium mb-1">Card Information</label>
+                    <CardElement
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        options={{
+                            style: {
+                                base: {
+                                    fontSize: '16px',
+                                    color: '#424770',
+                                    '::placeholder': {
+                                        color: '#aab7c4',
+                                    },
+                                },
+                                invalid: {
+                                    color: '#9e2146',
                                 },
                             },
-                            invalid: {
-                                color: '#9e2146',
-                            },
-                        },
-                        hidePostalCode: false,
-                    }}
-                />
+                            hidePostalCode: false,
+                        }}
+                    />
+                </div>
 
+                <button
+                    type="submit"
+                    disabled={!stripe || isProcessing}
+                    className={`w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-500 transition duration-300 ${isProcessing ? "cursor-not-allowed opacity-50" : ""
+                        }`}
+                >
+                    {isProcessing ? "Processing..." : `Pay ${total}$`}
+                </button>
+
+                {error && <div className="text-red-600 mt-2">{error}</div>}
+                {success && <div className="text-green-600 mt-2">{success}</div>}
+            </form>
+
+            <div className="lg:w-1/3 pl-6">
+                <Image
+                    src='https://cdn-icons-png.flaticon.com/512/5790/5790705.png'
+                    alt='payment image'
+                    height={200}
+                    width={200}
+                    className='w-72 h-48 ' />
+                <p className=" font-bold mt-4 font-mono ">Secure payment ensures data protection, encryption, and fraud prevention</p>
             </div>
+        </div>
 
-            <button
-                type="submit"
-                disabled={!stripe || isProcessing}
-                className={`w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-500 transition duration-300 ${isProcessing ? "cursor-not-allowed opacity-50" : ""
-                    }`}
-            >
-                {isProcessing ? "Processing..." : `Pay ${total}$`}
-            </button>
-
-            {error && <div className="text-red-600 mt-2">{error}</div>}
-            {success && <div className="text-green-600 mt-2">{success}</div>}
-        </form>
     );
 };
 

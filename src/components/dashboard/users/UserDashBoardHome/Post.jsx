@@ -44,8 +44,8 @@ const Post = () => {
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const title = form?.title?.value;
-    const message = form?.message?.value;
+    const title = form?.title?.value || "";
+    const message = form?.message?.value || "";
 
     if (session?.data?.user?.email !== lastPathSegment) {
       return toast.error('You cannot post another user profile 😒');
@@ -95,7 +95,7 @@ const Post = () => {
       }
     } catch (error) {
       console.error("Error uploading images:", error);
-      toast.error('Something Went Wrong 😒');
+      // toast.error('Something Went Wrong 😒');
     }
   };
 
@@ -155,7 +155,7 @@ const Post = () => {
                   type="file"
                   multiple={true}
                   placeholder="Your Image"
-                  required
+                  // required
                   onChange={(e) => {
                     setImages(e.target.files)
                     if (e.target.files && e.target.files[0]) {

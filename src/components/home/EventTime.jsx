@@ -13,11 +13,11 @@ import "aos/dist/aos.css";
 
 import axios from "axios";
 import Link from "next/link";
-import FireTextTitle from "../shared/FireText";
-import RotateButton from "../shared/RotateButton";
+
 import SectionTitle from "../shared/SectionTitle";
 import Button from "../shared/CercleBuuton/Button";
 import CardForEvents from "../allEventsPage/CardForEvents";
+import SectionTitleSimple from "../shared/SectionTitleSimple";
 
 let tabs = [
   { id: 1, label: "All" },
@@ -52,7 +52,7 @@ const EventTime = () => {
           return;
         }
         setEvents(res.data);
-        console.log(res.data)
+        // console.log(res.data)
       })
       .catch((err) => console.log(err.message));
   }, []);
@@ -64,7 +64,7 @@ const EventTime = () => {
     });
   }, []);
 
-  console.log("Event timing page theke events ", events)
+  // console.log("Event timing page theke events ", events)
 
 
   // 3d card const Card3D = ({ event }) => {
@@ -120,59 +120,89 @@ const EventTime = () => {
     <div >
       <Tabs defaultValue="All" className="">
         {/* Tab List */}
-        <SectionTitle
-          subTitle="Pick a Time"
-          title="Event_Timing_Options"
-          description="Browse events by time: today, tomorrow, this weekend, or this month."
+        <SectionTitleSimple
+          title="Event Timing Options"
+          subtitle="Browse events by time: today, tomorrow, this weekend, or this month."
         >
-        </SectionTitle>
+        </SectionTitleSimple>
 
         <TabsList className="w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
-          {tabs.map((category) => (
-            <TabsTrigger
-              onClick={() => setActiveTab(category.label)}
-              key={category.id}
-              value={category.label}
-              className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#10a0b9] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
-            >
-              {category.label}
-              <span className="absolute left-0 bottom-0 h-1 bg-[#10a0b9] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
-            </TabsTrigger>
-          ))}
+          {/* {tabs.map((category) => ( */}
+          <TabsTrigger
+            onClick={() => setActiveTab("All")}
+            value={"All"}
+            className="hidden md:block relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#1b85db] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+          >
+            All
+            <span className="absolute left-0 bottom-0 h-1 bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+          </TabsTrigger>
+
+          <TabsTrigger
+            onClick={() => setActiveTab("Today")}
+            value={"Today"}
+            className="hidden md:block relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#1b85db] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+          >
+            Today
+            <span className="absolute left-0 bottom-0 h-1 bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+          </TabsTrigger>
+
+          <TabsTrigger
+            onClick={() => setActiveTab("Tomorrow")}
+            value={"Tomorrow"}
+            className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#1b85db] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+          >
+            Tomorrow
+            <span className="absolute left-0 bottom-0 h-1 bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+          </TabsTrigger>
+
+          <TabsTrigger
+            onClick={() => setActiveTab("Next Week")}
+            value={"Next Week"}
+            className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#1b85db] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+          >
+            Next Week
+            <span className="absolute left-0 bottom-0 h-1 bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+          </TabsTrigger>
+
+          <TabsTrigger
+            onClick={() => setActiveTab("Next Month")}
+            value={"Next Month"}
+            className="relative text-sm sm:text-base md:w-28 px-4 rounded-lg text-gray-700 hover:bg-[#1b85db] hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 data-[state=active]:bg-[#1b85db] data-[state=active]:text-white"
+          >
+            Next Month
+            <span className="absolute left-0 bottom-0 h-1 bg-[#1b85db] transition-transform duration-300 ease-in-out origin-left scale-x-0 data-[state=active]:scale-x-100"></span>
+          </TabsTrigger>
+
+
+          {/* ))} */}
         </TabsList>
 
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full bg-transparent ">
-          <AnimatePresence>
-            {events?.events?.filter((n) => {
-              if (activeTab === "All") {
-                return n;
-              } else if (activeTab === "Today") {
-                return n.when === "Today";
-              } else if (activeTab === "Tomorrow") {
-                return n.when === "Tomorrow";
-              } else if (activeTab === "Next Week") {
-                return n.when === "Next Week";
-              } else if (activeTab === "Next Month") {
-                return n.when === "Next Month";
-              }
-            }).map((event) => (
-                <AnimatePresence>
-                  <CardForEvents
-               
-                    event={event}
-                  />
-                </AnimatePresence>
-            ))}
+          {events?.events?.filter((n) => {
+            if (activeTab === "All") {
+              return n;
+            } else if (activeTab === "Today") {
+              return n.when === "Today";
+            } else if (activeTab === "Tomorrow") {
+              return n.when === "Tomorrow";
+            } else if (activeTab === "Next Week") {
+              return n.when === "Next Week";
+            } else if (activeTab === "Next Month") {
+              return n.when === "Next Month";
+            }
+          }).map((event) => (
+            <CardForEvents
+              key={event?._id}
+              event={event}
+            />
+          ))}
 
-
-
-          </AnimatePresence>
         </div>
       </Tabs>
       <div className="text-center mt-10">
-          <Link href="/events" className="flex justify-center">
-            <Button>See All</Button>
-          </Link>
+        <Link href="/events" className="flex justify-center">
+          <Button>See All</Button>
+        </Link>
       </div>
 
     </div>

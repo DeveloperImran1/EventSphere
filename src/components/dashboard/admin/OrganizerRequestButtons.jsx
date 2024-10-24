@@ -70,15 +70,15 @@ const OrganizerRequestButtons = ({ user, dialogType, handleCancel, handleAccept 
         <div>
             <AlertDialog>
                 <div className="flex gap-x-4">
-                    <div className="flex">
-                        <Link href={user?.socialPlatform || '#'} target='_blank' className=''><FaChrome className='text-4xl rounded-xl text-white bg-[#0000008b] p-2 cursor-pointer' /></Link>
+                    <div title='Portfolio' className="flex">
+                        <Link target="_blank" href={`/dashboard/user-profile/${user?.email}`}  className=''><FaChrome className='text-4xl rounded-xl text-white bg-[#0000008b] p-2 cursor-pointer' /></Link>
                     </div>
                     {/* Cancel Button */}
-                    <div className="flex" onClick={() => handleCancel(user?._id)}>
+                    <div title='Reject' className="flex" onClick={() => handleCancel(user?._id)}>
                         <AlertDialogTrigger><MdOutlineCancel className='text-4xl rounded-xl text-white bg-red-500 p-2 cursor-pointer' /></AlertDialogTrigger>
                     </div>
                     {/* Accept Button */}
-                    <div className="flex" onClick={() => handleAccept(user?._id)}>
+                    <div title='Accept' className="flex" onClick={() => handleAccept(user?._id)}>
                         <AlertDialogTrigger><FaRegCircleCheck className='text-4xl rounded-xl text-white bg-green-500 p-2 cursor-pointer' /></AlertDialogTrigger>
                     </div>
                 </div>
