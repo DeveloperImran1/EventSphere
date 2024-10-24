@@ -4,12 +4,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
 import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
-import DummyProfit from './DummyProfit';
 
 // Define color palette for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
-const Dashboard = () => {
+const DummyProfit = () => {
   // State to store event data and order data
   const [eventData, setEventData] = useState([]);
   console.log( "eeeeeeeeeee", eventData);
@@ -29,8 +28,8 @@ const Dashboard = () => {
       const orders = await ordersResponse.json();
 
       // Filter events and orders based on the current organizer's email
-      setEventData(events.filter(event => event.organizer.email === organizerEmail));
-      setOrderData(orders.filter(order => order.eventOrganizerEmail === organizerEmail));
+      setEventData(events.filter(event => event.organizer.email === "mehedi@gamil.com"));
+      setOrderData(orders.filter(order => order.eventOrganizerEmail ==="mehedi@gamil.com"));
     };
 
     fetchData();
@@ -78,13 +77,9 @@ const Dashboard = () => {
       .slice(0, 5);
   };
 
-  if (eventData.length === 0) {
-    return <DummyProfit/>
-  }
-
   return (
     <div className="p-4 space-y-6 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">Event Organizer Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6">Dummy Organizer Dashboard</h1>
       
       {/* Display metrics in a grid layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -214,4 +209,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DummyProfit;
