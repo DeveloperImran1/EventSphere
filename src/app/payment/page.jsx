@@ -1,5 +1,5 @@
 "use client";
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";

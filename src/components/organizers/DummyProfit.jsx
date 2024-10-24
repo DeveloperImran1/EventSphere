@@ -21,8 +21,8 @@ const DummyProfit = () => {
   // useEffect to fetch data from APIs once the component mounts or the organizerEmail changes
   useEffect(() => {
     const fetchData = async () => {
-      const eventsResponse = await fetch('http://localhost:9000/events');
-      const ordersResponse = await fetch('http://localhost:9000/orders');
+      const eventsResponse = await fetch('https://event-sphare-server.vercel.app/events');
+      const ordersResponse = await fetch('https://event-sphare-server.vercel.app/orders');
       const eventsData = await eventsResponse.json();
       const events = eventsData.events;
       const orders = await ordersResponse.json();

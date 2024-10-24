@@ -22,7 +22,7 @@ const MyFollowing = ({ userData, refetch }) => {
 // handleUnFollow Button
 const handleUnFollow = async (id) => {
     try {
-        const response = await fetch(`http://localhost:9000/user/handleRemoveFollower/${id}`, {
+        const response = await fetch(`https://event-sphare-server.vercel.app/user/handleRemoveFollower/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
