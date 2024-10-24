@@ -11,6 +11,7 @@ import './Banner.css'
 import Image from 'next/image'
 import CercleButton from '../shared/CercleBuuton/Button'
 import GiftCardDesign from './GiftCard/GiftCardDesign'
+import Link from 'next/link'
 const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
 
 
@@ -93,26 +94,20 @@ export default function ChristmasPromo() {
       </div>
     </div>
           <div className=" md:flex  gap-4 ">
-            <Button className="button">BOOK NOW</Button>
+          <Link className='button' href="/events">All Events</Link>
               <CercleButton>Explore More</CercleButton>
 
           </div>
         </div>
       </div>
-      <div className="w-full  md:w-1/2    relative">
-        {/* <div className="relative"> 
-        <Image height={675} width={1200}
-            src="https://i.ibb.co.com/kB2XJkB/people-taking-part-high-protocol-event.jpg"
-            alt="Concertgoers Watching Majestic Concert"
-            onClick={handlePlayClick}
-          />
-          <Button 
-            onClick={handlePlayClick} 
-            className="absolute inset-0  w-14  flex items-center justify-center bg-red-500 text-white rounded-full mx-auto my-auto"
-          >
-            <FaPlayCircle className="text-4xl" />
-          </Button>
-        </div> */}
+      <div className="w-full  md:w-1/2  py-10  relative">
+          <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold text-white font-serif">Exclusive Event Gift Cards</h2>
+        <p className="text-slate-200 mt-2">Choose the perfect card to unlock amazing benefits and enjoy premium experiences at our events.</p>
+      </div>
+
+
+
 {/*   Gift card       */}
        <GiftCardDesign></GiftCardDesign>
       </div>

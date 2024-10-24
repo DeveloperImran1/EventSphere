@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 
-import { RiMessage2Line } from "react-icons/ri";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { MdOutlineEqualizer } from "react-icons/md";
 import { IoBagHandleOutline } from "react-icons/io5";
@@ -17,6 +16,23 @@ import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
+import {
+    RiDashboardLine,
+    RiUserLine,
+    RiEdit2Line,
+    RiCalendarEventLine,
+    RiTeamLine,
+    RiUserAddLine,
+    RiCommunityLine,
+    RiMessage2Line,
+    RiNotificationLine,
+
+    RiUploadLine,
+    RiCalendarCheckLine,
+    RiMoneyDollarCircleLine,
+    RiShoppingBagLine,
+} from "react-icons/ri";
+import { FaBell } from "react-icons/fa";
 
 const DashboardSideBar = () => {
     const session = useSession();
@@ -41,133 +57,138 @@ const DashboardSideBar = () => {
         queryFn: fetchOrders,
       });
     
+
+
     const userRoutes = [
         {
             title: "Profile",
             path: `/dashboard/user-profile/${session?.data?.user?.email}`,
-            icon: RiMessage2Line
+            icon: RiUserLine, // User icon for the profile page
         },
         {
             title: "Edit Profile",
             path: "/dashboard/edit-profile",
-            icon: RiMessage2Line
+            icon: RiEdit2Line, // Edit icon for profile editing
         },
         {
             title: "My Order",
             path: "/dashboard/my-orderlist",
-            icon: IoBagHandleOutline
+            icon: RiShoppingBagLine, // Shopping bag icon for orders
         },
         {
             title: "Request Organizer",
             path: "/dashboard/be-organizer",
-            icon: RiMessage2Line
+            icon: RiUserAddLine, // Add user icon for requesting organizer role
         },
         {
-            title: "Comunity",
+            title: "Community",
             path: "/community",
-            icon: FaSignOutAlt
+            icon: RiCommunityLine, // Community icon for community section
         },
         {
             title: "Message",
             path: "/message",
-            icon: FaSignOutAlt
+            icon: RiMessage2Line, // Message/chat icon for the message section
         },
         {
-            title: "Message",
-            path: "/notifications",
-            icon: FaSignOutAlt
+            title: "Notification",
+            path: "/dashboard/notifications",
+            icon: FaBell, // Bell icon for notifications
         },
-
-    ]
+    ];
 
     const organizerRoutes = [
         {
             title: "Overview",
             path: `/dashboard/organizer-container`,
-            icon: RiMessage2Line
+            icon: RiDashboardLine, // Dashboard icon for overview
         },
         {
             title: "Profile",
             path: `/dashboard/organizer-profile/${session?.data?.user?.email}`,
-            icon: RiMessage2Line
+            icon: RiUserLine, // User icon for profile
         },
         {
             title: "Edit Profile",
             path: "/dashboard/edit-profile",
-            icon: RiMessage2Line
+            icon: RiEdit2Line, // Edit icon for profile editing
         },
         {
             title: "Publish Events",
             path: "/dashboard/eventPost",
-            icon: RiMessage2Line
+            icon: RiUploadLine, // Upload icon for event posting
         },
         {
             title: "Booked Events",
             path: "/dashboard/booked-event",
-            icon: RiMessage2Line,
-            number: bookings?.length
+            icon: RiCalendarCheckLine, // Calendar with checkmark for booked events
+            number: bookings?.length, // Shows the number of bookings
         },
         {
             title: "My Profit",
             path: "/dashboard/organizer-profit",
-            icon: RiMessage2Line
-        },
-        {
-            title: "Comunity",
-            path: "/community",
-            icon: FaSignOutAlt
-        },
-        {
-            title: "Notification",
-            path: "/notifications",
-            icon: FaSignOutAlt,
-            number: 5
-        },
-
-    ]
-    const AdminRoutes = [
-        {
-            title: "Overview",
-            path: `/dashboard/admin-container`,
-            icon: RiMessage2Line
-        },
-        {
-            title: "Profile",
-            path: `/dashboard/organizer-profile/${session?.data?.user?.email}`,
-            icon: RiMessage2Line
-        },
-        {
-            title: "Edit Profile",
-            path: "/dashboard/edit-profile",
-            icon: RiMessage2Line
-        },
-        {
-            title: "All Events",
-            path: "/dashboard/all-events",
-            icon: RiMessage2Line
-        },
-        {
-            title: "Users",
-            path: "/dashboard/users",
-            icon: RiMessage2Line
-        },
-        {
-            title: "Organizer Request",
-            path: "/dashboard/payment-history",
-            icon: RiMessage2Line
+            icon: RiMoneyDollarCircleLine, // Dollar circle for profit section
         },
         {
             title: "Community",
             path: "/community",
-            icon: RiMessage2Line
+            icon: RiCommunityLine, // Community icon for community section
+        },
+        {
+            title: "Notification",
+            path: "/dashboard/notifications",
+            icon: FaBell, // Bell icon for notifications
+            number: 5, // Example notification count
+        },
+    ];
+
+    const AdminRoutes = [
+        {
+            title: "Overview",
+            path: `/dashboard/admin-container`,
+            icon: RiDashboardLine, // Best for "Overview" or dashboard-like section
+        },
+        {
+            title: "Profile",
+            path: `/dashboard/organizer-profile/${session?.data?.user?.email}`,
+            icon: RiUserLine, // Best for personal profiles
+        },
+        {
+            title: "Edit Profile",
+            path: "/dashboard/edit-profile",
+            icon: RiEdit2Line, // Represents editing actions
+        },
+        {
+            title: "All Events",
+            path: "/dashboard/all-events",
+            icon: RiCalendarEventLine, // Calendar icon for events
+        },
+        {
+            title: "Users",
+            path: "/dashboard/user-manage",
+            icon: RiTeamLine, // Best for managing users or teams
+        },
+        {
+            title: "Organizer Request",
+            path: "/dashboard/organizer-request",
+            icon: RiUserAddLine, // Represents user or organizer requests
+        },
+        {
+            title: "Community",
+            path: "/community",
+            icon: RiCommunityLine, // Suitable for community or group-based sections
         },
         {
             title: "Message",
-            path: "/message",
-            icon: RiMessage2Line
+            path: "/messenger",
+            icon: RiMessage2Line, // Message/chat section
         },
-
-    ]
+        {
+            title: "Notification",
+            path: "/dashboard/notifications",
+            icon: FaBell, // Bell icon for notifications
+        },
+    ];
 
     useEffect(() => {
         if (auth?.data?.role === "user") {
@@ -187,29 +208,29 @@ const DashboardSideBar = () => {
     return (
         <>
 
-            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 flex flex-col justify-between">
+            <div className="fixed pl-2 pt-4 w-64 h-[calc(100vh-90px)] text-slate-600 shadow-2xl overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 flex flex-col justify-between bg-white">
 
 
                 <div>
                     <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2 relative">
                         <div className='p-2 rounded-full border-4 border-gray-200'>
                             <Image
-                                src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
+                                src={auth?.data?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                                 alt="Profile"
                                 height="60"
                                 width="60"
-                                className="   transition duration-300 ease-in-out"
+                                className="   transition duration-300 ease-in-out rounded-full"
                             />
                         </div>
 
                         <div>
                             <p className="font-semibold text-gray-800">
-                                {session?.data?.user?.name || "User Name"}
+                                {auth?.data?.name || "User Name"}
                             </p>
                         </div>
 
                         <p className="text-sm text-gray-500">
-                            {session?.data?.user?.email || "johndoe@example.com"}
+                            {auth?.data?.email || "johndoe@example.com"}
                         </p>
                     </div>
 
@@ -243,7 +264,7 @@ const DashboardSideBar = () => {
 
                 <div className="">
                     <hr className="border-gray-200 my-6" />
-                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 ">
+                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 w-full ">
                         <FaSignOutAlt className="mr-2 text-xl" />
 
                         <span>Sign Out</span>

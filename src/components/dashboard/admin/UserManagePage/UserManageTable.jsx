@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import BlockButton from './BlockButton';
 import UnBlockButton from './UnBlockButton';
 import Image from 'next/image';
+import Link from 'next/link';
 
-const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
+const UserManageTable = ({ handleBlock, users, handleUnBlock }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const usersPerPage = 8; // Number of users per page
 
@@ -32,7 +33,7 @@ const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
                                 <th className="py-3 px-4 text-left border-b border-gray-200">User</th>
                                 <th className="py-3 px-4 text-left border-b border-gray-200">Email</th>
                                 <th className="py-3 px-4 text-left border-b border-gray-200">Role</th>
-                                <th className="py-3 px-4 text-left border-b border-gray-200">Status</th>
+             
                                 <th className="py-3 px-4 text-left border-b border-gray-200">Action</th>
                             </tr>
                         </thead>
@@ -45,11 +46,7 @@ const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
                                     </td>
                                     <td className="py-4 px-4">{user?.email}</td>
                                     <td className="py-4 px-4">{user?.role}</td>
-                                    <td className="py-4 px-4">
-                                        <span className={`font-bold ${user?.status === "Active" ? 'text-green-500' : 'text-red-500'}`}>
-                                            {user?.status}
-                                        </span>
-                                    </td>
+                              
                                     <td className="py-4 px-4">
                                         {/* <button
                                             onClick={() => handleBlock(user?._id)}
@@ -77,26 +74,24 @@ const UserManageTable = ({ handleBlock, users, handleUnBlock}) => {
                             <tr className="bg-gray-100 text-gray-600">
                                 <th className="py-3 px-4 text-left border-b border-gray-200 text-sm md:text-base">User Info</th>
                                 <th className="py-3 px-4 text-left border-b border-gray-200 text-sm md:text-base">Role</th>
-                                <th className="py-3 px-4 text-left border-b border-gray-200 text-sm md:text-base">Status</th>
+
                                 <th className="py-3 px-4 text-left border-b border-gray-200 text-sm md:text-base">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentUsers.map(user => (
                                 <tr key={user?._id} className="border-b border-gray-200 hover:bg-gray-50 transition duration-300">
-                                    <td className="flex items-center py-4 px-4 text-sm md:text-base">
-                                        <Image height={676} width={1200} src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
-                                        <div>
-                                            <div className="font-semibold">{user?.name}</div>
-                                            <div className="text-gray-500 text-xs">{user?.email.slice(0, 10)}...</div>
-                                        </div>
-                                    </td>
+                                    <Link href={`/dashboard/organizer-profile/${user?.ema}`}>
+                                        <td className="flex items-center py-4 px-4 text-sm md:text-base">
+                                            <Image height={676} width={1200} src={user?.image} alt={user?.name} className="w-10 h-10 rounded-full mr-3" />
+                                            <div>
+                                                <div className="font-semibold">{user?.name}</div>
+                                                <div className="text-gray-500 text-xs">{user?.email.slice(0, 10)}...</div>
+                                            </div>
+                                        </td>
+                                    </Link>
                                     <td className="py-4 px-4 text-sm md:text-base">{user?.role}</td>
-                                    <td className="py-4 px-4 text-sm md:text-base">
-                                        <span className={`font-bold ${user?.status === "Active" ? 'text-green-500' : 'text-red-500'}`}>
-                                            {user?.status}
-                                        </span>
-                                    </td>
+
                                     <td className="py-4 px-4 text-sm md:text-base">
                                         {/* <button
                                             onClick={() => handleBlock(user?._id)}

@@ -133,14 +133,14 @@ const AboutSection = () => {
 
         </div>
         {/* Right Content - Event Details */}
-        <div className=" flex justify-center py-6  rounded-tl-full md:w-1/2 md:h-[443px] bg-gray-200 ">
+        <div className=" flex justify-center py-10  rounded-tl-full md:w-1/2 md:h-[443px] bg-gray-200 ">
 
 
           <ul className=" grid  grid-cols-1  md:grid-cols-2  gap-4  ">
             {features.map((feature, index) => (
               <li
                 key={index}
-                className="relative  w-44 p-2 flex justify-center flex-col items-center  rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-[0_0_15px_var(--clr),0_0_30px_var(--clr)] group"
+                className="relative w-44 p-2 flex justify-center flex-col items-center  rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-[0_0_15px_var(--clr),0_0_30px_var(--clr)] group"
                 style={{
                   '--clr': feature.color,
                   '--i': index,
