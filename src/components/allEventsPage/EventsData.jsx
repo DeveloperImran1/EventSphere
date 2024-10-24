@@ -15,6 +15,8 @@ import { Slider } from "@nextui-org/react";
 import CardForEvents from './CardForEvents';
 import { AnimatePresence } from 'framer-motion';
 import EventBanner from './EventBanner';
+import { IoMdClose } from 'react-icons/io';
+import { FiFilter } from 'react-icons/fi'; 
 
 const EventsData = () => {
   const axiosPublic = useAxiosPublic();
@@ -236,18 +238,40 @@ const EventsData = () => {
 
       <div className='  container mx-auto'>
         {/* For mobile - Drawer button */}
-        <div className="block lg:hidden">
-          <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-logo] text-white rounded-full">
-            <FaBars />
+        {/* For mobile - Drawer button */}
+        <div className="block lg:hidden ">
+          <button
+            onClick={() => setIsDrawerOpen(true)}
+            className="text-4xl p-2 bg-[--color-logo] text-green-500 rounded-full"
+          >
+            <FiFilter />
           </button>
         </div>
-        <Dialog open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} className="fixed inset-0 z-50 overflow-hidden">
+
+        {/* Drawer Component */}
+        <Dialog
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          className="fixed inset-0 z-50 overflow-hidden"
+        >
           <div className="bg-white p-5 h-full w-[60%] md:w-[40%] overflow-y-scroll">
-            <div className="w-full">
+            {/* Close Button */}
+            <div className="flex justify-end">
+              <button onClick={() => setIsDrawerOpen(false)} className="text-2xl text-red-500">
+                <IoMdClose />
+              </button>
+            </div>
+
+            <div className="w-full space-y-2">
               {/* Filters for mobile drawer */}
               {/* Category Filter */}
               <div>
-                <select name="category" value={filters.category} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
+                <select
+                  name="category"
+                  value={filters.category}
+                  onChange={handleFilterChange}
+                  className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
+                >
                   <option value="">All Categories</option>
                   <option value="Business">Business</option>
                   <option value="Technology">Technology</option>
@@ -258,7 +282,12 @@ const EventsData = () => {
 
               {/* Location Filters */}
               <div>
-                <select name="country" value={filters.country} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
+                <select
+                  name="country"
+                  value={filters.country}
+                  onChange={handleFilterChange}
+                  className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
+                >
                   <option value="">All Countries</option>
                   {events?.events?.map((event) => event.location.country)
                     .filter((country, index, self) => self.indexOf(country) === index)
@@ -271,7 +300,12 @@ const EventsData = () => {
               </div>
 
               <div>
-                <select name="city" value={filters.city} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
+                <select
+                  name="city"
+                  value={filters.city}
+                  onChange={handleFilterChange}
+                  className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
+                >
                   <option value="">All Cities</option>
                   {events?.events?.filter((event) => event.location.country === filters.country)
                     .map((event) => event.location.city)
@@ -284,10 +318,14 @@ const EventsData = () => {
                 </select>
               </div>
 
-
               {/* Type Filter */}
               <div>
-                <select name="type" value={filters.type} onChange={handleFilterChange} className='py-2 px-5 shadow-2xl  rounded-lg font-bold bg-[--color-secondary] text-white w-full'>
+                <select
+                  name="type"
+                  value={filters.type}
+                  onChange={handleFilterChange}
+                  className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
+                >
                   <option value="">All Types</option>
                   <option value="online">Online</option>
                   <option value="onsite">Onsite</option>
@@ -338,9 +376,8 @@ const EventsData = () => {
                 />
               </div>
 
-
               {/* Day Filters for Today, Tomorrow, This Week, This Month */}
-              <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
+              {/* <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
               <select
                 className="block w-full p-2 rounded border-2"
                 value={filters.day}
@@ -349,12 +386,11 @@ const EventsData = () => {
                 {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
                   <option key={index} value={day.toLowerCase()}>{day}</option>
                 ))}
-              </select>
-
-
+              </select> */}
             </div>
           </div>
         </Dialog>
+
 
 
         {/* Filter and large device */}
@@ -460,7 +496,7 @@ const EventsData = () => {
 
 
               {/* Day Filters for Today, Tomorrow, This Week, This Month */}
-              <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
+              {/* <h5 className="font-bold mt-4 mb-3">Filter by Day</h5>
               <select
                 className="block w-full p-2 rounded border-2"
                 value={filters.day}
@@ -469,7 +505,7 @@ const EventsData = () => {
                 {['All', 'Today', 'Tomorrow', 'This Week', 'This Month'].map((day, index) => (
                   <option key={index} value={day.toLowerCase()}>{day}</option>
                 ))}
-              </select>
+              </select> */}
 
 
 
@@ -477,16 +513,16 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className="w-full lg:w-4/5">
+          <div className="w-full lg:w-4/5 ml-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
-                  <CardForEvents
+                <CardForEvents
                   key={event._id}
-                    event={event}
-                    addToCart={addToCart}
-                    shareEvent={shareEvent}
-                  />
-         
+                  event={event}
+                  addToCart={addToCart}
+                  shareEvent={shareEvent}
+                />
+
               ))}
             </div>
             {/* Pagination */}

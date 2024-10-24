@@ -33,7 +33,7 @@ const EventDetailsPage = ({ params }) => {
             mirror: true,
         })
 
-     const fetchEventsData = async () => {
+        const fetchEventsData = async () => {
             try {
                 const response = await axios.get(`http://localhost:9000/events/${id}`)
                 // console.log(response)
@@ -46,15 +46,15 @@ const EventDetailsPage = ({ params }) => {
         }
         fetchEventsData()
     }, [id])
-// console.log(event)
-//   console.log(event?.location?.city)
-const city=event?.location?.city
-// console.log(city)
+    // console.log(event)
+    //   console.log(event?.location?.city)
+    const city = event?.location?.city
+    // console.log(city)
     if (loading) {
         return <Loading />
     }
 
-    
+
     if (!event) {
         return (
             <div className="text-center mt-20">
@@ -110,39 +110,26 @@ const city=event?.location?.city
                                 </div>
                             </article>
                         )}
+                        <div>
+                            <p data-aos="fade-up" className="text-gray-700 leading-relaxed">{event.description}</p>
+                        </div>
+
                         {/* Event Reviews */}
                         {event.reviews && event.reviews.length > 0 && (
                             <article data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-6">
-                                <h3 className="text-2xl font-semibold mb-4 text-center font-serif text-blue-500 border-b-2 border-purple-400 pb-2 ">Reviews</h3>
+                                <h3 className="text-2xl font-semibold mb-4 text-center  text-blue-500 border-b-2 border-purple-400 pb-2 ">Reviews</h3>
                                 <div className="space-y-4">
                                     {event.reviews.map((review, index) => (
                                         <div key={index} data-aos="fade-right" data-aos-delay={index * 100} className="bg-gray-50 rounded-lg p-4 transition-all duration-300 hover:shadow-md">
-                                            <h4 className="font-semibold font-mono text-xl">{review.name}</h4>
-                                            <p className="text-gray-600 italic">{review.review}</p>
+                                            <h4 className="font-semibold  text-xl">{review.name}</h4>
+                                            <p className="text-gray-600 ">{review.review}</p>
                                         </div>
                                     ))}
                                 </div>
                             </article>
                         )}
 
-                        {/* Contact Information */}
-                        <article data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-6">
-                            <h3 className="text-2xl font-semibold mb-4 text-center font-serif text-blue-500 border-b-2 border-purple-400 pb-2 ">Contact Information</h3>
-                            <div className="space-y-2">
-                                <p className="flex items-center">
-                                    <FaEnvelope className="mr-2 text-pink-500 animate-pulse" />
-                                    <a href={`mailto:${event.contactInfo.email}`} className=" hover:underline">
-                                        {event.contactInfo.email}
-                                    </a>
-                                </p>
-                                <p className="flex items-center">
-                                    <FaPhoneAlt className="mr-2 text-green-500 animate-pulse" />
-                                    <a href={`tel:${event.contactInfo.phone}`} className="text-green-500 hover:underline">
-                                        {event.contactInfo.phone}
-                                    </a>
-                                </p>
-                            </div>
-                        </article>
+
 
                         {/* Location Map */}
                         <MapComponent city={city} />
@@ -151,7 +138,7 @@ const city=event?.location?.city
                     {/* Right Side: Event Data */}
                     <section className="space-y-8">
                         <div data-aos="fade-left">
-                            <h2 className="text-4xl font-serif font-bold mb-4 text-blue-500">{event.title}</h2>
+                            <h2 className="text-4xl  font-bold mb-4 text-blue-500">{event.title}</h2>
                             <div className="space-y-2 text-gray-600">
                                 <p className="flex items-center">
                                     <FaRegClock className="mr-2 text-yellow-500 animate-spin" />
@@ -196,23 +183,11 @@ const city=event?.location?.city
                             </div>
                         </article>
 
-                      <div>
-                      <p data-aos="fade-up" className="text-gray-700 leading-relaxed">{event.description}</p>
-                       
 
-                       <div className="mt-2 ml-2" >
-                      
-                       
-
-                       <Link href={`/payment?id=${id}`}>
-                           <Button >Buy Ticket</Button>
-                       </Link>
-                       </div>
-                      </div>
 
                         {/* Organizer Information */}
                         <article data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-6">
-                            <h3 className="text-2xl font-semibold mb-4 text-center font-serif text-blue-500 border-b-2 border-purple-400 pb-2 ">Speaker</h3>
+                            <h3 className="text-2xl font-semibold mb-4 text-center  text-blue-500 border-b-2 border-purple-400 pb-2 ">Speaker</h3>
                             <div className="flex items-center">
                                 <div className="w-32 h-24 relative">
                                     <Image
@@ -224,7 +199,7 @@ const city=event?.location?.city
                                     />
                                 </div>
                                 <div className="ml-6">
-                                    <p className="font-bold text-xl font-mono text-black ">{event.organizer.name}</p>
+                                    <p className="font-bold text-xl  text-black ">{event.organizer.name}</p>
                                     <p className="text-gray-600 flex items-center mt-1">
                                         <FaUserFriends className="mr-2 text-green-500 animate-pulse" />
                                         {event.organizer.followers} Followers
@@ -234,26 +209,45 @@ const city=event?.location?.city
                             </div>
                         </article>
 
+                        {/* Contact Information */}
+                        <article data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-6">
+                            <h3 className="text-2xl font-semibold mb-4 text-center  text-blue-500 border-b-2 border-purple-400 pb-2 ">Contact Information</h3>
+                            <div className="space-y-2">
+                                <p className="flex items-center">
+                                    <FaEnvelope className="mr-2 text-pink-500 animate-pulse" />
+                                    <a href={`mailto:${event.contactInfo.email}`} className=" hover:underline">
+                                        {event.contactInfo.email}
+                                    </a>
+                                </p>
+                                <p className="flex items-center">
+                                    <FaPhoneAlt className="mr-2 text-green-500 animate-pulse" />
+                                    <a href={`tel:${event.contactInfo.phone}`} className="text-green-500 hover:underline">
+                                        {event.contactInfo.phone}
+                                    </a>
+                                </p>
+                            </div>
+                        </article>
+
                         {/* Sponsor */}
-                        <div data-aos="fade-up" className="bg-white rounded-2xl shadow-xl p-6">
-                            <h3 className="text-2xl font-semibold mb-4 text-center font-serif text-blue-500 border-b-2 border-purple-400 pb-2 ">Sponsor</h3>
+                        <div data-aos="fade-up" className="bg-white rounded-2xl shadow-xl px-6">
+                            <h3 className="text-2xl font-semibold mb-4 text-center  text-blue-500 border-b-2 border-purple-400 pb-2 ">Sponsor</h3>
                             <div className="flex items-center">
                                 <Image
                                     src={event.sponsor.logo}
                                     alt="sponsor"
                                     width={120}
                                     height={100}
-                                    className="object-contain transition-transform duration-300 hover:scale-110"
+                                    className="object-contain transition-transform duration-300 hover:scale-105"
                                 />
                                 <p className="ml-6 text-xl font-medium">{event.sponsor.name}</p>
                             </div>
                         </div>
 
                         {/* FAQ Accordion */}
-                        <div data-aos="fade-up" className="space-y-4">
+                        <div data-aos="fade-up" className="space-y-4 ">
                             <div className="collapse collapse-plus bg-white rounded-xl shadow-lg">
                                 <input type="radio" name="my-accordion-3" defaultChecked />
-                                <div className="collapse-title text-lg font-medium font-mono">
+                                <div className="collapse-title text-lg font-medium ">
                                     What is event management?
                                 </div>
                                 <div className="collapse-content">
@@ -262,7 +256,7 @@ const city=event?.location?.city
                             </div>
                             <div className="collapse collapse-plus bg-white rounded-xl shadow-lg">
                                 <input type="radio" name="my-accordion-3" />
-                                <div className="collapse-title text-lg font-medium font-mono">
+                                <div className="collapse-title text-lg font-medium ">
                                     What tasks are involved in event planning?
                                 </div>
                                 <div className="collapse-content">
@@ -271,7 +265,7 @@ const city=event?.location?.city
                             </div>
                             <div className="collapse collapse-plus bg-white rounded-xl shadow-lg">
                                 <input type="radio" name="my-accordion-3" />
-                                <div className="collapse-title text-lg font-medium font-mono">
+                                <div className="collapse-title text-lg font-medium ">
                                     What challenges are common in event management?
                                 </div>
                                 <div className="collapse-content">
@@ -279,11 +273,16 @@ const city=event?.location?.city
                                 </div>
                             </div>
                         </div>
-                     
 
+                        <div className="mt-6 ml-2" >
+                            <Link href={`/payment?id=${id}`}>
+                                <button className="bg-blue-500 px-8 py-3 rounded-xl text-white font-black text-xl lg:w-full mx-auto cursor-pointer mt-7">Buy Ticket</button>
+                            </Link>
+                        </div>
                     </section>
+
                 </div>
-                <PopularEvents/>
+                <PopularEvents />
             </div>
         </div>
     )
