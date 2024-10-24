@@ -99,11 +99,10 @@ export default function PopularEvent() {
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
       const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
-      console.log("Popular event theke data: ", eventData?.data)
       return eventData?.data;
     }
   })
-  console.log("Popular event theke data: ", eventData)
+  // console.log("Popular event theke data: ", eventData)
 
 
   useEffect(() => {
