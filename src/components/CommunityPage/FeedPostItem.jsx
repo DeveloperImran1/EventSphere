@@ -137,7 +137,7 @@ const FeedPostItem = ({ item, refetch }) => {
             {/* Username & Options */}
             <div className="flex justify-between p-4">
                 <div className="flex items-center gap-x-3">
-                    <img
+                    <Image height={676} width={1200}
                         className="h-12 w-12 rounded-full"
                         src={item.user?.profile_picture || "default-avatar.png"} // Use avatar from API
                         alt="user avatar"
@@ -149,7 +149,7 @@ const FeedPostItem = ({ item, refetch }) => {
                 </div>
                 <div className="relative">
                     <button onClick={toggleMenu}>
-                        <img src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
+                        <Image height={676} width={1200} src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
                     </button>
 
                     {menuOpen && (
@@ -178,7 +178,7 @@ const FeedPostItem = ({ item, refetch }) => {
             >
                 {item.content?.media?.length > 0 && item.content.media.map((imgSrc, i) => (
                     <SwiperSlide key={i}>
-                        <img
+                        <Image height={676} width={1200}
                             src={imgSrc}
                             alt={`slide ${i + 1}`}
                             className="w-full max-h-[320px] object-cover rounded-md"
@@ -211,7 +211,7 @@ const FeedPostItem = ({ item, refetch }) => {
                         {item.comments?.map((comment, cIndex) => (
                             <div key={cIndex} className="border rounded-2xl p-2">
                                 <div className="flex items-start mb-2">
-                                    <img
+                                    <Image height={676} width={1200}
                                         src={comment.user?.profile_picture || "default-avatar.png"}
                                         alt="commenter"
                                         className="h-8 w-8 rounded-full"

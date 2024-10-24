@@ -4,6 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
 import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
+import Image from 'next/image';
 
 // Define color palette for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
@@ -191,7 +192,7 @@ const DummyProfit = () => {
           <div className="space-y-4">
             {getTopEvents().map((event, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
+                <Image height={676} width={1200} src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
                 <div className="flex-grow">
                   <h3 className="font-semibold">{event.title}</h3>
                   <p className="text-sm text-gray-500">{event.category}</p>
