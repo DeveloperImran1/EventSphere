@@ -72,7 +72,7 @@ const MembershipCard = () => {
                      <div className="flex justify-center">
                          {/* button */}
                          <Link href={`/qualityPayment?id=${card?._id}`}>
-                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
+                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-2 px-8 rounded-2xl  mt-4 mr-4'>Purchase Now</Button>
                                 </Link>
                      </div>
                  </div>
