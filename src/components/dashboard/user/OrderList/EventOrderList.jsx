@@ -12,7 +12,7 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from "@/components/shared/LoadingSpiner/Loading";
+import Loading from "@/components/shared/LoadingSpinner/Loading";
 import { useState } from "react";
 import Link from "next/link";
 import { IoMdArrowRoundForward } from "react-icons/io";
@@ -24,14 +24,14 @@ const EventOrderList = () => {
   const { data: invoice = [], refetch, isLoading } = useQuery({
     queryKey: ["users", session],
     queryFn: () =>
-      fetch(`http://localhost:9000/myAllOrder/${session?.data?.user?.email}`).then((res) =>
+      fetch(`https://event-sphare-server.vercel.app/myAllOrder/${session?.data?.user?.email}`).then((res) =>
         res.json()
       ),
   });
   console.log(invoice);
 
   const handleRefundRequest = async (id) => {
-    const res = await axios.put(`http://localhost:9000/refundRequest/${id}`)
+    const res = await axios.put(`https://event-sphare-server.vercel.app/refundRequest/${id}`)
     console.log(res)
     if (res?.data?.modifiedCount) {
       toast.success('Successfully Refund Requested 😊')

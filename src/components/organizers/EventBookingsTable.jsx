@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import { useSession } from 'next-auth/react';
-import Loading from '../shared/LoadingSpiner/Loading';
+import Loading from '../shared/LoadingSpinner/Loading';
 
 const StatusBadge = ({ status }) => {
   const colorMap = {
@@ -46,7 +46,7 @@ const EventBookingsTable = () => {
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
+    const { data } = await axios.get(`https://event-sphare-server.vercel.app/ordersByGmail/${currentUserEmail}`);
 
     return data;
   };

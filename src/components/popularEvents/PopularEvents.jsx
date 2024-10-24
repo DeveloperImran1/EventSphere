@@ -21,7 +21,7 @@ import { IoMdArrowRoundForward } from "react-icons/io";
 import { MdArrowOutward } from "react-icons/md";
 import { Heart, Share2 } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from '../shared/LoadingSpiner/Loading';
+import Loading from '../shared/LoadingSpinner/Loading';
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import SectionTitle from "../shared/SectionTitle";
