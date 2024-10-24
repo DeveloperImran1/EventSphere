@@ -64,7 +64,7 @@ const handleUnFollow = async (id) => {
                         </div>
                     ))
                 ) : (
-                    <p>You have no followers.</p>
+                    <p>You have no Following.</p>
                 )}
                 {
                     // Show the "See more" or "See less" options only if the length of filteredUsersWithoutYou is more than 3
