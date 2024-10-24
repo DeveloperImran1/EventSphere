@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 const useAuth = () => {
     const session = useSession();
 
-    console.log("ProfileInfo", session);
+    // console.log("ProfileInfo", session);
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["users"],
         queryFn: () =>
