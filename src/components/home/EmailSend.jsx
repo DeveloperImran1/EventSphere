@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com'; // Import EmailJS
-
+import { toast, Toaster } from 'react-hot-toast';
 const EmailSend = () => {
     const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [message] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,16 +18,16 @@ const EmailSend = () => {
 
         // Use EmailJS to send the email
         emailjs
-            .send('service_cabzzrm','template_iczs5ah', templateParams, 'XI3ftrktXnFrzmdjx')
+            .send('service_vrtjb7u','template_iczs5ah', templateParams, 'mG0AHrO3300phZ9Kb')
             .then(
                 (response) => {
                     console.log('Email sent successfully:', response);
-                    setMessage('Subscription successful! ');
+                    toast.success('Successfully Subscribe!');
                     setEmail(''); // Clear the input field after success
                 },
                 (error) => {
                     console.error('Failed to send email:', error);
-                    setMessage('Subscription failed. Please try again.');
+                    toast.error("This didn't work.")
                 }
             );
     };
