@@ -9,8 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
-import Image from "next/image"
-import { user } from "@nextui-org/react"
+import Swal from 'sweetalert2';
 
 const socket = io("http://localhost:9000", {
   reconnectionAttempts: 5,
@@ -34,6 +33,16 @@ export default function VideoCall() {
   const userVideo = useRef()
   const connectionRef = useRef()
   const callTimerRef = useRef(null)
+
+  // Message for Join now 
+  useEffect(() => {
+    Swal.fire({
+      title: '🎉JOIN NOW !',
+      text: 'Please enter your name before joining !',
+      icon: 'warning',
+      confirmButtonText: 'Got it!',
+    });
+  }, []);
 
   // Add missing joinRoom function
   const joinRoom = () => {
@@ -358,9 +367,7 @@ export default function VideoCall() {
             <video playsInline ref={userVideo} autoPlay className="w-full h-full object-cover" />
             {!callAccepted && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarFallback className="text-2xl">?</AvatarFallback>
-                </Avatar>
+               
                 <p className="text-white text-lg">Waiting for connection...</p>
               </div>
             )}
