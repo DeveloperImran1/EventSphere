@@ -10,48 +10,8 @@ import Link from 'next/link';
 const GiftCardDesign = () => {
     const axiosPublic = useAxiosPublic()
 
-    // const cards = [
-    //     {
-    //         "id": 1,
-    //         "type": "Gold  Card",
-    //         "price": 100,
-    //         "BG": "https://i.ibb.co.com/FYQcZ77/pexels-michael-steinberg-95604-321452.jpg",
-
-    //         "benefits": [
-    //             "10% discount on all bookings",
-    //             "Exclusive early access to events",
-    //             "Free ticket cancellation"
-    //         ],
-    //         "validity": "1"
-    //     },
-    //     {
-    //         "id": 2,
-    //         "type": "Diamond Card",
-    //         "BG": "https://i.ibb.co.com/BnQ2m0x/pexels-enginakyurt-1458867.jpg",
-    //         "price": 200,
-    //         "benefits": [
-    //             "15% discount on all bookings",
-    //             "Exclusive VIP access",
-    //             "Free ticket upgrades"
-    //         ],
-    //         "validity": "3"
-    //     },
-    //     {
-    //         "id": 3,
-    //         "type": "Platinum  Card",
-    //         "BG": "https://i.ibb.co.com/CwSgzfr/premium-photo-1678749105251-b15e8fd164bf.jpg",
-    //         "price": 300,
-    //         "benefits": [
-    //             "20% discount on bookings",
-    //             "Lifetime priority access",
-    //             "VIP lounge access",
-
-    //         ],
-    //         "validity": "6"
-    //     }
-    // ]
-    // Data fetching using react-query
-    const { data: quality = [], isLoading, refetch } = useQuery({
+    
+    const { data: quality = {}, isLoading, refetch } = useQuery({
         queryKey: ['quality'],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/getQuality');
@@ -66,7 +26,13 @@ const GiftCardDesign = () => {
     }
 
     return (
-        <div className='grid md:grid-cols-3 grid-cols-1 gap-10 md:gap-4 mx-2 my-20 ' >
+        <>
+       
+        
+        
+  
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-6 md:gap-2 lg:gap-4 mx-2 my-20 ' >
+            
             {quality?.map((card) => (
                 <div key={card.id} className="container ">
 
@@ -84,7 +50,7 @@ const GiftCardDesign = () => {
                             <div className="card-top  ">
                                 <p className="text-base text-white  font-bold">{card.price} $</p>
                             </div>
-                            <p className='text-white bg-opacity-60     bg-black  backdrop-blur-md p-2 rounded-lg shadow-lg  text-center transform transition-transform duration-300 hover:scale-105 text-xl font-semibold font-serif ' >{card.type}</p>
+                            <p className='text-white bg-opacity-60     bg-black  backdrop-blur-md p-2 md:p-0 lg:p-2 rounded-lg shadow-lg  text-center transform transition-transform duration-300 hover:scale-105 text-xl md:text-base lg:text-xl font-semibold font-serif ' >{card.type}</p>
                         </div>
                         {/* Back */}
                         <div className="back">
@@ -94,7 +60,7 @@ const GiftCardDesign = () => {
                             </div>
                             <div className="mt-4 ">
 
-                                <ul className="text-white text-sm space-y-1">
+                                <ul className="text-white md:hidden lg:block text-sm space-y-1">
                                     {card.benefits.map((benefit, index) => (
                                         <li key={index} className="flex items-start">
                                             <span className="text-green-400 mr-2">•</span>
@@ -114,7 +80,7 @@ const GiftCardDesign = () => {
                             </div>
                             {/* button */}
                             <Link href={`/qualityPayment?id=${card?._id}`}>
-                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
+                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 md:p-0 lg:py-1 px-2 md:px-1 lg:px-2 rounded-2xl'>Purchase Now</Button>
                                 </Link>
 
                         </div>
@@ -124,6 +90,7 @@ const GiftCardDesign = () => {
                 </div>
             ))}
         </div>
+        </>
     );
 };
 

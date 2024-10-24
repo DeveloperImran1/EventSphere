@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../shared/LoadingSpiner/Loading";
+import Loading from "../shared/LoadingSpinner/Loading";
 import toast, { Toaster } from 'react-hot-toast';
 import SectionTitleSimple from "../shared/SectionTitleSimple";
 const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Business', 'Music']
@@ -99,11 +99,10 @@ export default function PopularEvent() {
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
       const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
-      console.log("Popular event theke data: ", eventData?.data)
       return eventData?.data;
     }
   })
-  console.log("Popular event theke data: ", eventData)
+  // console.log("Popular event theke data: ", eventData)
 
 
   useEffect(() => {

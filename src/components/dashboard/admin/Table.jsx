@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GoogleMapComponent from './googlemap';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 const Table = () => {
   const [eventData, setEventData] = useState([]);
@@ -8,7 +9,7 @@ const Table = () => {
   // useEffect to fetch data from APIs once the component mounts or the organizerEmail changes
   useEffect(() => {
     const fetchData = async () => {
-      const eventsResponse = await fetch('http://localhost:9000/events');
+      const eventsResponse = await fetch('https://event-sphare-server.vercel.app/events');
       const eventsData = await eventsResponse.json();
       const events = eventsData.events;
       setEventData(events);
@@ -35,7 +36,7 @@ const Table = () => {
           <div className="space-y-4">
             {getTopEvents().map((event, index) => (
               <div key={index} className="flex items-center p-2 bg-gray-50 rounded-lg">
-                <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
+                <Image height={676} width={1200} src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
                 <div className="flex-grow">
                   <h5 className="font-semibold ">{event.title}</h5>
                   <p className="text-sm text-gray-500">{event.category}</p>

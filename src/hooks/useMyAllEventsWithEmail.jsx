@@ -8,7 +8,7 @@ const useMyAllEventsWithEmail = () => {
     const { data, isLoading, refetch }  = useQuery({
         queryKey: ["myEventsWithEmail"],
         queryFn: () =>
-            fetch(`http://localhost:9000/events/getMyEvent/${lastPathSegment}`).then((res) =>
+            fetch(`https://event-sphare-server.vercel.app/events/getMyEvent/${lastPathSegment}`).then((res) =>
                 res.json()
             ),
     });

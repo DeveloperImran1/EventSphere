@@ -4,6 +4,9 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSession } from 'next-auth/react';
 import { Calendar, Users, DollarSign, MapPin, Tag } from 'lucide-react';
+import DummyProfit from './DummyProfit';
+import Image from 'next/image';
+
 
 // Define color palette for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
@@ -11,6 +14,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 const Dashboard = () => {
   // State to store event data and order data
   const [eventData, setEventData] = useState([]);
+  console.log( "eeeeeeeeeee", eventData);
   const [orderData, setOrderData] = useState([]);
   
   // Retrieve session data for the current user
@@ -20,8 +24,8 @@ const Dashboard = () => {
   // useEffect to fetch data from APIs once the component mounts or the organizerEmail changes
   useEffect(() => {
     const fetchData = async () => {
-      const eventsResponse = await fetch('http://localhost:9000/events');
-      const ordersResponse = await fetch('http://localhost:9000/orders');
+      const eventsResponse = await fetch('https://event-sphare-server.vercel.app/events');
+      const ordersResponse = await fetch('https://event-sphare-server.vercel.app/orders');
       const eventsData = await eventsResponse.json();
       const events = eventsData.events;
       const orders = await ordersResponse.json();
@@ -75,6 +79,10 @@ const Dashboard = () => {
       .sort((a, b) => b.bookedSeats.length - a.bookedSeats.length)
       .slice(0, 5);
   };
+
+  if (eventData.length === 0) {
+    return <DummyProfit/>
+  }
 
   return (
     <div className="p-4 space-y-6 bg-gray-100">
@@ -190,7 +198,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             {getTopEvents().map((event, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                <img src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
+                <Image height={676} width={1200} src={event.gallery[0]} alt={event.title} className="w-16 h-16 object-cover rounded-full mr-4" />
                 <div className="flex-grow">
                   <h3 className="font-semibold">{event.title}</h3>
                   <p className="text-sm text-gray-500">{event.category}</p>

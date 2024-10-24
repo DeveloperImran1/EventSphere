@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import QRCode from 'react-qr-code';
-import Loading from '../shared/LoadingSpiner/Loading';
+import Loading from '../shared/LoadingSpinner/Loading';
 import Image from 'next/image';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
@@ -17,15 +19,17 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState('');
   const ticketRef = useRef();
 
+ 
+
   useEffect(() => {
-    if (!transitionId) {
+   if (!transitionId) {
       console.log("Transaction ID is missing.");
       return;
     }
 
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/orders/${transitionId}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/orders/${transitionId}`);
         setPaymentData(response.data);
         setLoading(false);
       } catch (error) {
@@ -40,7 +44,11 @@ const PaymentQRCodePage = () => {
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
-    console.log('Feedback:', feedback);
+
+    // Show success toast
+    toast.success('Feedback successfully submitted!')
+
+    // Clear the form
     setFeedback('');
   };
 
