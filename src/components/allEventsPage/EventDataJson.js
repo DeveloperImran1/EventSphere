@@ -339,7 +339,7 @@
 
 const fetchEventsData = async () => {
   try {
-    const response = await axios.get(`http://localhost:9000/events`);
+    const response = await axios.get(`https://event-sphare-server.vercel.app/events`);
     return response.data;
   } catch (error) {
     console.error('Error fetching events:', error);

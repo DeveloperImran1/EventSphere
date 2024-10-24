@@ -25,16 +25,6 @@ const Navbar = () => {
   };
 
 
-
-  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
-  //   const { data: notification = [] } = useQuery({
-  //     queryKey: ['notification'],
-  //     queryFn: async () => {
-  //         const res = await axiosPublic.get('/notification')
-  //         return res.data;
-  //     }
-  // })
-
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -62,6 +52,14 @@ const Navbar = () => {
   }, []);
 
 
+  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
+  //   const { data: notification = [] } = useQuery({
+  //     queryKey: ['notification'],
+  //     queryFn: async () => {
+  //         const res = await axiosPublic.get('/notification')
+  //         return res.data;
+  //     }
+  // })
 
   const session = useSession();
   const auth = useAuth();
