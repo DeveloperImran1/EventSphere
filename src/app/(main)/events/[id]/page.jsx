@@ -8,7 +8,7 @@ import { FaRegClock, FaMapMarkerAlt, FaUserFriends, FaEnvelope, FaPhoneAlt, FaTa
 import Image from "next/image"
 import { MdLocationCity } from "react-icons/md"
 import { FileType2 } from "lucide-react"
-import Loading from "@/components/shared/LoadingSpiner/Loading"
+import Loading from "@/components/shared/LoadingSpinner/Loading"
 import Link from "next/link"
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -35,7 +35,7 @@ const EventDetailsPage = ({ params }) => {
 
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/events/${id}`)
+                const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`)
                 // console.log(response)
                 setEvent(response.data)
                 setLoading(false)

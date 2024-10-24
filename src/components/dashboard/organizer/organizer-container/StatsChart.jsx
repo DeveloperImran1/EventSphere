@@ -14,12 +14,12 @@ import {
 
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import Loading from "@/components/shared/LoadingSpiner/Loading";
+import Loading from "@/components/shared/LoadingSpinner/Loading";
 
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {
     const response = await fetch(
-        `http://localhost:9000/organizer-waveChart/${email}`
+        `https://event-sphare-server.vercel.app/organizer-waveChart/${email}`
     );
     if (!response.ok) {
         throw new Error("Network response was not ok");

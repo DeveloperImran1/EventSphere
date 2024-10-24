@@ -8,7 +8,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Dialog } from '@headlessui/react';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import Loading from '../shared/LoadingSpiner/Loading';
+import Loading from '../shared/LoadingSpinner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
 import { Slider } from "@nextui-org/react";
@@ -236,7 +236,7 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='  container mx-auto'>
+      <div className='  max-w-[1280px] mx-auto'>
         {/* For mobile - Drawer button */}
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden ">

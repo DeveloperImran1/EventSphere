@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../shared/LoadingSpiner/Loading";
+import Loading from "../shared/LoadingSpinner/Loading";
 import toast, { Toaster } from 'react-hot-toast';
 import SectionTitleSimple from "../shared/SectionTitleSimple";
 const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Business', 'Music']

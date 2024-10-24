@@ -13,6 +13,7 @@ import useAxiosPublic from '@/hooks/useAxiosPublic';
 
 const FeedPostItem = ({ item, refetch }) => {
     const session = useSession()
+    const currentUser = session.data?.user;
     const axiosPublic = useAxiosPublic()
     const [menuOpen, setMenuOpen] = useState(false);
     const [commentsOpen, setCommentsOpen] = useState(false);
@@ -28,6 +29,10 @@ const FeedPostItem = ({ item, refetch }) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
     const handleReplySubmit = async (commentId, commenterEmail, id, replyUserPic, commentText) => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         // Create a reply object
         const replyObj = {
             replyComment: replies,  // Use commentText for reply content
@@ -48,6 +53,10 @@ const FeedPostItem = ({ item, refetch }) => {
 
     // handleReact
     const handleReact = async () => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         // Get the current love count from the post
         let updatedLove = 0;
 
@@ -79,6 +88,13 @@ const FeedPostItem = ({ item, refetch }) => {
     };
     // handleCommentSubmit
     const handleCommentSubmit = async () => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
+        if ( !newComment) {
+           return toast.error("Add Comment 👊")
+        }
 
         const commentObj = {
             text: newComment,
@@ -165,7 +181,7 @@ const FeedPostItem = ({ item, refetch }) => {
                         <img
                             src={imgSrc}
                             alt={`slide ${i + 1}`}
-                            className="w-full max-h-[700px] object-cover rounded-md"
+                            className="w-full max-h-[320px] object-cover rounded-md"
                         />
                     </SwiperSlide>
                 ))}
