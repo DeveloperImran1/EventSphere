@@ -8,6 +8,7 @@ import DestinationSlider from './DestinationSlider';
 import Banner from './banner/page';
 import EventTimed from './EventTime/page';
 import PopularEvent from '../PopularEvent/PopularEvent';
+import MembershipCard from './membership/MembershipCard';
 
 
 const HomeContainer = () => {
@@ -15,11 +16,14 @@ const HomeContainer = () => {
         <div className=''>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
+            <MembershipCard/>
             <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
             <PopularEvent/>
+           
             {/* <Testimonials></Testimonials> */}
+            
         </div>
     );
 };

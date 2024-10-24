@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
     height: 10%;
-    position: absolute;
+    /* position: absolute; */
     width: 50%;
     background-color: transparent;
     border: 2px solid black;

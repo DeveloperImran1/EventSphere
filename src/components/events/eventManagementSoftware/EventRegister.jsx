@@ -1,15 +1,16 @@
 import SectionTitle from '@/components/shared/SectionTitle';
+import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
 import React from 'react';
 
 const EventRegister = () => {
     return (
         <div className=' w-11/12 mx-auto mb-20'>
-            <SectionTitle
-                subTitle="The Secret To Sold Out Events"
+            <SectionTitleSimple
                 title="Seamless Registration And Ticketing Systems"
+                subtitle="The Secret To Sold Out Events"
             >
-            </SectionTitle>
+            </SectionTitleSimple>
             <div className='flex flex-col lg:flex-row gap-12 '>
                 <div className='flex-1'>
                     <div>
