@@ -1,4 +1,5 @@
 import SectionTitle from '@/components/shared/SectionTitle';
+import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,9 +8,9 @@ const EventLimeLights = () => {
         <section className=' w-11/12 mx-auto'>
             {/* First Section */}
             <article>
-                <SectionTitle
-                    subTitle="Stakeholders Make or Break Your Event"
+                <SectionTitleSimple
                     title="Give Them The Limelight They Deserve!"
+                    subtitle="Stakeholders Make or Break Your Event"
                 />
                 <div className='flex lg:flex-row-reverse flex-col gap-12'>
                     {/* Left Content */}
@@ -41,9 +42,9 @@ const EventLimeLights = () => {
 
             {/* Second Section */}
             <article>
-                <SectionTitle
-                    subTitle="See What Worked And What Didn’t"
-                    title="Make Your Next Event Successful With Our Event Planning Software"
+                <SectionTitleSimple
+                    title="See What Worked And What Didn’t"
+                    subtitle="Make Your Next Event Successful With Our Event Planning Software"
                 />
                 <div className='flex lg:flex-row flex-col gap-12'>
                     {/* Left Content */}
@@ -75,9 +76,9 @@ const EventLimeLights = () => {
 
             {/* Third Section */}
             <article className='mb-20'>
-                <SectionTitle
-                    subTitle="Miscellaneous"
-                    title="Because Who Doesn’t Love A Little Extra Help!"
+                <SectionTitleSimple
+                    title="Miscellaneous"
+                    subtitle="Because Who Doesn’t Love A Little Extra Help!"
                 />
                 <div className='flex lg:flex-row-reverse flex-col gap-6 lg:gap-12'>
                     {/* Left Content */}

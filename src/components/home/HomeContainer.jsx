@@ -18,8 +18,7 @@ const HomeContainer = () => {
             <EventTimed></EventTimed>
             <DestinationSlider />
             <Organizers></Organizers>
-            <PopularEvent/>
-            {/* <Testimonials></Testimonials> */}
+            
         </div>
     );
 };

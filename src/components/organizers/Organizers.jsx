@@ -9,6 +9,7 @@ import { MdPeople } from "react-icons/md";
 // import Link from 'next/link';
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import SectionTitle from '../shared/SectionTitle';
+import SectionTitleSimple from '../shared/SectionTitleSimple';
 
 
 const Organizers = () => {
@@ -21,7 +22,7 @@ const Organizers = () => {
             followers: "9.5k",
             specialization: ["Real-Time Events", "Revenue Opt."],
             contactInfo: "imran.hassan@example.com",
-            bio: "Leads real-time ticketing and dynamic pricing to enhance revenue growth and user engagement."
+            bio: "Leads real-time ticketing and dynamic pricing to enhance revenue growth.."
         },
         {
             name: "Tauhid Hossen",
@@ -30,7 +31,7 @@ const Organizers = () => {
             followers: "7.9k",
             specialization: ["Live Streaming", "Tech Support"],
             contactInfo: "tauhid.hossen@example.com",
-            bio: "Oversees live streaming and QR code-based ticketing, ensuring seamless technical performance."
+            bio: "Oversees live streaming and QR code-based ticketing, ensuring technical."
         },
         {
             name: "Jowel Ahmed",
@@ -57,7 +58,7 @@ const Organizers = () => {
             followers: "6.7k",
             specialization: ["Event Recomm.", "User Intuition"],
             contactInfo: "asadujjaman@example.com",
-            bio: "Optimizes event recommendations using AI, making the platform more intuitive and engaging."
+            bio: "Optimizes event recommendations using AI, making the platform more intuitive."
         },
         {
             name: "Zakia Sultana",
@@ -91,13 +92,12 @@ const Organizers = () => {
 
     return (
         <div className="container  mx-auto p-4 my-20 ">
-         <SectionTitle 
-         subTitle="Our Team"
-         title={"Top_Organizers"}
-         description={"Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life"}
+         <SectionTitleSimple
+         title={"Top Organizers"}
+         subtitle={"Discover our top organizers, renowned for their expertise and successful events. Their dedication ensures exceptional experiences, making them leaders in the industry. Trust them to bring your vision to life"}
          >
 
-         </SectionTitle>
+         </SectionTitleSimple>
             <Swiper
                 modules={[Pagination, Navigation]}
                 spaceBetween={30}
@@ -121,10 +121,10 @@ const Organizers = () => {
                     },
                 }}
             >
-                {organizers.map((organizer, index) => (
+                {organizers?.map((organizer, index) => (
                     <SwiperSlide key={index}>
                         {/* Add group class here */}
-                        <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 flex flex-col items-center text-center group">
+                        <div className="bg-white dark:bg-gray-800 shadow-lg border-2  rounded-lg p-6 flex flex-col items-center text-center group">
                             <div className="relative w-32 h-32 mb-4">
                                 <Image
                                     src={organizer.profilePicture}
