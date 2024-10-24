@@ -26,6 +26,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import SectionTitle from "../shared/SectionTitle";
 import SectionTitleSimple from "../shared/SectionTitleSimple";
+import CardForEvents from "../allEventsPage/CardForEvents";
 
 
 
@@ -162,71 +163,10 @@ const PopularEvents = () => {
             <SectionTitleSimple title="Popular Events" subtitle="Explore the top popular events with the most booked seats, offering exciting experiences across various categories like entertainment, sports, and cultural activities, ensuring unforgettable moments for everyone."></SectionTitleSimple>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:4 2xl:6 gap-2 lg:gap-4 2xl:gap-6">
-                {popularEventsMax?.map(popularEvents => <>
-                    <div className=" " key={popularEvents._id}>
-
-                        <motion.div
-                            ref={cardRef}
-                            className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
-                            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                            whileHover="hover"
-                            variants={cardVariants}
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.1 }}
-                        >
-                            <div className="relative overflow-hidden h-48">
-                                <Image
-                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    src={popularEvents?.gallery[0]}
-                                    alt={popularEvents?.title}
-                                    layout="fill"
-                                    data-aos="zoom-in"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
-                            </div>
-
-                            <div className="flex justify-end space-x-2 absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
-                                <button
-                                    className={`p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 ${favorite?.includes(popularEvents?._id) ? 'bg-white' : 'bg-red-500'} `}
-                                    onClick={() => handleAddFavorite(popularEvents?._id)}
-                                >
-                                    <Heart className={`w-6 h-6 ${favorite?.includes(popularEvents?._id) ? 'text-red-500 fill-red-500' : 'text-white fill-white'}`} />
-                                </button>
-                                <button className="p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 bg-[#1b85db] ">
-                                    <Share2 className="w-6 h-6 text-white" />
-                                </button>
-                            </div>
-
-                            <motion.div className="p-6  space-y-4 " style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
-                                <motion.div style={{ transform: "translateZ(40px)" }}>
-                                    <h2 className="text-2xl font-bold text-blue-500"> {popularEvents?.title}</h2>
-                                </motion.div>
-
-                                <motion.div className="space-y-2  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
-                                    <InfoItem icon={<Clock className=" text-blue-400 " />} text={format(new Date(popularEvents?.dateTime), 'MMMM do, yyyy h:mm a')} />
-                                    <InfoItem icon={<Building2 className=" text-blue-400  " />} text={`Hosted by: ${popularEvents?.companyName}`} />
-                                    <InfoItem icon={<MapPin className=" text-blue-400  " />} text={`${popularEvents?.location.country}, ${popularEvents?.location.city}`} />
-                                    <InfoItem icon={<FileType className=" text-blue-400  " />} text={`Type: ${popularEvents?.type}`} />
-                                    <InfoItem icon={<Tag className=" text-blue-400  " />} text={`Category: ${popularEvents?.category}`} />
-                                </motion.div>
-
-                                <motion.div className="flex justify-between items-center -mt-6" data-aos="fade-up" data-aos-delay="300" >
-                                    <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[25px] " />} text={`Price: ${popularEvents?.price}`} />
-
-                                    <Link href={`/events/${popularEvents?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" >
-                                        {
-                                            hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
-
-                                        }
-                                    </Link>
-
-                                </motion.div>
-                            </motion.div>
-                        </motion.div>
-
-                    </div>
-                </>)}
+                {popularEventsMax?.map(event => <CardForEvents
+                    key={event._id}
+                    event={event}
+                />)}
 
             </div>
         </div>

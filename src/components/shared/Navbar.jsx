@@ -18,12 +18,12 @@ const Navbar = () => {
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
 
-    const updateFavorites = () => {
-      const storedFavorites = localStorage.getItem('favorites');
-      const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-      setFavorite(myFavorites);
-    };
-  
+  const updateFavorites = () => {
+    const storedFavorites = localStorage.getItem('favorites');
+    const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+    setFavorite(myFavorites);
+  };
+
 
 
   // Notification er kaj akhono hoini... kora somoi comment out korte hobe
@@ -146,10 +146,7 @@ const Navbar = () => {
 
   ]
   const subMenu4 = [
-    {
-      title: "Dashboard",
-      path: "/dashboard"
-    },
+ 
     {
       title: "Offer Announcement",
       path: "/offer-announcement"
@@ -181,7 +178,7 @@ const Navbar = () => {
       title: "Bookmark",
       path: "/favorite-list"
     },
-  
+
 
 
   ]
@@ -246,7 +243,13 @@ const Navbar = () => {
               >
                 Community
               </Link>
-           
+              <Link
+                href="/video-call"
+                className="hover:text-yellow-300 transition duration-300 ease-in-out"
+              >
+                Messenger
+              </Link>
+
               <Link onClick={updateFavorites}
                 href="/favorite-list"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out relative"
@@ -403,6 +406,29 @@ const Navbar = () => {
                         >
                           Category 4
                         </p>
+
+                        {
+                          auth?.data?.role === "user" ? <Link
+                            href={`/dashboard/user-profile/${session?.data?.user?.email}`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link> : auth?.data?.role === "organizer" ? <Link
+                            href={`/dashboard/organizer-container`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link> : <Link
+                            href={`/dashboard/admin-container`}
+                            className="block px-4 py-2  text-white hover:text-[#eab308] transition text-start"
+                            onClick={closeDesktopMenu}
+                          >
+                            Dashboard
+                          </Link>
+                        }
+
                         {
                           subMenu4?.map((menu, index) => <Link key={index}
                             href={menu?.path}
@@ -482,7 +508,7 @@ const Navbar = () => {
                           onClick={closeDropdown}
                         >
                           Dashboard
-                        </Link> :   auth?.data?.role === "organizer" ? <Link
+                        </Link> : auth?.data?.role === "organizer" ? <Link
                           href={`/dashboard/organizer-container`}
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                           onClick={closeDropdown}
