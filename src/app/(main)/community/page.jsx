@@ -14,7 +14,7 @@ const CommunityPage = () => {
                     <CommunitySidebar />
                 </div> */}
                 {/* Main Content */}
-                <div className="border-2 w-full md:w-[70%]">
+                <div className="border-2 w-full lg:max-w-[70%]">
                     {/* <CommunityHeader /> */}
                     <div className="">
                         {/* Scrollable Feed */}
@@ -27,7 +27,7 @@ const CommunityPage = () => {
                     </div>
                 </div>
                 {/* Right Sidebar */}
-                <div className="md:w-[30%] p-5 border-2 hidden md:block">
+                <div className="md:w-[30%] p-5 border-2 hidden lg:block">
                     <CommunityRightSidebar />
                 </div>
             </div>

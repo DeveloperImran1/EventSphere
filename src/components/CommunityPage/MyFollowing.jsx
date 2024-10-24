@@ -19,29 +19,29 @@ const MyFollowing = ({ userData, refetch }) => {
     const followerData = userData.filter(user => followerEmails.includes(user.email));
     const filteredUsersWithoutYou = followerData.filter(user => user.followers.includes(myEmail) && user.email != myEmail);
 
-    // handleFollow Button
-    const handleFollow = async (id) => {
-        try {
-          const response = await fetch(`http://localhost:9000/user/handleAddFollower/${id}`, {
+// handleUnFollow Button
+const handleUnFollow = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:9000/user/handleRemoveFollower/${id}`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ followerEmail: myEmail }),
-          });
-      
-          const data = await response.json();
-      
-          if (response.ok) {
-            toast.success('Followed successfully!');
-            refetch()
-          } else {
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            toast.success('UnFollow successfully!');
+            refetch();
+        } else {
             console.error('Error:', data.message);
-          }
-        } catch (error) {
-          console.error('Error:', error);
         }
-      };
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
     return (
         <div className="my-6">
             <h2 className="text-lg font-bold">Following</h2>
@@ -59,7 +59,7 @@ const MyFollowing = ({ userData, refetch }) => {
                                         <p className="text-sm">{(follower.email).slice(0, 15)}...</p>
                                     </div>
                                 </div>
-                                <button onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
+                                <button title='Unfollow' onClick={() => handleUnFollow(follower?._id)} className="text-blue-500">Unfollow</button>
                             </div>
                         </div>
                     ))
