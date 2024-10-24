@@ -76,10 +76,10 @@ const LoginPage = () => {
     return (
         <div className="">
             <div
-                style={{ backgroundImage: `url('https://i.postimg.cc/13VKgtYc/top-banner.png')` }}
+                style={{ backgroundImage: `url('https://media.istockphoto.com/id/1368151370/photo/user-typing-login-and-password-cyber-security-concept.jpg?s=612x612&w=0&k=20&c=hZ14F6Fa4edYWwg0BduAj0is8gdcORsBBHpQcQbAPKc=')` }}
                 className="bg-cover bg-center pb-16"
             >
-                <div className="max-w-[1320px] mx-auto flex flex-col md:flex-row text-white">
+                <div className="container mx-auto flex flex-col md:flex-row text-white">
                     <div className="w-full md:w-1/2 my-5 md:mt-14 p-3">
                         <div className="max-w-[550px] mb-44">
                             <h1 className="pb-[30px] mb-[30px] font-bold text-3xl md:border-b text-center md:text-start md:ml-0">
