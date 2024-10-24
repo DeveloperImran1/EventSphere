@@ -39,7 +39,7 @@ const LeftsideChat = ({ conversations, currentUser, handleCurrentChat, users, cu
     }
 
     return (
-        <div className="max-h-screen fixed">
+        <div className="min-h-screen fixed">
             <div className=" flex  items-center justify-between">
                 <h1 className=" font-semibold">Chats</h1>
                 <div className=" flex gap-4">

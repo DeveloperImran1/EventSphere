@@ -22,14 +22,14 @@ const HomeContainer = () => {
             <Banner></Banner>
             <PopularEvents></PopularEvents>
             <EventTimed></EventTimed>
-      <WhyUse></WhyUse>
-      
+            <WhyUse></WhyUse>
+
             <DestinationSlider />
             <Organizers></Organizers>
-            <MembershipCard/>
+            <MembershipCard />
             <EmailSend></EmailSend>
-           
-            
+
+
         </div>
     );
 };
