@@ -3,32 +3,20 @@
 
 
 import { useState, useEffect } from 'react'
-import { Button } from "@/components/ui/button"
-import YouTube from 'react-youtube'
 
-import { FaPlayCircle } from 'react-icons/fa'
+
 import './Banner.css'
-import Image from 'next/image'
+
 import CercleButton from '../shared/CercleBuuton/Button'
 import GiftCardDesign from './GiftCard/GiftCardDesign'
 import Link from 'next/link'
 const festiveEmojis = ['🎄', '🎅', '🎁', '❄️', '⛄', '🦌', '🔔', '🕯️', '🎶', '🍪', '🎉', '🥂', '🧦', '🕎', '🥳', '🎇'];
-
 
 export default function ChristmasPromo() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [isPlaying, setIsPlaying] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
-  const videoId = 'ncjuqj0WN6s'
-
-  const opts = {
-    width: '600',
-    height: '400',
-    playerVars: {
-      autoplay: 1,
-    },
-  }
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,11 +36,13 @@ export default function ChristmasPromo() {
     return () => clearInterval(timer)
   }, [])
 
+  
   const handlePlayClick = () => {
     setShowModal(true)
     setIsPlaying(true)
   }
 
+  
   const handleCloseModal = () => {
     setShowModal(false)
     setIsPlaying(false)
