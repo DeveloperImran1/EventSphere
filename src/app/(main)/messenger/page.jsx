@@ -1,15 +1,22 @@
 "use client"
 import ChatBody from "@/components/Messenger/ChatBody";
 import ChatList from "@/components/Messenger/ChatList";
+import LeftsideChat from "@/components/Messenger/LeftsideChat";
+import MiddleSideChat from "@/components/Messenger/MiddleSideChat";
+import RightSideChat from "@/components/Messenger/RightSideChat";
 import useAuth from "@/hooks/useAuth";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 
 const Messenger = () => {
     const [conversations, setConversations] = useState([])
+    const [currentChat, setCurrentChat] = useState(null)
+    const [messages, setMessages] = useState([])
+    const [users, setUser] = useState([])
     const auth = useAuth();
     const axiosPublic = useAxiosPublic()
-    console.log(auth)
+
+
     useEffect(() => {
         const getConversations = async () => {
             try {
@@ -21,25 +28,58 @@ const Messenger = () => {
             }
         }
         getConversations()
-    }, [auth?.data])
+    }, [auth?.data,axiosPublic])
 
-    console.log(conversations, auth?.data)
+    useEffect(() => {
+        const getMessages = async () => {
+            try {
+                const res = await axiosPublic.get(`/getMessages/${currentChat?._id}`)
+                setMessages(res?.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+       getMessages()
+    }, [axiosPublic,currentChat?._id])
+
+    useEffect(() => {
+        const getUsers = async () => {
+            try {
+                const res = await axiosPublic.get(`/user`)
+                setUser(res?.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+      getUsers()
+    }, [axiosPublic])
+
+ const handleCurrentChat=(findCurrentChat)=>{
+    setCurrentChat(findCurrentChat)  
+ }
+
+
+
     return (
         <div>
             <section className="flex flex-col lg:grid grid-cols-12 container gap-8 pb-8">
 
                 {/* left side  */}
                 <div className="col-span-3  rounded">
-                    <ChatList conversations={conversations} currentUser={auth?.data}></ChatList>
+                    <LeftsideChat handleCurrentChat={handleCurrentChat}  conversations={conversations} 
+                    currentUser={auth?.data?._id} users={users} currentChat={currentChat} />
                 </div>
 
                 {/* right site  */}
                 <div className="col-span-6  rounded ">
-                    <ChatBody></ChatBody>
+                    <MiddleSideChat currentChat={currentChat} messages={messages} conversations={conversations} 
+                    currentUser={auth?.data?._id}/>
                 </div>
 
                 <div className="col-span-3  rounded">
-                    <ChatList></ChatList>
+                    <RightSideChat currentChat={currentChat}  currentUser={auth?.data?._id}/>
                 </div>
             </section>
         </div>
