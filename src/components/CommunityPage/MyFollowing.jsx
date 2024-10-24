@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const MyFollower = ({ userData, refetch }) => {
+const MyFollowing = ({ userData, refetch }) => {
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
@@ -17,7 +17,7 @@ const MyFollower = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user.email));
-    const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
+    const filteredUsersWithoutYou = followerData.filter(user => user.followers.includes(myEmail) && user.email != myEmail);
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -43,8 +43,8 @@ const MyFollower = ({ userData, refetch }) => {
         }
       };
     return (
-        <div className="">
-            <h2 className="text-lg font-bold">Followers</h2>
+        <div className="my-6">
+            <h2 className="text-lg font-bold">Following</h2>
             <div className="mt-1">
                 {filteredUsersWithoutYou.length > 0 ? (
                     filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
@@ -59,7 +59,7 @@ const MyFollower = ({ userData, refetch }) => {
                                         <p className="text-sm">{(follower.email).slice(0, 15)}...</p>
                                     </div>
                                 </div>
-                                <button title='Follow User' onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
+                                <button onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
                             </div>
                         </div>
                     ))
@@ -81,4 +81,4 @@ const MyFollower = ({ userData, refetch }) => {
     );
 };
 
-export default MyFollower;
+export default MyFollowing;
