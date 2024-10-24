@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from 'next/image';
 import { useState } from 'react';
@@ -35,9 +35,8 @@ const GetTouchSection = () => {
         });
     };
 
-
     return (
-        <div className='pt-20 md:pt-[130px] mb-10 text-[16px] text-[#333] leading-[18px] bg-white overflow-x-hidden font-normal'>
+        <div className=' mt-16 text-[16px] text-[#333] leading-[18px] bg-white overflow-x-hidden font-normal'>
             <ToastContainer />
             {/* Content Container */}
             <div className="relative">
@@ -57,24 +56,43 @@ const GetTouchSection = () => {
                             <form onSubmit={handleSubmit} className="-mb-[25px]">
                                 <div className="mb-[25px]">
                                     <label htmlFor="name" className='cursor-pointer inline-block mb-2 text-[17px]'>Name <span className='text-[#f1481f]'>*</span></label>
-                                    <input type="text" placeholder='Enter Your Full Name' name='name' required
+                                    <input
+                                        type="text"
+                                        placeholder='Enter Your Full Name'
+                                        name='name'
+                                        required
+                                        value={formData.name} // Bind to formData
+                                        onChange={handleChange} // Handle change
                                         className='w-full h-[60px] outline-none border border-gray-300 rounded-[10px] pl-[20px] text-[#333] bg-white'
                                     />
                                 </div>
                                 <div className="mb-[25px]">
                                     <label htmlFor="email" className='cursor-pointer inline-block mb-2 text-[17px]'>Email <span className='text-[#f1481f]'>*</span></label>
-                                    <input type="email" placeholder='Enter Your Email' name='email' required
+                                    <input
+                                        type="email"
+                                        placeholder='Enter Your Email'
+                                        name='email'
+                                        required
+                                        value={formData.email} // Bind to formData
+                                        onChange={handleChange} // Handle change
                                         className='w-full h-[60px] outline-none border border-gray-300 rounded-[10px] pl-[20px] text-[#333] bg-white'
                                     />
                                 </div>
                                 <div className="mb-[25px]">
                                     <label htmlFor="message" className='cursor-pointer inline-block mb-2 text-[17px]'>Message <span className='text-[#f1481f]'>*</span></label>
-                                    <textarea placeholder='Enter Your Message' name='message' required
+                                    <textarea
+                                        placeholder='Enter Your Message'
+                                        name='message'
+                                        required
+                                        value={formData.message} // Bind to formData
+                                        onChange={handleChange} // Handle change
                                         className='w-full rounded-lg flex bg-white p-5 h-44 text-[#333] border border-gray-300 outline-none resize-none'
                                     />
                                 </div>
                                 <div className="mb-[25px]">
-                                    <input type="submit" value="Send Message"
+                                    <input
+                                        type="submit"
+                                        value="Send Message"
                                         className='w-full uppercase rounded-[30px] border-none font-semibold h-[60px] pl-5 text-white cursor-pointer bg-blue-500 transition ease-linear duration-300'
                                     />
                                 </div>
@@ -87,8 +105,8 @@ const GetTouchSection = () => {
                                         <Image src="https://i.postimg.cc/Y9FZg3F1/contact01.png" height={57} width={55} alt='logo' />
                                     </div>
                                     <div className="mt-2">
-                                        <p className='  bg-white py-2 px-5 rounded-md mb-[5px]'>Phone Number</p>
-                                        <p className='  bg-white py-2 px-5 rounded-md mb-[5px]'>+1234 56789</p>
+                                        <p className='bg-white py-2 px-5 rounded-md mb-[5px]'>Phone Number</p>
+                                        <p className='bg-white py-2 px-5 rounded-md mb-[5px]'>+1234 56789</p>
                                     </div>
                                 </div>
                                 <div className="w-1/2 flex flex-wrap gap-x-3 pl-5 justify-center items-center border-l-[1px] border-gray-300">
@@ -96,8 +114,8 @@ const GetTouchSection = () => {
                                         <Image src="https://i.postimg.cc/Y9FZg3F1/contact01.png" height={57} width={55} alt='logo' />
                                     </div>
                                     <div className="mt-2">
-                                        <p className='  bg-white py-2 px-5 rounded-md mb-[5px]'>Email Address</p>
-                                        <p className='  bg-white py-2 px-5 rounded-md mb-[5px]'>info@eventsphare.com</p>
+                                        <p className='bg-white py-2 px-5 rounded-md mb-[5px]'>Email Address</p>
+                                        <p className='bg-white py-2 px-5 rounded-md mb-[5px]'>info@eventsphare.com</p>
                                     </div>
                                 </div>
                             </div>

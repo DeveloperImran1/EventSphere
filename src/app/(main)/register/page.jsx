@@ -69,7 +69,7 @@ const SignUp = () => {
     const name = `${e.target.firstName.value} ${e.target.lastName.value}`
     const email = e.target.email.value
     const password = e.target.password.value
-    const image = links?.[0] 
+    const image = links?.[0]
     console.log("db te image pathassi", image);
 
 
@@ -88,7 +88,7 @@ const SignUp = () => {
     console.log("multiple images ", links)
     console.log("iMAGE FILE IS ", images)
 
-    if(!image){
+    if (!image) {
       return;
     }
 
@@ -140,10 +140,10 @@ const SignUp = () => {
   return (
     <div className="">
       <div
-        style={{ backgroundImage: `url(${'https://i.postimg.cc/13VKgtYc/top-banner.png'})` }}
+        style={{ backgroundImage: `url(${'https://media.istockphoto.com/id/1368151370/photo/user-typing-login-and-password-cyber-security-concept.jpg?s=612x612&w=0&k=20&c=hZ14F6Fa4edYWwg0BduAj0is8gdcORsBBHpQcQbAPKc='})` }}
         className="bg-cover bg-center pb-16"
       >
-        <div className="max-w-[1320px] mx-auto flex flex-col md:flex-row text-white">
+        <div className="container mx-auto flex flex-col md:flex-row text-white">
           <div className="w-full md:w-1/2 my-5 md:mt-14 p-3">
             <div className="max-w-[550px] mb-44">
               <h1 className="pb-[30px] mb-[30px] font-bold text-3xl md:border-b text-center md:text-start md:ml-0">
@@ -195,27 +195,9 @@ const SignUp = () => {
                 10,000+ communities and organisers worldwide sell with
                 EventBookings
               </h2>
-              <div className="grid grid-cols-4 gap-x-10 gap-10 w-4/5">
-                {/* img1 */}
-                <div>
-                  <Image
-                    src="https://i.postimg.cc/5tvpr0BN/org-1.png"
-                    height={1000}
-                    width={1000}
-                    alt="logo"
-                    className=""
-                  />
-                </div>
-                {/* img2 */}
-                <div>
-                  <Image
-                    src="https://i.postimg.cc/MTm5WF3C/org-2.png"
-                    height={1000}
-                    width={1000}
-                    alt="logo"
-                    className=""
-                  />
-                </div>
+              <div className="grid grid-cols-4 gap-x-10 gap-10 w-4/5 items-center justify-center">
+                {/* brand logos */}
+
                 {/* img3 */}
                 <div>
                   <Image
@@ -226,16 +208,7 @@ const SignUp = () => {
                     className=""
                   />
                 </div>
-                {/* img4 */}
-                <div>
-                  <Image
-                    src="https://i.postimg.cc/6q60TfDy/org-4.png"
-                    height={1000}
-                    width={1000}
-                    alt="logo"
-                    className=""
-                  />
-                </div>
+
                 {/* img5 */}
                 <div>
                   <Image
@@ -246,16 +219,7 @@ const SignUp = () => {
                     className="w-10/12 p-1"
                   />
                 </div>
-                {/* img6 */}
-                <div>
-                  <Image
-                    src="https://i.postimg.cc/9FMbh1dk/org-6.png"
-                    height={1000}
-                    width={1000}
-                    alt="logo"
-                    className="w-10/12"
-                  />
-                </div>
+
                 {/* img7 */}
                 <div>
                   <Image

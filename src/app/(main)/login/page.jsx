@@ -130,28 +130,9 @@ const LoginPage = () => {
                                 10,000+ communities and organisers worldwide sell with
                                 EventBookings
                             </h2>
-                            <div className="grid grid-cols-4 gap-x-10 gap-10 w-4/5">
+                            <div className="grid grid-cols-4 gap-x-10 gap-10 w-4/5 items-center justify-center">
                                 {/* brand logos */}
-                                {/* img1 */}
-                                <div>
-                                    <Image
-                                        src="https://i.postimg.cc/5tvpr0BN/org-1.png"
-                                        height={1000}
-                                        width={1000}
-                                        alt="logo"
-                                        className=""
-                                    />
-                                </div>
-                                {/* img2 */}
-                                <div>
-                                    <Image
-                                        src="https://i.postimg.cc/MTm5WF3C/org-2.png"
-                                        height={1000}
-                                        width={1000}
-                                        alt="logo"
-                                        className=""
-                                    />
-                                </div>
+                                
                                 {/* img3 */}
                                 <div>
                                     <Image
@@ -162,16 +143,7 @@ const LoginPage = () => {
                                         className=""
                                     />
                                 </div>
-                                {/* img4 */}
-                                <div>
-                                    <Image
-                                        src="https://i.postimg.cc/6q60TfDy/org-4.png"
-                                        height={1000}
-                                        width={1000}
-                                        alt="logo"
-                                        className=""
-                                    />
-                                </div>
+                                
                                 {/* img5 */}
                                 <div>
                                     <Image
@@ -182,16 +154,7 @@ const LoginPage = () => {
                                         className="w-10/12 p-1"
                                     />
                                 </div>
-                                {/* img6 */}
-                                <div>
-                                    <Image
-                                        src="https://i.postimg.cc/9FMbh1dk/org-6.png"
-                                        height={1000}
-                                        width={1000}
-                                        alt="logo"
-                                        className="w-10/12"
-                                    />
-                                </div>
+                               
                                 {/* img7 */}
                                 <div>
                                     <Image

@@ -5,15 +5,12 @@ import SectionTitleSimple from '../shared/SectionTitleSimple';
 const GallerySection = () => {
     return (
         <div className="relative bg-white">
-            <div className="text-lg text-[#032055] leading-7 pb-20 lg:pb-[120px] pt-20 lg:pt-[120px]">
+            <div className="text-lg text-[#032055] leading-7  ">
                 <div className="w-full px-4 mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[1200px]">
                     <div className="text-center mb-10 md:mb-15">
-                        <h3 className="text-[#31d7a9] uppercase block leading-10 text-[18px] mb-2 mt-[-8px] sm:text-[24px] sm:mb-[25px] sm:mt-[-6px] text-center md:mb-[40px]">
-                            Take a look at our
-                        </h3>
 
                         <SectionTitleSimple 
-                        title=" A Ticket for Every Fan"
+                        title=" A Ticket for Every Users"
                         subtitle=" World is committed to making participation in the event a harassment-free experience for everyone, regardless of experience level, gender, gender identity, or expression."/>
                        
                     </div>
