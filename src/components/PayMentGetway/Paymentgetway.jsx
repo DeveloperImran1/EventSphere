@@ -33,7 +33,7 @@ export default function PaymentPage({ total, selectedSeats, selectedSeatNames })
                             <CreditCard size={24} />
                         </div>
                         <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-                            AceCoinPay
+                           EventShare
                         </span>
                     </div>
                     <div className="bg-gray-800 text-white px-4 py-2 rounded-full flex items-center">
