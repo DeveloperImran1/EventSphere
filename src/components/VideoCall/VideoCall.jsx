@@ -277,7 +277,7 @@ export default function VideoCall() {
   }
 
   return (
-    <div className="min-h-screen container  mx-auto  p-6">
+    <div className="container  mx-auto  px-4">
     <ToastContainer position="top-right" autoClose={5000} />
     
     {/* Join Card */}
@@ -310,8 +310,8 @@ export default function VideoCall() {
     {/* Video Grid */}
     <div className="grid grid-cols-1  md:grid-cols-2 gap-4 mb-8">
       {/* My Video Card */}
-      <Card className="shadow-lg">
-        <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+      <Card className="shadow-lg ">
+        <CardHeader className="bg-gradient-to-r  from-gray-100 to-gray-200">
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="h-10 w-10">

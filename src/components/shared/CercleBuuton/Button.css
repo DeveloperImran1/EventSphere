@@ -38,13 +38,13 @@
   display: block;
 
   --webkit-mask-image: none;
-  outline: 4px solid #fff;
+  outline: 2px solid #fff;
   outline-offset: -4px;
   overflow: hidden;
   
   position: relative;
   text-transform: uppercase;
-  transition: 0.2s linear 0.1s;
+  transition: 0.4s linear 0.1s;
 }
 .btn-76:hover {
   background: var(--neon);
@@ -52,7 +52,7 @@
     /* 0 0 100px var(--neon); */
   color: #fff;
   outline-color: transparent;
-  transition: 0.2s linear 0.6s;
+  transition: 0.4s linear 0.6s;
 }
 .btn-76 span {
   display: block;
@@ -68,7 +68,7 @@
 .btn-76:hover .top {
   --progress: 100%;
   opacity: 1;
-  transition: transform 0.2s linear;
+  transition: transform 0.4s linear;
 }
 .btn-76 .right {
   border-right: 4px solid var(--neon);
@@ -79,7 +79,7 @@
 .btn-76:hover .right {
   --progress: 100%;
   opacity: 1;
-  transition: transform 0.2s linear 0.2s;
+  transition: transform 0.4s linear 0.4s;
 }
 .btn-76 .bottom {
   border-bottom: 4px solid var(--neon);
@@ -90,7 +90,7 @@
 .btn-76:hover .bottom {
   --progress: 100%;
   opacity: 1;
-  transition: transform 0.2s linear 0.4s;
+  transition: transform 0.4s linear 0.4s;
 }
 .btn-76 .left {
   border-left: 4px solid var(--neon);
@@ -101,5 +101,5 @@
 .btn-76:hover .left {
   --progress: 100%;
   opacity: 1;
-  transition: transform 0.2s linear 0.6s;
+  transition: transform 0.4s linear 0.6s;
 }
