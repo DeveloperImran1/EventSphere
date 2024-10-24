@@ -10,11 +10,11 @@ const GiftCard = () => {
     return (
         <div className=' overflow-hidden' >
             <Banner></Banner>
-          <AboutSection></AboutSection>
-          <EventSchedule></EventSchedule>
-         <Booking></Booking>
-         <Testimonial></Testimonial>
-            
+            <AboutSection></AboutSection>
+            <EventSchedule></EventSchedule>
+            <Booking></Booking>
+            <Testimonial></Testimonial>
+
         </div>
     );
 };
