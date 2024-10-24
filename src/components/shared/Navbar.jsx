@@ -229,7 +229,7 @@ const Navbar = () => {
   return (
     <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-[#1b85db] shadow-lg 
+      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50
     `}>
       <div className=" mx-auto py-1  px-4 max-w-7xl">
         <div className="flex justify-between items-center ">
