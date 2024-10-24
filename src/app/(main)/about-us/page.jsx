@@ -11,10 +11,10 @@ import React from 'react';
 
 const page = () => {
     return (
-        <div className='bg-[#001232]'>
+        <div className=''>
             <MainHeader/>
             <TopAbout/>
-            <OurPhilosophy/>
+            {/* <OurPhilosophy/> */}
             <FactsSection/>
             <TestimonialsAbout/>
             <TeamMembers/>

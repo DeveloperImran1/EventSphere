@@ -5,10 +5,10 @@ import { MdInsertPhoto } from 'react-icons/md';
 import { uploadCloudinary } from "@/hooks/upload";
 import toast, { Toaster } from 'react-hot-toast';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-
+import { useRouter } from 'next/navigation'
 export default function FeedPost({post}) {
     console.log("infinity", post);
-    
+    const router = useRouter()
     const session = useSession();
     const currentUser = session.data?.user;
     const axiosPublic = useAxiosPublic();
@@ -33,6 +33,10 @@ export default function FeedPost({post}) {
     // Handle post submission
     const handlePostSubmit = async (e) => {
         e.preventDefault();
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         const form = e.target;
         const title = form?.title?.value;
 

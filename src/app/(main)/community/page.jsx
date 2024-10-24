@@ -27,7 +27,7 @@ const CommunityPage = () => {
                     </div>
                 </div>
                 {/* Right Sidebar */}
-                <div className="md:w-[30%] p-5 border-2 hidden md:block">
+                <div className="md:w-[30%] p-5 border-2 hidden lg:block">
                     <CommunityRightSidebar />
                 </div>
             </div>
