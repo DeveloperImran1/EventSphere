@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com'; // Import EmailJS
 import { toast, Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 const EmailSend = () => {
     const [email, setEmail] = useState('');
     const [message] = useState('');
@@ -68,7 +69,9 @@ const EmailSend = () => {
 
                 {/* Image on the right side with increased height */}
                 <div className="w-full md:w-1/2">
-                    <img
+                    <Image
+                        height={676}
+                        width={1200}
                         src="https://i.postimg.cc/hP3y0Qqw/send.png"
                         alt="Send Email Icon"
                         className="w-full h-auto object-cover md:h-[400px] lg:h-[500px]" 
