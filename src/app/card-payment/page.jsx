@@ -1,4 +1,6 @@
 "use client"
+import PopularEvents from "@/components/popularEvents/PopularEvents"
+import UnderwaterFooter from '@/components/shared/Footer';
 import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Navbar from '@/components/shared/Navbar';
 import axios from 'axios';
@@ -111,6 +113,8 @@ const CardPayment = () => {
             </div>
 
 
+<PopularEvents/>
+<UnderwaterFooter/>
         </div>
     );
 };
