@@ -9,8 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
-import Image from "next/image"
-import { user } from "@nextui-org/react"
+import Swal from 'sweetalert2';
 
 const socket = io("http://localhost:9000", {
   reconnectionAttempts: 5,
@@ -34,6 +33,16 @@ export default function VideoCall() {
   const userVideo = useRef()
   const connectionRef = useRef()
   const callTimerRef = useRef(null)
+
+  // Message for Join now 
+  useEffect(() => {
+    Swal.fire({
+      title: '🎉JOIN NOW !',
+      text: 'Please enter your name before joining !',
+      icon: 'warning',
+      confirmButtonText: 'Got it!',
+    });
+  }, []);
 
   // Add missing joinRoom function
   const joinRoom = () => {
@@ -268,7 +277,7 @@ export default function VideoCall() {
   }
 
   return (
-    <div className="min-h-screen container  mx-auto  p-6">
+    <div className="container  mx-auto  px-4">
     <ToastContainer position="top-right" autoClose={5000} />
     
     {/* Join Card */}
@@ -301,8 +310,8 @@ export default function VideoCall() {
     {/* Video Grid */}
     <div className="grid grid-cols-1  md:grid-cols-2 gap-4 mb-8">
       {/* My Video Card */}
-      <Card className="shadow-lg">
-        <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+      <Card className="shadow-lg ">
+        <CardHeader className="bg-gradient-to-r  from-gray-100 to-gray-200">
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="h-10 w-10">
@@ -358,9 +367,7 @@ export default function VideoCall() {
             <video playsInline ref={userVideo} autoPlay className="w-full h-full object-cover" />
             {!callAccepted && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarFallback className="text-2xl">?</AvatarFallback>
-                </Avatar>
+               
                 <p className="text-white text-lg">Waiting for connection...</p>
               </div>
             )}

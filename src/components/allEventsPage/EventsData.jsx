@@ -234,7 +234,7 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='  container mx-auto'>
+      <div className='  max-w-[1280px] mx-auto'>
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden">
           <button onClick={() => setIsDrawerOpen(true)} className="text-2xl p-2 bg-[--color-logo] text-white rounded-full">

@@ -130,122 +130,98 @@ const EventOrderList = () => {
           <div className=" -my-2 overflow-x-auto ">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <div className="border border-gray-200  md:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200  pl-4">
-                  <thead className="bg-gray-50 ">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
                     <tr>
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right ml-2"
-                      >
-                        <div className="flex items-center gap-x-3 ">
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
+                        <div className="flex items-center gap-x-3">
                           <span>Image</span>
                         </div>
                       </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2 "
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
                         <span>Title</span>
                       </th>
-                
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:block -ml-2"
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:table-cell">
                         <span>Event Date</span>
                       </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
                         <span>Amount</span>
                       </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2 "
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
                         <span>Ticket</span>
                       </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:block -ml-2"
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right hidden lg:table-cell">
                         <span>Status</span>
                       </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2">
-                        Refund Request
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
+                        <span>Refund Request</span>
                       </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 md:px-4 text-sm font-bold text-black text-left rtl:text-right  -ml-2"
-                      >
+                      <th scope="col" className="py-3.5 px-2 md:px-4 text-sm font-bold text-black text-left rtl:text-right">
                         <span>Details</span>
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200  text-sm">
-                    {
-                      // isLoading && <Loading></Loading>
-                    }
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {invoice?.map((invoice) => (
                       <tr key={invoice?._id}>
-
-
-                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                          <div className=" flex gap-3 flex-col md:flex-row flex-wrap">
+                        <td className="px-2 md:px-2 py-4 text-sm text-gray-500 whitespace-nowrap">
+                          <div className="flex gap-3 flex-col md:flex-row flex-wrap">
                             <Image
                               src={invoice?.eventImage}
                               width={50}
                               height={50}
-                              alt="fdsg"
+                              alt="event-image"
                               className="h-[50px] w-[50px] border border-gray-200 rounded-lg"
                             />
-
                           </div>
                         </td>
-
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap ">
+                        <td className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                           {invoice?.eventName?.slice(0, 15)}
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap hidden lg:block">
+                        <td className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap hidden lg:table-cell">
                           {new Date(invoice?.eventDate).toLocaleDateString("en-US")}
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                        <td className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                           $ {invoice?.amount}
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
+                        <td className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
                           {invoice?.totalTickets} P
                         </td>
-                        <td className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap hidden lg:block">
+                        <td className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap hidden lg:table-cell">
                           <span className="bg-[#cae0e7] text-[#3098ee] px-2 py-1 rounded-3xl">
-                            {invoice?.refundRequested === "NotRequested" ? "Success" : invoice?.refundRequested === "Requested" ? "Requested" : "Refunded"}</span>
+                            {invoice?.refundRequested === "NotRequested" ? "Success" : invoice?.refundRequested === "Requested" ? "Requested" : "Refunded"}
+                          </span>
                         </td>
-                        <td onClick={() => {
-                          invoice?.refundRequested === "Requested" ? handleRefundAlert() : handleRefundRequest(invoice?._id)
-                        }} className="md:px-4 px-2 py-4 text-sm text-gray-500  whitespace-nowrap text-wrap">
-                          <span className="  px-2 py-1 rounded-3xl">
-                            <RiRefund2Fill size={22} className="text-red-500 ml-3 bg-red-200 text-center hover:scale-105 cursor-pointer rounded-full "></RiRefund2Fill></span>
+                        <td
+                          onClick={() => {
+                            invoice?.refundRequested === "Requested" ? handleRefundAlert() : handleRefundRequest(invoice?._id);
+                          }}
+                          className="px-2 md:px-4 py-4 text-sm text-gray-500 whitespace-nowrap cursor-pointer"
+                        >
+                          <span className="px-2 py-1 rounded-3xl">
+                            <RiRefund2Fill size={22} className="text-red-500 ml-3 bg-red-200 hover:scale-105 cursor-pointer rounded-full" />
+                          </span>
                         </td>
-                        
-                        <Link href={"/events"} className="flex flex-col justify-center items-center  relative">
-
-                          <p onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300 w-9 absolute top-7" >
-                            {
-                              hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
-
-                            }
-                          </p>
-                        </Link>
-
+                        <td className="px-2 py-4">
+                          <Link href={"/events"} className="flex justify-center items-center relative">
+                            <p
+                              onMouseEnter={() => setHoverd(true)}
+                              onMouseLeave={() => setHoverd(false)}
+                              className="border-2 rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300 w-9 "
+                            >
+                              {hoverd ? (
+                                <IoMdArrowRoundForward size={22} className="ease-in duration-300" />
+                              ) : (
+                                <MdArrowOutward size={22} className="ease-in duration-300" />
+                              )}
+                            </p>
+                          </Link>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+
               </div>
             </div>
           </div>

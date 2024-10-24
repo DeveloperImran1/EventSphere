@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@canvasjs/react-charts": "^1.0.2",
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -45,6 +46,7 @@
     "daisyui": "^4.12.10",
     "dotenv": "^16.4.5",
     "downloadjs": "^1.4.7",
+    "emailjs-com": "^3.2.0",
     "file-saver": "^2.0.5",
     "form-data": "^4.0.0",
     "framer-motion": "^11.11.8",
@@ -98,6 +100,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.168.0",
+    "timeago.js": "^4.0.2",
     "typewriter-effect": "^2.21.0",
     "zod": "^3.23.8"
   },

@@ -7,6 +7,8 @@ import Loading from '../shared/LoadingSpinner/Loading';
 import Image from 'next/image';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
@@ -17,8 +19,10 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState('');
   const ticketRef = useRef();
 
+ 
+
   useEffect(() => {
-    if (!transitionId) {
+   if (!transitionId) {
       console.log("Transaction ID is missing.");
       return;
     }
@@ -40,7 +44,11 @@ const PaymentQRCodePage = () => {
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
-    console.log('Feedback:', feedback);
+
+    // Show success toast
+    toast.success('Feedback successfully submitted!')
+
+    // Clear the form
     setFeedback('');
   };
 

@@ -242,7 +242,7 @@ const Navbar = () => {
                 Community
               </Link>
               <Link
-                href="/video-call"
+                href="/messenger"
                 className="hover:text-yellow-300 transition duration-300 ease-in-out"
               >
                 Messenger

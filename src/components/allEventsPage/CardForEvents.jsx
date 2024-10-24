@@ -137,7 +137,7 @@ const CardForEvents = ({ event }) => {
 
       <motion.div
         ref={cardRef}
-        className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
+        className="group rounded-lg h-[440px] overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
