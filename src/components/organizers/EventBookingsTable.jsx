@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import { useSession } from 'next-auth/react';
-import Loading from '../shared/LoadingSpinner/Loading';
+import Loading from '../shared/LoadingSpiner/Loading';
 
 const StatusBadge = ({ status }) => {
   const colorMap = {

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const PaymentDetailsPage = () => {
   const searchParams = useSearchParams();

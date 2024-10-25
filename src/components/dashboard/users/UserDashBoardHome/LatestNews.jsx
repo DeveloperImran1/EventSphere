@@ -1,4 +1,4 @@
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';

@@ -7,7 +7,7 @@ import MyFollowing from './MyFollowing';
 
 // Function to fetch user data
 const fetchUserData = async () => {
-    const response = await axios.get('http://localhost:9000/user');
+    const response = await axios.get('https://event-sphare-server.vercel.app/user');
     return response.data;
 };
 

@@ -12,7 +12,7 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import { useState } from "react";
 import Link from "next/link";
 import { IoMdArrowRoundForward } from "react-icons/io";

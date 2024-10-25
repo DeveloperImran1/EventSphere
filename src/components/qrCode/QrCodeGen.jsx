@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import QRCode from 'react-qr-code';
-import Loading from '../shared/LoadingSpinner/Loading';
+import Loading from '../shared/LoadingSpiner/Loading';
 import Image from 'next/image';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
@@ -171,7 +171,7 @@ const PaymentQRCodePage = () => {
               size={200}
               bgColor="#ffffff"
               fgColor="#000000"
-              // value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
+              // value={`https://event-sphere-bice.vercel.app/payment-details?transitionId=${paymentData.transitionId}`}
               className='mb-3 text-center m-2 mx-auto'
 
             />

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const fetchUsers = async () => {
     const response = await axios.get('https://event-sphare-server.vercel.app/organizerRequest');

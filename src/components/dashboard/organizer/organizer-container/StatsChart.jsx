@@ -14,7 +14,7 @@ import {
 
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {
