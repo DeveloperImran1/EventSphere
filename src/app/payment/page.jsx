@@ -209,7 +209,7 @@ const Payment = () => {
             {seats.map((row, rowIndex) => (
               <div
                 key={rowIndex}
-                className={`flex justify-center ${rowIndex === 2 ? "mt-6" : ""}`}
+                className={`grid gap-2 justify-center grid-cols-6 sm:grid-cols-6 lg:grid-cols-12`}
               >
                 {row.map((seat, seatIndex) => (
                   <React.Fragment key={`${rowIndex}-${seatIndex}`}>
@@ -218,17 +218,24 @@ const Payment = () => {
                         seat={seat}
                         event={event}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                        className={`p-2 ${rowIndex % 6 === 0 ? "text-sm md:text-base lg:text-lg" : ""}`}
                       />
                     </div>
-                    {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
-                      <div className="w-4"></div>
-                    )}
+                    {/* প্রতি ৪টি কলামের পর ফাঁকা স্থান যোগ করা হয়েছে */}
+                    {/* {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
+                      <div className="lg:w-6 sm:w-4 w-2"></div>
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
             ))}
           </div>
         </div>
+
+
+
+
+
         <div className="ml-4 flex-shrink-0 w-full md:w-64 mt-4 md:mt-0">
           <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg transform transition-transform duration-300 p-4 text-xl space-y-4">
             <div className="mb-2">
@@ -281,7 +288,7 @@ const Payment = () => {
                 </p>
                 <hr className="my-2" />
                 <p className="mt-1">
-                 Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
+                  Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
                 </p>
               </div>
 

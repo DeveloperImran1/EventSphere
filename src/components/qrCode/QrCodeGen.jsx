@@ -19,10 +19,10 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState('');
   const ticketRef = useRef();
 
- 
+
 
   useEffect(() => {
-   if (!transitionId) {
+    if (!transitionId) {
       console.log("Transaction ID is missing.");
       return;
     }
@@ -82,34 +82,6 @@ const PaymentQRCodePage = () => {
   };
   const qrData = JSON.stringify(dataforqr);
 
-  // const handleFeedback = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const updateResponse = await axiosPublic.patch(`/events/${id}`, {
-  //       eventId: id,
-  //       newBookedSeats: selectedSeatNames
-  //   });
-  //     await axios.post(`/feedback`, { feedback });
-  //     // Show success message
-  //     Swal.fire({
-  //       title: 'Success!',
-  //       text: 'Your feedback has been submitted.',
-  //       icon: 'success',
-  //     });
-  //     // Clear feedback input
-  //     setFeedback('');
-  //     // Optionally refetch events or perform other actions
-  //     refetch();
-  //   } catch (error) {
-  //     // Show error message
-  //     Swal.fire({
-  //       title: 'Error!',
-  //       text: 'There was a problem submitting your feedback.',
-  //       icon: 'error',
-  //     });
-  //   }
-  // };
 
   if (loading) {
     return <Loading />;
@@ -206,7 +178,7 @@ const PaymentQRCodePage = () => {
               <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
             </form>
           </div>
-
+          <ToastContainer />
           <div className='flex-1'>
             <Image
               src="https://img.freepik.com/free-vector/flat-design-feedback-concept_23-2148944236.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721520000&semt=ais_user"
