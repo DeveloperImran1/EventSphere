@@ -1,5 +1,4 @@
 
-"use client"
 import FactsSection from '@/components/About/FactsSection';
 import GallerySection from '@/components/About/GallerySection';
 import MainHeader from '@/components/About/MainHeader';
@@ -10,17 +9,19 @@ import TopAbout from '@/components/About/TopAbout';
 import TrustSection from '@/components/About/TrustSection';
 import Subscribe from '@/components/shared/Subscribe';
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+
+export const metadata = {
+    title: "About us",
+    description: "About page, Smart Event Management and Booking Platform",
+    keywords: ["online", "ticket", "selling", "system", "event", "management"]
+};
 
 const AboutUs = () => {
-    useEffect(() => {
-        document.title = 'EventSphere | About us';
-      }, []);
+
+
     return (
         <div className=''>
-            <Head>
-                <title>EventSphere || All Events</title>
-            </Head>
+
             <MainHeader />
             <TopAbout />
             {/* <OurPhilosophy/> */}

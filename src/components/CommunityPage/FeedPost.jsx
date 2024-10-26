@@ -6,6 +6,7 @@ import { uploadCloudinary } from "@/hooks/upload";
 import toast, { Toaster } from 'react-hot-toast';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useRouter } from 'next/navigation'
+import Image from 'next/image';
 export default function FeedPost({post}) {
     console.log("infinity", post);
     const router = useRouter()
@@ -90,7 +91,7 @@ export default function FeedPost({post}) {
     return (
         <div className="w-full mx-auto p-4 border rounded-md shadow-md">
             <div className="flex items-center space-x-3">
-                <img
+                <Image height={676} width={1200}
                     src={currentUser?.image || 'https://img.freepik.com/premium-vector/default-male-user-profile-icon-vector-illustration_276184-168.jpg'}
                     alt="User profile"
                     className="w-10 h-10 rounded-full"
@@ -138,7 +139,7 @@ export default function FeedPost({post}) {
                                         />
                                     </label>
                                     {selectedImage && (
-                                        <img src={selectedImage} alt="Selected" className="h-10 w-10 ml-2 rounded-md" />
+                                        <Image height={676} width={1200} src={selectedImage} alt="Selected" className="h-10 w-10 ml-2 rounded-md" />
                                     )}
                                 </div>
                                 <button

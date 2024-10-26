@@ -8,7 +8,7 @@ import { FaRegClock, FaMapMarkerAlt, FaUserFriends, FaEnvelope, FaPhoneAlt, FaTa
 import Image from "next/image"
 import { MdLocationCity } from "react-icons/md"
 import { FileType2 } from "lucide-react"
-import Loading from "@/components/shared/LoadingSpinner/Loading"
+// import Loading from "@/components/shared/LoadingSpinner/Loading"
 import Link from "next/link"
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -20,6 +20,7 @@ import PopularEvents from "@/components/popularEvents/PopularEvents"
 import MapComponent from "@/components/shared/MapComponent"
 import LeafLetMap from "@/components/shared/leafLetMap/LeafLetMap"
 import Head from "next/head"
+import Loading from "@/components/shared/LoadingSpiner/Loading"
 
 
 
@@ -84,9 +85,9 @@ const EventDetail = ({ id }) => {
             </Head>
 
             <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Left Side: Image, Gallery, Reviews */}
-                    <section className="space-y-12">
+                    <section className="space-y-8">
                         {/* Event Image */}
                         <div data-aos="zoom-in" className="relative overflow-hidden rounded-2xl shadow-2xl">
                             <Image

@@ -24,7 +24,7 @@ const CardPayment = () => {
 
         const fetchCardPayment = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/card/${transitionId}`);
+                const response = await axios.get(`https://event-sphare-server.vercel.app/card/${transitionId}`);
                 setCardPaymentData(response.data);
                 setLoading(false);
             } catch (error) {

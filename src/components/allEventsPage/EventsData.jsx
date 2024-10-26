@@ -8,7 +8,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Dialog } from '@headlessui/react';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import Loading from '../shared/LoadingSpinner/Loading';
+import Loading from '../shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
 import { Slider } from "@nextui-org/react";
