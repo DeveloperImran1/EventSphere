@@ -9,7 +9,7 @@ import useAxiosPublic from '@/hooks/useAxiosPublic';
 import Link from 'next/link';
 import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+// import Loading from '@/components/shared/LoadingSpinner/Loading';
 
 const MembershipCard = () => {
     const axiosPublic = useAxiosPublic()
@@ -36,9 +36,9 @@ const MembershipCard = () => {
 
 
     console.log('try')
-    if (isLoading) {
-        return <Loading />
-    }
+    // if (isLoading) {
+    //     return <Loading />
+    // }
 
 
     return (

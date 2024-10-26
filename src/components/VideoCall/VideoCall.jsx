@@ -11,11 +11,6 @@ import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
 import Swal from 'sweetalert2';
 
-const socket = io("https://event-sphare-server.vercel.app", {
-  reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
-  transports: ['websocket']
-});
 export default function VideoCall() {
   const [users, setUsers] = useState({})
   const [name, setName] = useState("")
@@ -33,6 +28,14 @@ export default function VideoCall() {
   const userVideo = useRef()
   const connectionRef = useRef()
   const callTimerRef = useRef(null)
+
+  const socket = io("wss://event-sphare-server.vercel.app", { 
+    reconnectionAttempts: 5,
+    reconnectionDelay: 1000,
+    transports: ['websocket']
+  });
+  
+
 
   // Message for Join now 
   useEffect(() => {
@@ -82,7 +85,7 @@ export default function VideoCall() {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: true
+          audio: false
         });
         setStream(mediaStream);
         if (myVideo.current) {
