@@ -99,8 +99,12 @@ const CardPayment = () => {
                         <div className='mt-8'>
                             <p className='text-white mb-4'>We are giving you a coupon code. Please keep it safe. By using this coupon code during payment, you will receive a <span className='text-yellow-300 font-bold'>{cardPaymentData?.benefits[0]}</span></p>
                             <div className="flex items-center justify-between">
-                                <div className="bg-white/90 rounded-full font-bold px-4 lg:px-6 py-2 text-sky-900 ">
-                                    {cardPaymentData?.coupon || "Guest User"}
+
+                                <div className="flex gap-2 items-center justify-center">
+                                    <p className="text-white">Your coupon code</p>
+                                    <div className="bg-white/90 rounded-full font-black px-4 lg:px-6 py-2 text-blue-600 ">
+                                        {cardPaymentData?.coupon || "Guest User"}
+                                    </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <Star className="w-5 h-5 text-yellow-300 animate-pulse" />
@@ -113,8 +117,8 @@ const CardPayment = () => {
             </div>
 
 
-<PopularEvents/>
-<UnderwaterFooter/>
+            <PopularEvents />
+            <UnderwaterFooter />
         </div>
     );
 };

@@ -49,7 +49,7 @@ const GetTouchSection = () => {
                     <div className="flex flex-col md:flex-row flex-wrap -mx-4 justify-between">
                         <div className="w-full md:w-1/2 px-4 md:max-w-[58.333333%] lg:max-w-1/2 xl:max-w-[41.666667%]">
                             <div className="text-left mb-10 sm:mb-15">
-                                <span className="block text-[#31d7a9] uppercase text-[18px] mb-2 -mt-2 sm:text-[26px] sm:mb-6 sm:-mt-1">Contact Us</span>
+                                <span className="block text-[#31d7a9] uppercase text-[18px] mb-2  sm:text-[26px] ">Contact Us</span>
                                 <h2 className="text-[30px] sm:text-[50px] leading-[1.3] sm:leading-[60px] text-black font-bold uppercase mb-4 sm:mb-6 -mt-2 sm:-mt-3">Get in Touch</h2>
                                 <p className="mt-[-11px] leading-6 sm:text-[16px] sm:max-w-[700px] sm:mx-auto text-[#333]">We’d love to talk about how we can work together. Send us a message below and we’ll respond as soon as possible.</p>
                             </div>
