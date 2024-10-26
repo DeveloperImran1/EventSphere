@@ -4,7 +4,7 @@ import CardSection from './CardSection';
 import Table from './Table';
 import NewChart from './UserManagePage/NewChart';
 import axios from 'axios';
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const AdminInfo = () => {
     const [metrics, setMetrics] = useState(null);

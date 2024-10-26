@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import Image from 'next/image';
 import QualityCheckoutForm from './QualityCheckoutForm';
 
-const QualityPaymentGetway = ({quality}) => {
+const QualityPaymentGetway = ({ quality }) => {
     // console.log(quality)
     const [timeLeft, setTimeLeft] = useState(119); // 1:59 in seconds
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -24,34 +24,35 @@ const QualityPaymentGetway = ({quality}) => {
     };
     return (
         <div className="min-h-[90vh] w-screen bg-gradient-to-br from-blue-200 to-purple-200">
-        <div className="bg-white p-12 rounded-3xl shadow-2xl w-full h-[95vh] max-w-[75vw] mx-auto transition-all duration-300 ease-in-out transform hover:scale-105">
-            <div className="flex justify-between items-center mb-8">
-                <div className="flex items-center">
-                    <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
-                        <CreditCard size={24} />
+            <div className="bg-white p-4 lg:p-12 rounded-3xl shadow-2xl w-full h-[95vh] lg:max-w-[75vw] mx-auto transition-all duration-300 ease-in-out transform hover:scale-105">
+                <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
+                    <div className="flex items-center">
+                        <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
+                            <CreditCard size={24} />
+                        </div>
+                        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                            EventShare
+                        </span>
                     </div>
-                    <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-                       EventShare
-                    </span>
+                    <p className='text-xl lg:text-3xl font-bold'>{quality?.type}</p>
+                    <div className="bg-gray-800 text-white px-4 py-2 rounded-full flex items-center">
+                        <span className="mr-2">🕒</span>
+                        {formatTime(timeLeft)}
+                    </div>
                 </div>
-                <div className="bg-gray-800 text-white px-4 py-2 rounded-full flex items-center">
-                    <span className="mr-2">🕒</span>
-                    {formatTime(timeLeft)}
-                </div>
-            </div>
 
-            <div className=" mb-10">
-                <div className="flex-grow ">
-                    {/* Stripe Payment Form */}
-                    <Elements stripe={stripePromise}>
-                        <QualityCheckoutForm
-                           quality={quality}
-                        />
-                    </Elements>
+                <div className=" mb-10">
+                    <div className="flex-grow ">
+                        {/* Stripe Payment Form */}
+                        <Elements stripe={stripePromise}>
+                            <QualityCheckoutForm
+                                quality={quality}
+                            />
+                        </Elements>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     );
 };
 

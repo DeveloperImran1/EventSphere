@@ -1,4 +1,4 @@
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import useAuth from "@/hooks/useAuth";
 import useMyAllPost from "@/hooks/useMyAllPost";
 import { useQuery } from "@tanstack/react-query";

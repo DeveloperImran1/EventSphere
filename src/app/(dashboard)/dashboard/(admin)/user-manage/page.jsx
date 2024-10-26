@@ -4,7 +4,7 @@ import axios from "axios";
 import Top from "@/components/dashboard/admin/UserManagePage/Top";
 import UserManageTable from "@/components/dashboard/admin/UserManagePage/UserManageTable";
 import toast from "react-hot-toast";
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 const UserManage = () => {
   const [users, setUsers] = useState([]);

@@ -13,7 +13,7 @@ import ImageSection from '@/components/dashboard/users/UserDashBoardHome/ImageSe
 import LatestNews from '@/components/dashboard/users/UserDashBoardHome/LatestNews';
 import RightSide from '@/components/dashboard/users/UserDashBoardHome/RightSide';
 import EventCard from '@/components/allEventsPage/EventCard';
-import Loading from '@/components/shared/LoadingSpinner/Loading';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 import CardForEvents from '@/components/allEventsPage/CardForEvents';
 import { usePathname } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';

@@ -8,7 +8,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Dialog } from '@headlessui/react';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
-import Loading from '../shared/LoadingSpinner/Loading';
+import Loading from '../shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import EventCard from './EventCard';
 import { Slider } from "@nextui-org/react";
@@ -513,7 +513,7 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className="w-full lg:w-4/5 ml-2">
+          <div className=" w-full lg:w-4/5 ml-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
                 <CardForEvents

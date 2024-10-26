@@ -17,7 +17,7 @@ const QualityPayment = ({ params }) => {
     useEffect(() => {
         const fetchEventsData = async () => {
             try {
-                const response = await axios.get(`http://localhost:9000/getQuality/${id}`)
+                const response = await axios.get(`https://event-sphare-server.vercel.app/getQuality/${id}`)
                 // console.log(response)
                 setQuality(response.data)
                 setLoading(false)

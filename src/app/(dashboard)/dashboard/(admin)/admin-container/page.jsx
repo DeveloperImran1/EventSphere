@@ -1,5 +1,10 @@
 import AdminInfo from "@/components/dashboard/admin/AdminInfo";
-import React from "react";
+
+export const metadata = {
+  title: "Admin dashboard",
+  description: "admin dashboard page, Smart Event Management and Booking Platform",
+  keywords: ["admin dashboard","online", "ticket", "selling", "system", "event", "management"]
+};
 
 const AdminContainer = () => {
   return (
