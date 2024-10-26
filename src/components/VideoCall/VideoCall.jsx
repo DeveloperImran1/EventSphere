@@ -11,7 +11,7 @@ import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
 import Swal from 'sweetalert2';
 
-const socket = io("https://event-sphare-server.vercel.app", {
+const socket = io("http://localhost:9000", {
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
   transports: ['websocket']
