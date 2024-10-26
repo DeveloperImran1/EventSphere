@@ -25,8 +25,8 @@ export default function PaymentPage({ total, selectedSeats, selectedSeatNames })
     };
 
     return (
-        <div className="min-h-[90vh] w-screen bg-gradient-to-br from-blue-200 to-purple-200">
-            <div className="bg-white p-12 rounded-3xl shadow-2xl w-full h-[95vh] max-w-[75vw] mx-auto transition-all duration-300 ease-in-out transform hover:scale-105">
+        <div className="min-h-[90vh] w-screen ">
+            <div className="bg-white p-2 lg:p-5 rounded-3xl shadow-2xl w-full h-[95vh] lg:max-w-[75vw] mx-auto transition-all duration-300 ease-in-out transform hover:scale-105">
                 <div className="flex justify-between items-center mb-8">
                     <div className="flex items-center">
                         <div className="bg-blue-600 text-white p-2 rounded-full mr-3 animate-pulse">
