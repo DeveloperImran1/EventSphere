@@ -2,14 +2,32 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { uploadCloudinary } from "@/hooks/upload"; // Assumes this function is available for image uploads
-import { useSession } from 'next-auth/react';
 
 const AddEventForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [galleryData, setGalleryData] = useState( [] );
 
+  // Handler for file selection and upload
+  const handleFileAdd = async (e) => {
+    const files = Array.from(e.target.files);
+    const imageUrls = files.map(file => URL.createObjectURL(file)); // Creates preview URLs for the selected images.
+    setSelectedImages(imageUrls);
+    setLoading(true);
 
+    try {
+      // Uploads each selected file to Cloudinary, waits for all uploads to finish.
+      const uploadedImages = await Promise.all(files.map(file => uploadCloudinary(file)));
+      const imageUrls = uploadedImages.map(image => image.url); // Extracts URLs from uploaded images.
+      setGalleryData([...galleryData, ...imageUrls]); // Adds new image URLs to existing gallery data.
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to upload images');
+      setLoading(false);
+    }
+  };
 
 
   const handleSubmit = async (e) => {
@@ -79,7 +97,7 @@ const AddEventForm = () => {
             </div>
             {/* Display selected images */}
             <div className="flex flex-wrap gap-2">
-              {[1,2,2]?.map((image, index) => (
+              {galleryData?.map((image, index) => (
                 <img key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
               ))}
             </div>
