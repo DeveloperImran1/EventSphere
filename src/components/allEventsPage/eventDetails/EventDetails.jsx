@@ -284,7 +284,7 @@ const EventDetail = ({ id }) => {
 
                         <div className="mt-6 ml-2" >
                             <Link href={`/payment?id=${id}`}>
-                                <button className="bg-blue-500 px-8 py-3 rounded-xl text-white font-black text-xl lg:w-full mx-auto cursor-pointer mt-7">Buy Ticket</button>
+                                <button className="bg-blue-500 px-8 py-3 rounded-xl text-white font-black text-xl lg:w-full mx-auto cursor-pointer mt-5">Buy Ticket</button>
                             </Link>
                         </div>
                     </section>

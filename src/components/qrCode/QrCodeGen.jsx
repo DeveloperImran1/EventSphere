@@ -93,8 +93,8 @@ const PaymentQRCodePage = () => {
 
   return (
     <div className='container mx-auto '>
-      <div ref={ticketRef} className=' mt-16 mb-16 shadow-xl  p-10 bg-[#E3EAFF] rounded-2xl'>
-        <div className="payment-info flex flex-col lg:flex-row justify-between mr-5">
+      <div ref={ticketRef} className=' mt-16 mb-16 shadow-xl p-2 lg:p-10 bg-[#E3EAFF] rounded-2xl'>
+        <div className="payment-info flex flex-col lg:flex-row justify-between mr-2 lg:mr-5">
           <div className='w-96'>
             {/* <h2>Payment Successful</h2> */}
 
@@ -105,7 +105,7 @@ const PaymentQRCodePage = () => {
               width={370}
               className='h-[150px] w-[300px] rounded-lg mb-5 rounded-tl-full rounded-br-full' />
 
-            <p className='text-3xl  font-bold ml-5 mb-2 font-mono'>{paymentData.eventName}</p>
+            <p className='text-xl lg:text-3xl  font-bold ml-2 lg:ml-5 mb-2 text-wrap font-mono'>{paymentData.eventName}</p>
             <p className='ml-5'>Booked by: {paymentData.bookedUserName}</p>
           </div>
 
@@ -139,11 +139,11 @@ const PaymentQRCodePage = () => {
           </div>
           <div>
             <QRCode
-              value={qrData}
+              // value={qrData}
               size={200}
               bgColor="#ffffff"
               fgColor="#000000"
-              // value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
+              value={`https://event-sphere-bice.vercel.app/payment-qr-code?transitionId=${paymentData.transitionId}`}
               className='mb-3 text-center m-2 mx-auto'
 
             />
