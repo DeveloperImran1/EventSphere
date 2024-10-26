@@ -5,7 +5,7 @@ import ImageSection from "@/components/dashboard/users/UserDashBoardHome/ImageSe
 import LatestNews from "@/components/dashboard/users/UserDashBoardHome/LatestNews";
 import RightSide from "@/components/dashboard/users/UserDashBoardHome/RightSide";
 import UserProfile from "@/components/dashboard/users/UserDashBoardHome/UserProfile";
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";

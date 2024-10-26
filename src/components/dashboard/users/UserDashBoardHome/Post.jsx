@@ -11,8 +11,9 @@ import { useSession } from "next-auth/react";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { TbFidgetSpinner } from "react-icons/tb";
 import toast, { Toaster } from 'react-hot-toast';
-import Loading from "@/components/shared/LoadingSpinner/Loading";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import { usePathname } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
 const Post = () => {
 
   const [images, setImages] = useState([]);
@@ -22,6 +23,7 @@ const Post = () => {
   const axiosPublic = useAxiosPublic()
   const session = useSession()
   const [loading, setLoading] = useState(false)
+  const {data = {}} = useAuth();
 
   const { data: posts = [], isLoading, refetch } = useMyAllPostWithEmail();
   console.log("all my post is ", posts)
@@ -62,7 +64,6 @@ const Post = () => {
 
       // After all images are uploaded, update the `links` state
       setLinks(uploadedLinks);
-      console.log(session)
       // Now use `uploadedLinks` directly instead of the state, because the state will update asynchronously
       const postObj = {
         comments: [],
@@ -72,9 +73,9 @@ const Post = () => {
           media: uploadedLinks, // Use the uploadedLinks array here
         },
         user: {
-          email: session?.data?.user?.email,
-          name: session?.data?.user?.name,
-          profile_picture: session?.data?.user?.image,
+          email: data?.email,
+          name: data?.name,
+          profile_picture: data?.image,
         },
         reactions: {
           love: 0,
@@ -88,10 +89,10 @@ const Post = () => {
       console.log("post er responce ", res)
       if (res?.status === 201) {
         toast.success('Successfully Posted 👏');
+        refetch()
         setLoading(false)
         form.reset()
         selectedImage("")
-        refetch()
       }
     } catch (error) {
       console.error("Error uploading images:", error);

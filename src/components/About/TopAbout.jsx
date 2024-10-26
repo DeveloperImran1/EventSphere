@@ -24,7 +24,7 @@ const TopAbout = () => {
                                     EventSphere is your ultimate destination for discovering and booking tickets to various events, including concerts, sports, workshops, and festivals. We bring experiences to life by making event access easy and convenient.
                                 </p>
                                 <p className="text-[16px] mb-3 md:mb-[37px] mt-0 md:-mt-[11px] sm:text-[18px] sm:max-w-[700px] sm:mx-auto text-justify text-[#666]">
-                                    Our platform ensures a seamless booking experience with real-time availability, personalized recommendations, and secure payment options. Whether you're a music lover, sports enthusiast, or looking for a fun weekend, EventSphere has something for everyone.
+                                    Our platform ensures a seamless booking experience with real-time availability, personalized recommendations, and secure payment options. Whether youre a music lover, sports enthusiast, or looking for a fun weekend, EventSphere has something for everyone.
                                 </p>
                                 <button className='bg-blue-500 py-2 px-6 mt-10 rounded-md'>Explore more</button>
                               
