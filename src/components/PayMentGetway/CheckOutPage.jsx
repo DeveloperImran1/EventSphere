@@ -184,7 +184,7 @@ const CheckOutForm = (props) => {
 
 
     return (
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 p-6  rounded-lg  mb-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 p-2 lg:p-6  rounded-lg  mb-10">
             <form
                 onSubmit={handleSubmit}
                 className="bg-white p-8 rounded-lg shadow-lg lg:w-2/3 w-full"
@@ -243,13 +243,13 @@ const CheckOutForm = (props) => {
             </form>
 
             <div className="lg:w-1/3 w-full flex flex-col items-center relative">
-                <div className="relative w-72 h-48 mb-6 rounded-lg overflow-hidden shadow-lg">
+                <div className="relative w-full p-4 lg:w-72 h-48 mb-6 rounded-lg overflow-hidden shadow-lg">
                     <Image
                         src="https://cdn-icons-png.flaticon.com/512/5790/5790705.png"
                         alt="payment image"
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-300 hover:scale-105"
+                        className="transition-transform duration-300 hover:scale-105 p-4"
                     />
                     <div className="absolute inset-0 bg-blue-900 bg-opacity-50 flex flex-col items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                         <p className="text-white font-bold text-lg text-center px-4 mb-2">Secure Payment Ensures Protection</p>
