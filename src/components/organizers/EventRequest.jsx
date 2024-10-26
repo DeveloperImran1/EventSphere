@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { uploadCloudinary } from "@/hooks/upload"; // Assumes this function is available for image uploads
+import { useSession } from 'next-auth/react';
 
 const AddEventForm = () => {
+  const session = useSession()
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -32,6 +34,66 @@ const AddEventForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target;
+    const whenArray = ["Tomorrow", "Next Month", "Next Week", "Today", "This Week"]
+    const title = form?.title?.value;
+    const dateTime = form?.dateTime?.value;
+    const price = form?.price?.value;
+    const country = form?.country?.value;
+    const city = form?.city?.value;
+    const category = form?.category?.value;
+    const description = form?.description?.value;
+    const type = form?.type?.value;
+    const venue = form?.venue?.value;
+    const companyName = form?.companyName?.value;
+    const tagsWithString = form?.tags?.value;
+    const contactInfoPhone = form?.contactInfoPhone?.value;
+    const contactInfoEmail = form?.contactInfoEmail?.value;
+    const tags = tagsWithString.split(",").map(tag => tag.trim());    
+    const locationMap = "https://www.newofficeamerica.com/images/map-thumbs/serviced-400-montgo…"
+    const createdAt = new Date();
+    const updatedAt = null;
+    const reviews = null;
+    const bookedSeats = null;
+    const when = whenArray[Math.floor(Math.random() * whenArray.length)];
+    const formData = {
+      photo: "fff",
+      title,
+      dateTime,
+      price,
+      location: {
+        country,
+        city,
+        venue,
+      },
+      category,
+      type,
+      organizer: {
+        name: session?.data?.user?.name,
+        email: session?.data?.user?.email,
+        profile_picture: session?.data?.user?.image,
+        followers: null,
+        bio: null,
+      },
+      description,
+      locationMap,
+      gallery: galleryData,
+      sponsor: {
+        name: "FutureTech",
+        logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHpKR-St3jrJVdI1BXS19aFiBwjEowCwf5SA&s"
+      },
+      reviews,
+      contactInfo: {
+        contactInfoEmail,
+        contactInfoPhone,
+      },
+      tags,
+      createdAt,
+      updatedAt,
+      when,
+      eventCreatorEmail: session?.data?.user?.email,
+    }
+    
   };
 
   return (
