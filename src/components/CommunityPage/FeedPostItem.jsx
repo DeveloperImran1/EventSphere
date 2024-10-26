@@ -149,7 +149,7 @@ const FeedPostItem = ({ item, refetch }) => {
                 </div>
                 <div className="relative">
                     <button onClick={toggleMenu}>
-                        <Image height={676} width={1200} src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
+                        <Image height={676} width={20} src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
                     </button>
 
                     {menuOpen && (
