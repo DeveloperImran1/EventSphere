@@ -3,14 +3,26 @@
 import AdminInfo from '@/components/dashboard/admin/AdminInfo';
 import DashboardNavbar from '@/components/dashboard/admin/DashboardNavbar';
 import DashboardSideBar from '@/components/dashboard/admin/DashboardSideBar';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsLayoutSidebar } from "react-icons/bs";
 import { IoChatbubbleEllipsesOutline, IoSettings } from 'react-icons/io5';
 
 const DashboardLayout = ({ children }) => {
     const [showSidebar, setShowSidebar] = useState(false);
-
+    const session = useSession()
+  
+  
+    useEffect(() => {
+        if (session?.data?.user?.email) {
+          document.cookie = `myEmail=${session?.data?.user?.email}; path=/;`;
+        }
+        else {
+         document.cookie = `myEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
+        }
+  
+    }, [session?.data?.user?.email])
     return (
         <div className="min-h-screen bg-white">
             {/* Navbar */}

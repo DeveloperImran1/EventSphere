@@ -17,6 +17,8 @@ import MembershipCard from './membership/MEmbershipCard';
 
 
 const HomeContainer = () => {
+     
+
     return (
         <div className=''>
             <Banner></Banner>

@@ -3,16 +3,27 @@ import Link from "next/link";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { HiOutlineEye } from "react-icons/hi";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "@/components/shared/Logo";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import SocialSignIn from "@/components/shared/SocialSignIn";
 import Swal from 'sweetalert2'
 import { TbFidgetSpinner } from "react-icons/tb";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const LoginPage = () => {
+    const router = useRouter();
+
+    const searchParamsForError = useSearchParams();
+    const error = searchParamsForError.get('error');
+
+    useEffect(() => {
+        if (error === 'access_denied') {
+            toast.error('You cannot access this route 😒');
+        }
+    }, [error]);
 
     const successfullySignIn = () => {
         Swal.fire({
@@ -46,7 +57,6 @@ const LoginPage = () => {
     };
 
     // navigate kore onno page conditinaly jaoer jonno
-    const router = useRouter();
     const searchParams = useSearchParams();
     const path = searchParams.get("redirect");
     console.log("search params is a ", searchParams, "path is a ", path)
@@ -184,7 +194,7 @@ const LoginPage = () => {
                             Log in to your account
                         </h1>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={()=> handleSubmit()} className="space-y-6">
                             {/* Email */}
                             <div>
                                 <label className="block text-[15px] font-medium mb-1">
