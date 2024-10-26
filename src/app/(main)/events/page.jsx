@@ -5,7 +5,7 @@ import EventsData from '@/components/allEventsPage/EventsData';
 export const metadata = {
   title:"All Events",
   description: "Smart Event Management and Booking Platform",
-  keywords:["online", "ticket", "selling", "system","event", "management"]
+  keywords:["event", "searching and filtering","online", "ticket", "selling", "system","event", "management"]
 };
 
 const AllEventsPage = () => {
