@@ -1,3 +1,5 @@
+
+"use client"
 import FactsSection from '@/components/About/FactsSection';
 import GallerySection from '@/components/About/GallerySection';
 import MainHeader from '@/components/About/MainHeader';
@@ -7,22 +9,29 @@ import TestimonialsAbout from '@/components/About/TestimonialsAbout';
 import TopAbout from '@/components/About/TopAbout';
 import TrustSection from '@/components/About/TrustSection';
 import Subscribe from '@/components/shared/Subscribe';
-import React from 'react';
+import Head from 'next/head';
+import React, { useEffect } from 'react';
 
-const page = () => {
+const AboutUs = () => {
+    useEffect(() => {
+        document.title = 'EventSphere | About us';
+      }, []);
     return (
         <div className=''>
-            <MainHeader/>
-            <TopAbout/>
+            <Head>
+                <title>EventSphere || All Events</title>
+            </Head>
+            <MainHeader />
+            <TopAbout />
             {/* <OurPhilosophy/> */}
-            <FactsSection/>
-            <TestimonialsAbout/>
-            <TeamMembers/>
-            <GallerySection/>
-            <TrustSection/>
-            <Subscribe/>
+            <FactsSection />
+            <TestimonialsAbout />
+            <TeamMembers />
+            <GallerySection />
+            <TrustSection />
+            <Subscribe />
         </div>
     );
 };
 
-export default page;
+export default AboutUs;

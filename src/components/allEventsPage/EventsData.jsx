@@ -513,7 +513,7 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className="w-full lg:w-4/5 ml-2">
+          <div className=" w-full lg:w-4/5 ml-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
                 <CardForEvents
