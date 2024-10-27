@@ -1,5 +1,6 @@
 'use client'
 
+
 import React, { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +12,12 @@ import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
 import Swal from 'sweetalert2';
 
+
+const socket = io("http://localhost:9000", {
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
+  transports: ['websocket']
+});
 export default function VideoCall() {
   const [users, setUsers] = useState({})
   const [name, setName] = useState("")
@@ -24,20 +31,14 @@ export default function VideoCall() {
   const [mediaError, setMediaError] = useState(null)
   const [isConnected, setIsConnected] = useState(false)
 
+
   const myVideo = useRef()
   const userVideo = useRef()
   const connectionRef = useRef()
   const callTimerRef = useRef(null)
 
-  const socket = io("wss://event-sphare-server.vercel.app", { 
-    reconnectionAttempts: 5,
-    reconnectionDelay: 1000,
-    transports: ['websocket']
-  });
-  
 
-
-  // Message for Join now 
+  // Message for Join now
   useEffect(() => {
     Swal.fire({
       title: '🎉JOIN NOW !',
@@ -46,6 +47,7 @@ export default function VideoCall() {
       confirmButtonText: 'Got it!',
     });
   }, []);
+
 
   // Add missing joinRoom function
   const joinRoom = () => {
@@ -56,19 +58,22 @@ export default function VideoCall() {
     socket.emit("join", name.trim());
   };
 
+
   useEffect(() => {
     // Socket connection status handlers
     socket.on("connect", () => setIsConnected(true));
     socket.on("disconnect", () => setIsConnected(false));
-    
+   
     // Update users list
     socket.on("allUsers", (updatedUsers) => {
       setUsers(updatedUsers);
     });
 
+
     socket.on("error", (error) => {
       toast.error(error);
     });
+
 
     return () => {
       socket.off("connect");
@@ -78,14 +83,16 @@ export default function VideoCall() {
     };
   }, []);
 
+
 //Audio & Video on/of condition
+
 
   useEffect(() => {
     const initializeMedia = async () => {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: false
+          audio: true
         });
         setStream(mediaStream);
         if (myVideo.current) {
@@ -98,7 +105,9 @@ export default function VideoCall() {
       }
     };
 
+
     initializeMedia();
+
 
     return () => {
       if (stream) {
@@ -107,12 +116,15 @@ export default function VideoCall() {
     };
   }, []);
 
+
   useEffect(() => {
     if (!socket) return;
+
 
     socket.on("callUser", ({ from, name: callerName, signal }) => {
       setCall({ isReceivingCall: true, from, name: callerName, signal });
     });
+
 
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
@@ -121,9 +133,11 @@ export default function VideoCall() {
         .catch(err => console.error("Error setting remote description:", err));
     });
 
+
     socket.on("callEnded", () => {
       handleCallEnd();
     });
+
 
     socket.on("iceCandidate", ({ candidate }) => {
       if (connectionRef.current && candidate) {
@@ -132,6 +146,7 @@ export default function VideoCall() {
       }
     });
 
+
     return () => {
       socket.off("callUser");
       socket.off("callAccepted");
@@ -139,6 +154,7 @@ export default function VideoCall() {
       socket.off("iceCandidate");
     };
   }, []);
+
 
   const createPeerConnection = () => {
     const peer = new RTCPeerConnection({
@@ -153,6 +169,7 @@ export default function VideoCall() {
       ]
     });
 
+
     peer.onicecandidate = (event) => {
       if (event.candidate) {
         socket.emit("iceCandidate", {
@@ -162,12 +179,14 @@ export default function VideoCall() {
       }
     };
 
+
     peer.ontrack = (event) => {
       console.log("Received remote track", event.streams[0]);
       if (userVideo.current) {
         userVideo.current.srcObject = event.streams[0];
       }
     };
+
 
     // Important: Add all tracks before creating offer/answer
     if (stream) {
@@ -176,12 +195,15 @@ export default function VideoCall() {
       });
     }
 
+
     peer.oniceconnectionstatechange = () => {
       console.log("ICE Connection State:", peer.iceConnectionState);
     };
 
+
     return peer;
   };
+
 
   const answerCall = async () => {
     try {
@@ -189,14 +211,17 @@ export default function VideoCall() {
       const peer = createPeerConnection();
       connectionRef.current = peer;
 
+
       await peer.setRemoteDescription(new RTCSessionDescription(call.signal));
       const answer = await peer.createAnswer();
       await peer.setLocalDescription(answer);
+
 
       socket.emit("answerCall", {
         signal: peer.localDescription,
         to: call.from,
       });
+
 
       startCallTimer();
     } catch (err) {
@@ -206,13 +231,16 @@ export default function VideoCall() {
     }
   };
 
+
   const callUser = async (id) => {
     try {
       const peer = createPeerConnection();
       connectionRef.current = peer;
 
+
       const offer = await peer.createOffer();
       await peer.setLocalDescription(offer);
+
 
       socket.emit("callUser", {
         userToCall: id,
@@ -220,6 +248,7 @@ export default function VideoCall() {
         from: socket.id,
         name
       });
+
 
       setCall({ to: id });
     } catch (err) {
@@ -230,7 +259,11 @@ export default function VideoCall() {
 
 
 
+
+
+
   // ... (rest of the component remains the same)
+
 
   const handleCallEnd = () => {
     setCallEnded(true)
@@ -248,6 +281,7 @@ export default function VideoCall() {
     window.location.reload()
   }
 
+
   const toggleMute = () => {
     if (!stream) return
     const audioTrack = stream.getAudioTracks()[0]
@@ -256,6 +290,7 @@ export default function VideoCall() {
       setIsMuted(!audioTrack.enabled)
     }
   }
+
 
   const toggleVideo = () => {
     if (!stream) return
@@ -266,6 +301,7 @@ export default function VideoCall() {
     }
   }
 
+
   const startCallTimer = () => {
     setCallDuration(0)
     callTimerRef.current = setInterval(() => {
@@ -273,20 +309,23 @@ export default function VideoCall() {
     }, 1000)
   }
 
+
   const formatDuration = (seconds) => {
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
+
   return (
     <div className="container  mx-auto  px-4">
     <ToastContainer position="top-right" autoClose={5000} />
-    
+   
     {/* Join Card */}
     <Card className="max-w-md mx-auto mb-8  shadow-lg">
       <CardHeader className=" rounded-t-xl bg-gradient-to-r   from-blue-500 to-blue-400">
         <CardTitle className="text-white flex items-center ">
+
 
           <span>Join Video Call</span>
         </CardTitle>
@@ -300,7 +339,7 @@ export default function VideoCall() {
             placeholder="Enter your name"
             className="focus-visible:ring-blue-500"
           />
-          <button 
+          <button
             onClick={joinRoom}
             className="button"
           >
@@ -310,6 +349,7 @@ export default function VideoCall() {
       </CardContent>
     </Card>
 
+
     {/* Video Grid */}
     <div className="grid grid-cols-1  md:grid-cols-2 gap-4 mb-8">
       {/* My Video Card */}
@@ -318,9 +358,9 @@ export default function VideoCall() {
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="h-10 w-10">
-            
+           
                   <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yCMBpekD57G4-5FTZcs2CiZUbspx-hA6mQ&s" alt="user 1" />
-                
+               
                 </Avatar>
              
               <span className="text-xl" >{name || 'You'} (Me)</span>
@@ -332,8 +372,8 @@ export default function VideoCall() {
             {mediaError ? (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
                 <p className="text-white text-lg text-center px-6">
-                  {mediaError === "NotAllowedError" 
-                    ? "Please allow access to camera and microphone" 
+                  {mediaError === "NotAllowedError"
+                    ? "Please allow access to camera and microphone"
                     : "Error accessing media devices"}
                 </p>
               </div>
@@ -357,9 +397,9 @@ export default function VideoCall() {
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
             <Avatar className="h-10 w-10">
-            
+           
             <AvatarImage src="https://media.licdn.com/dms/image/D4D22AQFdzKgfoBGjmA/feedshare-shrink_2048_1536/0/1722914742765?e=2147483647&v=beta&t=1a_qeffsiGRpPDvFbVSKNBV-QKbXZKRNnVCdaLbMGUo" alt="user 2" />
-          
+         
           </Avatar>
               <span className="text-xl">{call.name || 'Remote User'}</span>
             </div>
@@ -379,6 +419,7 @@ export default function VideoCall() {
       </Card>
     </div>
 
+
     {/* Call Controls */}
     {callAccepted && !callEnded && (
       <Card className=" mb-8 shadow-lg">
@@ -390,24 +431,24 @@ export default function VideoCall() {
             </p>
           </div>
           <div className="flex justify-center space-x-6">
-            <Button 
-              onClick={toggleMute} 
+            <Button
+              onClick={toggleMute}
               variant={isMuted ? "destructive" : "secondary"}
               disabled={!stream}
               className="w-14 h-14 rounded-full"
             >
               {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
             </Button>
-            <Button 
-              onClick={toggleVideo} 
+            <Button
+              onClick={toggleVideo}
               variant={isVideoOff ? "destructive" : "secondary"}
               disabled={!stream}
               className="w-14 h-14 rounded-full"
             >
               {isVideoOff ? <VideoOff className="w-6 h-6" /> : <Video className="w-6 h-6" />}
             </Button>
-            <Button 
-              onClick={handleCallEnd} 
+            <Button
+              onClick={handleCallEnd}
               variant="destructive"
               className="w-14 h-14 rounded-full"
             >
@@ -418,6 +459,7 @@ export default function VideoCall() {
       </Card>
     )}
 
+
     {/* Incoming Call */}
     {call.isReceivingCall && !callAccepted && (
       <Card className="max-w-md mx-auto mb-8 shadow-lg border-2 border-green-500 animate-pulse">
@@ -425,17 +467,17 @@ export default function VideoCall() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
             <Avatar className="h-10 w-10">
-            
+           
             <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yCMBpekD57G4-5FTZcs2CiZUbspx-hA6mQ&s" alt="user 1" />
-          
+         
           </Avatar>
               <div>
                 <h3 className="text-lg font-semibold">Incoming Call</h3>
                 <p className="text-gray-500">{call.name || 'Unknown Caller'}</p>
               </div>
             </div>
-            <Button 
-              onClick={answerCall} 
+            <Button
+              onClick={answerCall}
               disabled={!stream}
               className="bg-green-500 hover:bg-green-600"
             >
@@ -446,11 +488,12 @@ export default function VideoCall() {
       </Card>
     )}
 
+
     {/* Available Users */}
     <Card className="   shadow-2xl    ">
       <CardHeader className="bg-[#1b85db] rounded-t-xl">
         <CardTitle className="flex items-center ">
-      
+     
           <span  className="text-yellow-50 text-2xl font-semibold">Available Users</span>
         </CardTitle>
       </CardHeader>
