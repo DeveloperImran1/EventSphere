@@ -9,8 +9,6 @@ export const metadata = {
 
 
 const LoginPage = () => {
-
-
     return (
         <div className="">
             <LoginPageComponents/>

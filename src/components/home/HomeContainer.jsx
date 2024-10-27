@@ -18,6 +18,8 @@ import FAQSection from './faq/FaqSection';
 
 
 const HomeContainer = () => {
+     
+
     return (
         <div className=''>
             <Banner></Banner>
