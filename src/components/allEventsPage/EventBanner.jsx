@@ -24,7 +24,7 @@ const EventBanner = ({ search, setFilters }) => {
 
     return (
         <div
-            className="relative bg-cover bg-center h-80 mb-6 md:mb-12 lg:mb-20"
+            className="relative bg-cover bg-center h-80 mb-6 md:mb-12 lg:mb-20 object-cover"
             style={{ backgroundImage: `url('https://img.freepik.com/premium-photo/businessman-man-hold-hand-magnifying-glass-icon-business-technology-internet-concept_150455-10173.jpg?w=1060')` }}
         >
             <h2 className=' text-2xl md:text-4xl lg:text-5xl font-bold text-center pt-20 text-white '> Enjoy Your Life With Us</h2>
