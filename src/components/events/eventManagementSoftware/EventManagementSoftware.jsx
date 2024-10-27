@@ -19,7 +19,7 @@ const EventManagementSoftware = () => {
       <EventRegister/>
       <EventLimeLights/>
       <HandyFeatured/>
-      <ExperianceTab/>
+      {/* <ExperianceTab/> */}
       <Testimonials/>
       <AppleLogoSection/>
       <InputSchedule/>
