@@ -13,6 +13,7 @@ import useAxiosPublic from '@/hooks/useAxiosPublic';
 
 const FeedPostItem = ({ item, refetch }) => {
     const session = useSession()
+    const currentUser = session.data?.user;
     const axiosPublic = useAxiosPublic()
     const [menuOpen, setMenuOpen] = useState(false);
     const [commentsOpen, setCommentsOpen] = useState(false);
@@ -28,6 +29,10 @@ const FeedPostItem = ({ item, refetch }) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
     const handleReplySubmit = async (commentId, commenterEmail, id, replyUserPic, commentText) => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         // Create a reply object
         const replyObj = {
             replyComment: replies,  // Use commentText for reply content
@@ -48,6 +53,10 @@ const FeedPostItem = ({ item, refetch }) => {
 
     // handleReact
     const handleReact = async () => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         // Get the current love count from the post
         let updatedLove = 0;
 
@@ -79,6 +88,13 @@ const FeedPostItem = ({ item, refetch }) => {
     };
     // handleCommentSubmit
     const handleCommentSubmit = async () => {
+        if ( !currentUser) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
+        if ( !newComment) {
+           return toast.error("Add Comment 👊")
+        }
 
         const commentObj = {
             text: newComment,
@@ -121,7 +137,7 @@ const FeedPostItem = ({ item, refetch }) => {
             {/* Username & Options */}
             <div className="flex justify-between p-4">
                 <div className="flex items-center gap-x-3">
-                    <img
+                    <Image height={676} width={1200}
                         className="h-12 w-12 rounded-full"
                         src={item.user?.profile_picture || "default-avatar.png"} // Use avatar from API
                         alt="user avatar"
@@ -133,7 +149,7 @@ const FeedPostItem = ({ item, refetch }) => {
                 </div>
                 <div className="relative">
                     <button onClick={toggleMenu}>
-                        <img src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
+                        <Image height={676} width={1200} src="https://i.postimg.cc/Twv30sTd/menu-1.png" alt="menu" className="h-5" />
                     </button>
 
                     {menuOpen && (
@@ -162,10 +178,10 @@ const FeedPostItem = ({ item, refetch }) => {
             >
                 {item.content?.media?.length > 0 && item.content.media.map((imgSrc, i) => (
                     <SwiperSlide key={i}>
-                        <img
+                        <Image height={676} width={1200}
                             src={imgSrc}
                             alt={`slide ${i + 1}`}
-                            className="w-full max-h-[700px] object-cover rounded-md"
+                            className="w-full max-h-[320px] object-cover rounded-md"
                         />
                     </SwiperSlide>
                 ))}
@@ -195,7 +211,7 @@ const FeedPostItem = ({ item, refetch }) => {
                         {item.comments?.map((comment, cIndex) => (
                             <div key={cIndex} className="border rounded-2xl p-2">
                                 <div className="flex items-start mb-2">
-                                    <img
+                                    <Image height={676} width={1200}
                                         src={comment.user?.profile_picture || "default-avatar.png"}
                                         alt="commenter"
                                         className="h-8 w-8 rounded-full"

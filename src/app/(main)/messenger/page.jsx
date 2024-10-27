@@ -1,87 +1,17 @@
-"use client"
-import ChatBody from "@/components/Messenger/ChatBody";
-import ChatList from "@/components/Messenger/ChatList";
-import LeftsideChat from "@/components/Messenger/LeftsideChat";
-import MiddleSideChat from "@/components/Messenger/MiddleSideChat";
-import RightSideChat from "@/components/Messenger/RightSideChat";
-import useAuth from "@/hooks/useAuth";
-import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { useEffect, useState } from "react";
+import MessengerContainer from "@/components/Messenger/MessengerConteiner";
+
+export const metadata = {
+    title:"Messenger",
+    description: "Messenger page, Smart Event Management and Booking Platform",
+    keywords:["messenger","community","chatting", "online", "ticket", "selling", "system","event", "management"]
+  };
 
 const Messenger = () => {
-    const [conversations, setConversations] = useState([])
-    const [currentChat, setCurrentChat] = useState(null)
-    const [messages, setMessages] = useState([])
-    const [users, setUser] = useState([])
-    const auth = useAuth();
-    const axiosPublic = useAxiosPublic()
-
-
-    useEffect(() => {
-        const getConversations = async () => {
-            try {
-                const res = await axiosPublic.get(`/getConvertation/${auth?.data?._id}`)
-                setConversations(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        getConversations()
-    }, [auth?.data,axiosPublic])
-
-    useEffect(() => {
-        const getMessages = async () => {
-            try {
-                const res = await axiosPublic.get(`/getMessages/${currentChat?._id}`)
-                setMessages(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-       getMessages()
-    }, [axiosPublic,currentChat?._id])
-
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const res = await axiosPublic.get(`/user`)
-                setUser(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-      getUsers()
-    }, [axiosPublic])
-
- const handleCurrentChat=(findCurrentChat)=>{
-    setCurrentChat(findCurrentChat)  
- }
-
 
 
     return (
         <div>
-            <section className="flex flex-col lg:grid grid-cols-12 container gap-8 pb-8">
-
-                {/* left side  */}
-                <div className="col-span-3  rounded">
-                    <LeftsideChat handleCurrentChat={handleCurrentChat}  conversations={conversations} 
-                    currentUser={auth?.data?._id} users={users} currentChat={currentChat} />
-                </div>
-
-                {/* right site  */}
-                <div className="col-span-6  rounded ">
-                    <MiddleSideChat currentChat={currentChat} messages={messages} conversations={conversations} 
-                    currentUser={auth?.data?._id}/>
-                </div>
-
-                <div className="col-span-3  rounded">
-                    <RightSideChat currentChat={currentChat}  currentUser={auth?.data?._id}/>
-                </div>
-            </section>
+         <MessengerContainer/>
         </div>
     );
 };

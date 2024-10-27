@@ -7,7 +7,7 @@ import axios from 'axios';
 import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const fetchUsers = async () => {
-    const response = await axios.get('http://localhost:9000/organizerRequest');
+    const response = await axios.get('https://event-sphare-server.vercel.app/organizerRequest');
     return response.data;
 };
 

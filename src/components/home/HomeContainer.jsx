@@ -11,24 +11,29 @@ import Services from '../events/Services';
 import EmailSend from './EmailSend';
 
 import PopularEvent from '../PopularEvent/PopularEvent';
-import MembershipCard from './membership/MembershipCard';
+import WhyUse from './WhyUse';
+import MembershipCard from './membership/MEmbershipCard';
+import FAQSection from './faq/FaqSection';
+
 
 
 const HomeContainer = () => {
+     
+
     return (
         <div className=''>
             <Banner></Banner>
             <PopularEvents></PopularEvents>
             <EventTimed></EventTimed>
+            <WhyUse></WhyUse>
+
             <DestinationSlider />
             <Organizers></Organizers>
-            <Services></Services>
+            <MembershipCard />
+            <FAQSection/>
             <EmailSend></EmailSend>
-           
-            {/* <Testimonials></Testimonials> */}
-            <MembershipCard/>
-           
-            
+
+
         </div>
     );
 };

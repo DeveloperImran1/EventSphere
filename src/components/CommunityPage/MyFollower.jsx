@@ -17,11 +17,16 @@ const MyFollower = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user.email));
+    const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
 
     // handleFollow Button
     const handleFollow = async (id) => {
+        if ( !myEmail) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
         try {
-          const response = await fetch(`http://localhost:9000/user/handleAddFollower/${id}`, {
+          const response = await fetch(`https://event-sphare-server.vercel.app/user/handleAddFollower/${id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -43,10 +48,10 @@ const MyFollower = ({ userData, refetch }) => {
       };
     return (
         <div className="">
-            <h2 className="text-lg font-bold">My Followers</h2>
-            <div className="mt-4">
-                {followerData.length > 0 ? (
-                    followerData.slice(0, showFollower).map(follower => (
+            <h2 className="text-lg font-bold">Followers</h2>
+            <div className="mt-1">
+                {filteredUsersWithoutYou.length > 0 ? (
+                    filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
                         <div key={follower._id} className="p-3 border mb-1 rounded">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
@@ -58,7 +63,7 @@ const MyFollower = ({ userData, refetch }) => {
                                         <p className="text-sm">{(follower.email).slice(0, 15)}...</p>
                                     </div>
                                 </div>
-                                <button onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
+                                <button title='Follow User' onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
                             </div>
                         </div>
                     ))
@@ -66,8 +71,14 @@ const MyFollower = ({ userData, refetch }) => {
                     <p>You have no followers.</p>
                 )}
                 {
-                    showFollower === 3 && showFollower < 4 ?  <p onClick={() => {setShowFollower(showFollower + 3)}} className='text-gay-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See more</p> 
-                    : <p onClick={() => {setShowFollower(showFollower - 3)}} className='text-gay-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See less</p>
+                    // Show the "See more" or "See less" options only if the length of filteredUsersWithoutYou is more than 3
+                    filteredUsersWithoutYou.length > 3 && (
+                        showFollower === 3 ? (
+                            <p onClick={() => {setShowFollower(showFollower + 3)}} className='text-gray-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See more</p>
+                        ) : (
+                            <p onClick={() => {setShowFollower(showFollower - 3)}} className='text-gray-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See less</p>
+                        )
+                    )
                 }
             </div>
         </div>

@@ -42,7 +42,7 @@ const OrganizerProfile = () => {
     const { data, isLoading: followLoading, refetch: followRefetch } = useQuery({
       queryKey: ["user"],
       queryFn: () =>
-        fetch(`http://localhost:9000/user/${lastPathSegment}`).then((res) =>
+        fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
           res.json()
         ),
     });
@@ -66,7 +66,7 @@ const OrganizerProfile = () => {
       console.log("Updated info", addedFollower)
   
       try {
-        const result = await axios.put("http://localhost:9000/userAddedFollower", addedFollower);
+        const result = await axios.put("https://event-sphare-server.vercel.app/userAddedFollower", addedFollower);
         console.log(result);
   
         if (result?.data?.modifiedCount) {

@@ -5,16 +5,22 @@ import FeedContent from '@/components/CommunityPage/FeedContent';
 import FeedPostCard from '@/components/CommunityPage/FeedPostCard';
 import React from 'react';
 
+export const metadata = {
+    title: "Community",
+    description: "Community page,Smart Event Management and Booking Platform",
+    keywords: ["community page","post","online", "ticket", "selling", "system", "event", "management"]
+};
+
 const CommunityPage = () => {
     return (
         <div className="">
-            <div className="flex gap-x-4 w-full container">
+            <div className="flex gap-x-4 max-w-[1280px] mx-auto">
                 {/* Sidebar */}
                 {/* <div className="w-1/6 border-2 hidden md:block">
                     <CommunitySidebar />
                 </div> */}
                 {/* Main Content */}
-                <div className="border-2 w-full md:w-[70%]">
+                <div className=" w-full md:w-[50%] mx-auto">
                     {/* <CommunityHeader /> */}
                     <div className="">
                         {/* Scrollable Feed */}
@@ -27,7 +33,7 @@ const CommunityPage = () => {
                     </div>
                 </div>
                 {/* Right Sidebar */}
-                <div className="md:w-[30%] p-5 border-2 hidden md:block">
+                <div className="md:w-[30%] p-5 border-2 hidden lg:block">
                     <CommunityRightSidebar />
                 </div>
             </div>

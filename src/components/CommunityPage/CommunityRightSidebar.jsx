@@ -3,10 +3,11 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import MyFollower from './MyFollower';
+import MyFollowing from './MyFollowing';
 
 // Function to fetch user data
 const fetchUserData = async () => {
-    const response = await axios.get('http://localhost:9000/user');
+    const response = await axios.get('https://event-sphare-server.vercel.app/user');
     return response.data;
 };
 
@@ -31,6 +32,7 @@ const CommunityRightSidebar = () => {
         <div className='sticky top-20'>
             {/* My Follower */}
             <MyFollower userData={userData} refetch={refetch} />
+            <MyFollowing userData={userData} refetch={refetch} />
         </div>
     );
 };

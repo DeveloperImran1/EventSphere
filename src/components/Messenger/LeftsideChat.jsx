@@ -14,22 +14,23 @@ import {
     TabsTrigger,
 } from "@/components/ui/tabs"
 import useAxiosPublic from '@/hooks/useAxiosPublic'
+import Link from 'next/link'
 
-const LeftsideChat = ({ conversations, currentUser, handleCurrentChat, users,currentChat }) => {
+const LeftsideChat = ({ conversations, currentUser, handleCurrentChat, users, currentChat }) => {
     const axiosPublic = useAxiosPublic()
-console.log(currentChat);
+    console.log(currentChat);
 
-    const handleSend = async (e,receiverId) => {
+    const handleSend = async (e, receiverId) => {
 
-        
+
         e.preventDefault()
         const newConversation = {
-             senderId:currentUser,
-             receiverId:receiverId
-   
+            senderId: currentUser,
+            receiverId: receiverId
+
         }
         try {
-            const res = await axiosPublic.post(`/newConversation`,newConversation)
+            const res = await axiosPublic.post(`/newConversation`, newConversation)
 
         } catch (error) {
             console.log(error);
@@ -38,7 +39,7 @@ console.log(currentChat);
     }
 
     return (
-        <div className="">
+        <div className="min-h-screen fixed">
             <div className=" flex  items-center justify-between">
                 <h1 className=" font-semibold">Chats</h1>
                 <div className=" flex gap-4">
@@ -57,7 +58,7 @@ console.log(currentChat);
                         <TabsTrigger value="Conversation">Create Conversation</TabsTrigger>
                     </TabsList>
                     <TabsContent value="Inbox">
-                        <div className=" mt-5 flex gap-1 ml-3 flex-col ">
+                        <div className=" mt-5 flex gap-1 ml-3 flex-col overflow-y-auto">
                             {
                                 conversations.map(conversation => <Conversation handleCurrentChat={handleCurrentChat} key={conversation._id} conversation={conversation} currentUser={currentUser} />
 
@@ -67,10 +68,15 @@ console.log(currentChat);
                     </TabsContent>
                     <TabsContent value="Conversation">
                         {
-                            users.map(user => <div  key={user._id} className=' '>
-                                <form  className='flex  my-2' >
-                                <p className=' w-28 text-blue-400 font-semibold'>{user.name}</p>
-                                <button onClick={(e)=>handleSend(e,user._id)} type="submit" className='button'>Create</button>
+                            users.map(user => <div key={user._id} className='border-4  '>
+                                <form className='flex justify-between items-center my-2 ' >
+                                    <div className='flex gap-2 items-center'>
+                                        <Link href={`/dashboard/user-profile/${user?.email}`}>
+                                            <Image height={676} width={1200} src={user?.image} alt='user' className='h-[38px] w-[38px] rounded-full'></Image>
+                                        </Link>
+                                        <p className=' w-28 text-blue-400 font-semibold'>{user.name}</p>
+                                    </div>
+                                    <p onClick={(e) => handleSend(e, user._id)} type="submit" className='bg-[#1b85db] hover:bg-[#10a0b9] px-2 py-1 rounded-lg text-white cursor-pointer'>Create</p>
                                 </form>
                             </div>)
                         }

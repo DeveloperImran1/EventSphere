@@ -6,7 +6,7 @@ import FeedPostItem from "./FeedPostItem";
 
 export default function FeedPostCard() {
     const fetchPosts = async ({ pageParam = 1 }) => {
-        const res = await axios.get(`http://localhost:9000/getAllPost?page=${pageParam}`);
+        const res = await axios.get(`https://event-sphare-server.vercel.app/getAllPost?page=${pageParam}`);
         return res.data; // Adjust based on API response structure
     };
 

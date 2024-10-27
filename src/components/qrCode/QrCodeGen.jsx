@@ -7,6 +7,8 @@ import Loading from '../shared/LoadingSpiner/Loading';
 import Image from 'next/image';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
@@ -17,6 +19,8 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState('');
   const ticketRef = useRef();
 
+
+
   useEffect(() => {
     if (!transitionId) {
       console.log("Transaction ID is missing.");
@@ -25,7 +29,7 @@ const PaymentQRCodePage = () => {
 
     const fetchPaymentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/orders/${transitionId}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/orders/${transitionId}`);
         setPaymentData(response.data);
         setLoading(false);
       } catch (error) {
@@ -40,7 +44,11 @@ const PaymentQRCodePage = () => {
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
-    console.log('Feedback:', feedback);
+
+    // Show success toast
+    toast.success('Feedback successfully submitted!')
+
+    // Clear the form
     setFeedback('');
   };
 
@@ -74,34 +82,6 @@ const PaymentQRCodePage = () => {
   };
   const qrData = JSON.stringify(dataforqr);
 
-  // const handleFeedback = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const updateResponse = await axiosPublic.patch(`/events/${id}`, {
-  //       eventId: id,
-  //       newBookedSeats: selectedSeatNames
-  //   });
-  //     await axios.post(`/feedback`, { feedback });
-  //     // Show success message
-  //     Swal.fire({
-  //       title: 'Success!',
-  //       text: 'Your feedback has been submitted.',
-  //       icon: 'success',
-  //     });
-  //     // Clear feedback input
-  //     setFeedback('');
-  //     // Optionally refetch events or perform other actions
-  //     refetch();
-  //   } catch (error) {
-  //     // Show error message
-  //     Swal.fire({
-  //       title: 'Error!',
-  //       text: 'There was a problem submitting your feedback.',
-  //       icon: 'error',
-  //     });
-  //   }
-  // };
 
   if (loading) {
     return <Loading />;
@@ -112,9 +92,9 @@ const PaymentQRCodePage = () => {
   }
 
   return (
-    <div className='w-11/12 mx-auto'>
-      <div ref={ticketRef} className=' mt-16 mb-24 shadow-xl  p-10 bg-[#E3EAFF] rounded-2xl'>
-        <div className="payment-info flex flex-col lg:flex-row justify-between mr-5">
+    <div className='container mx-auto '>
+      <div ref={ticketRef} className=' mt-16 mb-16 shadow-xl p-2 lg:p-10 bg-[#E3EAFF] rounded-2xl'>
+        <div className="payment-info flex flex-col lg:flex-row justify-between mr-2 lg:mr-5">
           <div className='w-96'>
             {/* <h2>Payment Successful</h2> */}
 
@@ -125,12 +105,12 @@ const PaymentQRCodePage = () => {
               width={370}
               className='h-[150px] w-[300px] rounded-lg mb-5 rounded-tl-full rounded-br-full' />
 
-            <p className='text-3xl  font-bold ml-5 mb-2 font-mono'>{paymentData.eventName}</p>
+            <p className='text-xl lg:text-3xl  font-bold ml-2 lg:ml-5 mb-2 text-wrap font-mono'>{paymentData.eventName}</p>
             <p className='ml-5'>Booked by: {paymentData.bookedUserName}</p>
           </div>
 
           <div className='flex flex-col justify-center items-center gap-5'>
-            <h1 className='text-3xl lg:text-5xl font-bold lg:font-black text-blue-500 mb-10 font-mono'>Event Tickets</h1>
+            <h1 className='text-3xl lg:text-4xl font-bold lg:font-bold text-blue-500 mb-4 font-mono'>Event Tickets</h1>
             <table className='border-2 border-blue-800 border-collapse mb-5 bg-white font-mono' >
               <tr className='border-2 p-3'>
                 <td className='border-2 p-2 border-blue-500 text-center'>Total Seats</td>
@@ -159,11 +139,11 @@ const PaymentQRCodePage = () => {
           </div>
           <div>
             <QRCode
-              value={qrData}
+              // value={qrData}
               size={200}
               bgColor="#ffffff"
               fgColor="#000000"
-              // value={`http://localhost:3000/payment-details?transitionId=${paymentData.transitionId}`}
+              value={`https://event-sphere-bice.vercel.app/payment-qr-code?transitionId=${paymentData.transitionId}`}
               className='mb-3 text-center m-2 mx-auto'
 
             />
@@ -178,7 +158,7 @@ const PaymentQRCodePage = () => {
       </div>
 
       {/* Feedback Section */}
-      <div className='my-16 shadow-xl rounded-xl p-4 lg:p-6 2xl:p-10'>
+      <div className='mb-16 shadow-xl rounded-xl p-4 lg:p-6 2xl:p-10'>
         <div className=' max-w-2xl mx-auto my-10'>
           <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4 ">User Feedback</h2>
           <p className="text-center">Thank you for attending our event! Please share your valuable feedback about your experience to help us improve and deliver even better events in the future.</p>
@@ -187,7 +167,7 @@ const PaymentQRCodePage = () => {
           <div className='flex-1 '>
             <form onSubmit={handleFeedbackSubmit} className='flex flex-col items-center'>
               <textarea
-                className='w-full lg:w-2/3 p-4 mb-4 border rounded-lg'
+                className='w-full lg:w-2/3 p-4  border-2 rounded-lg my-10'
                 placeholder='Write your feedback here...'
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
@@ -195,10 +175,10 @@ const PaymentQRCodePage = () => {
               ></textarea>
 
 
-              <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
+              <button type='submit' className='bg-blue-500 text-white px-4 py-2  rounded-lg'>Submit Feedback</button>
             </form>
           </div>
-
+          <ToastContainer />
           <div className='flex-1'>
             <Image
               src="https://img.freepik.com/free-vector/flat-design-feedback-concept_23-2148944236.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721520000&semt=ais_user"

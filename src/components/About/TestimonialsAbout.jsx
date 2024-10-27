@@ -15,7 +15,7 @@ import TestimonialCard from './TestimonialCard';
 
 const TestimonialsAbout = () => {
     return (
-        <div className="bg-[url('https://i.postimg.cc/N0WjkHpk/client-bg.jpg')] bg-[#001232] text-[#dbe2fb] leading-7 overflow-hidden relative block bg-cover bg-center bg-no-repeat pt-20 ">
+        <div className="bg-[url('https://i.postimg.cc/N0WjkHpk/client-bg.jpg')]  text-[#dbe2fb] leading-7 overflow-hidden relative block bg-cover bg-center bg-no-repeat pt-20 ">
             {/* Container */}
             <div className="relative z-10 w-full px-4 mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px]">
                 {/* Header Section */}

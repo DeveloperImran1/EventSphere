@@ -98,7 +98,7 @@ export default function PopularEvent() {
   const { data: eventData, isLoading } = useQuery({
     queryKey: ["categoryEvent", categoryName],
     queryFn: async () => {
-      const eventData = await axiosPublic.get(`http://localhost:9000/events/getCategoryEvent/${categoryName}`)
+      const eventData = await axiosPublic.get(`https://event-sphare-server.vercel.app/events/getCategoryEvent/${categoryName}`)
       return eventData?.data;
     }
   })

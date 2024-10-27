@@ -133,17 +133,16 @@ const CardForEvents = ({ event }) => {
     return formattedDateTime.slice(0, 16);
   };
   return (
-    <div className=" ">
-
+    <div className="">
       <motion.div
         ref={cardRef}
-        className="group rounded-lg overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative"
+        className="group rounded-lg h-[440px] overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative mr-4"
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.1 }}
       >
-        <div className="relative overflow-hidden h-48">
+        <div className=" relative overflow-hidden h-48">
           <Image
             className="w-full h-full object-cover transition-transform duration-300 "
             src={event.gallery[0]}
@@ -192,8 +191,11 @@ const CardForEvents = ({ event }) => {
           </motion.div>
         </motion.div>
       </motion.div>
-
-    </div>
+  
+   
+  
+  </div>
+ 
   );
 };
 

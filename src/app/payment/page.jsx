@@ -17,8 +17,7 @@ const SEATS_PER_ROW = 12;
 // SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick, event }) {
   const res = event?.bookedSeats?.includes(seat?.number)
-  //  console.log("bokin naki chekc", res)
-  const bgColor = res ? "bg-gray-300" : seat?.status === "selected" ? "bg-orange-200" : " bg-green-500";
+  const bgColor = res ? "bg-gray-500 text-white cursor-not-allowed" : seat?.status === "selected" ? "bg-[#1B85DB] text-white" : "bg-white";
   // console.log(seat)
 
   return (
@@ -57,7 +56,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchEventsData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9000/events/${id}`);
+        const response = await axios.get(`https://event-sphare-server.vercel.app/events/${id}`);
         setEvent(response.data);
         setLoading(false);
       } catch (error) {
@@ -171,11 +170,6 @@ const Payment = () => {
     setFinalTotal(newTotal);
   }, [selectedSeats, total, couponCode]);
 
-
-
-
-  console.log(discount)
-  console.log(finalTotal)
   if (loading) {
     return <Loading />;
   }
@@ -192,43 +186,51 @@ const Payment = () => {
   const selectSeat = selectedSeatNames.map((seatName, index) => (
     <>{seatName}</>
   ))
-  console.log(selectSeat)
+  // console.log(selectSeat)
 
   return (
-    <div className="p-10 max-w-6xl min-h-screen mx-auto bg-gradient-to-br from-purple-600 to-blue-500 rounded-lg shadow-lg text-white">
+    <div className="p-10 max-w-6xl min-h-screen mx-auto  rounded-lg shadow-lg ">
       <h1 className="text-3xl border-b-2 py-4 font-serif font-bold mb-4 text-center">
-        Multiplex Theatre Showing Screen 1
+        Multiplex Theatre Showing Screen 
       </h1>
 
       <div className="flex flex-col md:flex-row">
         <div className="flex-1">
           <div className="bg-yellow-500 text-black text-center py-2 rounded-t-lg font-bold">
-            SCREEN
+          Seat map
           </div>
-          <div className="bg-opacity-50 bg-black py-10 rounded-b-lg p-4">
+          <div className="bg-base-300 pb-10 pt-4 rounded-b-lg p-4">
+            <p className="mb-2 text-center font-bold"> 5% discount for selecting 5+ seats</p>
             {seats.map((row, rowIndex) => (
               <div
                 key={rowIndex}
-                className={`flex justify-center ${rowIndex === 2 ? "mt-6" : ""}`}
+                className={`grid gap-2 justify-center grid-cols-6 sm:grid-cols-6 lg:grid-cols-12`}
               >
                 {row.map((seat, seatIndex) => (
                   <React.Fragment key={`${rowIndex}-${seatIndex}`}>
-                    <div className="lg:mr-1">
+                    <div className="lg:mr-1 ">
                       <SeatButton
                         seat={seat}
                         event={event}
                         onClick={() => handleSeatClick(rowIndex, seatIndex)}
+                        className={`p-2 ${rowIndex % 6 === 0 ? "text-sm md:text-base lg:text-lg" : ""}`}
                       />
                     </div>
-                    {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
-                      <div className="w-4"></div>
-                    )}
+                    {/* প্রতি ৪টি কলামের পর ফাঁকা স্থান যোগ করা হয়েছে */}
+                    {/* {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
+                      <div className="lg:w-6 sm:w-4 w-2"></div>
+                    )} */}
                   </React.Fragment>
                 ))}
               </div>
             ))}
           </div>
         </div>
+
+
+
+
+
         <div className="ml-4 flex-shrink-0 w-full md:w-64 mt-4 md:mt-0">
           <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg shadow-lg transform transition-transform duration-300 p-4 text-xl space-y-4">
             <div className="mb-2">
@@ -240,12 +242,12 @@ const Payment = () => {
             </div>
 
 
-            <div className="bg-yellow-100 text-yellow-900 p-2 rounded-lg mb-2">
+            <div className="bg-base-200 text-yellow-900 p-3 rounded-lg mb-2">
               <p className="mb-2">
-                Total select seat: <span className="text-xl font-bold">{selectedSeats}</span>
+                Total select seat: <span className=" ">{selectedSeats}</span>
               </p>
               <p className="mt-2  ">Selected Seats:</p>
-              <ol type="1" className=" flex gap-4 flex-wrap">
+              <ol type="1" className=" flex gap-4 flex-wrap text-[#6b7280]">
                 {selectedSeatNames.map((seatName, index) => (
                   <li key={index}>{seatName}</li>
                 ))}
@@ -258,7 +260,7 @@ const Payment = () => {
                   placeholder="Enter coupon code"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="w-full p-2 border rounded mb-2"
+                  className="w-full p-2 border rounded mb-2 text-[#6b7280]"
                 />
               </div>
 
@@ -281,7 +283,7 @@ const Payment = () => {
                 </p>
                 <hr className="my-2" />
                 <p className="mt-1">
-                 Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
+                  Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
                 </p>
               </div>
 
@@ -289,7 +291,7 @@ const Payment = () => {
               <Button
                 onClick={() => setIsModalOpen(true)}
                 disabled={selectedSeats === 0}
-                className="w-full py-2 mt-4 bg-blue-700"
+                className="w-full btn button mt-4"
               >
                 Book Now
               </Button>
@@ -314,7 +316,7 @@ const Payment = () => {
               <div className="absolute top-10 right-10 z-50">
                 <Button
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-purple-600 text-white w-20"
+                  className="bg-purple-600 text-white w-20 "
                 >
                   <TbXboxX className='text-2xl' />
                 </Button>

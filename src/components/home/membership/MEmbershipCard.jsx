@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
-import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Link from 'next/link';
 import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 
 const MembershipCard = () => {
     const axiosPublic = useAxiosPublic()
@@ -72,7 +72,7 @@ const MembershipCard = () => {
                      <div className="flex justify-center">
                          {/* button */}
                          <Link href={`/qualityPayment?id=${card?._id}`}>
-                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-1 px-2 rounded-2xl'>Purchase Now</Button>
+                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-2 px-8 rounded-2xl  mt-4 mr-4'>Purchase Now</Button>
                                 </Link>
                      </div>
                  </div>

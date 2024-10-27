@@ -22,7 +22,7 @@ const demoData = [
 // Function to fetch statistics data
 const fetchStatsData = async (email) => {
     const response = await fetch(
-        `http://localhost:9000/organizer-barChart/${email}`
+        `https://event-sphare-server.vercel.app/organizer-barChart/${email}`
     );
     if (!response.ok) {
         throw new Error("Network response was not ok");

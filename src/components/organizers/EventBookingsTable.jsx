@@ -46,7 +46,7 @@ const EventBookingsTable = () => {
 
   // Get Booking Data 
   const fetchOrders = async () => {
-    const { data } = await axios.get(`http://localhost:9000/ordersByGmail/${currentUserEmail}`);
+    const { data } = await axios.get(`https://event-sphare-server.vercel.app/ordersByGmail/${currentUserEmail}`);
 
     return data;
   };
