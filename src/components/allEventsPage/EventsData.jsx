@@ -237,7 +237,7 @@ const EventsData = () => {
         setFilters={setFilters} />
 
       <div className='  max-w-[1280px] mx-auto'>
-        {/* For mobile - Drawer button */}
+
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden ">
           <button
@@ -270,6 +270,7 @@ const EventsData = () => {
                   name="category"
                   value={filters.category}
                   onChange={handleFilterChange}
+                  
                   className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
                 >
                   <option value="">All Categories</option>
