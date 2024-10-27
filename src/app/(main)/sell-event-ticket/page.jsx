@@ -10,8 +10,12 @@ import Services from '@/components/events/Services';
 import TicketManagesystem from '@/components/events/TicketManagesystem';
 import TicketSellProcess from '@/components/events/TicketSellProcess';
 
+export const metadata = {
+    title: "Sell-event-ticket",
+    description: "Sell-event-ticket page,Smart Event Management and Booking Platform",
+    keywords: ["sell-event-ticket","online", "ticket", "selling", "system", "event", "management"]
+};
 
-import React from 'react';
 
 const page = () => {
     return (

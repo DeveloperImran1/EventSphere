@@ -40,12 +40,13 @@ const PaymentDetailsPage = () => {
 
   return (
     <div className="payment-details-container">
-      <h2 className='text-3xl font-bold mb-4'>Payment Details for {paymentData.eventName}</h2>
+      jklsdafkasdjglashdsla
+      {/* <h2 className='text-3xl font-bold mb-4'>Payment Details for {paymentData.eventName}</h2>
       <p><strong>Booked by:</strong> {paymentData.bookedUserName}</p>
       <p><strong>Total Paid:</strong> {paymentData.amount}$</p>
       <p><strong>Seats:</strong> {paymentData.selectSeatNames.join(', ')}</p>
       <p><strong>Date:</strong> {paymentData.eventDate?.slice(0, 10)} at {paymentData.eventDate?.slice(11, 16)} AM</p>
-      <p><strong>Transaction ID:</strong> {paymentData.transitionId}</p>
+      <p><strong>Transaction ID:</strong> {paymentData.transitionId}</p> */}
     
     </div>
   );
