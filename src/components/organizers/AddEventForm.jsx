@@ -36,6 +36,9 @@ const AddEventForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (selectedImages.length !== 3) {
+      return setError("Add 3 Image")
+    }
     const form = e.target;
     const whenArray = ["Tomorrow", "Next Month", "Next Week", "Today", "This Week"]
     const title = form?.title?.value;
