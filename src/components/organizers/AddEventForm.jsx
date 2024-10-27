@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import axios from 'axios';
 import { uploadCloudinary } from "@/hooks/upload"; // Assumes this function is available for image uploads
+import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 
 const AddEventForm = () => {
@@ -9,8 +11,8 @@ const AddEventForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [galleryData, setGalleryData] = useState( [] );
+  const [selectedImages, setSelectedImages] = useState([]);  
+  const [galleryData, setGalleryData] = useState( [] );  
 
   // Handler for file selection and upload
   const handleFileAdd = async (e) => {
@@ -57,9 +59,10 @@ const AddEventForm = () => {
     const bookedSeats = null;
     const when = whenArray[Math.floor(Math.random() * whenArray.length)];
     const formData = {
-      photo: "fff",
+      photo: galleryData[0],
       title,
       dateTime,
+      companyName,
       price,
       location: {
         country,
@@ -71,7 +74,7 @@ const AddEventForm = () => {
       organizer: {
         name: session?.data?.user?.name,
         email: session?.data?.user?.email,
-        profile_picture: session?.data?.user?.image,
+        photo: session?.data?.user?.image,
         followers: null,
         bio: null,
       },
@@ -84,8 +87,8 @@ const AddEventForm = () => {
       },
       reviews,
       contactInfo: {
-        contactInfoEmail,
-        contactInfoPhone,
+        email: contactInfoEmail,
+        phone: contactInfoPhone,
       },
       tags,
       createdAt,
@@ -93,7 +96,22 @@ const AddEventForm = () => {
       when,
       eventCreatorEmail: session?.data?.user?.email,
     }
-    
+    setLoading(true);
+    try {
+      const res = await axios.post('http://localhost:9000/events/postEvent', formData);      
+      if (res.status === 201) {
+        setSuccess('Event added successfully!');
+        toast.success('Event added successfully!');
+        setGalleryData([]);
+        setSelectedImages([]);
+        e.target.reset();
+      }
+    } catch (err) {      
+      toast.error('Error adding event');
+      setError('Error adding event');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -116,7 +134,7 @@ const AddEventForm = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Title</label>
+              <label className="block text-sm font-medium mb-1">Description</label>
               <input
                 type="text"
                 name="description"
