@@ -46,6 +46,7 @@ const EmailSend = () => {
             <div className='container mx-auto'>
                 <div className='text-center'>
                   <SectionTitleSimple 
+                  
                   title="NewsLetter"
                   subtitle="Subscribe to our newsletter to stay updated with the latest news, special offers, and exclusive content. Join our community and be the first to know about upcoming events, promotions, and insightful articles delivered straight to your inbox"/>
                 </div>
