@@ -142,14 +142,14 @@ const Organizers = () => {
                                 {organizer.specialization.map((spec, index) => (
                                     <div
                                         key={index}
-                                        className="bg-[#1b85db] dark:bg-blue-900 text-black text-bold dark:text-blue-300 px-3 py-1 rounded-full text-xs mb-2"
+                                        className="bg-[#1b85db] dark:bg-blue-900 text-black text-bold dark:text-blue-300 px-3 py-1 rounded-full text-sm mb-2"
                                     >
                                         {spec}
                                     </div>
                                 ))}
                             </div>
 
-                            <p className="text-sm text-gray-700 dark:text-gray-300 my-2">{organizer.bio}</p>
+                            <p className="text-md text-gray-700 dark:text-gray-300 my-2">{organizer.bio}</p>
                             <a
                                 href={`mailto:${organizer.contactInfo}`}
                                 className="text-blue-500 dark:text-blue-400 text-sm font-medium mb-1"
