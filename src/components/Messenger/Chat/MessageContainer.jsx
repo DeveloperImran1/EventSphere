@@ -18,7 +18,7 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import { RiInformationFill } from 'react-icons/ri';
 
-const MessageContainer = ({ onBackUser, selectedUser }) => {
+const MessageContainer = ({selectedUser }) => {
 
   const { messages, selectedConversation, setMessage } = userConversation();
   const auth = useAuth();
@@ -34,7 +34,7 @@ const MessageContainer = ({ onBackUser, selectedUser }) => {
     }
   }, [messages]);
 
-  // Fetch messages for the selected conversation
+  // Fetch messages for the selected conversations
   useEffect(() => {
     const getMessages = async () => {
       setLoading(true);
