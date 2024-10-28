@@ -164,7 +164,7 @@ const Organizers = () => {
                 href={`mailto:${organizer.contactInfo}`}
                 className="flex items-center text-blue-600 dark:text-blue-400 text-md font-medium mb-1"
               >
-                <MdContactMail className="text-black mr-2" />
+                <MdContactMail className="text-black bg-green-400 mr-2" />
                 <span className="text-black font-semibold">Contact:</span>{" "}
                 {organizer.contactInfo}
               </a>
