@@ -75,7 +75,7 @@ const MessageContainer = ({ onBackUser, selectedUser }) => {
 
       if (data.success !== false) {
         setMessage([...messages, data]);
-        setSendData(''); // Clear input after sending
+        setSendData(''); 
       }
 
       setSending(false);
@@ -117,8 +117,6 @@ const MessageContainer = ({ onBackUser, selectedUser }) => {
                     </Link>
                     <RiInformationFill className="text-blue-600" />
                 </div>
-
-   
           </div>
      
           <div className='flex-1 overflow-auto min-h-[80%]'>
