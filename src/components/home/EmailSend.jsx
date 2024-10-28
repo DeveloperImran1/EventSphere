@@ -52,7 +52,12 @@ const EmailSend = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between px-4 gap-6">
                     <div className="w-full md:w-1/2 mb-8 md:mb-0 lg:p-4">
                    
-                        
+                    <div data-aos="zoom-out-right" data-aos-duration="1000">
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
+                           
+                           Stay Informed with Our Newsletter
+                       </h2>
+                    </div> 
                        
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                             <input
