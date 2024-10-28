@@ -177,7 +177,7 @@ const Organizers = () => {
                 </p>
                 <div className="flex items-center gap-3 text-xl ">
                   <FaLinkedin className="bg-blue-500"/>
-                  <FaFacebook />
+                  <FaFacebook className="bg-blue-500"/>
                 </div>
               </div>
             </div>
