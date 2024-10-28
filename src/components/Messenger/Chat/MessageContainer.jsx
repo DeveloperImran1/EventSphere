@@ -17,9 +17,9 @@ import Image from 'next/image';
 import { FaPhoneAlt } from 'react-icons/fa';
 import Link from 'next/link';
 import { RiInformationFill } from 'react-icons/ri';
-
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 const MessageContainer = ({selectedUser }) => {
-
+  const axiosPublic = useAxiosPublic()
   const { messages, selectedConversation, setMessage } = userConversation();
   const auth = useAuth();
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const MessageContainer = ({selectedUser }) => {
       setLoading(true);
 
       try {
-        const get = await axios.get(`http://localhost:9000/get-message?senderId=${auth?.data?._id}&reciverId=${selectedUser?._id}`);
+        const get = await axiosPublic.get(`/get-message?senderId=${auth?.data?._id}&reciverId=${selectedUser?._id}`);
         const data = await get.data;
         console.log(data);
 
