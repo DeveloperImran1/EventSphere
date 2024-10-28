@@ -83,7 +83,7 @@ export default function VideoCall() {
   }, []);
 
 
-//Audio & Video on/of condition
+//Audio & Video on/of condition 
 
 
   useEffect(() => {
@@ -91,7 +91,7 @@ export default function VideoCall() {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: true
+          audio: false
         });
         setStream(mediaStream);
         if (myVideo.current) {
