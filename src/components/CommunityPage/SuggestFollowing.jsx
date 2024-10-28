@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const SuggestFollowing = ({ userData, refetch }) => {
     const [ showFollower , setShowFollower ] = useState(3);
@@ -18,6 +19,32 @@ const SuggestFollowing = ({ userData, refetch }) => {
     const followerData = userData.filter(user => followerEmails.includes(user.email));
     const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
 
+    // handleFollow Button
+    const handleFollow = async (id) => {
+        if ( !myEmail) {
+            toast.success("Please Login First 👊")
+            return router.push('/login')
+        }
+        try {
+          const response = await fetch(`https://event-sphare-server.vercel.app/user/handleAddFollower/${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ followerEmail: myEmail }),
+          });
+          const data = await response.json();
+      
+          if (response.ok) {
+            toast.success('Followed successfully!');
+            refetch()
+          } else {
+            console.error('Error:', data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
     return (
         <div className="mb-20">
             <h2 className="text-lg font-bold">Suggest</h2>
