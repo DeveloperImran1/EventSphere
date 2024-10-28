@@ -62,7 +62,7 @@ const EmailSend = () => {
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Enter your name"
                                 required
-                                className="p-2 text-base lg:text-lg border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform"
+                                className="p-2 text-base lg:text-lg border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full transition-transform transform"
                             />
                             <input
                                 type="email"
@@ -70,7 +70,7 @@ const EmailSend = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
                                 required
-                                className="p-2 text-base lg:text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform hover:scale-105"
+                                className="p-2 text-base lg:text-lg border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform hover:scale-105"
                             />
                             <input
                                 type="number"
