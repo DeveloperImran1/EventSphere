@@ -42,8 +42,6 @@ const MessageContainer = ({selectedUser }) => {
       try {
         const get = await axiosPublic.get(`/get-message?senderId=${auth?.data?._id}&reciverId=${selectedUser?._id}`);
         const data = await get.data;
-        console.log(data);
-
         if (data.success === false) {
           setLoading(false);
           console.log(data.message);
@@ -70,7 +68,7 @@ const MessageContainer = ({selectedUser }) => {
     setSending(true);
 
     try {
-      const res = await axios.post(`http://localhost:9000/send-message?senderId=${auth?.data?._id}&reciverId=${selectedUser._id}`, { messages: sendData });
+      const res = await axiosPublic.post(`/send-message?senderId=${auth?.data?._id}&reciverId=${selectedUser._id}`, { messages: sendData });
       const data = await res.data;
 
       if (data.success !== false) {
