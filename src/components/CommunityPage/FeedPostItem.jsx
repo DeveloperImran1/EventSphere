@@ -10,6 +10,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useRouter } from 'next/navigation';
 
 const FeedPostItem = ({ item, refetch }) => {
     const session = useSession()
@@ -22,15 +23,15 @@ const FeedPostItem = ({ item, refetch }) => {
     const [replies, setReplies] = useState("");
     const [react, setReact] = useState(false);
     const [love, setLove] = useState(item.reactions.love)
-
+    const router = useRouter()
     const toggleMenu = () => setMenuOpen(!menuOpen);
     const toggleComments = () => setCommentsOpen(!commentsOpen);
     const handleReplyClick = (commentId) => {
         setReplyOpen(replyOpen === commentId ? null : commentId);
     };
     const handleReplySubmit = async (commentId, commenterEmail, id, replyUserPic, commentText) => {
-        if ( !currentUser) {
-            toast.success("Please Login First 👊")
+        if (!currentUser) {
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
         // Create a reply object
@@ -46,15 +47,15 @@ const FeedPostItem = ({ item, refetch }) => {
                 profile_picture: session?.data?.user?.image || "",
             },
         };
-    
+
         console.log("New comment:", replyObj);
-    
+
     };
 
     // handleReact
     const handleReact = async () => {
-        if ( !currentUser) {
-            toast.success("Please Login First 👊")
+        if (!currentUser) {
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
         // Get the current love count from the post
@@ -88,12 +89,12 @@ const FeedPostItem = ({ item, refetch }) => {
     };
     // handleCommentSubmit
     const handleCommentSubmit = async () => {
-        if ( !currentUser) {
-            toast.success("Please Login First 👊")
+        if (!currentUser) {
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
-        if ( !newComment) {
-           return toast.error("Add Comment 👊")
+        if (!newComment) {
+            return toast.error("Add Comment 👊")
         }
 
         const commentObj = {
@@ -191,11 +192,11 @@ const FeedPostItem = ({ item, refetch }) => {
             <div className="p-4">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-x-3">
-                        <FaHeart  onClick={() => {
+                        <FaHeart onClick={() => {
                             handleReact()
                             setReact(!react)
                         }} size={22} className={`${react ? 'text-red-600' : 'text-gray-600 bg-white'} cursor-pointer`}></FaHeart>
-                        <FaRegComment onClick={toggleComments} className='text-[22px] cursor-pointer '/>
+                        <FaRegComment onClick={toggleComments} className='text-[22px] cursor-pointer ' />
                     </div>
                     <p className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-x-1">{love} <FaHeart className='inline text-red-500' /></p>
                 </div>

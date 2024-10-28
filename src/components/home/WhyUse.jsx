@@ -31,14 +31,14 @@ const WhyUse = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative  w-full max-w-4xl aspect-square">
+                <div className="relative  w-full max-w-5xl aspect-square">
                     {options.map((option, index) => {
                         const angle = (index * 60 - 90) * (Math.PI / 180);
                         const radius = 'min(42%, 350px)';
                         return (
                             <div
                                 key={index}
-                                className="absolute  w-36 sm:w-48 md:w-64 lg:w-72 h-24 sm:h-28 md:h-32 lg:h-36 p-1 flex items-center  rounded-full overflow-hidden transform -translate-x-1/2 -translate-y-1/2"
+                                className="absolute  w-36 sm:w-48 md:w-64 lg:w-[300px] h-24 sm:h-28 md:h-32 lg:h-36 p-1 flex items-center  rounded-full overflow-hidden transform -translate-x-1/2 -translate-y-1/2"
                                 style={{
                                     top: `calc(50% + ${Math.sin(angle)} * ${radius})`,
                                     left: `calc(50% + ${Math.cos(angle)} * ${radius})`,
@@ -56,7 +56,7 @@ const WhyUse = () => {
                             </div>
                         );
                     })}
-                    <svg className="  w-full h-full pointer-events-none">
+                    <svg className="absolute top-0 bottom-0  w-full h-full pointer-events-none">
                         {options.map((_, index) => {
                             const angle = (index * 60 - 90) * (Math.PI / 180);
                             const radius = '30%';

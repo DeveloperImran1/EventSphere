@@ -1,3 +1,4 @@
+"use client"
 import { HiDotsHorizontal, HiGift } from "react-icons/hi"
 
 import { IoSearch } from "react-icons/io5";
@@ -7,35 +8,19 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { FaCircleUser } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 
-const RightSideChat = ({currentChat,currentUser}) => {
+const RightSideChat = ({selectedUser}) => {
     const axiosPublic = useAxiosPublic()
-    const [user, setUser] = useState([])
 
-    console.log(user);
-    
-     useEffect(() => {
-         const friendId = currentChat?.members?.find(m => m !== currentUser)
-  
-         const getUsers = async () => {
-             try {
-                 const res = await axiosPublic.get(`/single-user/${friendId}`)
- 
-                 setUser(res?.data)
-             }
-             catch (err) {
-                 console.log(err)
-             }
-         }
-         getUsers()
-     }, [currentChat?.members,currentUser,axiosPublic])
+
 
   return (
-    <div className="mt-3 ">
+    <div className="mt-3 bg-slate-100  my-10 ">
     <div className=" flex  pb-2  flex-col  justify-center items-center ">
-        <Image src={user?.image || "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"}  width={50} height={50} alt="avatar"
+        <Image src={selectedUser?.image || "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"}
+          width={50} height={50} alt="avatar"
             className=" rounded-full h-[120px] w-[120px] " />
 
-        <p className=" font-bold text-black">{user?.name}</p>
+        <p className=" font-bold text-black">{selectedUser?.name}</p>
     
     </div>
     <div className=" flex bg-gray-200 px-2 py-1 items-center justify-center gap-2  text-sm mx-10 rounded-full">

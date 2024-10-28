@@ -136,7 +136,7 @@ const CardForEvents = ({ event }) => {
     <div className="">
       <motion.div
         ref={cardRef}
-        className="group rounded-lg h-[440px] overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative mr-4"
+        className="group rounded-lg h-[480px] sm:h-auto overflow-hidden shadow-lg bg-slate-100 transform transition-all duration-300 relative mr-4 sm:mr-0 "
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -165,9 +165,11 @@ const CardForEvents = ({ event }) => {
           </button>
         </div>
 
-        <motion.div className="p-6  space-y-4 " style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
+        <motion.div className="p-4 sm:p-2 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
           <motion.div style={{ transform: "translateZ(40px)" }}>
-            <h2 className="text-2xl font-bold text-blue-500"> {event?.title?.slice(0, 18)}</h2>
+            <h2 className="text-lg sm:text-md font-bold text-blue-500">
+              {event?.title?.slice(0,20)}
+            </h2>
           </motion.div>
 
           <motion.div className="space-y-2  text-gray-600 " data-aos="fade-up" data-aos-delay="100" >
@@ -181,7 +183,7 @@ const CardForEvents = ({ event }) => {
           <motion.div className="flex justify-between items-center " data-aos="fade-up" data-aos-delay="300" >
             <InfoItem icon={<FaDollarSign className=" text-blue-400 text-[24px] font-normal" />} text={`Price: ${event.price}`} />
 
-            <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" > 
+            <Link href={`/events/${event?._id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#1b85db] border-[#1b85db] hover:text-white ease-in duration-300" >
               {
                 hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
 
@@ -191,11 +193,11 @@ const CardForEvents = ({ event }) => {
           </motion.div>
         </motion.div>
       </motion.div>
-  
-   
-  
-  </div>
- 
+
+
+
+    </div>
+
   );
 };
 

@@ -1,3 +1,4 @@
+// "use client"
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import { format } from "timeago.js";
