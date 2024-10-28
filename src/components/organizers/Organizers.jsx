@@ -172,7 +172,7 @@ const Organizers = () => {
               {/* Add group-hover effect */}
               <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
                 <p className="text-sm text-black dark:text-gray-400 mb-2 pt-2 flex gap-2 items-center">
-                  <MdPeople className="text-xl rounded-sm" />
+                  <MdPeople className="text-xl bg-orange-600 rounded-full" />
                   Followers: {organizer.followers}
                 </p>
                 <div className="flex items-center gap-3 text-xl ">
