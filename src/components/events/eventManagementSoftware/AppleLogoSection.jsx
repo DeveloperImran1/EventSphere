@@ -3,7 +3,7 @@ import React from 'react';
 
 const AppleLogoSection = () => {
     return (
-        <section className=' mx-auto my-32 px-12 bg-[#145AFF]'>
+        <section className='container mx-auto my-32  bg-[#145AFF]'>
             <div className='flex flex-col lg:flex-row gap-12 py-20'>
                 <div className='flex gap-10 flex-1 justify-center items-center'>
                     <figure>

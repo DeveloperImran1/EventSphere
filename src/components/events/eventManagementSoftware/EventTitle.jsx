@@ -38,22 +38,22 @@ const EventTitle = () => {
 
             <hr className='mb-10' />
 
-            <div className='w-5/6 mx-auto flex flex-col lg:flex-row justify-between items-center gap-8 py-10 bg-gray-50 rounded-lg shadow-lg'>
-                <div className='text-center'>
-                    <h2 className='text-3xl lg:text-4xl mb-2'>
+            <div className='container mx-auto flex flex-col lg:flex-row justify-between items-center gap-8 py-10 '>
+                <div className='text-center shadow-md p-4 hover:bg-orange-50 hover:scale-x-105'>
+                    <h2  className='text-3xl lg:text-4xl mb-2'>
                         Up to <span className='text-5xl lg:text-6xl text-blue-600'>
                             <CountUp start={0} end={70} duration={2.5} suffix="%" />
                         </span>
                     </h2>
                     <p className='text-xl lg:text-2xl text-gray-700'>Increase in event engagement rate</p>
                 </div>
-                <div className='text-center'>
+                <div className='text-center shadow-md p-4 hover:bg-orange-50 hover:scale-x-105'>
                     <h2 className='text-3xl lg:text-5xl mb-2 text-blue-600'>
                         <CountUp start={0} end={3} duration={2.5} suffix="x" />
                     </h2>
                     <p className='text-xl lg:text-2xl text-gray-700'>Increase in attendee retention</p>
                 </div>
-                <div className='text-center'>
+                <div className='text-center shadow-md p-4 hover:bg-orange-50 hover:scale-x-105'>
                     <h2 className='text-3xl lg:text-4xl mb-2'>
                         Up to <span className='text-5xl lg:text-6xl text-blue-600'>
                             <CountUp start={0} end={200} duration={2.5} suffix="%" />

@@ -12,7 +12,7 @@ import InputSchedule from './InputSchedule';
 
 const EventManagementSoftware = () => {
   return (
-    <div>
+    <div className='space-y-16'>
       <EventTitle/>
       <AnimatedImageSection/>
       <EventStaticSection/>
