@@ -67,8 +67,8 @@ const Sidebar = ({ onSelectUser }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const search = await axios.get(
-                `http://localhost:9000/search?search=${searchInput}&id=${auth?.data?._id}`
+            const search = await axiosPublic.get(
+                `/search?search=${searchInput}&id=${auth?.data?._id}`
             ); 
             setSearchuser(search.data);
             setLoading(false);
