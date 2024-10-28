@@ -57,8 +57,8 @@ const GetTouchSection = () => {
                 Get in Touch
               </h2>
               <p className="text-gray-600">
-                We’d love to talk about how we can work together. Send us a
-                message below, and we’ll respond as soon as possible.
+                We love to talk about how we can work together. Send us a
+                message below, and well respond as soon as possible.
               </p>
             </div>
             <form onSubmit={sendEmail} ref={form} className="space-y-6">
