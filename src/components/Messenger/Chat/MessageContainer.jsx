@@ -27,7 +27,7 @@ const MessageContainer = ({ onBackUser, selectedUser }) => {
   const [sendData, setSendData] = useState("");
   const lastMessageRef = useRef();
 
-  // Scroll to the last message when messages update
+  // Scroll to the 
   useEffect(() => {
     if (messages?.length > 0) {
       lastMessageRef?.current?.scrollIntoView({ behavior: "smooth" });
