@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
+import swal from 'sweetalert';
 
 const InputSchedule = () => {
     const [formData, setFormData] = useState({
@@ -23,10 +24,26 @@ const InputSchedule = () => {
         e.preventDefault();
         // Form submission logic here
         console.log(formData);
+    
+        // Display success message using SweetAlert
+        swal("Success!", "Your registration has been submitted successfully!", "success");
+    
+        // Clear the form
+        setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            contactNumber: "",
+            country: "",
+            eventName: "",
+            eventIndustry: "",
+            message: "",
+        });
     };
 
+
     return (
-        <div className="flex flex-col lg:flex-row justify-center items-center bg-gray-100 p-10 gap-4 lg:gap-10">
+        <div className=" container mx-auto flex flex-col lg:flex-row justify-center items-center mb-16 gap-4 lg:gap-10">
             {/* Left side with image and text */}
             <div className="lg:w-1/2 flex flex-col items-center">
                 <Image
@@ -43,8 +60,8 @@ const InputSchedule = () => {
                 <h4>We are  Totally Obsessed To Make Your Event Succeed!
                 </h4>
                 <p className="text-lg">Please Fill Out The Form To Request A Demo & Let us Convince YouWhy You Must Switch To Eventify!
-                 PS Nobody can match our pricing </p>
-        
+                    PS Nobody can match our pricing </p>
+
             </div>
 
             {/* Right side with form */}

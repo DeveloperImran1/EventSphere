@@ -4,18 +4,18 @@ import './Button.css'
 import Image  from 'next/image';
 const TicketSellProcess = () => {
   return (
-    <div className='my-24  container mx-auto px-8' >
+    <div className='mt-16  container mx-auto px-8' >
       {/* heading */}
-      <div className='text-center mt-10 my-16  '  >
+      <div className='text-center   '  >
         <h1 className='   font-serif text-5xl font-medium text-black'  >Streamline Your Event Ticketing Sales Process</h1>
-        <p className='text-lg font-serif  mt-4 text-gray-600  '  >   We understand that every event is unique, and that`s why we offer customized solutions tailored to your
+        <p className='text-lg font-serif  mt-4 text-gray-600  mb-8'  >   We understand that every event is unique, and that`s why we offer customized solutions tailored to your
           specific needs. <br />  From personalized ticketing options to marketing tools, we are committed to maximizing your sales and making your event a success.         </p>
       </div>
 
 
       {/* 2 card  */}
-      <div className='flex justify-center gap-16'   >
-        <div className="card  w-[600px] h-[800px] ">
+      <div className='flex flex-col lg:flex-row justify-center gap-4 lg:gap-8'   >
+        <div className="card  lg:w-[600px] lg:h-[800px] ">
           <figure className="">
             <Image
               src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
@@ -24,13 +24,13 @@ const TicketSellProcess = () => {
               height={800}
               className="rounded-3xl h-full " />
           </figure>
-          <div className="mt-10 p-2 md:p-6">
+          <div className="mt-10">
             <h2 className="card-title  font-serif text-3xl text-black "> QR Scan and Badge Printing  </h2>
             <p className='mt-4 text-lg text-gray-600 font-serif'  > Say goodbye to long lines and hassles at the door - Try our badge printing and ticket scanning feature today! Eventify makes it easy to print custom badges for your attendees, allowing for quick and easy check-in at your event.</p>
 
           </div>
         </div>
-        <div className="card  w-[600px] h-[800px]  ">
+        <div className="card  lg:w-[600px] lg:h-[800px]  ">
           <figure className="">
             <Image
               src="https://i.postimg.cc/j2rQbBpy/pexels-marceloverfe-28575523.jpg"
@@ -40,7 +40,7 @@ const TicketSellProcess = () => {
               className="rounded-xl " />
 
           </figure>
-          <div className="mt-10 p-2 md:p-6">
+          <div className="mt-10 ">
             <h2 className="card-title  font-serif text-3xl text-black "> API and Integration  </h2>
             <p className='mt-4 text-lg text-gray-600 font-serif'  >Integrate your event management and ticketing app with your favorite tools and apps using our robust API and Zapier integration. Save time and boost your productivity by streamlining your workflow and automating repetitive tasks.</p>
 
@@ -55,7 +55,7 @@ const TicketSellProcess = () => {
 
       {/* Additional Source of Sales */}
 
-      <div className="hero my-20  bg-slate-200 rounded-2xl px-16  ">
+      <div className="hero bg-slate-200 rounded-2xl lg:px-4  ">
         <div className="hero-content gap-6 flex-col lg:flex-row">
           <Image
             src="https://i.postimg.cc/kgjqLTnb/freepik-br-3a9f85c1-f113-45f7-9db0-387fde6ebda5.png"

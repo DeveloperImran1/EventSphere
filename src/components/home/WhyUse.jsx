@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { DollarSign, Rocket, Search, Target, Cog, Clock } from 'lucide-react';
+import SectionTitleSimple from '../shared/SectionTitleSimple';
 
 const options = [
     { title: 'Seat Selection', icon: DollarSign, color: '#1b85dbcf', description: 'Choose your preferred seats on an interactive real-time map with available and premium spots.' },
@@ -15,14 +16,22 @@ const options = [
 
 const WhyUse = () => {
     return (
+<<<<<<< HEAD
         <div className='my-10 p-2'  >
             {/* hading */}
             <div className="pt-6 text-center  ">
                 <h1 className=" font-bold 2xl:font-black font-mono text-3xl lg:text-6xl  text-blue-500 mb-4">Why Use Our Service</h1>
                 <p className=" hidden md:block text-2xl text-gray-600">Discover the benefits of using our platform to enhance your experience.</p>
             </div>
+=======
+        <div className='container my-10 p-2'  >
+            <SectionTitleSimple 
+            title="Why Use Our Service" 
+            subtitle="Choose our service for reliable, high-quality solutions tailored to your needs. Enjoy exceptional customer support, competitive pricing, and innovative features that ensure a seamless and satisfying experience every time."/>
+            
+>>>>>>> 537ea61e202b1e18b61c0a7bf656d4b3b581380a
 
-            <div className="relative  min-h-screen flex items-center justify-center ">
+            <div className="relative  lg:min-h-screen flex items-center justify-center p-4">
 
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                     <div className="w-24 h-24 sm:w-32 border-2 sm:h-32 md:w-40 md:h-40 bg-white shadow-xl  flex items-center justify-center rounded-full">

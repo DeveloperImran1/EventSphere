@@ -31,7 +31,7 @@ const EventsData = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDay, setSelectedDay] = useState('all');
   const [filters, setFilters] = useState({
     search: '',
@@ -236,8 +236,8 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='  max-w-[1280px] mx-auto'>
-        {/* For mobile - Drawer button */}
+      <div className='  container mx-auto'>
+
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden ">
           <button
@@ -270,6 +270,7 @@ const EventsData = () => {
                   name="category"
                   value={filters.category}
                   onChange={handleFilterChange}
+                  
                   className='py-2 px-5 shadow-2xl rounded-lg font-bold bg-[--color-secondary] text-white w-full'
                 >
                   <option value="">All Categories</option>
@@ -513,7 +514,7 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className="w-full lg:w-4/5 ml-2">
+          <div className=" w-full lg:w-4/5 ml-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
                 <CardForEvents

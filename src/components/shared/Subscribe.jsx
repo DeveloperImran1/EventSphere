@@ -1,22 +1,33 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import emailjs from 'emailjs-com'; // Import EmailJS
 
 const Subscribe = () => {
-
     const [email, setEmail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Show success toast
-        toast.success('Successfully subscribed!')
+        // Prepare the email data
+        const templateParams = {
+            email: email,
+        };
 
-        // Clear the input field
-        setEmail('');
+        // Send email using EmailJS
+        emailjs.send('service_t29biwz', 'template_i3phqje', templateParams, 'mG0AHrO3300phZ9Kb')
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                toast.success('Successfully subscribed!'); // Show success toast
+                setEmail(''); // Clear the input field
+            }, (error) => {
+                console.error('FAILED...', error);
+                toast.error('Subscription failed. Please try again later.'); // Show error toast
+            });
     };
+
     return (
         <div className="w-full px-4 mx-auto text-[#dbe2fb] leading-7 sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px] pb-11">
             <div

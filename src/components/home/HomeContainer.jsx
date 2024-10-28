@@ -13,10 +13,13 @@ import EmailSend from './EmailSend';
 import PopularEvent from '../PopularEvent/PopularEvent';
 import WhyUse from './WhyUse';
 import MembershipCard from './membership/MEmbershipCard';
+import FAQSection from './faq/FaqSection';
 
 
 
 const HomeContainer = () => {
+     
+
     return (
         <div className=''>
             <Banner></Banner>
@@ -27,6 +30,7 @@ const HomeContainer = () => {
             <DestinationSlider />
             <Organizers></Organizers>
             <MembershipCard />
+            <FAQSection/>
             <EmailSend></EmailSend>
 
 
