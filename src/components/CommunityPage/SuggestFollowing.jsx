@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -8,7 +9,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
-    
+    const router = useRouter()
     // Find the current user's data using their email
     const myData = userData.find(user => user?.email === myEmail);
     
@@ -22,7 +23,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
     // handleFollow Button
     const handleFollow = async (id) => {
         if ( !myEmail) {
-            toast.success("Please Login First 👊")
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
         try {
