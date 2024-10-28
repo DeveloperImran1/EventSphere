@@ -11,10 +11,11 @@ const SectionTitleSimple = ({ title, subtitle }) => {
             {title}
           </h2>
         </div>
-
-        <p className="text-center hidden md:block text-[18px] text-gray-600">
-          {subtitle}
-        </p>
+        <div data-aos="fade-up" data-aos-duration="3000">
+          <p className="text-center hidden md:block text-[18px] text-gray-600">
+            {subtitle}
+          </p>
+        </div>
       </div>
     </div>
   );
