@@ -168,7 +168,7 @@ const CardForEvents = ({ event }) => {
         <motion.div className="p-4 sm:p-2 space-y-4" style={{ transformStyle: "preserve-3d" }} variants={contentVariants}>
           <motion.div style={{ transform: "translateZ(40px)" }}>
             <h2 className="text-lg sm:text-md font-bold text-blue-500">
-              {event?.title?.slice(0,24)}
+              {event?.title?.slice(0,20)}
             </h2>
           </motion.div>
 
