@@ -46,19 +46,18 @@ const EmailSend = () => {
             <div className='container mx-auto'>
                 <div className='text-center'>
                   <SectionTitleSimple 
-                  
                   title="NewsLetter"
                   subtitle="Subscribe to our newsletter to stay updated with the latest news, special offers, and exclusive content. Join our community and be the first to know about upcoming events, promotions, and insightful articles delivered straight to your inbox"/>
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-between px-4 gap-6">
                     <div className="w-full md:w-1/2 mb-8 md:mb-0 lg:p-4">
-                   
                     <div data-aos="zoom-out-right" data-aos-duration="1000">
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
                            
                            Stay Informed with Our Newsletter
                        </h2>
-                    </div> 
+                    </div>
+                        
                        
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                             <input
@@ -87,12 +86,12 @@ const EmailSend = () => {
                             />
                             <button
                                 type="submit"
-                                className="bg-[#1b85db] text-white font-medium px-6 py-2 rounded-lg hover:bg-green-500 transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform "
+                                className=" text-white font-medium px-6 py-2 rounded-lg bg-[#1b85db] transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform "
                             >
                                 Subscribe
                             </button>
                         </form>
-                        {message && <p className="mt-4 text-green-600 text-base lg:text-lg">{message}</p>}
+                        {message && <p className="mt-4 bg-[#1b85db] text-base lg:text-lg">{message}</p>}
                     </div>
 
                     {/* Image on the right side with increased height */}
