@@ -37,7 +37,7 @@ const Chat = () => {
                     <div className=" ">
                         <p className=" font-bold text-black">Imran</p>
                         <div className=" flex gap-1">
-                            <p>How are yor ? </p>
+                            <p>How are you ? </p>
                         </div>
                     </div>
                 </div>
