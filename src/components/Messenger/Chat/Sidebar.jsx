@@ -9,9 +9,10 @@ import Image from "next/image";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { LiaEdit } from "react-icons/lia";
 import Link from "next/link";
-
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 const Sidebar = ({ onSelectUser }) => {
     const auth = useAuth();
+    const axiosPublic = useAxiosPublic()
     const [searchInput, setSearchInput] = useState("");
     const [allUsers, setAllUsers] = useState([]);
     const [searchUser, setSearchuser] = useState([]);
@@ -32,7 +33,7 @@ const Sidebar = ({ onSelectUser }) => {
         const chatUserHandler = async () => {
             setLoading(true);
             try {
-                const allUsers = await axios.get(`http://localhost:9000/user`);
+                const allUsers = await axiosPublic.get(`/user`);
                 setAllUsers(allUsers.data);
                 setLoading(false);
             } catch (error) {
