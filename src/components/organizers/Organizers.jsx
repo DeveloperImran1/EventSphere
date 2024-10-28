@@ -165,14 +165,14 @@ const Organizers = () => {
                 className="flex items-center text-blue-600 dark:text-blue-400 text-md font-medium mb-1"
               >
                 <MdContactMail className="text-black bg-green-400 mr-2" />
-                <span className="text-black font-semibold">Contact:</span>{" "}
+                <span className="text-black font-semibold mr-2">Contact:</span>{" "}
                 {organizer.contactInfo}
               </a>
 
               {/* Add group-hover effect */}
               <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 pt-2 flex gap-2 items-center">
-                  <MdPeople className="text-xl" />
+                  <MdPeople className="text-xl " />
                   Followers: {organizer.followers}
                 </p>
                 <div className="flex items-center gap-3 text-xl ">
