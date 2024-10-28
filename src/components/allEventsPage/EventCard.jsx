@@ -82,13 +82,6 @@ const EventCard = ({ event }) => {
                             </span>
                         ))}
                     </div>
-                    {/* <div className=" text-gray-600 mb-5">
-                        <div className='flex items-center'>
-                            <FaUserFriends className="mr-2" />
-                            <p>speaker: <span className='font-bold'>{event.organizer.name} {event.organizer.followers}</span> Followers</p>
-                        </div>
-                        <p className="text-gray-500 "><span className='font-bold'>bio:</span> {event.organizer.bio}</p>
-                    </div> */}
                     <div className='flex justify-between items-center'>
 
                         <button className="bg-[--color-primary] text-white py-2 px-8 rounded-lg hover:bg-green-600 transition">

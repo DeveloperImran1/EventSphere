@@ -6,7 +6,7 @@ import './Card.css'; // Import the CSS file for trapezoid shape
 
 const EventTicket = () => {
     return (
-        <div className="mx-auto my-32">
+        <div className="mx-auto mb-16">
             <div className="shadow-lg w-[800px] border-2 border-cyan-400 h-64 overflow-hidden flex">
 
                 {/* Left Section */}

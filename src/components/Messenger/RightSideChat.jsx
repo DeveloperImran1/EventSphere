@@ -1,3 +1,4 @@
+"use client"
 import { HiDotsHorizontal, HiGift } from "react-icons/hi"
 
 import { IoSearch } from "react-icons/io5";

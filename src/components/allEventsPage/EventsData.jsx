@@ -31,7 +31,7 @@ const EventsData = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDay, setSelectedDay] = useState('all');
   const [filters, setFilters] = useState({
     search: '',
@@ -236,7 +236,7 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='  max-w-[1280px] mx-auto'>
+      <div className='  container mx-auto'>
 
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden ">
