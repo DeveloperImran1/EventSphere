@@ -6,13 +6,24 @@ import React, { useState } from 'react';
 const SuggestFollowing = ({ userData, refetch }) => {
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
+    const myEmail = session?.user?.email;
     
+    // Find the current user's data using their email
+    const myData = userData.find(user => user?.email === myEmail);
+    
+    // If myData exists, extract the followers array
+    const followerEmails = myData?.followers || [];
+    
+    // Filter userData to get the data of users who follow the current user
+    const followerData = userData.filter(user => followerEmails.includes(user.email));
+    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
+
     return (
         <div className="mb-20">
             <h2 className="text-lg font-bold">Suggest</h2>
             <div className="mt-1">
-                {[1,2,].length > 0 ? (
-                    [1221].slice(0, showFollower).map(follower => (
+                {filteredUsersWithoutYou.length > 0 ? (
+                    filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
                         <div key={follower._id} className="p-3 border mb-1 rounded">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
@@ -21,6 +32,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
                                     </div>
                                     <div className="">
                                         <p className="font-semibold">{follower.name}</p>
+                                        <p className="text-sm">{(follower.email).slice(0, 15)}...</p>
                                     </div>
                                 </div>
                                 <button title='Follow User' onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
@@ -32,7 +44,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
                 )}
                 {
                     // Show the "See more" or "See less" options only if the length of filteredUsersWithoutYou is more than 3
-                    [].length > 3 && (
+                    filteredUsersWithoutYou.length > 3 && (
                         showFollower === 3 ? (
                             <p onClick={() => {setShowFollower(showFollower + 3)}} className='text-gray-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See more</p>
                         ) : (
