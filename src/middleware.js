@@ -33,7 +33,7 @@ export const middleware = async (request) => {
 }
 
 export const config = {
-    matcher: ["/dashboard/:path*"]
-    // matcher: ["/dashboard"]
+    // matcher: ["/dashboard/:path*"]
+    matcher: []
 }
 
