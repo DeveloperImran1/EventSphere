@@ -98,9 +98,6 @@ const MessageContainer = ({selectedUser }) => {
       ) : (
         <>
           <div className='flex justify-between items-center gap-1 bg-white md:px-2  h-10 md:h-12 sticky z-50'>
-     
-  
-
               <div className=" flex gap-1">
               <div className='self-center'>
                 <Image src={selectedConversation?.image}  width={30} height={30} alt="avatar"
@@ -151,7 +148,7 @@ const MessageContainer = ({selectedUser }) => {
                         <PiSmileyStickerFill className="absolute top-2 right-2 text-blue-600 font-semibold" />
                     </div>
 
-                    <button type="submit" ><IoSend className="  text-blue-600 font-semibold  " />  </button>
+                    <button type="submit" ><IoSend className="  text-blue-600 font-semibold" />  </button>
                 </form>
             </div>
         </>
