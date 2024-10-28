@@ -77,7 +77,7 @@ const Sidebar = ({ onSelectUser }) => {
         }
     };
 
-    // Handle user click
+   
     const handelUserClick = (user) => {
         onSelectUser(user);
         setSelectedConversation(user);
