@@ -114,8 +114,8 @@ export default function PopularEvent() {
 
   // main body//
   return (
-    <div className="w-full  py-12 container mx-auto ">
-      <div className="px-4">
+    <div className=" py-12 container mx-auto ">
+      <div className="px-4 sm:px-0">
         <SectionTitleSimple
           title="Explore Popular Events"
           subtitle="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
