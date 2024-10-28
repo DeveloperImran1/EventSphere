@@ -44,7 +44,7 @@ export default function FeedPost({ post }) {
     const handlePostSubmit = async (e) => {
         e.preventDefault();
         if (!currentUser) {
-            toast.success("Please Login First 👊")
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
         const form = e.target;
@@ -121,7 +121,7 @@ export default function FeedPost({ post }) {
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {selectedImage?.map((image, index) => (
-                                <img key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
+                                <Image height={676} width={1200} key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
                             ))}
                         </div>
                         <form onSubmit={handlePostSubmit}>
@@ -142,6 +142,7 @@ export default function FeedPost({ post }) {
                                         <MdInsertPhoto className="text-3xl" />
                                         <input
                                             type="file"
+                                            multiple={true}
                                             className="hidden"
                                             onChange={handleImageChange}
                                         />
