@@ -93,7 +93,7 @@ const WhyUse = () => {
                   </div>
                   <div className="flex-1 p-2 text-white">
                     <div
-                      data-aos="fade-up"
+                    data-aos="zoom-in"
                       data-aos-anchor-placement="center-center"
                     >
                     <h3 className="text-base font-serif md:text-xl ">
