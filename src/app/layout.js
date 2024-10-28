@@ -17,8 +17,12 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "EventSphare",
+  title:{
+    default: "EventSphere",
+    template: "%s | EventSphere"
+  },
   description: "Smart Event Management and Booking Platform",
+  keywords:["online", "ticket", "selling", "system","event", "management"]
 };
 
 export default function RootLayout({ children }) {

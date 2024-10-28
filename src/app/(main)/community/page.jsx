@@ -5,6 +5,12 @@ import FeedContent from '@/components/CommunityPage/FeedContent';
 import FeedPostCard from '@/components/CommunityPage/FeedPostCard';
 import React from 'react';
 
+export const metadata = {
+    title: "Community",
+    description: "Community page,Smart Event Management and Booking Platform",
+    keywords: ["community page","post","online", "ticket", "selling", "system", "event", "management"]
+};
+
 const CommunityPage = () => {
     return (
         <div className="">

@@ -70,7 +70,7 @@ export default function FAQ() {
     };
   
     return (
-      <div className="w-full bg-slate-200    p-8">
+      <div className="container mx-auto w-full     p-8">
         <h2 className="text-4xl font-bold text-gray-800  font-serif  m-8 text-center">Frequently Asked Questions</h2>
         <div className="max-w-3xl mx-auto">
           {Faq.map((faq, index) => (

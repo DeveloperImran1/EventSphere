@@ -3,7 +3,7 @@ import React from 'react';
 
 const EventStaticSection = () => {
     return (
-        <div className=' w-11/12 flex flex-col lg:flex-row gap-12 mx-auto mb-20'>
+        <div className='container mx-auto flex flex-col lg:flex-row gap-12  my-20'>
             <Image src="https://img.freepik.com/free-photo/young-handsome-business-man-with-laptop-office_1303-21060.jpg"
                 alt='organizers picture'
                 height={500}

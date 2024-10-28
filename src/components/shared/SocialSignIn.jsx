@@ -4,9 +4,9 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple } from "react-icons/fa";
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 import Swal from 'sweetalert2';
+import { useRouter } from "next/navigation";
 
 const SocialSignIn = () => {
     const router = useRouter();
@@ -19,7 +19,7 @@ const SocialSignIn = () => {
             title: "Welcome to EventSphere!",
             showConfirmButton: false,
             timer: 1500
-        });
+        }).then(() => router.push("/"));
     };
 
     const errorSignIn = () => {
@@ -33,43 +33,51 @@ const SocialSignIn = () => {
     };
 
     const handleSocialLogin = async (provider) => {
-        const resp = await signIn(provider, { redirect: false }); // Avoid auto redirect
-        console.log("Response from signIn:", resp);
-
-        if (resp?.error) {
-            errorSignIn(); // Show error modal
-        }
+        await signIn(provider, {
+            redirect: false,
+            callbackUrl: '/', // Redirect URL on successful sign-in
+        })
+            .then((resp) => {
+                if (resp?.error) {
+                    errorSignIn(); // Show error if sign-in fails
+                } else {
+                    successfullSignIn(); // Show success modal and navigate
+                }
+            })
+            .catch((error) => {
+                console.error("Sign-in error:", error);
+                errorSignIn();
+            });
     };
 
-    useEffect(() => {
-        if (status === "authenticated") {
-            // Show success modal and redirect to homepage
-            successfullSignIn();
-            setTimeout(() => {
-                router.push('/');
-            }, 1500); // Wait for the modal to disappear before redirecting
-        }
-    }, [status, router]);
-
     return (
-        <div>
+        <div className="text-center mt-4">
             {/* Sign up with Google, Facebook, Apple */}
-            <div className="mt-4 text-center">
-                <p>Or, Sign up with</p>
-                <div className="flex flex-col md:flex-row items-center justify-center space-x-5 mt-2 text-center">
-                    {/* Google Sign Up Button */}
-                    <button onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center justify-center ">
-                        <FcGoogle className="m-2 w-5 h-5" /> Google
-                    </button>
-                    {/* Facebook Sign Up Button */}
-                    <button onClick={() => handleSocialLogin('facebook')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md px-4 flex items-center justify-center">
-                        <FaFacebook className="m-2 w-5 h-5 text-blue-600" /> Facebook
-                    </button>
-                    {/* Apple Sign Up Button */}
-                    <button  onClick={() => handleSocialLogin('google')} className="border w-full border-gray-300 hover:bg-slate-200 rounded-md  flex items-center justify-center">
-                        <FaApple className="m-2 w-5 h-5" /> Apple
-                    </button>
-                </div>
+            <p>Or, Sign up with</p>
+            <div className="flex flex-col md:flex-row md:space-x-4 items-center justify-center mt-2 space-y-3 md:space-y-0 w-full max-w-md mx-auto">
+                {/* Google Sign Up Button */}
+                <button
+                    onClick={() => handleSocialLogin('google')}
+                    className="border w-full md:w-auto border-gray-300 hover:bg-slate-200 rounded-md px-4 py-2 flex items-center justify-center transition-all duration-200"
+                >
+                    <FcGoogle className="mr-2 w-5 h-5" /> Google
+                </button>
+                
+                {/* Facebook Sign Up Button */}
+                <button
+                    onClick={() => handleSocialLogin('facebook')}
+                    className="border w-full md:w-auto border-gray-300 hover:bg-slate-200 rounded-md px-4 py-2 flex items-center justify-center transition-all duration-200"
+                >
+                    <FaFacebook className="mr-2 w-5 h-5 text-blue-600" /> Facebook
+                </button>
+                
+                {/* Apple Sign Up Button */}
+                <button
+                    onClick={() => handleSocialLogin('apple')}
+                    className="border w-full md:w-auto border-gray-300 hover:bg-slate-200 rounded-md px-4 py-2 flex items-center justify-center transition-all duration-200"
+                >
+                    <FaApple className="mr-2 w-5 h-5" /> Apple
+                </button>
             </div>
         </div>
     );

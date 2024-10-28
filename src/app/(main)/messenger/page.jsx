@@ -11,60 +11,16 @@ import useAuth from "@/hooks/useAuth";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useEffect, useState } from "react";
 
-const Messenger = () => {
-    const [conversations, setConversations] = useState([])
-    const [currentChat, setCurrentChat] = useState(null)
-    const [messages, setMessages] = useState([])
-    const [users, setUser] = useState([])
-    const auth = useAuth();
-    const axiosPublic = useAxiosPublic()
 
-
-    useEffect(() => {
-        const getConversations = async () => {
-            try {
-                const res = await axiosPublic.get(`/getConvertation/${auth?.data?._id}`)
-                setConversations(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-        getConversations()
-    }, [auth?.data,axiosPublic])
-
-    useEffect(() => {
-        const getMessages = async () => {
-            try {
-                const res = await axiosPublic.get(`/getMessages/${currentChat?._id}`)
-                setMessages(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-       getMessages()
-    }, [axiosPublic,currentChat?._id])
-
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const res = await axiosPublic.get(`/user`)
-                setUser(res?.data)
-            }
-            catch (err) {
-                console.log(err)
-            }
-        }
-      getUsers()
-    }, [axiosPublic])
-
- const handleCurrentChat=(findCurrentChat)=>{
-    setCurrentChat(findCurrentChat)  
- }
+export const metadata = {
+    title:"Messenger",
+    description: "Messenger page, Smart Event Management and Booking Platform",
+    keywords:["messenger","community","chatting", "online", "ticket", "selling", "system","event", "management"]
+  };
 
  const [selectedUser, setSelectedUser] = useState(null);
  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+const Messenger = () => {
 
  
  const handelUserSelect = (user) => {
@@ -94,6 +50,7 @@ const Messenger = () => {
                     <RightSideChat selectedUser={selectedUser} currentUser={auth?.data?._id}/>
                 </div>
             </section>
+
         </div>
   
     );
