@@ -149,7 +149,7 @@ const Organizers = () => {
                                 ))}
                             </div>
 
-                            <p className="text-md text-gray-700 dark:text-gray-300 my-2">{organizer.bio}</p>
+                            <p className="text-md text-start mx-auto text-gray-700 dark:text-gray-300 my-2">{organizer.bio}</p>
                             <a
                                 href={`mailto:${organizer.contactInfo}`}
                                 className="text-blue-500 dark:text-blue-400 text-sm font-medium mb-1"
