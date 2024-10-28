@@ -91,7 +91,7 @@ export default function VideoCall() {
       try {
         const mediaStream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: false
+          audio: true
         });
         setStream(mediaStream);
         if (myVideo.current) {
