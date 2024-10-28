@@ -176,7 +176,7 @@ const Organizers = () => {
                   Followers: {organizer.followers}
                 </p>
                 <div className="flex items-center gap-3 text-xl ">
-                  <FaLinkedin />
+                  <FaLinkedin className="bg-blue-500"/>
                   <FaFacebook />
                 </div>
               </div>
