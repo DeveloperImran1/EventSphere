@@ -1,7 +1,6 @@
 import CommunityHeader from '@/components/CommunityPage/CommunityHeader';
 import CommunityRightSidebar from '@/components/CommunityPage/CommunityRightSidebar';
 import CommunitySidebar from '@/components/CommunityPage/CommunitySidebar';
-import FeedContent from '@/components/CommunityPage/FeedContent';
 import FeedPostCard from '@/components/CommunityPage/FeedPostCard';
 import React from 'react';
 
@@ -14,7 +13,7 @@ export const metadata = {
 const CommunityPage = () => {
     return (
         <div className="">
-            <div className="flex gap-x-4 max-w-[1280px] mx-auto">
+            <div className="flex gap-x-4 max-w-[1280px] mx-auto justify-between">
                 {/* Sidebar */}
                 {/* <div className="w-1/6 border-2 hidden md:block">
                     <CommunitySidebar />
@@ -26,7 +25,6 @@ const CommunityPage = () => {
                         {/* Scrollable Feed */}
                         <div className="">
                             {/* Main feed content */}
-                            <FeedContent/>
                             <FeedPostCard/>
                             {/* <FeedPostCard/> */}
                         </div>
