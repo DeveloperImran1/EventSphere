@@ -5,7 +5,7 @@ import { FaCheckCircle } from "react-icons/fa"; // Import the icon you want to u
 
 const HomepageSection = () => {
   return (
-    <section className="my-28 bg-white px-8">
+    <section className="my-28 bg-white px-2">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-20   ">
         
         {/* First Section */}
@@ -26,7 +26,7 @@ const HomepageSection = () => {
           </ul>
 
         </div>
-        <div className="relative  w-full h-[450px]">
+        <div className="relative object-cover  w-full h-[450px]">
         <Image height={675} width={1200} src="https://i.ibb.co.com/BjdY7FC/pexels-ono-kosuki-5999936.jpg" // Replace with your imagebb lin
             alt="Ticketing System"
             className="rounded-lg shadow-lg object-cover w-full h-full"
@@ -36,7 +36,7 @@ const HomepageSection = () => {
 
         {/* Second Section */}
 
-        <div className="relative w-full h-[450px]">
+        <div className="relative object-cover w-full h-[450px]">
         <Image height={675} width={1200}
             src="https://i.ibb.co.com/q0x9qVJ/6411b7a3fa853599f08d4700-image-4-min.png" // Replace with your imagebb link
             alt="Event Crowd"
@@ -76,7 +76,7 @@ const HomepageSection = () => {
             <li className="flex items-center "><FaCheckCircle className="text-green-500 mr-2" />Embed custom widgets on partner websites.</li>
           </ul>
         </div>
-        <div className="relative w-full h-[450px]">
+        <div className="relative object-cover w-full h-[450px]">
         <Image height={675} width={1200}
             src="https://i.ibb.co.com/yFXCyff/pexels-shvetsa-3943950.jpg" // Replace with your imagebb link
             alt="Event Promotion"
@@ -85,7 +85,7 @@ const HomepageSection = () => {
         </div>
 
         {/* Fourth Section */}
-        <div className="relative w-full ">
+        <div className="relative object-cover w-full ">
         <Image height={675} width={1200} src="https://i.ibb.co.com/SJftvqn/pexels-tdcat-69866.jpg" 
             alt="Event Management"
             className="rounded-lg shadow-lg object-cover w-full h-full"

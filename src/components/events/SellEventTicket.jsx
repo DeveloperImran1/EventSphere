@@ -30,21 +30,10 @@ const TicketingManagementSection = () => {
       color: '#ff8c00',
     },
   ]
-
-
-
-
-
-
-
   return (
 
-
-
-
-
     <>
-      <div className="container mx-auto">
+      <div className="">
         <div className="bg-gradient-to-r from-[#f1ddd5] to-[#d9eaf6] ">
           <div className=" pt-28 ">
             <p className=" text-[#145aff] text-center font-semibold uppercase">
@@ -96,46 +85,44 @@ const TicketingManagementSection = () => {
 
       <section className='container mx-auto'>
         <div >
-        <div className='text-center    mb-14    '>
-        <h2 className="lg:text-5xl md:text-3xl text-2xl text-black font-bold mb-4 text-center font-sans">Boost Event Success with  Our Powerful   <br /> Ticketing Management Software</h2>
-          <p      className='text-gray-800 font-serif     font-medium text-lg'   >
-            Our ticketing platform simplifies event management, enhances user experience, and  <br />  helps increase your ticket sales.Manage your events smoothly with ease.
-          </p>
-        </div>
-{/* 4 card  */}
-
-       
-       <div className=" p-2  bg-white">
-      {/* <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Main Features:</h3> */}
-      <ul className="grid   md:grid-cols-3  lg:grid-cols-4    gap-4    ">
-        {features.map((feature, index) => (
-          <li
-            key={index}
-            className="relative w-72 p-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-[0_0_15px_var(--clr),0_0_30px_var(--clr)] group"
-            style={{
-              '--clr': feature.color,
-              '--i': index,
-            }}
-          >
-            <div
-              className="absolute w-10 h-[400%] opacity-20 transition-all duration-1000 animate-[spin_8s_linear_infinite]"
-              style={{
-                background: `linear-gradient(0deg, transparent 30%, ${feature.color} 70%)`,
-                animationDelay: `calc(2s * ${index})`,
-              }}
-            />
-            <div className="absolute inset-1 bg-white transition-all duration-500 z-[1] group-hover:bg-[var(--clr)] group-hover:opacity-5" />
-            <div className="relative z-[2] flex flex-col items-center">
-              <feature.icon className="text-5xl mb-4 transition-colors duration-300" style={{ color: feature.color }} />
-              <div className="text-xl font-bold mb-2 text-gray-800 group-hover:text-gray-900">{feature.title}</div>
-              <p className="text-sm text-gray-600 text-center group-hover:text-gray-800 transition-colors duration-300">
-                {feature.description}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-        </div>
+          <div className='text-center    mb-14    '>
+            <h2 className="lg:text-5xl md:text-3xl text-2xl text-black font-bold mb-4 text-center font-sans">Boost Event Success with  Our Powerful   <br /> Ticketing Management Software</h2>
+            <p className='text-gray-800 font-serif     font-medium text-lg'   >
+              Our ticketing platform simplifies event management, enhances user experience, and  <br />  helps increase your ticket sales.Manage your events smoothly with ease.
+            </p>
+          </div>
+          {/* 4 card  */}
+          <div className=" p-2  bg-white">
+            {/* <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Main Features:</h3> */}
+            <ul className="grid gap-4 md:grid-cols-3  lg:grid-cols-4  ">
+              {features.map((feature, index) => (
+                <li
+                  key={index}
+                  className="relative  p-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transition-all duration-500 hover:shadow-[0_0_5px_var(--clr),0_0_10px_var(--clr)] group"
+                  style={{
+                    '--clr': feature.color,
+                    '--i': index,
+                  }}
+                >
+                  <div
+                    className="absolute w-10 h-[400%] opacity-20 transition-all duration-2000 animate-[spin_8s_linear_infinite]"
+                    style={{
+                      background: `linear-gradient(0deg, transparent 30%, ${feature.color} 70%)`,
+                      animationDelay: `calc(2s * ${index})`,
+                    }}
+                  />
+                  <div className="absolute inset-1 bg-white transition-all duration-500 z-[1] group-hover:bg-[var(--clr)] group-hover:opacity-5" />
+                  <div className="relative z-[2] flex flex-col items-center">
+                    <feature.icon className="text-5xl mb-4 transition-colors duration-300" style={{ color: feature.color }} />
+                    <div className="text-xl font-bold mb-2 text-gray-800 group-hover:text-gray-900">{feature.title}</div>
+                    <p className="text-sm text-gray-600 text-center group-hover:text-gray-800 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -143,4 +130,4 @@ const TicketingManagementSection = () => {
   );
 }
 
-  export default TicketingManagementSection;
+export default TicketingManagementSection;
