@@ -49,8 +49,8 @@ const Sidebar = ({ onSelectUser }) => {
         const chatUserHandler = async () => {
             setLoading(true);
             try {
-                const chatters = await axios.get(
-                    `http://localhost:9000/current-chatters?id=${auth?.data?._id}`
+                const chatters = await axiosPublic.get(
+                    `/current-chatters?id=${auth?.data?._id}`
                 );
                 setChatUser(chatters.data);
             } catch (error) {
