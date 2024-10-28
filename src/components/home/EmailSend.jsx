@@ -82,7 +82,7 @@ const EmailSend = () => {
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform hover:scale-105"
+                                className="bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform "
                             >
                                 Subscribe
                             </button>
