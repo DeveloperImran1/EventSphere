@@ -2,21 +2,6 @@
   @return ($value / 16) * 1em;
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  border: 0;
-  padding: 0;
-  word-wrap: break-word;
-  box-sizing: border-box;
-}
-
-body {
-  font-size: 1.5em;
-  margin: 1em;
-  background-color: rgba(mix(dodgerblue, black, 25%), 0.0625);
-}
 
 /* MIXIN FOR YOUR MESSAGE */
 @mixin bubble($radius: 8, $color: dodgerblue, $proportional: false) {

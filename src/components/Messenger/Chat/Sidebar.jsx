@@ -92,7 +92,7 @@ const Sidebar = ({ onSelectUser }) => {
     };
 
     return (
-        <div className="h-full w-auto px-1 bg-slate-100 text-black">
+        <div className="h-full px-1 bg-slate-100 text-black">
             <div className="flex items-center justify-between">
                 <h1 className="font-semibold">Chats</h1>
                 <div className="flex gap-4">

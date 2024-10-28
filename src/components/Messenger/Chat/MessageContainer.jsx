@@ -1,24 +1,23 @@
-import { useEffect, useState, useRef } from 'react';
-import { TiMessages } from "react-icons/ti";
-import { IoArrowBackSharp, IoSend } from 'react-icons/io5';
-import axios from 'axios';
+"use client"
 
-import notify from './asset/notification.mp3';
-import Message from './Message';
-import userConversation from './Zustans/useConversation';
-import useAuth from '@/hooks/useAuth';
-import { Input } from '@/components/ui/input';
-import { PiSmileyStickerFill } from 'react-icons/pi';
-import { BsFillPlusCircleFill } from 'react-icons/bs';
-import { IoMdImages, IoMdVideocam } from 'react-icons/io';
-import { LuSticker } from 'react-icons/lu';
-import { HiGift } from 'react-icons/hi';
-import Image from 'next/image';
-import { FaPhoneAlt } from 'react-icons/fa';
-import Link from 'next/link';
-import { RiInformationFill } from 'react-icons/ri';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-const MessageContainer = ({selectedUser }) => {
+import userConversation from "./Zustans/useConversation";
+import useAuth from "@/hooks/useAuth";
+import { useEffect, useRef, useState } from "react";
+import { TiMessages } from "react-icons/ti";
+import Image from "next/image";
+import { FaPhoneAlt } from "react-icons/fa";
+import Link from "next/link";
+import { IoMdImages, IoMdVideocam } from "react-icons/io";
+import { RiInformationFill } from "react-icons/ri";
+import Message from "./Message";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { LuSticker } from "react-icons/lu";
+import { HiGift } from "react-icons/hi";
+import { PiSmileyStickerFill } from "react-icons/pi";
+import { IoSend } from "react-icons/io5";
+
+const MessageContainer = ({ selectedUser }) => {
   const axiosPublic = useAxiosPublic()
   const { messages, selectedConversation, setMessage } = userConversation();
   const auth = useAuth();
@@ -73,7 +72,7 @@ const MessageContainer = ({selectedUser }) => {
 
       if (data.success !== false) {
         setMessage([...messages, data]);
-        setSendData(''); 
+        setSendData('');
       }
 
       setSending(false);
@@ -95,25 +94,25 @@ const MessageContainer = ({selectedUser }) => {
         </div>
       ) : (
         <>
-          <div className='flex justify-between items-center gap-1 bg-white md:px-2  h-10 md:h-12 sticky z-50'>
-              <div className=" flex gap-1">
+          <div className='flex justify-between items-center gap-1 bg-white md:px-2  h-10 md:h-12  z-50'>
+            <div className=" flex gap-1">
               <div className='self-center'>
-                <Image src={selectedConversation?.image}  width={30} height={30} alt="avatar"
-                        className=" rounded-full" />
-                </div>
-                <span className='text-black self-center text-sm md:text-xl font-bold'>
-                  {selectedConversation?.name}
-                </span>
+                <Image src={selectedConversation?.image} width={30} height={30} alt="avatar"
+                  className=" rounded-full" />
               </div>
-                <div className=" flex gap-3 pr-3 ">
-                    <FaPhoneAlt className="text-blue-600" />
-                    <Link href="/video-call">
-                        <IoMdVideocam className="text-blue-600" />
-                    </Link>
-                    <RiInformationFill className="text-blue-600" />
-                </div>
+              <span className='text-black self-center text-sm md:text-xl font-bold'>
+                {selectedConversation?.name}
+              </span>
+            </div>
+            <div className=" flex gap-3 pr-3 ">
+              <FaPhoneAlt className="text-blue-600" />
+              <Link href="/video-call">
+                <IoMdVideocam className="text-blue-600" />
+              </Link>
+              <RiInformationFill className="text-blue-600" />
+            </div>
           </div>
-     
+
           <div className='flex-1 overflow-auto min-h-[80%]'>
             {loading && (
               <div className="flex w-full h-full flex-col items-center justify-center gap-4 bg-transparent">
@@ -129,26 +128,26 @@ const MessageContainer = ({selectedUser }) => {
               </div>
             ))}
           </div>
-                 <div className={` flex items-center   pl-10 py-2 mr-1 sticky bottom-0  z-50`}>
-                <div className=" flex gap-2">
-                    <BsFillPlusCircleFill className="text-blue-600" />
-                    <IoMdImages className="text-blue-600" />
-                    <LuSticker className="text-blue-600" />
-                    <HiGift className="text-blue-600" />
-                </div>
-                <form onSubmit={handleSubmit}  className=" flex items-center ">
-                    <div className=" mx-2 relative ">
-                        <Input
-                            type="text"
-                            value={sendData} onChange={handleMessages} required id='message' 
-                            placeholder="Type your message..."
-                            className='pl-3 bg-slate-50 text-black  rounded-full h-[35px] lg:w-[400px] w-[100px]' />
-                        <PiSmileyStickerFill className="absolute top-2 right-2 text-blue-600 font-semibold" />
-                    </div>
-
-                    <button type="submit" ><IoSend className="  text-blue-600 font-semibold" />  </button>
-                </form>
+          <div className={` flex items-center   pl-10 py-2 mr-1 sticky bottom-0  z-50`}>
+            <div className=" flex gap-2">
+              <BsFillPlusCircleFill className="text-blue-600" />
+              <IoMdImages className="text-blue-600" />
+              <LuSticker className="text-blue-600" />
+              <HiGift className="text-blue-600" />
             </div>
+            <form onSubmit={handleSubmit} className=" flex items-center ">
+              <div className=" mx-2 relative ">
+                <input
+                  type="text"
+                  value={sendData} onChange={handleMessages} required id='message'
+                  placeholder="Type your message..."
+                  className='pl-3 bg-slate-50 text-black  rounded-full h-[35px] lg:w-[400px] w-[100px]' />
+                <PiSmileyStickerFill className="absolute top-2 right-2 text-blue-600 font-semibold" />
+              </div>
+
+              <button type="submit" ><IoSend className="  text-blue-600 font-semibold" />  </button>
+            </form>
+          </div>
         </>
       )}
     </div>
