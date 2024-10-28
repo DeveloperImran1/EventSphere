@@ -16,20 +16,11 @@ const options = [
 
 const WhyUse = () => {
     return (
-<<<<<<< HEAD
-        <div className='my-10 p-2'  >
-            {/* hading */}
-            <div className="pt-6 text-center  ">
-                <h1 className=" font-bold 2xl:font-black font-mono text-3xl lg:text-6xl  text-blue-500 mb-4">Why Use Our Service</h1>
-                <p className=" hidden md:block text-2xl text-gray-600">Discover the benefits of using our platform to enhance your experience.</p>
-            </div>
-=======
         <div className='container my-10 p-2'  >
             <SectionTitleSimple 
             title="Why Use Our Service" 
             subtitle="Choose our service for reliable, high-quality solutions tailored to your needs. Enjoy exceptional customer support, competitive pricing, and innovative features that ensure a seamless and satisfying experience every time."/>
             
->>>>>>> 537ea61e202b1e18b61c0a7bf656d4b3b581380a
 
             <div className="relative  lg:min-h-screen flex items-center justify-center p-4">
 

@@ -5,18 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
-<<<<<<< HEAD
-
-import Link from 'next/link';
-import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
-import Image from 'next/image';
-// import Loading from '@/components/shared/LoadingSpinner/Loading';
-=======
 import Link from 'next/link';
 import SectionTitleSimple from '@/components/shared/SectionTitleSimple';
 import Image from 'next/image';
 import Loading from '@/components/shared/LoadingSpiner/Loading';
->>>>>>> 537ea61e202b1e18b61c0a7bf656d4b3b581380a
 
 const MembershipCard = () => {
     const axiosPublic = useAxiosPublic()
@@ -102,14 +94,12 @@ const MembershipCard = () => {
                             </ul>
                         </div>
                         <div className="text-center sm:text-left">
-                            <ButtonOutline
-                                primary
-                                fullWidth
-                                href={`/booking/${card._id}`}
-                                className="bg-gradient-to-br from-blue-700 via-blue-500 to-blue-700 text-white rounded-lg hover:scale-105"
-                            >
-                                Choose Plan
-                            </ButtonOutline>
+                        <div className="flex justify-center">
+                         {/* button */}
+                         <Link href={`/qualityPayment?id=${card?._id}`}>
+                                <Button className='bg-[#0ea5e9] hover:bg-[#0e91e9d9] text-white py-2 px-8 rounded-2xl  mt-4 mr-4'>Purchase Now</Button>
+                                </Link>
+                     </div>
                         </div>
                     </div>
                 ))}
