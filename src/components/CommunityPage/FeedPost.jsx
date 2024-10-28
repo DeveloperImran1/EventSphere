@@ -7,7 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
-export default function FeedPost({post}) {
+export default function FeedPost({ post }) {
     console.log("infinity", post);
     const router = useRouter()
     const session = useSession();
@@ -15,27 +15,36 @@ export default function FeedPost({post}) {
     const axiosPublic = useAxiosPublic();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [images, setImages] = useState([]);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState([]);    
     const [loading, setLoading] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    // Handle file selection
+
+    // Handler for file selection and upload
     const handleImageChange = async (e) => {
-        const file = e.target.files[0]; // Get the selected file
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setSelectedImage(imageUrl);
-            setImages([file]); // Store the file for uploading later
+        const files = Array.from(e.target.files);
+        const imageUrls = files.map(file => URL.createObjectURL(file)); // Creates preview URLs for the selected images.
+        setSelectedImage([...images ,imageUrls]);
+        setLoading(true);
+
+        try {
+            // Uploads each selected file to Cloudinary, waits for all uploads to finish.
+            const uploadedImages = await Promise.all(files.map(file => uploadCloudinary(file)));
+            const imageUrls = uploadedImages.map(image => image.url); // Extracts URLs from uploaded images.
+            setImages([...images, ...imageUrls]); // Adds new image URLs to existing gallery data.
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
         }
     };
 
     // Handle post submission
     const handlePostSubmit = async (e) => {
         e.preventDefault();
-        if ( !currentUser) {
-            toast.success("Please Login First 👊")
+        if (!currentUser) {
+            toast.error("Please Login First 👊")
             return router.push('/login')
         }
         const form = e.target;
@@ -47,18 +56,12 @@ export default function FeedPost({post}) {
 
         setLoading(true);
         try {
-            let uploadedImageUrl = null;
-            if (images.length > 0) {
-                const uploadedImage = await uploadCloudinary(images[0]);
-                uploadedImageUrl = uploadedImage?.url;
-            }
-
             // Construct post object to match backend schema
             const postObj = {
                 content: {
                     title,
                     text: '',
-                    media: uploadedImageUrl,
+                    media: images,
                 },
                 user: {
                     email: currentUser?.email,
@@ -68,7 +71,7 @@ export default function FeedPost({post}) {
                 reactions: {
                     love: 0,
                 },
-                comments: [], 
+                comments: [],
             };
 
             // Send post object to the server
@@ -116,6 +119,11 @@ export default function FeedPost({post}) {
                                 ✕
                             </button>
                         </div>
+                        <div className="flex flex-wrap gap-2">
+                            {selectedImage?.map((image, index) => (
+                                <Image height={676} width={1200} key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
+                            ))}
+                        </div>
                         <form onSubmit={handlePostSubmit}>
                             {/* title */}
                             <div className="mt-4">
@@ -134,13 +142,11 @@ export default function FeedPost({post}) {
                                         <MdInsertPhoto className="text-3xl" />
                                         <input
                                             type="file"
+                                            multiple={true}
                                             className="hidden"
                                             onChange={handleImageChange}
                                         />
                                     </label>
-                                    {selectedImage && (
-                                        <Image height={676} width={1200} src={selectedImage} alt="Selected" className="h-10 w-10 ml-2 rounded-md" />
-                                    )}
                                 </div>
                                 <button
                                     type="submit"

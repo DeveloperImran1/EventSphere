@@ -166,7 +166,7 @@ const UnderwaterFooter = () => {
 
           </div>
           {/* Footer Menu */}
-          <div className={`grid gap-0  justify-between pb-2 grid-cols-2 md:grid-cols-[0.3fr 0.25fr 0.25fr 0.25fr]`}>
+          <div className={`grid gap-0  justify-between pb-2 grid-cols-2 lg:grid-cols-4`}>
             {/* Footer Link 1*/}
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}

@@ -5,7 +5,7 @@ import React from 'react';
 
 const EventLimeLights = () => {
     return (
-        <section className=' w-11/12 mx-auto'>
+        <section className='container mx-auto'>
             {/* First Section */}
             <article>
                 <SectionTitleSimple

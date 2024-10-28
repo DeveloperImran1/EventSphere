@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const MyFollower = ({ userData, refetch }) => {
+const SuggestFollowing = ({ userData, refetch }) => {
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
@@ -18,7 +18,7 @@ const MyFollower = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user.email));
-    const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
+    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -34,7 +34,6 @@ const MyFollower = ({ userData, refetch }) => {
             },
             body: JSON.stringify({ followerEmail: myEmail }),
           });
-      
           const data = await response.json();
       
           if (response.ok) {
@@ -48,8 +47,8 @@ const MyFollower = ({ userData, refetch }) => {
         }
       };
     return (
-        <div className="">
-            <h2 className="text-lg font-bold">Followers</h2>
+        <div className="mb-20">
+            <h2 className="text-lg font-bold">Suggest</h2>
             <div className="mt-1">
                 {filteredUsersWithoutYou.length > 0 ? (
                     filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
@@ -86,4 +85,4 @@ const MyFollower = ({ userData, refetch }) => {
     );
 };
 
-export default MyFollower;
+export default SuggestFollowing;
