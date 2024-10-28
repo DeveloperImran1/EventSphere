@@ -16,8 +16,8 @@ const SuggestFollowing = ({ userData, refetch }) => {
     const followerEmails = myData?.followers || [];
     
     // Filter userData to get the data of users who follow the current user
-    const followerData = userData.filter(user => followerEmails.includes(user.email));
-    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
+    const followerData = userData.filter(user => followerEmails.includes(user?.email));
+    const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -33,6 +33,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
             },
             body: JSON.stringify({ followerEmail: myEmail }),
           });
+      
           const data = await response.json();
       
           if (response.ok) {
@@ -46,7 +47,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
         }
       };
     return (
-        <div className="mb-20">
+        <div className="">
             <h2 className="text-lg font-bold">Suggest</h2>
             <div className="mt-1">
                 {filteredUsersWithoutYou.length > 0 ? (

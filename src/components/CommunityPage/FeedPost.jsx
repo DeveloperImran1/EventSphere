@@ -7,15 +7,15 @@ import toast, { Toaster } from 'react-hot-toast';
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useRouter } from 'next/navigation'
 import Image from 'next/image';
-export default function FeedPost({ post }) {
-    console.log("infinity", post);
+export default function FeedPost({refetch}) {
     const router = useRouter()
     const session = useSession();
     const currentUser = session.data?.user;
     const axiosPublic = useAxiosPublic();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [images, setImages] = useState([]);
-    const [selectedImage, setSelectedImage] = useState([]);    
+    const [selectedImage, setSelectedImage] = useState([]);   
+
     const [loading, setLoading] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -80,6 +80,7 @@ export default function FeedPost({ post }) {
                 toast.success('Post created successfully!');
                 form.reset();
                 setSelectedImage(null);
+                refetch()
                 setImages([]);
                 closeModal();
             }
@@ -119,6 +120,7 @@ export default function FeedPost({ post }) {
                                 ✕
                             </button>
                         </div>
+                        {/* Preview */}
                         <div className="flex flex-wrap gap-2">
                             {selectedImage?.map((image, index) => (
                                 <img key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
