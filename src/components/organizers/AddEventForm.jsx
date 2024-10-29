@@ -5,14 +5,15 @@ import axios from 'axios';
 import { uploadCloudinary } from "@/hooks/upload"; // Assumes this function is available for image uploads
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const AddEventForm = () => {
   const session = useSession()
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [selectedImages, setSelectedImages] = useState([]);  
-  const [galleryData, setGalleryData] = useState( [] );  
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [galleryData, setGalleryData] = useState([]);
 
   // Handler for file selection and upload
   const handleFileAdd = async (e) => {
@@ -54,7 +55,7 @@ const AddEventForm = () => {
     const tagsWithString = form?.tags?.value;
     const contactInfoPhone = form?.contactInfoPhone?.value;
     const contactInfoEmail = form?.contactInfoEmail?.value;
-    const tags = tagsWithString.split(",").map(tag => tag.trim());    
+    const tags = tagsWithString.split(",").map(tag => tag.trim());
     const locationMap = "https://www.newofficeamerica.com/images/map-thumbs/serviced-400-montgo…"
     const createdAt = new Date();
     const updatedAt = null;
@@ -90,7 +91,7 @@ const AddEventForm = () => {
       },
       reviews,
       contactInfo: {
-        email: contactInfoEmail,
+        email: session?.data?.user?.email,
         phone: contactInfoPhone,
       },
       tags,
@@ -99,9 +100,10 @@ const AddEventForm = () => {
       when,
       eventCreatorEmail: session?.data?.user?.email,
     }
+    console.log("Event add korar form data ", formData)
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:9000/events/postEvent', formData);      
+      const res = await axios.post('http://localhost:9000/events/postEvent', formData);
       if (res.status === 201) {
         setSuccess('Event added successfully!');
         toast.success('Event added successfully!');
@@ -109,7 +111,7 @@ const AddEventForm = () => {
         setSelectedImages([]);
         e.target.reset();
       }
-    } catch (err) {      
+    } catch (err) {
       toast.error('Error adding event');
       setError('Error adding event');
     } finally {
@@ -181,7 +183,7 @@ const AddEventForm = () => {
             {/* Display selected images */}
             <div className="flex flex-wrap gap-2">
               {galleryData?.map((image, index) => (
-                <img key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
+                <Image height={676} width={1200} key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
               ))}
             </div>
           </div>
@@ -210,29 +212,29 @@ const AddEventForm = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Venue</label>
+                <label className="block text-sm font-medium mb-1">Place Name</label>
                 <input
                   type="text"
                   name="venue"
                   className="w-full p-2 border rounded"
-
+                  placeholder='Seikh Rasel Stadium'
                   required
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium mb-1">Location Map</label>
                 <input
                   type="text"
                   name="locationMap"
                   className="w-full p-2 border rounded"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 
           {/* Category and Type */}
           <div className="grid grid-cols-2 gap-4">
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium mb-1">Category</label>
               <input
                 type="text"
@@ -241,6 +243,19 @@ const AddEventForm = () => {
 
                 required
               />
+            </div> */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Category</label>
+              <select
+                name="category"
+                className="w-full p-2 border rounded"
+                required
+              >
+                <option value="Technology">Technology</option>
+                <option value="Music">Music</option>
+                <option value="Business">Business</option>
+                <option value="Art & Culture">Art & Culture</option>
+              </select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Type</label>
