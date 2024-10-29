@@ -94,14 +94,14 @@ const MembershipCard = () => {
                             </ul>
                         </div>
                         <div className="text-center sm:text-left">
-                            <ButtonOutline
+                            <Button
                                 primary
                                 fullWidth
                                 href={`/booking/${card._id}`}
                                 className="bg-gradient-to-br from-blue-700 via-blue-500 to-blue-700 text-white rounded-lg hover:scale-105"
                             >
                                 Choose Plan
-                            </ButtonOutline>
+                            </Button>
                         </div>
                     </div>
                 ))}
