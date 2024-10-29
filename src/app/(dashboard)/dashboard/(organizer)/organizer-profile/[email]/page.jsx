@@ -24,6 +24,7 @@ import { RiUserFollowFill } from "react-icons/ri";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { MdEmojiEvents } from "react-icons/md";
 import { IoHome } from "react-icons/io5";
+import { FaCloudMeatball } from "react-icons/fa";
 
 const OrganizerProfile = () => {
   const { data: user, isLoading } = useAuthWithEmail();
@@ -217,9 +218,15 @@ const OrganizerProfile = () => {
         <div className="min-w-[400px]">
           <div className="max-w-md mx-start mt-6 bg-white shadow-lg rounded-lg overflow-hidden transform  transition-transform duration-300">
             <div className="p-4">
-              <h2 className="text-2xl font-bold text-start text-[--color-secondary]  mb-2">
-                My All Events
-              </h2>
+              <div className="flex items-center gap-3 text-gray-800">
+                <h2 className="text-2xl text-red-500">
+                  <FaCloudMeatball />
+                </h2>
+                <h2 className="text-2xl font-bold text-start text-[--color-secondary] mb-2">
+                  My All Events
+                </h2>
+              </div>
+
               <div>
                 {eventLoading ? (
                   <Loading></Loading>
