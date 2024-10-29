@@ -51,9 +51,13 @@ const EmailSend = () => {
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-between px-4 gap-6">
                     <div className="w-full md:w-1/2 mb-8 md:mb-0 lg:p-4">
-                        <h2 className="text-3xl lg:text-5xl font-medium mb-4 text-gray-900">
-                            Stay Informed with Our Newsletter
-                        </h2>
+                    <div data-aos="zoom-out-right" data-aos-duration="1000">
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
+                           
+                           Stay Informed with Our Newsletter
+                       </h2>
+                    </div>
+                        
                        
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                             <input
@@ -62,7 +66,7 @@ const EmailSend = () => {
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Enter your name"
                                 required
-                                className="p-2 text-base lg:text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform hover:scale-105"
+                                className="p-2 text-base lg:text-lg border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full transition-transform transform"
                             />
                             <input
                                 type="email"
@@ -70,7 +74,7 @@ const EmailSend = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
                                 required
-                                className="p-2 text-base lg:text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform hover:scale-105"
+                                className="p-2 text-base lg:text-lg border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform "
                             />
                             <input
                                 type="number"
@@ -78,16 +82,16 @@ const EmailSend = () => {
                                 onChange={(e) => setPhone(e.target.value)}
                                 placeholder="Enter your phone number"
                                 required
-                                className="p-2 text-base lg:text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform hover:scale-105"
+                                className="p-2 text-base lg:text-lg border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full transition-transform transform "
                             />
                             <button
                                 type="submit"
-                                className="bg-blue-600 text-white font-medium px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform hover:scale-105"
+                                className=" text-white font-medium px-6 py-2 rounded-lg bg-[#1b85db] transition duration-300 shadow-md w-full md:w-auto text-base lg:text-lg transform "
                             >
                                 Subscribe
                             </button>
                         </form>
-                        {message && <p className="mt-4 text-green-600 text-base lg:text-lg">{message}</p>}
+                        {message && <p className="mt-4 bg-[#1b85db] text-base lg:text-lg">{message}</p>}
                     </div>
 
                     {/* Image on the right side with increased height */}
@@ -97,7 +101,7 @@ const EmailSend = () => {
                             width={1200}
                             src="https://i.postimg.cc/hP3y0Qqw/send.png"
                             alt="Send Email Icon"
-                            className="w-full h-auto object-cover md:h-[400px] lg:h-[500px] transform transition-transform duration-300 hover:scale-105"
+                            className="w-full h-auto object-cover md:h-[400px] lg:h-[500px] transform transition-transform duration-300 "
                         />
                     </div>
                 </div>
