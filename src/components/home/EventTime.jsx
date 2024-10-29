@@ -117,16 +117,16 @@ const EventTime = () => {
   }
 
   return (
-    <div >
+    <div className="container mx-auto">
       <Tabs defaultValue="All" className="">
         {/* Tab List */}
         <SectionTitleSimple
           title="Event Timing Options"
-          subtitle="Browse events by time: today, tomorrow, this weekend, or this month."
+          subtitle="Set flexible timing for your events. Choose from multiple scheduling options to match your events duration, start and end times, recurring schedules, and timezone preferences, ensuring a seamless experience for all attendees."
         >
         </SectionTitleSimple>
 
-        <TabsList className="w-full flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
+        <TabsList className="w-full  flex justify-around h-12 mb-6 bg-white rounded-lg shadow-lg relative overflow-hidden">
           {/* {tabs.map((category) => ( */}
           <TabsTrigger
             onClick={() => setActiveTab("All")}

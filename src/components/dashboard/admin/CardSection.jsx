@@ -50,10 +50,10 @@ const CardSection = ({metrics}) => {
 
   return (
     <>
-    <div className="w-full my-3 md:my-4 lg:my-6">
+    <div className="w-full ml-4 md:ml-0 my-3 md:my-4 lg:my-6">
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
-        <div>
+        <div >
           <h2 className="text-xl font-semibold text-gray-800">Monthly Sales</h2>
           <span className="text-sm text-gray-500">Sales Summary</span>
         </div>

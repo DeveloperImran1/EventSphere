@@ -151,7 +151,7 @@ const UnderwaterFooter = () => {
         </filter>
       </svg>
 
-      <footer className=" relative  text-[18px] [unicode-bidi:isolate] px-6  max-w-[1280px] mx-auto">
+      <footer className=" relative  text-[18px] [unicode-bidi:isolate] px-6 container mx-auto">
         <div className="flex flex-col items-stretch border-[#40454f]  mx-6 md:mx-auto ">
           {/* Footer Header */}
           <div className="  uppercase mb-6 my-10  ">

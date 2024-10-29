@@ -43,7 +43,7 @@ const Organizers = () => {
       followers: "6.5k",
       specialization: ["Multi-Booking", "User Flexibility"],
       contactInfo: "jowel.ahmed@example.com",
-      bio: "Manages customizable event packages and multi-category bookings for user flexibility.",
+      bio: "Manages customizable event packages and category bookings for user flexibe.",
     },
     {
       name: "Mehedi Mehad",
@@ -53,7 +53,7 @@ const Organizers = () => {
       followers: "7.7k",
       specialization: ["Seat Selection", "AR Venue Tours"],
       contactInfo: "mehedi.mehad@example.com",
-      bio: "Focuses on seat selection and AR venue tours, improving the overall event experience.",
+      bio: "Focuses on seat selection and AR venue tours, improving the overall.",
     },
     {
       name: "Asadujjaman Atik",
@@ -63,7 +63,7 @@ const Organizers = () => {
       followers: "6.7k",
       specialization: ["Event Recomm.", "User Intuition"],
       contactInfo: "asadujjaman@example.com",
-      bio: "Optimizes event recommendations using AI, making the platform more intuitive.",
+      bio: "Optimizes event recommendations using AI, making the platform more.",
     },
     {
       name: "Zakia Sultana",
@@ -73,7 +73,7 @@ const Organizers = () => {
       followers: "6.8k",
       specialization: ["Eco Events", "Sustainability"],
       contactInfo: "zakia.sultana@example.com",
-      bio: "Promotes eco-friendly and sustainable events, contributing to green initiatives.",
+      bio: "Promotes eco-friendly and sustainable events, contributing to green.",
     },
     {
       name: "Riyad Hasan",
@@ -83,7 +83,7 @@ const Organizers = () => {
       followers: "6.9k",
       specialization: ["Music Events", "Wide Audience"],
       contactInfo: "riyad.hasan@example.com",
-      bio: "Handles promotion for music and arts events, ensuring they reach a wider audience.",
+      bio: "Handles promotion for music and arts events, ensuring they a audience.",
     },
     {
       name: "Mostafa Kamal",
@@ -93,7 +93,7 @@ const Organizers = () => {
       followers: "6.7k",
       specialization: ["Budgeting", "Financial Success"],
       contactInfo: "mostafa.kamal@example.com",
-      bio: "Manages budgets and financial planning, ensuring financial success for every event.",
+      bio: "Manages budgets and financial planning, financial success for event.",
     },
   ];
 
@@ -157,7 +157,7 @@ const Organizers = () => {
                 ))}
               </div>
 
-              <p className="text-md text-start mx-auto font-semibold text-gray-700 dark:text-gray-300 my-2">
+              <p className="text-md text-center mx-auto font-semibold text-gray-700 dark:text-gray-300 my-2">
                 {organizer.bio}
               </p>
               <a
@@ -176,8 +176,8 @@ const Organizers = () => {
                   Followers: {organizer.followers}
                 </p>
                 <div className="flex items-center gap-3 text-xl ">
-                  <FaLinkedin className="bg-blue-500 rounded-sm"/>
-                  <FaFacebook className="bg-blue-600 rounded-full"/>
+                  <FaLinkedin className=" rounded-sm"/>
+                  <FaFacebook className=" rounded-full"/>
                 </div>
               </div>
             </div>

@@ -143,7 +143,7 @@ const PaymentQRCodePage = () => {
               size={200}
               bgColor="#ffffff"
               fgColor="#000000"
-              value={`https://event-sphere-bice.vercel.app/payment-qr-code?transitionId=${paymentData.transitionId}`}
+              value={`http://localhost:3000/payment-qr-code?transitionId=${paymentData.transitionId}`}
               className='mb-3 text-center m-2 mx-auto'
 
             />
