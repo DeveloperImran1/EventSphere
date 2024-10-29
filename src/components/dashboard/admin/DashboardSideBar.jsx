@@ -219,7 +219,7 @@ const DashboardSideBar = () => {
                                 alt="Profile"
                                 height="60"
                                 width="60"
-                                className="   transition duration-300 ease-in-out rounded-full"
+                                className=" h-[85px] w-[85px]  transition duration-300 ease-in-out rounded-full"
                             />
                         </div>
 
@@ -240,7 +240,7 @@ const DashboardSideBar = () => {
                             routes?.map((route, index) => {
                                 const Icon = route?.icon;
                                 return (
-                                    <Link key={index} href={route?.path} className={`${route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group`}>
+                                    <Link key={index} href={route?.path} className={`${route?.path?.includes(lastPathSegment) ? 'bg-[#3b99f1] text-white' : 'bg-white'} flex items-center justify-between my-1 py-1 md:py-2 px-4 rounded transition duration-200  hover:bg-[#3b99f1] hover:text-white transform ease-in delay-100 group`}>
                                         <div className='flex items-center'>
                                             <Icon className="mr-2 text-xl" />
 
