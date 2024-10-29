@@ -23,6 +23,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { RiUserFollowFill } from "react-icons/ri";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import { MdEmojiEvents } from "react-icons/md";
+import { IoHome } from "react-icons/io5";
 
 const OrganizerProfile = () => {
   const { data: user, isLoading } = useAuthWithEmail();
@@ -148,10 +149,16 @@ const OrganizerProfile = () => {
             {/* Bottom */}
             <div className="flex flex-col justify-center items-center mt-6 text-gray-600">
               <h1 className="text-4xl font-bold ">{user?.name}</h1>
-              <p className="text-center mt-2">
-                {user?.location?.city || "Rajshahi"}{" "}
-                {user?.location?.country || "Bangladesh"}
-              </p>
+              <div className="flex items-center gap-2 text-gray-800">
+                <p className="text-blue-600 text-xl">
+                  <IoHome />
+                </p>
+                <p className="text-center font-semibold text-sm">
+                  {user?.location?.city || "Rajshahi"},{" "}
+                  {user?.location?.country || "Bangladesh"}
+                </p>
+              </div>
+
               <div className="flex justify-around mt-10 gap-6">
                 <div className="">
                   <p className="text-center font-bold text-2xl text-gray-600">
