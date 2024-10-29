@@ -14,8 +14,8 @@ import PopularEvent from '../PopularEvent/PopularEvent';
 import WhyUse from './WhyUse';
 import MembershipCard from './membership/MEmbershipCard';
 import FAQSection from './faq/FaqSection';
-import Banner from './Banner';
 import Image from 'next/image';
+import Banner from './banner/page';
 
 
 
