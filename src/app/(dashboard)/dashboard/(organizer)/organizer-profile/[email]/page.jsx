@@ -22,6 +22,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { RiUserFollowFill } from "react-icons/ri";
 import { BsFileEarmarkPost } from "react-icons/bs";
+import { MdEmojiEvents } from "react-icons/md";
 
 const OrganizerProfile = () => {
   const { data: user, isLoading } = useAuthWithEmail();
@@ -182,7 +183,14 @@ const OrganizerProfile = () => {
                   <p className="text-center font-bold text-2xl text-gray-600">
                     {myEvents?.length || "05"}
                   </p>
-                  <p>My Events</p>
+                  <div className="flex items-center gap-2 text-gray-700 font-medium text-sm">
+                    <p className="text-yellow-500 text-lg">
+                      <MdEmojiEvents />
+                    </p>
+                    <p className="hover:text-yellow-500 transition-colors duration-200">
+                      My Events
+                    </p>
+                  </div>
                 </div>
               </div>
               {/* Button */}
