@@ -21,6 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { RiUserFollowFill } from "react-icons/ri";
+import { BsFileEarmarkPost } from "react-icons/bs";
 
 const OrganizerProfile = () => {
   const { data: user, isLoading } = useAuthWithEmail();
@@ -168,7 +169,14 @@ const OrganizerProfile = () => {
                   <p className="text-center font-bold text-2xl text-gray-600">
                     {myPost?.length || "10"}
                   </p>
-                  <p>Posts</p>
+                  <div className="flex items-center gap-2 text-gray-700 font-medium text-sm">
+                    <p className="text-green-500 text-lg">
+                      <BsFileEarmarkPost />
+                    </p>
+                    <p className="hover:text-green-500 transition-colors duration-200">
+                      Posts
+                    </p>
+                  </div>
                 </div>
                 <div className="">
                   <p className="text-center font-bold text-2xl text-gray-600">
