@@ -32,8 +32,8 @@ const CommunityRightSidebar = () => {
     return (
         <div className='sticky top-20 min-h-screen overflow-auto'>
             {/* My Follower */}
-            <MyFollower userData={userData} refetch={refetch} />
-            {/* <MyFollowing userData={userData} refetch={refetch} /> */}
+            {/* <MyFollower userData={userData} refetch={refetch} /> */}
+            <MyFollowing userData={userData} refetch={refetch} />
             <SuggestFollowing userData={userData} refetch={refetch} />
         </div>
     );

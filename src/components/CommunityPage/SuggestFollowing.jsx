@@ -18,7 +18,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user?.email));
-    const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
+    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
 
     // handleFollow Button
     const handleFollow = async (id) => {
