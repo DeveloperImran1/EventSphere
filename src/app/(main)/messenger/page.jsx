@@ -17,19 +17,19 @@ const Messenger = () => {
 
 
     return (
-        <section className="flex flex-col lg:grid grid-cols-12 max-w-[1280px] mx-auto gap-8 mt-16  ">
+        <section className="flex max-w-[1280px] mx-auto md:gap-8 gap-x-2 mt-16  ">
 
         {/* left side  */}
-        <div className="col-span-3  rounded">
+        <div className=" w-[25%]  rounded">
             <Sidebar onSelectUser={handelUserSelect} />
         </div>
 
         {/* right site  */}
-        <div className="col-span-6  rounded ">
+        <div className=" md:w-[50%] w-[80%]  rounded ">
             <MessageContainer selectedUser={selectedUser} />
         </div>
 
-        <div className="col-span-3  rounded">
+        <div className="md:w-[25%] rounded hidden md:block">
             <RightSideChat selectedUser={selectedUser} currentUser={auth?.data?._id} />
         </div>
     </section>

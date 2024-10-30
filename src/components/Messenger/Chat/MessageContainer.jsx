@@ -94,7 +94,7 @@ const MessageContainer = ({ selectedUser }) => {
         </div>
       ) : (
         <>
-          <div className='flex justify-between items-center gap-1 bg-white py-2 md:px-5 border-y shadow-sm  '>
+          <div className='flex justify-between items-center gap-1 bg-white pt-4 pb-2 md:px-5 border-y shadow-sm '>
             <div className=" flex gap-1">
               <div className='self-center'>
                 <Image src={selectedConversation?.image} width={50} height={50} alt="avatar"
