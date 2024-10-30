@@ -140,7 +140,7 @@ const RegisterPageComponent = () => {
   return (
     <div className="">
       <div
-        style={{ backgroundImage: `url(${'https://media.istockphoto.com/id/1368151370/photo/user-typing-login-and-password-cyber-security-concept.jpg?s=612x612&w=0&k=20&c=hZ14F6Fa4edYWwg0BduAj0is8gdcORsBBHpQcQbAPKc='})` }}
+        style={{ backgroundImage: `url(${'https://i.postimg.cc/j5F0kNnY/loginBG.jpg'})` }}
         className="bg-cover bg-center pb-16"
       >
         <div className="container mx-auto flex flex-col md:flex-row text-white">
