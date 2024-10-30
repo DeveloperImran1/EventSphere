@@ -45,21 +45,37 @@ const UnderwaterFooter = () => {
       path: "/register"
     },
     {
-      title: "About Us",
-      path: "/about-us"
+      title: "Login",
+      path: "/login"
     },
     {
       title: "Contact Us",
       path: "/contact"
-    },  
+    }, 
+   
+    
     
   
   ]
   const subMenu2 = [
-   {
-      title: "Login",
-      path: "/login"
-    },   {
+    {
+      title: "About Us",
+      path: "/about-us"
+    },
+    {
+      title: "messenger",
+      path: "/messenger"
+    },
+    {
+      title: "Subscription",
+      path: "/subscriptions"
+    },
+    
+    
+  
+  ]
+  const subMenu3 = [
+    {
       title: "Events",
       path: "/events"
     },
@@ -67,39 +83,30 @@ const UnderwaterFooter = () => {
       title: "Gift Card",
       path: "/gift-card"
     },
-  
-  ]
-  const subMenu3 = [
- 
-   
-    {
-      title: "Gallery",
-      path: "/gallery"
-    },
-    {
-      title: "Subscription",
-      path: "/subscriptions"
-    },
-  
-    {
-      title: "All Events",
-      path: "/events"
-    }, 
-    
-  ]
-  const subMenu4 = [
     {
       title: "Offer Announcement",
       path: "/offer-announcement"
     },
+   
+    
+  
+   
+    
+  ]
+  const subMenu4 = [
     {
-      title: "messenger",
-      path: "/messenger"
+      title: "Gallery",
+      path: "/gallery"
     },
+   
     {
       title: "community",
       path: "/community"
     },
+    {
+      title: "All Events",
+      path: "/events"
+    }, 
     
   ]
   
@@ -142,7 +149,7 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PLATFORMS</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">IMPORTANTS</h6>
               </div>
               {
                 subMenu1?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
@@ -153,7 +160,7 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PRODUCTS</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">COMMUNITS</h6>
               </div>
               {
                 subMenu2?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
@@ -163,7 +170,7 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">RESOURCES</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">EVENTS</h6>
               </div>
               {
                 subMenu4?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
