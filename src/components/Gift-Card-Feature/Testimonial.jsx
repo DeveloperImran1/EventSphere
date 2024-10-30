@@ -39,7 +39,10 @@ export default function TestimonialSlider() {
   };
 
   return (
-    <div className='max-w-[1280px] mx-auto p-2 mt-14 flex flex-col md:flex-row justify-center items-center gap-16  ' >
+    <div className='container mx-auto'>
+
+
+    <div className=' mx-auto p-2 mt-14 flex flex-col md:flex-row justify-center items-center gap-16  ' >
 
 
 
@@ -63,7 +66,7 @@ export default function TestimonialSlider() {
                 {testimonials.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-red-500" : "bg-gray-300"
+                    className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-[#1b85db]" : "bg-gray-300"
                       }`}
                   />
                 ))}
@@ -71,7 +74,7 @@ export default function TestimonialSlider() {
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute -translate-y-1/2 left-0 -ml-4 rounded-full bg-red-400 text-white hover:bg-red-600 hover:text-white border-none shadow-md"
+                className="absolute -translate-y-1/2 left-0 -ml-4 rounded-full bg-[#1b85db] text-white hover:bg-[#1b85db] hover:text-white border-none shadow-md"
                 onClick={prevTestimonial}
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -80,7 +83,7 @@ export default function TestimonialSlider() {
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute   -translate-y-1/2 right-0 -mr-4 rounded-full bg-red-400 text-white hover:bg-red-600 hover:text-white border-none shadow-md"
+                className="absolute   -translate-y-1/2 right-0 -mr-4 rounded-full bg-[#1b85db] text-white hover:bg-[#1b85db] hover:text-white border-none shadow-md"
                 onClick={nextTestimonial}
               >
                 <ChevronRight className="h-4 w-4" />
@@ -129,6 +132,7 @@ export default function TestimonialSlider() {
       </div>
 
 
+    </div>
     </div>
   );
 }

@@ -218,9 +218,9 @@ const Navbar = () => {
   return (
     <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50
+      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50 
     `}>
-      <div className=" mx-auto py-2  container">
+      <div className=" mx-auto py-2  container ">
         <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
           <div className="block lg:hidden">
@@ -232,7 +232,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <Logo></Logo>
           </div>
-          <div className="flex justify-between items-center gap-[100px]">
+          <div className="flex justify-between items-center  lg:gap-[40px]">
             {/* Navigation Links for larger devices */}
             <div className="hidden md:flex space-x-8 text-white">
 
@@ -529,7 +529,7 @@ const Navbar = () => {
                       }
 
                       <Link
-                        href="/offer-announcement"
+                        href="/gift-card"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                         onClick={closeDropdown}
                       >

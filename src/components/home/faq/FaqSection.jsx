@@ -41,8 +41,8 @@ const FAQSection = () => {
   return (
     <div className='container mx-auto'>
       <div className='max-w-4xl mx-auto mb-16'>
-        <h2 className='text-3xl lg:text-5xl 2xl:text-7xl font-bold 2xl:font-black text-blue-500 text-center mb-4'>Frequently Asked Questions</h2>
-        <p className='text-center'>Our Frequently Asked Questions section provides detailed answers to common queries about our platform. Whether you need help with booking, payments, event management, or navigating the site, you will find the information you need here. We aim to make your experience smooth and hassle-free by addressing your concerns.</p>
+        <SectionTitleSimple title="Frequently Asked Questions" subtitle="Our Frequently Asked Questions section provides detailed answers to common queries about our platform. Whether you need help with booking, payments, event management, or navigating the site, you will find the information you need here. We aim to make your experience smooth and hassle-free by addressing your concerns."></SectionTitleSimple>
+    
 
       </div>
       <div className="w-full bg-white grid grid-cols-1 lg:grid-cols-2 gap-8">
