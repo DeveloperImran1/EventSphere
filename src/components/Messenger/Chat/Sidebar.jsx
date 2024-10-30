@@ -93,7 +93,7 @@ const Sidebar = ({ onSelectUser }) => {
     };
 
     return (
-        <div className="h-screen overflow-auto px-2 border-2 text-black">
+        <div className="h-[calc(100vh-64px)] pt-5 overflow-auto px-2 border-2 text-black">
             <div className="flex items-center justify-center">
                 <h1 className="font-semibold text-center py-4 text-xl ">Chats</h1>
             </div>

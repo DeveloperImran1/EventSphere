@@ -18,7 +18,7 @@ const MessengerContainer = () => {
 
 
     return (
-        <section className="flex flex-col lg:grid grid-cols-12 max-w-[1280px] mx-auto gap-8 pb-8 mt-16  ">
+        <section className="flex flex-col lg:grid grid-cols-12 max-w-[1280px] mx-auto gap-8">
 
             {/* left side  */}
             <div className="col-span-3  rounded">
