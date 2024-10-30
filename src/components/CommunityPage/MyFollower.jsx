@@ -60,7 +60,7 @@ const MyFollower = ({ userData, refetch }) => {
             <div className="mt-1">
                 {followerData.length > 0 ? (
                     followerData.slice(0, showFollower).map(follower => (
-                        <div key={follower._id} className="p-3 border mb-1 rounded">
+                        <div key={follower._id} className="p-3 border mb-1 rounded cursor-pointer">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
                                     <div className="rounded-full h-11 w-11 border p-[2px]">

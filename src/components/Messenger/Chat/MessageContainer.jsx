@@ -83,7 +83,7 @@ const MessageContainer = ({ selectedUser }) => {
   };
 
   return (
-    <div className=' bg-slate-100 flex flex-col h-[calc(100vh-64px)] border'>
+    <div className=' flex flex-col h-[calc(100vh-64px)] border'>
       {selectedConversation === null ? (
         <div className='flex items-center justify-center w-full h-full'>
           <div className='px-4 text-center text-2xl text-gray-950 font-semibold flex flex-col items-center gap-2'>
