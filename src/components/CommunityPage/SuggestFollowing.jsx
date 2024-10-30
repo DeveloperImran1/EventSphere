@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const SuggestFollowing = ({ userData, refetch }) => {
-    const [ showFollower , setShowFollower ] = useState(3);
+    const [ showFollower , setShowFollower ] = useState(6);
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
     const router = useRouter()
@@ -18,7 +18,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user?.email));
-    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail));
+    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail) && user.email != myEmail);
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -48,7 +48,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
         }
       };
     return (
-        <div className="">
+        <div className="mt-7">
             <h2 className="text-lg font-bold">Suggest</h2>
             <div className="mt-1">
                 {filteredUsersWithoutYou.length > 0 ? (
