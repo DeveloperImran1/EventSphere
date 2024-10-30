@@ -83,7 +83,7 @@ const MessageContainer = ({ selectedUser }) => {
   };
 
   return (
-    <div className=' bg-slate-100 flex flex-col h-[90vh]'>
+    <div className=' flex flex-col h-[calc(100vh-64px)] border'>
       {selectedConversation === null ? (
         <div className='flex items-center justify-center w-full h-full'>
           <div className='px-4 text-center text-2xl text-gray-950 font-semibold flex flex-col items-center gap-2'>
@@ -94,26 +94,19 @@ const MessageContainer = ({ selectedUser }) => {
         </div>
       ) : (
         <>
-          <div className='flex justify-between items-center gap-1 bg-white md:px-2  h-10 md:h-12  z-50'>
+          <div className='flex justify-between items-center gap-1 bg-white py-2 md:px-5 border-y shadow-sm  '>
             <div className=" flex gap-1">
               <div className='self-center'>
-                <Image src={selectedConversation?.image} width={30} height={30} alt="avatar"
+                <Image src={selectedConversation?.image} width={50} height={50} alt="avatar"
                   className=" rounded-full" />
               </div>
               <span className='text-black self-center text-sm md:text-xl font-bold'>
                 {selectedConversation?.name}
               </span>
             </div>
-            <div className=" flex gap-3 pr-3 ">
-              <FaPhoneAlt className="text-blue-600" />
-              <Link href="/video-call">
-                <IoMdVideocam className="text-blue-600" />
-              </Link>
-              <RiInformationFill className="text-blue-600" />
-            </div>
           </div>
 
-          <div className='flex-1 overflow-auto min-h-[80%]'>
+          <div className='flex-1 pt-2 overflow-auto min-h-[80%] bg-white'>
             {loading && (
               <div className="flex w-full h-full flex-col items-center justify-center gap-4 bg-transparent">
                 <div className="loading loading-spinner"></div>
@@ -128,24 +121,20 @@ const MessageContainer = ({ selectedUser }) => {
               </div>
             ))}
           </div>
-          <div className={` flex items-center   pl-10 py-2 mr-1 sticky bottom-0  z-50`}>
+          <div className={` flex w-full items-center pl-5 py-2 mr-1 sticky bottom-0  z-50`}>
             <div className=" flex gap-2">
-              <BsFillPlusCircleFill className="text-blue-600" />
-              <IoMdImages className="text-blue-600" />
-              <LuSticker className="text-blue-600" />
-              <HiGift className="text-blue-600" />
+              <IoMdImages className="text-blue-600 text-xl cursor-pointer" />
             </div>
-            <form onSubmit={handleSubmit} className=" flex items-center ">
-              <div className=" mx-2 relative ">
+            <form onSubmit={handleSubmit} className=" flex items-center w-full">
+              <div className=" mx-2 relative  w-full">
                 <input
                   type="text"
                   value={sendData} onChange={handleMessages} required id='message'
                   placeholder="Type your message..."
-                  className='pl-3 bg-slate-50 text-black  rounded-full h-[35px] lg:w-[400px] w-[100px]' />
-                <PiSmileyStickerFill className="absolute top-2 right-2 text-blue-600 font-semibold" />
+                  className='pl-3 bg-slate-50 text-black  rounded-full h-[35px] w-full outline-none' />
+              <button type="submit" ><IoSend className="  text-blue-600 font-semibold absolute text-xl top-2 right-4" />  </button>
               </div>
 
-              <button type="submit" ><IoSend className="  text-blue-600 font-semibold" />  </button>
             </form>
           </div>
         </>

@@ -1,68 +1,56 @@
 "use client"
 import { HiDotsHorizontal, HiGift } from "react-icons/hi"
-
 import { IoSearch } from "react-icons/io5";
+import React from 'react';
 import Image from "next/image";
-import { FaBell, FaChevronDown, FaLock} from "react-icons/fa";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { FaCircleUser } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import SuggestFollowing from "../CommunityPage/SuggestFollowing";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import MyFollower from "../CommunityPage/MyFollower";
+// Function to fetch user data
+const fetchUserData = async () => {
+  const response = await axios.get('https://event-sphare-server.vercel.app/user');
+  return response.data;
+};
 
-const RightSideChat = ({selectedUser}) => {
-    const axiosPublic = useAxiosPublic()
+const RightSideChat = ({ selectedUser }) => {
+  const axiosPublic = useAxiosPublic()
+
+  // Use TanStack Query to fetch user data
+  const { data: userData = [], isLoading, error, refetch } = useQuery({
+    queryKey: ['userData'],
+    queryFn: fetchUserData,
+  });
+  console.log("userData", userData);
+
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
 
 
 
   return (
-    <div className="mt-3 bg-slate-100  my-10 ">
-    <div className=" flex  pb-2  flex-col  justify-center items-center ">
+    <div className="box-border h-[calc(100vh-64px)] pt-8 border p-4">
+      <div className=" flex  pb-2  flex-col  justify-center items-center ">
         <Image src={selectedUser?.image || "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"}
           width={50} height={50} alt="avatar"
-            className=" rounded-full h-[120px] w-[120px] " />
+          className=" rounded-full h-[120px] w-[120px] " />
 
         <p className=" font-bold text-black">{selectedUser?.name}</p>
-    
-    </div>
-    <div className=" flex bg-gray-200 px-2 py-1 items-center justify-center gap-2  text-sm mx-10 rounded-full">
-        <p>   <FaLock color="000" /> </p>
-        <p className="text-black">End-to-end encrypeted</p>
 
+      </div>
+      <div className=" flex items-center justify-center gap-2  text-sm mx-10 cursor-pointer">
+        <p className="text-white font-medium bg-blue-600 px-5 py-1 rounded-full">Profile</p>
+      </div>
+      <MyFollower userData={userData} refetch={refetch} />
+      {/* <SuggestFollowing userData={userData} refetch={refetch} /> */}
     </div>
-    <div className=" flex gap-5 justify-center items-center my-6">
-        <div className="">
-            <FaCircleUser size={50} color="black" className=" bg-gray-200 rounded-full p-2" />
-            <p className=" text-center">Profile</p>
-        </div>
-        <div className="">
-            <FaBell size={50} color="black"  className=" bg-gray-200  rounded-full p-2" />
-            <p className=" text-center">Mute</p>
-        </div>
-        <div className="">
-            <IoSearch size={50} color="black"  className=" bg-gray-200  rounded-full p-2" />
-            <p className=" text-center">Search</p>
-        </div>
-
-
-    </div>
-    <div className=" mx-5 flex flex-col gap-3 ">
-        <div className=" flex items-center gap-2 justify-between">
-            <p className="text-black">Chat info</p>
-            <FaChevronDown color="black"  />
-        </div>
-        <div className=" flex items-center gap-2 justify-between">
-            <p className="text-black">Customize Chat</p>
-            <FaChevronDown color="black" />
-        </div>
-        <div className=" flex items-center gap-2 justify-between">
-            <p className="text-black">Media & Files</p>
-            <FaChevronDown color="black" />
-        </div>
-        <div className=" flex items-center gap-2 justify-between">
-            <p className="text-black">Privacy & Support</p>
-            <FaChevronDown color="black" />
-        </div>
-    </div>
-</div>
   )
 }
 
