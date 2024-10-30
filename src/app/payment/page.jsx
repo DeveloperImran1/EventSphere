@@ -17,7 +17,7 @@ const SEATS_PER_ROW = 12;
 // SeatButton Component for rendering seat buttons
 function SeatButton({ seat, onClick, event }) {
   const res = event?.bookedSeats?.includes(seat?.number)
-  const bgColor = res ? "bg-gray-500 text-white cursor-not-allowed" : seat?.status === "selected" ? "bg-[#1B85DB] text-white" : "bg-white";
+  const bgColor = res ? "bg-gray-600 text-white cursor-not-allowed" : seat?.status === "selected" ? "bg-[#1B85DB] text-white" : "bg-white";
   // console.log(seat)
 
   return (
@@ -196,7 +196,7 @@ const Payment = () => {
 
       <div className="flex flex-col md:flex-row">
         <div className="flex-1">
-          <div className="bg-yellow-500 text-black text-center py-2 rounded-t-lg font-bold">
+          <div className="bg-[#1b85db] text-white text-center py-2 rounded-t-lg font-bold">
           Seat map
           </div>
           <div className="bg-base-300 pb-10 pt-4 rounded-b-lg p-4">
@@ -216,10 +216,7 @@ const Payment = () => {
                         className={`p-2 ${rowIndex % 6 === 0 ? "text-sm md:text-base lg:text-lg" : ""}`}
                       />
                     </div>
-                    {/* প্রতি ৪টি কলামের পর ফাঁকা স্থান যোগ করা হয়েছে */}
-                    {/* {(seatIndex + 1) % 4 === 0 && seatIndex !== row.length - 1 && (
-                      <div className="lg:w-6 sm:w-4 w-2"></div>
-                    )} */}
+                 
                   </React.Fragment>
                 ))}
               </div>
@@ -243,11 +240,11 @@ const Payment = () => {
 
 
             <div className="bg-base-200 text-yellow-900 p-3 rounded-lg mb-2">
-              <p className="mb-2">
-                Total select seat: <span className=" ">{selectedSeats}</span>
+              <p className="mb-2 font-semibold text-black">
+                Total select seat: <span className=" text-gray-600 font-medium ">{selectedSeats}</span>
               </p>
-              <p className="mt-2  ">Selected Seats:</p>
-              <ol type="1" className=" flex gap-4 flex-wrap text-[#6b7280]">
+              <p className="mt-2  font-semibold text-black ">Selected Seats:</p>
+              <ol type="1" className=" flex gap-4 flex-wrap text-black">
                 {selectedSeatNames.map((seatName, index) => (
                   <li key={index}>{seatName}</li>
                 ))}
@@ -267,7 +264,7 @@ const Payment = () => {
               {/* Calculation Display */}
               <div className="mt-4">
                 <p className="mt-2">
-                  Subtotal: <span className="ml-4">${total.toFixed(2)}</span>
+                 <span className="font-semibold text-black"> Subtotal:</span> <span className="ml-4">${total.toFixed(2)}</span>
                 </p>
                 {/* Seat Discount Display */}
                 {selectedSeats >= 5 && (
@@ -276,14 +273,14 @@ const Payment = () => {
                   </p>
                 )}
                 <p className="mb-1">
-                  Coupon Dis: <span className="ml-1">${couponDiscount.toFixed(2)}</span>
+                 <span className="font-semibold text-black" > Coupon Dis:</span> <span className="ml-1">${couponDiscount.toFixed(2)}</span>
                 </p>
                 <p className="mb-1">
-                  Total Dis: <span className="ml-2">${discount.toFixed(2)}</span>
+                  <span className="font-semibold text-black" >Total Dis:</span> <span className="ml-2">${discount.toFixed(2)}</span>
                 </p>
                 <hr className="my-2" />
                 <p className="mt-1">
-                  Total pay: <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
+                  <span className="font-semibold text-black">Total pay:</span> <span className="font-bold text-xl ml-2">${finalTotal.toFixed(2)}</span>
                 </p>
               </div>
 
