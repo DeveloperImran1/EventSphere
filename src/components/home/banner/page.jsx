@@ -70,125 +70,140 @@ export default function Banner() {
       setTimeout(() => {
         setIsAnimating(false);
         setBgTransition(false);
-      }, 500); // Match this with the CSS animation duration
+      }, 500); 
       return newItems;
     });
   };
 
   return (
-    <div className="h-screen grid place-items-center overflow-hidden  ">
-
-      <main className="relative  w-full h-full shadow-[0_3px_10px_rgba(0,0,0,0.3)] ">
-        <ul ref={sliderRef} className="slider">
-          {items.map((item, index) => (
-            <li
-              key={index}
-              className={` item absolute top-1/2 -translate-y-1/2 z-[1] w-[200px] h-[300px] bg-center bg-cover rounded-[20px] shadow-[0_20px_30px_rgba(255,255,255,0.3)_inset] transition-all duration-1000 ease-in-out ${index === 5 ? 'opacity-0' : 'opacity-100'
-                } ${bgTransition && index === 1 ? 'animate-zoomInUp' : ''}`}
-              style={{
-                backgroundImage: `url(${item.image})`,
-                left: index === 0 || index === 1 ? '0' :
-                  index === 2 ? '50%' :
-                    index === 3 ? 'calc(50% + 220px)' :
-                      index === 4 ? 'calc(50% + 440px)' : 'calc(50% + 660px)',
-                top: index === 0 || index === 1 ? '0' : '50%',
-                width: index === 0 || index === 1 ? '100%' : '200px',
-                height: index === 0 || index === 1 ? '100%' : '300px',
-                transform: index === 0 || index === 1 ? 'none' : 'translateY(-50%)',
-                borderRadius: index === 0 || index === 1 ? '0' : '30px',
-                boxShadow: index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
-              }}
+    <div className="h-screen grid place-items-center overflow-hidden">
+    <main className="relative w-full h-full shadow-[0_3px_10px_rgba(0,0,0,0.3)]">
+      <ul ref={sliderRef} className="slider">
+        {items.map((item, index) => (
+          <li
+            key={index}
+            className={`item absolute top-1/2 -translate-y-1/2 z-[1] w-[200px] h-[300px] bg-center bg-cover rounded-[20px] shadow-[0_20px_30px_rgba(255,255,255,0.3)_inset] transition-all duration-1000 ease-in-out ${
+              index === 5 ? 'opacity-0' : 'opacity-100'
+            } ${bgTransition && index === 1 ? 'animate-zoomInUp' : ''} ${
+              index > 1 ? 'hidden-sm' : ''
+            }`}
+            style={{
+              backgroundImage: `url(${item.image})`,
+              left:
+                index === 0 || index === 1
+                  ? '0'
+                  : index === 2
+                  ? '50%'
+                  : index === 3
+                  ? 'calc(50% + 220px)'
+                  : index === 4
+                  ? 'calc(50% + 440px)'
+                  : 'calc(50% + 660px)',
+              top: index === 0 || index === 1 ? '0' : '50%',
+              width: index === 0 || index === 1 ? '100%' : '200px',
+              height: index === 0 || index === 1 ? '100%' : '300px',
+              transform: index === 0 || index === 1 ? 'none' : 'translateY(-50%)',
+              borderRadius: index === 0 || index === 1 ? '0' : '30px',
+              boxShadow:
+                index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
+            }}
+          >
+            <div
+              className={`bg-opacity-10 backdrop-blur-3xl p-4 lg:p-6 rounded-2xl text-lime-100 transform absolute top-1/2 m-2 lg:left-20 -translate-y-1/2 md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${
+                index === 1 ? 'opacity-100' : 'opacity-0'
+              }`}
             >
-              <div className={` bg-opacity-10 backdrop-blur-3xl   p-4  lg:p-6 rounded-2xl text-lime-100   transform   absolute top-20 md:top-1/2 m-2 lg:left-20  -translate-y-1/2    md:w-60 lg:w-1/3 text-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-opacity duration-500 ${index === 1 ? 'opacity-100' : 'opacity-0'}`}>
-                <h2 className=" text-xl md:text-3xl  md:font-['arial-black'] md:uppercase">{item.title}</h2>
-                <p className="  text-white my-2 text-sm   ">{item.description}</p>
-                <div className='  ml-2 '>
-                  <Link className='button' href="/events">All Events</Link>
-                </div>
+              <h2 className="text-xl md:text-3xl md:font-['arial-black'] md:uppercase">
+                {item.title}
+              </h2>
+              <p className="text-white my-2 text-sm">{item.description}</p>
+              <div className="ml-2">
+                <Link className="button" href="/events">
+                  All Events
+                </Link>
               </div>
-            </li>
-          ))}
-        </ul>
-        <nav className="nav absolute flex  gap-4  bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
-          <ArrowLeftIcon
-            className="w-9 h-9  text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db]   hover:bg-[#10a0b9]  "
-            onClick={() => activate('prev')}
-          />
-          <ArrowRightIcon
-            className="w-9 h-9  text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db]   hover:bg-[#10a0b9] "
-            onClick={() => activate('next')}
-          />
-        </nav>
-      </main>
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+            </div>
+          </li>
+        ))}
+      </ul>
+      <nav className="nav absolute flex gap-4 bottom-10 md:bottom-24 left-1/2 -translate-x-1/2 z-[5] select-none">
+        <ArrowLeftIcon
+          className="w-9 h-9 text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db] hover:bg-[#10a0b9]"
+          onClick={() => activate('prev')}
+        />
+        <ArrowRightIcon
+          className="w-9 h-9 text-white rounded-full cursor-pointer transition-all duration-300 bg-[#1b85db] hover:bg-[#10a0b9]"
+          onClick={() => activate('next')}
+        />
+      </nav>
+    </main>
+    <style jsx>{`
+      /* Animation styles */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        @keyframes fadeOut {
-          from { opacity: 1; transform: translateY(0); }
-          to { opacity: 0; transform: translateY(-20px); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        @keyframes zoomInUp {
-          from {
-            opacity: 0;
-            transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
-            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-          }
-          60% {
-            opacity: 1;
-            transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
-            animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
-          }
-          to {
-            opacity: 1;
-            transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
-          }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .content {
-          animation: fadeIn 0.5s ease-out;
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
         }
-        .item:not(:nth-child(1)):not(:nth-child(2)) {
-          transition: all 1s ease-in-out;
+      }
+      @keyframes zoomInUp {
+        from {
+          opacity: 0;
+          transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+          animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
         }
-        .item:nth-child(1) {
-          animation: fadeOut 0.5s ease-in forwards;
+        60% {
+          opacity: 1;
+          transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+          animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
         }
-        .item:nth-child(2) .content {
-          animation: fadeIn 0.5s ease-out 0.25s forwards;
+        to {
+          opacity: 1;
+          transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
         }
-        .animate-zoomInUp {
-          animation: zoomInUp .5s ease-out;
-        }
-        @media (min-width: 651px) and (max-width: 900px) {
-          .content .title { font-size: 1rem; }
-          .content .description { font-size: 0.7rem; }
-          .content button { font-size: 0.7rem; }
-          .item {
-            width: 160px;
-            height: 270px;
-          }
-          .item:nth-child(3) { left: 50%; }
-          .item:nth-child(4) { left: calc(50% + 170px); }
-          .item:nth-child(5) { left: calc(50% + 340px); }
-          .item:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
-        }
-        @media (max-width: 650px) {
-          .content .title { font-size: 0.9rem; }
-          .content .description { font-size: 0.65rem; }
-          .content button { font-size: 0.7rem; }
-          .item {
-            width: 130px;
-            height: 220px;
-          }
-          .item:nth-child(3) { left: 50%; }
-          .item:nth-child(4) { left: calc(50% + 140px); }
-          .item:nth-child(5) { left: calc(50% + 280px); }
-          .item:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
-        }
-      
+      }
+      .content {
+        animation: fadeIn 1s ease-out;
+      }
+      .item:not(:nth-child(1)):not(:nth-child(2)) {
+        transition: all 1s ease-in-out;
+      }
+      .item:nth-child(1) {
+        animation: fadeOut 0.5s ease-in forwards;
+      }
+      .item:nth-child(2) .content {
+        animation: fadeIn 0.5s ease-out 0.25s forwards;
+      }
+      .animate-zoomInUp {
+        animation: zoomInUp 0.7s ease-out;
+      }
 
-      `}</style>
-    </div>
+      /* Small devices styling */
+      @media (max-width: 640px) {
+        .hidden-sm {
+          display: none;
+        }
+        .item:first-child {
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+          box-shadow: none;
+        }
+      }
+    `}</style>
+  </div>
   );
 }
