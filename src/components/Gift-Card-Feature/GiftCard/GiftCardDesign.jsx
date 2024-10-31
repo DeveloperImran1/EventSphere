@@ -11,7 +11,7 @@ const GiftCardDesign = () => {
     const axiosPublic = useAxiosPublic()
 
     
-    const { data: quality = {}, isLoading, refetch } = useQuery({
+    const { data: quality = [], isLoading, refetch } = useQuery({
         queryKey: ['quality'],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/getQuality');
@@ -27,16 +27,12 @@ const GiftCardDesign = () => {
 
     return (
         <>
-       
-        
-        
-  
-        <div className='grid md:grid-cols-3 grid-cols-1 w-full gap-4 md:gap-0 mx-2 mt-10 mb-20 ' >
+       <div className='grid md:grid-cols-3 grid-cols-1 w-full gap-4   mt-10 mb-20 ' >
             
             {quality?.map((card) => (
-                <div key={card.id} className="container ">
+                <div key={card.id} className="containerCard ">
 
-                    <div className="card w-full h-full bg-black rounded-2xl  "
+                    <div className="card w-full h-full  rounded-2xl  "
                         style={{
                             backgroundImage: `url(${card.BG})`,
                             backgroundSize: 'cover',
@@ -50,7 +46,7 @@ const GiftCardDesign = () => {
                             <div className="card-top  ">
                                 <p className="text-base text-white  font-bold">{card.price} $</p>
                             </div>
-                            <p className='text-white bg-opacity-60     bg-black  backdrop-blur-md p-2 md:p-0 lg:p-2 rounded-lg shadow-lg  text-center transform transition-transform duration-300 hover:scale-105 text-xl md:text-base lg:text-xl font-semibold font-serif ' >{card.type}</p>
+                            <p className='text-white bg-opacity-60     bg-black  backdrop-blur-md p-2 md:p-0 lg:p-2 rounded-lg   text-center transform transition-transform duration-300 hover:scale-105 text-xl md:text-base lg:text-xl font-semibold font-serif ' >{card.type}</p>
                         </div>
                         {/* Back */}
                         <div className="back    ">

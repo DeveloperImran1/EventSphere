@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -64,7 +65,9 @@ const MyFollower = ({ userData, refetch }) => {
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
                                     <div className="rounded-full h-11 w-11 border p-[2px]">
-                                        <Image src={follower?.image} height={40} width={40} alt={follower?.name} className='rounded-full h-full w-full' />
+                                      <Link href={`dashboard/user-profile/${follower?.email}`}>
+                                      <Image src={follower?.image} height={40} width={40} alt={follower?.name} className='rounded-full h-full w-full' />
+                                      </Link>
                                     </div>
                                     <div className="">
                                         <p className="font-semibold">{follower.name}</p>

@@ -168,6 +168,10 @@ const FeedPostItem = ({ item, refetch }) => {
                     )}
                 </div>
             </div>
+            <div className="px-4 pb-4">
+                <p className="text-[17px] font-semibold text-black">{item?.content?.title}</p>
+                <h5>{item?.content?.text}</h5>
+            </div>
 
             {/* Image Swiper */}
             <Swiper

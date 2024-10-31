@@ -49,11 +49,11 @@ export default function ChristmasPromo() {
 
   return (
     <div className=" clipPathSection1 h-full md:min-h-[600px]  relative">
-   <div className="absolute inset-0 backdrop-blur-sm bg-opacity-50 z-0"></div> {/* Add blur effect background */}
-      <div className='max-w-[1280px]  mx-auto grid grid-cols-1 md:grid-cols-2'>
+      <div className="absolute inset-0 backdrop-blur-sm bg-opacity-50 z-0"></div> {/* Add blur effect background */}
+      <div className='container  mx-auto grid grid-cols-1 md:grid-cols-2'>
 
-        <div className="  text-white flex items-center  relative ">
-         <div className="relative  z-10   pt-10 md:pt-20 pl-2">
+        <div className=" mt-3  text-white flex items-center  relative ">
+          <div className="relative  z-10   pt-10 md:pt-20 pl-2">
             <h4 className="text-[18px] lg:text-xl  font-poppins mb-2">December 24-26, 2024</h4>
             <h1 className="md:text-4xl lg:5xl font-serif  md:font-extrabold mb-6">Christmas Day</h1>
             <div className="flex mb-6">
@@ -78,7 +78,7 @@ export default function ChristmasPromo() {
           </div>
         </div>
         <div className=" relative py-10 ">
-       
+
 
           <div className="text-center relative mt-12">
             <h2 className="text-4xl font-bold text-white font-serif">Exclusive Event Gift Cards</h2>
@@ -87,8 +87,8 @@ export default function ChristmasPromo() {
 
 
           {/*   Gift card       */}
-          <GiftCardDesign></GiftCardDesign>
-        </div>
+         <GiftCardDesign></GiftCardDesign>
+        </div> 
 
 
       </div>

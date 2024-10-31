@@ -39,6 +39,7 @@ export default function FeedPost({refetch}) {
             setLoading(false);
         }
     };
+    console.log("Selected Image ", selectedImage)
 
     // Handle post submission
     const handlePostSubmit = async (e) => {
@@ -122,7 +123,10 @@ export default function FeedPost({refetch}) {
                         </div>
                         {/* Preview */}
                         <div className="flex flex-wrap gap-2">
-                            {selectedImage?.map((image, index) => (
+                            {/* {selectedImage?.length > 0 &&  
+                                <Image height={676} width={1200} src={selectedImage[0]} alt="Selected" className="h-20 w-20 rounded" />
+                            } */}
+                            {selectedImage?.[0]?.length > 0 &&  selectedImage?.[0]?.map((image, index)=> (
                                 <Image height={676} width={1200} key={index} src={image} alt="Selected" className="h-20 w-20 rounded" />
                             ))}
                         </div>

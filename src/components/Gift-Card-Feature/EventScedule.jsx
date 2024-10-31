@@ -138,8 +138,8 @@ export default function EventSchedule() {
 
     return (
 
-        <section className="bg-gray-200   "  >
-            <div className="max-w-[1280px] mx-auto p-4 md:py-20 ">
+        <section className="bg-gray-200  py-8 md:py-20 "  >
+            <div className=" mx-auto container  ">
 
 
 
@@ -152,7 +152,7 @@ export default function EventSchedule() {
                 <div className="md:flex  bg-white  rounded-3xl  gap-20  ">
                     <div className="md:w-72 rounded-3xl bg-[#1b85db]  text-white">
                         <h2 className=" p-6 text-lg text-gray-200 font-serif">
-                            Learn more about the detailed schedule & activities of our event.
+                        Stay on top of all events with real-time schedule updates and customized reminders.
                         </h2>
                         <div className="space-y-2  flex flex-col ml-10">
                             {tabs.map((tab) => (
@@ -179,7 +179,7 @@ export default function EventSchedule() {
                         >
                             {tabs.find((tab) => tab.date === activeTab)?.events.map((event, index) => (
                                 <Link href={`/events/${event?._id}`} key={index} className="overflow-hidden rounded-lg bg-gray-100 shadow">
-                                    <div className="md:flex gap-10 items-center p-2 border-2 ">
+                                    <div className="md:flex gap-10 items-center p-2 border-2 mb-3 rounded-md">
 
                                         <div className="min-w-44 max-w-56 ">
 
@@ -195,7 +195,7 @@ export default function EventSchedule() {
                                         </div>
                                         <div className="w-2/3 ">
                                             <h3 className="mb-2 font-mono text-xl font-semibold text-blue-500">{event.title}</h3>
-                                            <p className="mb-4 font-serif text-gray-600">{event.description}</p>
+                                            <p className="mb-4 hidden md:block font-serif text-gray-600">{event.description}</p>
                                             <div className="flex items-center space-x-4 text-sm text-gray-500">
                                                 <div className="flex items-center">
                                                     <MapPin className="mr-1  text-[#1b48db]   h-4 w-4" />
