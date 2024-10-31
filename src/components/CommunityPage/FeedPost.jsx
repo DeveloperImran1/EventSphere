@@ -104,7 +104,7 @@ export default function FeedPost({refetch}) {
                 <input
                     type="text"
                     placeholder="What's on your mind?"
-                    className="w-full p-2 bg-gray-100 rounded-full focus:outline-none"
+                    className="md:w-full w-[70%] p-2 bg-gray-100 rounded-full focus:outline-none"
                     onClick={openModal}
                 />
             </div>
