@@ -11,12 +11,9 @@ const CommunityPage = () => {
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
-        <div className="border-2 container max-w-[1280px] mx-auto mt-16 ">
+        <div className=" container max-w-[1280px] mx-auto mt-16 ">
             <div className="flex   mx-auto justify-between gap-10">
-                {/* Sidebar */}
-                {/* <div className="w-1/6 border-2 hidden md:block">
-                    <CommunitySidebar />
-                </div> */}
+              
 
                 {/* Main Content */}
                 <div className="w-full md:w-[60%]">
