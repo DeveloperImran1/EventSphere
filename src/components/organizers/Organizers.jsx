@@ -119,7 +119,7 @@ const Organizers = () => {
       >
         {organizers?.map((organizer, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg pt-3 p-2 flex flex-col items-center text-center group h-[450px] w-[300px]">
+            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg pt-3 p-2 flex flex-col items-center text-center group h-[450px] w-full md:w-[300px]">
       <div className="relative w-32 h-32 mb-4">
         <Image
           src={organizer.profilePicture}

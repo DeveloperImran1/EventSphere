@@ -200,9 +200,7 @@ export default function Banner() {
       .item:nth-child(2) .content {
         animation: fadeIn 0.5s ease-out 0.25s forwards;
       }
-      .animate-zoomInUp {
-        animation: zoomInUp 0.9s ease-out;
-      }
+  
 
       /* Small devices styling */
       @media (max-width: 640px) {
