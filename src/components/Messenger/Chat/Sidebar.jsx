@@ -228,7 +228,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                     onClick={() => handelUserClick(user)}
                                                     className="px-2 rounded-lg text-white cursor-pointer"
                                                 >
-                                                    <TbMessage className="text-blue-600" />
+                                                    <TbMessage className="text-blue-600 text-2xl" />
                                                 </p>
                                             </form>
                                         </div>
@@ -259,7 +259,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                 onClick={() => handelUserClick(user)}
                                                 className="px-2 rounded-lg text-white cursor-pointer"
                                             >
-                                                <TbMessage className="text-blue-600" />
+                                                <TbMessage className="text-blue-600 text-2xl" />
                                             </p>
                                         </form>
                                     </div>
