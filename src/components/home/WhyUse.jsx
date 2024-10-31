@@ -61,8 +61,8 @@ const WhyUse = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
           <div className="w-24 h-24 sm:w-32 border-2 sm:h-32 md:w-40 md:h-40 bg-white shadow-xl  flex items-center justify-center rounded-full">
             <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 bg-gray-100 flex items-center  justify-center rounded-full">
-              <h2 className="text-xs md:text-lg text-blue-500 md:font-semibold text-center ">
-                EVENTSPHERE
+              <h2 className="text-xs md:text-lg text-blue-500 md:uppercase  md:font-semibold text-center ">
+              Eventsphere
               </h2>
             </div>
           </div>
