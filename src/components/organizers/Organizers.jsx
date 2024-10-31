@@ -10,7 +10,7 @@ import { MdContactMail } from "react-icons/md";
 
 // import Link from 'next/link';
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
-import SectionTitle from "../shared/SectionTitle";
+
 import SectionTitleSimple from "../shared/SectionTitleSimple";
 
 const Organizers = () => {

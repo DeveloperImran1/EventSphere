@@ -79,7 +79,7 @@ const EnhancedCountdown = ({ date }) => {
       </div>
       <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#10a0b9] transition-all duration-1000 ease-linear"
+          className="h-full bg-gradient-to-br from-cyan-700 to bg-blue-500 transition-all duration-1000 ease-linear"
           style={{ width: `${(seconds / 60) * 100}%` }}
         ></div>
       </div>
