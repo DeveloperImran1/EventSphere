@@ -221,11 +221,6 @@ export default function PopularEvent() {
   )
 }
 
-
-
-
-
-
 function EventCard({ event }) {
   const [favorite, setFavorite] = useState([]);
   const [favoriteUpdate, setFavoriteUpdate] = useState(false);
