@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from 'axios';
 import FeedPostItem from "./FeedPostItem";
 import FeedPost from './FeedPost';
+import Loading from '../shared/LoadingSpiner/Loading';
 
 export default function FeedPostCard() {
     const fetchPosts = async ({ pageParam = 1 }) => {
@@ -34,7 +35,7 @@ export default function FeedPostCard() {
             dataLength={posts.length}
             next={fetchNextPage} // Function to load more data
             hasMore={hasNextPage} // Whether more data exists
-            loader={<h4>Loading...</h4>}
+            loader={<Loading></Loading>}
             endMessage={<p className="text-center text-black text-3xl my-5">All posts are loaded</p>}
         >
             <div className="mt-20 px-4">
@@ -46,7 +47,7 @@ export default function FeedPostCard() {
                 </div>
             ))}
 
-            {isFetchingNextPage && <h4>Loading more posts...</h4>} {/* Optional: show loading state */}
+            {isFetchingNextPage && <Loading></Loading>} {/* Optional: show loading state */}
         </InfiniteScroll>
     );
 }

@@ -129,7 +129,7 @@ const Sidebar = ({ onSelectUser }) => {
                                             setActiveTab("Inbox");
                                             triggerRefetch();
                                         }}
-                                        className={`${activeTab === "Inbox" ? "font-semibold text-white text-center rounded-md" : "font-semibold text-white text-center rounded-md"
+                                        className={`${activeTab === "Inbox" ? "font-semibold text-white text-center rounded-md rounded-r-none" : "font-semibold text-white text-center rounded-md"
                                             } text-center bg-blue-600`}
                                         style={{
                                             WebkitTapHighlightColor: "transparent",
@@ -144,7 +144,7 @@ const Sidebar = ({ onSelectUser }) => {
                                         onClick={() => {
                                             setActiveTab("Conversation")
                                         }}
-                                        className={`${activeTab === "Conversation" ? " text-white font-semibold rounded-md " : "font-semibold text-white"
+                                        className={`${activeTab === "Conversation" ? " text-white font-semibold rounded-md rounded-l-none" : "font-semibold text-white rounded-md rounded-l-none"
                                             } bg-blue-600`}
                                         style={{
                                             WebkitTapHighlightColor: "transparent",
@@ -155,13 +155,13 @@ const Sidebar = ({ onSelectUser }) => {
                                 </div>
                             </div>
                         </TabsList>
-                        <TabsContent value="Inbox">
+                        <TabsContent value="Conversation">
                             {searchUser?.length > 0 ? (
                                 <>
                                     {/* Search Div  */}
                                     <div className="message-container no-scrollbar">
-                                        {searchUser.map((user) => (
-                                            <div key={user._id}>
+                                        {searchUser?.map((user) => (
+                                            <div key={user?._id}>
                                                 <div
                                                     onClick={() => handelUserClick(user)}
                                                     className={`flex gap-3 items-center rounded 
@@ -174,7 +174,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                 >
                                                     <div className="rounded-full">
                                                         <Image
-                                                            src={user.image}
+                                                            src={user?.image}
                                                             alt="user.img"
                                                             width={30}
                                                             height={30}
@@ -189,7 +189,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                                     : ""
                                                                 }`}
                                                         >
-                                                            {user.name}
+                                                            {user?.name}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -210,10 +210,10 @@ const Sidebar = ({ onSelectUser }) => {
                                 <div>
                                     {/* Inbox */}
                                     {chatUser.map((user) => (
-                                        <div key={user._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
+                                        <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
                                             <form className="flex justify-between items-center my-2">
                                                 <div className="flex gap-2 items-center">
-                                                    <Link href={`/dashboard/user-profile/${user?.email}`}>
+                                                
                                                         <Image
                                                             height={30}
                                                             width={30}
@@ -221,8 +221,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                             alt="user"
                                                             className="rounded-full"
                                                         />
-                                                    </Link>
-                                                    <p className="text-xl hidden md:block text-black ">{user.name}</p>
+                                                    <p className="text-xl hidden md:block text-black ">{user?.name}</p>
                                                 </div>
                                                 <p
                                                     onClick={() => handelUserClick(user)}
@@ -237,14 +236,14 @@ const Sidebar = ({ onSelectUser }) => {
                             )}
                         </TabsContent>
 
-                        <TabsContent value="Conversation">
+                        <TabsContent value="Inbox">
                             <div className="">
                                 {/* Inbox */}
                                 {allUsers.map((user) => (
-                                    <div key={user._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
+                                    <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
                                         <form className="flex justify-between items-center my-2">
                                             <div className="flex gap-2 items-center">
-                                                <Link href={`/dashboard/user-profile/${user?.email}`}>
+                                             
                                                     <Image
                                                         height={30}
                                                         width={30}
@@ -252,8 +251,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                         alt="user"
                                                         className="rounded-full"
                                                     />
-                                                </Link>
-                                                <p className="text-xl hidden md:block text-black ">{user.name}</p>
+                                                <p className="text-xl hidden md:block text-black ">{user?.name}</p>
                                             </div>
                                             <p
                                                 onClick={() => handelUserClick(user)}

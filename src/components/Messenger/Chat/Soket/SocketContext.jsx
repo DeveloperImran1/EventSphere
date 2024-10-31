@@ -16,7 +16,7 @@ export const SocketContextProvider=({children})=>{
     const {authUser} = useAuth();
     useEffect(()=>{
         if(authUser){
-            const socket = io("http://localhost:9000",{
+            const socket = io("https://event-sphare-server.vercel.app",{
                 query:{
                     userId:authUser?._id,
                 }

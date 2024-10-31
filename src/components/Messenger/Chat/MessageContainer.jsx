@@ -98,7 +98,7 @@ const MessageContainer = ({ selectedUser }) => {
             <div className=" flex gap-1">
               <div className='self-center'>
                 <Image src={selectedConversation?.image} width={50} height={50} alt="avatar"
-                  className=" rounded-full" />
+                  className=" rounded-full cursor-pointer" />
               </div>
               <span className='text-black self-center text-sm md:text-xl font-bold'>
                 {selectedConversation?.name}
