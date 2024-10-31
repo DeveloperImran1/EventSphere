@@ -23,7 +23,7 @@ const categories = ['All', 'Healthcare', 'Technology', 'Art & Culture', 'Busines
 
 
 const CountdownUnit = ({ value, label }) => (
-  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-cyan-800 to bg-blue-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+  <div className="flex  gap-1 md:gap-2 items-center justify-center p-1 bg-gradient-to-br from-cyan-500 to bg-blue-600 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
     <span className=" text-lg font-mono  text-white">{value.toString().padStart(2, '0')}</span>
     <span className="text-xs font-serif  text-purple-200">{label}</span>
   </div>
@@ -79,7 +79,7 @@ const EnhancedCountdown = ({ date }) => {
       </div>
       <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#1b5bdb] transition-all duration-1000 ease-linear"
+          className="h-full bg-[#1b85db] transition-all duration-1000 ease-linear"
           style={{ width: `${(seconds / 60) * 100}%` }}
         ></div>
       </div>
