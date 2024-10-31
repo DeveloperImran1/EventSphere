@@ -134,13 +134,13 @@ const Organizers = () => {
         {organizer.name}
       </h3>
       
-      <p className="text-md font-semibold mb-2">{organizer.role}</p>
+      <p className="text-md font-semibold mb-2">( {organizer.role} )</p>
 
-      <div className="flex flex-wrap gap-2 justify-center mt-2 mb-1 ">
+      <div className="flex flex-wrap gap-2 justify-center my-2 ">
         {organizer.specialization.map((spec, index) => (
           <div
             key={index}
-            className=" px-2 py-1  text-xs"
+            className=" px-2 py-1 text-white bg-[#1b9bdb] text-xs"
           >
             {spec}
           </div>
