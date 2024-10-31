@@ -6,11 +6,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
-import { MdPeople } from "react-icons/md";
-import { MdContactMail } from "react-icons/md";
+
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 
 import SectionTitleSimple from "../shared/SectionTitleSimple";
+import { IoIosMailOpen } from "react-icons/io";
 
 const Organizers = () => {
   const organizers = [
@@ -21,7 +21,7 @@ const Organizers = () => {
       role: "Lead Organizer",
       followers: "9.5k",
       specialization: ["Real-Time Events", "Revenue Opt."],
-      contactInfo: "imran.hassan@example.com",
+      contactInfo: "imran@example.com",
       bio: "Leads real-time ticketing and dynamic pricing to enhance revenue growth..",
     },
     {
@@ -31,7 +31,7 @@ const Organizers = () => {
       role: "Technical Organizer",
       followers: "7.9k",
       specialization: ["Live Streaming", "Tech Support"],
-      contactInfo: "tauhid.hossen@example.com",
+      contactInfo: "tauhid@example.com",
       bio: "Oversees live streaming and QR code-based ticketing, ensuring technical.",
     },
     {
@@ -41,7 +41,7 @@ const Organizers = () => {
       role: "Logistics Organizer",
       followers: "6.5k",
       specialization: ["Multi-Booking", "User Flexibility"],
-      contactInfo: "jowel.ahmed@example.com",
+      contactInfo: "jowel@example.com",
       bio: "Manages customizable event packages and category bookings for user flexibe.",
     },
     {
@@ -51,7 +51,7 @@ const Organizers = () => {
       role: "Program Organizer",
       followers: "7.7k",
       specialization: ["Seat Selection", "AR Venue Tours"],
-      contactInfo: "mehedi.mehad@example.com",
+      contactInfo: "mehedi@example.com",
       bio: "Focuses on seat selection and AR venue tours, improving the overall.",
     },
     {
@@ -61,7 +61,7 @@ const Organizers = () => {
       role: "Coordinator",
       followers: "6.7k",
       specialization: ["Event Recomm.", "User Intuition"],
-      contactInfo: "asadujjaman@example.com",
+      contactInfo: "atik@example.com",
       bio: "Optimizes event recommendations using AI, making the platform more.",
     },
     {
@@ -71,7 +71,7 @@ const Organizers = () => {
       role: "Marketing Organizer",
       followers: "6.8k",
       specialization: ["Eco Events", "Sustainability"],
-      contactInfo: "zakia.sultana@example.com",
+      contactInfo: "zakia@example.com",
       bio: "Promotes eco-friendly and sustainable events, contributing to green.",
     },
     {
@@ -81,7 +81,7 @@ const Organizers = () => {
       role: "Volunteer Organizer",
       followers: "6.9k",
       specialization: ["Music Events", "Wide Audience"],
-      contactInfo: "riyad.hasan@example.com",
+      contactInfo: "riyad@example.com",
       bio: "Handles promotion for music and arts events, ensuring they a audience.",
     },
     {
@@ -91,7 +91,7 @@ const Organizers = () => {
       role: "Finance Organizer",
       followers: "6.7k",
       specialization: ["Budgeting", "Financial Success"],
-      contactInfo: "mostafa.kamal@example.com",
+      contactInfo: "mostafa@example.com",
       bio: "Manages budgets and financial planning, financial success for event.",
     },
   ];
@@ -153,9 +153,9 @@ const Organizers = () => {
       
       <a
         href={`mailto:${organizer.contactInfo}`}
-        className="flex items-center  text-sm mb-1"
+        className="flex items-center bg-blue-200 px-2 rounded-xl text-base mb-1"
       >
-        <MdContactMail className="  mr-2 rounded p-1 text-lg" />
+        <IoIosMailOpen className="  mr-2 rounded  text-lg" />
      
         {organizer.contactInfo}
       </a>
