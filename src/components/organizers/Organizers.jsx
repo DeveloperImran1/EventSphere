@@ -119,7 +119,7 @@ const Organizers = () => {
       >
         {organizers?.map((organizer, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-2 flex flex-col items-center text-center group h-[600px] w-[300px]">
+            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-2 flex flex-col items-center text-center group h-[450px] w-[300px]">
       <div className="relative w-32 h-32 mb-4">
         <Image
           src={organizer.profilePicture}
@@ -147,7 +147,7 @@ const Organizers = () => {
         ))}
       </div>
 
-      <p className="text-sm text-center mx-auto text-gray-700 dark:text-gray-300 mb-4 flex-grow overflow-y-auto">
+      <p className="text-sm text-center mx-auto text-gray-700 dark:text-gray-300  flex-grow overflow-y-auto">
         {organizer.bio}
       </p>
       
