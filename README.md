@@ -136,7 +136,7 @@ Gift card purchase options and access to current promotions.
 
 ## Additional Information
   - Secure authentication using Google and Facebook providers, along with Mailgun for email notifications.
-  - 
+    
 - **Environment Variables:**
   - Create a `.env.local` file in the root of your client project and add the following variables:
     ```plaintext
