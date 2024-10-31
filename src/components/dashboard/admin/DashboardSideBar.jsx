@@ -81,20 +81,21 @@ const DashboardSideBar = () => {
             icon: RiUserAddLine, // Add user icon for requesting organizer role
         },
         {
+            title: "Notification",
+            path: "/dashboard/notifications",
+            icon: FaBell, // Bell icon for notifications
+        },
+        {
             title: "Community",
             path: "/community",
             icon: RiCommunityLine, // Community icon for community section
         },
         {
             title: "Message",
-            path: "/message",
+            path: "/messenger",
             icon: RiMessage2Line, // Message/chat icon for the message section
         },
-        {
-            title: "Notification",
-            path: "/dashboard/notifications",
-            icon: FaBell, // Bell icon for notifications
-        },
+     
     ];
 
     const organizerRoutes = [
@@ -130,16 +131,22 @@ const DashboardSideBar = () => {
             icon: RiMoneyDollarCircleLine, // Dollar circle for profit section
         },
         {
-            title: "Community",
-            path: "/community",
-            icon: RiCommunityLine, // Community icon for community section
-        },
-        {
             title: "Notification",
             path: "/dashboard/notifications",
             icon: FaBell, // Bell icon for notifications
             number: 5, // Example notification count
         },
+        {
+            title: "Community",
+            path: "/community",
+            icon: RiCommunityLine, // Community icon for community section
+        },
+        {
+            title: "Message",
+            path: "/messenger",
+            icon: RiMessage2Line, // Message/chat icon for the message section
+        },
+       
     ];
 
     const AdminRoutes = [
@@ -174,6 +181,11 @@ const DashboardSideBar = () => {
             icon: RiUserAddLine, // Represents user or organizer requests
         },
         {
+            title: "Notification",
+            path: "/dashboard/notifications",
+            icon: FaBell, // Bell icon for notifications
+        },
+        {
             title: "Community",
             path: "/community",
             icon: RiCommunityLine, // Suitable for community or group-based sections
@@ -183,11 +195,7 @@ const DashboardSideBar = () => {
             path: "/messenger",
             icon: RiMessage2Line, // Message/chat section
         },
-        {
-            title: "Notification",
-            path: "/dashboard/notifications",
-            icon: FaBell, // Bell icon for notifications
-        },
+       
     ];
 
     useEffect(() => {
