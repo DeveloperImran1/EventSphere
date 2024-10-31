@@ -5,12 +5,12 @@ const Pricing = () => {
     return (
         <div>
         {/* Background section */}
-        <div className="bg-slate-300   pb-36">
+        <div className="pb-10   lg:pb-36">
           <div className="container mx-auto p-2 md:p-20">
             <div className="text-center">
-              <h1 className="text-xl font-semibold font-serif tracking-[.25em] text-blue-500">PRICING</h1>
-              <h1 className="my-2 font-serif font-semibold text-black">Flat Event Ticketing Fee.<br /> Zero Contracts. Zero Bindings.</h1>
-              <p className="text-gray-800 font-serif font-medium text-xl">
+              <h1 className="text-xl font-semibold  tracking-[.25em] text-blue-500">PRICING</h1>
+              <h1 className="my-2  font-semibold text-black">Flat Event Ticketing Fee.<br /> Zero Contracts. Zero Bindings.</h1>
+              <p className="text-gray-800  font-medium lg:text-xl">
                 Get everyone onboard, optimize your event registration and boost ticket sales.
               </p>
             </div>

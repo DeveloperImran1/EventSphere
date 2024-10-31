@@ -5,7 +5,7 @@ import React from 'react';
 
 const EventRegister = () => {
     return (
-        <div className=' w-11/12 mx-auto mb-20'>
+        <div className=' container mx-auto mb-20'>
             <SectionTitleSimple
                 title="Seamless Registration And Ticketing Systems"
                 subtitle="The Secret To Sold Out Events"

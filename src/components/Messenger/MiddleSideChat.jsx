@@ -1,3 +1,4 @@
+"use client"
 import { HiGift } from "react-icons/hi"
 import { Input } from "../ui/input";
 import Image from "next/image";

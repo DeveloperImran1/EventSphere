@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import MyFollower from './MyFollower';
 import MyFollowing from './MyFollowing';
+import SuggestFollowing from './SuggestFollowing';
 
 // Function to fetch user data
 const fetchUserData = async () => {
@@ -29,10 +30,11 @@ const CommunityRightSidebar = () => {
     }
 
     return (
-        <div className='sticky top-20'>
+        <div className='sticky top-20 h-[90vh] overflow-auto'>
             {/* My Follower */}
-            <MyFollower userData={userData} refetch={refetch} />
             <MyFollowing userData={userData} refetch={refetch} />
+            <MyFollower userData={userData} refetch={refetch} />
+            <SuggestFollowing userData={userData} refetch={refetch} />
         </div>
     );
 };

@@ -16,8 +16,8 @@ const MyFollowing = ({ userData, refetch }) => {
     const followerEmails = myData?.followers || [];
     
     // Filter userData to get the data of users who follow the current user
-    const followerData = userData.filter(user => followerEmails.includes(user.email));
-    const filteredUsersWithoutYou = followerData.filter(user => user.followers.includes(myEmail) && user.email != myEmail);
+    // const followerData = userData.filter(user => followerEmails.includes(user.email));
+    const filteredUsersWithoutYou = userData.filter(user => user.followers.includes(myEmail) && user.email != myEmail);
 
 // handleUnFollow Button
 const handleUnFollow = async (id) => {
@@ -42,13 +42,16 @@ const handleUnFollow = async (id) => {
         console.error('Error:', error);
     }
 };
+if (filteredUsersWithoutYou.length == 0) {
+    return
+  }
     return (
         <div className="my-6">
             <h2 className="text-lg font-bold">Following</h2>
             <div className="mt-1">
                 {filteredUsersWithoutYou.length > 0 ? (
                     filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
-                        <div key={follower._id} className="p-3 border mb-1 rounded">
+                        <div key={follower._id} className="p-3 border mb-1 cursor-pointer rounded">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
                                     <div className="rounded-full h-11 w-11 border p-[2px]">

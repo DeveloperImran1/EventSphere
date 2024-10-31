@@ -13,7 +13,7 @@ const NewChart = () => {
   }, []);
 
   return (
-    <div className="w-full h-[500px] bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-lg shadow-lg py-6 sm:h-[400px] sm:p-4 md:h-[500px]">
+    <div className="w-full ml-4 md:ml-0  h-[500px] bg-gradient-to-r from-blue-50 via-white to-blue-50 rounded-lg shadow-lg py-6 sm:h-[340px] sm:p-4 md:h-[500px]">
       <h2 className="text-2xl font-bold text-center text-gray-800 sm:text-xl md:text-3xl">Monthly Metrics Overview</h2>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart

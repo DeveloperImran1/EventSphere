@@ -31,7 +31,7 @@ const EventsData = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDay, setSelectedDay] = useState('all');
   const [filters, setFilters] = useState({
     search: '',
@@ -236,13 +236,13 @@ const EventsData = () => {
         search={search}
         setFilters={setFilters} />
 
-      <div className='  max-w-[1280px] mx-auto'>
+      <div className='  container mx-auto'>
 
         {/* For mobile - Drawer button */}
         <div className="block lg:hidden ">
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="text-4xl p-2 bg-[--color-logo] text-green-500 rounded-full"
+            className="text-4xl p-2 bg-[--color-logo] text-[#1b85db] rounded-full"
           >
             <FiFilter />
           </button>
@@ -514,7 +514,7 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className=" w-full lg:w-4/5 ml-2">
+          <div className=" w-full lg:w-4/5 mr-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
                 <CardForEvents

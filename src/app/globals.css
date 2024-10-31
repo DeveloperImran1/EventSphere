@@ -74,6 +74,7 @@ body {
   font-family: var(--font-family-sans);
   background-color: var(--color-light);
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 p {
@@ -85,7 +86,7 @@ p {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   width: 100%;
 }
 
@@ -144,42 +145,6 @@ p {
   text-align: center;
 }
 
-
-   /* --color-hover: #2332c4; Normal blue for hover or selection */
-   
-   /* Utility Colors */
-   /* --color-border: #d1d1d1; Neutral color for borders */
-   /* --color-error: #ff4c4c; Error messages */
-   /* --color-success: #4caf50; Success messages */
-   /* --color-warning: #ff9800; Warning messages */
- 
-   /* Font Variables */
-   /* --font-family-sans: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-   --font-family-serif: 'Merriweather', serif; */
-  
- 
-
- 
- 
- /* ===== GLOBAL STYLES ===== */
- *,
- *::before,
- *::after {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
- 
- html {
-   font-size: var(--font-size-base);
-   scroll-behavior: smooth;
- }
- 
- body {
-   font-family: var(--font-family-sans);
-   background-color: var(--color-light);
-   line-height: 1.5;
- }
  
  p{
   color: #6b7280;

@@ -98,7 +98,7 @@ const RegisterPageComponent = () => {
       password: e.target.password.value,
       image,
       createdAt: new Date(),
-      role: "user",
+      role: "organizer",
       followers: [],
       review: [],
       block: false,
@@ -140,7 +140,7 @@ const RegisterPageComponent = () => {
   return (
     <div className="">
       <div
-        style={{ backgroundImage: `url(${'https://media.istockphoto.com/id/1368151370/photo/user-typing-login-and-password-cyber-security-concept.jpg?s=612x612&w=0&k=20&c=hZ14F6Fa4edYWwg0BduAj0is8gdcORsBBHpQcQbAPKc='})` }}
+        style={{ backgroundImage: `url(${'https://i.postimg.cc/j5F0kNnY/loginBG.jpg'})` }}
         className="bg-cover bg-center pb-16"
       >
         <div className="container mx-auto flex flex-col md:flex-row text-white">
@@ -157,7 +157,7 @@ const RegisterPageComponent = () => {
                   <li>
                     <p className="text-[1rem] mb-1 font-semibold text-white flex gap-x-2">
                       <span>
-                        <IoIosCheckmarkCircle className="text-2xl text-green-500" />
+                        <IoIosCheckmarkCircle className="text-2xl text-[#1b85db]" />
                       </span>
                       Simple, easy-to-use platform
                     </p>
@@ -165,7 +165,7 @@ const RegisterPageComponent = () => {
                   <li>
                     <p className="text-[1rem] mb-1 font-semibold text-white flex gap-x-2">
                       <span>
-                        <IoIosCheckmarkCircle className="text-2xl text-green-500" />
+                        <IoIosCheckmarkCircle className="text-2xl text-[#1b85db]" />
                       </span>
                       Lowest ticketing fees
                     </p>
@@ -173,7 +173,7 @@ const RegisterPageComponent = () => {
                   <li>
                     <p className="text-[1rem] mb-1 font-semibold text-white flex gap-x-2">
                       <span>
-                        <IoIosCheckmarkCircle className="text-2xl text-green-500" />
+                        <IoIosCheckmarkCircle className="text-2xl text-[#1b85db]" />
                       </span>
                       Dedicated customer support team
                     </p>
@@ -181,7 +181,7 @@ const RegisterPageComponent = () => {
                   <li>
                     <p className="text-[1rem] mb-1 font-semibold text-white flex gap-x-2">
                       <span>
-                        <IoIosCheckmarkCircle className="text-2xl text-green-500" />
+                        <IoIosCheckmarkCircle className="text-2xl text-[#1b85db]" />
                       </span>
                       Powerful features
                     </p>
@@ -379,7 +379,7 @@ const RegisterPageComponent = () => {
               {/* Sign up Button */}
               <button
                 type="submit"
-                className="bg-green-500 text-white rounded-md p-3 w-full font-bold hover:bg-green-600"
+                className="bg-[#1b85db] text-white rounded-md p-3 w-full font-bold hover:bg-[#1b85db]"
               >
                 {
                   loading ? <p className="flex flex-col justify-center items-center"><TbFidgetSpinner size={22} className="text-white animate-spin "></TbFidgetSpinner></p> : "Sign up"
@@ -394,7 +394,7 @@ const RegisterPageComponent = () => {
             {/* Log in Link */}
             <p className="text-center mt-4">
               Already have an account?{" "}
-              <Link href="login" className="text-green-500 font-bold hover:underline">
+              <Link href="login" className="text-[#1b85db] font-bold hover:underline">
                 Log In
               </Link>
             </p>
@@ -402,11 +402,11 @@ const RegisterPageComponent = () => {
             {/* Terms & Privacy */}
             <p className="text-center text-xs text-gray-500 mt-2">
               By clicking Sign up, you agree to EventBookings{" "}
-              <Link href="#" className="text-green-500 underline">
+              <Link href="#" className="text-[#1b85db] underline">
                 Terms & Conditions
               </Link>{" "}
               and have read the{" "}
-              <Link href="#" className="text-green-500 underline">
+              <Link href="#" className="text-[#1b85db] underline">
                 Privacy Policy
               </Link>
               .
