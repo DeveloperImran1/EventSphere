@@ -119,7 +119,7 @@ const Organizers = () => {
       >
         {organizers?.map((organizer, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-6 flex flex-col items-center text-center group h-[600px] w-[300px]">
+            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-2 flex flex-col items-center text-center group h-[600px] w-[300px]">
       <div className="relative w-32 h-32 mb-4">
         <Image
           src={organizer.profilePicture}
@@ -153,19 +153,19 @@ const Organizers = () => {
       
       <a
         href={`mailto:${organizer.contactInfo}`}
-        className="flex items-center bg-blue-200 px-2 rounded-xl text-base mb-1"
+        className="flex items-center bg-blue-200 px-2 rounded-xl text-base mb-2"
       >
         <IoIosMailOpen className="  mr-2 rounded  text-lg" />
      
         {organizer.contactInfo}
       </a>
 
-      <div className="flex justify-between items-center w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="flex justify-evenly items-center w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 flex items-center gap-1">
          Followers:  <span className="text-black">{organizer.followers} </span>
         </p>
         
-        <div className="flex items-center gap-3 text-xl">
+        <div className="flex items-center  gap-3 text-xl">
           <FaLinkedin className=" cursor-pointer" />
           <FaFacebook className=" cursor-pointer" />
         </div>
