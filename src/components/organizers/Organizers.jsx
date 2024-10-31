@@ -309,59 +309,58 @@ const Organizers = () => {
       >
         {organizers?.map((organizer, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-6 flex flex-col items-center text-center group">
-              <div className="relative w-32 h-32 mb-4">
-                <Image
-                  src={organizer.profilePicture}
-                  alt={`${organizer.name}'s profile`}
-                  className="rounded-full object-cover w-full h-full animate-top-down"
-                  width={200}
-                  height={200}
-                />
-              </div>
-              
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                {organizer.name}
-              </h3>
-              
-              <p className="text-md font-semibold mb-2">{organizer.role}</p>
+             <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-6 flex flex-col items-center text-center group h-[600px] w-[300px]">
+      <div className="relative w-32 h-32 mb-4">
+        <Image
+          src={organizer.profilePicture}
+          alt={`${organizer.name}'s profile`}
+          className="rounded-full object-cover w-full h-full animate-top-down"
+          width={200}
+          height={200}
+        />
+      </div>
+      
+      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+        {organizer.name}
+      </h3>
+      
+      <p className="text-md font-semibold mb-2">{organizer.role}</p>
 
-              <div className="flex flex-wrap gap-2 justify-center">
-                {organizer.specialization.map((spec, index) => (
-                  <div
-                    key={index}
-                    className="bg-[#1b85db] dark:bg-blue-900 text-white font-bold dark:text-blue-300 px-3 py-1 rounded-full text-sm mb-2"
-                  >
-                    {spec}
-                  </div>
-                ))}
-              </div>
+      <div className="flex flex-wrap gap-2 justify-center mb-2">
+        {organizer.specialization.map((spec, index) => (
+          <div
+            key={index}
+            className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs"
+          >
+            {spec}
+          </div>
+        ))}
+      </div>
 
-              <p className="text-md text-center mx-auto font-semibold text-gray-700 dark:text-gray-300 my-2">
-                {organizer.bio}
-              </p>
-              
-              <a
-                href={`mailto:${organizer.contactInfo}`}
-                className="flex items-center text-blue-600 dark:text-blue-400 text-md font-medium mb-1"
-              >
-                <MdContactMail className="text-black bg-green-400 mr-2 rounded" />
-                <span className="text-black font-semibold mr-2">Contact:</span>
-                {organizer.contactInfo}
-              </a>
+      <p className="text-sm text-center mx-auto text-gray-700 dark:text-gray-300 mb-4 flex-grow overflow-y-auto">
+        {organizer.bio}
+      </p>
+      
+      <a
+        href={`mailto:${organizer.contactInfo}`}
+        className="flex items-center text-primary text-sm mb-2"
+      >
+        <MdContactMail className="text-background bg-primary mr-2 rounded p-1 text-lg" />
+        <span className="font-semibold mr-1">Contact:</span>
+        {organizer.contactInfo}
+      </a>
 
-              <div className="flex justify-between items-center gap-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold w-full">
-                <p className="text-sm text-black dark:text-gray-400 mb-2 pt-2 flex gap-2 items-center">
-                 
-                  Followers: {organizer.followers}
-                </p>
-                
-                <div className="flex items-center gap-3 text-xl">
-                  <FaLinkedin className="rounded-sm" />
-                  <FaFacebook className="rounded-full" />
-                </div>
-              </div>
-            </div>
+      <div className="flex justify-between items-center w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
+          Followers: {organizer.followers}
+        </p>
+        
+        <div className="flex items-center gap-3 text-xl">
+          <FaLinkedin className="text-primary hover:text-primary/80 cursor-pointer" />
+          <FaFacebook className="text-primary hover:text-primary/80 cursor-pointer" />
+        </div>
+      </div>
+    </div>
           </SwiperSlide>
         ))}
       </Swiper>
