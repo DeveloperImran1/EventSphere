@@ -5,6 +5,7 @@ import axios from 'axios';
 import MyFollower from './MyFollower';
 import MyFollowing from './MyFollowing';
 import SuggestFollowing from './SuggestFollowing';
+import Loading from '../shared/LoadingSpiner/Loading';
 
 // Function to fetch user data
 const fetchUserData = async () => {
@@ -22,7 +23,7 @@ const CommunityRightSidebar = () => {
     
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
     if (error) {

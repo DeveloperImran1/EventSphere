@@ -118,7 +118,7 @@ export default function Banner() {
               }}
             >
               {index === 1 && (
-                <div className="absolute inset-1 bg-black  bg-opacity-50 " />
+                <div className="absolute inset-[0px] bg-black  bg-opacity-50 " />
               )}
                
 
@@ -200,9 +200,7 @@ export default function Banner() {
       .item:nth-child(2) .content {
         animation: fadeIn 0.5s ease-out 0.25s forwards;
       }
-      .animate-zoomInUp {
-        animation: zoomInUp 0.9s ease-out;
-      }
+  
 
       /* Small devices styling */
       @media (max-width: 640px) {

@@ -104,13 +104,13 @@ export default function FeedPost({refetch}) {
                 <input
                     type="text"
                     placeholder="What's on your mind?"
-                    className="w-full p-2 bg-gray-100 rounded-full focus:outline-none"
+                    className="md:w-full w-[70%] p-2 bg-gray-100 rounded-full focus:outline-none"
                     onClick={openModal}
                 />
             </div>
 
             {isModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 z-50 flex items-center justify-center  bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-md shadow-md w-full max-w-lg">
                         <div className="flex justify-between items-center">
                             <h2 className="text-lg font-bold">Create post</h2>
