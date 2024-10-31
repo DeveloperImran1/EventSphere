@@ -140,7 +140,7 @@ const Organizers = () => {
         {organizer.specialization.map((spec, index) => (
           <div
             key={index}
-            className=" px-2 py-1 text-white bg-[#1b9bdb] text-xs"
+            className=" p-1  text-white bg-[#1b9bdb] text-xs"
           >
             {spec}
           </div>
