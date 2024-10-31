@@ -1,10 +1,10 @@
-import EventRequestForm from '@/components/organizers/EventRequest';
+import AddEventForm from '@/components/organizers/AddEventForm';
 import React from 'react';
 
 const EventPost = () => {
     return (
         <div>
-             <EventRequestForm></EventRequestForm>
+             <AddEventForm/>
         </div>
     );
 };

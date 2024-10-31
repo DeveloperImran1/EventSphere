@@ -144,7 +144,7 @@ const Navbar = () => {
 
   ]
   const subMenu4 = [
- 
+
     {
       title: "Offer Announcement",
       path: "/offer-announcement"
@@ -218,14 +218,21 @@ const Navbar = () => {
   return (
     <nav className={` 
       transition-transform duration-500 ease-in-out 
-      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50
+      bg-[#1b85db] shadow-lg  fixed top-0 w-full z-50 
     `}>
-      <div className=" mx-auto py-1  px-4 max-w-7xl">
+      <div className=" mx-auto py-2  container ">
         <div className="flex justify-between items-center ">
           {/* Logo + Website Name */}
-          <Logo></Logo>
+          <div className="block lg:hidden">
+            <Link href="/" className='flex items-center hover:scale-105 duration-300 transform'>
+              <Image src="/asssets/images/logo-white.png" alt='logo' width={60} height={60} className='object-cover rounded-full mr-[-10px]' />
+            </Link>
 
-          <div className="flex justify-between items-center gap-[100px]">
+          </div>
+          <div className="hidden lg:block">
+            <Logo></Logo>
+          </div>
+          <div className="flex justify-between items-center  lg:gap-[40px]">
             {/* Navigation Links for larger devices */}
             <div className="hidden md:flex space-x-8 text-white">
 
@@ -522,7 +529,7 @@ const Navbar = () => {
                       }
 
                       <Link
-                        href="/offer-announcement"
+                        href="/gift-card"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                         onClick={closeDropdown}
                       >

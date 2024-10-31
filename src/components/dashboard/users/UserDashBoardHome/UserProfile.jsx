@@ -49,7 +49,7 @@ const UserProfile = () => {
 
                 {/* User Info */}
                 <div className='flex '>
-                    <div className='flex pl-3  flex-col md:flex-row md:gap-4 gap-2'>
+                    <div className='flex pl-3  flex-col lg:flex-row md:gap-4 gap-2'>
                         <div>
                             <h2 className='text-xl text-left font-bold'>{data?.name}</h2>
                             <h3 className='text-lg  text-[#1b85db]'>{data?.specialty || "UX / UI Designer"}</h3>

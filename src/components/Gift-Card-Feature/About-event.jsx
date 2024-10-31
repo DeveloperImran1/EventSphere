@@ -48,86 +48,23 @@ const AboutSection = () => {
   ]
 
   return (
-    <section className="py-14 h-full">
+    <section className=" container h-full">
 
-      <div className="md:flex max-w-[1280px] mx-auto justify-evenly  items-center h-full ">
+      <div className="md:flex mx-auto py-7 lg:py-14 justify-evenly  items-center h-full ">
         <div className='md:flex space-y-4 gap-10  items-center'  >
           {/* Left Content - Event Description */}
-          <div className="    lg:w-[50%]  text-center lg:text-left">
+          <div className=" ml-6   lg:w-[50%]  text-center lg:text-left">
             <h2 className="text-3xl font-serif font-bold text-gray-800 mb-4">About Event</h2>
             <p className="text-gray-600 ">Join us to celebrate the biggest event for the whole family this December!</p>
             <p className="text-gray-600 mb-6">We have prepared a variety of entertaining activities for kids and adults to provide an unforgettable experience of celebrating Christmas the way you want it.</p>
            <Button className='button'>Book Now</Button>
           </div>
 
-          {/* Middle Content - Swiper Image Slider */}
-          {/* <div className="lg:max-w-[400px]  ">
-            <Swiper
-
-              spaceBetween={30}
-              navigation
-              autoplay={{ delay: 1000 }}
-              loop={true}
-              modules={[Navigation, Autoplay]}
-              className="rounded-lg overflow-hidden  shadow-lg"
-            >
-
-              <SwiperSlide>
-
-                <Image
-                  src="https://i.postimg.cc/wB5gTmPZ/pexels-pixabay-433452.jpg"
-                  alt="404 gif"
-                  width={400}
-                  height={400}
-                  className='w-full h-full '
-                />
-
-              </SwiperSlide>
-              <SwiperSlide>
-
-                <Image
-                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
-                  alt="404 gif"
-                  width={400}
-                  height={400}
-                  className='w-full  h-full'
-                />
-
-              </SwiperSlide>
-              <SwiperSlide>
-
-                <Image
-                  src="https://i.postimg.cc/Y05sWXL3/pexels-asadphoto-169198.jpg"
-                  alt="404 gif"
-                  width={400}
-                  height={400}
-                  className='w-full  h-full '
-                />
-
-              </SwiperSlide>
-              <SwiperSlide>
-
-                <Image
-                  src="https://i.postimg.cc/FH2C4Fs2/pexels-teddy-2263436.jpg"
-                  alt="404 gif"
-                  width={400}
-                  height={400}
-                  className='w-full  h-full'
-                />
-
-              </SwiperSlide>
-
-
-
-            </Swiper>
-
-
-
-          </div> */}
+          
 
         </div>
         {/* Right Content - Event Details */}
-        <div className=" flex justify-center py-10   md:w-1/2 md:h-[443px]  ">
+        <div className="hidden lg:flex justify-center py-10   md:w-1/2 md:h-[443px]  ">
 
 
           <ul className=" grid  grid-cols-1  md:grid-cols-2  gap-4  ">

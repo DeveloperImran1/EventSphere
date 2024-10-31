@@ -1,5 +1,5 @@
 
-.container {
+.containerCard {
     height: 300px;
    
     color: rgb(0, 187, 255);
@@ -26,7 +26,7 @@
     top: 0;
     border-top: none;
     border-radius: 0 0 1rem 1rem;
-    box-shadow: 0px 0px 10px 5px rgba(0, 179, 255, 0.7);
+    box-shadow: 0px 0px 3px 2px rgba(0, 179, 255, 0.7);
   }
   
 
@@ -40,15 +40,15 @@
   .back {
     height: 100%;
     width: 100%;
-    border-radius: 2rem;
-    box-shadow: 0px 0px 10px 5px rgba(0, 213, 255, 0.7);
+    border-radius: 16px;
+    box-shadow: 0px 0px 3px 1px rgba(0, 213, 255, 0.7);
     position: absolute;
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+   
   }
   
   .back {

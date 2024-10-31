@@ -14,9 +14,9 @@ export default function GlowingCssText({ text }) {
   }, [])
 
   const getTextShadow = () => {
-    const shadows = [10, 20, 40, 80].map((size, index) => {
+    const shadows = [5, 10, 20].map((size, index) => {
       const intensity = Math.max(0, shadowIntensity - index)
-      return `0px 0px ${size}px rgba(2, 255, 255, ${intensity * 0.6})`
+      return `0px 0px ${size}px rgba(0, 0, 255, ${intensity * 0.6})`
     })
     return shadows.join(', ')
   }

@@ -114,8 +114,8 @@ export default function PopularEvent() {
 
   // main body//
   return (
-    <div className="w-full  py-12 container mx-auto ">
-      <div className="px-4">
+    <div className=" py-12 container mx-auto ">
+      <div className="px-4 sm:px-0">
         <SectionTitleSimple
           title="Explore Popular Events"
           subtitle="Discover the most popular events happening right now. Whether it's sports, drama, or live shows, find and book tickets for events that suit your taste. Don't miss out on these trending events!"
@@ -256,7 +256,7 @@ function EventCard({ event }) {
   return (
     <div className="w-full   ">
       <div
-        className="relative h-[500px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out "
+        className="relative h-[400px] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 ease-in-out "
         style={{
           backgroundImage: `url(${event?.gallery[0]})`,
           backgroundSize: 'cover',
@@ -280,7 +280,7 @@ function EventCard({ event }) {
             </div>
             <div className="space-y-2">
               <h2 className=" text-xl  font-semibold font-serif text-white">{event.title}</h2>
-              <p className="text-lg flex  items-center gap-2 font-mono text-white"> <FaMagnifyingGlassLocation className="text-xl text-[#10a0b9] " /> {event?.location?.country}       </p>
+              {/* <p className="text-lg flex  items-center gap-2 font-mono text-white"> <FaMagnifyingGlassLocation className="text-xl text-[#10a0b9] " /> {event?.location?.country}       </p> */}
               <div className="pt-2 ">
                 <EnhancedCountdown date={Date.now() + Math.random() * 30 * 24 * 60 * 60 * 1000} />
               </div>
@@ -295,7 +295,7 @@ function EventCard({ event }) {
           <motion.div
             initial={{ y: "-100%", rotateX: -90, opacity: 0 }}
             animate={isHovered ? { y: 0, rotateX: 0, opacity: 1 } : { y: "-100%", rotateX: -90, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 5 }}
             style={{ transformStyle: "preserve-3d" }}
           >
             <Link href={`events/${event?._id}`}>

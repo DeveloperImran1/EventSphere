@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const AnimatedImageSection = () => {
     return (
-        <div className="flex flex-col lg:flex-row justify-between items-center w-full bg-gray-100 p-10">
+        <div className="container mx-auto mb-16 flex flex-col lg:flex-row justify-between items-center w-full">
             {/* Left side text (1/2 width) */}
             <div className="lg:w-1/2 p-5">
                 <h2 className="text-3xl font-bold mb-4">Ordinary Tools, Ordinary Events—Summon The Kraken Of Online Event Management Software</h2>

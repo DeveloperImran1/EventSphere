@@ -23,8 +23,8 @@ const Booking = () => {
             <div className="hero md:min-h-[800px] ">
                 <div className="hero-overlay bg-opacity-60"></div>
                  
-                <div   id="Container">
-                    <h1  className=' font-serif text-white  mt-5'>
+                <div   id="Container" className='px-2 '>
+                    <h1  className='text-center font-serif text-white  mt-5'>
                     🎉 Are you ready to join our event? 🎊</h1>
                     <form className="form  w-full">
                         <div id="login-lable">Register Now ✍️</div>

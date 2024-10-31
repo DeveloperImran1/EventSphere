@@ -105,7 +105,7 @@ const Dashboard = () => {
         <Card className="bg-white shadow-lg">
           <CardContent className="flex items-center p-6">
             <Users className="h-10 w-10 text-blue-500 mr-4" />
-            <div>
+            <div >
               <p className="text-sm text-gray-500">Tickets Sold</p>
               <p className="text-3xl font-bold">{getTotalTicketsSold()}</p>
             </div>
@@ -203,8 +203,8 @@ const Dashboard = () => {
                   <h3 className="font-semibold">{event.title}</h3>
                   <p className="text-sm text-gray-500">{event.category}</p>
                 </div>
-                <div className="text-right">
-                  <p className="font-semibold">{event.bookedSeats.length} tickets sold</p>
+                <div className="text-right ">
+                  <p className="font-semibold text-red-700">{event.bookedSeats.length} tickets sold</p>
                   <p className="text-sm text-gray-500">${event.price * event.bookedSeats.length} revenue</p>
                 </div>
               </div>
