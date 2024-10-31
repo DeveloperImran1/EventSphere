@@ -1,9 +1,34 @@
+"use client"
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
-
+import toast, { Toaster } from 'react-hot-toast';
 const WelcomePopup = () => {
+  const axiosPublic = useAxiosPublic();
+  const router = useRouter()
+  const session = useSession();
+  const email = session?.data?.user?.email;
+  const handleRoleSubmit = async (newRole) => {
+    const data = { email, newRole }
+    console.log(data)
+    const res = await axiosPublic.put(`/userRollUpdateWithEmail`, data)
+    console.log("responce is ", res?.data?.data?.modifiedCount)
+    if(res?.data?.data?.modifiedCount){
+      router.push("/")
+      toast.success('Successfylly Your Role is Updated')
+    }
+    else{
+      router.push("/")
+      toast.error('Your Role is Updated Error')
+    }
+  }
+
+
+
   return (
-    <div className="relative py-16 bg-[url('https://i.postimg.cc/KYXmLkry/bcc3716da3dabc9f944d1c30cea66036-background-Desktop.jpg')] bg-no-repeat bg-cover flex flex-col items-center justify-center text-center">
+    <div className="relative py-16 bg-[url('https://i.postimg.cc/ZqjxSqHr/pngtree-blue-wave-shapes-with-layered-bottom-png-image-4391667-removebg-preview.png')] bg-no-repeat bg-cover flex flex-col items-center justify-center text-center">
       <h1 className="text-3xl md:text-5xl font-bold text-[#1e0a3c] mb-4 px-5 md:px-0">
         Welcome to EventSphare! <span className="wave">👋</span>
       </h1>
@@ -22,10 +47,10 @@ const WelcomePopup = () => {
             height={200}
           />
           <h3 className="md:text-2xl font-bold text-[#1e0a3c] mb-6">
-            Find an experience
+            Find an Experience
           </h3>
-          <button className="bg-gray-100 hover:bg-gray-300 font-semibold py-2 px-4 rounded border border-[#1e0a3c77]">
-            Tell us what you love
+          <button onClick={()=> handleRoleSubmit("user")} className="bg-gray-100 hover:bg-gray-300 font-semibold py-2 px-4 rounded border border-[#1e0a3c77]">
+            As an User
           </button>
         </div>
 
@@ -39,10 +64,10 @@ const WelcomePopup = () => {
             height={200}
           />
           <h3 className="md:text-2xl font-bold text-[#1e0a3c] mb-6">
-            Organize an event
+            Organize an Event?
           </h3>
-          <button className="bg-gray-100 hover:bg-gray-300 font-semibold py-2 px-4 rounded border border-[#1e0a3c77]">
-            Plan your best event <span className=''>ever</span>
+          <button onClick={()=> handleRoleSubmit("organizer")} className="bg-gray-100 hover:bg-gray-300 font-semibold py-2 px-4 rounded border border-[#1e0a3c77]">
+            As an Organizer
           </button>
         </div>
       </div>

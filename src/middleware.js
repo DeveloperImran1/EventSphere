@@ -24,7 +24,17 @@ export const middleware = async (request) => {
     const {data} = await axios.get(`https://event-sphare-server.vercel.app/user/${myEmail}`)
     console.log("current user role is ", data?.role);
  
-    if(pathname === '/dashboard/be-organizer' || pathname === '/dashboard/my-orderlist' &&  data?.role !== "user" ){
+    if((pathname === '/dashboard/be-organizer' || pathname === '/dashboard/my-orderlist') &&  data?.role !== "user" ){
+       
+        return NextResponse.redirect(new URL(`/login?redirect=${pathname}&error=access_denied`, request.url));
+    }
+
+    if((pathname === '/dashboard/booked-event' || pathname === '/dashboard/eventPost' || pathname === '/dashboard/organizer-container' || pathname === '/dashboard/organizer-profit') &&  data?.role !== "organizer" ){
+       
+        return NextResponse.redirect(new URL(`/login?redirect=${pathname}&error=access_denied`, request.url));
+    }
+
+    if((pathname === '/dashboard/admin-container' || pathname === '/dashboard/organizer-request' || pathname === '/dashboard/user-manage') &&  data?.role !== "admin" ){
        
         return NextResponse.redirect(new URL(`/login?redirect=${pathname}&error=access_denied`, request.url));
     }
@@ -34,6 +44,6 @@ export const middleware = async (request) => {
 
 export const config = {
     matcher: ["/dashboard/:path*"]
-    // matcher: ["/dashboard"]
+    // matcher: []
 }
 

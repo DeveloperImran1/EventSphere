@@ -28,7 +28,7 @@ const MainLayout = ({ children }) => {
       }
       {children}
       {
-        path.includes("login") || path.includes("register") || path.includes("community") ? <></> : <Footer></Footer>
+        path.includes("login") || path.includes("register") || path.includes("community") || path.includes("messenger") ? <></> : <Footer></Footer>
       }
 
     </div>

@@ -40,6 +40,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -49,7 +50,7 @@
     "emailjs-com": "^3.2.0",
     "file-saver": "^2.0.5",
     "form-data": "^4.0.0",
-    "framer-motion": "^11.11.8",
+    "framer-motion": "^11.11.10",
     "html-to-image": "^1.11.11",
     "ionicons": "^7.4.0",
     "jsonwebtoken": "^9.0.2",
@@ -65,6 +66,7 @@
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.0.1",
     "react": "^18.3.1",
+    "react-animations": "^1.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
@@ -92,8 +94,9 @@
     "react-toastify": "^10.0.5",
     "react-youtube": "^10.1.0",
     "recharts": "^2.13.0",
+    "sass": "^1.80.4",
     "simple-peer": "^9.11.1",
-    "socket.io-client": "^4.8.0",
+    "socket.io-client": "^4.8.1",
     "stripe": "^17.1.0",
     "styled-components": "^6.1.13",
     "sweetalert": "^2.1.2",
@@ -104,12 +107,15 @@
     "three": "^0.168.0",
     "timeago.js": "^4.0.2",
     "typewriter-effect": "^2.21.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "14.2.12",
+    "file-loader": "^6.2.0",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.12"
+    "tailwindcss": "^3.4.12",
+    "url-loader": "^4.1.1"
   }
 }

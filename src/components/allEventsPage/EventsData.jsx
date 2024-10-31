@@ -242,7 +242,7 @@ const EventsData = () => {
         <div className="block lg:hidden ">
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="text-4xl p-2 bg-[--color-logo] text-green-500 rounded-full"
+            className="text-4xl p-2 bg-[--color-logo] text-[#1b85db] rounded-full"
           >
             <FiFilter />
           </button>
@@ -514,7 +514,7 @@ const EventsData = () => {
             </div>
           </div>
           {/* Event Cards */}
-          <div className=" w-full lg:w-4/5 ml-2">
+          <div className=" w-full lg:w-4/5 mr-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
               {events?.events?.map(event => (
                 <CardForEvents

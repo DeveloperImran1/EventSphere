@@ -5,10 +5,8 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const MyFollower = ({ userData, refetch }) => {
-    console.log('user Data', userData);
-    
-    const [ showFollower , setShowFollower ] = useState(3);
+const SuggestFollowing = ({ userData, refetch }) => {
+    const [ showFollower , setShowFollower ] = useState(6);
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
     const router = useRouter()
@@ -19,10 +17,8 @@ const MyFollower = ({ userData, refetch }) => {
     const followerEmails = myData?.followers || [];
     
     // Filter userData to get the data of users who follow the current user
-    const followerData = userData.filter(user => followerEmails.includes(user.email));
-    console.log('followerData', followerData);
-    
-    // const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
+    const followerData = userData.filter(user => followerEmails.includes(user?.email));
+    const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail) && user.email != myEmail);
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -51,16 +47,13 @@ const MyFollower = ({ userData, refetch }) => {
           console.error('Error:', error);
         }
       };
-      if (followerData.length == 0) {
-        return
-      }
     return (
-        <div className="">
-            <h2 className="text-lg font-bold">Followers</h2>
+        <div className="mt-7">
+            <h2 className="text-lg font-bold">Suggest</h2>
             <div className="mt-1">
-                {followerData.length > 0 ? (
-                    followerData.slice(0, showFollower).map(follower => (
-                        <div key={follower._id} className="p-3 border mb-1 rounded cursor-pointer">
+                {filteredUsersWithoutYou.length > 0 ? (
+                    filteredUsersWithoutYou.slice(0, showFollower).map(follower => (
+                        <div key={follower._id} className="p-3 border mb-1 cursor-pointer rounded">
                             <div className="flex justify-between items-center">
                                 <div className="flex gap-x-2">
                                     <div className="rounded-full h-11 w-11 border p-[2px]">
@@ -80,7 +73,7 @@ const MyFollower = ({ userData, refetch }) => {
                 )}
                 {
                     // Show the "See more" or "See less" options only if the length of filteredUsersWithoutYou is more than 3
-                    followerData.length > 3 && (
+                    filteredUsersWithoutYou.length > 3 && (
                         showFollower === 3 ? (
                             <p onClick={() => {setShowFollower(showFollower + 3)}} className='text-gray-600 mt-1 hover:text-blue-500 duration-300 cursor-pointer'>See more</p>
                         ) : (
@@ -93,4 +86,4 @@ const MyFollower = ({ userData, refetch }) => {
     );
 };
 
-export default MyFollower;
+export default SuggestFollowing;
