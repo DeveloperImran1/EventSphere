@@ -83,7 +83,7 @@ const MessageContainer = ({ selectedUser }) => {
   };
 
   return (
-    <div className=' flex flex-col h-[calc(100vh-64px)] border'>
+    <div className=' flex flex-col pl-3 h-[calc(100vh-64px)] border'>
       {selectedConversation === null ? (
         <div className='flex items-center justify-center w-full h-full'>
           <div className='px-4 text-center text-2xl text-gray-950 font-semibold flex flex-col items-center gap-2'>
@@ -94,11 +94,11 @@ const MessageContainer = ({ selectedUser }) => {
         </div>
       ) : (
         <>
-          <div className='flex justify-between items-center gap-1 bg-white py-2 md:px-5 border-y shadow-sm  '>
+          <div className='flex justify-between items-center gap-1 bg-white pt-4 pb-2 md:px-5 border-y shadow-sm '>
             <div className=" flex gap-1">
               <div className='self-center'>
                 <Image src={selectedConversation?.image} width={50} height={50} alt="avatar"
-                  className=" rounded-full" />
+                  className=" rounded-full cursor-pointer" />
               </div>
               <span className='text-black self-center text-sm md:text-xl font-bold'>
                 {selectedConversation?.name}

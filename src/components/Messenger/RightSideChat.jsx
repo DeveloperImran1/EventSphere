@@ -8,6 +8,8 @@ import SuggestFollowing from "../CommunityPage/SuggestFollowing";
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import MyFollower from "../CommunityPage/MyFollower";
+import Loading from "../shared/LoadingSpiner/Loading";
+import Link from "next/link";
 // Function to fetch user data
 const fetchUserData = async () => {
   const response = await axios.get('https://event-sphare-server.vercel.app/user');
@@ -23,10 +25,11 @@ const RightSideChat = ({ selectedUser }) => {
     queryFn: fetchUserData,
   });
   console.log("userData", userData);
+  console.log("selectedUser", selectedUser);
 
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading></Loading>;
   }
 
   if (error) {
@@ -46,8 +49,16 @@ const RightSideChat = ({ selectedUser }) => {
 
       </div>
       <div className=" flex items-center justify-center gap-2  text-sm mx-10 cursor-pointer">
-        <p className="text-white font-medium bg-blue-600 px-5 py-1 rounded-full">Profile</p>
+        {
+          selectedUser?.email ?  <Link href={`/dashboard/user-profile/${selectedUser?.email}`}>
+          <p className="text-white font-medium bg-blue-600 px-5 py-1 rounded-full">Profile</p>
+        </Link> :  <Link href="#">
+          <p className="text-white font-medium bg-blue-600 px-5 py-1 rounded-full">Profile</p>
+        </Link>
+        }
+       
       </div>
+      
       <MyFollower userData={userData} refetch={refetch} />
       {/* <SuggestFollowing userData={userData} refetch={refetch} /> */}
     </div>

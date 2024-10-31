@@ -41,95 +41,73 @@ const UnderwaterFooter = () => {
 
   const subMenu1 = [
     {
-      title: "Sell Event Ticket",
-      path: "/sell-event-ticket"
-    },
-    {
-      title: "Event Management Softwer",
-      path: "/event-management-software"
-    },
-  
-    {
-      title: "Event Ticketing Software",
-      path: "/register"
-    },
-    {
-      title: "Ticket Sales Report",
-      path: "/login"
-    },
-    {
-      title: "Request to Be Organizer",
-      path: "/organizer-request"
-    },
-  
-  ]
-  const subMenu2 = [
-    {
       title: "Register",
       path: "/register"
     },
+    {
+      title: "Login",
+      path: "/login"
+    },
+    {
+      title: "Contact Us",
+      path: "/contact"
+    }, 
+   
+    
+    
+  
+  ]
+  const subMenu2 = [
     {
       title: "About Us",
       path: "/about-us"
     },
     {
-      title: "Contact Us",
-      path: "/contact"
-    },  {
-      title: "Login",
-      path: "/login"
-    },   {
-      title: "Events",
-      path: "/events"
-    },
-  
-  ]
-  const subMenu3 = [
- 
-    {
-      title: "Gift Card",
-      path: "/gift-card"
-    },
-    {
-      title: "Gallery",
-      path: "/gallery"
+      title: "messenger",
+      path: "/messenger"
     },
     {
       title: "Subscription",
       path: "/subscriptions"
     },
+    
+    
   
+  ]
+  const subMenu3 = [
+    {
+      title: "Events",
+      path: "/events"
+    },
+    {
+      title: "Gift Card",
+      path: "/gift-card"
+    },
+    {
+      title: "Offer Announcement",
+      path: "/offer-announcement"
+    },
+   
+    
+  
+   
+    
+  ]
+  const subMenu4 = [
+    {
+      title: "Gallery",
+      path: "/gallery"
+    },
+   
+    {
+      title: "community",
+      path: "/community"
+    },
     {
       title: "All Events",
       path: "/events"
     }, 
-     {
-      title: "Offer Announcement",
-      path: "/offer-announcement"
-    },
-  ]
-  const subMenu4 = [
-    {
-      title: "Dashboard",
-      path: "/dashboard"
-    },
-    {
-      title: "Home",
-      path: "/"
-    },
-   
-    {
-      title: "All Events",
-      path: "/events"
-    },
-    {
-      title: "Community",
-      path: "/community"
-    },
-    {
-      title: "Bookmark",
-      path: "/favorite-list"
-    },
+    
   ]
   
 
@@ -171,7 +149,7 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PLATFORMS</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">IMPORTANTS</h6>
               </div>
               {
                 subMenu1?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
@@ -182,7 +160,7 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">PRODUCTS</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">COMMUNITS</h6>
               </div>
               {
                 subMenu2?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
@@ -192,10 +170,10 @@ const UnderwaterFooter = () => {
             <div className="flex flex-col items-start">
               {/* Footer Menu Tittle */}
               <div className="pb-[30px] text-[#40454f]">
-                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">RESOURCES</h6>
+                <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">EVENTS</h6>
               </div>
               {
-                subMenu3?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
+                subMenu4?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
               }
             </div>
             {/* Footer Link 4*/}
@@ -204,18 +182,23 @@ const UnderwaterFooter = () => {
               <div className="pb-[30px] text-[#40454f]">
                 <h6 className="text-white/50 tracking-[1px] text-[16px] font-semibold">OTHERS</h6>
               </div>
-              <Link href={'/dashboard'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Privacy Policy</Link>
+              {
+                subMenu3?.map((menu, index) => <Link key={index} href={`${menu?.path}`} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">{menu?.title}</Link>)
+              }
+              {/* <Link href={'/dashboard'} className="text-white mb-4 text-[16px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Privacy Policy</Link> */}
 
 
               <div className="">
-                <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Subscribe For Allert New Offer</h6>
+
+
+                {/* <h6 className="text-white mb-4 text-[18px] hover:text-white/70 cursor-pointer transition-colors duration-200 ">Subscribe For Allert New Offer</h6> */}
                 <div className="flex flex-col">
-                  <Link href={'#'} className='pt-[15px] max-w-[100%]'>
+                  {/* <Link href={'#'} className='pt-[15px] max-w-[100%]'>
                     <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3e4e6bff71d1f1eb40b_Eventify%20AppStore.svg" width={180} height={100} alt='palyStor' />
-                  </Link>
-                  <Link href={'#'} className='pt-[15px] max-w-[100%]'>
+                  </Link> */}
+                  {/* <Link href={'#'} className='pt-[15px] max-w-[100%]'>
                     <Image src="https://cdn.prod.website-files.com/61cee5eb4d566d3471eca114/6242f3f797f08340d7065372_Eventify%20PlayStore.svg" width={180} height={100} alt='palyStor' />
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

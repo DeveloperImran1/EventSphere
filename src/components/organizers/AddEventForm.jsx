@@ -103,7 +103,7 @@ const AddEventForm = () => {
     console.log("Event add korar form data ", formData)
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:9000/events/postEvent', formData);
+      const res = await axios.post('https://event-sphare-server.vercel.app/events/postEvent', formData);
       if (res.status === 201) {
         setSuccess('Event added successfully!');
         toast.success('Event added successfully!');

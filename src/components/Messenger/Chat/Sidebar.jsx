@@ -11,6 +11,7 @@ import { LiaEdit } from "react-icons/lia";
 import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { FaMessage } from "react-icons/fa6";
+import { TbMessage } from "react-icons/tb";
 const Sidebar = ({ onSelectUser }) => {
     const auth = useAuth();
     const axiosPublic = useAxiosPublic()
@@ -18,7 +19,7 @@ const Sidebar = ({ onSelectUser }) => {
     const [allUsers, setAllUsers] = useState([]);
     const [searchUser, setSearchuser] = useState([]);
     const [chatUser, setChatUser] = useState([]);
-    const [activeTab, setActiveTab] = useState("Inbox"); 
+    const [activeTab, setActiveTab] = useState("Inbox");
     const [loading, setLoading] = useState(false);
     const [selectedUserId, setSetSelectedUserId] = useState(null);
     const [newMessageUsers, setNewMessageUsers] = useState("");
@@ -70,7 +71,7 @@ const Sidebar = ({ onSelectUser }) => {
         try {
             const search = await axiosPublic.get(
                 `/search?search=${searchInput}&id=${auth?.data?._id}`
-            ); 
+            );
             setSearchuser(search.data);
             setLoading(false);
         } catch (error) {
@@ -79,7 +80,7 @@ const Sidebar = ({ onSelectUser }) => {
         }
     };
 
-   
+
     const handelUserClick = (user) => {
         onSelectUser(user);
         setSelectedConversation(user);
@@ -98,7 +99,7 @@ const Sidebar = ({ onSelectUser }) => {
                 <h1 className="font-semibold text-center py-4 text-xl ">Chats</h1>
             </div>
 
-            <div className="w-full">
+            <div className="w-full hidden md:block">
                 <form
                     onSubmit={handelSearchSubmit}
                     className=" flex items-center justify-between bg-gray-200 rounded-full"
@@ -117,77 +118,81 @@ const Sidebar = ({ onSelectUser }) => {
             </div>
 
             <div className="my-3 ">
-                <div className="mt-3 ">
-                    <Tabs defaultValue="Inbox" className="">
-                        <TabsList className="grid w-full grid-cols-2 bg-blue-600">
-                        <TabsTrigger
-                                value="Inbox"
-                                onClick={() => {
-                                    setActiveTab("Inbox"); 
-                                    triggerRefetch();
-                                }}
-                                className={`${
-                                    activeTab === "Inbox" ? "font-semibold " : "font-semibold text-white"
-                                  }  `}
-                                  style={{
-                                    WebkitTapHighlightColor: "transparent",
-                                  }}
-                            >
-                                Inbox
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="Conversation"
-                                onClick={() => {
-                                    setActiveTab("Conversation")
-                                }}
-                                className={`${
-                                    activeTab === "Conversation" ? " text-white" : "font-semibold text-white"
-                                  } `}
-                                  style={{
-                                    WebkitTapHighlightColor: "transparent",
-                                  }}
-                            >
-                               Conversation
-                            </TabsTrigger>
+                <div className="mt-3">
+                    <Tabs defaultValue="Inbox" className="rounded-md ">
+                        <TabsList className="flex  justify-center bg-white py-3 mt-5">
+                            <div className="bg-blue-600 rounded-md flex flex-col md:flex-row mb-5">
+                                <div className="w-full bg-white text-black text-center rounded-md ">
+                                    <TabsTrigger
+                                        value="Inbox"
+                                        onClick={() => {
+                                            setActiveTab("Inbox");
+                                            triggerRefetch();
+                                        }}
+                                        className={`${activeTab === "Inbox" ? "font-semibold text-white text-center rounded-md rounded-r-none" : "font-semibold text-white text-center rounded-md"
+                                            } text-center bg-blue-600`}
+                                        style={{
+                                            WebkitTapHighlightColor: "transparent",
+                                        }}
+                                    >
+                                        Inbox
+                                    </TabsTrigger>
+                                </div>
+                                <div className="">
+                                    <TabsTrigger
+                                        value="Conversation"
+                                        onClick={() => {
+                                            setActiveTab("Conversation")
+                                        }}
+                                        className={`${activeTab === "Conversation" ? " text-white font-semibold rounded-md rounded-l-none" : "font-semibold text-white rounded-md rounded-l-none"
+                                            } bg-blue-600`}
+                                        style={{
+                                            WebkitTapHighlightColor: "transparent",
+                                        }}
+                                    >
+                                        Conversation
+                                    </TabsTrigger>
+                                </div>
+                            </div>
                         </TabsList>
-                        <TabsContent value="Inbox">
+                        <TabsContent value="Conversation">
                             {searchUser?.length > 0 ? (
                                 <>
-                                {/* Search Div  */}
+                                    {/* Search Div  */}
                                     <div className="message-container no-scrollbar">
                                         {searchUser?.map((user) => (
-                                            <div key={user._id}>
-                                               <div
-                                                onClick={() => handelUserClick(user)}
-                                                className={`flex gap-3 items-center rounded 
+                                            <div key={user?._id}>
+                                                <div
+                                                    onClick={() => handelUserClick(user)}
+                                                    className={`flex gap-3 items-center rounded 
                                                     justify-start p-2 py-1 cursor-pointer 
                                                     ${selectedUserId ===
-                                                        user?._id
-                                                        ? "bg-sky-500"
-                                                        : ""
-                                                    }`}
-                                            >
-                                                <div className="rounded-full">
-                                                    <Image
-                                                        src={user?.image}
-                                                        alt="user.img"
-                                                        width={30}
-                                                        height={30}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <p
-                                                        className={`
+                                                            user?._id
+                                                            ? "bg-sky-500"
+                                                            : ""
+                                                        }`}
+                                                >
+                                                    <div className="rounded-full">
+                                                        <Image
+                                                            src={user?.image}
+                                                            alt="user.img"
+                                                            width={30}
+                                                            height={30}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            className={`
                                                     ${selectedUserId ===
-                                                                user?._id
-                                                                ? "text-white"
-                                                                : ""
-                                                            }`}
-                                                    >
-                                                        {user?.name}
-                                                    </p>
+                                                                    user?._id
+                                                                    ? "text-white"
+                                                                    : ""
+                                                                }`}
+                                                        >
+                                                            {user?.name}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
                                                 <div className="divider divide-solid px-3 h-[1px]"></div>
                                             </div>
                                         ))}
@@ -204,59 +209,60 @@ const Sidebar = ({ onSelectUser }) => {
                             ) : (
                                 <div>
                                     {/* Inbox */}
-                                    {chatUser?.map((user) => (
-                                <div key={user?._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}> 
-                                    <form className="flex justify-between items-center my-2">
-                                        <div className="flex gap-2 items-center">
-                                            <Link href={`/dashboard/user-profile/${user?.email}`}>
-                                                <Image
-                                                    height={30}
-                                                    width={30}
-                                                    src={user?.image}
-                                                    alt="user"
-                                                    className="rounded-full"
-                                                />
-                                            </Link>
-                                            <p className="text-xl text-black ">{user?.name}</p>
+                                    {chatUser.map((user) => (
+                                        <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
+                                            <form className="flex justify-between items-center my-2">
+                                                <div className="flex gap-2 items-center">
+                                                
+                                                        <Image
+                                                            height={30}
+                                                            width={30}
+                                                            src={user?.image}
+                                                            alt="user"
+                                                            className="rounded-full"
+                                                        />
+                                                    <p className="text-xl hidden md:block text-black ">{user?.name}</p>
+                                                </div>
+                                                <p
+                                                    onClick={() => handelUserClick(user)}
+                                                    className="px-2 rounded-lg text-white cursor-pointer"
+                                                >
+                                                    <TbMessage className="text-blue-600 text-2xl" />
+                                                </p>
+                                            </form>
                                         </div>
-                                        <p
-                                            onClick={() => handelUserClick(user)}
-                                            className="px-2 rounded-lg text-white cursor-pointer"
-                                        >
-                                            <FaMessage className="text-blue-600"/>
-                                        </p>
-                                    </form>
-                                </div>
-                            ))}
+                                    ))}
                                 </div>
                             )}
                         </TabsContent>
 
-                        <TabsContent value="Conversation">
-                            {allUsers?.map((user) => (
-                                <div key={user._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}> 
-                                    <form className="flex justify-between items-center my-2">
-                                        <div className="flex gap-2 items-center">
-                                            <Link href={`/dashboard/user-profile/${user?.email}`}>
-                                                <Image
-                                                    height={30}
-                                                    width={30}
-                                                    src={user?.image}
-                                                    alt="user"
-                                                    className="rounded-full"
-                                                />
-                                            </Link>
-                                            <p className="text-xl text-black ">{user?.name}</p>
-                                        </div>
-                                        <p
-                                            onClick={() => handelUserClick(user)}
-                                            className="px-2 rounded-lg text-white cursor-pointer"
-                                        >
-                                            <FaMessage className="text-blue-600"/>
-                                        </p>
-                                    </form>
-                                </div>
-                            ))}
+                        <TabsContent value="Inbox">
+                            <div className="">
+                                {/* Inbox */}
+                                {allUsers.map((user) => (
+                                    <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
+                                        <form className="flex justify-between items-center my-2">
+                                            <div className="flex gap-2 items-center">
+                                             
+                                                    <Image
+                                                        height={30}
+                                                        width={30}
+                                                        src={user?.image}
+                                                        alt="user"
+                                                        className="rounded-full"
+                                                    />
+                                                <p className="text-xl hidden md:block text-black ">{user?.name}</p>
+                                            </div>
+                                            <p
+                                                onClick={() => handelUserClick(user)}
+                                                className="px-2 rounded-lg text-white cursor-pointer"
+                                            >
+                                                <TbMessage className="text-blue-600 text-2xl" />
+                                            </p>
+                                        </form>
+                                    </div>
+                                ))}
+                            </div>
                         </TabsContent>
                     </Tabs>
                 </div>
