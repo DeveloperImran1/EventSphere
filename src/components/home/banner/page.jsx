@@ -118,7 +118,7 @@ export default function Banner() {
               }}
             >
               {index === 1 && (
-                <div className="absolute inset-1 bg-black  bg-opacity-50 " />
+                <div className="absolute inset-0 bg-black  bg-opacity-50 " />
               )}
                
 
