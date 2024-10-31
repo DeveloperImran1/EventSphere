@@ -11,8 +11,8 @@ const CommunityPage = () => {
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
-        <div className="container mx-auto mt-16 ">
-            <div className="flex  max-w-[1280px] mx-auto justify-between gap-10">
+        <div className="border-2 container max-w-[1280px] mx-auto mt-16 ">
+            <div className="flex   mx-auto justify-between gap-10">
                 {/* Sidebar */}
                 {/* <div className="w-1/6 border-2 hidden md:block">
                     <CommunitySidebar />
@@ -31,7 +31,7 @@ const CommunityPage = () => {
                 {/* Right Sidebar (Icon and Sidebar Content) */}
                 <div
                     className={`${showSidebar ? 'translate-x-0' : 'translate-x-full'
-                        } fixed lg:fixed lg:mr-20 rounded-lg lg:top-24 lg:w-[30%] top-24 right-0 h-full transition-transform transform w-[80%] sm:w-[30%] p-5 bg-white border-2 z-50  lg:translate-x-0`}
+                        } fixed md:sticky   rounded-lg lg:top-24 lg:w-[30%] top-24 right-0 h-full transition-transform transform w-[80%] sm:w-[30%] p-5 bg-white border-2 z-40  lg:translate-x-0`}
                 >
                     {/* Close Icon for Small Devices */}
                     <button
