@@ -155,7 +155,7 @@ const Sidebar = ({ onSelectUser }) => {
                                 <>
                                 {/* Search Div  */}
                                     <div className="message-container no-scrollbar">
-                                        {searchUser.map((user) => (
+                                        {searchUser?.map((user) => (
                                             <div key={user._id}>
                                                <div
                                                 onClick={() => handelUserClick(user)}
@@ -169,7 +169,7 @@ const Sidebar = ({ onSelectUser }) => {
                                             >
                                                 <div className="rounded-full">
                                                     <Image
-                                                        src={user.image}
+                                                        src={user?.image}
                                                         alt="user.img"
                                                         width={30}
                                                         height={30}
@@ -184,7 +184,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                                 : ""
                                                             }`}
                                                     >
-                                                        {user.name}
+                                                        {user?.name}
                                                     </p>
                                                 </div>
                                             </div>
@@ -204,8 +204,8 @@ const Sidebar = ({ onSelectUser }) => {
                             ) : (
                                 <div>
                                     {/* Inbox */}
-                                    {chatUser.map((user) => (
-                                <div key={user._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}> 
+                                    {chatUser?.map((user) => (
+                                <div key={user?._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}> 
                                     <form className="flex justify-between items-center my-2">
                                         <div className="flex gap-2 items-center">
                                             <Link href={`/dashboard/user-profile/${user?.email}`}>
@@ -217,7 +217,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                     className="rounded-full"
                                                 />
                                             </Link>
-                                            <p className="text-xl text-black ">{user.name}</p>
+                                            <p className="text-xl text-black ">{user?.name}</p>
                                         </div>
                                         <p
                                             onClick={() => handelUserClick(user)}
@@ -233,7 +233,7 @@ const Sidebar = ({ onSelectUser }) => {
                         </TabsContent>
 
                         <TabsContent value="Conversation">
-                            {allUsers.map((user) => (
+                            {allUsers?.map((user) => (
                                 <div key={user._id} className="shadow-md px-5 py-2 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}> 
                                     <form className="flex justify-between items-center my-2">
                                         <div className="flex gap-2 items-center">
@@ -246,7 +246,7 @@ const Sidebar = ({ onSelectUser }) => {
                                                     className="rounded-full"
                                                 />
                                             </Link>
-                                            <p className="text-xl text-black ">{user.name}</p>
+                                            <p className="text-xl text-black ">{user?.name}</p>
                                         </div>
                                         <p
                                             onClick={() => handelUserClick(user)}
