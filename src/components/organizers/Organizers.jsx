@@ -346,12 +346,12 @@ const Organizers = () => {
         className="flex items-center text-primary text-sm mb-2"
       >
         <MdContactMail className="text-background bg-primary mr-2 rounded p-1 text-lg" />
-        <span className="font-semibold mr-1">Contact:</span>
+     
         {organizer.contactInfo}
       </a>
 
       <div className="flex justify-between items-center w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-base text-gray-600 dark:text-gray-400 flex items-center gap-1">
+        <p className="text-base font-semibold text-gray-600 dark:text-gray-400 flex items-center gap-1">
           Followers: {organizer.followers}
         </p>
         
