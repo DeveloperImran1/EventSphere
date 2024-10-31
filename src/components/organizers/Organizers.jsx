@@ -309,7 +309,7 @@ const Organizers = () => {
       >
         {organizers?.map((organizer, index) => (
           <SwiperSlide key={index}>
-             <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-6 flex flex-col items-center text-center group h-[600px] w-[300px]">
+            <div className="bg-white dark:bg-gray-800 shadow-lg border-2 rounded-lg p-6 flex flex-col items-center text-center group h-[600px] w-[300px]">
       <div className="relative w-32 h-32 mb-4">
         <Image
           src={organizer.profilePicture}
@@ -351,13 +351,13 @@ const Organizers = () => {
       </a>
 
       <div className="flex justify-between items-center w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <p className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
+        <p className="text-base text-gray-600 dark:text-gray-400 flex items-center gap-1">
           Followers: {organizer.followers}
         </p>
         
         <div className="flex items-center gap-3 text-xl">
-          <FaLinkedin className="text-primary hover:text-primary/80 cursor-pointer" />
-          <FaFacebook className="text-primary hover:text-primary/80 cursor-pointer" />
+          <FaLinkedin className=" cursor-pointer" />
+          <FaFacebook className=" cursor-pointer" />
         </div>
       </div>
     </div>
