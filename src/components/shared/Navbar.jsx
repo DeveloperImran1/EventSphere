@@ -92,10 +92,10 @@ const Navbar = () => {
 
 
   const subMenu1 = [
-    {
-      title: "Sell Event Ticket",
-      path: "/sell-event-ticket"
-    },
+    // {
+    //   title: "Sell Event Ticket",
+    //   path: "/sell-event-ticket"
+    // },
     {
       title: "Register",
       path: "/register"
@@ -110,10 +110,10 @@ const Navbar = () => {
     },
   ]
   const subMenu2 = [
-    {
-      title: "Event Management Softwer",
-      path: "/event-management-software"
-    },
+    // {
+    //   title: "Event Management Softwer",
+    //   path: "/event-management-software"
+    // },
     {
       title: "About Us",
       path: "/about-us"
@@ -121,6 +121,10 @@ const Navbar = () => {
     {
       title: "Contact Us",
       path: "/contact"
+    },
+    {
+      title: "Video Call",
+      path: "/video-call"
     },
 
   ]
@@ -137,10 +141,7 @@ const Navbar = () => {
       title: "Gallery",
       path: "/gallery"
     },
-    {
-      title: "Subscription",
-      path: "/subscriptions"
-    },
+  
 
   ]
   const subMenu4 = [
@@ -153,10 +154,10 @@ const Navbar = () => {
       title: "Request to Be Organizer",
       path: "/organizer-request"
     },
-    {
-      title: "Setting",
-      path: "/settings"
-    },
+    // {
+    //   title: "Setting",
+    //   path: "/settings"
+    // },
   ]
 
   const subMenu5 = [
