@@ -16,6 +16,7 @@ import { LuSticker } from "react-icons/lu";
 import { HiGift } from "react-icons/hi";
 import { PiSmileyStickerFill } from "react-icons/pi";
 import { IoSend } from "react-icons/io5";
+import { FaVideo } from "react-icons/fa";
 
 const MessageContainer = ({ selectedUser }) => {
   const axiosPublic = useAxiosPublic()
@@ -104,6 +105,10 @@ const MessageContainer = ({ selectedUser }) => {
                 {selectedConversation?.name}
               </span>
             </div>
+
+            <Link href="/video-call">
+              <FaVideo size={23} className="text-[#1b85db] "></FaVideo>
+            </Link>
           </div>
 
           <div className='flex-1 pt-2 overflow-auto min-h-[80%] bg-white'>
@@ -123,7 +128,7 @@ const MessageContainer = ({ selectedUser }) => {
           </div>
           <div className={` flex w-full items-center pl-5 py-2 mr-1 sticky bottom-0  z-50`}>
             <div className=" flex gap-2">
-              <IoMdImages className="text-blue-600 text-xl cursor-pointer" />
+              <IoMdImages className="text-[#1b85db] text-xl cursor-pointer" />
             </div>
             <form onSubmit={handleSubmit} className=" flex items-center w-full">
               <div className=" mx-2 relative  w-full">
@@ -132,7 +137,7 @@ const MessageContainer = ({ selectedUser }) => {
                   value={sendData} onChange={handleMessages} required id='message'
                   placeholder="Type your message..."
                   className='pl-3 bg-slate-50 text-black  rounded-full h-[35px] w-full outline-none' />
-              <button type="submit" ><IoSend className="  text-blue-600 font-semibold absolute text-xl top-2 right-4" />  </button>
+                <button type="submit" ><IoSend className="  text-[#1b85db] font-semibold absolute text-xl top-2 right-4" />  </button>
               </div>
 
             </form>

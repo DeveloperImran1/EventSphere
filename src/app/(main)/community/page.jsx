@@ -28,13 +28,12 @@ const CommunityPage = () => {
                 {/* Right Sidebar (Icon and Sidebar Content) */}
                 <div
                     className={`${showSidebar ? 'translate-x-0' : 'translate-x-full'
-                        } fixed md:sticky   rounded-lg lg:top-24 lg:w-[30%] top-24 right-0 h-full transition-transform transform w-[80%] sm:w-[30%] p-5 bg-white border-2 z-40  lg:translate-x-0`}
+                        } fixed md:sticky   rounded-lg lg:top-24  top-24 right-0 h-full transition-transform transform w-[80%]  lg:w-[30%] p-5 bg-white border-2 z-40  lg:translate-x-0`}
                 >
                     {/* Close Icon for Small Devices */}
                     <button
-                        className="lg:hidden absolute top-0 right-4 text-xl"
-                        onClick={() => setShowSidebar(false)}
-                    >
+                        className="md:hidden absolute top-0 right-4 text-xl"
+                        onClick={() => setShowSidebar(false)} >
                         <FaTimes className="text-4xl font-bold text-blue-500" />
                     </button>
                     <CommunityRightSidebar />
@@ -42,7 +41,7 @@ const CommunityPage = () => {
 
                 {!showSidebar && (
                     <button
-                        className="lg:hidden absolute top-24 right-4 text-xl z-50"
+                        className="md:hidden absolute top-24 right-[33px] text-xl z-50"
                         onClick={() => setShowSidebar(true)}
                     >
                         <FaBars className="text-4xl font-bold text-blue-500" />
