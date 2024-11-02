@@ -15,7 +15,7 @@ const UserProfile = () => {
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     console.log(lastPathSegment)
     const { data, isLoading, refetch } = useQuery({
-        queryKey: ["user"],
+        queryKey: ["user", lastPathSegment],
         queryFn: () =>
             fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
                 res.json()

@@ -9,6 +9,8 @@ import useAuth from "@/hooks/useAuth";
 import { FaHeart } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { formatDistanceToNow } from 'date-fns';
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,6 +19,7 @@ const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState(null);
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
+  const router = useRouter()
 
   const updateFavorites = () => {
     const storedFavorites = localStorage.getItem('favorites');
@@ -24,7 +27,13 @@ const Navbar = () => {
     setFavorite(myFavorites);
   };
 
-
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Sign Out Successfully");
+    document.cookie = `myEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+    router.push("/login");
+  };
+  
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -92,10 +101,10 @@ const Navbar = () => {
 
 
   const subMenu1 = [
-    {
-      title: "Sell Event Ticket",
-      path: "/sell-event-ticket"
-    },
+    // {
+    //   title: "Sell Event Ticket",
+    //   path: "/sell-event-ticket"
+    // },
     {
       title: "Register",
       path: "/register"
@@ -110,10 +119,10 @@ const Navbar = () => {
     },
   ]
   const subMenu2 = [
-    {
-      title: "Event Management Softwer",
-      path: "/event-management-software"
-    },
+    // {
+    //   title: "Event Management Softwer",
+    //   path: "/event-management-software"
+    // },
     {
       title: "About Us",
       path: "/about-us"
@@ -121,6 +130,10 @@ const Navbar = () => {
     {
       title: "Contact Us",
       path: "/contact"
+    },
+    {
+      title: "Video Call",
+      path: "/video-call"
     },
 
   ]
@@ -133,14 +146,11 @@ const Navbar = () => {
       title: "Gift Card",
       path: "/gift-card"
     },
-    {
-      title: "Gallery",
-      path: "/gallery"
-    },
-    {
-      title: "Subscription",
-      path: "/subscriptions"
-    },
+    // {
+    //   title: "Gallery",
+    //   path: "/gallery"
+    // },
+
 
   ]
   const subMenu4 = [
@@ -153,10 +163,10 @@ const Navbar = () => {
       title: "Request to Be Organizer",
       path: "/organizer-request"
     },
-    {
-      title: "Setting",
-      path: "/settings"
-    },
+    // {
+    //   title: "Setting",
+    //   path: "/settings"
+    // },
   ]
 
   const subMenu5 = [
@@ -456,11 +466,10 @@ const Navbar = () => {
                         href="/login"
                         className="button bg-[#10a0b9] "
                         onClick={closeDropdown} > Login
-                      </Link> : <Link
-                        href="/login"
+                      </Link> : <div
                         className="button bg-[#10a0b9] "
-                        onClick={() => signOut()}>Logout
-                      </Link>
+                        onClick={() => handleSignOut()}>Logout
+                      </div>
                     }
                   </div>
                 </div>
@@ -474,7 +483,7 @@ const Navbar = () => {
                 <div className="relative">
                   <div className="flex items-center gap-1  rounded-3xl cursor-pointer ">
                     <Image
-                      src={session?.data?.user?.image || "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
+                      src={session?.data?.user?.image || "https://i.postimg.cc/cCdkf2bM/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"}
                       alt="Profile"
                       height="40"
                       width="40"
@@ -488,11 +497,11 @@ const Navbar = () => {
                     <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-20 font-bold">
                       <div className="px-4 py-3 border-b flex flex-col justify-center items-center gap-2">
                         <Image
-                          src={session?.data?.user?.image || 'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
+                          src={session?.data?.user?.image || 'https://i.postimg.cc/cCdkf2bM/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'}
                           alt="Profile"
                           height="60"
                           width="60"
-                          className="rounded-full  border-2 border-white hover:border-yellow-300  transition duration-300 ease-in-out"
+                          className="rounded-full  border-2 border-white hover:border-yellow-300 h-[80px] w-[80px] transition duration-300 ease-in-out"
                           onClick={toggleDropdown} // Toggle dropdown on image click
                         />
 
@@ -540,11 +549,10 @@ const Navbar = () => {
                           href="/login"
                           className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
                           onClick={closeDropdown} > Login
-                        </Link> : <Link
-                          href="/login"
-                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
-                          onClick={() => signOut()}>Logout
-                        </Link>
+                        </Link> : <div
+                          className="block px-4 py-2 cursor-pointer text-gray-700 hover:bg-gray-100 transition"
+                          onClick={() => handleSignOut()}>Logout
+                        </div>
                       }
 
 

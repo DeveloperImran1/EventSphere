@@ -13,7 +13,9 @@ export const useSocketContext=()=>{
 export const SocketContextProvider=({children})=>{
     const [socket , setSocket]= useState(null);
     const [onlineUser,setOnlineUser]=useState([]);
-    const {authUser} = useAuth();
+    const {data: authUser} = useAuth();
+
+    console.log("this is a auth User of SocketContestProvider ", authUser)
     useEffect(()=>{
         if(authUser){
             const socket = io("https://eventsphare-server.onrender.com",{
@@ -39,3 +41,8 @@ export const SocketContextProvider=({children})=>{
     </SocketContext.Provider>
     )
 }
+
+
+
+
+
