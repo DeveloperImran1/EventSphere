@@ -14,9 +14,9 @@ const TestimonialCard = ({ data }) => {
                 <h1 className='uppercase font-[600px] text-[24px] leading-[1.3] text-white'>{data.name}</h1>
                 <div className='text-[14px] mb-[14px] flex justify-center items-center gap-x-1'>
                     <FaCheckCircle className='text-blue-500 2xl' />
-                    <p className='text-white text-[14px] '>Verified</p>
+                    <p data-aos="fade-right" className='text-white text-[14px] '>Verified</p>
                 </div>
-                <p className='text-[24px] leading-[1.4] max-w-sm mx-auto text-white mb-16 -pb-[28px]'>{data.comment}</p>
+                <p  className='text-[24px] leading-[1.4] max-w-sm mx-auto text-white mb-16 -pb-[28px]'>{data.comment}</p>
             </div>
         </div>
     );

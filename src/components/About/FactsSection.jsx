@@ -10,10 +10,10 @@ const FactsSection = () => {
             <div className="flex flex-wrap -mx-4">
                 {/* Col 1 */}
                 <div className="relative w-full px-4 lg:w-1/3">
-                    <div className="text-left mb-10 sm:mb-16 lg:mb-0">
-                        <span className="block text-[#1b85db] uppercase text-lg mb-2 -mt-2 md:text-[24px] tracking-wide sm:mb-6 sm:-mt-1">Quick Facts</span>
-                        <h1 className="mb-[16px] md:mb-7 font-bold uppercase text-[50px] -mt-[13px] leading-[60px] text-black tracking-[0.050em]">Fun Facts</h1>
-                        <p className="-mt-[11px] text-[18px] text-gray-700">Objectively seize scalable metrics where proactive services seamlessly empower fully researched quick growth strategies.</p>
+                    <div  className="text-left mb-10 sm:mb-16 lg:mb-0">
+                        <span data-aos="fade-right" className="block text-[#1b85db] uppercase text-lg mb-2 -mt-2 md:text-[24px] tracking-wide sm:mb-6 sm:-mt-1">Quick Facts</span>
+                        <h1 data-aos="fade-right" className="mb-[16px] md:mb-7 font-bold uppercase text-[50px] -mt-[13px] leading-[60px] text-black tracking-[0.050em]">Fun Facts</h1>
+                        <p data-aos="fade-right" className="-mt-[11px] text-[18px] text-gray-700">Objectively seize scalable metrics where proactive services seamlessly empower fully researched quick growth strategies.</p>
                     </div>
                 </div>
                 {/* Logos And Counter */}

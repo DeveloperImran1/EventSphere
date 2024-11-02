@@ -24,8 +24,8 @@ const TrustSection = () => {
                                     <Image className="w-full" height={49} width={43} src="https://i.postimg.cc/qR1t6PLC/icon01.png" alt="Get In Guarantee" />
                                 </div>
                                 <div className="w-[calc(100%-65px)] pl-5">
-                                    <h2 className="mb-2 font-bold text-[#111]">Get In Guarantee</h2>
-                                    <p className="text-[#555]">Authentic tickets, on-time delivery, and access to your event. Or your money back.</p>
+                                    <h2 data-aos="fade-right" className="mb-2 font-bold text-[#111]">Get In Guarantee</h2>
+                                    <p data-aos="fade-right" className="text-[#555]">Authentic tickets, on-time delivery, and access to your event. Or your money back.</p>
                                 </div>
                             </div>
                             <div className="flex flex-wrap p-0 mb-6">
@@ -33,8 +33,8 @@ const TrustSection = () => {
                                     <Image className="w-full" height={45} width={45} src="https://i.postimg.cc/nzFjzFvJ/icon02.png" alt="Price Match Guarantee" />
                                 </div>
                                 <div className="w-[calc(100%-65px)] pl-5">
-                                    <h2 className="mb-2 font-bold text-[#111]">Price Match Guarantee</h2>
-                                    <p className="text-[#555]">The best prices are here. If you find a better deal elsewhere, we’ll match the difference.</p>
+                                    <h2 data-aos="fade-right" className="mb-2 font-bold text-[#111]">Price Match Guarantee</h2>
+                                    <p data-aos="fade-right" className="text-[#555]">The best prices are here. If you find a better deal elsewhere, we’ll match the difference.</p>
                                 </div>
                             </div>
                         </div>

@@ -10,11 +10,11 @@ const OurPhilosophy = () => {
                         <div className="px-[15px] md:pb-[30px] md:px-[15px] text-base text-[#032055] leading-[28px]">
                             {/* Content */}
                             <div className="mb-[40px] text-center md:text-left">
-                                <p className="uppercase text-[18px] md:text-[24px] mb-[25px] text-[#1b85db]">Take a Look at</p>
-                                <h2 className="uppercase font-bold text-[30px] sm:text-[40px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6 text-[#032055]">
+                                <p data-aos="fade-right" className="uppercase text-[18px] md:text-[24px] mb-[25px] text-[#1b85db]">Take a Look at</p>
+                                <h2 data-aos="fade-right" className="uppercase font-bold text-[30px] sm:text-[40px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6 text-[#032055]">
                                     Our Philosophy
                                 </h2>
-                                <p className="max-w-[700px] text-[16px] sm:text-[18px] text-left text-[#032055] mb-0">
+                                <p data-aos="fade-right" className="max-w-[700px] text-[16px] sm:text-[18px] text-left text-[#032055] mb-0">
                                     At EventSphere, we believe in building trust through honesty, fostering clarity and transparency in all our processes, and maintaining a strong focus on delivering the best experiences for our customers.
                                 </p>
                             </div>
