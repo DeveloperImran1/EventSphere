@@ -12,6 +12,7 @@ import Link from "next/link";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { FaMessage } from "react-icons/fa6";
 import { TbMessage } from "react-icons/tb";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 const Sidebar = ({ onSelectUser }) => {
     const auth = useAuth();
     const axiosPublic = useAxiosPublic()
@@ -36,7 +37,18 @@ const Sidebar = ({ onSelectUser }) => {
             setLoading(true);
             try {
                 const allUsers = await axiosPublic.get(`/user`);
-                setAllUsers(allUsers.data);
+                console.log("allUsers?.data ", allUsers?.data);
+
+                // Create a Set of chatUser IDs for faster lookup
+                const chatUserIds = new Set(chatUser?.map(user => user?._id));
+
+                // Filter allUsers to exclude those in chatUser
+                const conversationUsers = allUsers?.data?.filter(user => !chatUserIds.has(user?._id));
+
+                console.log("conversationUsers ", conversationUsers);
+
+                // Update the state with the filtered users
+                setAllUsers(conversationUsers);
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
@@ -44,7 +56,7 @@ const Sidebar = ({ onSelectUser }) => {
             }
         };
         chatUserHandler();
-    }, []);
+    }, [chatUser]);
 
     // Fetch chat users based on refetch state or auth changes
     useEffect(() => {
@@ -54,7 +66,7 @@ const Sidebar = ({ onSelectUser }) => {
                 const chatters = await axiosPublic.get(
                     `/current-chatters?id=${auth?.data?._id}`
                 );
-                setChatUser(chatters.data);
+                setChatUser(chatters?.data);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -92,6 +104,10 @@ const Sidebar = ({ onSelectUser }) => {
         setSearchuser([]);
         setSearchInput("");
     };
+
+    if (auth?.isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className="h-[calc(100vh-64px)] pt-5 overflow-auto px-2 border-2 text-black">
@@ -209,18 +225,18 @@ const Sidebar = ({ onSelectUser }) => {
                             ) : (
                                 <div>
                                     {/* Inbox */}
-                                    {chatUser.map((user) => (
+                                    {chatUser?.map((user) => (
                                         <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
                                             <form className="flex justify-between items-center my-2">
                                                 <div className="flex gap-2 items-center">
-                                                
-                                                        <Image
-                                                            height={30}
-                                                            width={30}
-                                                            src={user?.image}
-                                                            alt="user"
-                                                            className="rounded-full"
-                                                        />
+
+                                                    <Image
+                                                        height={30}
+                                                        width={30}
+                                                        src={user?.image}
+                                                        alt="user"
+                                                        className="rounded-full"
+                                                    />
                                                     <p className="text-xl hidden md:block text-black ">{user?.name}</p>
                                                 </div>
                                                 <p
@@ -237,13 +253,64 @@ const Sidebar = ({ onSelectUser }) => {
                         </TabsContent>
 
                         <TabsContent value="Inbox">
-                            <div className="">
-                                {/* Inbox */}
-                                {allUsers.map((user) => (
-                                    <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
-                                        <form className="flex justify-between items-center my-2">
-                                            <div className="flex gap-2 items-center">
-                                             
+                            {searchUser?.length > 0 ? (
+                                <>
+                                    {/* Search Div  */}
+                                    <div className="message-container no-scrollbar">
+                                        {searchUser?.map((user) => (
+                                            <div key={user?._id}>
+                                                <div
+                                                    onClick={() => handelUserClick(user)}
+                                                    className={`flex gap-3 items-center rounded 
+                                                    justify-start p-2 py-1 cursor-pointer 
+                                                    ${selectedUserId ===
+                                                            user?._id
+                                                            ? "bg-sky-500"
+                                                            : ""
+                                                        }`}
+                                                >
+                                                    <div className="rounded-full">
+                                                        <Image
+                                                            src={user?.image}
+                                                            alt="user.img"
+                                                            width={30}
+                                                            height={30}
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <p
+                                                            className={`
+                                                    ${selectedUserId ===
+                                                                    user?._id
+                                                                    ? "text-white"
+                                                                    : ""
+                                                                }`}
+                                                        >
+                                                            {user?.name}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="divider divide-solid px-3 h-[1px]"></div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="mt-auto px-1 py-1 flex">
+                                        <button
+                                            onClick={handSearchback}
+                                            className="bg-white rounded-full px-2 py-1 self-center"
+                                        >
+                                            <IoArrowBackSharp size={25} />
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="">
+                                    {/* Inbox */}
+                                    {allUsers?.map((user) => (
+                                        <div key={user?._id} className="shadow-md py-2 px-1 mt-3 cursor-pointer" onClick={() => handelUserClick(user)}>
+                                            <form className="flex justify-between items-center my-2">
+                                                <div className="flex gap-2 items-center">
+
                                                     <Image
                                                         height={30}
                                                         width={30}
@@ -251,18 +318,20 @@ const Sidebar = ({ onSelectUser }) => {
                                                         alt="user"
                                                         className="rounded-full"
                                                     />
-                                                <p className="text-xl hidden md:block text-black ">{user?.name}</p>
-                                            </div>
-                                            <p
-                                                onClick={() => handelUserClick(user)}
-                                                className="px-2 rounded-lg text-white cursor-pointer"
-                                            >
-                                                <TbMessage className="text-blue-600 text-2xl" />
-                                            </p>
-                                        </form>
-                                    </div>
-                                ))}
-                            </div>
+                                                    <p className="text-xl hidden md:block text-black ">{user?.name}</p>
+                                                </div>
+                                                <p
+                                                    onClick={() => handelUserClick(user)}
+                                                    className="px-2 rounded-lg text-white cursor-pointer"
+                                                >
+                                                    <TbMessage className="text-blue-600 text-2xl" />
+                                                </p>
+                                            </form>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
                         </TabsContent>
                     </Tabs>
                 </div>
@@ -272,3 +341,5 @@ const Sidebar = ({ onSelectUser }) => {
 };
 
 export default Sidebar;
+
+

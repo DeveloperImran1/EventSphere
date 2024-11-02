@@ -17,6 +17,8 @@ import { HiGift } from "react-icons/hi";
 import { PiSmileyStickerFill } from "react-icons/pi";
 import { IoSend } from "react-icons/io5";
 import { FaVideo } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const MessageContainer = ({ selectedUser }) => {
   const axiosPublic = useAxiosPublic()
@@ -26,6 +28,7 @@ const MessageContainer = ({ selectedUser }) => {
   const [sending, setSending] = useState(false);
   const [sendData, setSendData] = useState("");
   const lastMessageRef = useRef();
+  const router = useRouter();
 
   // Scroll to the 
   useEffect(() => {
@@ -65,10 +68,16 @@ const MessageContainer = ({ selectedUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("auth er data ", auth?.data?._id)
+    if (!auth?.data?._id) {
+      toast.error("Please Before Login Now")
+      return router.push('/login')
+    }
     setSending(true);
 
     try {
-      const res = await axiosPublic.post(`/send-message?senderId=${auth?.data?._id}&reciverId=${selectedUser._id}`, { messages: sendData });
+      const res = await axiosPublic.post(`/send-message?senderId=${auth?.data?._id}&reciverId=${selectedUser?._id}`, { messages: sendData });
       const data = await res.data;
 
       if (data.success !== false) {
@@ -149,3 +158,13 @@ const MessageContainer = ({ selectedUser }) => {
 };
 
 export default MessageContainer;
+
+
+
+
+
+
+
+
+
+
