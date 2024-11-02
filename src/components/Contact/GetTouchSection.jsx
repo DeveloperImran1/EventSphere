@@ -50,7 +50,7 @@ const GetTouchSection = () => {
           {/* Form Section */}
           <div className="w-full md:w-1/2 px-4 md:max-w-[58.333333%]">
             <div className="text-left mb-10">
-              <span className="text-[#31d7a9] uppercase text-[18px] mb-2">
+              <span className="text-[#1b85db] uppercase text-[20px] mb-2">
                 Contact Us
               </span>
               <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
@@ -105,7 +105,7 @@ const GetTouchSection = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-[#31d7a9] text-white font-semibold rounded-md hover:bg-[#29b592] transition duration-300"
+                className="w-full py-3 bg-[#1b85db] text-white font-semibold rounded-md hover:bg-[#29b592] transition duration-300"
               >
                 Send Message
               </button>
@@ -115,11 +115,12 @@ const GetTouchSection = () => {
           {/* Right-Side Image */}
           <div className="w-full md:w-1/2 mt-10 md:mt-0 px-4 flex justify-center items-center">
             <Image
-              src="https://i.postimg.cc/PrS1W9kR/contact-register-feedback-support-help-concept-53876-124243.jpg"
+              
+              src="https://i.postimg.cc/PJFJ2SGs/contact.jpg"
               alt="Contact Us Illustration"
               width={400}
               height={400}
-              className="object-cover rounded-lg"
+              className="object-cover rounded-lg md:h-[600px]"
             />
           </div>
         </div>
