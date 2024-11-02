@@ -59,18 +59,18 @@ const CheckOutForm = (props) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         if (!stripe || !elements || isProcessing) {
             return;
         }
         setIsProcessing(true);
-
+    
         const card = elements.getElement(CardElement);
-
+    
         if (card === null) {
             return;
         }
-
+    
         try {
             if (!clientSecret) {
                 console.error("Client secret is missing");
@@ -78,33 +78,33 @@ const CheckOutForm = (props) => {
                 setIsProcessing(false);
                 return;
             }
-
+    
             const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
                 card
             });
-
+    
             if (error) {
                 console.log('Payment error', error);
                 setError(error.message);
                 setIsProcessing(false);
                 return;
             }
-
+    
             const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: paymentMethod.id,
             });
-
+    
             if (confirmError) {
                 console.log('Confirm error', confirmError);
                 setError(confirmError.message);
                 setIsProcessing(false);
                 return;
             }
-
+    
             if (paymentIntent.status === 'succeeded') {
                 setTransactionId(paymentIntent.id);
-
+    
                 const payment = {
                     eventImage: events?.gallery?.[0],
                     eventName: events?.title,
@@ -119,16 +119,13 @@ const CheckOutForm = (props) => {
                     selectSeatNames: selectedSeatNames,
                     totalTickets: selectedSeats,
                     eventDate: events?.dateTime,
-                    totalTickets: selectedSeats,
                     refundRequested: "NotRequested",
                     transitionId: paymentIntent.id,
                 };
-
-
+    
                 const res = await axiosPublic.post('/orders', payment);
                 console.log('Payment saved', res.data);
-
-
+    
                 if (res.data?.success && res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         position: "top-center",
@@ -137,33 +134,32 @@ const CheckOutForm = (props) => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-
+    
                     // Update the booked seats in the events collection
                     const updateResponse = await axiosPublic.patch(`/events/${id}`, {
                         eventId: id,
                         newBookedSeats: selectedSeatNames
                     });
-
-                    if (updateResponse.data.success) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Booked seats updated successfully",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    } else {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: "Failed to update booked seats",
-                            showConfirmButton: true,
-                        });
-                    }
-
+    
+                   
+    
+                        // **Send notification to backend after successful payment and seat update**
+                        const notification = {
+                            type: "payment",
+                            message: `Your payment was successful for the event  ${events?.title}`,
+                            route: `/payment-qr-code?transitionId=${paymentIntent.id}`,
+                        };
+    
+                        // Send notification request using PATCH
+                        const notificationRes = await axiosPublic.patch(`/notification/${session?.data?.user?.email}`, notification);
+    
+                       
+    
+                    
+    
                     elements.getElement(CardElement).clear();
                     refetch();
-
+    
                     router.push(`/payment-qr-code?transitionId=${paymentIntent.id}`);
                 } else {
                     Swal.fire({
@@ -181,6 +177,7 @@ const CheckOutForm = (props) => {
             setIsProcessing(false);
         }
     };
+    
 
 
     return (
