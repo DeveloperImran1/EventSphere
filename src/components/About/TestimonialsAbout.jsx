@@ -20,7 +20,7 @@ const TestimonialsAbout = () => {
             <div className="relative z-10 w-full px-4 mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1170px]">
                 {/* Header Section */}
                 <div className="text-center mb-6 sm:mb-9 md:mb-[50px]">
-                    <h1 className="text-[#31D7AA] uppercase block text-lg mb-2 -mt-2 sm:text-[24px] sm:mb-6 sm:-mt-1">testimonials</h1>
+                    <h1 className="text-[#1b85db] uppercase block text-lg mb-2 -mt-2 sm:text-[24px] sm:mb-6 sm:-mt-1">testimonials</h1>
                     <h1 className="uppercase font-bold mb-4 sm:mb-6 text-2xl sm:text-5xl sm:leading-[60px] -mt-2 sm:-mt-3 text-white m-0">the fans have spoken </h1>
                 </div>
                 <div className="max-w-[1140px]">

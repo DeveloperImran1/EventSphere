@@ -12,7 +12,7 @@ const TopAbout = () => {
                     <div className="w-full px-4 box-border lg:w-1/2">
                         <div>
                             <div className="text-left mb-14 sm:mb-16">
-                                <span className="text-[#31d7a9] uppercase block text-lg mb-2 -mt-2 sm:text-xl sm:mb-6 sm:-mt-1 md:text-2xl">
+                                <span className="text-[#1b85db] uppercase block text-lg mb-2 -mt-2 sm:text-xl sm:mb-6 sm:-mt-1 md:text-2xl">
                                     We Are EventSphere
                                 </span>
                                 <div className="mb-3 md:mb-6">

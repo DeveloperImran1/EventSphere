@@ -10,7 +10,7 @@ const OurPhilosophy = () => {
                         <div className="px-[15px] md:pb-[30px] md:px-[15px] text-base text-[#032055] leading-[28px]">
                             {/* Content */}
                             <div className="mb-[40px] text-center md:text-left">
-                                <p className="uppercase text-[18px] md:text-[24px] mb-[25px] text-[#31d7a9]">Take a Look at</p>
+                                <p className="uppercase text-[18px] md:text-[24px] mb-[25px] text-[#1b85db]">Take a Look at</p>
                                 <h2 className="uppercase font-bold text-[30px] sm:text-[40px] lg:text-[50px] leading-[1.2] mb-4 sm:mb-6 text-[#032055]">
                                     Our Philosophy
                                 </h2>

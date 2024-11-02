@@ -50,13 +50,13 @@ const GetTouchSection = () => {
           {/* Form Section */}
           <div className="w-full md:w-1/2 px-4 md:max-w-[58.333333%]">
             <div className="text-left mb-10">
-              <span className="text-[#1b85db] uppercase text-[20px] mb-2">
+              <span data-aos="fade-right" className=" text-[#1b85db] uppercase text-[20px] mb-2">
                 Contact Us
               </span>
-              <h2 className="text-3xl sm:text-4xl font-semibold mb-4">
+              <h2 data-aos="fade-right" className="text-3xl sm:text-4xl font-semibold mb-4">
                 Get in Touch
               </h2>
-              <p className="text-gray-600">
+              <p data-aos="fade-right" className="text-gray-600">
                 We love to talk about how we can work together. Send us a
                 message below, and well respond as soon as possible.
               </p>

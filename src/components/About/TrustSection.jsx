@@ -10,7 +10,7 @@ const TrustSection = () => {
                 <div className="flex flex-col lg:flex-row  justify-between -mx-4 relative">
                     {/* Left Side */}
                     <div>
-                        <p className="uppercase text-[18px] md:text-[24px] font-medium mb-6 text-[#31d7a9]">Take a Look at Our Tour</p>
+                        <p className="uppercase text-[18px] md:text-[24px] font-medium mb-6 text-[#1b85db]">Take a Look at Our Tour</p>
                         <h1 className="uppercase font-bold mb-4 text-[30px] sm:text-[50px] leading-[1.3] text-[#111]">
                             Guarantees You <br /> Can Trust
                         </h1>
