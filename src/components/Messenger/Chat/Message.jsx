@@ -4,11 +4,14 @@ import { format } from "timeago.js";
 import './M.scss';
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 
 const Message = ({ own, message, selectedUser }) => {
     const auth = useAuth();
-    
+    if(auth?.isLoading){
+        return <Loading></Loading>
+      }
   
     const isLargeMessage = message?.message.length > 30; 
 

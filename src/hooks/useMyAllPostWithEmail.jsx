@@ -7,7 +7,7 @@ const useMyAllPostWithEmail = () => {
     const pathname = usePathname();
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     const { data, isLoading, refetch }  = useQuery({
-        queryKey: ["myPost"],
+        queryKey: ["myPost", lastPathSegment],
         queryFn: () =>
             fetch(`https://event-sphare-server.vercel.app/getUserPosts/${lastPathSegment}`).then((res) =>
                 res.json()

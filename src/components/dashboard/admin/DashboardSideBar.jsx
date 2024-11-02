@@ -33,14 +33,17 @@ import {
     RiShoppingBagLine,
 } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
+import toast from "react-hot-toast";
 
 const DashboardSideBar = () => {
     const session = useSession();
     const [routes, setRoutes] = useState([])
+    const pathname = usePathname();
     const auth = useAuth();
+
     const sessionData = session?.data;
     const authInfo = auth?.data?.role;
-    const pathname = usePathname();
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
@@ -57,7 +60,11 @@ const DashboardSideBar = () => {
         queryFn: fetchOrders,
       });
     
-
+      const handleSignOut = async () => {
+        await signOut();
+        toast.success("Sign Out Successfully");
+        document.cookie = `myEmail=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+      };
 
     const userRoutes = [
         {
@@ -211,7 +218,9 @@ const DashboardSideBar = () => {
     }, [sessionData, authInfo])
 
 
-
+    if(auth?.isLoading){
+        return <Loading></Loading>
+    }
 
     return (
         <>
@@ -272,7 +281,7 @@ const DashboardSideBar = () => {
 
                 <div className="">
                     <hr className="border-gray-200 my-6" />
-                    <button onClick={() => signOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 w-full ">
+                    <button onClick={() => handleSignOut()} className="flex items-center py-1 md:py-2 px-4 rounded transition duration-200 bg-white hover:bg-[#3b99f1] hover:text-white mb-6 transform ease-in delay-100 w-full ">
                         <FaSignOutAlt className="mr-2 text-xl" />
 
                         <span>Sign Out</span>

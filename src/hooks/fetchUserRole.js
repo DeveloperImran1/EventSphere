@@ -4,7 +4,7 @@ const fetchUserRole = async (token) => {
         return null;
     }
     try {
-        const decode = jwt.decode(token)
+        const decode = jwt?.decode(token)
         console.log("decode is ", decode)
         return decode?.role || null;
     }

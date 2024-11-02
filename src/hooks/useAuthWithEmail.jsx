@@ -6,7 +6,7 @@ const useAuthWithEmail = () => {
     const pathname = usePathname();
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
     const { data, isLoading, refetch } = useQuery({
-        queryKey: ["user"],
+        queryKey: ["user", lastPathSegment],
         queryFn: () =>
             fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
                 res.json()
