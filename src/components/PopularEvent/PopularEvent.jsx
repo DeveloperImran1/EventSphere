@@ -295,16 +295,16 @@ function EventCard({ event }) {
           <motion.div
             initial={{ y: "-100%", rotateX: -90, opacity: 0 }}
             animate={isHovered ? { y: 0, rotateX: 0, opacity: 1 } : { y: "-100%", rotateX: -90, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 5 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             style={{ transformStyle: "preserve-3d" }}
           >
             <Link href={`events/${event?._id}`}>
-              <Button className=" p-2 font-serif bg-[#1b85db]  hover:bg-[#1b85db] h-8 hover:text-white transition-colors duration-300">
+              <Button className=" p-2 font-serif bg-[#1b85db]  hover:bg-[#1b85db] h-8 hover:text-white transition-colors duration-600">
                 Read More
               </Button>
             </Link>
             <Link href={`/payment?id=${event?._id}`}>
-              <Button className=" m-2 p-1 font-serif  h-8 bg-[#1b85db]  hover:bg-[#1b85db] hover:text-white transition-colors duration-300">
+              <Button className=" m-2 p-1 font-serif  h-8 bg-[#1b85db]  hover:bg-[#1b85db] hover:text-white transition-colors duration-600">
                 Book Now !
               </Button>
 
