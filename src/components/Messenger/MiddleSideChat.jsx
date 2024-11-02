@@ -8,7 +8,7 @@ import { RiInformationFill } from "react-icons/ri";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import { LuSticker } from "react-icons/lu";
 import { PiSmileyStickerFill } from "react-icons/pi";
-import { AiFillLike } from "react-icons/ai";
+
 import Messages from "./Messages";
 import { IoSend } from "react-icons/io5";
 import { useEffect, useState } from "react";
@@ -61,19 +61,7 @@ const MiddleSideChat = ({ currentChat, messages, currentUser, conversations }) =
         getUsers()
     }, [currentChat?.members, currentUser, axiosPublic])
 
-    // useEffect(() => {
-    //     const fetchMessages = async () => {
-    //         try {
-    //             const res = await axiosPublic.get(`/messages/${currentChat._id}`)
-    //             setMessageses(res.data)
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //     }
-    //     if (currentChat) {
-    //         fetchMessages()
-    //     }
-    // }, [currentChat, axiosPublic])
+ 
 
     return (
         <div className=" border-r-2 min-h-screen   border-l-2 ">
