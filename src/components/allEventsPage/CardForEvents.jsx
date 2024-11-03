@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect, useRef } from "react";
