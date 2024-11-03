@@ -15,10 +15,13 @@ const SuggestFollowing = ({ userData, refetch }) => {
     
     // If myData exists, extract the followers array
     const followerEmails = myData?.followers || [];
+    console.log(followerEmails)
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user?.email));
+    console.log(followerData)
     const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail) && user.email != myEmail);
+    console.log(filteredUsersWithoutYou[2]?.email)
 
     // handleFollow Button
     const handleFollow = async (id) => {
@@ -36,6 +39,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
           });
       
           const data = await response.json();
+          console.log(data)
       
           if (response.ok) {
             toast.success('Followed successfully!');

@@ -15,13 +15,14 @@ const MyFollower = ({ userData, refetch }) => {
     const router = useRouter()
     // Find the current user's data using their email
     const myData = userData.find(user => user?.email === myEmail);
+    console.log(myData)
     
     // If myData exists, extract the followers array
     const followerEmails = myData?.followers || [];
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user.email));
-    // console.log('followerData', followerData);
+    console.log('followerData', followerData);
     
     // const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
 
@@ -41,6 +42,7 @@ const MyFollower = ({ userData, refetch }) => {
           });
       
           const data = await response.json();
+          console.log(data)
       
           if (response.ok) {
             toast.success('Followed successfully!');
