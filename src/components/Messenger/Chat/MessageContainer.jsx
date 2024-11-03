@@ -42,7 +42,7 @@ const MessageContainer = ({ selectedUser }) => {
     }
   }, [messages]);
 
-  // Fetch messages for the selected conversations
+  // Fetch messages for the selected conversation
   useEffect(() => {
     const getMessages = async () => {
       setLoading(true);
