@@ -6,8 +6,8 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export const middleware = async (request) => {
 
-    const token = cookies(request).get("__Secure-next-auth.session-token")   // vercel a deploy korar somoi ai line comentout kore dibo.
-    // const token = cookies(request).get("next-auth.session-token")
+    // const token = cookies(request).get("__Secure-next-auth.session-token")   // vercel a deploy korar somoi ai line comentout kore dibo.
+    const token = cookies(request).get("next-auth.session-token")
 
     const pathname = request.nextUrl.pathname;
     console.log("path name is ", pathname)

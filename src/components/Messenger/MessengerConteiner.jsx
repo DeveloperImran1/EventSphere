@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from "./Chat/Sidebar";
 import MessageContainer from "./Chat/MessageContainer";
 import RightSideChat from "./RightSideChat";
+import Loading from "../shared/LoadingSpiner/Loading";
 
 const MessengerContainer = () => {
     const [selectedUser, setSelectedUser] = useState(null);
@@ -15,7 +16,9 @@ const MessengerContainer = () => {
         setIsSidebarVisible(false);
     }
 
-
+    if(auth?.isLoading){
+        return <Loading></Loading>
+      }
 
     return (
         <section className="flex flex-col lg:grid grid-cols-12 max-w-[1280px] mx-auto gap-8">
