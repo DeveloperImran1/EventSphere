@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const MyFollower = ({ userData, refetch }) => {
-    console.log('user Data', userData);
+    // console.log('user Data', userData);
     
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
@@ -15,6 +15,7 @@ const MyFollower = ({ userData, refetch }) => {
     const router = useRouter()
     // Find the current user's data using their email
     const myData = userData.find(user => user?.email === myEmail);
+    console.log(myData)
     
     // If myData exists, extract the followers array
     const followerEmails = myData?.followers || [];
@@ -41,6 +42,7 @@ const MyFollower = ({ userData, refetch }) => {
           });
       
           const data = await response.json();
+          console.log(data)
       
           if (response.ok) {
             toast.success('Followed successfully!');

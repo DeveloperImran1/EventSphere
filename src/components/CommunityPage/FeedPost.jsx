@@ -39,22 +39,22 @@ export default function FeedPost({refetch}) {
             setLoading(false);
         }
     };
-    console.log("Selected Image ", selectedImage)
+    // console.log("Selected Image ", selectedImage)
 
     // Handle post submission
     const handlePostSubmit = async (e) => {
         e.preventDefault();
         if (!currentUser) {
-            toast.error("Please Login First 👊")
-            return router.push('/login')
+            toast.error("Please Login First 👊");
+            return router.push('/login');
         }
         const form = e.target;
         const title = form?.title?.value;
-
+    
         if (!title && images.length === 0) {
             return toast.error("Please add a title or image!");
         }
-
+    
         setLoading(true);
         try {
             // Construct post object to match backend schema
@@ -74,16 +74,26 @@ export default function FeedPost({refetch}) {
                 },
                 comments: [],
             };
-
+    
             // Send post object to the server
             const res = await axiosPublic.post('/createPost', postObj);
             if (res?.status === 201) {
                 toast.success('Post created successfully!');
                 form.reset();
                 setSelectedImage(null);
-                refetch()
+                refetch();
                 setImages([]);
                 closeModal();
+    
+                // Create a notification object
+                const notification = {
+                    type: "community_post",
+                    message: `${currentUser?.name} created a new post: ${title.slice(0,30)}`,
+                    route: `/community`, // Assuming the backend returns a postId
+                };
+    
+                // Try updating notification with error handling
+                    const notificationRes = await axiosPublic.patch(`/notification/${currentUser.email}`, notification);
             }
         } catch (error) {
             console.error('Error during post submission:', error.response?.data || error.message);
@@ -92,6 +102,8 @@ export default function FeedPost({refetch}) {
             setLoading(false);
         }
     };
+    
+    
 
     return (
         <div className="w-full mx-auto p-4 border rounded-md shadow-md">

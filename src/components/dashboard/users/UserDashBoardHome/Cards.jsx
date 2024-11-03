@@ -22,7 +22,7 @@ const Cards = () => {
 
   // dynaic user profile er email dia dynamic user er profile info get
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", lastPathSegment],
     queryFn: () =>
       fetch(`https://event-sphare-server.vercel.app/user/${lastPathSegment}`).then((res) =>
         res.json()
@@ -32,7 +32,7 @@ const Cards = () => {
 
   // dynaic user profile er email dia dynamic user er all post get
   const { data: myPosts } = useQuery({
-    queryKey: ["myPost"],
+    queryKey: ["myPost", lastPathSegment],
     queryFn: () =>
       fetch(`https://event-sphare-server.vercel.app/getUserPosts/${lastPathSegment}`).then((res) =>
         res.json()

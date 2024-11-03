@@ -4,22 +4,25 @@ import { format } from "timeago.js";
 import './M.scss';
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 
 
 const Message = ({ own, message, selectedUser }) => {
     const auth = useAuth();
-    
+    if(auth?.isLoading){
+        return <Loading></Loading>
+      }
   
     const isLargeMessage = message?.message.length > 30; 
 
     return (
         <div className="my-1">
         <div className={`flex gap-2 px-3 ${own ? 'justify-end' : ''}`}>
-            <div className="message-content">
-                <div className={`text-[16px] bubble-container ${own ? 'bubble' : 'friend-bubble'}`}>
+            <div className="max-w-[50%]">
+                <div className={`text-[16px] mt-2 py-2 px-2 rounded-lg ${own ? 'bg-blue-500 text-whhite' : ' bg-gray-200 text-black '}`}>
                     {message?.message}
                 </div>
-                <p className={`-mt-1.5 text-[10px] ${own ? 'text-right' : 'text-left'} `}>
+                <p className={` text-[10px] ${own ? 'text-right' : 'text-left'} `}>
                     {format(message?.createdAt)}
                 </p>
             </div>

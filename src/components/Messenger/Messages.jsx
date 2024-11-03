@@ -2,9 +2,13 @@
 import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import { format } from "timeago.js";
+import Loading from "../shared/LoadingSpiner/Loading";
 const Messages = ({ message, own ,user}) => {
   const auth = useAuth();
 
+  if(auth?.isLoading){
+    return <Loading></Loading>
+  }
   return (
     <div className=" my-1 ">
 
