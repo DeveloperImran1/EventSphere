@@ -44,6 +44,7 @@ const MiddleSideChat = ({ currentChat, messages, currentUser, conversations }) =
         }
     }
     const [user, setUser] = useState([])
+  
 
     useEffect(() => {
         const friendId = currentChat?.members?.find(m => m !== currentUser)
@@ -53,6 +54,7 @@ const MiddleSideChat = ({ currentChat, messages, currentUser, conversations }) =
                 const res = await axiosPublic.get(`/single-user/${friendId}`)
 
                 setUser(res?.data)
+                
             }
             catch (err) {
                 console.log(err)
