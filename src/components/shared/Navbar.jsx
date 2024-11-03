@@ -9,6 +9,8 @@ import useAuth from "@/hooks/useAuth";
 import { FaHeart } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { formatDistanceToNow } from 'date-fns';
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -19,6 +21,7 @@ const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState(null);
   const [isNotification, setNotification] = useState(false)
   const [favorites, setFavorite] = useState([])
+  const axiosPublic = useAxiosPublic()
   const router = useRouter()
 
   const updateFavorites = () => {
@@ -72,7 +75,8 @@ const Navbar = () => {
 
   const session = useSession();
   const auth = useAuth();
-  console.log(auth)
+  // console.log(session?.data)
+  // console.log(session?.data?.user?.email)
   // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
@@ -191,38 +195,50 @@ const Navbar = () => {
 
   ]
 
-  const notification = [
-    {
-      _id: "1",
-      url: "/event/12345",
-      title: "New comment on your event \"Summer Music Fest\"",
-      time: "2024-10-18T14:48:00Z"
+  // const notification = [
+  //   {
+  //     _id: "1",
+  //     url: "/event/12345",
+  //     title: "New comment on your event \"Summer Music Fest\"",
+  //     time: "2024-10-18T14:48:00Z"
+  //   },
+  //   {
+  //     _id: "2",
+  //     url: "/profile/settings",
+  //     title: "Your account settings have been updated",
+  //     time: "2024-10-18T09:30:00Z"
+  //   },
+  //   {
+  //     _id: "3",
+  //     url: "/message/98765",
+  //     title: "You have a new message from John",
+  //     time: "2024-10-17T20:15:00Z"
+  //   },
+  //   {
+  //     _id: "4",
+  //     url: "/event/54321",
+  //     title: "Your event \"Tech Conference 2024\" has been approved",
+  //     time: "2024-10-17T16:00:00Z"
+  //   },
+  //   {
+  //     _id: "5",
+  //     url: "/notification/65432",
+  //     title: "Special offer: 50% off on premium events",
+  //     time: "2024-10-16T08:00:00Z"
+  //   }
+  // ];
+
+  const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
+    queryKey: ['notifications'],
+    queryFn: async () => {
+      const { data } = await axiosPublic.get(`/user/${session?.data?.user?.email}`);
+      return data;
     },
-    {
-      _id: "2",
-      url: "/profile/settings",
-      title: "Your account settings have been updated",
-      time: "2024-10-18T09:30:00Z"
-    },
-    {
-      _id: "3",
-      url: "/message/98765",
-      title: "You have a new message from John",
-      time: "2024-10-17T20:15:00Z"
-    },
-    {
-      _id: "4",
-      url: "/event/54321",
-      title: "Your event \"Tech Conference 2024\" has been approved",
-      time: "2024-10-17T16:00:00Z"
-    },
-    {
-      _id: "5",
-      url: "/notification/65432",
-      title: "Special offer: 50% off on premium events",
-      time: "2024-10-16T08:00:00Z"
-    }
-  ];
+    keepPreviousData: true,
+  });
+  // console.log(notificationsAll)
+  const sortedNotifications = notificationsAll?.notifications?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
 
 
   return (
@@ -273,21 +289,37 @@ const Navbar = () => {
                 <small className="absolute  px-1 bg-red-500  border-white rounded-full -top-2 left-4 dark:border-gray-900">{favorites?.length || 0}</small>
 
               </Link>
+              <button
+                onClick={() => setNotification(!isNotification)}
+                id="dropdownNotificationButton"
+                data-dropdown-toggle="dropdownNotification"
+                className="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
+                type="button"
+              >
+                <IoMdNotifications size={25} className="text-white" />
 
-              <button onClick={() => setNotification(!isNotification)} id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" className="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
-                <IoMdNotifications size={25} className="text-white"></IoMdNotifications>
-
-                <div className="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
+                {/* Notification count badge */}
+                {sortedNotifications?.length > 0 && (
+                  <div className="absolute -top-0.5 start-2.5 flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs rounded-full border-2 border-white dark:border-gray-900">
+                    {sortedNotifications?.length}
+                  </div>
+                )}
               </button>
-              <div id="dropdownNotification" className={` ${isNotification ? 'inline' : 'hidden'} overflow-y-auto z-20  h-[400px]  absolute top-[60px] md:right-[20px] w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`} aria-labelledby="dropdownNotificationButton">
+
+              {/* Dropdown Notification Panel */}
+              <div
+                id="dropdownNotification"
+                className={`${isNotification ? 'inline' : 'hidden'} overflow-y-auto z-20 h-[400px] w-[300px] md:w-[350px] absolute top-[60px] md:right-[20px] max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`}
+                aria-labelledby="dropdownNotificationButton"
+              >
                 <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
                   Notifications
                 </div>
                 <div className="divide-y divide-gray-100 dark:divide-gray-700">
-                  {
-                    notification?.map(notific => <Link href={notific?.url} key={notific?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                      <div className="flex-shrink-0">
-                        <Image height={676} width={1200} className="rounded-full w-11 h-11" src="https://i.ibb.co/Kzd0ZzJ/not.png" alt="Jese image" />
+                  {sortedNotifications?.map((notification) => (
+                    <Link href={notification?.route} key={notification?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <div className="flex-shrink-0 relative">
+                        <Image height={676} width={1200} className="rounded-full w-11 h-11" src="https://i.ibb.co/Kzd0ZzJ/not.png" alt="User notification" />
                         <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
                           <svg className="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                             <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
@@ -296,17 +328,26 @@ const Navbar = () => {
                         </div>
                       </div>
                       <div className="w-full ps-3">
-                        <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">{notific?.title}</div>
-                        <div className="text-xs text-blue-600 dark:text-blue-500">{notific?.time &&
-                          formatDistanceToNow(new Date(notific?.time))} ago</div>
+                        <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">{notification?.message}</div>
+                        <div className="text-xs text-blue-600 dark:text-blue-500">
+                          {notification?.createdAt && formatDistanceToNow(new Date(notification?.createdAt))} ago
+                        </div>
                       </div>
-                    </Link>)
-                  }
-
+                    </Link>
+                  ))}
                 </div>
-                <a href="#" className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
-                  <div className="inline-flex items-center ">
-                    <svg className="w-4 h-4 me-2 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                <a
+                  href="#"
+                  className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+                >
+                  <div className="inline-flex items-center">
+                    <svg
+                      className="w-4 h-4 me-2 text-gray-500 dark:text-gray-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 14"
+                    >
                       <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
                     </svg>
                     View all
