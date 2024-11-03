@@ -35,7 +35,7 @@ const MessageContainer = ({ selectedUser }) => {
   const sendNotification = async ( ) => {
     try {
       const response = await axios.post('http://localhost:9000/send-notification', {
-        senderId: auth?.data?.name,
+             
                 userId: selectedUser?._id,
                 message: `${auth?.data?.name} has initiated a video call.`,
     
