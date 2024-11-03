@@ -13,7 +13,7 @@ const sliderItems = [
   {
     image: "https://i.ibb.co.com/gmvcxtB/pexels-wendywei-1387174.jpg",
     title: "\"Epic Concert Night\"",
-    description: "Experience an unforgettable night of live performances with world-renowned artists and electrifying music. Join the crowd and feel the energy!"
+    description:"Experience an unforgettable night of live performances with world-renowned artists and electrifying music. Join the crowd and feel the energy!"
   },
   {
     image: "https://i.ibb.co/tmc1PgJ/pexels-furknsaglam-1596977-3131406.jpg",
@@ -116,7 +116,7 @@ export default function Banner() {
                 boxShadow:
                   index === 0 || index === 1 ? 'none' : '0 20px 30px rgba(255,255,255,0.3) inset',
               }}
-            >
+            >        
               {index === 1 && (
                 <div className="absolute inset-[0px] bg-black  bg-opacity-50 " />
               )}
