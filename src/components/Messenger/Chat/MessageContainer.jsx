@@ -70,7 +70,7 @@ const MessageContainer = ({ selectedUser }) => {
   const handleMessages = (e) => {
     setSendData(e.target.value);
   };
-// handleSubmit added
+// handleSubmit added w
   const handleSubmit = async (e) => {
     e.preventDefault();
 
