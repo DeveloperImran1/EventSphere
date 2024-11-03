@@ -66,15 +66,9 @@ const Navbar = () => {
     };
   }, []);
 
-
-
-
   const session = useSession();
 
   const auth = useAuth();
-  // console.log(session?.data)
-  // console.log(session?.data?.user?.email)
-  // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };
@@ -102,10 +96,7 @@ const Navbar = () => {
 
 
   const subMenu1 = [
-    // {
-    //   title: "Sell Event Ticket",
-    //   path: "/sell-event-ticket"
-    // },
+   
     {
       title: "Register",
       path: "/register"
@@ -120,10 +111,7 @@ const Navbar = () => {
     },
   ]
   const subMenu2 = [
-    // {
-    //   title: "Event Management Softwer",
-    //   path: "/event-management-software"
-    // },
+    
     {
       title: "About Us",
       path: "/about-us"
@@ -147,10 +135,6 @@ const Navbar = () => {
       title: "Gift Card",
       path: "/gift-card"
     },
-    // {
-    //   title: "Gallery",
-    //   path: "/gallery"
-    // },
 
 
   ]
@@ -192,10 +176,7 @@ const Navbar = () => {
 
   ]
 
-
-
-
-  const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
+    const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
     queryKey: ['notifications'],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/user/${session?.data?.user?.email}`);
