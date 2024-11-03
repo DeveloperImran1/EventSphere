@@ -63,21 +63,8 @@ const Navbar = () => {
     };
   }, []);
 
-
-  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
-  //   const { data: notification = [] } = useQuery({
-  //     queryKey: ['notification'],
-  //     queryFn: async () => {
-  //         const res = await axiosPublic.get('/notification')
-  //         return res.data;
-  //     }
-  // })
-
   const session = useSession();
   const auth = useAuth();
-  // console.log(session?.data)
-  // console.log(session?.data?.user?.email)
-  // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };
@@ -105,10 +92,7 @@ const Navbar = () => {
 
 
   const subMenu1 = [
-    // {
-    //   title: "Sell Event Ticket",
-    //   path: "/sell-event-ticket"
-    // },
+   
     {
       title: "Register",
       path: "/register"
@@ -123,10 +107,7 @@ const Navbar = () => {
     },
   ]
   const subMenu2 = [
-    // {
-    //   title: "Event Management Softwer",
-    //   path: "/event-management-software"
-    // },
+    
     {
       title: "About Us",
       path: "/about-us"
@@ -150,10 +131,6 @@ const Navbar = () => {
       title: "Gift Card",
       path: "/gift-card"
     },
-    // {
-    //   title: "Gallery",
-    //   path: "/gallery"
-    // },
 
 
   ]
@@ -195,40 +172,7 @@ const Navbar = () => {
 
   ]
 
-  // const notification = [
-  //   {
-  //     _id: "1",
-  //     url: "/event/12345",
-  //     title: "New comment on your event \"Summer Music Fest\"",
-  //     time: "2024-10-18T14:48:00Z"
-  //   },
-  //   {
-  //     _id: "2",
-  //     url: "/profile/settings",
-  //     title: "Your account settings have been updated",
-  //     time: "2024-10-18T09:30:00Z"
-  //   },
-  //   {
-  //     _id: "3",
-  //     url: "/message/98765",
-  //     title: "You have a new message from John",
-  //     time: "2024-10-17T20:15:00Z"
-  //   },
-  //   {
-  //     _id: "4",
-  //     url: "/event/54321",
-  //     title: "Your event \"Tech Conference 2024\" has been approved",
-  //     time: "2024-10-17T16:00:00Z"
-  //   },
-  //   {
-  //     _id: "5",
-  //     url: "/notification/65432",
-  //     title: "Special offer: 50% off on premium events",
-  //     time: "2024-10-16T08:00:00Z"
-  //   }
-  // ];
-
-  const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
+    const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
     queryKey: ['notifications'],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/user/${session?.data?.user?.email}`);
