@@ -2,6 +2,7 @@
 import MessageContainer from "@/components/Messenger/Chat/MessageContainer";
 import Sidebar from "@/components/Messenger/Chat/Sidebar";
 import RightSideChat from "@/components/Messenger/RightSideChat";
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 
@@ -9,7 +10,9 @@ const Messenger = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [isSidebarVisible, setIsSidebarVisible] = useState(true);
     const auth = useAuth()
-
+    if (auth?.isLoading) {
+        return <Loading></Loading>
+    }
     const handelUserSelect = (user) => {
         setSelectedUser(user);
         setIsSidebarVisible(false);

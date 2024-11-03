@@ -1,3 +1,4 @@
+"use client"
 import useAuth from '@/hooks/useAuth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
@@ -13,12 +14,12 @@ export const useSocketContext=()=>{
 export const SocketContextProvider=({children})=>{
     const [socket , setSocket]= useState(null);
     const [onlineUser,setOnlineUser]=useState([]);
-    const {authUser} = useAuth();
+    const auth = useAuth();
     useEffect(()=>{
-        if(authUser){
-            const socket = io("https://eventsphare-server.onrender.com",{
+        if(auth?.data?._id){
+            const socket = io("http://localhost:9000",{
                 query:{
-                    userId:authUser?._id,
+                    userId:auth?.data?._id,
                 }
             })
             socket.on("getOnlineUsers",(users)=>{
@@ -32,7 +33,7 @@ export const SocketContextProvider=({children})=>{
                 setSocket(null); 
             }
         }
-    },[authUser]);
+    },[auth?.data?._id,socket]);
     return(
     <SocketContext.Provider value={{socket , onlineUser}}>
         {children}

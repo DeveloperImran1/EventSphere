@@ -1,4 +1,5 @@
 'use client'
+import Loading from "@/components/shared/LoadingSpiner/Loading";
 import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
@@ -9,10 +10,12 @@ const { MdPhotoCamera } = require("react-icons/md");
 
 const ProfileInfo = () => {
   const session = useSession();
-  const {data} = useAuth();
+  const { data, isLoading } = useAuth();
 
 
-  console.log(data);
+  if (isLoading) {
+    return <Loading></Loading>
+  }
 
 
   return (

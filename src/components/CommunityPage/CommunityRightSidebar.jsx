@@ -19,7 +19,7 @@ const CommunityRightSidebar = () => {
         queryKey: ['userData'],
         queryFn: fetchUserData,
     });
-    console.log("userData", userData);
+    // console.log("userData", userData);
     
 
     if (isLoading) {
