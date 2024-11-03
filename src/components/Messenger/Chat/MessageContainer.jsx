@@ -1,4 +1,5 @@
 // "use client"
+// "use client"
 // import useAxiosPublic from "@/hooks/useAxiosPublic";
 // import userConversation from "./Zustans/useConversation";
 // import useAuth from "@/hooks/useAuth";
@@ -213,6 +214,7 @@ import { useRouter } from "next/navigation";
 import { useSocketContext } from "./Soket/SocketContext";
 import notify from "./asset/notification.mp3"; // Ensure the correct path for notification sound
 import { useQuery } from '@tanstack/react-query'; // Import useQuery from TanStack Query
+import axios from "axios";
 
 const MessageContainer = ({ selectedUser }) => {
   const axiosPublic = useAxiosPublic();
@@ -223,6 +225,35 @@ const MessageContainer = ({ selectedUser }) => {
   const [sendData, setSendData] = useState("");
   const lastMessageRef = useRef();
   const router = useRouter();
+  console.log('463')
+  // Function to send notification
+
+  const sendNotification = async ( ) => {
+    try {
+          // Create a notification object
+          const notification = {
+            type: "video-call",
+            message: `${auth?.data?.name} just call you `,
+            route: `/video-call`, // Assuming the backend returns a postId
+        };
+      
+      const response = await axiosPublic.patch(`/notification/${selectedUser?.email}`, notification  );
+      console.log('Notification response:', response.data);
+    } catch (error) {
+      console.error('Error sending notification:', error.response ? error.response.data : error.message);
+    }
+  };
+
+  console.log(auth?.data?.name, 'auth er nam ')
+
+  // Function to handle video call button click
+  const handleVideoCall = () => {
+    if (!auth?.data?._id) {
+      toast.error("Please log in to initiate a call.");
+      return router.push('/login');
+    }
+    sendNotification(); // Send notification when the video call starts
+  };
 
   const { socket } = useSocketContext();
 
@@ -364,8 +395,10 @@ const MessageContainer = ({ selectedUser }) => {
               </span>
             </div>
 
-            <Link href="/video-call">
-              <FaVideo size={23} className="text-[#1b85db] "></FaVideo>
+            <Link href="/video-call"     >
+              <button onClick={handleVideoCall}>
+                <FaVideo size={23} className="text-[#1b85db]" />
+              </button>
             </Link>
           </div>
 

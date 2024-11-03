@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
@@ -24,6 +25,8 @@ const Navbar = () => {
   const axiosPublic = useAxiosPublic()
   const router = useRouter()
 
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
   const updateFavorites = () => {
     const storedFavorites = localStorage.getItem('favorites');
     const myFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
@@ -63,21 +66,9 @@ const Navbar = () => {
     };
   }, []);
 
-
-  // Notification er kaj akhono hoini... kora somoi comment out korte hobe
-  //   const { data: notification = [] } = useQuery({
-  //     queryKey: ['notification'],
-  //     queryFn: async () => {
-  //         const res = await axiosPublic.get('/notification')
-  //         return res.data;
-  //     }
-  // })
-
   const session = useSession();
+
   const auth = useAuth();
-  // console.log(session?.data)
-  // console.log(session?.data?.user?.email)
-  // console.log("Navbar theke session is", session)
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev);
   };
@@ -105,10 +96,7 @@ const Navbar = () => {
 
 
   const subMenu1 = [
-    // {
-    //   title: "Sell Event Ticket",
-    //   path: "/sell-event-ticket"
-    // },
+   
     {
       title: "Register",
       path: "/register"
@@ -123,10 +111,7 @@ const Navbar = () => {
     },
   ]
   const subMenu2 = [
-    // {
-    //   title: "Event Management Softwer",
-    //   path: "/event-management-software"
-    // },
+    
     {
       title: "About Us",
       path: "/about-us"
@@ -150,10 +135,6 @@ const Navbar = () => {
       title: "Gift Card",
       path: "/gift-card"
     },
-    // {
-    //   title: "Gallery",
-    //   path: "/gallery"
-    // },
 
 
   ]
@@ -195,40 +176,7 @@ const Navbar = () => {
 
   ]
 
-  // const notification = [
-  //   {
-  //     _id: "1",
-  //     url: "/event/12345",
-  //     title: "New comment on your event \"Summer Music Fest\"",
-  //     time: "2024-10-18T14:48:00Z"
-  //   },
-  //   {
-  //     _id: "2",
-  //     url: "/profile/settings",
-  //     title: "Your account settings have been updated",
-  //     time: "2024-10-18T09:30:00Z"
-  //   },
-  //   {
-  //     _id: "3",
-  //     url: "/message/98765",
-  //     title: "You have a new message from John",
-  //     time: "2024-10-17T20:15:00Z"
-  //   },
-  //   {
-  //     _id: "4",
-  //     url: "/event/54321",
-  //     title: "Your event \"Tech Conference 2024\" has been approved",
-  //     time: "2024-10-17T16:00:00Z"
-  //   },
-  //   {
-  //     _id: "5",
-  //     url: "/notification/65432",
-  //     title: "Special offer: 50% off on premium events",
-  //     time: "2024-10-16T08:00:00Z"
-  //   }
-  // ];
-
-  const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
+    const { data: notificationsAll = {}, isLoading, refetch } = useQuery({
     queryKey: ['notifications'],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/user/${session?.data?.user?.email}`);
@@ -316,6 +264,27 @@ const Navbar = () => {
                   Notifications
                 </div>
                 <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                {/* {notifications.length > 0 ? (
+        notifications.map((notific) => (
+          <Link href={notific?.url || '#'} key={notific?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <div className="flex-shrink-0">
+              <Image height={676} width={1200} className="rounded-full w-11 h-11" src="https://i.ibb.co/Kzd0ZzJ/not.png" alt="Notification icon" />
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
+                <svg className="w-2 h-2 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                  <path d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
+                  <path d="M4.439 9a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239Z" />
+                </svg>
+              </div>
+            </div>
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">{notific?.message}</div>
+              <div className="text-xs text-blue-600 dark:text-blue-500">{notific?.createdAt && formatDistanceToNow(new Date(notific?.createdAt))} ago</div>
+            </div>
+          </Link>
+        ))
+      ) : (
+        <p>No notifications found.</p>
+      )} */}
                   {sortedNotifications?.map((notification) => (
                     <Link href={notification?.route} key={notification?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <div className="flex-shrink-0 relative">
@@ -519,7 +488,6 @@ const Navbar = () => {
 
               <div className="flex items-center space-x-6">
 
-
                 {/* If logged in */}
                 <div className="relative">
                   <div className="flex items-center gap-1  rounded-3xl cursor-pointer ">
@@ -595,9 +563,6 @@ const Navbar = () => {
                           onClick={() => handleSignOut()}>Logout
                         </div>
                       }
-
-
-
 
 
                     </div>
