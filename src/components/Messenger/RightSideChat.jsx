@@ -42,7 +42,7 @@ const RightSideChat = ({ selectedUser }) => {
     <div className="box-border h-[calc(100vh-64px)] pt-8 border p-4">
       <div className=" flex  pb-2  flex-col  justify-center items-center ">
         <Image src={selectedUser?.image || "https://cdn-icons-png.flaticon.com/512/6596/6596121.png"}
-          width={50} height={50} alt="avatar"
+          width={676} height={1200} alt="avatar"
           className=" rounded-full h-[120px] w-[120px] " />
 
         <p className=" font-bold text-black">{selectedUser?.name}</p>
