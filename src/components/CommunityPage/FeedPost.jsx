@@ -92,9 +92,11 @@ export default function FeedPost({refetch}) {
                     route: `/community`, // Assuming the backend returns a postId
                 };
     
-                // Try updating notification with error handling
-                    const notificationRes = await axiosPublic.patch(`/notification/${currentUser.email}`, notification);
-            }
+                
+                        const notificationRes = await axiosPublic.patch(`/notification/${currentUser.email}`, notification);
+                    
+            } 
+            
         } catch (error) {
             console.error('Error during post submission:', error.response?.data || error.message);
             toast.error('Something went wrong. Try again!');

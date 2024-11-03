@@ -1,4 +1,5 @@
 import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { refresh } from 'aos';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -54,8 +55,11 @@ const SuggestFollowing = ({ userData, refetch }) => {
                     route: `/dashboard/user-profile/${session?.data?.user?.email}`, 
                 };
     
-                const notificationRes = await axiosPublic.patch(`/notification/${followerEmail}`, notification);
-    
+               
+                    const notificationRes = await axiosPublic.patch(`/notification/${followerEmail}`, notification);
+                
+                   
+                
             } else {
                 console.error('Error:', data.message);
             }

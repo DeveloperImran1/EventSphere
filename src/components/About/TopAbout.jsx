@@ -12,21 +12,21 @@ const TopAbout = () => {
                     <div className="w-full px-4 box-border lg:w-1/2">
                         <div>
                             <div className="text-left mb-14 sm:mb-16">
-                                <span className="text-[#31d7a9] uppercase block text-lg mb-2 -mt-2 sm:text-xl sm:mb-6 sm:-mt-1 md:text-2xl">
+                                <span data-aos="fade-right" className="text-[#1b85db] uppercase block text-lg mb-2 -mt-2 sm:text-xl sm:mb-6 sm:-mt-1 md:text-2xl">
                                     We Are EventSphere
                                 </span>
                                 <div className="mb-3 md:mb-6">
-                                    <h2 className="text-[30px] md:-mt-2 sm:text-[50px] sm:leading-[60px] sm:-mt-3 font-bold uppercase mb-4 sm:mb-6 text-[#333]">
+                                    <h2 data-aos="fade-right" className="text-[30px] md:-mt-2 sm:text-[50px] sm:leading-[60px] sm:-mt-3 font-bold uppercase mb-4 sm:mb-6 text-[#333]">
                                         Get to Know Us
                                     </h2>
                                 </div>
-                                <p className="text-[16px] mb-3 md:mb-[37px] mt-0 md:-mt-[11px] sm:text-[18px] sm:max-w-[700px] sm:mx-auto text-justify text-[#666]">
+                                <p data-aos="fade-right" className="text-[16px] mb-3 md:mb-[37px] mt-0 md:-mt-[11px] sm:text-[18px] sm:max-w-[700px] sm:mx-auto text-justify text-[#666]">
                                     EventSphere is your ultimate destination for discovering and booking tickets to various events, including concerts, sports, workshops, and festivals. We bring experiences to life by making event access easy and convenient.
                                 </p>
-                                <p className="text-[16px] mb-3 md:mb-[37px] mt-0 md:-mt-[11px] sm:text-[18px] sm:max-w-[700px] sm:mx-auto text-justify text-[#666]">
+                                <p data-aos="fade-right" className="text-[16px] mb-3 md:mb-[37px] mt-0 md:-mt-[11px] sm:text-[18px] sm:max-w-[700px] sm:mx-auto text-justify text-[#666]">
                                     Our platform ensures a seamless booking experience with real-time availability, personalized recommendations, and secure payment options. Whether youre a music lover, sports enthusiast, or looking for a fun weekend, EventSphere has something for everyone.
                                 </p>
-                                <button className='bg-blue-500 py-2 px-6 mt-10 rounded-md'>Explore more</button>
+                                <button  className='bg-blue-500 py-2 px-6 mt-10 rounded-md'>Explore more</button>
                               
                             </div>
                         </div>

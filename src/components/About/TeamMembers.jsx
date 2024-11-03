@@ -102,7 +102,7 @@ const TeamMembers = () => {
                                 </div>
                                 <div className="mt-5 text-center">
                                     <h1 className="text-gray-900 font-bold capitalize text-[24px] sm:text-[26px] md:text-[28px] lg:text-[30px]">{organizer?.name}</h1>
-                                    <p className="text-[#31d7a9] text-[16px]">{organizer?.role}</p>
+                                    <p className="text-[#1b85db] text-[16px]">{organizer?.role}</p>
                                 </div>
                             </div>
                         </SwiperSlide>
