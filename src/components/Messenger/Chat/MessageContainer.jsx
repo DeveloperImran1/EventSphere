@@ -1,24 +1,18 @@
 "use client"
-
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import userConversation from "./Zustans/useConversation";
 import useAuth from "@/hooks/useAuth";
 import { useEffect, useRef, useState } from "react";
 import { TiMessages } from "react-icons/ti";
 import Image from "next/image";
-import { FaPhoneAlt } from "react-icons/fa";
 import Link from "next/link";
-import { IoMdImages, IoMdVideocam } from "react-icons/io";
-import { RiInformationFill } from "react-icons/ri";
+import { IoMdImages,} from "react-icons/io";
 import Message from "./Message";
-import { BsFillPlusCircleFill } from "react-icons/bs";
-import { LuSticker } from "react-icons/lu";
-import { HiGift } from "react-icons/hi";
-import { PiSmileyStickerFill } from "react-icons/pi";
 import { IoSend } from "react-icons/io5";
 import { FaVideo } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useSocketContext } from "./Soket/SocketContext";
 
 const MessageContainer = ({ selectedUser }) => {
   const axiosPublic = useAxiosPublic()
@@ -30,6 +24,17 @@ const MessageContainer = ({ selectedUser }) => {
   const lastMessageRef = useRef();
   const router = useRouter();
 
+  const {socket} = useSocketContext();
+
+  useEffect(()=>{
+    socket?.on("newMessage",(newMessage)=>{
+      const sound = new Audio(notify);
+      sound.play();
+      setMessage([...messages,newMessage])
+    })
+
+    return ()=> socket?.off("newMessage");
+  },[socket,setMessage,messages])
   // Scroll to the 
   useEffect(() => {
     if (messages?.length > 0) {
@@ -60,7 +65,7 @@ const MessageContainer = ({ selectedUser }) => {
     };
 
     if (selectedConversation?._id) getMessages();
-  }, [selectedConversation?._id, setMessage, auth?.data?._id, selectedUser?._id]);
+  }, [selectedConversation?._id, setMessage, auth?.data?._id, selectedUser?._id,axiosPublic]);
 
   const handleMessages = (e) => {
     setSendData(e.target.value);
