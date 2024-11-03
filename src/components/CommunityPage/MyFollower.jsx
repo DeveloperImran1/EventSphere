@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const MyFollower = ({ userData, refetch }) => {
-    console.log('user Data', userData);
+    // console.log('user Data', userData);
     
     const [ showFollower , setShowFollower ] = useState(3);
     const { data: session } = useSession();
@@ -21,7 +21,7 @@ const MyFollower = ({ userData, refetch }) => {
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user.email));
-    console.log('followerData', followerData);
+    // console.log('followerData', followerData);
     
     // const filteredUsersWithoutYou = followerData.filter(user => !user.followers.includes(myEmail));
 
