@@ -174,7 +174,7 @@ const DashboardSideBar = () => {
         },
         {
             title: "All Events",
-            path: "/dashboard/all-events",
+            path: "/events",
             icon: RiCalendarEventLine, // Calendar icon for events
         },
         {

@@ -4,12 +4,13 @@ import React, { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback ,AvatarImage} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Mic, MicOff, Phone, PhoneOff, Video, VideoOff } from 'lucide-react'
 import io from "socket.io-client"
 import Swal from 'sweetalert2';
+import useAuth from "@/hooks/useAuth"
 
 const socket = io("https://eventsphare-server.onrender.com", {
   reconnectionAttempts: 5,
@@ -28,23 +29,31 @@ export default function VideoCall() {
   const [callDuration, setCallDuration] = useState(0)
   const [mediaError, setMediaError] = useState(null)
   const [isConnected, setIsConnected] = useState(false)
-
+  const auth = useAuth();
 
   const myVideo = useRef()
   const userVideo = useRef()
   const connectionRef = useRef()
   const callTimerRef = useRef(null)
 
-
-  // Message for Join now
+  // Modified Message for Join now with auto-join functionality
   useEffect(() => {
     Swal.fire({
-      title: '🎉JOIN NOW !',
-      text: 'Please enter your name before joining !',
+      title: '🎉JOIN VIDEO CALL 📞',
+ 
       icon: 'warning',
-      confirmButtonText: 'Got it!',
+      confirmButtonText: 'Join Now  !',
+      confirmButtonColor: '#1b85db',  // Custom color for the confirm button
+      background: '#f0f8ff',         // Custom background color
+      color: '#333333',              // Custom text color
+      iconColor: '#ffa500'           
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setName(auth.data.name);
+        socket.emit("join", auth.data.name);
+      }
     });
-  }, []);
+  }, [auth?.data?.name]);
 
 
   // Add missing joinRoom function
@@ -61,7 +70,7 @@ export default function VideoCall() {
     // Socket connection status handlers
     socket.on("connect", () => setIsConnected(true));
     socket.on("disconnect", () => setIsConnected(false));
-   
+
     // Update users list
     socket.on("allUsers", (updatedUsers) => {
       setUsers(updatedUsers);
@@ -82,7 +91,7 @@ export default function VideoCall() {
   }, []);
 
 
-//Audio & Video on/of condition 
+  //Audio & Video on/of condition 
 
 
   useEffect(() => {
@@ -315,10 +324,10 @@ export default function VideoCall() {
 
   return (
     <div className="container  mx-auto  px-4">
-    <ToastContainer position="top-right" autoClose={5000} />
-   
-    {/* Join Card */}
-    <Card className="max-w-md mx-auto mb-8  shadow-lg">
+      <ToastContainer position="top-right" autoClose={5000} />
+
+      {/* Join Card */}
+      {/* <Card className="max-w-md mx-auto mb-8  shadow-lg">
       <CardHeader className=" rounded-t-xl bg-gradient-to-r   from-blue-500 to-blue-400">
         <CardTitle className="text-white flex items-center ">
 
@@ -343,193 +352,192 @@ export default function VideoCall() {
           </button>
         </div>
       </CardContent>
-    </Card>
+    </Card> */}
 
 
-    {/* Video Grid */}
-    <div className="grid grid-cols-1  md:grid-cols-2 gap-4 mb-8">
-      {/* My Video Card */}
-      <Card className="shadow-lg ">
-        <CardHeader className="bg-gradient-to-r  from-gray-100 to-gray-200">
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Avatar className="h-10 w-10">
-           
+      {/* Video Grid */}
+      <div className="grid grid-cols-1  md:grid-cols-2 gap-4 mb-8">
+        {/* My Video Card */}
+        <Card className="shadow-lg ">
+          <CardHeader className="bg-gradient-to-r  from-gray-100 to-gray-200">
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Avatar className="h-10 w-10">
+
                   <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yCMBpekD57G4-5FTZcs2CiZUbspx-hA6mQ&s" alt="user 1" />
-               
+
                 </Avatar>
-             
-              <span className="text-xl" >{name || 'You'} (Me)</span>
+
+                <span className="text-xl" >{name || 'You'} (Me)</span>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="relative aspect-video bg-gray-900 rounded-b-lg overflow-hidden">
+              {mediaError ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+                  <p className="text-white text-lg text-center px-6">
+                    {mediaError === "NotAllowedError"
+                      ? "Please allow access to camera and microphone"
+                      : "Error accessing media devices"}
+                  </p>
+                </div>
+              ) : (
+                <video playsInline muted ref={myVideo} autoPlay className="w-full h-full object-cover" />
+              )}
+              {isVideoOff && !mediaError && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-2">
+                  <Avatar className="h-20 w-20">
+                    <AvatarFallback className="text-2xl">{name?.[0] || '?'}</AvatarFallback>
+                  </Avatar>
+                  <p className="text-white text-lg">Video Off</p>
+                </div>
+              )}
             </div>
+          </CardContent>
+        </Card>
+        {/* Remote Video Card */}
+        <Card className="shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
+            <CardTitle className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Avatar className="h-10 w-10">
+
+                  <AvatarImage src="https://media.licdn.com/dms/image/D4D22AQFdzKgfoBGjmA/feedshare-shrink_2048_1536/0/1722914742765?e=2147483647&v=beta&t=1a_qeffsiGRpPDvFbVSKNBV-QKbXZKRNnVCdaLbMGUo" alt="user 2" />
+
+                </Avatar>
+                <span className="text-xl">{call.name || 'Remote User'}</span>
+              </div>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="relative aspect-video bg-gray-900 rounded-b-lg overflow-hidden">
+              <video playsInline ref={userVideo} autoPlay className="w-full h-full object-cover" />
+              {!callAccepted && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-4">
+
+                  <p className="text-white text-lg">Waiting for connection...</p>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+
+      {/* Call Controls */}
+      {callAccepted && !callEnded && (
+        <Card className=" mb-8 shadow-lg">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-lg font-semibold text-green-600">Call in progress</p>
+              <p className="text-xl text-gray-800 font-mono bg-green-100 px-3 py-1 rounded-full">
+                {formatDuration(callDuration)}
+              </p>
+            </div>
+            <div className="flex justify-center space-x-6">
+              <Button
+                onClick={toggleMute}
+                variant={isMuted ? "destructive" : "secondary"}
+                disabled={!stream}
+                className="w-14 h-14 rounded-full"
+              >
+                {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+              </Button>
+              <Button
+                onClick={toggleVideo}
+                variant={isVideoOff ? "destructive" : "secondary"}
+                disabled={!stream}
+                className="w-14 h-14 rounded-full"
+              >
+                {isVideoOff ? <VideoOff className="w-6 h-6" /> : <Video className="w-6 h-6" />}
+              </Button>
+              <Button
+                onClick={handleCallEnd}
+                variant="destructive"
+                className="w-14 h-14 rounded-full"
+              >
+                <PhoneOff className="w-6 h-6" />
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+
+      {/* Incoming Call */}
+      {call.isReceivingCall && !callAccepted && (
+        <Card className="max-w-md mx-auto mb-8 shadow-lg border-2 border-green-500 animate-pulse">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <Avatar className="h-10 w-10">
+
+                  <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yCMBpekD57G4-5FTZcs2CiZUbspx-hA6mQ&s" alt="user 1" />
+
+                </Avatar>
+                <div>
+                  <h3 className="text-lg font-semibold">Incoming Call</h3>
+                  <p className="text-gray-500">{call.name || 'Unknown Caller'}</p>
+                </div>
+              </div>
+              <Button
+                onClick={answerCall}
+                disabled={!stream}
+                className="bg-green-500 hover:bg-green-600"
+              >
+                <Phone className="mr-2 h-4 w-4" /> Answer
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+
+      {/* Available Users */}
+      <Card className="   shadow-2xl    ">
+        <CardHeader className="bg-[#1b85db] rounded-t-xl">
+          <CardTitle className="flex items-center ">
+
+            <span className="text-yellow-50 text-2xl font-semibold">Available Users</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-0">
-          <div className="relative aspect-video bg-gray-900 rounded-b-lg overflow-hidden">
-            {mediaError ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-                <p className="text-white text-lg text-center px-6">
-                  {mediaError === "NotAllowedError"
-                    ? "Please allow access to camera and microphone"
-                    : "Error accessing media devices"}
-                </p>
-              </div>
-            ) : (
-              <video playsInline muted ref={myVideo} autoPlay className="w-full h-full object-cover" />
-            )}
-            {isVideoOff && !mediaError && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-2">
-                <Avatar className="h-20 w-20">
-                  <AvatarFallback className="text-2xl">{name?.[0] || '?'}</AvatarFallback>
-                </Avatar>
-                <p className="text-white text-lg">Video Off</p>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-      {/* Remote Video Card */}
-      <Card className="shadow-lg">
-        <CardHeader className="bg-gradient-to-r from-gray-100 to-gray-200">
-          <CardTitle className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-            <Avatar className="h-10 w-10">
-           
-            <AvatarImage src="https://media.licdn.com/dms/image/D4D22AQFdzKgfoBGjmA/feedshare-shrink_2048_1536/0/1722914742765?e=2147483647&v=beta&t=1a_qeffsiGRpPDvFbVSKNBV-QKbXZKRNnVCdaLbMGUo" alt="user 2" />
-         
-          </Avatar>
-              <span className="text-xl">{call.name || 'Remote User'}</span>
+        <CardContent className="">
+          {Object.entries(users).length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-4 px-4">
+
+              <h3 className="text-xl font-semibold text-gray-600 mb-1">No Users Available</h3>
+              <p className="text-gray-500 text-center">
+                Waiting for other users to join the room...
+              </p>
             </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div className="relative aspect-video bg-gray-900 rounded-b-lg overflow-hidden">
-            <video playsInline ref={userVideo} autoPlay className="w-full h-full object-cover" />
-            {!callAccepted && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 bg-opacity-75 space-y-4">
-               
-                <p className="text-white text-lg">Waiting for connection...</p>
-              </div>
-            )}
-          </div>
+          ) : (
+            <ul className="divide-y-2 divide-green-200">
+              {Object.entries(users).map(([id, user]) => (
+                <li key={id} className="flex items-center justify-between py-2 px-6 hover:bg-gray-50 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-xl font-semibold">{user.name}</span>
+                  </div>
+                  <Button
+                    onClick={() => callUser(id)}
+                    size="sm"
+                    disabled={user.inCall || !stream || id === socket.id}
+                    className={`${id === socket.id
+                        ? 'bg-gray-400'
+                        : user.inCall
+                          ? 'bg-yellow-500 hover:bg-yellow-600'
+                          : 'bg-blue-500 hover:bg-blue-600'
+                      }`}
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    {id === socket.id ? 'You' : user.inCall ? 'In Call' : 'Call'}
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
         </CardContent>
       </Card>
     </div>
-
-
-    {/* Call Controls */}
-    {callAccepted && !callEnded && (
-      <Card className=" mb-8 shadow-lg">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-lg font-semibold text-green-600">Call in progress</p>
-            <p className="text-xl text-gray-800 font-mono bg-green-100 px-3 py-1 rounded-full">
-              {formatDuration(callDuration)}
-            </p>
-          </div>
-          <div className="flex justify-center space-x-6">
-            <Button
-              onClick={toggleMute}
-              variant={isMuted ? "destructive" : "secondary"}
-              disabled={!stream}
-              className="w-14 h-14 rounded-full"
-            >
-              {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
-            </Button>
-            <Button
-              onClick={toggleVideo}
-              variant={isVideoOff ? "destructive" : "secondary"}
-              disabled={!stream}
-              className="w-14 h-14 rounded-full"
-            >
-              {isVideoOff ? <VideoOff className="w-6 h-6" /> : <Video className="w-6 h-6" />}
-            </Button>
-            <Button
-              onClick={handleCallEnd}
-              variant="destructive"
-              className="w-14 h-14 rounded-full"
-            >
-              <PhoneOff className="w-6 h-6" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    )}
-
-
-    {/* Incoming Call */}
-    {call.isReceivingCall && !callAccepted && (
-      <Card className="max-w-md mx-auto mb-8 shadow-lg border-2 border-green-500 animate-pulse">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-            <Avatar className="h-10 w-10">
-           
-            <AvatarImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7yCMBpekD57G4-5FTZcs2CiZUbspx-hA6mQ&s" alt="user 1" />
-         
-          </Avatar>
-              <div>
-                <h3 className="text-lg font-semibold">Incoming Call</h3>
-                <p className="text-gray-500">{call.name || 'Unknown Caller'}</p>
-              </div>
-            </div>
-            <Button
-              onClick={answerCall}
-              disabled={!stream}
-              className="bg-green-500 hover:bg-green-600"
-            >
-              <Phone className="mr-2 h-4 w-4" /> Answer
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    )}
-
-
-    {/* Available Users */}
-    <Card className="   shadow-2xl    ">
-      <CardHeader className="bg-[#1b85db] rounded-t-xl">
-        <CardTitle className="flex items-center ">
-     
-          <span  className="text-yellow-50 text-2xl font-semibold">Available Users</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="">
-        {Object.entries(users).length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-4 px-4">
-         
-            <h3 className="text-xl font-semibold text-gray-600 mb-1">No Users Available</h3>
-            <p className="text-gray-500 text-center">
-              Waiting for other users to join the room...
-            </p>
-          </div>
-        ) : (
-          <ul className="divide-y-2 divide-green-200">
-            {Object.entries(users).map(([id, user]) => (
-              <li key={id} className="flex items-center justify-between py-2 px-6 hover:bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <span className="text-xl font-semibold">{user.name}</span>
-                </div>
-                <Button
-                  onClick={() => callUser(id)}
-                  size="sm"
-                  disabled={user.inCall || !stream || id === socket.id}
-                  className={`${
-                    id === socket.id
-                      ? 'bg-gray-400'
-                      : user.inCall
-                      ? 'bg-yellow-500 hover:bg-yellow-600'
-                      : 'bg-blue-500 hover:bg-blue-600'
-                  }`}
-                >
-                  <Phone className="mr-2 h-4 w-4" />
-                  {id === socket.id ? 'You' : user.inCall ? 'In Call' : 'Call'}
-                </Button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </CardContent>
-    </Card>
-  </div>
   )
 }
