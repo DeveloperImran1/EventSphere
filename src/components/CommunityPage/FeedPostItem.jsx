@@ -11,6 +11,12 @@ import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useRouter } from 'next/navigation';
+import {
+    FacebookIcon,
+    FacebookShareButton,
+} from "react-share";
+import { Share2 } from 'lucide-react';
+
 
 const FeedPostItem = ({ item, refetch }) => {
     const session = useSession()
@@ -201,8 +207,22 @@ const FeedPostItem = ({ item, refetch }) => {
                             setReact(!react)
                         }} size={22} className={`${react ? 'text-red-600' : 'text-gray-600 bg-white'} cursor-pointer`}></FaHeart>
                         <FaRegComment onClick={toggleComments} className='text-[22px] cursor-pointer ' />
+
+                        <FacebookShareButton className="flex" url={`https://event-sphere-bice.vercel.app/community`} quote={item?.content?.title} hashtag="#EventSphare #WebAvengers" >
+
+                            <button type="button" title="Share post" className="flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current">
+                                    <path d="M474.444,19.857a20.336,20.336,0,0,0-21.592-2.781L33.737,213.8v38.066l176.037,70.414L322.69,496h38.074l120.3-455.4A20.342,20.342,0,0,0,474.444,19.857ZM337.257,459.693,240.2,310.37,389.553,146.788l-23.631-21.576L215.4,290.069,70.257,232.012,443.7,56.72Z"></path>
+                                </svg>
+                            </button>
+                            {/* <button className="p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 bg-[#1b85db] ">
+                                <Share2 className="w-6 h-6 text-white" />
+                            </button> */}
+                        </FacebookShareButton>
                     </div>
                     <p className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-x-1">{love} <FaHeart className='inline text-red-500' /></p>
+
+
                 </div>
 
                 {/* Comments Section */}
