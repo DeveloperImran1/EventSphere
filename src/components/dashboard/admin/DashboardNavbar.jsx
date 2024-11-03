@@ -1,4 +1,5 @@
 "use client"
+import Loading from '@/components/shared/LoadingSpiner/Loading';
 import Logo from '@/components/shared/Logo';
 import LogoBlue from '@/components/shared/LogoBlue';
 import useAuth from '@/hooks/useAuth';
@@ -9,7 +10,10 @@ import { FaSearch, FaGlobe, FaUserCircle } from 'react-icons/fa';
 
 const DashboardNavbar = () => {
     const session = useSession();
-    const { data } = useAuth();
+    const { data, isLoading } = useAuth();
+    if(isLoading){
+        <Loading></Loading>
+    }
     console.log("hahaahahah",data)
     return (
         <header className="  flex flex-col md:flex-row items-center justify-between   text-slate-600 py-2 px-4 md:px-6 md:shadow-md space-y-4 md:space-y-0 z-50">

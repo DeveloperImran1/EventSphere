@@ -5,6 +5,7 @@ import Footer from "@/components/shared/Footer";
 import AuthProvider from "@/services/AuthProvider";
 import TanStackProvider from "providers/TanstackProvider";
 import toast, { Toaster } from 'react-hot-toast';
+import { SocketContextProvider } from "@/components/Messenger/Chat/Soket/SocketContext";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -32,8 +33,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased `} >
         <TanStackProvider>
           <AuthProvider>
+            <SocketContextProvider> 
             {children}
             <Toaster></Toaster>
+            </SocketContextProvider>
+      
           </AuthProvider>
         </TanStackProvider>
       </body>

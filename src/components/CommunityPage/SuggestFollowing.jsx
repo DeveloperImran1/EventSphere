@@ -1,3 +1,4 @@
+import useAxiosPublic from '@/hooks/useAxiosPublic';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -10,43 +11,59 @@ const SuggestFollowing = ({ userData, refetch }) => {
     const { data: session } = useSession();
     const myEmail = session?.user?.email;
     const router = useRouter()
+    const axiosPublic=useAxiosPublic()
     // Find the current user's data using their email
     const myData = userData.find(user => user?.email === myEmail);
     
     // If myData exists, extract the followers array
     const followerEmails = myData?.followers || [];
+    console.log(followerEmails)
     
     // Filter userData to get the data of users who follow the current user
     const followerData = userData.filter(user => followerEmails.includes(user?.email));
+    console.log(followerData)
     const filteredUsersWithoutYou = userData.filter(user => !user.followers.includes(myEmail) && user.email != myEmail);
+    console.log(filteredUsersWithoutYou[2]?.email)
 
     // handleFollow Button
-    const handleFollow = async (id) => {
-        if ( !myEmail) {
-            toast.error("Please Login First 👊")
-            return router.push('/login')
+    const handleFollow = async (id, followerEmail) => {
+        if (!myEmail) {
+            toast.error("Please Login First 👊");
+            return router.push('/login');
         }
+        console.log(followerEmail)
         try {
-          const response = await fetch(`https://event-sphare-server.vercel.app/user/handleAddFollower/${id}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ followerEmail: myEmail }),
-          });
-      
-          const data = await response.json();
-      
-          if (response.ok) {
-            toast.success('Followed successfully!');
-            refetch()
-          } else {
-            console.error('Error:', data.message);
-          }
+            const response = await fetch(`https://event-sphare-server.vercel.app/user/handleAddFollower/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ followerEmail: myEmail }),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                toast.success('Followed successfully!');
+                refetch();
+    
+                // Send notification to the followed user
+                const notification = {
+                    type: "new_follower",
+                    message: `${myEmail} has started following you.`,
+                    route: `/dashboard/user-profile/${session?.data?.user?.email}`, 
+                };
+    
+                const notificationRes = await axiosPublic.patch(`/notification/${followerEmail}`, notification);
+    
+            } else {
+                console.error('Error:', data.message);
+            }
         } catch (error) {
-          console.error('Error:', error);
+            console.error('Error:', error);
         }
-      };
+    };
+    
     return (
         <div className="mt-7">
             <h2 className="text-lg font-bold">Suggest</h2>
@@ -64,7 +81,7 @@ const SuggestFollowing = ({ userData, refetch }) => {
                                         <p className="text-sm">{(follower.email).slice(0, 15)}...</p>
                                     </div>
                                 </div>
-                                <button title='Follow User' onClick={() => handleFollow(follower?._id)} className="text-blue-500">Follow</button>
+                                <button title='Follow User' onClick={() => handleFollow(follower?._id, follower?.email)} className="text-blue-500">Follow</button>
                             </div>
                         </div>
                     ))
