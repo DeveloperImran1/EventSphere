@@ -18,7 +18,7 @@
 //     const auth = useAuth();
 //     useEffect(()=>{
 //         if(auth?.data?._id){
-//             const socket = io("http://localhost:9000",{
+//             const socket = io("https://eventsphare-server.onrender.com",{
 //                 query:{
 //                     userId:auth?.data?._id,
 //                 }
@@ -64,7 +64,7 @@ export const SocketContextProvider = ({ children }) => {
     useEffect(() => {
         // Ensure we have a user ID from authentication before creating a socket connection
         if (auth?.data?._id) {
-            const newSocket = io("http://localhost:9000", {
+            const newSocket = io("https://eventsphare-server.onrender.com", {
                 query: {
                     userId: auth.data._id,
                 }
