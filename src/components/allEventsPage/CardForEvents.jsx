@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect, useRef } from "react";
@@ -155,7 +156,7 @@ const CardForEvents = ({ event }) => {
 
         <div className="flex justify-end space-x-2 absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
           <button
-            className={`p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 ${favorite?.includes(event?._id) ? 'bg-white' : 'bg-red-500'} `}
+            className={`p-1 rounded-full  backdrop-blur-sm transition-colors duration-300 hover:bg-white/20 ${favorite?.includes(event?._id) ? '' : ''} bg-[#1b85db]`}
             onClick={() => handleAddFavorite(event._id)}
           >
             <Heart className={`w-6 h-6 ${favorite?.includes(event?._id) ? 'text-red-500 fill-red-500' : 'text-white fill-white'}`} />
