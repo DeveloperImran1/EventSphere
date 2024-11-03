@@ -46,7 +46,7 @@ export default function VideoCall() {
       confirmButtonColor: '#1b85db',  // Custom color for the confirm button
       background: '#f0f8ff',         // Custom background color
       color: '#333333',              // Custom text color
-      iconColor: '#ffa500'           // Custom color for the warning icon
+      iconColor: '#ffa500'           
     }).then((result) => {
       if (result.isConfirmed) {
         setName(auth.data.name);
