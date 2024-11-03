@@ -39,7 +39,7 @@ const MessageContainer = ({ selectedUser }) => {
             route: `/video-call`, // Assuming the backend returns a postId
         };
       
-      const response = await axios.patch(`http://localhost:9000/notification/${selectedUser?.email}`, notification  );
+      const response = await axiosPublic.patch(`/notification/${selectedUser?.email}`, notification  );
       console.log('Notification response:', response.data);
     } catch (error) {
       console.error('Error sending notification:', error.response ? error.response.data : error.message);

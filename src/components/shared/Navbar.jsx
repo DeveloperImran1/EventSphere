@@ -191,29 +191,7 @@ const Navbar = () => {
 
 
   ]
-// Notification for video call 
-  // useEffect(() => {
-  //   // Only fetch notifications if the user is authenticated
-  //   if (auth && auth?.data?._id) {
-  //     fetchUserNotifications(auth?.data?._id);
-  //   }
-  // }, [auth]);
 
-  // // Function to fetch notifications for a specific user
-  // const fetchUserNotifications = async (userId) => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:9000/notifications/${userId}`);
-  //     if (response.data.success) {
-  //       setNotifications(response.data.data);
-  //     } else {
-  //       console.log(response.data.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch notifications:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
 
 
