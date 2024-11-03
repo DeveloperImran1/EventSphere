@@ -192,28 +192,28 @@ const Navbar = () => {
 
   ]
 // Notification for video call 
-  useEffect(() => {
-    // Only fetch notifications if the user is authenticated
-    if (auth && auth?.data?._id) {
-      fetchUserNotifications(auth?.data?._id);
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   // Only fetch notifications if the user is authenticated
+  //   if (auth && auth?.data?._id) {
+  //     fetchUserNotifications(auth?.data?._id);
+  //   }
+  // }, [auth]);
 
-  // Function to fetch notifications for a specific user
-  const fetchUserNotifications = async (userId) => {
-    try {
-      const response = await axios.get(`http://localhost:9000/notifications/${userId}`);
-      if (response.data.success) {
-        setNotifications(response.data.data);
-      } else {
-        console.log(response.data.message);
-      }
-    } catch (error) {
-      console.error("Failed to fetch notifications:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // // Function to fetch notifications for a specific user
+  // const fetchUserNotifications = async (userId) => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:9000/notifications/${userId}`);
+  //     if (response.data.success) {
+  //       setNotifications(response.data.data);
+  //     } else {
+  //       console.log(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch notifications:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
 
@@ -305,7 +305,7 @@ const Navbar = () => {
                   Notifications
                 </div>
                 <div className="divide-y divide-gray-100 dark:divide-gray-700">
-                {notifications.length > 0 ? (
+                {/* {notifications.length > 0 ? (
         notifications.map((notific) => (
           <Link href={notific?.url || '#'} key={notific?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
             <div className="flex-shrink-0">
@@ -325,7 +325,7 @@ const Navbar = () => {
         ))
       ) : (
         <p>No notifications found.</p>
-      )}
+      )} */}
                   {sortedNotifications?.map((notification) => (
                     <Link href={notification?.route} key={notification?._id} className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <div className="flex-shrink-0 relative">
