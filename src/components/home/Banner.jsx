@@ -1,289 +1,389 @@
-"use client";
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Import the CSS for the date picker
-import Image from "next/image";
-import Typewriter from 'typewriter-effect';
+"use client"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Country sections with grouped countries
-const countrySections = [
-  { section: "North America", countries: ["United States", "Canada"] },
-  {
-    section: "Europe",
-    countries: ["United Kingdom", "Germany", "France", "Italy"],
-  },
-  { section: "Asia", countries: ["India", "Japan"] },
-  { section: "Oceania", countries: ["Australia"] },
-  { section: "South America", countries: ["Brazil"] },
-];
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
 
+// import required modules
+import { Pagination } from 'swiper/modules';
+import { FaSearch } from "react-icons/fa";
+
+
+import { useEffect, useState } from "react";
+import { IoReorderThree } from "react-icons/io5";
+
+import { MdOutlineArrowForwardIos } from "react-icons/md";
+import Link from 'next/link';
 
 
 const Banner = () => {
-  const [fromSearchTerm, setFromSearchTerm] = useState("");
-  const [toSearchTerm, setToSearchTerm] = useState("");
-  const [dropdownVisibleFrom, setDropdownVisibleFrom] = useState(false);
-  const [dropdownVisibleTo, setDropdownVisibleTo] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null); // Date and Time state
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
+    const [selectCategory, setSelectCategory] = useState(null)
 
 
-  /** Hook Output */
-  // const { isType, isDelete, isDelay, isDone } = helper
+    const boiShomogro = [
+        "মহাকালের কণ্ঠ",
+        "গোয়েন্দা কাহিনী সমগ্র",
+        "ভূতের গল্প",
+        "নক্ষত্রের রাত",
+        "জীবনের জলছবি",
+        "বাংলা সাহিত্যের ইতিহাস",
+        "ইতিহাসের অজানা অধ্যায়",
+        "গণিতের আনন্দ",
+        "পাখিদের নিয়ে গল্প",
+        "ভূগোলের বিস্ময়",
+        "শিশুতোষ গল্পসমগ্র",
+        "রহস্যময় পৃথিবী",
+        "প্রাণীর কাহিনী",
+        "বিজ্ঞানের বিস্ময়",
+        "বিশ্বের সেরা উপন্যাস",
+        "রবীন্দ্রনাথের কবিতা",
+        "প্রাচীন মিসরের ইতিহাস",
+        "যুগান্তরের কবিতা",
+        "অ্যালিস ইন ওয়ান্ডারল্যান্ড (বাংলা অনুবাদ)",
+        "বাংলা প্রবাদ প্রবচন",
+        "আধুনিক বাংলার কথা",
+        "চর্যাপদ ও প্রাচীন সাহিত্য",
+        "বাংলাদেশের মুক্তিযুদ্ধের গল্প",
 
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
+    ];
 
-  // Filtered list of countries based on search term
-  const filteredCountrySectionsFrom = countrySections
-    .map((section) => ({
-      ...section,
-      countries: section.countries.filter((country) =>
-        country.toLowerCase().includes(fromSearchTerm.toLowerCase())
-      ),
-    }))
-    .filter((section) => section.countries.length > 0);
+    // বিষয়ের নামের অ্যারে
+    const subjects = [
+        "উপন্যাস",
+        "কবিতা",
+        "গল্প",
+        "ইতিহাস",
+        "বিজ্ঞান",
+        "দর্শন",
+        "ধর্ম",
+        "জীবনী",
+        "শিশুসাহিত্য",
+        "কৃষি",
+        "ভ্রমণকাহিনী",
+        "রাজনীতি",
+        "সমাজবিজ্ঞান",
+        "প্রযুক্তি",
+        "চিকিৎসাশাস্ত্র",
+        "গণিত",
+        "আইন",
+        "সাহিত্য",
+        "শিল্প ও সংস্কৃতি",
+        "ভৌগোলিক গবেষণা"
+    ];
 
-  const filteredCountrySectionsTo = countrySections
-    .map((section) => ({
-      ...section,
-      countries: section.countries.filter((country) =>
-        country.toLowerCase().includes(toSearchTerm.toLowerCase())
-      ),
-    }))
-    .filter((section) => section.countries.length > 0);
+    // লেখকের নামের অ্যারে
+    const writers = [
+        "হুমায়ুন আহমেদ",
+        "জহির রায়হান",
+        "রবীন্দ্রনাথ ঠাকুর",
+        "কাজী নজরুল ইসলাম",
+        "আবুল বাশার",
+        "সৈয়দ মুজতবা আলী",
+        "সুনীল গঙ্গোপাধ্যায়",
+        "আবুল মনসুর আহমদ",
+        "বিভূতিভূষণ বন্দ্যোপাধ্যায়",
+        "মুহম্মদ জাফর ইকবাল",
+        "শীর্ষেন্দু মুখোপাধ্যায়",
+        "আনিসুল হক",
+        "আহমদ ছফা",
+        "অনীশ দাস অপু",
+        "বেগম রোকেয়া",
+        "ফয়েজ আহমেদ",
+        "মীর মশাররফ হোসেন",
+        "তসলিমা নাসরিন",
+        "জাকির তালুকদার",
+        "প্রেমচাঁদ"
+    ];
 
-  return (
-    <>
-      <div className="w-full h-full  ">
-
-
-
-        <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
-          onAutoplayTimeLeft={onAutoplayTimeLeft}
-          className="mySwiper h-[calc(100vh-57px)] "
-        >
-          <div className="absolute inset-0 bg-black/50  backdrop-blur-[1px]  z-10"></div>
-          <SwiperSlide>
-            <div className="flex justify-center items-center h-[480px]   rounded-lg shadow-lg">
-            <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/content/vul/hero-images/city/amsterdam/1x.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="flex justify-center items-center h-[480px]   rounded-lg shadow-lg">
-              <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/content/vul/hero-images/city/brussels/1x.jpg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="flex justify-center items-center h-[480px]   rounded-lg shadow-lg">
-              <div>
-                <Image layout="fill" objectFit="cover"
-                  src="https://www.thetrainline.com/cms/media/10375/italy-castelli-romani.jpg?mode=crop&width=860&height=574&quality=70"
-                  alt=""
-                />
-              </div>
-            </div>
-          </SwiperSlide>
+    // প্রকাশনীর নামের অ্যারে
+    const publications = [
+        "প্রথমা প্রকাশন",
+        "অন্যপ্রকাশ",
+        "আনন্দ পাবলিশার্স",
+        "বাংলা একাডেমি",
+        "বিদ্যাপ্রকাশ",
+        "ইত্যাদি গ্রন্থ প্রকাশ",
+        "কাকলী প্রকাশনী",
+        "পাঠক সমাবেশ",
+        "মাওলা ব্রাদার্স",
+        "সাহিত্য প্রকাশ",
+        "অনন্যা প্রকাশনী",
+        "অন্তর্জলী প্রকাশন",
+        "বঙ্গপ্রকাশ",
+        "সৃজনশীল প্রকাশনী",
+        "সম্প্রতি প্রকাশনী",
+        "জ্ঞানভবন প্রকাশনী",
+        "বিশ্বসাহিত্য কেন্দ্র",
+        "শিখা প্রকাশনী",
+        "বর্ণমালা প্রকাশনী",
+        "সাহিত্য সংসদ"
+    ];
 
 
-          <div
-            className="absolute top-0 right-0 m-4 autoplay-progress hidden"
-            slot="container-end"
-          >
-            <svg className="w-8 h-8" viewBox="0 0 48 48" ref={progressCircle}>
-              <circle
-                cx="24"
-                cy="24"
-                r="20"
-                className="text-gray-300"
-                strokeWidth="4"
-                fill="none"
-              ></circle>
-              <circle
-                cx="24"
-                cy="24"
-                r="20"
-                className="text-blue-600"
-                strokeWidth="4"
-                fill="none"
-                strokeDasharray="126"
-                strokeDashoffset="calc(126 * var(--progress))"
-              ></circle>
-            </svg>
-            <span
-              ref={progressContent}
-              className="text-xs text-gray-700"
-            ></span>
-          </div>
-        </Swiper>
 
-        {/* Left Section: Search Bars */}
-        <div className="absolute hidden md:block w-full md:h-auto md:w-1/3  rounded-lg top-[10%] left-[30px] z-10">
-          <div className="w-full md:h-auto  bg-white p-6 rounded-lg shadow-lg relative">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-              Search Flights
-            </h2>
 
-            {/* First Search Bar (From) */}
-            <div className="relative mb-6">
-              <input
-                type="text"
-                id="from-country-search"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="From"
-                value={fromSearchTerm}
-                onChange={(e) => setFromSearchTerm(e.target.value)}
-                onClick={() => setDropdownVisibleFrom(true)}
-                onBlur={() =>
-                  setTimeout(() => setDropdownVisibleFrom(false), 100)
-                }
-              />
+    return (
 
-              {/* From Dropdown */}
-              {dropdownVisibleFrom && filteredCountrySectionsFrom.length > 0 && (
-                <div className="absolute z-10 right-0 mt-2 border border-gray-300 rounded-lg max-h-48 overflow-y-auto bg-white shadow-lg w-full">
-                  {filteredCountrySectionsFrom.map((section, index) => (
-                    <div key={index} className="p-2">
-                      <div className="font-semibold text-gray-600 mb-1">
-                        {section.section}
-                      </div>
-                      <ul>
-                        {section.countries.map((country, i) => (
-                          <li
-                            key={i}
-                            className="p-2 cursor-pointer hover:bg-blue-100 transition-colors"
-                            onMouseDown={() => {
-                              setFromSearchTerm(country);
-                              setDropdownVisibleFrom(false);
-                            }}
-                          >
-                            {country}
-                          </li>
-                        ))}
-                      </ul>
+        <>
+            <div className="container  mt-3">
+                <section className="hidden md:flex py-2  px-2 items-center justify-between bg-[#00bffe]  rounded-md">
+                    <span className="relative   ">
+                        <input type="text" placeholder="Search Anything" className="  bg-white  md:w-[200px] lg:w-[300px] py-1  px-2 border-none focus:outline-none focus:border-none bg-transparent rounded-full md:rounded-l-full " />
+                        <FaSearch size={22} className='text-gray-500 absolute right-3 top-[20%]'></FaSearch>
+                    </span>
+
+                    <div className="hidden md:flex items-center  gap-2 bg-[#00bffe] ">
+                        <svg width="13.750000" height="18.910156" viewBox="0 0 13.75 18.9102" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <desc>
+                                Created with Pixso.
+                            </desc>
+                            <defs />
+                            <path id="Symbol" d="M13.75 2.91L0 2.91L0 0L13.75 0L13.75 2.91ZM13.75 6.91L0 6.91L0 4L13.75 4L13.75 6.91ZM13.75 10.91L0 10.91L0 8L13.75 8L13.75 10.91ZM13.75 14.91L0 14.91L0 12L13.75 12L13.75 14.91ZM13.75 18.91L0 18.91L0 16L13.75 16L13.75 18.91Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                        </svg>
+
+                        <p className="font-semibold text-[18px] text-white">free shipping over $199</p>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                    <div className="hidden md:flex  items-center gap-2 bg-[#00bffe]">
+                        <svg width="13.750000" height="18.910156" viewBox="0 0 13.75 18.9102" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <desc>
+                                Created with Pixso.
+                            </desc>
+                            <defs />
+                            <path id="Symbol" d="M13.75 2.91L0 2.91L0 0L13.75 0L13.75 2.91ZM13.75 6.91L0 6.91L0 4L13.75 4L13.75 6.91ZM13.75 10.91L0 10.91L0 8L13.75 8L13.75 10.91ZM13.75 14.91L0 14.91L0 12L13.75 12L13.75 14.91ZM13.75 18.91L0 18.91L0 16L13.75 16L13.75 18.91Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                        </svg>
 
-            {/* Second Search Bar (To) */}
-            <div className="relative mb-6">
-              <input
-                type="text"
-                id="to-country-search"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="To"
-                value={toSearchTerm}
-                onChange={(e) => setToSearchTerm(e.target.value)}
-                onClick={() => setDropdownVisibleTo(true)}
-                onBlur={() => setTimeout(() => setDropdownVisibleTo(false), 100)}
-              />
-
-              {/* To Dropdown */}
-              {dropdownVisibleTo && filteredCountrySectionsTo.length > 0 && (
-                <div className="absolute z-10 right-0 mt-2 border border-gray-300 rounded-lg max-h-48 overflow-y-auto bg-white shadow-lg w-full">
-                  {filteredCountrySectionsTo.map((section, index) => (
-                    <div key={index} className="p-2">
-                      <div className="font-semibold text-gray-600 mb-1">
-                        {section.section}
-                      </div>
-                      <ul>
-                        {section.countries.map((country, i) => (
-                          <li
-                            key={i}
-                            className="p-2 cursor-pointer hover:bg-blue-100 transition-colors"
-                            onMouseDown={() => {
-                              setToSearchTerm(country);
-                              setDropdownVisibleTo(false);
-                            }}
-                          >
-                            {country}
-                          </li>
-                        ))}
-                      </ul>
+                        <p className="font-semibold text-[18px] text-white">30 days money back</p>
                     </div>
-                  ))}
+                    <div className="hidden md:flex  items-center gap-2 bg-[#00bffe]">
+                        <svg width="13.750000" height="18.910156" viewBox="0 0 13.75 18.9102" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <desc>
+                                Created with Pixso.
+                            </desc>
+                            <defs />
+                            <path id="Symbol" d="M13.75 2.91L0 2.91L0 0L13.75 0L13.75 2.91ZM13.75 6.91L0 6.91L0 4L13.75 4L13.75 6.91ZM13.75 10.91L0 10.91L0 8L13.75 8L13.75 10.91ZM13.75 14.91L0 14.91L0 12L13.75 12L13.75 14.91ZM13.75 18.91L0 18.91L0 16L13.75 16L13.75 18.91Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                        </svg>
+
+                        <p className="font-semibold text-[18px] text-white">100% secure payment</p>
+                    </div>
+                </section>
+
+            </div>
+
+
+            <div className='flex relative gap-[10px] container'>
+
+                <div className="md:w-[30%] lg:w-[20%] hidden md:flex  bg-white pt-[10px] pb-[50px] rounded-md  justify-between items-start  border-2">
+                    <ul onMouseLeave={() => setSelectCategory(null)} className="w-full ">
+                        <Link href={"#"} onMouseOver={() => setSelectCategory("books")} className="py-3 px-3 font-semibold w-full hover:bg-[#00bffe] hover:text-white rounded-md flex justify-between items-center">
+                            <p>Books</p>
+                            <MdOutlineArrowForwardIos></MdOutlineArrowForwardIos>
+                        </Link>
+                        <Link href={"#"} onMouseOver={() => setSelectCategory("subjects")} className="py-3 px-3 font-semibold w-full hover:bg-[#00bffe] hover:text-white rounded-md flex justify-between items-center">
+                            <p>Subjects</p>
+                            <MdOutlineArrowForwardIos></MdOutlineArrowForwardIos>
+                        </Link>
+                        <Link href={"#"} onMouseOver={() => setSelectCategory("writers")} className="py-3 px-3 font-semibold w-full hover:bg-[#00bffe] hover:text-white rounded-md flex justify-between items-center">
+                            <p>Writer</p>
+                            <MdOutlineArrowForwardIos></MdOutlineArrowForwardIos>
+                        </Link>
+                        <Link href={"#"} onMouseOver={() => setSelectCategory("publications")} className="py-3 px-3 font-semibold w-full hover:bg-[#00bffe] hover:text-white rounded-md flex justify-between items-center">
+                            <p>Publications</p>
+                            <MdOutlineArrowForwardIos></MdOutlineArrowForwardIos>
+                        </Link>
+
+                        {
+                            selectCategory && <div className="bg-white absolute right-0 top-0 z-50 w-full md:w-[70%] lg:w-[80%]">
+                                <ul className="w-full px-6 py-4 flex flex-col flex-wrap h-[430px] ">
+                                    {
+                                        selectCategory === "books" ?
+                                            boiShomogro?.map((book, index) => <Link href={"#"} key={index} className="py-3 px-3 font-normal w-[250px] hover:text-[#00bffe] hover:underline">
+                                                {book}
+                                            </Link>) :
+                                            selectCategory === "subjects" ? subjects?.map((book, index) => <Link href={"#"} key={index} className="py-3 px-3 font-normal w-[250px] hover:text-[#00bffe] hover:underline">
+                                                {book}
+                                            </Link>) :
+                                                selectCategory === "writers" ? writers?.map((book, index) => <Link href={"#"} key={index} className="py-3 px-3 font-normal w-[250px] hover:text-[#00bffe] hover:underline">
+                                                    {book}
+                                                </Link>) :
+                                                    selectCategory === "publications" ? publications?.map((book, index) => <Link href={"#"} key={index} className="py-3 px-3 font-normal w-[250px] hover:text-[#00bffe] hover:underline">
+                                                        {book}
+                                                    </Link>) : ""
+                                    }
+
+                                </ul>
+                            </div>
+                        }
+
+
+
+                    </ul>
                 </div>
-              )}
+
+
+                <Swiper pagination={true} modules={[Pagination]} className="mySwiper w-full md:w-[70%] lg:w-[80%] ">
+                    <SwiperSlide className="bg-[url('https://i.ibb.co/GVN2nLN/slider3-png.png')] bg-center bg-cover pl-[80px] pt-[80px] pb-[80px] rounded-md  ">
+                        <h1 className="text-white font-extrabold text-[34px] ">Noise Cancelling</h1>
+                        <h1 className="text-white font-semibold text-[24px] ">Headphone</h1>
+
+                        <div className='flex items-center gap-3 mt-[20px] '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Wifi, Voice Assistant,</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+
+                        <button className='font-semibold mt-[40px] text-[19px] px-4 py-2 rounded-md bg-white'>Buy Now</button>
+                    </SwiperSlide>
+                    <SwiperSlide className="bg-[url('https://i.ibb.co/GVN2nLN/slider3-png.png')] bg-cover bg-center pl-[80px] pt-[80px] pb-[80px] rounded-md ">
+                        <h1 className="text-white font-extrabold text-[34px] ">Noise Cancelling</h1>
+                        <h1 className="text-white font-semibold text-[24px] ">Headphone</h1>
+
+                        <div className='flex items-center gap-3 mt-[20px] '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Wifi, Voice Assistant,</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+
+                        <button className='font-semibold mt-[40px] text-[19px] px-4 py-2 rounded-md bg-white'>Buy Now</button>
+                    </SwiperSlide>
+                    <SwiperSlide className="bg-[url('https://i.ibb.co/GVN2nLN/slider3-png.png')] bg-center bg-cover pl-[80px] pt-[80px] pb-[80px] rounded-md ">
+                        <h1 className="text-white font-extrabold text-[34px] ">Noise Cancelling</h1>
+                        <h1 className="text-white font-semibold text-[24px] ">Headphone</h1>
+
+                        <div className='flex items-center gap-3 mt-[20px] '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Wifi, Voice Assistant,</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+
+                        <button className='font-semibold mt-[40px] text-[19px] px-4 py-2 rounded-md bg-white'>Buy Now</button>
+                    </SwiperSlide>
+                    <SwiperSlide className="bg-[url('https://i.ibb.co/GVN2nLN/slider3-png.png')] bg-cover bg-center pl-[80px] pt-[80px] pb-[80px] rounded-md ">
+                        <h1 className="text-white font-extrabold text-[34px] ">Noise Cancelling</h1>
+                        <h1 className="text-white font-semibold text-[24px] ">Headphone</h1>
+
+                        <div className='flex items-center gap-3 mt-[20px] '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Wifi, Voice Assistant,</p>
+                        </div>
+                        <div className='flex items-center gap-3 '>
+                            <svg width="10.312500" height="14.182617" viewBox="0 0 10.3125 14.1826" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <desc>
+                                    Created with Pixso.
+                                </desc>
+                                <defs />
+                                <path id="Symbol" d="M10.31 2.18L-0.01 2.18L-0.01 0L10.31 0L10.31 2.18ZM10.31 5.18L-0.01 5.18L-0.01 3L10.31 3L10.31 5.18ZM10.31 8.18L-0.01 8.18L-0.01 6L10.31 6L10.31 8.18ZM10.31 11.18L-0.01 11.18L-0.01 9L10.31 9L10.31 11.18ZM10.31 14.18L-0.01 14.18L-0.01 12L10.31 12L10.31 14.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd" />
+                            </svg>
+                            <p className='font-semibold text-[17px] text-white'>Boso Year Head Phone</p>
+                        </div>
+
+                        <button className='font-semibold mt-[40px] text-[19px] px-4 py-2 rounded-md bg-white'>Buy Now</button>
+                    </SwiperSlide>
+
+                </Swiper>
             </div>
 
-            {/* Date and Time Picker */}
-            <div className="relative mb-6">
-              <label
-                htmlFor="date-picker"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Select Date and Time
-              </label>
-              <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                showTimeSelect
-                dateFormat="Pp"
-                placeholderText="Select a date and time"
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-            </div>
 
-            {/* Search Button */}
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold shadow-lg transition duration-200">
-              Search
-            </button>
-          </div>
 
-        </div>
 
-        <div className="absolute top-[10%] left-[20%] md:left-[50%] z-10 text-left">
-          <p className="text-4xl font-bold text-white ">Welcome To Event<span className="text-[#eab308]">Sphare</span> For</p>
-          <Typewriter
-            options={{
-              strings: ['Plan, Book, and Experience Unforgettable Events', 'Your One-Stop Destination for Concerts, Conferences & Sports', 'Seamlessly Manage and Attend Events with Ease'],
-              wrapperClassName: "text-4xl text-white font-bold",
-              autoStart: true,
-              loop: true,
-              delay: 75,
-              deleteSpeed: 50,
-              pauseFor: 2000,
-              cursor: '|',
-              cursorClassName: 'text-yellow-500', // Customize cursor color
-            }}
-          />
 
-        </div>
 
-      </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default Banner;
+
+
