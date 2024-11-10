@@ -44,7 +44,8 @@ export const authOptions = {
                     throw new Error("Invalid password");
                 }
 
-                return currentUser; // Successful login
+
+                return currentUser; // Successful loginn
             },
         }),
         // Google login provider
