@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: "https://event-sphare-server.vercel.app"
+    baseURL: "http://localhost:9000"
 })
 
 const useAxiosPublic = () => {

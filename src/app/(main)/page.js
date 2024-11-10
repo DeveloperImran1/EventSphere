@@ -4,7 +4,7 @@ import HomeContainer from "@/components/home/HomeContainer";
 
 export default function Home() {
   return (
-    <div className="space-y-20">
+    <div className="space-y-20 bg-bg-gray">
       <HomeContainer />
     </div>
   );
