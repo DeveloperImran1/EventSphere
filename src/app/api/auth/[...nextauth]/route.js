@@ -38,7 +38,8 @@ export const authOptions = {
                     throw new Error("User not found");
                 }
 
-                // Password comparison using bcrypt
+              
+                // Password comparison using bcryptt
                 const passwordMatched = await bcrypt.compare(password, currentUser.password);
                 if (!passwordMatched) {
                     throw new Error("Invalid password");
