@@ -9,6 +9,7 @@ import { toPng } from 'html-to-image';
 import download from 'downloadjs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaStar } from 'react-icons/fa6';
 
 const PaymentQRCodePage = () => {
   const searchParams = useSearchParams();
@@ -16,7 +17,8 @@ const PaymentQRCodePage = () => {
   const [paymentData, setPaymentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [feedback, setFeedback] = useState('');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
   const ticketRef = useRef();
 
 
@@ -158,38 +160,48 @@ const PaymentQRCodePage = () => {
       </div>
 
       {/* Feedback Section */}
-      <div className='mb-16 shadow-xl rounded-xl p-4 lg:p-6 2xl:p-10'>
-        <div className=' max-w-2xl mx-auto my-10'>
-          <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4 ">User Feedback</h2>
-          <p className="text-center">Thank you for attending our event! Please share your valuable feedback about your experience to help us improve and deliver even better events in the future.</p>
+      <div className='mb-16 shadow-xl rounded-xl p-4 lg:p-6 2xl:p-10 bg-gray-50'>
+      <div className='max-w-2xl mx-auto my-10'>
+        <h2 className="text-center font-bold 2xl:font-black font-mono text-3xl lg:text-5xl 2xl:text-7xl text-blue-500 mb-4">User Feedback</h2>
+        <p className="text-center">Thank you for attending our event! Please share your valuable feedback about your experience to help us improve and deliver even better events in the future.</p>
+      </div>
+      <div className='feedback-section flex flex-col lg:flex-row justify-between'>
+        <div className='flex-1'>
+          <form onSubmit={handleFeedbackSubmit} className='flex flex-col items-center'>
+            <div className="flex justify-center my-5">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <FaStar
+                  key={star}
+                  size={30}
+                  className={`cursor-pointer ${star <= (hover || rating) ? 'text-yellow-500' : 'text-gray-300'}`}
+                  onClick={() => setRating(star)}
+                  onMouseEnter={() => setHover(star)}
+                  onMouseLeave={() => setHover(rating)}
+                />
+              ))}
+            </div>
+            <textarea
+              className='w-full lg:w-2/3 p-4 border-2 rounded-lg my-5'
+              placeholder='Write your feedback here...'
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              required
+            ></textarea>
+            <button type='submit' className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg'>Submit Feedback</button>
+          </form>
         </div>
-        <div className=' feedback-section flex flex-col lg:flex-row justify-between '>
-          <div className='flex-1 '>
-            <form onSubmit={handleFeedbackSubmit} className='flex flex-col items-center'>
-              <textarea
-                className='w-full lg:w-2/3 p-4  border-2 rounded-lg my-10'
-                placeholder='Write your feedback here...'
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
-                required
-              ></textarea>
-
-
-              <button type='submit' className='bg-blue-500 text-white px-4 py-2  rounded-lg'>Submit Feedback</button>
-            </form>
-          </div>
-          <ToastContainer />
-          <div className='flex-1'>
-            <Image
-              src="https://img.freepik.com/free-vector/flat-design-feedback-concept_23-2148944236.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721520000&semt=ais_user"
-              height={200}
-              width={200}
-              alt="feedback image"
-              className='h-72 w-96'
-            />
-          </div>
+        <ToastContainer />
+        <div className='flex-1 flex justify-center items-center'>
+          <Image
+            src="https://img.freepik.com/free-vector/flat-design-feedback-concept_23-2148944236.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721520000&semt=ais_user"
+            height={300}
+            width={300}
+            alt="feedback image"
+            className='h-72 w-96 rounded-xl shadow-lg'
+          />
         </div>
       </div>
+    </div>
 
     </div>
   );

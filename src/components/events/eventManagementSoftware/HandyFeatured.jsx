@@ -3,7 +3,7 @@ import React from 'react';
 
 const HandyFeatured = () => {
     return (
-        <div className='container mx-auto bg-[#F4F4F6]  rounded-3xl mb-20 py-10 px-5 lg:px-16 text-center'>
+        <div className='container mx-auto bg-[#F4F4F6]  rounded-3xl py-10 px-5 lg:px-16 text-center'>
             <h2 className='text-3xl lg:text-5xl font-bold text-center'>And 1000+ Handy Features</h2>
             <ul className='grid grid-cols-1 lg:grid-cols-3 my-12'>
                 <li className='flex items-center gap-2 w-'>

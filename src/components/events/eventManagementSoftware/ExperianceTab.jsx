@@ -5,7 +5,7 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 const ExperianceTab = () => {
     return (
-        <div className='container mx-auto bg-[#0F1F3D] py-20'>
+        <div className='container mx-auto bg-[#0F1F3D] '>
             <div className='w-2/3 mx-auto text-center'>
                 <h5 className='text-xl text-white'>Build A Custom Event Mobile App</h5>
                 <h1 className='text-3xl lg:text-5xl leading-tight font-bold text-white my-8'>Give Your Attendees An Experience They Will Remember For Life</h1>
