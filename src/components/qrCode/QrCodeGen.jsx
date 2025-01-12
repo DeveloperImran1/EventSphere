@@ -20,6 +20,7 @@ const PaymentQRCodePage = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const ticketRef = useRef();
+  
 
 
 
@@ -42,17 +43,26 @@ const PaymentQRCodePage = () => {
 
     fetchPaymentData();
   }, [transitionId]);
-  console.log(paymentData)
+  // console.log(paymentData)
 
-  const handleFeedbackSubmit = (e) => {
+  const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
-
-    // Show success toast
-    toast.success('Feedback successfully submitted!')
-
-    // Clear the form
-    setFeedback('');
+    try {
+      await axios.post('http://localhost:9000/events/feedback', { 
+        eventId: paymentData.eventId, 
+        name: paymentData?.bookedUserName, 
+        rating, 
+        review: feedback 
+      });
+      toast.success('Feedback submitted successfully!');
+      setFeedback('');
+      setRating(0);
+    } catch (error) {
+      toast.error('Failed to submit feedback.');
+    }
   };
+  
+  
 
   const handleDownload = () => {
     if (!ticketRef.current) {

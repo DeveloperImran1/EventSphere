@@ -14,7 +14,7 @@ const DashboardNavbar = () => {
     if(isLoading){
         <Loading></Loading>
     }
-    console.log("hahaahahah",data)
+    // console.log("hahaahahah",data)
     return (
         <header className="  flex flex-col md:flex-row items-center justify-between   text-slate-600 py-2 px-4 md:px-6 md:shadow-md space-y-4 md:space-y-0 z-50">
             {/* Left side: Website Name and Search Bar */}

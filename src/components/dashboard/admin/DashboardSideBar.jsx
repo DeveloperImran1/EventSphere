@@ -31,6 +31,7 @@ import {
     RiCalendarCheckLine,
     RiMoneyDollarCircleLine,
     RiShoppingBagLine,
+    RiOrderPlayFill,
 } from "react-icons/ri";
 import { FaBell } from "react-icons/fa";
 import Loading from "@/components/shared/LoadingSpiner/Loading";
@@ -45,7 +46,7 @@ const DashboardSideBar = () => {
     const sessionData = session?.data;
     const authInfo = auth?.data?.role;
     const lastPathSegment = pathname?.split('/').filter(Boolean).pop();
-    console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
+    // console.log("Dashboard sidebar theke session ", session?.data?.user?.email);
 
     const currentUserEmail = session?.data?.user?.email
 
@@ -176,6 +177,11 @@ const DashboardSideBar = () => {
             title: "All Events",
             path: "/dashboard/all-events",
             icon: RiCalendarEventLine, // Calendar icon for events
+        },
+        {
+            title: "All Booked Events",
+            path: "/dashboard/all-order",
+            icon: RiOrderPlayFill, 
         },
         {
             title: "Users",
