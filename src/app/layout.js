@@ -41,6 +41,10 @@ export default function RootLayout({ children }) {
           </AuthProvider>
         </TanStackProvider>
       </body>
+  <script type='text/javascript' src='//pl26667229.profitableratecpm.com/61/17/62/61176237ed1f7a0c3a59b06e865a8314.js'></script>
+  <script async="async" data-cfasync="false" src="//pl26667248.profitableratecpm.com/fa4ed044e8485867675225abe4ecf495/invoke.js"></script>
+<div id="container-fa4ed044e8485867675225abe4ecf495"></div>
+  
     </html>
   );
 }
