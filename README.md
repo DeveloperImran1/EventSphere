@@ -9,11 +9,12 @@
 - **Password:** aaaaaa
 
 **Organizer Email and Password**
-- **Email:** organizer@gmail.com
+- **Email:** organizer1@gmail.com
+
 - **Password:** aaaaaa
 
 **Admin Email and Password**
-- **Email:** admin@gmail.com
+- **Email:** admin1@gmail.com
 - **Password:** aaaaaa
 
 ## Live Site URL
